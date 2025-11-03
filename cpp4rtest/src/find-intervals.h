@@ -1,7 +1,3 @@
-
-#include <Rcpp.h>
-using namespace Rcpp;
-
 [[cpp4r::register]] SEXP remove_altrep(SEXP x) {
   SEXP out = PROTECT(Rf_allocVector(REALSXP, Rf_xlength(x)));
   memcpy(REAL(out), REAL(x), Rf_xlength(x));
@@ -56,23 +52,6 @@ using namespace Rcpp;
   return out;
 }
 
-[[cpp4r::register]] IntegerVector findInterval4(NumericVector x, NumericVector breaks) {
-  IntegerVector out(x.size());
-
-  NumericVector::iterator it, it_end, pos, b, e;
-  IntegerVector::iterator out_it;
-  it_end = x.end();
-  b = breaks.begin();
-  e = breaks.end();
-
-  for (it = x.begin(), out_it = out.begin(); it != it_end; ++it, ++out_it) {
-    pos = std::upper_bound(b, e, *it);
-    *out_it = std::distance(b, pos);
-  }
-
-  return out;
-}
-
 /* R code to benchmark these implementations
 res <- bench::press(
   n1 = 10^seq(1, 3),
@@ -85,7 +64,6 @@ res <- bench::press(
       findInterval2(x, y),
       findInterval2_5(x, y),
       findInterval3(x, y),
-      findInterval4(x, y)
     )
   }
 )

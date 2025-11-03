@@ -89,9 +89,6 @@ register <- function(path = NULL, quiet = !is_interactive(), extension = c(".cpp
   cpp_function_registration <- glue::glue_collapse(cpp_function_registration, sep = "\n")
 
   extra_includes <- character()
-  if (pkg_links_to_rcpp(path)) {
-    extra_includes <- c(extra_includes, "#include <cpp4r/R.hpp>", "#include <Rcpp.h>", "using namespace Rcpp;")
-  }
 
   pkg_types <- c(
     file.path(path, "src", paste0(package, "_types.h")),
@@ -230,8 +227,60 @@ generate_r_functions <- function(funs, package = "cpp4r", use_package = FALSE) {
   }
 
   funs$package_call <- package_call
-  funs$list_params <- vcapply(funs$args, glue_collapse_data, "{name}")
-  funs$params <- vcapply(funs$list_params, function(x) if (nzchar(x)) paste0(", ", x) else x)
+  
+  # Extract default values and create parameter lists
+  funs$param_info <- lapply(funs$args, function(args_df) {
+    if (nrow(args_df) == 0) {
+      return(list(params = "", args = "", checks = ""))
+    }
+    
+    # Parse default values from the type column (they appear after '=')
+    param_names <- args_df$name
+    param_types <- args_df$type
+    
+    # Extract defaults (format: "type name = value" becomes "value")
+    defaults <- vapply(param_types, function(t) {
+      if (grepl("=", t)) {
+        sub(".*=\\s*", "", t)
+      } else {
+        ""
+      }
+    }, character(1))
+    
+    # Clean up types (remove default value parts)
+    clean_types <- vapply(param_types, function(t) {
+      trimws(sub("\\s*=.*$", "", t))
+    }, character(1))
+    
+    # Generate R function parameters with defaults
+    params_with_defaults <- vapply(seq_along(param_names), function(i) {
+      if (nzchar(defaults[i])) {
+        # Convert C++ defaults to R defaults
+        r_default <- convert_cpp_default_to_r(defaults[i])
+        paste0(param_names[i], " = ", r_default)
+      } else {
+        param_names[i]
+      }
+    }, character(1))
+    
+    # Generate type checking/coercion code
+    checks <- vapply(seq_along(param_names), function(i) {
+      generate_type_check(param_names[i], clean_types[i])
+    }, character(1))
+    checks <- checks[nzchar(checks)]
+    
+    list(
+      params = paste(params_with_defaults, collapse = ", "),
+      args = paste(param_names, collapse = ", "),
+      checks = if (length(checks) > 0) paste0("\t", checks, collapse = "\n") else ""
+    )
+  })
+  
+  funs$list_params <- vapply(funs$param_info, function(x) x$params, character(1))
+  funs$call_args <- vapply(funs$param_info, function(x) x$args, character(1))
+  funs$type_checks <- vapply(funs$param_info, function(x) x$checks, character(1))
+  
+  funs$params <- vcapply(funs$call_args, function(x) if (nzchar(x)) paste0(", ", x) else x)
   is_void <- funs$return_type == "void"
   funs$calls <- ifelse(is_void,
     glue::glue_data(funs, "invisible(.Call({package_names}{params}{package_call}))"),
@@ -256,18 +305,87 @@ generate_r_functions <- function(funs, package = "cpp4r", use_package = FALSE) {
     }
   }, funs$file, funs$line, SIMPLIFY = TRUE)
 
-  # Generate R functions with or without Roxygen comments
-  out <- mapply(function(name, list_params, calls, roxygen_comment) {
-    if (nzchar(roxygen_comment)) {
-      glue::glue("{roxygen_comment}\n{name} <- function({list_params}) {{\n\t{calls}\n}}")
+  # Generate R functions with type checks and defaults
+  out <- mapply(function(name, list_params, calls, roxygen_comment, type_checks) {
+    body <- if (nzchar(type_checks)) {
+      paste0("\n", type_checks, "\n\t", calls, "\n")
     } else {
-      glue::glue("{name} <- function({list_params}) {{\n  {calls}\n}}")
+      paste0("\n\t", calls, "\n")
     }
-  }, funs$name, funs$list_params, funs$calls, funs$roxygen_comment, SIMPLIFY = TRUE)
+    
+    if (nzchar(roxygen_comment)) {
+      glue::glue("{roxygen_comment}\n{name} <- function({list_params}) {{{body}}}")
+    } else {
+      glue::glue("{name} <- function({list_params}) {{{body}}}")
+    }
+  }, funs$name, funs$list_params, funs$calls, funs$roxygen_comment, funs$type_checks, SIMPLIFY = TRUE)
 
   out <- glue::trim(out)
   out <- glue::glue_collapse(out, sep = "\n\n")
   unclass(out)
+}
+
+# Helper function to convert C++ default values to R
+convert_cpp_default_to_r <- function(cpp_default) {
+  cpp_default <- trimws(cpp_default)
+  
+  # Handle common cases
+  if (cpp_default == "true" || cpp_default == "TRUE") {
+    return("TRUE")
+  } else if (cpp_default == "false" || cpp_default == "FALSE") {
+    return("FALSE")
+  } else if (grepl("^[0-9]+L?$", cpp_default)) {
+    # Integer literal
+    return(paste0(sub("L$", "", cpp_default), "L"))
+  } else if (grepl("^[0-9.]+[fF]?$", cpp_default)) {
+    # Float/double literal
+    return(sub("[fF]$", "", cpp_default))
+  } else if (grepl('^".*"$', cpp_default) || grepl("^'.*'$", cpp_default)) {
+    # String literal - keep as is
+    return(cpp_default)
+  } else if (cpp_default == "NULL" || cpp_default == "nullptr") {
+    return("NULL")
+  }
+  
+  # Default: keep as-is and hope for the best
+  cpp_default
+}
+
+# Helper function to generate type checking/coercion code
+generate_type_check <- function(param_name, param_type) {
+  # Map C++ types to R coercion functions
+  if (param_type == "int" || grepl("^int[[:space:]]*$", param_type)) {
+    return(glue::glue("{param_name} <- as.integer({param_name})"))
+  } else if (param_type == "double" || grepl("^double[[:space:]]*$", param_type)) {
+    return(glue::glue("{param_name} <- as.numeric({param_name})"))
+  } else if (param_type == "bool" || grepl("^bool[[:space:]]*$", param_type)) {
+    return(glue::glue("{param_name} <- as.logical({param_name})"))
+  } else if (grepl("string", param_type, ignore.case = TRUE)) {
+    return(glue::glue("{param_name} <- as.character({param_name})"))
+  }
+  
+  # Handle cpp4r matrix types - set proper storage mode
+  if (grepl("integers_matrix", param_type)) {
+    return(glue::glue("storage.mode({param_name}) <- \"integer\""))
+  } else if (grepl("doubles_matrix", param_type)) {
+    return(glue::glue("storage.mode({param_name}) <- \"double\""))
+  } else if (grepl("logicals_matrix", param_type)) {
+    return(glue::glue("storage.mode({param_name}) <- \"logical\""))
+  }
+  
+  # Handle cpp4r vector types - set proper storage mode as well
+  if (grepl("^integers[^_]", param_type) || param_type == "integers") {
+    return(glue::glue("storage.mode({param_name}) <- \"integer\""))
+  } else if (grepl("^doubles[^_]", param_type) || param_type == "doubles") {
+    return(glue::glue("storage.mode({param_name}) <- \"double\""))
+  } else if (grepl("^logicals[^_]", param_type) || param_type == "logicals") {
+    return(glue::glue("storage.mode({param_name}) <- \"logical\""))
+  } else if (grepl("^strings[^_]", param_type) || param_type == "strings") {
+    return(glue::glue("storage.mode({param_name}) <- \"character\""))
+  }
+  
+  # For other cpp4r types, don't add checks (they handle conversion internally)
+  return("")
 }
 
 extract_roxygen_comments <- function(file) {
@@ -354,12 +472,6 @@ get_call_entries <- function(path, names, package) {
   mid <- grep("static const R_CallMethodDef CallEntries[] = {", res, fixed = TRUE)
 
   res[seq(mid, end)]
-}
-
-pkg_links_to_rcpp <- function(path) {
-  deps <- desc::desc_get_deps(file.path(path, "DESCRIPTION"))
-
-  any(deps$type == "LinkingTo" & deps$package == "Rcpp")
 }
 
 get_register_needs <- function() {

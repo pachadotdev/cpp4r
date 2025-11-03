@@ -1,5 +1,7 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 #include <algorithm>         // for min
 #include <array>             // for array
 #include <initializer_list>  // for initializer_list
@@ -32,7 +34,11 @@ inline typename r_vector<int>::underlying_type r_vector<int>::get_elt(SEXP x,
 template <>
 inline typename r_vector<int>::underlying_type* r_vector<int>::get_p(bool is_altrep,
                                                                      SEXP data) noexcept {
+#if CPP4R_HAS_CXX20
+  return __builtin_expect(is_altrep, 0) CPP4R_UNLIKELY ? nullptr : INTEGER(data);
+#else
   return __builtin_expect(is_altrep, 0) ? nullptr : INTEGER(data);
+#endif
 }
 
 template <>
@@ -50,7 +56,11 @@ inline void r_vector<int>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
 
 template <>
 inline bool r_vector<int>::const_iterator::use_buf(bool is_altrep) noexcept {
+#if CPP4R_HAS_CXX20
+  return __builtin_expect(is_altrep, 0) CPP4R_UNLIKELY;
+#else
   return __builtin_expect(is_altrep, 0);
+#endif
 }
 
 typedef r_vector<int> integers;
@@ -64,6 +74,8 @@ inline void r_vector<int>::set_elt(SEXP x, R_xlen_t i,
   SET_INTEGER_ELT(x, i, value);
 }
 
+// No special conversions needed for int - it's the native type
+
 typedef r_vector<int> integers;
 
 // Add constructor for initializer_list for the writable r_vector specialization
@@ -73,6 +85,17 @@ inline r_vector<int>::r_vector(std::initializer_list<int> il)
       capacity_(il.size()) {
   auto it = il.begin();
 
+#if CPP4R_HAS_CXX20
+  if (data_p_ != nullptr) CPP4R_LIKELY {
+    for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
+      data_p_[i] = *it;
+    }
+  } else CPP4R_UNLIKELY {
+    for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
+      set_elt(data_, i, *it);
+    }
+  }
+#else
   if (data_p_ != nullptr) {
     for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
       data_p_[i] = *it;
@@ -82,14 +105,21 @@ inline r_vector<int>::r_vector(std::initializer_list<int> il)
       set_elt(data_, i, *it);
     }
   }
+#endif
 }
 
 }  // namespace writable
 
 template <>
+#if CPP4R_HAS_CXX17
+CPP4R_NODISCARD inline int na() {
+  return NA_INTEGER;
+}
+#else
 inline int na() {
   return NA_INTEGER;
 }
+#endif
 
 // forward declaration
 
@@ -98,15 +128,27 @@ typedef r_vector<r_bool> logicals;
 
 inline integers as_integers(SEXP x) {
   SEXPTYPE x_type = detail::r_typeof(x);
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(x_type == INTSXP, 1)) CPP4R_LIKELY {
+    return integers(x);
+  }
+#else
   if (__builtin_expect(x_type == INTSXP, 1)) {
     return integers(x);
   }
+#endif
 
   // Get length once and check for early exit
   R_xlen_t len = Rf_length(x);
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(len == 0, 0)) CPP4R_UNLIKELY {
+    return writable::integers(static_cast<R_xlen_t>(0));
+  }
+#else
   if (__builtin_expect(len == 0, 0)) {
     return writable::integers(static_cast<R_xlen_t>(0));
   }
+#endif
 
   if (__builtin_expect(x_type == REALSXP, 0)) {
     doubles xn(x);
@@ -116,6 +158,21 @@ inline integers as_integers(SEXP x) {
     const double* src_ptr = REAL_OR_NULL(x);
     int* dest_ptr = INTEGER(ret.data());
 
+#if CPP4R_HAS_CXX20
+    if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) CPP4R_LIKELY {
+      // Direct memory access - faster for large arrays
+      for (R_xlen_t i = 0; i < len; ++i) {
+        if (__builtin_expect(ISNA(src_ptr[i]), 0)) CPP4R_UNLIKELY {
+          dest_ptr[i] = NA_INTEGER;
+        } else if (__builtin_expect(!is_convertible_without_loss_to_integer(src_ptr[i]),
+                                    0)) CPP4R_UNLIKELY {
+          throw std::runtime_error("All elements must be integer-like");
+        } else CPP4R_LIKELY {
+          dest_ptr[i] = static_cast<int>(src_ptr[i]);
+        }
+      }
+    } else CPP4R_UNLIKELY {
+#else
     if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) {
       // Direct memory access - faster for large arrays
       for (R_xlen_t i = 0; i < len; ++i) {
@@ -129,6 +186,7 @@ inline integers as_integers(SEXP x) {
         }
       }
     } else {
+#endif
       // Fallback to iterator-based approach
       std::transform(xn.begin(), xn.end(), ret.begin(), [](double value) {
         if (ISNA(value)) {
@@ -149,6 +207,15 @@ inline integers as_integers(SEXP x) {
     const int* src_ptr = LOGICAL_OR_NULL(x);
     int* dest_ptr = INTEGER(ret.data());
 
+#if CPP4R_HAS_CXX20
+    if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) CPP4R_LIKELY {
+      // Direct memory access - faster for large arrays
+      for (R_xlen_t i = 0; i < len; ++i) {
+        dest_ptr[i] =
+            __builtin_expect(src_ptr[i] == NA_LOGICAL, 0) CPP4R_UNLIKELY ? NA_INTEGER : src_ptr[i];
+      }
+    } else CPP4R_UNLIKELY {
+#else
     if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) {
       // Direct memory access - faster for large arrays
       for (R_xlen_t i = 0; i < len; ++i) {
@@ -156,6 +223,7 @@ inline integers as_integers(SEXP x) {
             __builtin_expect(src_ptr[i] == NA_LOGICAL, 0) ? NA_INTEGER : src_ptr[i];
       }
     } else {
+#endif
       // Fallback to iterator-based approach
       std::transform(xn.begin(), xn.end(), ret.begin(), [](r_bool value) {
         return value == NA_LOGICAL ? NA_INTEGER
@@ -171,15 +239,31 @@ inline integers as_integers(SEXP x) {
 // Optimized comparison operators for r_vector<int>
 template <>
 inline bool operator==(const r_vector<int>& lhs, const r_vector<int>& rhs) {
+#if CPP4R_HAS_CXX20
+  if (lhs.size() != rhs.size()) CPP4R_UNLIKELY return false;
+
+  // Fast path: if both vectors point to the same data, they're equal
+  if (lhs.data() == rhs.data()) CPP4R_LIKELY return true;
+#else
   if (lhs.size() != rhs.size()) return false;
 
   // Fast path: if both vectors point to the same data, they're equal
   if (lhs.data() == rhs.data()) return true;
+#endif
 
   // Use direct memory comparison when possible
   const int* lhs_ptr = INTEGER_OR_NULL(lhs.data());
   const int* rhs_ptr = INTEGER_OR_NULL(rhs.data());
 
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(lhs_ptr != nullptr && rhs_ptr != nullptr, 1)) CPP4R_LIKELY {
+    R_xlen_t len = lhs.size();
+    for (R_xlen_t i = 0; i < len; ++i) {
+      if (__builtin_expect(lhs_ptr[i] != rhs_ptr[i], 0)) CPP4R_UNLIKELY return false;
+    }
+    return true;
+  } else CPP4R_UNLIKELY {
+#else
   if (__builtin_expect(lhs_ptr != nullptr && rhs_ptr != nullptr, 1)) {
     R_xlen_t len = lhs.size();
     for (R_xlen_t i = 0; i < len; ++i) {
@@ -187,6 +271,7 @@ inline bool operator==(const r_vector<int>& lhs, const r_vector<int>& rhs) {
     }
     return true;
   } else {
+#endif
     // Fallback to iterator comparison
     auto lhs_it = lhs.cbegin();
     auto rhs_it = rhs.cbegin();
@@ -210,6 +295,16 @@ inline long long sum_integers(const r_vector<int>& vec) noexcept {
   const int* ptr = INTEGER_OR_NULL(vec.data());
   R_xlen_t len = vec.size();
 
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(ptr != nullptr, 1)) CPP4R_LIKELY {
+    // Direct memory access for better performance
+    for (R_xlen_t i = 0; i < len; ++i) {
+      if (__builtin_expect(ptr[i] != NA_INTEGER, 1)) CPP4R_LIKELY {
+        result += ptr[i];
+      }
+    }
+  } else CPP4R_UNLIKELY {
+#else
   if (__builtin_expect(ptr != nullptr, 1)) {
     // Direct memory access for better performance
     for (R_xlen_t i = 0; i < len; ++i) {
@@ -218,12 +313,19 @@ inline long long sum_integers(const r_vector<int>& vec) noexcept {
       }
     }
   } else {
+#endif
     // Fallback to iterator approach
     for (auto it = vec.cbegin(); it != vec.cend(); ++it) {
       int val = *it;
+#if CPP4R_HAS_CXX20
+      if (__builtin_expect(val != NA_INTEGER, 1)) CPP4R_LIKELY {
+        result += val;
+      }
+#else
       if (__builtin_expect(val != NA_INTEGER, 1)) {
         result += val;
       }
+#endif
     }
   }
   return result;

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 #include <algorithm>         // for min
 #include <array>             // for array
 #include <cmath>             // for floor
@@ -47,7 +49,7 @@ inline typename r_vector<uint8_t>::underlying_type const* r_vector<uint8_t>::get
 template <>
 inline typename r_vector<uint8_t>::underlying_type* r_vector<uint8_t>::get_p(
     bool is_altrep, SEXP data) noexcept {
-  return __builtin_expect(is_altrep, 0) ? nullptr : RAW(data);
+  return CPP4R_UNLIKELY(is_altrep) ? nullptr : RAW(data);
 }
 
 template <>
@@ -59,7 +61,7 @@ inline void r_vector<uint8_t>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
 
 template <>
 inline bool r_vector<uint8_t>::const_iterator::use_buf(bool is_altrep) noexcept {
-  return __builtin_expect(is_altrep, 0);
+  return CPP4R_UNLIKELY(is_altrep);
 }
 
 typedef r_vector<uint8_t> raws;
@@ -85,7 +87,7 @@ inline r_vector<uint8_t>::r_vector(std::initializer_list<uint8_t> il)
   auto it = il.begin();
   Rbyte* ptr = RAW(this->data_);
 
-  if (ptr != nullptr) {
+  if (CPP4R_LIKELY(ptr != nullptr)) {
     // Direct memory access for better performance
     for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
       ptr[i] = static_cast<Rbyte>(*it);
@@ -110,17 +112,17 @@ typedef r_vector<r_bool> logicals;
 // Optimized as_raws conversion function
 inline raws as_raws(SEXP x) {
   SEXPTYPE x_type = detail::r_typeof(x);
-  if (__builtin_expect(x_type == RAWSXP, 1)) {
+  if (CPP4R_LIKELY(x_type == RAWSXP)) {
     return raws(x);
   }
 
   // Get length once and check for early exit
   R_xlen_t len = Rf_length(x);
-  if (__builtin_expect(len == 0, 0)) {
+  if (CPP4R_UNLIKELY(len == 0)) {
     return writable::raws(static_cast<R_xlen_t>(0));
   }
 
-  if (__builtin_expect(x_type == INTSXP, 0)) {
+  if (CPP4R_UNLIKELY(x_type == INTSXP)) {
     integers xn(x);
     writable::raws ret(len);
 
@@ -128,13 +130,13 @@ inline raws as_raws(SEXP x) {
     const int* src_ptr = INTEGER_OR_NULL(x);
     Rbyte* dest_ptr = RAW(ret.data());
 
-    if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) {
+    if (CPP4R_LIKELY(src_ptr != nullptr && dest_ptr != nullptr)) {
       // Direct memory access - faster for large arrays
       for (R_xlen_t i = 0; i < len; ++i) {
-        if (__builtin_expect(src_ptr[i] == NA_INTEGER, 0)) {
+        if (CPP4R_UNLIKELY(src_ptr[i] == NA_INTEGER)) {
           throw std::runtime_error("Cannot convert NA integer to raw");
         }
-        if (__builtin_expect(src_ptr[i] < 0 || src_ptr[i] > 255, 0)) {
+        if (CPP4R_UNLIKELY(src_ptr[i] < 0 || src_ptr[i] > 255)) {
           throw std::runtime_error(
               "Integer value out of range for raw conversion (0-255)");
         }
@@ -145,10 +147,10 @@ inline raws as_raws(SEXP x) {
       auto it = xn.begin();
       for (R_xlen_t i = 0; i < len; ++i, ++it) {
         int val = *it;
-        if (val == NA_INTEGER) {
+        if (CPP4R_UNLIKELY(val == NA_INTEGER)) {
           throw std::runtime_error("Cannot convert NA integer to raw");
         }
-        if (val < 0 || val > 255) {
+        if (CPP4R_UNLIKELY(val < 0 || val > 255)) {
           throw std::runtime_error(
               "Integer value out of range for raw conversion (0-255)");
         }
@@ -156,7 +158,7 @@ inline raws as_raws(SEXP x) {
       }
     }
     return ret;
-  } else if (__builtin_expect(x_type == REALSXP, 0)) {
+  } else if (CPP4R_UNLIKELY(x_type == REALSXP)) {
     doubles xn(x);
     writable::raws ret(len);
 
@@ -164,15 +166,14 @@ inline raws as_raws(SEXP x) {
     const double* src_ptr = REAL_OR_NULL(x);
     Rbyte* dest_ptr = RAW(ret.data());
 
-    if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) {
+    if (CPP4R_LIKELY(src_ptr != nullptr && dest_ptr != nullptr)) {
       // Direct memory access - faster for large arrays
       for (R_xlen_t i = 0; i < len; ++i) {
-        if (__builtin_expect(ISNA(src_ptr[i]), 0)) {
+        if (CPP4R_UNLIKELY(ISNA(src_ptr[i]))) {
           throw std::runtime_error("Cannot convert NA real to raw");
         }
-        if (__builtin_expect(
-                src_ptr[i] < 0.0 || src_ptr[i] > 255.0 || src_ptr[i] != floor(src_ptr[i]),
-                0)) {
+        if (CPP4R_UNLIKELY(
+                src_ptr[i] < 0.0 || src_ptr[i] > 255.0 || src_ptr[i] != floor(src_ptr[i]))) {
           throw std::runtime_error(
               "Real value out of range or not integer-like for raw conversion (0-255)");
         }
@@ -183,10 +184,10 @@ inline raws as_raws(SEXP x) {
       auto it = xn.begin();
       for (R_xlen_t i = 0; i < len; ++i, ++it) {
         double val = *it;
-        if (ISNA(val)) {
+        if (CPP4R_UNLIKELY(ISNA(val))) {
           throw std::runtime_error("Cannot convert NA real to raw");
         }
-        if (val < 0.0 || val > 255.0 || val != floor(val)) {
+        if (CPP4R_UNLIKELY(val < 0.0 || val > 255.0 || val != floor(val))) {
           throw std::runtime_error(
               "Real value out of range or not integer-like for raw conversion (0-255)");
         }
@@ -194,7 +195,7 @@ inline raws as_raws(SEXP x) {
       }
     }
     return ret;
-  } else if (__builtin_expect(x_type == LGLSXP, 0)) {
+  } else if (CPP4R_UNLIKELY(x_type == LGLSXP)) {
     logicals xn(x);
     writable::raws ret(len);
 
@@ -202,10 +203,10 @@ inline raws as_raws(SEXP x) {
     const int* src_ptr = LOGICAL_OR_NULL(x);
     Rbyte* dest_ptr = RAW(ret.data());
 
-    if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) {
+    if (CPP4R_LIKELY(src_ptr != nullptr && dest_ptr != nullptr)) {
       // Direct memory access - faster for large arrays
       for (R_xlen_t i = 0; i < len; ++i) {
-        if (__builtin_expect(src_ptr[i] == NA_LOGICAL, 0)) {
+        if (CPP4R_UNLIKELY(src_ptr[i] == NA_LOGICAL)) {
           throw std::runtime_error("Cannot convert NA logical to raw");
         }
         dest_ptr[i] = src_ptr[i] ? static_cast<Rbyte>(1) : static_cast<Rbyte>(0);
@@ -215,7 +216,7 @@ inline raws as_raws(SEXP x) {
       auto it = xn.begin();
       for (R_xlen_t i = 0; i < len; ++i, ++it) {
         r_bool val = *it;
-        if (val == NA_LOGICAL) {
+        if (CPP4R_UNLIKELY(val == NA_LOGICAL)) {
           throw std::runtime_error("Cannot convert NA logical to raw");
         }
         ret[i] =
@@ -231,16 +232,16 @@ inline raws as_raws(SEXP x) {
 // Optimized comparison operators for r_vector<uint8_t>
 template <>
 inline bool operator==(const r_vector<uint8_t>& lhs, const r_vector<uint8_t>& rhs) {
-  if (lhs.size() != rhs.size()) return false;
+  if (CPP4R_UNLIKELY(lhs.size() != rhs.size())) return false;
 
   // Fast path: if both vectors point to the same data, they're equal
-  if (lhs.data() == rhs.data()) return true;
+  if (CPP4R_UNLIKELY(lhs.data() == rhs.data())) return true;
 
   // Use direct memory comparison when possible - very efficient for raw bytes
   const Rbyte* lhs_ptr = RAW_OR_NULL(lhs.data());
   const Rbyte* rhs_ptr = RAW_OR_NULL(rhs.data());
 
-  if (__builtin_expect(lhs_ptr != nullptr && rhs_ptr != nullptr, 1)) {
+  if (CPP4R_LIKELY(lhs_ptr != nullptr && rhs_ptr != nullptr)) {
     R_xlen_t len = lhs.size();
     // Use memcmp for maximum performance on byte arrays
     return memcmp(lhs_ptr, rhs_ptr, len) == 0;
@@ -273,14 +274,14 @@ inline void raw_copy(const r_vector<uint8_t>& src, writable::raws& dst,
     length = std::min(src_len - src_start, dst_len - dst_start);
   }
 
-  if (src_start + length > src_len || dst_start + length > dst_len) {
+  if (CPP4R_UNLIKELY(src_start + length > src_len || dst_start + length > dst_len)) {
     throw std::out_of_range("Copy operation would exceed vector bounds");
   }
 
   const Rbyte* src_ptr = RAW_OR_NULL(src.data());
   Rbyte* dst_ptr = RAW(dst.data());
 
-  if (__builtin_expect(src_ptr != nullptr && dst_ptr != nullptr, 1)) {
+  if (CPP4R_LIKELY(src_ptr != nullptr && dst_ptr != nullptr)) {
     // Use memcpy for maximum performance
     memcpy(dst_ptr + dst_start, src_ptr + src_start, length);
   } else {
@@ -299,12 +300,12 @@ inline void raw_fill(writable::raws& vec, uint8_t value, R_xlen_t start = 0,
     length = vec_len - start;
   }
 
-  if (start + length > vec_len) {
+  if (CPP4R_UNLIKELY(start + length > vec_len)) {
     throw std::out_of_range("Fill operation would exceed vector bounds");
   }
 
   Rbyte* ptr = RAW(vec.data());
-  if (__builtin_expect(ptr != nullptr, 1)) {
+  if (CPP4R_LIKELY(ptr != nullptr)) {
     // Use memset for maximum performance
     memset(ptr + start, static_cast<int>(value), length);
   } else {
@@ -327,8 +328,7 @@ inline writable::raws raw_concat(const r_vector<uint8_t>& lhs,
   const Rbyte* rhs_ptr = RAW_OR_NULL(rhs.data());
   Rbyte* result_ptr = RAW(result.data());
 
-  if (__builtin_expect(lhs_ptr != nullptr && rhs_ptr != nullptr && result_ptr != nullptr,
-                       1)) {
+  if (CPP4R_LIKELY(lhs_ptr != nullptr && rhs_ptr != nullptr && result_ptr != nullptr)) {
     // Use memcpy for maximum performance
     memcpy(result_ptr, lhs_ptr, lhs_len);
     memcpy(result_ptr + lhs_len, rhs_ptr, rhs_len);

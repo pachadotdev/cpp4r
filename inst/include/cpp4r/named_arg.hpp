@@ -1,5 +1,7 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 // for size_t [@MichaelChirico, r-lib/cpp11/pull/454]
 // https://stackoverflow.com/questions/5079325/should-i-include-stddef-h-or-cstddef-for-size-t
 #include <cstddef>
@@ -8,6 +10,10 @@
 
 #include <initializer_list>  // for initializer_list
 #include <utility>           // for forward
+
+#if CPP4R_HAS_CXX17
+#include <string_view>  // for std::string_view (C++17)
+#endif
 
 #include "cpp4r/R.hpp"     // for SEXP, SEXPREC, literals
 #include "cpp4r/as.hpp"    // for as_sexp
@@ -38,6 +44,11 @@ class named_arg {
   named_arg(const char* name, const char* value) : name_(name), value_(as_sexp(value)) {}
   named_arg(const char* name, const std::string& value) : name_(name), value_(as_sexp(value)) {}
 
+#if CPP4R_HAS_CXX17
+  // C++17: Add string_view overload for zero-copy construction
+  named_arg(const char* name, std::string_view value) : name_(name), value_(as_sexp(value)) {}
+#endif
+
   named_arg& operator=(std::initializer_list<int> il) {
     value_ = as_sexp(il);
     return *this;
@@ -62,22 +73,39 @@ class named_arg {
     return *this;
   }
 
+#if CPP4R_HAS_CXX17
+  CPP4R_NODISCARD const char* name() const noexcept { return name_; }
+  CPP4R_NODISCARD SEXP value() const noexcept { return value_; }
+#else
   const char* name() const noexcept { return name_; }
   SEXP value() const noexcept { return value_; }
+#endif
 
   // Comparison operators for efficient name-based comparison
   bool operator==(const named_arg& other) const noexcept {
+#if CPP4R_HAS_CXX20
+    return std::strcmp(name_, other.name_) == 0 CPP4R_LIKELY;
+#else
     return std::strcmp(name_, other.name_) == 0;
+#endif
   }
 
   bool operator!=(const named_arg& other) const noexcept { return !(*this == other); }
 
   bool operator==(const char* other_name) const noexcept {
+#if CPP4R_HAS_CXX20
+    return std::strcmp(name_, other_name) == 0 CPP4R_LIKELY;
+#else
     return std::strcmp(name_, other_name) == 0;
+#endif
   }
 
   bool operator!=(const char* other_name) const noexcept {
+#if CPP4R_HAS_CXX20
+    return std::strcmp(name_, other_name) != 0 CPP4R_UNLIKELY;
+#else
     return std::strcmp(name_, other_name) != 0;
+#endif
   }
 
  private:
@@ -87,7 +115,15 @@ class named_arg {
 
 namespace literals {
 
-inline named_arg operator""_nm(const char* name, std::size_t) { return named_arg(name); }
+#if CPP4R_HAS_CXX17
+CPP4R_NODISCARD inline named_arg operator""_nm(const char* name, std::size_t) { 
+  return named_arg(name); 
+}
+#else
+inline named_arg operator""_nm(const char* name, std::size_t) { 
+  return named_arg(name); 
+}
+#endif
 
 }  // namespace literals
 
@@ -108,8 +144,14 @@ using namespace literals;
 namespace std {
 template <>
 struct hash<cpp4r::named_arg> {
+#if CPP4R_HAS_CXX17
+  CPP4R_NODISCARD std::size_t operator()(const cpp4r::named_arg& arg) const noexcept {
+    return std::hash<const char*>{}(arg.name());
+  }
+#else
   std::size_t operator()(const cpp4r::named_arg& arg) const noexcept {
     return std::hash<const char*>{}(arg.name());
   }
+#endif
 };
 }  // namespace std

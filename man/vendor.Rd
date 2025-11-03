@@ -4,10 +4,11 @@
 \alias{vendor}
 \title{Vendor the cpp4r headers}
 \usage{
-vendor(path = "./src/vendor")
+vendor(path = NULL)
 }
 \arguments{
-\item{path}{The directory to vendor the headers into}
+\item{path}{The directory with the vendored headers. It is recommended to use \code{"./src/vendor"}.
+The default is \code{NULL}.}
 }
 \value{
 The path to the vendored code (invisibly).
@@ -28,7 +29,7 @@ code until you run \code{cpp_vendor()} again.
 \examples{
 # create a new directory
 dir <- paste0(tempdir(), "/", gsub("\\\\s+|[[:punct:]]", "", Sys.time()))
-dir.create(dir, recursive = TRUE)
+dir.create(dir, recursive = TRUE, showWarnings = FALSE)
 
 # vendor the cpp4r headers into the directory
 vendor(dir)

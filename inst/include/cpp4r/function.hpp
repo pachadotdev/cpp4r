@@ -1,10 +1,16 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 #include <cstring>  // for std::strcmp (@pachadotdev use std qualifiers)
 
 #include <cstdio>   // for snprintf
 #include <string>   // for string, basic_string
 #include <utility>  // for forward
+
+#if CPP4R_HAS_CXX17
+#include <string_view>  // for std::string_view (C++17)
+#endif
 
 #include "cpp4r/R.hpp"          // for SEXP, SEXPREC, CDR, Rf_install, SETCAR
 #include "cpp4r/as.hpp"         // for as_sexp
@@ -57,16 +63,38 @@ class package {
  public:
   inline package(const char* name) : data_(get_namespace(name)) {}
   inline package(const std::string& name) : data_(get_namespace(name.c_str())) {}
+
+#if CPP4R_HAS_CXX17
+  // C++17: Add string_view overload
+  inline package(std::string_view name) : data_(get_namespace(name.data())) {}
+
+  CPP4R_NODISCARD inline function operator[](const char* name) {
+    return safe[Rf_findFun](safe[Rf_install](name), data_);
+  }
+  CPP4R_NODISCARD inline function operator[](const std::string& name) { 
+    return operator[](name.c_str()); 
+  }
+  CPP4R_NODISCARD inline function operator[](std::string_view name) { 
+    return safe[Rf_findFun](safe[Rf_install](name.data()), data_); 
+  }
+#else
   inline function operator[](const char* name) {
     return safe[Rf_findFun](safe[Rf_install](name), data_);
   }
   inline function operator[](const std::string& name) { return operator[](name.c_str()); }
+#endif
 
  private:
   static inline SEXP get_namespace(const char* name) {
+#if CPP4R_HAS_CXX20
+    if (__builtin_expect(std::strcmp(name, "base") == 0, 1)) CPP4R_LIKELY {
+      return R_BaseEnv;
+    }
+#else
     if (__builtin_expect(std::strcmp(name, "base") == 0, 1)) {
       return R_BaseEnv;
     }
+#endif
     sexp name_sexp = safe[Rf_install](name);
     return safe[detail::r_env_get](R_NamespaceRegistry, name_sexp);
   }
@@ -88,7 +116,11 @@ namespace detail {
 inline void r_message(const char* x) {
   static SEXP fn = NULL;
 
+#if CPP4R_HAS_CXX20
+  if (fn == NULL) CPP4R_UNLIKELY {
+#else
   if (fn == NULL) {
+#endif
     fn = Rf_findFun(Rf_install("message"), R_BaseEnv);
     R_PreserveObject(fn);
   }
@@ -113,9 +145,15 @@ inline void message(const char* fmt_arg) {
   char buff[1024];
   int msg;
   msg = std::snprintf(buff, 1024, "%s", fmt_arg);
+#if CPP4R_HAS_CXX20
+  if (msg >= 0 && msg < 1024) CPP4R_LIKELY {
+    safe[detail::r_message](buff);
+  }
+#else
   if (msg >= 0 && msg < 1024) {
     safe[detail::r_message](buff);
   }
+#endif
 #endif
 }
 
@@ -128,17 +166,36 @@ void message(const char* fmt_arg, Args... args) {
   char buff[1024];
   int msg;
   msg = std::snprintf(buff, 1024, fmt_arg, args...);
+#if CPP4R_HAS_CXX20
+  if (msg >= 0 && msg < 1024) CPP4R_LIKELY {
+    safe[detail::r_message](buff);
+  }
+#else
   if (msg >= 0 && msg < 1024) {
     safe[detail::r_message](buff);
   }
+#endif
 #endif
 }
 
 inline void message(const std::string& fmt_arg) { message(fmt_arg.c_str()); }
 
+#if CPP4R_HAS_CXX17
+// C++17: Add string_view overload
+inline void message(std::string_view fmt_arg) { message(fmt_arg.data()); }
+#endif
+
 template <typename... Args>
 void message(const std::string& fmt_arg, Args... args) {
   message(fmt_arg.c_str(), args...);
 }
+
+#if CPP4R_HAS_CXX17
+// C++17: Add string_view overload
+template <typename... Args>
+void message(std::string_view fmt_arg, Args... args) {
+  message(fmt_arg.data(), args...);
+}
+#endif
 
 }  // namespace cpp4r

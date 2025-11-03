@@ -1,5 +1,6 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"
 #include "cpp4r/R.hpp"
 #include "cpp4r/as.hpp"
 #include "cpp4r/attribute_proxy.hpp"

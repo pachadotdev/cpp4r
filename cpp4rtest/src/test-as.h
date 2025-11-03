@@ -1,5 +1,4 @@
 #include <testthat.h>
-#include "Rcpp.h"
 
 context("as_cpp-C++") {
   test_that("as_cpp<integer>(INTSEXP)") {
@@ -238,23 +237,6 @@ context("as_cpp-C++") {
     expect_true(x1[0] == 1.);
     expect_true(x1[1] == 2.);
     expect_true(x1[2] == 3.);
-
-    UNPROTECT(1);
-  }
-
-  test_that("as_cpp<Rcpp::List>()") {
-    SEXP l1 = PROTECT(Rf_allocVector(VECSXP, 3));
-    SET_VECTOR_ELT(l1, 0, Rf_allocVector(VECSXP, 1));
-    SET_VECTOR_ELT(VECTOR_ELT(l1, 0), 0, Rf_mkString("foo"));
-
-    auto res1 = cpp4r::as_cpp<Rcpp::List>(l1);
-    auto res2 = Rcpp::List(l1);
-
-    expect_true(Rf_length(res1) == Rf_length(res2));
-
-    SEXP res3 = cpp4r::as_sexp(res2);
-
-    expect_true(Rf_length(res3) == Rf_length(res2));
 
     UNPROTECT(1);
   }

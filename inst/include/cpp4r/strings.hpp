@@ -1,8 +1,14 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 #include <cstring>           // for strlen
 #include <initializer_list>  // for initializer_list
 #include <string>            // for string, basic_string
+
+#if CPP4R_HAS_CXX17
+#include <string_view>  // for std::string_view (C++17)
+#endif
 
 #include "cpp4r/R.hpp"                // for SEXP, SEXPREC, SET_STRI...
 #include "cpp4r/as.hpp"               // for as_sexp
@@ -39,7 +45,7 @@ template <>
 inline typename r_vector<r_string>::underlying_type const*
 r_vector<r_string>::get_const_p(bool is_altrep, SEXP data) noexcept {
   // No `STRING_PTR_OR_NULL()`
-  if (__builtin_expect(is_altrep, 0)) {
+  if (CPP4R_UNLIKELY(is_altrep)) {
     return nullptr;
   } else {
     return STRING_PTR_RO(data);
@@ -72,7 +78,7 @@ inline void r_vector<r_string>::set_elt(
 template <>
 template <typename U, typename std::enable_if<std::is_same<U, r_string>::value>::type*>
 inline void r_vector<r_string>::push_back(const std::string& value) {
-  if (this->length_ >= this->capacity_) {
+  if (CPP4R_UNLIKELY(this->length_ >= this->capacity_)) {
     // Calculate new capacity once instead of using while loop
     R_xlen_t new_capacity = this->capacity_ == 0 ? 1 : this->capacity_ * 2;
     this->reserve(new_capacity);
@@ -88,9 +94,9 @@ inline bool operator==(const r_vector<r_string>::proxy& lhs, r_string rhs) noexc
 
 inline SEXP alloc_or_copy(const SEXP data) {
   SEXPTYPE data_type = detail::r_typeof(data);
-  if (__builtin_expect(data_type == STRSXP, 1)) {
+  if (CPP4R_LIKELY(data_type == STRSXP)) {
     return safe[Rf_shallow_duplicate](data);
-  } else if (__builtin_expect(data_type == CHARSXP, 0)) {
+  } else if (CPP4R_UNLIKELY(data_type == CHARSXP)) {
     return cpp4r::r_vector<r_string>(safe[Rf_allocVector](STRSXP, 1));
   } else {
     throw type_error(STRSXP, data_type);
@@ -99,9 +105,9 @@ inline SEXP alloc_or_copy(const SEXP data) {
 
 inline SEXP alloc_if_charsxp(const SEXP data) {
   SEXPTYPE data_type = detail::r_typeof(data);
-  if (__builtin_expect(data_type == STRSXP, 1)) {
+  if (CPP4R_LIKELY(data_type == STRSXP)) {
     return data;
-  } else if (__builtin_expect(data_type == CHARSXP, 0)) {
+  } else if (CPP4R_UNLIKELY(data_type == CHARSXP)) {
     return cpp4r::r_vector<r_string>(safe[Rf_allocVector](STRSXP, 1));
   } else {
     throw type_error(STRSXP, data_type);
@@ -139,7 +145,7 @@ inline r_vector<r_string>::r_vector(std::initializer_list<r_string> il)
       typename r_vector<r_string>::underlying_type elt =
           static_cast<typename r_vector<r_string>::underlying_type>(*it);
 
-      if (elt == NA_STRING) {
+      if (CPP4R_UNLIKELY(elt == NA_STRING)) {
         SET_STRING_ELT(this->data_, i, elt);  // Direct access instead of set_elt
       } else {
         SET_STRING_ELT(this->data_, i, Rf_mkCharCE(Rf_translateCharUTF8(elt), CE_UTF8));
@@ -157,7 +163,7 @@ inline void r_vector<T>::push_back(const named_arg& value) {
   SEXP current_names = this->names();
   R_xlen_t current_size = this->size();
 
-  if (Rf_xlength(current_names) == 0) {
+  if (CPP4R_UNLIKELY(Rf_xlength(current_names) == 0)) {
     // Create names vector only once
     cpp4r::writable::strings new_nms(current_size);
     this->names() = new_nms;
@@ -181,32 +187,32 @@ typedef r_vector<r_bool> logicals;
 // Optimized as_strings conversion function
 inline strings as_strings(SEXP x) {
   SEXPTYPE x_type = detail::r_typeof(x);
-  if (__builtin_expect(x_type == STRSXP, 1)) {
+  if (CPP4R_LIKELY(x_type == STRSXP)) {
     return strings(x);
   }
 
   // Get length once and check for early exit
   R_xlen_t len = Rf_length(x);
-  if (__builtin_expect(len == 0, 0)) {
+  if (CPP4R_UNLIKELY(len == 0)) {
     return writable::strings(static_cast<R_xlen_t>(0));
   }
 
-  if (__builtin_expect(x_type == CHARSXP, 0)) {
+  if (CPP4R_UNLIKELY(x_type == CHARSXP)) {
     // Single character string - create a string vector with one element
     writable::strings ret(static_cast<R_xlen_t>(1));
     SET_STRING_ELT(ret.data(), 0, x);
     return ret;
-  } else if (__builtin_expect(x_type == INTSXP, 0)) {
+  } else if (CPP4R_UNLIKELY(x_type == INTSXP)) {
     integers xn(x);
     writable::strings ret(len);
 
     // Use direct memory access when possible for better performance
     const int* src_ptr = INTEGER_OR_NULL(x);
 
-    if (src_ptr != nullptr) {
+    if (CPP4R_LIKELY(src_ptr != nullptr)) {
       // Direct memory access - faster for large arrays
       for (R_xlen_t i = 0; i < len; ++i) {
-        if (src_ptr[i] == NA_INTEGER) {
+        if (CPP4R_UNLIKELY(src_ptr[i] == NA_INTEGER)) {
           SET_STRING_ELT(ret.data(), i, NA_STRING);
         } else {
           std::string str_val = std::to_string(src_ptr[i]);
@@ -219,7 +225,7 @@ inline strings as_strings(SEXP x) {
       auto it = xn.begin();
       for (R_xlen_t i = 0; i < len; ++i, ++it) {
         int val = *it;
-        if (val == NA_INTEGER) {
+        if (CPP4R_UNLIKELY(val == NA_INTEGER)) {
           SET_STRING_ELT(ret.data(), i, NA_STRING);
         } else {
           std::string str_val = std::to_string(val);
@@ -229,17 +235,17 @@ inline strings as_strings(SEXP x) {
       }
     }
     return ret;
-  } else if (__builtin_expect(x_type == REALSXP, 0)) {
+  } else if (CPP4R_UNLIKELY(x_type == REALSXP)) {
     doubles xn(x);
     writable::strings ret(len);
 
     // Use direct memory access when possible
     const double* src_ptr = REAL_OR_NULL(x);
 
-    if (src_ptr != nullptr) {
+    if (CPP4R_LIKELY(src_ptr != nullptr)) {
       // Direct memory access - faster for large arrays
       for (R_xlen_t i = 0; i < len; ++i) {
-        if (ISNA(src_ptr[i])) {
+        if (CPP4R_UNLIKELY(ISNA(src_ptr[i]))) {
           SET_STRING_ELT(ret.data(), i, NA_STRING);
         } else {
           std::string str_val = std::to_string(src_ptr[i]);
@@ -252,7 +258,7 @@ inline strings as_strings(SEXP x) {
       auto it = xn.begin();
       for (R_xlen_t i = 0; i < len; ++i, ++it) {
         double val = *it;
-        if (ISNA(val)) {
+        if (CPP4R_UNLIKELY(ISNA(val))) {
           SET_STRING_ELT(ret.data(), i, NA_STRING);
         } else {
           std::string str_val = std::to_string(val);
@@ -262,20 +268,20 @@ inline strings as_strings(SEXP x) {
       }
     }
     return ret;
-  } else if (__builtin_expect(x_type == LGLSXP, 0)) {
+  } else if (CPP4R_UNLIKELY(x_type == LGLSXP)) {
     logicals xn(x);
     writable::strings ret(len);
 
     // Use direct memory access when possible
     const int* src_ptr = LOGICAL_OR_NULL(x);
 
-    if (src_ptr != nullptr) {
+    if (CPP4R_LIKELY(src_ptr != nullptr)) {
       // Direct memory access with cached string values
       static const char* true_str = "TRUE";
       static const char* false_str = "FALSE";
 
       for (R_xlen_t i = 0; i < len; ++i) {
-        if (src_ptr[i] == NA_LOGICAL) {
+        if (CPP4R_UNLIKELY(src_ptr[i] == NA_LOGICAL)) {
           SET_STRING_ELT(ret.data(), i, NA_STRING);
         } else if (src_ptr[i]) {
           SET_STRING_ELT(ret.data(), i, Rf_mkCharCE(true_str, CE_UTF8));
@@ -288,7 +294,7 @@ inline strings as_strings(SEXP x) {
       auto it = xn.begin();
       for (R_xlen_t i = 0; i < len; ++i, ++it) {
         r_bool val = *it;
-        if (val == NA_LOGICAL) {
+        if (CPP4R_UNLIKELY(val == NA_LOGICAL)) {
           SET_STRING_ELT(ret.data(), i, NA_STRING);
         } else if (static_cast<bool>(val)) {
           SET_STRING_ELT(ret.data(), i, Rf_mkCharCE("TRUE", CE_UTF8));
@@ -306,10 +312,10 @@ inline strings as_strings(SEXP x) {
 // Optimized comparison operators for r_vector<r_string>
 template <>
 inline bool operator==(const r_vector<r_string>& lhs, const r_vector<r_string>& rhs) {
-  if (lhs.size() != rhs.size()) return false;
+  if (CPP4R_UNLIKELY(lhs.size() != rhs.size())) return false;
 
   // Fast path: if both vectors point to the same data, they're equal
-  if (lhs.data() == rhs.data()) return true;
+  if (CPP4R_UNLIKELY(lhs.data() == rhs.data())) return true;
 
   // Use direct element access when possible
   R_xlen_t len = lhs.size();
@@ -318,16 +324,16 @@ inline bool operator==(const r_vector<r_string>& lhs, const r_vector<r_string>& 
     SEXP rhs_elt = STRING_ELT(rhs.data(), i);
 
     // Fast pointer comparison first
-    if (lhs_elt == rhs_elt) continue;
+    if (CPP4R_LIKELY(lhs_elt == rhs_elt)) continue;
 
     // Handle NA cases
-    if (lhs_elt == NA_STRING || rhs_elt == NA_STRING) {
+    if (CPP4R_UNLIKELY(lhs_elt == NA_STRING || rhs_elt == NA_STRING)) {
       if (lhs_elt != rhs_elt) return false;
       continue;
     }
 
     // String content comparison
-    if (strcmp(CHAR(lhs_elt), CHAR(rhs_elt)) != 0) return false;
+    if (CPP4R_UNLIKELY(strcmp(CHAR(lhs_elt), CHAR(rhs_elt)) != 0)) return false;
   }
 
   return true;
@@ -339,21 +345,21 @@ inline bool operator!=(const r_vector<r_string>& lhs, const r_vector<r_string>& 
 }
 
 // Optimized string utility functions
-inline bool string_vector_contains_na(const r_vector<r_string>& vec) noexcept {
+CPP4R_NODISCARD inline bool string_vector_contains_na(const r_vector<r_string>& vec) noexcept {
   R_xlen_t len = vec.size();
   for (R_xlen_t i = 0; i < len; ++i) {
-    if (__builtin_expect(STRING_ELT(vec.data(), i) == NA_STRING, 0)) {
+    if (CPP4R_UNLIKELY(STRING_ELT(vec.data(), i) == NA_STRING)) {
       return true;
     }
   }
   return false;
 }
 
-inline R_xlen_t count_non_na_strings(const r_vector<r_string>& vec) noexcept {
+CPP4R_NODISCARD inline R_xlen_t count_non_na_strings(const r_vector<r_string>& vec) noexcept {
   R_xlen_t count = 0;
   R_xlen_t len = vec.size();
   for (R_xlen_t i = 0; i < len; ++i) {
-    if (__builtin_expect(STRING_ELT(vec.data(), i) != NA_STRING, 1)) {
+    if (CPP4R_LIKELY(STRING_ELT(vec.data(), i) != NA_STRING)) {
       ++count;
     }
   }
@@ -365,7 +371,7 @@ inline writable::strings string_paste(const r_vector<r_string>& lhs,
                                       const r_vector<r_string>& rhs,
                                       const std::string& sep = "") {
   R_xlen_t len = lhs.size();
-  if (len != rhs.size()) {
+  if (CPP4R_UNLIKELY(len != rhs.size())) {
     throw std::invalid_argument("Vector lengths must be equal for string concatenation");
   }
 
@@ -375,7 +381,7 @@ inline writable::strings string_paste(const r_vector<r_string>& lhs,
     SEXP lhs_elt = STRING_ELT(lhs.data(), i);
     SEXP rhs_elt = STRING_ELT(rhs.data(), i);
 
-    if (lhs_elt == NA_STRING || rhs_elt == NA_STRING) {
+    if (CPP4R_UNLIKELY(lhs_elt == NA_STRING || rhs_elt == NA_STRING)) {
       SET_STRING_ELT(result.data(), i, NA_STRING);
     } else {
       std::string combined =

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 #include <limits>  // for numeric_limits
 #include <ostream>
 #include <type_traits>  // for is_convertible, enable_if
@@ -18,7 +20,7 @@ class r_bool {
   r_bool() = default;
 
   r_bool(SEXP data) {
-    if (__builtin_expect(Rf_isLogical(data) && Rf_xlength(data) == 1, 1)) {
+    if (CPP4R_LIKELY(Rf_isLogical(data) && Rf_xlength(data) == 1)) {
       value_ = static_cast<Rboolean>(LOGICAL_ELT(data, 0));
       return;
     }
@@ -29,9 +31,15 @@ class r_bool {
   constexpr r_bool(Rboolean value) noexcept : value_(value) {}
   constexpr r_bool(int value) noexcept : value_(from_int(value)) {}
 
+#if CPP4R_HAS_CXX17
+  CPP4R_NODISCARD constexpr operator bool() const noexcept { return value_ == TRUE; }
+  CPP4R_NODISCARD constexpr operator int() const noexcept { return value_; }
+  CPP4R_NODISCARD constexpr operator Rboolean() const noexcept { return value_ ? TRUE : FALSE; }
+#else
   constexpr operator bool() const noexcept { return value_ == TRUE; }
   constexpr operator int() const noexcept { return value_; }
   constexpr operator Rboolean() const noexcept { return value_ ? TRUE : FALSE; }
+#endif
 
   constexpr bool operator==(r_bool rhs) const noexcept { return value_ == rhs.value_; }
   constexpr bool operator==(bool rhs) const noexcept { return operator==(r_bool(rhs)); }
@@ -45,7 +53,11 @@ class r_bool {
   constexpr bool operator!=(Rboolean rhs) const noexcept { return !operator==(rhs); }
   constexpr bool operator!=(int rhs) const noexcept { return !operator==(rhs); }
 
+#if CPP4R_HAS_CXX17
+  CPP4R_NODISCARD constexpr bool is_na() const noexcept { return value_ == na; }
+#else
   constexpr bool is_na() const noexcept { return value_ == na; }
+#endif
 
  private:
   static constexpr int na = std::numeric_limits<int>::min();
@@ -59,7 +71,7 @@ class r_bool {
 };
 
 inline std::ostream& operator<<(std::ostream& os, r_bool const& value) {
-  if (__builtin_expect(value.is_na(), 0)) {
+  if (CPP4R_UNLIKELY(value.is_na())) {
     os << "NA";
   } else {
     os << (static_cast<bool>(value) ? "TRUE" : "FALSE");
@@ -78,9 +90,15 @@ enable_if_r_bool<T, SEXP> as_sexp(T from) {
 }
 
 template <>
+#if CPP4R_HAS_CXX17
+CPP4R_NODISCARD inline r_bool na() {
+  return NA_LOGICAL;
+}
+#else
 inline r_bool na() {
   return NA_LOGICAL;
 }
+#endif
 
 namespace traits {
 template <>

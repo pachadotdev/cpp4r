@@ -1,3 +1,8 @@
+/* roxygen
+@title Safe functions
+@rdname testing-safe
+@keywords internal
+*/
 [[cpp4r::register]] SEXP cpp4r_safe_(SEXP x_sxp) {
   SEXP err = R_NilValue;
   const size_t ERROR_SIZE = 2048;

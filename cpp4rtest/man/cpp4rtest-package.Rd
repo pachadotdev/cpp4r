@@ -4,7 +4,7 @@
 \name{cpp4rtest-package}
 \alias{cpp4rtest}
 \alias{cpp4rtest-package}
-\title{cpp4rtest: A test suite and benchmark code for 'cpp4r'}
+\title{cpp4rtest: A Test Suite and Benchmark Code for 'cpp4r'}
 \description{
 Provides a test suite and benchmarking code for the 'cpp4r' package.
 }

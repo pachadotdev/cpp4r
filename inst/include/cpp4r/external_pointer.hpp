@@ -1,5 +1,7 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 #include <cstddef>      // for nullptr_t, NULL
 #include <memory>       // for bad_weak_ptr
 #include <type_traits>  // for add_lvalue_reference
@@ -24,27 +26,49 @@ class external_pointer {
 
   static SEXP valid_type(SEXP data) {
     // Pacha: Allow nullable external_pointer (#312)
+#if CPP4R_HAS_CXX20
+    if (__builtin_expect(data == R_NilValue, 0)) CPP4R_UNLIKELY {
+      return data;
+    }
+#else
     if (__builtin_expect(data == R_NilValue, 0)) {
       return data;
     }
+#endif
 
     // Cache the type check to avoid multiple calls
     SEXPTYPE data_type = detail::r_typeof(data);
+#if CPP4R_HAS_CXX20
+    if (__builtin_expect(data_type != EXTPTRSXP, 0)) CPP4R_UNLIKELY {
+      throw type_error(EXTPTRSXP, data_type);
+    }
+#else
     if (__builtin_expect(data_type != EXTPTRSXP, 0)) {
       throw type_error(EXTPTRSXP, data_type);
     }
+#endif
 
     return data;
   }
 
   static void r_deleter(SEXP p) {
+#if CPP4R_HAS_CXX20
+    if (detail::r_typeof(p) != EXTPTRSXP) CPP4R_UNLIKELY return;
+#else
     if (detail::r_typeof(p) != EXTPTRSXP) return;
+#endif
 
     T* ptr = static_cast<T*>(R_ExternalPtrAddr(p));
 
+#if CPP4R_HAS_CXX20
+    if (ptr == nullptr) CPP4R_UNLIKELY {
+      return;
+    }
+#else
     if (ptr == nullptr) {
       return;
     }
+#endif
 
     R_ClearExternalPtr(p);
 
@@ -71,9 +95,15 @@ class external_pointer {
   }
 
   external_pointer& operator=(const external_pointer& rhs) {
+#if CPP4R_HAS_CXX20
+    if (this != &rhs) CPP4R_LIKELY {
+      data_ = safe[Rf_shallow_duplicate](rhs.data_);
+    }
+#else
     if (this != &rhs) {
       data_ = safe[Rf_shallow_duplicate](rhs.data_);
     }
+#endif
     return *this;
   }
 
@@ -87,10 +117,17 @@ class external_pointer {
   // same for the old external_pointer& operator=(external_pointer&& rhs) noexcept {
   // reset(rhs.release()); }
   external_pointer& operator=(external_pointer&& rhs) noexcept {
+#if CPP4R_HAS_CXX20
+    if (this != &rhs) CPP4R_LIKELY {
+      data_ = rhs.data_;
+      rhs.data_ = R_NilValue;
+    }
+#else
     if (this != &rhs) {
       data_ = rhs.data_;
       rhs.data_ = R_NilValue;
     }
+#endif
     return *this;
   }
 
@@ -99,13 +136,37 @@ class external_pointer {
     return *this;
   }
 
+#if CPP4R_HAS_CXX17
+  CPP4R_NODISCARD operator SEXP() const noexcept { return data_; }
+
+  CPP4R_NODISCARD pointer get() const noexcept {
+    pointer addr = static_cast<T*>(R_ExternalPtrAddr(data_));
+    return addr;  // No need to check for nullptr twice
+  }
+#else
   operator SEXP() const noexcept { return data_; }
 
   pointer get() const noexcept {
     pointer addr = static_cast<T*>(R_ExternalPtrAddr(data_));
     return addr;  // No need to check for nullptr twice
   }
+#endif
 
+#if CPP4R_HAS_CXX14
+  typename std::add_lvalue_reference<T>::type operator*() {
+    pointer addr = get();
+#if CPP4R_HAS_CXX20
+    if (addr == nullptr) CPP4R_UNLIKELY {
+      throw std::bad_weak_ptr();
+    }
+#else
+    if (addr == nullptr) {
+      throw std::bad_weak_ptr();
+    }
+#endif
+    return *addr;  // Use cached addr instead of calling get() again
+  }
+#else
   typename std::add_lvalue_reference<T>::type operator*() {
     pointer addr = get();
     if (addr == nullptr) {
@@ -113,20 +174,33 @@ class external_pointer {
     }
     return *addr;  // Use cached addr instead of calling get() again
   }
+#endif
 
   pointer operator->() const {
     pointer addr = get();
+#if CPP4R_HAS_CXX20
+    if (addr == nullptr) CPP4R_UNLIKELY {
+      throw std::bad_weak_ptr();
+    }
+#else
     if (addr == nullptr) {
       throw std::bad_weak_ptr();
     }
+#endif
     return addr;  // Use cached addr instead of calling get() again
   }
 
   pointer release() noexcept {
     pointer ptr = get();
+#if CPP4R_HAS_CXX20
+    if (ptr == nullptr) CPP4R_UNLIKELY {
+      return nullptr;
+    }
+#else
     if (ptr == nullptr) {
       return nullptr;
     }
+#endif
     R_ClearExternalPtr(data_);
 
     return ptr;
@@ -134,15 +208,29 @@ class external_pointer {
 
   void reset(pointer ptr = pointer()) {
     SEXP old_data = data_;
+#if CPP4R_HAS_CXX20
+    if (ptr != nullptr) CPP4R_LIKELY {
+      data_ = safe[R_MakeExternalPtr]((void*)ptr, R_NilValue, R_NilValue);
+    } else CPP4R_UNLIKELY {
+      data_ = R_NilValue;
+    }
+#else
     if (ptr != nullptr) {
       data_ = safe[R_MakeExternalPtr]((void*)ptr, R_NilValue, R_NilValue);
     } else {
       data_ = R_NilValue;
     }
+#endif
     // Clean up old data if it was an external pointer
+#if CPP4R_HAS_CXX20
+    if (old_data != R_NilValue) CPP4R_LIKELY {
+      r_deleter(old_data);
+    }
+#else
     if (old_data != R_NilValue) {
       r_deleter(old_data);
     }
+#endif
   }
 
   void swap(external_pointer& other) noexcept {
@@ -152,7 +240,11 @@ class external_pointer {
   }
 
   // Pacha: Support nullable external_pointer (#312)
+#if CPP4R_HAS_CXX17
+  CPP4R_NODISCARD operator bool() const noexcept { return data_ != R_NilValue; }
+#else
   operator bool() const noexcept { return data_ != R_NilValue; }
+#endif
 };
 
 template <class T, void Deleter(T*)>
@@ -166,6 +258,77 @@ bool operator==(const external_pointer<T, Deleter>& x,
   // Fast path: direct SEXP comparison
   SEXP x_sexp = static_cast<SEXP>(x);
   SEXP y_sexp = static_cast<SEXP>(y);
+#if CPP4R_HAS_CXX20
+  return x_sexp == y_sexp;
+}
+
+template <class T, void Deleter(T*)>
+CPP4R_NODISCARD bool operator!=(const external_pointer<T, Deleter>& x,
+                                const external_pointer<T, Deleter>& y) CPP4R_UNLIKELY {
+  return !(x == y);
+}
+
+template <class T, void Deleter(T*)>
+CPP4R_NODISCARD bool operator<(const external_pointer<T, Deleter>& x,
+                               const external_pointer<T, Deleter>& y) {
+  SEXP x_sexp = static_cast<SEXP>(x);
+  SEXP y_sexp = static_cast<SEXP>(y);
+  return x_sexp < y_sexp;
+}
+
+template <class T, void Deleter(T*)>
+CPP4R_NODISCARD bool operator<=(const external_pointer<T, Deleter>& x,
+                                const external_pointer<T, Deleter>& y) {
+  return !(y < x);
+}
+
+template <class T, void Deleter(T*)>
+CPP4R_NODISCARD bool operator>(const external_pointer<T, Deleter>& x,
+                               const external_pointer<T, Deleter>& y) {
+  return y < x;
+}
+
+template <class T, void Deleter(T*)>
+CPP4R_NODISCARD bool operator>=(const external_pointer<T, Deleter>& x,
+                                const external_pointer<T, Deleter>& y) {
+  return !(x < y);
+}
+#elif CPP4R_HAS_CXX17
+  return x_sexp == y_sexp;
+}
+
+template <class T, void Deleter(T*)>
+CPP4R_NODISCARD bool operator!=(const external_pointer<T, Deleter>& x,
+                                const external_pointer<T, Deleter>& y) {
+  return !(x == y);
+}
+
+template <class T, void Deleter(T*)>
+CPP4R_NODISCARD bool operator<(const external_pointer<T, Deleter>& x,
+                               const external_pointer<T, Deleter>& y) {
+  SEXP x_sexp = static_cast<SEXP>(x);
+  SEXP y_sexp = static_cast<SEXP>(y);
+  return x_sexp < y_sexp;
+}
+
+template <class T, void Deleter(T*)>
+CPP4R_NODISCARD bool operator<=(const external_pointer<T, Deleter>& x,
+                                const external_pointer<T, Deleter>& y) {
+  return !(y < x);
+}
+
+template <class T, void Deleter(T*)>
+CPP4R_NODISCARD bool operator>(const external_pointer<T, Deleter>& x,
+                               const external_pointer<T, Deleter>& y) {
+  return y < x;
+}
+
+template <class T, void Deleter(T*)>
+CPP4R_NODISCARD bool operator>=(const external_pointer<T, Deleter>& x,
+                                const external_pointer<T, Deleter>& y) {
+  return !(x < y);
+}
+#else
   return x_sexp == y_sexp;
 }
 
@@ -200,5 +363,6 @@ bool operator>=(const external_pointer<T, Deleter>& x,
                 const external_pointer<T, Deleter>& y) {
   return !(x < y);
 }
+#endif
 
 }  // namespace cpp4r

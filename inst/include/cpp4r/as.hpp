@@ -1,5 +1,7 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 #include <cmath>  // for modf
 #include <complex>
 #include <initializer_list>  // for initializer_list
@@ -11,16 +13,34 @@
 #include <unordered_map>  // for std::unordered_map
 #include <vector>         // for std::vector
 
+#if CPP4R_HAS_CXX17
+#include <string_view>  // for std::string_view (C++17)
+#endif
+
+#if CPP4R_HAS_STD_OPTIONAL
+#include <optional>  // for std::optional (C++17)
+#endif
+
 #include "cpp4r/R.hpp"        // for SEXP, SEXPREC, Rf_xlength, R_xlen_t
 #include "cpp4r/protect.hpp"  // for stop, protect, safe, protect::function
 
 namespace cpp4r {
 
+// C++14: Use variable templates for cleaner syntax
+#if CPP4R_HAS_CXX14
+template <bool C, typename R = void>
+using enable_if_t = std::enable_if_t<C, R>;
+
+template <typename T>
+using decay_t = std::decay_t<T>;
+#else
+// C++11 fallback
 template <bool C, typename R = void>
 using enable_if_t = typename std::enable_if<C, R>::type;
 
 template <typename T>
 using decay_t = typename std::decay<T>::type;
+#endif
 
 template <typename T>
 struct is_smart_ptr : std::false_type {};
@@ -85,10 +105,19 @@ struct is_std_complex<std::complex<T>> : std::true_type {};
 
 // https://stackoverflow.com/a/1521682/2055486
 //
+#if CPP4R_HAS_CXX20
+// C++20: Use constexpr for compile-time evaluation when possible
+constexpr bool is_convertible_without_loss_to_integer(double value) noexcept {
+  double int_part;
+  return std::modf(value, &int_part) == 0.0;
+}
+#else
+// C++11/14/17: Regular inline function
 inline bool is_convertible_without_loss_to_integer(double value) noexcept {
   double int_part;
   return std::modf(value, &int_part) == 0.0;
 }
+#endif
 
 template <typename T>
 enable_if_constructible_from_sexp<T, T> as_cpp(SEXP from) {
@@ -102,6 +131,28 @@ enable_if_is_sexp<T, T> as_cpp(SEXP from) {
 
 template <typename T>
 enable_if_integral<T, T> as_cpp(SEXP from) {
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(Rf_xlength(from) != 1, 0)) CPP4R_UNLIKELY {
+    throw std::length_error("Expected single integer value");
+  }
+
+  if (__builtin_expect(Rf_isInteger(from), 1)) CPP4R_LIKELY {
+    return INTEGER_ELT(from, 0);
+  } else if (__builtin_expect(Rf_isReal(from), 0)) CPP4R_UNLIKELY {
+    if (__builtin_expect(ISNA(REAL_ELT(from, 0)), 0)) CPP4R_UNLIKELY {
+      return NA_INTEGER;
+    }
+    double value = REAL_ELT(from, 0);
+    if (__builtin_expect(is_convertible_without_loss_to_integer(value), 1)) CPP4R_LIKELY {
+      return value;
+    }
+  } else if (__builtin_expect(Rf_isLogical(from), 0)) CPP4R_UNLIKELY {
+    if (__builtin_expect(LOGICAL_ELT(from, 0) == NA_LOGICAL, 0)) CPP4R_UNLIKELY {
+      return NA_INTEGER;
+    }
+  }
+#else
+  // C++11/14/17: No [[likely]]/[[unlikely]] attributes
   if (__builtin_expect(Rf_xlength(from) != 1, 0)) {
     throw std::length_error("Expected single integer value");
   }
@@ -121,6 +172,7 @@ enable_if_integral<T, T> as_cpp(SEXP from) {
       return NA_INTEGER;
     }
   }
+#endif
 
   throw std::length_error("Expected single integer value");
 }
@@ -128,12 +180,23 @@ enable_if_integral<T, T> as_cpp(SEXP from) {
 template <typename E>
 enable_if_enum<E, E> as_cpp(SEXP from) {
   if (Rf_isInteger(from)) {
+#if CPP4R_HAS_CXX17
+    // C++17: Use if constexpr for compile-time branch elimination
+    using underlying_type = typename std::underlying_type<E>::type;
+    if constexpr (std::is_same<char, underlying_type>::value) {
+      return static_cast<E>(as_cpp<int>(from));
+    } else {
+      return static_cast<E>(as_cpp<underlying_type>(from));
+    }
+#else
+    // C++11/14: Runtime conditional with type traits
     using underlying_type = typename std::underlying_type<E>::type;
     using int_type = typename std::conditional<std::is_same<char, underlying_type>::value,
                                                int,  // as_cpp<char> would trigger
                                                      // undesired string conversions
                                                underlying_type>::type;
     return static_cast<E>(as_cpp<int_type>(from));
+#endif
   }
 
   throw std::length_error("Expected single integer value");
@@ -141,15 +204,44 @@ enable_if_enum<E, E> as_cpp(SEXP from) {
 
 template <typename T>
 enable_if_bool<T, T> as_cpp(SEXP from) {
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(Rf_isLogical(from) && Rf_xlength(from) == 1, 1)) CPP4R_LIKELY {
+    return LOGICAL_ELT(from, 0) == 1;
+  }
+#else
   if (__builtin_expect(Rf_isLogical(from) && Rf_xlength(from) == 1, 1)) {
     return LOGICAL_ELT(from, 0) == 1;
   }
+#endif
 
   throw std::length_error("Expected single logical value");
 }
 
 template <typename T>
 enable_if_floating_point<T, T> as_cpp(SEXP from) {
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(Rf_xlength(from) != 1, 0)) CPP4R_UNLIKELY {
+    throw std::length_error("Expected single double value");
+  }
+
+  if (__builtin_expect(Rf_isReal(from), 1)) CPP4R_LIKELY {
+    return REAL_ELT(from, 0);
+  }
+  // All 32 bit integers can be coerced to doubles, so we just convert them.
+  if (__builtin_expect(Rf_isInteger(from), 0)) CPP4R_UNLIKELY {
+    if (__builtin_expect(INTEGER_ELT(from, 0) == NA_INTEGER, 0)) CPP4R_UNLIKELY {
+      return NA_REAL;
+    }
+    return INTEGER_ELT(from, 0);
+  }
+
+  // Also allow NA values
+  if (__builtin_expect(Rf_isLogical(from), 0)) CPP4R_UNLIKELY {
+    if (__builtin_expect(LOGICAL_ELT(from, 0) == NA_LOGICAL, 0)) CPP4R_UNLIKELY {
+      return NA_REAL;
+    }
+  }
+#else
   if (__builtin_expect(Rf_xlength(from) != 1, 0)) {
     throw std::length_error("Expected single double value");
   }
@@ -171,6 +263,7 @@ enable_if_floating_point<T, T> as_cpp(SEXP from) {
       return NA_REAL;
     }
   }
+#endif
 
   throw std::length_error("Expected single double value");
 }
@@ -180,15 +273,33 @@ enable_if_floating_point<T, T> as_cpp(SEXP from) {
 
 template <typename T>
 enable_if_char<T, T> as_cpp(SEXP from) {
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(Rf_isString(from) && Rf_xlength(from) == 1, 1)) CPP4R_LIKELY {
+    return unwind_protect([&] { return Rf_translateCharUTF8(STRING_ELT(from, 0))[0]; });
+  }
+#else
   if (__builtin_expect(Rf_isString(from) && Rf_xlength(from) == 1, 1)) {
     return unwind_protect([&] { return Rf_translateCharUTF8(STRING_ELT(from, 0))[0]; });
   }
+#endif
 
   throw std::length_error("Expected string vector of length 1");
 }
 
 template <typename T>
 enable_if_c_string<T, T> as_cpp(SEXP from) {
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(Rf_isString(from) && Rf_xlength(from) == 1, 1)) CPP4R_LIKELY {
+    void* vmax = vmaxget();
+
+    const char* result =
+        unwind_protect([&] { return Rf_translateCharUTF8(STRING_ELT(from, 0)); });
+
+    vmaxset(vmax);
+
+    return {result};
+  }
+#else
   if (__builtin_expect(Rf_isString(from) && Rf_xlength(from) == 1, 1)) {
     void* vmax = vmaxget();
 
@@ -199,6 +310,7 @@ enable_if_c_string<T, T> as_cpp(SEXP from) {
 
     return {result};
   }
+#endif
 
   throw std::length_error("Expected string vector of length 1");
 }
@@ -242,6 +354,15 @@ template <typename T>
 enable_if_std_string<T, SEXP> as_sexp(const T& from) {
   return as_sexp(from.c_str());
 }
+
+#if CPP4R_HAS_CXX17
+// C++17: std::string_view overload
+inline SEXP as_sexp(std::string_view from) {
+  return unwind_protect([&] { 
+    return Rf_ScalarString(Rf_mkCharLenCE(from.data(), from.size(), CE_UTF8)); 
+  });
+}
+#endif
 
 template <typename Container, typename T = typename Container::value_type,
           typename = disable_if_convertible_to_sexp<Container>>
@@ -353,11 +474,22 @@ inline SEXP as_sexp(const std::map<std::string, SEXP>& map) {
   SEXP result = PROTECT(Rf_allocVector(VECSXP, size));
   SEXP names = PROTECT(Rf_allocVector(STRSXP, size));
 
+#if CPP4R_HAS_CXX17
+  // C++17: Use structured bindings for cleaner iteration
+  R_xlen_t i = 0;
+  for (const auto& [key, value] : map) {
+    SET_VECTOR_ELT(result, i, value);
+    SET_STRING_ELT(names, i, Rf_mkCharCE(key.c_str(), CE_UTF8));
+    ++i;
+  }
+#else
+  // C++11/14: Traditional iterator approach
   auto it = map.begin();
   for (R_xlen_t i = 0; i < size; ++i, ++it) {
     SET_VECTOR_ELT(result, i, it->second);
     SET_STRING_ELT(names, i, Rf_mkCharCE(it->first.c_str(), CE_UTF8));
   }
+#endif
 
   Rf_setAttrib(result, R_NamesSymbol, names);
   UNPROTECT(2);
@@ -370,11 +502,22 @@ inline SEXP as_sexp(const std::map<double, int>& map) {
   SEXP result = PROTECT(Rf_allocVector(VECSXP, size));
   SEXP names = PROTECT(Rf_allocVector(REALSXP, size));
 
+#if CPP4R_HAS_CXX17
+  // C++17: Use structured bindings
+  R_xlen_t i = 0;
+  for (const auto& [key, value] : map) {
+    SET_VECTOR_ELT(result, i, Rf_ScalarInteger(value));
+    REAL(names)[i] = key;
+    ++i;
+  }
+#else
+  // C++11/14: Traditional iterator approach
   auto it = map.begin();
   for (R_xlen_t i = 0; i < size; ++i, ++it) {
     SET_VECTOR_ELT(result, i, Rf_ScalarInteger(it->second));
     REAL(names)[i] = it->first;
   }
+#endif
 
   Rf_setAttrib(result, R_NamesSymbol, names);
   UNPROTECT(2);
@@ -387,11 +530,22 @@ inline SEXP as_sexp(const std::unordered_map<std::string, SEXP>& map) {
   SEXP result = PROTECT(Rf_allocVector(VECSXP, size));
   SEXP names = PROTECT(Rf_allocVector(STRSXP, size));
 
+#if CPP4R_HAS_CXX17
+  // C++17: Use structured bindings
+  R_xlen_t i = 0;
+  for (const auto& [key, value] : map) {
+    SET_VECTOR_ELT(result, i, value);
+    SET_STRING_ELT(names, i, Rf_mkCharCE(key.c_str(), CE_UTF8));
+    ++i;
+  }
+#else
+  // C++11/14: Traditional iterator approach
   auto it = map.begin();
   for (R_xlen_t i = 0; i < size; ++i, ++it) {
     SET_VECTOR_ELT(result, i, it->second);
     SET_STRING_ELT(names, i, Rf_mkCharCE(it->first.c_str(), CE_UTF8));
   }
+#endif
 
   Rf_setAttrib(result, R_NamesSymbol, names);
   UNPROTECT(2);
@@ -404,11 +558,22 @@ inline SEXP as_sexp(const std::unordered_map<double, int>& map) {
   SEXP result = PROTECT(Rf_allocVector(VECSXP, size));
   SEXP names = PROTECT(Rf_allocVector(REALSXP, size));
 
+#if CPP4R_HAS_CXX17
+  // C++17: Use structured bindings
+  R_xlen_t i = 0;
+  for (const auto& [key, value] : map) {
+    SET_VECTOR_ELT(result, i, Rf_ScalarInteger(value));
+    REAL(names)[i] = key;
+    ++i;
+  }
+#else
+  // C++11/14: Traditional iterator approach
   auto it = map.begin();
   for (R_xlen_t i = 0; i < size; ++i, ++it) {
     SET_VECTOR_ELT(result, i, Rf_ScalarInteger(it->second));
     REAL(names)[i] = it->first;
   }
+#endif
 
   Rf_setAttrib(result, R_NamesSymbol, names);
   UNPROTECT(2);

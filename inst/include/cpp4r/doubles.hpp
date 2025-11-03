@@ -1,5 +1,7 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 #include <algorithm>         // for min, tranform
 #include <array>             // for array
 #include <initializer_list>  // for initializer_list
@@ -31,11 +33,19 @@ inline typename r_vector<double>::underlying_type r_vector<double>::get_elt(SEXP
 template <>
 inline typename r_vector<double>::underlying_type* r_vector<double>::get_p(bool is_altrep,
                                                                            SEXP data) noexcept {
+#if CPP4R_HAS_CXX20
+  if (is_altrep) CPP4R_UNLIKELY {
+    return nullptr;
+  } else CPP4R_LIKELY {
+    return REAL(data);
+  }
+#else
   if (is_altrep) {
     return nullptr;
   } else {
     return REAL(data);
   }
+#endif
 }
 
 template <>
@@ -76,6 +86,19 @@ typedef r_vector<r_bool> logicals;
 
 inline doubles as_doubles(SEXP x) {
   SEXPTYPE x_type = detail::r_typeof(x);
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(x_type == REALSXP, 1)) CPP4R_LIKELY {
+    return doubles(x);
+  }
+
+  // Get length once and check for early exit
+  R_xlen_t len = Rf_length(x);
+  if (__builtin_expect(len == 0, 0)) CPP4R_UNLIKELY {
+    return writable::doubles(static_cast<R_xlen_t>(0));
+  }
+
+  if (__builtin_expect(x_type == INTSXP, 0)) CPP4R_UNLIKELY {
+#else
   if (__builtin_expect(x_type == REALSXP, 1)) {
     return doubles(x);
   }
@@ -87,6 +110,7 @@ inline doubles as_doubles(SEXP x) {
   }
 
   if (__builtin_expect(x_type == INTSXP, 0)) {
+#endif
     integers xn(x);
     writable::doubles ret(len);
 
@@ -94,7 +118,11 @@ inline doubles as_doubles(SEXP x) {
     const int* src_ptr = INTEGER_OR_NULL(x);
     double* dest_ptr = REAL(ret.data());
 
+#if CPP4R_HAS_CXX20
+    if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) CPP4R_LIKELY {
+#else
     if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) {
+#endif
       // Direct memory access - faster for large arrays
       for (R_xlen_t i = 0; i < len; ++i) {
         dest_ptr[i] = __builtin_expect(src_ptr[i] == NA_INTEGER, 0)
@@ -108,7 +136,11 @@ inline doubles as_doubles(SEXP x) {
       });
     }
     return ret;
+#if CPP4R_HAS_CXX20
+  } else if (__builtin_expect(x_type == LGLSXP, 0)) CPP4R_UNLIKELY {
+#else
   } else if (__builtin_expect(x_type == LGLSXP, 0)) {
+#endif
     logicals xn(x);
     writable::doubles ret(len);
 
@@ -116,7 +148,11 @@ inline doubles as_doubles(SEXP x) {
     const int* src_ptr = LOGICAL_OR_NULL(x);
     double* dest_ptr = REAL(ret.data());
 
+#if CPP4R_HAS_CXX20
+    if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) CPP4R_LIKELY {
+#else
     if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) {
+#endif
       // Direct memory access - faster for large arrays
       for (R_xlen_t i = 0; i < len; ++i) {
         int logical_val = src_ptr[i];
@@ -138,31 +174,56 @@ inline doubles as_doubles(SEXP x) {
 }
 
 template <>
+#if CPP4R_HAS_CXX17
+CPP4R_NODISCARD inline double na() {
+  return NA_REAL;
+}
+#else
 inline double na() {
   return NA_REAL;
 }
+#endif
 
 // Optimized comparison operators for r_vector<double>
 template <>
 inline bool operator==(const r_vector<double>& lhs, const r_vector<double>& rhs) {
+#if CPP4R_HAS_CXX20
+  if (lhs.size() != rhs.size()) CPP4R_UNLIKELY return false;
+
+  // Fast path: if both vectors point to the same data, they're equal
+  if (lhs.data() == rhs.data()) CPP4R_LIKELY return true;
+#else
   if (lhs.size() != rhs.size()) return false;
 
   // Fast path: if both vectors point to the same data, they're equal
   if (lhs.data() == rhs.data()) return true;
+#endif
 
   // Use direct memory comparison when possible
   const double* lhs_ptr = REAL_OR_NULL(lhs.data());
   const double* rhs_ptr = REAL_OR_NULL(rhs.data());
 
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(lhs_ptr != nullptr && rhs_ptr != nullptr, 1)) CPP4R_LIKELY {
+#else
   if (__builtin_expect(lhs_ptr != nullptr && rhs_ptr != nullptr, 1)) {
+#endif
     R_xlen_t len = lhs.size();
     for (R_xlen_t i = 0; i < len; ++i) {
       // Handle NaN comparison correctly - NaN != NaN should be true
+#if CPP4R_HAS_CXX20
+      if (__builtin_expect(ISNAN(lhs_ptr[i]) || ISNAN(rhs_ptr[i]), 0)) CPP4R_UNLIKELY {
+        if (!(ISNAN(lhs_ptr[i]) && ISNAN(rhs_ptr[i]))) return false;
+      } else if (__builtin_expect(lhs_ptr[i] != rhs_ptr[i], 0)) CPP4R_UNLIKELY {
+        return false;
+      }
+#else
       if (__builtin_expect(ISNAN(lhs_ptr[i]) || ISNAN(rhs_ptr[i]), 0)) {
         if (!(ISNAN(lhs_ptr[i]) && ISNAN(rhs_ptr[i]))) return false;
       } else if (__builtin_expect(lhs_ptr[i] != rhs_ptr[i], 0)) {
         return false;
       }
+#endif
     }
     return true;
   } else {

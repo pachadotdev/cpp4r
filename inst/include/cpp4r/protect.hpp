@@ -1,10 +1,16 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 #include <csetjmp>    // for longjmp, setjmp, jmp_buf
 #include <exception>  // for exception
 #include <stdexcept>  // for std::runtime_error
 #include <string>     // for string, basic_string
 #include <tuple>      // for tuple, make_tuple
+
+#if CPP4R_HAS_CXX17
+#include <string_view>  // for std::string_view (C++17)
+#endif
 
 // NB: cpp4r/R.hpp must precede R_ext/Error.h to ensure R_NO_REMAP is defined
 #include "cpp4r/R.hpp"  // for SEXP, SEXPREC, CDR, R_NilValue, CAR, R_Pres...
@@ -13,11 +19,6 @@
 #include "R_ext/Error.h"    // for Rf_error, Rf_warning
 #include "R_ext/Print.h"    // for REprintf
 #include "R_ext/Utils.h"    // for R_CheckUserInterrupt
-
-// We would like to remove this, since all supported versions of R now support proper
-// unwind protect, but some groups rely on it existing, like arrow and systemfonts
-// https://github.com/r-lib/cpp11/issues/412
-#define HAS_UNWIND_PROTECT
 
 #ifdef CPP4R_USE_FMT
 #define FMT_HEADER_ONLY
@@ -44,9 +45,15 @@ SEXP unwind_protect(Fun&& code) {
   }();
 
   std::jmp_buf jmpbuf;
+#if CPP4R_HAS_CXX20
+  if (setjmp(jmpbuf)) CPP4R_UNLIKELY {
+    throw unwind_exception(token);
+  }
+#else
   if (setjmp(jmpbuf)) {
     throw unwind_exception(token);
   }
+#endif
 
   SEXP res = R_UnwindProtect(
       [](void* data) -> SEXP {
@@ -55,11 +62,19 @@ SEXP unwind_protect(Fun&& code) {
       },
       &code,
       [](void* jmpbuf, Rboolean jump) {
+#if CPP4R_HAS_CXX20
+        if (jump == TRUE) CPP4R_UNLIKELY {
+          // We need to first jump back into the C++ stacks because you can't safely
+          // throw exceptions from C stack frames.
+          longjmp(*static_cast<std::jmp_buf*>(jmpbuf), 1);
+        }
+#else
         if (jump == TRUE) {
           // We need to first jump back into the C++ stacks because you can't safely
           // throw exceptions from C stack frames.
           longjmp(*static_cast<std::jmp_buf*>(jmpbuf), 1);
         }
+#endif
       },
       &jmpbuf, token);
 
@@ -201,6 +216,15 @@ void stop [[noreturn]] (const std::string& fmt_arg, Args&&... args) {
   safe.noreturn(Rf_errorcall)(R_NilValue, "%s", msg.c_str());
 }
 
+#if CPP4R_HAS_CXX17
+// C++17: Add string_view overload
+template <typename... Args>
+void stop [[noreturn]] (std::string_view fmt_arg, Args&&... args) {
+  std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
+  safe.noreturn(Rf_errorcall)(R_NilValue, "%s", msg.c_str());
+}
+#endif
+
 template <typename... Args>
 void warning(const char* fmt_arg, Args&&... args) {
   std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
@@ -212,6 +236,15 @@ void warning(const std::string& fmt_arg, Args&&... args) {
   std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
   safe[Rf_warningcall](R_NilValue, "%s", msg.c_str());
 }
+
+#if CPP4R_HAS_CXX17
+// C++17: Add string_view overload
+template <typename... Args>
+void warning(std::string_view fmt_arg, Args&&... args) {
+  std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
+  safe[Rf_warningcall](R_NilValue, "%s", msg.c_str());
+}
+#endif
 #else
 template <typename... Args>
 void stop [[noreturn]] (const char* fmt, Args... args) {
@@ -223,6 +256,14 @@ void stop [[noreturn]] (const std::string& fmt, Args... args) {
   safe.noreturn(Rf_errorcall)(R_NilValue, fmt.c_str(), args...);
 }
 
+#if CPP4R_HAS_CXX17
+// C++17: Add string_view overload
+template <typename... Args>
+void stop [[noreturn]] (std::string_view fmt, Args... args) {
+  safe.noreturn(Rf_errorcall)(R_NilValue, fmt.data(), args...);
+}
+#endif
+
 template <typename... Args>
 void warning(const char* fmt, Args... args) {
   safe[Rf_warningcall](R_NilValue, fmt, args...);
@@ -232,6 +273,14 @@ template <typename... Args>
 void warning(const std::string& fmt, Args... args) {
   safe[Rf_warningcall](R_NilValue, fmt.c_str(), args...);
 }
+
+#if CPP4R_HAS_CXX17
+// C++17: Add string_view overload
+template <typename... Args>
+void warning(std::string_view fmt, Args... args) {
+  safe[Rf_warningcall](R_NilValue, fmt.data(), args...);
+}
+#endif
 #endif
 
 namespace detail {
@@ -269,17 +318,32 @@ inline SEXP get() noexcept {
   return out;
 }
 
+#if CPP4R_HAS_CXX17
+CPP4R_NODISCARD inline R_xlen_t count() noexcept {
+  constexpr R_xlen_t head = 1;
+  constexpr R_xlen_t tail = 1;
+  SEXP list = get();
+  return Rf_xlength(list) - head - tail;
+}
+#else
 inline R_xlen_t count() noexcept {
   constexpr R_xlen_t head = 1;
   constexpr R_xlen_t tail = 1;
   SEXP list = get();
   return Rf_xlength(list) - head - tail;
 }
+#endif
 
 inline SEXP insert(SEXP x) {
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(x == R_NilValue, 0)) CPP4R_UNLIKELY {
+    return R_NilValue;
+  }
+#else
   if (__builtin_expect(x == R_NilValue, 0)) {
     return R_NilValue;
   }
+#endif
 
   PROTECT(x);
 
@@ -305,9 +369,15 @@ inline SEXP insert(SEXP x) {
 }
 
 inline void release(SEXP cell) noexcept {
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(cell == R_NilValue, 0)) CPP4R_UNLIKELY {
+    return;
+  }
+#else
   if (__builtin_expect(cell == R_NilValue, 0)) {
     return;
   }
+#endif
 
   // Get a reference to the cells before and after the token.
   SEXP lhs = CAR(cell);

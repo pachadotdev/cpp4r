@@ -1,5 +1,7 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 #include <algorithm>         // for min
 #include <array>             // for array
 #include <initializer_list>  // for initializer_list
@@ -30,7 +32,11 @@ inline typename r_vector<r_bool>::underlying_type r_vector<r_bool>::get_elt(SEXP
 template <>
 inline typename r_vector<r_bool>::underlying_type* r_vector<r_bool>::get_p(
     bool is_altrep, SEXP data) noexcept {
+#if CPP4R_HAS_CXX20
+  return __builtin_expect(is_altrep, 0) CPP4R_UNLIKELY ? nullptr : LOGICAL(data);
+#else
   return __builtin_expect(is_altrep, 0) ? nullptr : LOGICAL(data);
+#endif
 }
 
 template <>
@@ -48,7 +54,11 @@ inline void r_vector<r_bool>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
 
 template <>
 inline bool r_vector<r_bool>::const_iterator::use_buf(bool is_altrep) noexcept {
+#if CPP4R_HAS_CXX20
+  return __builtin_expect(is_altrep, 0) CPP4R_UNLIKELY;
+#else
   return __builtin_expect(is_altrep, 0);
+#endif
 }
 
 typedef r_vector<r_bool> logicals;
@@ -73,6 +83,17 @@ inline r_vector<r_bool>::r_vector(std::initializer_list<r_bool> il)
       capacity_(il.size()) {
   auto it = il.begin();
 
+#if CPP4R_HAS_CXX20
+  if (data_p_ != nullptr) CPP4R_LIKELY {
+    for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
+      data_p_[i] = static_cast<underlying_type>(*it);
+    }
+  } else CPP4R_UNLIKELY {
+    for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
+      set_elt(data_, i, static_cast<underlying_type>(*it));
+    }
+  }
+#else
   if (data_p_ != nullptr) {
     for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
       data_p_[i] = static_cast<underlying_type>(*it);
@@ -82,6 +103,7 @@ inline r_vector<r_bool>::r_vector(std::initializer_list<r_bool> il)
       set_elt(data_, i, static_cast<underlying_type>(*it));
     }
   }
+#endif
 }
 
 typedef r_vector<r_bool> logicals;
@@ -95,15 +117,27 @@ typedef r_vector<double> doubles;
 // Optimized as_logicals conversion function
 inline logicals as_logicals(SEXP x) {
   SEXPTYPE x_type = detail::r_typeof(x);
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(x_type == LGLSXP, 1)) CPP4R_LIKELY {
+    return logicals(x);
+  }
+#else
   if (__builtin_expect(x_type == LGLSXP, 1)) {
     return logicals(x);
   }
+#endif
 
   // Get length once and check for early exit
   R_xlen_t len = Rf_length(x);
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(len == 0, 0)) CPP4R_UNLIKELY {
+    return writable::logicals(static_cast<R_xlen_t>(0));
+  }
+#else
   if (__builtin_expect(len == 0, 0)) {
     return writable::logicals(static_cast<R_xlen_t>(0));
   }
+#endif
 
   if (__builtin_expect(x_type == INTSXP, 0)) {
     integers xn(x);
@@ -113,6 +147,18 @@ inline logicals as_logicals(SEXP x) {
     const int* src_ptr = INTEGER_OR_NULL(x);
     int* dest_ptr = LOGICAL(ret.data());
 
+#if CPP4R_HAS_CXX20
+    if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) CPP4R_LIKELY {
+      // Direct memory access - faster for large arrays
+      for (R_xlen_t i = 0; i < len; ++i) {
+        if (__builtin_expect(src_ptr[i] == NA_INTEGER, 0)) CPP4R_UNLIKELY {
+          dest_ptr[i] = NA_LOGICAL;
+        } else CPP4R_LIKELY {
+          dest_ptr[i] = (src_ptr[i] != 0) ? TRUE : FALSE;
+        }
+      }
+    } else CPP4R_UNLIKELY {
+#else
     if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) {
       // Direct memory access - faster for large arrays
       for (R_xlen_t i = 0; i < len; ++i) {
@@ -123,6 +169,7 @@ inline logicals as_logicals(SEXP x) {
         }
       }
     } else {
+#endif
       // Fallback to iterator-based approach
       std::transform(xn.begin(), xn.end(), ret.begin(), [](int value) {
         return value == NA_INTEGER ? r_bool(NA_LOGICAL) : r_bool(value != 0);
@@ -137,6 +184,18 @@ inline logicals as_logicals(SEXP x) {
     const double* src_ptr = REAL_OR_NULL(x);
     int* dest_ptr = LOGICAL(ret.data());
 
+#if CPP4R_HAS_CXX20
+    if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) CPP4R_LIKELY {
+      // Direct memory access - faster for large arrays
+      for (R_xlen_t i = 0; i < len; ++i) {
+        if (__builtin_expect(ISNA(src_ptr[i]), 0)) CPP4R_UNLIKELY {
+          dest_ptr[i] = NA_LOGICAL;
+        } else CPP4R_LIKELY {
+          dest_ptr[i] = (src_ptr[i] != 0.0) ? TRUE : FALSE;
+        }
+      }
+    } else CPP4R_UNLIKELY {
+#else
     if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) {
       // Direct memory access - faster for large arrays
       for (R_xlen_t i = 0; i < len; ++i) {
@@ -147,6 +206,7 @@ inline logicals as_logicals(SEXP x) {
         }
       }
     } else {
+#endif
       // Fallback to iterator-based approach
       std::transform(xn.begin(), xn.end(), ret.begin(), [](double value) {
         return ISNA(value) ? r_bool(NA_LOGICAL) : r_bool(value != 0.0);
@@ -161,15 +221,31 @@ inline logicals as_logicals(SEXP x) {
 // Optimized comparison operators for r_vector<r_bool>
 template <>
 inline bool operator==(const r_vector<r_bool>& lhs, const r_vector<r_bool>& rhs) {
+#if CPP4R_HAS_CXX20
+  if (lhs.size() != rhs.size()) CPP4R_UNLIKELY return false;
+
+  // Fast path: if both vectors point to the same data, they're equal
+  if (lhs.data() == rhs.data()) CPP4R_LIKELY return true;
+#else
   if (lhs.size() != rhs.size()) return false;
 
   // Fast path: if both vectors point to the same data, they're equal
   if (lhs.data() == rhs.data()) return true;
+#endif
 
   // Use direct memory comparison when possible
   const int* lhs_ptr = LOGICAL_OR_NULL(lhs.data());
   const int* rhs_ptr = LOGICAL_OR_NULL(rhs.data());
 
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(lhs_ptr != nullptr && rhs_ptr != nullptr, 1)) CPP4R_LIKELY {
+    R_xlen_t len = lhs.size();
+    for (R_xlen_t i = 0; i < len; ++i) {
+      if (__builtin_expect(lhs_ptr[i] != rhs_ptr[i], 0)) CPP4R_UNLIKELY return false;
+    }
+    return true;
+  } else CPP4R_UNLIKELY {
+#else
   if (__builtin_expect(lhs_ptr != nullptr && rhs_ptr != nullptr, 1)) {
     R_xlen_t len = lhs.size();
     for (R_xlen_t i = 0; i < len; ++i) {
@@ -177,6 +253,7 @@ inline bool operator==(const r_vector<r_bool>& lhs, const r_vector<r_bool>& rhs)
     }
     return true;
   } else {
+#endif
     // Fallback to iterator comparison
     auto lhs_it = lhs.cbegin();
     auto rhs_it = rhs.cbegin();
@@ -208,6 +285,19 @@ inline writable::logicals logical_and(const r_vector<r_bool>& lhs,
   const int* rhs_ptr = LOGICAL_OR_NULL(rhs.data());
   int* result_ptr = LOGICAL(result.data());
 
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(lhs_ptr != nullptr && rhs_ptr != nullptr && result_ptr != nullptr,
+                       1)) CPP4R_LIKELY {
+    // Direct memory access - vectorized operation
+    for (R_xlen_t i = 0; i < len; ++i) {
+      if (__builtin_expect(lhs_ptr[i] == NA_LOGICAL || rhs_ptr[i] == NA_LOGICAL, 0)) CPP4R_UNLIKELY {
+        result_ptr[i] = NA_LOGICAL;
+      } else CPP4R_LIKELY {
+        result_ptr[i] = (lhs_ptr[i] && rhs_ptr[i]) ? TRUE : FALSE;
+      }
+    }
+  } else CPP4R_UNLIKELY {
+#else
   if (__builtin_expect(lhs_ptr != nullptr && rhs_ptr != nullptr && result_ptr != nullptr,
                        1)) {
     // Direct memory access - vectorized operation
@@ -219,6 +309,7 @@ inline writable::logicals logical_and(const r_vector<r_bool>& lhs,
       }
     }
   } else {
+#endif
     // Fallback to iterator approach
     auto lhs_it = lhs.cbegin();
     auto rhs_it = rhs.cbegin();
@@ -251,6 +342,19 @@ inline writable::logicals logical_or(const r_vector<r_bool>& lhs,
   const int* rhs_ptr = LOGICAL_OR_NULL(rhs.data());
   int* result_ptr = LOGICAL(result.data());
 
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(lhs_ptr != nullptr && rhs_ptr != nullptr && result_ptr != nullptr,
+                       1)) CPP4R_LIKELY {
+    // Direct memory access - vectorized operation
+    for (R_xlen_t i = 0; i < len; ++i) {
+      if (__builtin_expect(lhs_ptr[i] == NA_LOGICAL || rhs_ptr[i] == NA_LOGICAL, 0)) CPP4R_UNLIKELY {
+        result_ptr[i] = NA_LOGICAL;
+      } else CPP4R_LIKELY {
+        result_ptr[i] = (lhs_ptr[i] || rhs_ptr[i]) ? TRUE : FALSE;
+      }
+    }
+  } else CPP4R_UNLIKELY {
+#else
   if (__builtin_expect(lhs_ptr != nullptr && rhs_ptr != nullptr && result_ptr != nullptr,
                        1)) {
     // Direct memory access - vectorized operation
@@ -262,6 +366,7 @@ inline writable::logicals logical_or(const r_vector<r_bool>& lhs,
       }
     }
   } else {
+#endif
     // Fallback to iterator approach
     auto lhs_it = lhs.cbegin();
     auto rhs_it = rhs.cbegin();
@@ -288,6 +393,18 @@ inline writable::logicals logical_not(const r_vector<r_bool>& vec) {
   const int* src_ptr = LOGICAL_OR_NULL(vec.data());
   int* result_ptr = LOGICAL(result.data());
 
+#if CPP4R_HAS_CXX20
+  if (__builtin_expect(src_ptr != nullptr && result_ptr != nullptr, 1)) CPP4R_LIKELY {
+    // Direct memory access - vectorized operation
+    for (R_xlen_t i = 0; i < len; ++i) {
+      if (__builtin_expect(src_ptr[i] == NA_LOGICAL, 0)) CPP4R_UNLIKELY {
+        result_ptr[i] = NA_LOGICAL;
+      } else CPP4R_LIKELY {
+        result_ptr[i] = src_ptr[i] ? FALSE : TRUE;
+      }
+    }
+  } else CPP4R_UNLIKELY {
+#else
   if (__builtin_expect(src_ptr != nullptr && result_ptr != nullptr, 1)) {
     // Direct memory access - vectorized operation
     for (R_xlen_t i = 0; i < len; ++i) {
@@ -298,6 +415,7 @@ inline writable::logicals logical_not(const r_vector<r_bool>& vec) {
       }
     }
   } else {
+#endif
     // Fallback to iterator approach
     auto src_it = vec.cbegin();
     auto result_it = result.begin();

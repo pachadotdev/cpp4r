@@ -63,7 +63,7 @@ context("data_frame-C++") {
   test_that("writable::data_frame works") {
     using namespace cpp4r::literals;
     cpp4r::writable::data_frame df({"x"_nm = {1, 2, 3}, "y"_nm = {"a", "b", "c"}});
-    auto nrows = df.nrow();
+    // auto nrows = df.nrow();
     expect_true(df.nrow() == 3);
     expect_true(df.ncol() == 2);
 

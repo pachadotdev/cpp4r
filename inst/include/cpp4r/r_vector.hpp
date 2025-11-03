@@ -1,5 +1,7 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 #include <stddef.h>  // for ptrdiff_t, size_t
 
 #include <algorithm>         // for max
@@ -13,6 +15,10 @@
 #include <string>            // for string, basic_string
 #include <type_traits>       // for decay, is_same, enable_if, is_c...
 #include <utility>           // for declval
+
+#if CPP4R_HAS_CXX17
+#include <string_view>  // for std::string_view (C++17)
+#endif
 
 #include "cpp4r/R.hpp"                // for R_xlen_t, SEXP, SEXPREC, Rf_xle...
 #include "cpp4r/attribute_proxy.hpp"  // for attribute_proxy
@@ -451,7 +457,7 @@ inline r_vector<T>::r_vector(std::initializer_list<T> il)
 // Same reasoning as `r_vector(const r_vector& x)` constructor
 template <typename T>
 inline r_vector<T>& r_vector<T>::operator=(const r_vector& rhs) {
-  if (__builtin_expect(data_ == rhs.data_, 0)) {
+  if (CPP4R_UNLIKELY(data_ == rhs.data_)) {
     return *this;
   }
 
@@ -470,7 +476,7 @@ inline r_vector<T>& r_vector<T>::operator=(const r_vector& rhs) {
 // Same reasoning as `r_vector(r_vector&& x)` constructor
 template <typename T>
 inline r_vector<T>& r_vector<T>::operator=(r_vector&& rhs) {
-  if (__builtin_expect(data_ == rhs.data_, 0)) {
+  if (CPP4R_UNLIKELY(data_ == rhs.data_)) {
     return *this;
   }
 
@@ -494,12 +500,12 @@ inline r_vector<T>& r_vector<T>::operator=(r_vector&& rhs) {
 }
 
 template <typename T>
-inline r_vector<T>::operator SEXP() const {
+CPP4R_NODISCARD inline r_vector<T>::operator SEXP() const {
   return data_;
 }
 
 template <typename T>
-inline r_vector<T>::operator sexp() const {
+CPP4R_NODISCARD inline r_vector<T>::operator sexp() const {
   return data_;
 }
 
@@ -514,7 +520,7 @@ template <typename T>
 inline T r_vector<T>::operator[](const R_xlen_t pos) const {
   // Handles ALTREP, VECSXP, and STRSXP cases through `get_elt()`
   const underlying_type elt =
-      __builtin_expect(data_p_ != nullptr, 1) ? data_p_[pos] : get_elt(data_, pos);
+      CPP4R_LIKELY(data_p_ != nullptr) ? data_p_[pos] : get_elt(data_, pos);
   return static_cast<T>(elt);
 }
 
@@ -526,14 +532,14 @@ inline T r_vector<T>::operator[](const size_type pos) const {
 template <typename T>
 inline T r_vector<T>::operator[](const r_string& name) const {
   SEXP names = this->names();
-  if (names == R_NilValue) {
+  if (CPP4R_UNLIKELY(names == R_NilValue)) {
     return get_oob();
   }
 
   R_xlen_t size = Rf_xlength(names);
   for (R_xlen_t pos = 0; pos < size; ++pos) {
     auto cur = Rf_translateCharUTF8(STRING_ELT(names, pos));
-    if (name == cur) {
+    if (CPP4R_UNLIKELY(name == cur)) {
       return operator[](pos);
     }
   }
@@ -568,9 +574,9 @@ inline T r_vector<T>::at(const r_string& name) const {
 }
 
 template <typename T>
-inline bool r_vector<T>::contains(const r_string& name) const {
+CPP4R_NODISCARD inline bool r_vector<T>::contains(const r_string& name) const {
   SEXP names = this->names();
-  if (names == R_NilValue) {
+  if (CPP4R_UNLIKELY(names == R_NilValue)) {
     return false;
   }
 
@@ -586,29 +592,29 @@ inline bool r_vector<T>::contains(const r_string& name) const {
 }
 
 template <typename T>
-inline bool r_vector<T>::is_altrep() const noexcept {
+CPP4R_NODISCARD inline bool r_vector<T>::is_altrep() const noexcept {
   return is_altrep_;
 }
 
 template <typename T>
-inline bool r_vector<T>::named() const noexcept {
+CPP4R_NODISCARD inline bool r_vector<T>::named() const noexcept {
   return Rf_getAttrib(data_, R_NamesSymbol) != R_NilValue;
 }
 
 template <typename T>
-inline R_xlen_t r_vector<T>::size() const noexcept {
+CPP4R_NODISCARD inline R_xlen_t r_vector<T>::size() const noexcept {
   return length_;
 }
 
 template <typename T>
-inline bool r_vector<T>::empty() const noexcept {
+CPP4R_NODISCARD inline bool r_vector<T>::empty() const noexcept {
   return length_ == 0;
 }
 
 /// Provide access to the underlying data, mainly for interface
 /// compatibility with std::vector
 template <typename T>
-inline SEXP r_vector<T>::data() const noexcept {
+CPP4R_NODISCARD inline SEXP r_vector<T>::data() const noexcept {
   return data_;
 }
 
@@ -661,10 +667,10 @@ template <typename T>
 inline SEXP r_vector<T>::valid_type(SEXP x) {
   const SEXPTYPE type = get_sexptype();
 
-  if (x == nullptr) {
+  if (CPP4R_UNLIKELY(x == nullptr)) {
     throw type_error(type, NILSXP);
   }
-  if (detail::r_typeof(x) != type) {
+  if (CPP4R_UNLIKELY(detail::r_typeof(x) != type)) {
     throw type_error(type, detail::r_typeof(x));
   }
 
@@ -675,7 +681,7 @@ template <typename T>
 inline SEXP r_vector<T>::valid_length(SEXP x, R_xlen_t n) {
   R_xlen_t x_n = Rf_xlength(x);
 
-  if (x_n == n) {
+  if (CPP4R_LIKELY(x_n == n)) {
     return x;
   }
 
@@ -719,7 +725,7 @@ r_vector<T>::const_iterator::const_iterator(const r_vector* data, R_xlen_t pos)
 template <typename T>
 inline typename r_vector<T>::const_iterator& r_vector<T>::const_iterator::operator++() {
   ++pos_;
-  if (__builtin_expect(use_buf(data_->is_altrep()), 0) &&
+  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep())) &&
       pos_ >= block_start_ + length_) {
     fill_buf(pos_);
   } else if (__builtin_expect(!use_buf(data_->is_altrep()) && data_->data_p_ != nullptr &&
@@ -744,12 +750,11 @@ template <typename T>
 inline typename r_vector<T>::const_iterator& r_vector<T>::const_iterator::operator+=(
     R_xlen_t i) {
   pos_ += i;
-  if (__builtin_expect(use_buf(data_->is_altrep()), 0) &&
+  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep())) &&
       pos_ >= block_start_ + length_) {
     fill_buf(pos_);
-  } else if (__builtin_expect(
-                 !use_buf(data_->is_altrep()) && data_->data_p_ != nullptr && i > 32,
-                 0)) {
+  } else if (CPP4R_UNLIKELY(
+                 !use_buf(data_->is_altrep()) && data_->data_p_ != nullptr && i > 32)) {
     // Prefetch for large jumps in sequential access
     __builtin_prefetch(&data_->data_p_[pos_ + 64], 0, 3);
   }
@@ -810,7 +815,7 @@ inline typename r_vector<T>::const_iterator r_vector<T>::find(
 
 template <typename T>
 inline T r_vector<T>::const_iterator::operator*() const {
-  if (__builtin_expect(use_buf(data_->is_altrep()), 0)) {
+  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep()))) {
     // Use pre-loaded buffer for compatible ALTREP types
     return static_cast<T>(buf_[pos_ - block_start_]);
   } else {
@@ -824,7 +829,7 @@ inline void r_vector<T>::const_iterator::fill_buf(R_xlen_t pos) {
   using namespace cpp4r::literals;
   // Adaptive buffer size: use larger buffers for larger vectors
   const R_xlen_t remaining = data_->size() - pos;
-  const R_xlen_t adaptive_size = __builtin_expect(remaining > 4096, 0)
+  const R_xlen_t adaptive_size = CPP4R_UNLIKELY(remaining > 4096)
                                      ? std::min(4096_xl, remaining)
                                      : std::min(64_xl, remaining);
   length_ = adaptive_size;
@@ -985,7 +990,7 @@ inline r_vector<T>::r_vector(const V& obj) : r_vector() {
 
 template <typename T>
 inline r_vector<T>& r_vector<T>::operator=(const r_vector& rhs) {
-  if (__builtin_expect(data_ == rhs.data_, 0)) {
+  if (CPP4R_UNLIKELY(data_ == rhs.data_)) {
     return *this;
   }
 
@@ -1010,7 +1015,7 @@ inline r_vector<T>& r_vector<T>::operator=(const r_vector& rhs) {
 
 template <typename T>
 inline r_vector<T>& r_vector<T>::operator=(r_vector&& rhs) {
-  if (__builtin_expect(data_ == rhs.data_, 0)) {
+  if (CPP4R_UNLIKELY(data_ == rhs.data_)) {
     return *this;
   }
 
@@ -1062,10 +1067,10 @@ inline typename r_vector<T>::proxy r_vector<T>::operator[](const int pos) const 
 
 template <typename T>
 inline typename r_vector<T>::proxy r_vector<T>::operator[](const R_xlen_t pos) const {
-  if (__builtin_expect(is_altrep_, 0)) {
+  if (CPP4R_UNLIKELY(is_altrep_)) {
     return {data_, pos, nullptr, true};
   }
-  return {data_, pos, __builtin_expect(data_p_ != nullptr, 1) ? &data_p_[pos] : nullptr,
+  return {data_, pos, CPP4R_LIKELY(data_p_ != nullptr) ? &data_p_[pos] : nullptr,
           false};
 }
 
@@ -1364,12 +1369,11 @@ r_vector<T>::iterator::iterator(const r_vector* data, R_xlen_t pos)
 template <typename T>
 inline typename r_vector<T>::iterator& r_vector<T>::iterator::operator++() {
   ++pos_;
-  if (__builtin_expect(use_buf(data_->is_altrep()), 0) &&
+  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep())) &&
       pos_ >= block_start_ + length_) {
     fill_buf(pos_);
-  } else if (__builtin_expect(!use_buf(data_->is_altrep()) && data_->data_p_ != nullptr &&
-                                  pos_ % 64 == 0,
-                              0)) {
+  } else if (CPP4R_UNLIKELY(!use_buf(data_->is_altrep()) && data_->data_p_ != nullptr &&
+                            pos_ % 64 == 0)) {
     // Prefetch next cache line for sequential access
     __builtin_prefetch(&data_->data_p_[pos_ + 64], 0, 3);
   }
@@ -1378,7 +1382,7 @@ inline typename r_vector<T>::iterator& r_vector<T>::iterator::operator++() {
 
 template <typename T>
 inline typename r_vector<T>::proxy r_vector<T>::iterator::operator*() const {
-  if (__builtin_expect(use_buf(data_->is_altrep()), 0)) {
+  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep()))) {
     return proxy(
         data_->data(), pos_,
         const_cast<typename r_vector::underlying_type*>(&buf_[pos_ - block_start_]),
@@ -1386,7 +1390,7 @@ inline typename r_vector<T>::proxy r_vector<T>::iterator::operator*() const {
   } else {
     return proxy(
         data_->data(), pos_,
-        __builtin_expect(data_->data_p_ != nullptr, 1) ? &data_->data_p_[pos_] : nullptr,
+        CPP4R_LIKELY(data_->data_p_ != nullptr) ? &data_->data_p_[pos_] : nullptr,
         false);
   }
 }
@@ -1394,12 +1398,11 @@ inline typename r_vector<T>::proxy r_vector<T>::iterator::operator*() const {
 template <typename T>
 inline typename r_vector<T>::iterator& r_vector<T>::iterator::operator+=(R_xlen_t rhs) {
   pos_ += rhs;
-  if (__builtin_expect(use_buf(data_->is_altrep()), 0) &&
+  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep())) &&
       pos_ >= block_start_ + length_) {
     fill_buf(pos_);
-  } else if (__builtin_expect(
-                 !use_buf(data_->is_altrep()) && data_->data_p_ != nullptr && rhs > 32,
-                 0)) {
+  } else if (CPP4R_UNLIKELY(
+                 !use_buf(data_->is_altrep()) && data_->data_p_ != nullptr && rhs > 32)) {
     // Prefetch for large jumps in sequential access
     __builtin_prefetch(&data_->data_p_[pos_ + 64], 0, 3);
   }

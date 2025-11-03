@@ -1,3 +1,8 @@
+/* roxygen
+@title Data frame functions
+@rdname testing-data-frame
+@keywords internal
+*/
 [[cpp4r::register]] SEXP data_frame_() {
   using namespace cpp4r::literals;
   cpp4r::writable::list out({

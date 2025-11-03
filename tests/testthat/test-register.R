@@ -1,27 +1,3 @@
-describe("pkg_links_to_rcpp", {
-  it("works with single package in LinkingTo", {
-    pkg <- local_package()
-
-    expect_false(pkg_links_to_rcpp(pkg_path(pkg)))
-
-    pkg$set("LinkingTo", "Rcpp")
-    pkg$write()
-
-    expect_true(pkg_links_to_rcpp(pkg_path(pkg)))
-  })
-
-  it("works with multiple packages in LinkingTo", {
-    pkg <- local_package()
-
-    expect_false(pkg_links_to_rcpp(pkg_path(pkg)))
-
-    pkg$set("LinkingTo", paste("Rcpp", "cpp4r", sep = ","))
-    pkg$write()
-
-    expect_true(pkg_links_to_rcpp(pkg_path(pkg)))
-  })
-})
-
 describe("get_call_entries", {
   it("returns an empty string if there are no R files", {
     pkg <- local_package()
@@ -365,7 +341,7 @@ describe("generate_r_functions", {
     expect_equal(
       generate_r_functions(funs, package = "cpp4r"),
       "foo <- function() {
-  invisible(.Call(`_cpp4r_foo`))
+\tinvisible(.Call(`_cpp4r_foo`))
 }"
     )
   })
@@ -385,7 +361,7 @@ describe("generate_r_functions", {
     expect_equal(
       generate_r_functions(funs, package = "cpp4r", use_package = TRUE),
       "foo <- function() {
-  invisible(.Call(\"_cpp4r_foo\", PACKAGE = \"cpp4r\"))
+\tinvisible(.Call(\"_cpp4r_foo\", PACKAGE = \"cpp4r\"))
 }"
     )
   })
@@ -405,7 +381,7 @@ describe("generate_r_functions", {
     expect_equal(
       generate_r_functions(funs, package = "mypkg"),
       "foo <- function() {
-  invisible(.Call(`_mypkg_foo`))
+\tinvisible(.Call(`_mypkg_foo`))
 }"
     )
   })
@@ -425,7 +401,7 @@ describe("generate_r_functions", {
     expect_equal(
       generate_r_functions(funs, package = "cpp4r"),
       "foo <- function() {
-  .Call(`_cpp4r_foo`)
+\t.Call(`_cpp4r_foo`)
 }"
     )
   })
@@ -445,7 +421,7 @@ describe("generate_r_functions", {
     expect_equal(
       generate_r_functions(funs, package = "cpp4r", use_package = TRUE),
       "foo <- function() {
-  .Call(\"_cpp4r_foo\", PACKAGE = \"cpp4r\")
+\t.Call(\"_cpp4r_foo\", PACKAGE = \"cpp4r\")
 }"
     )
   })
@@ -465,7 +441,8 @@ describe("generate_r_functions", {
     expect_equal(
       generate_r_functions(funs, package = "cpp4r"),
       "foo <- function(bar) {
-  invisible(.Call(`_cpp4r_foo`, bar))
+\tbar <- as.integer(bar)
+\tinvisible(.Call(`_cpp4r_foo`, bar))
 }"
     )
   })
@@ -485,7 +462,8 @@ describe("generate_r_functions", {
     expect_equal(
       generate_r_functions(funs, package = "cpp4r"),
       "foo <- function(bar) {
-  .Call(`_cpp4r_foo`, bar)
+\tbar <- as.integer(bar)
+\t.Call(`_cpp4r_foo`, bar)
 }"
     )
   })
@@ -508,11 +486,13 @@ describe("generate_r_functions", {
     expect_equal(
       generate_r_functions(funs, package = "cpp4r"),
       "foo <- function(bar) {
-  .Call(`_cpp4r_foo`, bar)
+\tbar <- as.integer(bar)
+\t.Call(`_cpp4r_foo`, bar)
 }
 
 bar <- function(baz) {
-  .Call(`_cpp4r_bar`, baz)
+\tbaz <- as.numeric(baz)
+\t.Call(`_cpp4r_bar`, baz)
 }"
     )
   })

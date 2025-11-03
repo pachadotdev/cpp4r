@@ -1,3 +1,8 @@
+# cpp4r 0.4.0
+
+* Clearer documentation about the C++ workflow (i.e., how to use anticonf to specify a C++ standard)
+* Allows for default values like `my_fun(int x = 100)` to call `my_fun()` with the same result as `my_fun(100L)` from R
+
 # cpp4r 0.3.1
 
 * Added support for implicit conversions for R lists

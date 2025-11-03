@@ -32,7 +32,6 @@ using namespace cpp4r;
 #include "strings.h"
 #include "sum.h"
 #include "sum_int.h"
-#include "sum_Rcpp.h"
 #include "truncate.h"
 #include "lists.h"
 

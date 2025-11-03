@@ -1,39 +1,3 @@
-#include <Rcpp.h>
-
-// Test benchmark for string proxy assignment performance.
-// We don't unwind_protect() before each `SET_STRING_ELT()` call,
-// as that kills performance.
-[[cpp4r::register]] cpp4r::writable::strings string_proxy_assignment_() {
-  R_xlen_t size = 100000;
-
-  cpp4r::writable::strings x(size);
-
-  cpp4r::r_string elt(NA_STRING);
-
-  for (R_xlen_t i = 0; i < size; ++i) {
-    x[i] = elt;
-  }
-
-  return x;
-}
-
-// Test benchmark for string push back performance.
-// We don't unwind_protect() before each `SET_STRING_ELT()` call,
-// as that kills performance.
-[[cpp4r::register]] cpp4r::writable::strings string_push_back_() {
-  R_xlen_t size = 100000;
-
-  cpp4r::writable::strings x;
-
-  cpp4r::r_string elt(NA_STRING);
-
-  for (R_xlen_t i = 0; i < size; ++i) {
-    x.push_back(elt);
-  }
-
-  return x;
-}
-
 // issue 406
 
 std::random_device rd;
@@ -57,6 +21,11 @@ std::string random_string() {
   return s;
 }
 
+/* roxygen
+@title Grow functions
+@rdname testing-grow-strings
+@keywords internal
+*/
 [[cpp4r::register]] cpp4r::strings grow_strings_cpp4r_(size_t n, int seed) {
   gen.seed(seed);
   cpp4r::writable::strings x;
@@ -66,15 +35,11 @@ std::string random_string() {
   return x;
 }
 
-[[cpp4r::register]] Rcpp::CharacterVector grow_strings_Rcpp_(size_t n, int seed) {
-  gen.seed(seed);
-  Rcpp::CharacterVector x(n);
-  for (size_t i = 0; i < n; ++i) {
-    x[i] = random_string();
-  }
-  return x;
-}
-
+/* roxygen
+@title Grow functions
+@rdname testing-grow-strings
+@keywords internal
+*/
 [[cpp4r::register]] SEXP grow_strings_manual_(size_t n, int seed) {
   gen.seed(seed);
   SEXP data_ = PROTECT(Rf_allocVector(STRSXP, 0));
@@ -106,18 +71,14 @@ std::string random_string() {
   }
 }
 
+/* roxygen
+@title Grow functions
+@rdname testing-grow-strings
+@keywords internal
+*/
 [[cpp4r::register]] cpp4r::strings assign_cpp4r_(size_t n, int seed) {
   gen.seed(seed);
   cpp4r::writable::strings x(n);
-  for (size_t i = 0; i < n; ++i) {
-    x[i] = random_string();
-  }
-  return x;
-}
-
-[[cpp4r::register]] Rcpp::CharacterVector assign_Rcpp_(size_t n, int seed) {
-  gen.seed(seed);
-  Rcpp::CharacterVector x(n);
   for (size_t i = 0; i < n; ++i) {
     x[i] = random_string();
   }

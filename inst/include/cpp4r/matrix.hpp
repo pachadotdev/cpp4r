@@ -1,8 +1,14 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 #include <initializer_list>  // for initializer_list
 #include <iterator>
 #include <string>  // for string
+
+#if CPP4R_HAS_CXX17
+#include <string_view>  // for std::string_view (C++17)
+#endif
 
 #include "cpp4r/R.hpp"          // for SEXP, SEXPREC, R_xlen_t, INT...
 #include "cpp4r/r_bool.hpp"     // for r_bool
@@ -23,8 +29,13 @@ struct matrix_dims {
   matrix_dims(SEXP data) : nrow_(Rf_nrows(data)), ncol_(Rf_ncols(data)) {}
   matrix_dims(int nrow, int ncol) : nrow_(nrow), ncol_(ncol) {}
 
+#if CPP4R_HAS_CXX17
+  CPP4R_NODISCARD int nrow() const { return nrow_; }
+  CPP4R_NODISCARD int ncol() const { return ncol_; }
+#else
   int nrow() const { return nrow_; }
   int ncol() const { return ncol_; }
+#endif
 };
 
 // base type for dimension-wise matrix access specialization
@@ -55,10 +66,17 @@ struct matrix_slices<by_row> : public matrix_dims {
   using matrix_dims::ncol;
   using matrix_dims::nrow;
 
+#if CPP4R_HAS_CXX17
+  CPP4R_NODISCARD int nslices() const { return nrow(); }
+  CPP4R_NODISCARD int slice_size() const { return ncol(); }
+  CPP4R_NODISCARD int slice_stride() const { return nrow(); }
+  CPP4R_NODISCARD int slice_offset(int pos) const { return pos; }
+#else
   int nslices() const { return nrow(); }
   int slice_size() const { return ncol(); }
   int slice_stride() const { return nrow(); }
   int slice_offset(int pos) const { return pos; }
+#endif
 };
 
 // basic properties of matrix column slices
@@ -69,10 +87,17 @@ struct matrix_slices<by_column> : public matrix_dims {
   using matrix_dims::ncol;
   using matrix_dims::nrow;
 
+#if CPP4R_HAS_CXX17
+  CPP4R_NODISCARD int nslices() const { return ncol(); }
+  CPP4R_NODISCARD int slice_size() const { return nrow(); }
+  CPP4R_NODISCARD int slice_stride() const { return 1; }
+  CPP4R_NODISCARD int slice_offset(int pos) const { return pos * nrow(); }
+#else
   int nslices() const { return ncol(); }
   int slice_size() const { return nrow(); }
   int slice_stride() const { return 1; }
   int slice_offset(int pos) const { return pos * nrow(); }
+#endif
 };
 
 template <typename V, typename T, typename S = by_column>
@@ -92,17 +117,32 @@ class matrix : public matrix_slices<S> {
     slice(const matrix& parent, int index)
         : parent_(parent), index_(index), offset_(parent.slice_offset(index)) {}
 
+#if CPP4R_HAS_CXX17
+    CPP4R_NODISCARD R_xlen_t stride() const noexcept { return parent_.slice_stride(); }
+    CPP4R_NODISCARD R_xlen_t size() const noexcept { return parent_.slice_size(); }
+#else
     R_xlen_t stride() const noexcept { return parent_.slice_stride(); }
     R_xlen_t size() const noexcept { return parent_.slice_size(); }
+#endif
 
     bool operator==(const slice& rhs) const noexcept {
+#if CPP4R_HAS_CXX20
+      return (index_ == rhs.index_) && (parent_.data() == rhs.parent_.data()) CPP4R_LIKELY;
+#else
       return (index_ == rhs.index_) && (parent_.data() == rhs.parent_.data());
+#endif
     }
     bool operator!=(const slice& rhs) const noexcept { return !operator==(rhs); }
 
+#if CPP4R_HAS_CXX17
+    CPP4R_NODISCARD T operator[](int pos) const noexcept {
+      return parent_.vector_[offset_ + stride() * pos];
+    }
+#else
     T operator[](int pos) const noexcept {
       return parent_.vector_[offset_ + stride() * pos];
     }
+#endif
 
     // iterates elements of a slice
     class iterator {
@@ -125,11 +165,19 @@ class matrix : public matrix_slices<S> {
       }
 
       bool operator==(const iterator& rhs) const noexcept {
+#if CPP4R_HAS_CXX20
+        return (pos_ == rhs.pos_) && (slice_ == rhs.slice_) CPP4R_LIKELY;
+#else
         return (pos_ == rhs.pos_) && (slice_ == rhs.slice_);
+#endif
       }
       bool operator!=(const iterator& rhs) const noexcept { return !operator==(rhs); }
 
+#if CPP4R_HAS_CXX17
+      CPP4R_NODISCARD T operator*() const noexcept { return slice_[pos_]; };
+#else
       T operator*() const noexcept { return slice_[pos_]; };
+#endif
     };
 
     iterator begin() const { return {*this, 0}; }
@@ -158,11 +206,19 @@ class matrix : public matrix_slices<S> {
     }
 
     bool operator==(const slice_iterator& rhs) const noexcept {
+#if CPP4R_HAS_CXX20
+      return (pos_ == rhs.pos_) && (parent_.data() == rhs.parent_.data()) CPP4R_LIKELY;
+#else
       return (pos_ == rhs.pos_) && (parent_.data() == rhs.parent_.data());
+#endif
     }
     bool operator!=(const slice_iterator& rhs) const noexcept { return !operator==(rhs); }
 
+#if CPP4R_HAS_CXX17
+    CPP4R_NODISCARD slice operator*() { return parent_[pos_]; };
+#else
     slice operator*() { return parent_[pos_]; };
+#endif
   };
 
  public:
@@ -211,6 +267,15 @@ class matrix : public matrix_slices<S> {
   using matrix_slices<S>::slice_stride;
   using matrix_slices<S>::slice_offset;
 
+#if CPP4R_HAS_CXX17
+  CPP4R_NODISCARD V vector() const { return vector_; }
+
+  CPP4R_NODISCARD SEXP data() const { return vector_.data(); }
+
+  CPP4R_NODISCARD R_xlen_t size() const { return vector_.size(); }
+
+  CPP4R_NODISCARD operator SEXP() const { return SEXP(vector_); }
+#else
   V vector() const { return vector_; }
 
   SEXP data() const { return vector_.data(); }
@@ -218,6 +283,7 @@ class matrix : public matrix_slices<S> {
   R_xlen_t size() const { return vector_.size(); }
 
   operator SEXP() const { return SEXP(vector_); }
+#endif
 
   // operator sexp() { return sexp(vector_); }
 
@@ -227,11 +293,23 @@ class matrix : public matrix_slices<S> {
     return attribute_proxy<V>(vector_, name.c_str());
   }
 
+#if CPP4R_HAS_CXX17
+  // C++17: Add string_view overload
+  attribute_proxy<V> attr(std::string_view name) {
+    return attribute_proxy<V>(vector_, name.data());
+  }
+#endif
+
   attribute_proxy<V> attr(SEXP name) { return attribute_proxy<V>(vector_, name); }
 
   void attr(const char* name, SEXP value) { vector_.attr(name) = value; }
 
   void attr(const std::string& name, SEXP value) { vector_.attr(name) = value; }
+
+#if CPP4R_HAS_CXX17
+  // C++17: Add string_view overload
+  void attr(std::string_view name, SEXP value) { vector_.attr(name.data()) = value; }
+#endif
 
   void attr(SEXP name, SEXP value) { vector_.attr(name) = value; }
 
@@ -255,15 +333,30 @@ class matrix : public matrix_slices<S> {
     vector_.attr(name) = create_sexp_list(value);
   }
 
+#if CPP4R_HAS_CXX17
+  // C++17: Add string_view overload
+  void attr(std::string_view name, std::initializer_list<SEXP> value) {
+    vector_.attr(name.data()) = create_sexp_list(value);
+  }
+#endif
+
   void attr(SEXP name, std::initializer_list<SEXP> value) {
     vector_.attr(name) = create_sexp_list(value);
   }
 
+#if CPP4R_HAS_CXX17
+  CPP4R_NODISCARD r_vector<r_string> names() const { return r_vector<r_string>(vector_.names()); }
+
+  CPP4R_NODISCARD T operator()(int row, int col) const noexcept { return vector_[row + (col * nrow())]; }
+
+  CPP4R_NODISCARD slice operator[](int index) const { return {*this, index}; }
+#else
   r_vector<r_string> names() const { return r_vector<r_string>(vector_.names()); }
 
   T operator()(int row, int col) const noexcept { return vector_[row + (col * nrow())]; }
 
   slice operator[](int index) const { return {*this, index}; }
+#endif
 
   slice_iterator begin() const { return {*this, 0}; }
   slice_iterator end() const { return {*this, nslices()}; }

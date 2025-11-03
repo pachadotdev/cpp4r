@@ -1,5 +1,7 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 #include <initializer_list>  // for initializer_list
 
 #include "cpp4r/R.hpp"                // for SEXP, SEXPREC, SET_VECTOR_ELT
@@ -35,15 +37,26 @@ template <>
 inline typename r_vector<SEXP>::underlying_type const* r_vector<SEXP>::get_const_p(
     bool is_altrep, SEXP data) noexcept {
   // No `VECTOR_PTR_OR_NULL()`
+#if CPP4R_HAS_CXX20
+  return __builtin_expect(is_altrep, 0) CPP4R_UNLIKELY ? nullptr
+                                        : static_cast<SEXP const*>(DATAPTR_RO(data));
+#else
   return __builtin_expect(is_altrep, 0) ? nullptr
                                         : static_cast<SEXP const*>(DATAPTR_RO(data));
+#endif
 }
 
 /// Specialization for lists, where `x["oob"]` returns `R_NilValue`, like at the R level
 template <>
+#if CPP4R_HAS_CXX17
+CPP4R_NODISCARD inline SEXP r_vector<SEXP>::get_oob() {
+  return R_NilValue;
+}
+#else
 inline SEXP r_vector<SEXP>::get_oob() {
   return R_NilValue;
 }
+#endif
 
 template <>
 inline void r_vector<SEXP>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
@@ -91,7 +104,11 @@ inline r_vector<SEXP>::r_vector(std::initializer_list<named_arg> il)
     auto it = il.begin();
     const auto end = il.end();
 
+#if CPP4R_HAS_CXX20
+    for (R_xlen_t i = 0; __builtin_expect(it != end, 1) CPP4R_LIKELY; ++i, ++it) {
+#else
     for (R_xlen_t i = 0; __builtin_expect(it != end, 1); ++i, ++it) {
+#endif
       SEXP elt = it->value();
       set_elt(data_, i, elt);
 

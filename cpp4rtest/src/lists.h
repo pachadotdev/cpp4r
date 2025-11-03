@@ -1,3 +1,8 @@
+/* roxygen
+@title List functions
+@rdname testing-list
+@keywords internal
+*/
 [[cpp4r::register]] list cpp4r_named_list_push_back_() {
   writable::list result;
 
@@ -24,6 +29,11 @@
   return result;
 }
 
+/* roxygen
+@title List functions
+@rdname testing-list
+@keywords internal
+*/
 [[cpp4r::register]] list cpp4r_named_list_c_style_() {
   writable::list result(10);  // Preallocate list of size 10
 

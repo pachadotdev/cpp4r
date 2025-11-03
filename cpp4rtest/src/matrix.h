@@ -27,41 +27,6 @@
   return mat;
 }
 
-#include <Rcpp.h>
-using namespace Rcpp;
-
-[[cpp4r::register]] NumericMatrix gibbs_Rcpp(int N, int thin) {
-  NumericMatrix mat(N, 2);
-  double x = 0, y = 0;
-
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < thin; j++) {
-      x = rgamma(1, 3, 1 / (y * y + 4))[0];
-      y = rnorm(1, 1 / (x + 1), 1 / sqrt(2 * (x + 1)))[0];
-    }
-    mat(i, 0) = x;
-    mat(i, 1) = y;
-  }
-
-  return (mat);
-}
-
-[[cpp4r::register]] NumericMatrix gibbs_Rcpp2(int N, int thin) {
-  NumericMatrix mat(N, 2);
-  double x = 0, y = 0;
-
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < thin; j++) {
-      x = Rf_rgamma(3., 1. / (y * y + 4));
-      y = Rf_rnorm(1. / (x + 1), 1 / sqrt(2 * (x + 1)));
-    }
-    mat(i, 0) = x;
-    mat(i, 1) = y;
-  }
-
-  return (mat);
-}
-
 [[cpp4r::register]] cpp4r::doubles row_sums(cpp4r::doubles_matrix<cpp4r::by_row> x) {
   cpp4r::writable::doubles sums(x.nrow());
 

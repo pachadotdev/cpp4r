@@ -1,5 +1,7 @@
 #pragma once
 
+#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
+
 #include <complex>  // for std::complex
 #include <utility>  // for move
 
@@ -18,7 +20,7 @@ class r_complex {
     ptr[0].i = 0.0;
   }
   r_complex(SEXP data) : data_(data) {
-    if (__builtin_expect(data_ == R_NilValue, 0)) {
+    if (CPP4R_UNLIKELY(data_ == R_NilValue)) {
       data_ = safe[Rf_allocVector](CPLXSXP, 0);
     }
   }
@@ -35,7 +37,7 @@ class r_complex {
 
   // Copy assignment
   r_complex& operator=(const r_complex& other) {
-    if (this != &other) {
+    if (CPP4R_LIKELY(this != &other)) {
       data_ = other.data_;
     }
     return *this;
@@ -46,24 +48,24 @@ class r_complex {
 
   // Move assignment
   r_complex& operator=(r_complex&& other) noexcept {
-    if (this != &other) {
+    if (CPP4R_LIKELY(this != &other)) {
       data_ = other.data_;
       other.data_ = R_NilValue;
     }
     return *this;
   }
 
-  operator SEXP() const noexcept { return data_; }
-  operator sexp() const noexcept { return data_; }
-  operator std::complex<double>() const {
-    if (data_ == R_NilValue || Rf_length(data_) == 0) {
+  CPP4R_NODISCARD operator SEXP() const noexcept { return data_; }
+  CPP4R_NODISCARD operator sexp() const noexcept { return data_; }
+  CPP4R_NODISCARD operator std::complex<double>() const {
+    if (CPP4R_UNLIKELY(data_ == R_NilValue || Rf_length(data_) == 0)) {
       return {NA_REAL, NA_REAL};
     }
     return {COMPLEX(data_)[0].r, COMPLEX(data_)[0].i};
   }
-  operator Rcomplex() const {
+  CPP4R_NODISCARD operator Rcomplex() const {
     Rcomplex r;
-    if (data_ == R_NilValue || Rf_length(data_) == 0) {
+    if (CPP4R_UNLIKELY(data_ == R_NilValue || Rf_length(data_) == 0)) {
       r.r = NA_REAL;
       r.i = NA_REAL;
     } else {
@@ -73,14 +75,14 @@ class r_complex {
     return r;
   }
 
-  double real() const noexcept {
-    if (data_ == R_NilValue || Rf_length(data_) == 0) {
+  CPP4R_NODISCARD double real() const noexcept {
+    if (CPP4R_UNLIKELY(data_ == R_NilValue || Rf_length(data_) == 0)) {
       return NA_REAL;
     }
     return COMPLEX(data_)[0].r;
   }
-  double imag() const noexcept {
-    if (data_ == R_NilValue || Rf_length(data_) == 0) {
+  CPP4R_NODISCARD double imag() const noexcept {
+    if (CPP4R_UNLIKELY(data_ == R_NilValue || Rf_length(data_) == 0)) {
       return NA_REAL;
     }
     return COMPLEX(data_)[0].i;
@@ -93,9 +95,8 @@ class r_complex {
   bool operator!=(const r_complex& rhs) const { return !(*this == rhs); }
 
   r_complex& operator+=(const r_complex& rhs) {
-    if (__builtin_expect(data_ == R_NilValue || Rf_length(data_) == 0 ||
-                             rhs.data_ == R_NilValue || Rf_length(rhs.data_) == 0,
-                         0)) {
+    if (CPP4R_UNLIKELY(data_ == R_NilValue || Rf_length(data_) == 0 ||
+                       rhs.data_ == R_NilValue || Rf_length(rhs.data_) == 0)) {
       *this = r_complex(real() + rhs.real(), imag() + rhs.imag());
     } else {
       COMPLEX(data_)[0].r += COMPLEX(rhs.data_)[0].r;
@@ -105,9 +106,8 @@ class r_complex {
   }
 
   r_complex& operator-=(const r_complex& rhs) {
-    if (__builtin_expect(data_ == R_NilValue || Rf_length(data_) == 0 ||
-                             rhs.data_ == R_NilValue || Rf_length(rhs.data_) == 0,
-                         0)) {
+    if (CPP4R_UNLIKELY(data_ == R_NilValue || Rf_length(data_) == 0 ||
+                       rhs.data_ == R_NilValue || Rf_length(rhs.data_) == 0)) {
       *this = r_complex(real() - rhs.real(), imag() - rhs.imag());
     } else {
       COMPLEX(data_)[0].r -= COMPLEX(rhs.data_)[0].r;
@@ -150,7 +150,7 @@ class r_complex {
     return lhs;
   }
 
-  bool is_na() const { return R_IsNA(real()) || R_IsNA(imag()); }
+  CPP4R_NODISCARD bool is_na() const { return R_IsNA(real()) || R_IsNA(imag()); }
 
  private:
   sexp data_ = R_NilValue;
@@ -183,7 +183,7 @@ inline SEXP as_sexp(std::initializer_list<r_complex> il) {
 }
 
 template <>
-inline r_complex na() {
+CPP4R_NODISCARD inline r_complex na() {
   return r_complex(NA_REAL, NA_REAL);
 }
 

@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# cpp4r
+# cpp4r: Header-Only 'C++' and 'R' Interface
 
 <!-- badges: start -->
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
@@ -31,6 +31,9 @@ compilation for code snippets.
 
 cpp4r can be used as a replacement for cpp11 in existing or new packages. Think of cpp11 and cpp4r as MySQL and MariaDB:
 they are almost identical, but cpp4r has some extra features.
+
+cpp4r requires at least C++11. It is compatible with C++14, C++17, C++20, C++23 as well. The headers are written in
+a way that is compatible with all of these standards and newer features are used if the compiler supports them.
 
 After discussing some [pull requests](https://github.com/pachadotdev/cpp11/pulls/pachadotdev) with Hadley Wickham from
 Posit, it was mentioned that I should create my own fork to add the following features:
