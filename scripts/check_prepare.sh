@@ -16,9 +16,6 @@ else
 fi
 
 # Install dependencies
-Rscript -e "install.packages('cpp11', repos = 'https://cloud.r-project.org')"
-Rscript -e "install.packages('Rcpp', repos = 'https://cloud.r-project.org')"
-
 Rscript -e "install.packages('cpp4r', repos = NULL, type = 'source')"
 
 # Set the C++ standard in DESCRIPTION

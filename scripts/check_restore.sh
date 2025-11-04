@@ -23,3 +23,7 @@ sed -i "s/${cpp_std}/C++NN/" ./cpp4rtest/DESCRIPTION || true
 
 # Restore GCC by unsetting USE_CLANG
 unset USE_CLANG || true
+
+# Clear check files
+rm -rf ./cpp4rtest.Rcheck || true
+rm cpp4rtest_.*tar.gz || true

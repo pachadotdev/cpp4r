@@ -187,6 +187,11 @@ CPP4R_NODISCARD inline r_complex na() {
   return r_complex(NA_REAL, NA_REAL);
 }
 
+// Specialized is_na for r_complex
+CPP4R_NODISCARD inline bool is_na(const r_complex& value) noexcept {
+  return value.is_na();
+}
+
 namespace traits {
 template <>
 struct get_underlying_type<r_complex> {
