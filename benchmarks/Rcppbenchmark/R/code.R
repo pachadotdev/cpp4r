@@ -1,0 +1,117 @@
+#' @title Pre-allocated Vector Sum
+#' @description Computes weighted sum of two vectors with pre-allocation.
+#'  Test goal: create result once, no growing vectors, no unnecessary allocations.
+#' @param x 1st numeric vector
+#' @param y 2nd numeric vector
+#' @param w weight vector
+#' @export
+bench_prealloc_weighted_sum <- function(x, y, w) {
+  bench_prealloc_weighted_sum_(x, y, w)
+}
+
+#' @title Matrix Multiplication
+#' @description Standard matrix multiplication: C = A %*% B.
+#'  This tests actual numerical computation, not just object creation.
+#'  Uses pre-allocation and cache-friendly column-major access.
+#' @param A n x m matrix
+#' @param B m x p matrix
+#' @export
+bench_matrix_multiply <- function(A, B) {
+    bench_matrix_multiply_(A, B)
+}
+
+#' @title Rolling Window Mean
+#' @description Computes rolling window mean with specified window size.
+#'  Tests sequential access patterns. Pre-allocates result vector.
+#' @param x data vector
+#' @param w window size
+#' @export
+bench_rolling_mean <- function(x, w) {
+    bench_rolling_mean_(x, w)
+}
+
+#' @title Data Frame Column Operations
+#' @description Computes summary statistics for each numeric column in a data frame.
+#'  Tests data frame manipulation and type checking.
+#'  Returns a data frame with mean, sd, min, max for each column.
+#' @param tbl data frame
+#' @export
+bench_dataframe_summary <- function(tbl) {
+    bench_dataframe_summary_(tbl)
+}
+
+#' @title String Pattern Matching
+#' @description Counts occurrences of a pattern in string vector elements.
+#' @param s data vector
+#' @param p Pattern to search for
+#' @export
+bench_string_pattern_count <- function(s, p) {
+    bench_string_pattern_count_(s, p)
+}
+
+#' @title Grouped Aggregation
+#' @description Computes mean by group (like tapply or dplyr::summarize).
+#' @param x data vector
+#' @param groups Integer vector of group IDs
+#' @export
+bench_grouped_mean <- function(x, groups) {
+    bench_grouped_mean_(x, groups)
+}
+
+#' @title Fibonacci Sequence
+#' @description Generates Fibonacci sequence up to n terms.
+#'  Tests pure computational performance without R API overhead.
+#'  Pre-allocates result vector.
+#' @param n number of terms
+#' @export
+bench_fibonacci <- function(n) {
+    bench_fibonacci_(n)
+}
+
+#' @title NA Handling
+#' @description Computes mean excluding NAs, like mean(x, na.rm=TRUE).
+#' @param x data vector with NAs
+#' @export
+bench_mean_na_rm <- function(x) {
+    bench_mean_na_rm_(x)
+}
+
+#' @title Outer Product
+#' @description Computes outer product of two vectors: result[i,j] = x[i] * y[j].
+#'  Tests proper matrix allocation and filling patterns.
+#'  This is a case where you must allocate the full result upfront.
+#' @param x 1st data vector
+#' @param y 2nd data vector
+#' @export
+bench_outer_product <- function(x, y) {
+    bench_outer_product_(x, y)
+}
+
+#' @title Pairwise Distance Matrix
+#' @description Computes Euclidean distance matrix for a set of points.
+#'  Returns symmetric n x n distance matrix.
+#' @param x (n x k) matrix
+#' @export
+bench_pairwise_distances <- function(x) {
+    bench_pairwise_distances_(x)
+}
+
+#' @title Cumulative Operations
+#' @description Computes cumulative sum, product, min, and max.
+#'  Tests sequential data processing patterns.
+#' @param x data vector
+#' @export
+bench_cumulative_ops <- function(x) {
+    bench_cumulative_ops_(x)
+}
+
+#' @title Bootstrap Resampling
+#' @description Generates bootstrap resamples and computes statistic.
+#'  Tests random sampling and repeated computation.
+#'  Returns vector of bootstrap statistics (mean of each resample).
+#' @param x data vector
+#' @param n_boot number of bootstrap samples
+#' @export
+bench_bootstrap_mean <- function(x, n_boot) {
+    bench_bootstrap_mean_(x, n_boot)
+}

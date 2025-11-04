@@ -1,0 +1,25 @@
+Package: cpp4rbenchmark
+Type: Package
+Title: Checking speed improvement/worsening with different C++ standards for cpp4r
+Description: A benchmark package to test the speed of various C++ implementations using the cpp4r package.
+    The benchmarks include operations such as cumulative sums, outer products, pairwise distances, grouped
+    means, and bootstrap resampling.
+Version: 0.1
+Authors@R:
+    person("Mauricio", "Vargas Sepulveda", role = c("aut","cre","cph"), 
+        email = "m.vargas.sepulveda@gmail.com", 
+        comment = c(ORCID = "0000-0003-1017-7574"))
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Depends: R(>= 4.0.0)
+License: Apache License (>= 2)
+BugReports: https://github.com/USERNAME/PKGNAME/issues
+URL: https://WEBSITE.COM
+RoxygenNote: 7.3.3
+Encoding: UTF-8
+NeedsCompilation: yes
+LinkingTo: cpp4r
+Config/testthat/edition: 3
+SystemsRequirements: C++NN
