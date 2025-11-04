@@ -87,7 +87,7 @@ class package {
  private:
   static inline SEXP get_namespace(const char* name) {
 #if CPP4R_HAS_CXX20
-    if (__builtin_expect(std::strcmp(name, "base") == 0, 1)) CPP4R_LIKELY {
+    if (__builtin_expect(std::strcmp(name, "base") == 0, 1)) {
       return R_BaseEnv;
     }
 #else
@@ -117,7 +117,7 @@ inline void r_message(const char* x) {
   static SEXP fn = NULL;
 
 #if CPP4R_HAS_CXX20
-  if (fn == NULL) CPP4R_UNLIKELY {
+  if (CPP4R_UNLIKELY(fn == NULL)) {
 #else
   if (fn == NULL) {
 #endif
@@ -146,7 +146,7 @@ inline void message(const char* fmt_arg) {
   int msg;
   msg = std::snprintf(buff, 1024, "%s", fmt_arg);
 #if CPP4R_HAS_CXX20
-  if (msg >= 0 && msg < 1024) CPP4R_LIKELY {
+  if (CPP4R_LIKELY(msg >= 0 && msg < 1024)) {
     safe[detail::r_message](buff);
   }
 #else
@@ -167,7 +167,7 @@ void message(const char* fmt_arg, Args... args) {
   int msg;
   msg = std::snprintf(buff, 1024, fmt_arg, args...);
 #if CPP4R_HAS_CXX20
-  if (msg >= 0 && msg < 1024) CPP4R_LIKELY {
+  if (CPP4R_LIKELY(msg >= 0 && msg < 1024)) {
     safe[detail::r_message](buff);
   }
 #else

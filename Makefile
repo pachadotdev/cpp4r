@@ -23,7 +23,7 @@ check:
 	@clear
 	@echo "==============================="
 	@echo "Checking C++ code"
-	@/bin/bash -euo pipefail -c './scripts/check_loop.sh'
+	@export -p USE_CLANG; /bin/bash -euo pipefail -c './scripts/check_loop.sh'
 	@echo "==============================="
 
 clang_format=`which clang-format-18`

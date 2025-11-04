@@ -34,9 +34,9 @@ template <>
 inline typename r_vector<double>::underlying_type* r_vector<double>::get_p(bool is_altrep,
                                                                            SEXP data) noexcept {
 #if CPP4R_HAS_CXX20
-  if (is_altrep) CPP4R_UNLIKELY {
+  if (CPP4R_UNLIKELY(is_altrep)) {
     return nullptr;
-  } else CPP4R_LIKELY {
+  } else {
     return REAL(data);
   }
 #else
@@ -87,17 +87,17 @@ typedef r_vector<r_bool> logicals;
 inline doubles as_doubles(SEXP x) {
   SEXPTYPE x_type = detail::r_typeof(x);
 #if CPP4R_HAS_CXX20
-  if (__builtin_expect(x_type == REALSXP, 1)) CPP4R_LIKELY {
+  if (CPP4R_LIKELY(x_type == REALSXP)) {
     return doubles(x);
   }
 
   // Get length once and check for early exit
   R_xlen_t len = Rf_length(x);
-  if (__builtin_expect(len == 0, 0)) CPP4R_UNLIKELY {
+  if (CPP4R_UNLIKELY(len == 0)) {
     return writable::doubles(static_cast<R_xlen_t>(0));
   }
 
-  if (__builtin_expect(x_type == INTSXP, 0)) CPP4R_UNLIKELY {
+  if (CPP4R_UNLIKELY(x_type == INTSXP)) {
 #else
   if (__builtin_expect(x_type == REALSXP, 1)) {
     return doubles(x);
@@ -119,7 +119,7 @@ inline doubles as_doubles(SEXP x) {
     double* dest_ptr = REAL(ret.data());
 
 #if CPP4R_HAS_CXX20
-    if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) CPP4R_LIKELY {
+    if (CPP4R_LIKELY(src_ptr != nullptr && dest_ptr != nullptr)) {
 #else
     if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) {
 #endif
@@ -137,7 +137,7 @@ inline doubles as_doubles(SEXP x) {
     }
     return ret;
 #if CPP4R_HAS_CXX20
-  } else if (__builtin_expect(x_type == LGLSXP, 0)) CPP4R_UNLIKELY {
+  } else if (CPP4R_UNLIKELY(x_type == LGLSXP)) {
 #else
   } else if (__builtin_expect(x_type == LGLSXP, 0)) {
 #endif
@@ -149,7 +149,7 @@ inline doubles as_doubles(SEXP x) {
     double* dest_ptr = REAL(ret.data());
 
 #if CPP4R_HAS_CXX20
-    if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) CPP4R_LIKELY {
+    if (CPP4R_LIKELY(src_ptr != nullptr && dest_ptr != nullptr)) {
 #else
     if (__builtin_expect(src_ptr != nullptr && dest_ptr != nullptr, 1)) {
 #endif
@@ -204,7 +204,7 @@ inline bool operator==(const r_vector<double>& lhs, const r_vector<double>& rhs)
   const double* rhs_ptr = REAL_OR_NULL(rhs.data());
 
 #if CPP4R_HAS_CXX20
-  if (__builtin_expect(lhs_ptr != nullptr && rhs_ptr != nullptr, 1)) CPP4R_LIKELY {
+  if (CPP4R_LIKELY(lhs_ptr != nullptr && rhs_ptr != nullptr)) {
 #else
   if (__builtin_expect(lhs_ptr != nullptr && rhs_ptr != nullptr, 1)) {
 #endif
@@ -212,9 +212,9 @@ inline bool operator==(const r_vector<double>& lhs, const r_vector<double>& rhs)
     for (R_xlen_t i = 0; i < len; ++i) {
       // Handle NaN comparison correctly - NaN != NaN should be true
 #if CPP4R_HAS_CXX20
-      if (__builtin_expect(ISNAN(lhs_ptr[i]) || ISNAN(rhs_ptr[i]), 0)) CPP4R_UNLIKELY {
+      if (CPP4R_UNLIKELY(ISNAN(lhs_ptr[i]) || ISNAN(rhs_ptr[i]))) {
         if (!(ISNAN(lhs_ptr[i]) && ISNAN(rhs_ptr[i]))) return false;
-      } else if (__builtin_expect(lhs_ptr[i] != rhs_ptr[i], 0)) CPP4R_UNLIKELY {
+      } else if (CPP4R_UNLIKELY(lhs_ptr[i] != rhs_ptr[i])) {
         return false;
       }
 #else

@@ -84,7 +84,7 @@ class named_arg {
   // Comparison operators for efficient name-based comparison
   bool operator==(const named_arg& other) const noexcept {
 #if CPP4R_HAS_CXX20
-    return std::strcmp(name_, other.name_) == 0 CPP4R_LIKELY;
+    return CPP4R_LIKELY(std::strcmp(name_, other.name_) == 0);
 #else
     return std::strcmp(name_, other.name_) == 0;
 #endif
@@ -94,7 +94,7 @@ class named_arg {
 
   bool operator==(const char* other_name) const noexcept {
 #if CPP4R_HAS_CXX20
-    return std::strcmp(name_, other_name) == 0 CPP4R_LIKELY;
+    return CPP4R_LIKELY(std::strcmp(name_, other_name) == 0);
 #else
     return std::strcmp(name_, other_name) == 0;
 #endif
@@ -102,7 +102,7 @@ class named_arg {
 
   bool operator!=(const char* other_name) const noexcept {
 #if CPP4R_HAS_CXX20
-    return std::strcmp(name_, other_name) != 0 CPP4R_UNLIKELY;
+    return CPP4R_UNLIKELY(std::strcmp(name_, other_name) != 0);
 #else
     return std::strcmp(name_, other_name) != 0;
 #endif

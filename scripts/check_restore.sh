@@ -3,8 +3,9 @@ set -euo pipefail
 
 # Accept std as first arg, default to CXX11
 std=${1:-CXX11}
+compiler=${2:-gcc}
 
-echo "Restoring files for $std"
+echo "Restoring files for $std and $compiler"
 
 # Convert std to C++ format for DESCRIPTION (e.g., CXX20 -> C++20)
 if [ "$std" = "CXX11" ]; then cpp_std="C++11"
@@ -19,3 +20,6 @@ echo "CXX_STD = CXXNN" > ./cpp4rtest/src/Makevars.in
 
 # Restore DESCRIPTION placeholder (needs C++ format)
 sed -i "s/${cpp_std}/C++NN/" ./cpp4rtest/DESCRIPTION || true
+
+# Restore GCC by unsetting USE_CLANG
+unset USE_CLANG || true

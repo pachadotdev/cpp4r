@@ -127,7 +127,7 @@ class matrix : public matrix_slices<S> {
 
     bool operator==(const slice& rhs) const noexcept {
 #if CPP4R_HAS_CXX20
-      return (index_ == rhs.index_) && (parent_.data() == rhs.parent_.data()) CPP4R_LIKELY;
+      return CPP4R_LIKELY((index_ == rhs.index_) && (parent_.data() == rhs.parent_.data()));
 #else
       return (index_ == rhs.index_) && (parent_.data() == rhs.parent_.data());
 #endif
@@ -166,7 +166,7 @@ class matrix : public matrix_slices<S> {
 
       bool operator==(const iterator& rhs) const noexcept {
 #if CPP4R_HAS_CXX20
-        return (pos_ == rhs.pos_) && (slice_ == rhs.slice_) CPP4R_LIKELY;
+        return CPP4R_LIKELY((pos_ == rhs.pos_) && (slice_ == rhs.slice_));
 #else
         return (pos_ == rhs.pos_) && (slice_ == rhs.slice_);
 #endif
@@ -207,7 +207,7 @@ class matrix : public matrix_slices<S> {
 
     bool operator==(const slice_iterator& rhs) const noexcept {
 #if CPP4R_HAS_CXX20
-      return (pos_ == rhs.pos_) && (parent_.data() == rhs.parent_.data()) CPP4R_LIKELY;
+      return CPP4R_LIKELY((pos_ == rhs.pos_) && (parent_.data() == rhs.parent_.data()));
 #else
       return (pos_ == rhs.pos_) && (parent_.data() == rhs.parent_.data());
 #endif

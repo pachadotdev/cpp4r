@@ -46,7 +46,7 @@ SEXP unwind_protect(Fun&& code) {
 
   std::jmp_buf jmpbuf;
 #if CPP4R_HAS_CXX20
-  if (setjmp(jmpbuf)) CPP4R_UNLIKELY {
+  if (setjmp(jmpbuf)) {
     throw unwind_exception(token);
   }
 #else
@@ -63,7 +63,7 @@ SEXP unwind_protect(Fun&& code) {
       &code,
       [](void* jmpbuf, Rboolean jump) {
 #if CPP4R_HAS_CXX20
-        if (jump == TRUE) CPP4R_UNLIKELY {
+        if (CPP4R_UNLIKELY(jump == TRUE)) {
           // We need to first jump back into the C++ stacks because you can't safely
           // throw exceptions from C stack frames.
           longjmp(*static_cast<std::jmp_buf*>(jmpbuf), 1);
@@ -336,7 +336,7 @@ inline R_xlen_t count() noexcept {
 
 inline SEXP insert(SEXP x) {
 #if CPP4R_HAS_CXX20
-  if (__builtin_expect(x == R_NilValue, 0)) CPP4R_UNLIKELY {
+  if (CPP4R_UNLIKELY(x == R_NilValue)) {
     return R_NilValue;
   }
 #else
@@ -370,7 +370,7 @@ inline SEXP insert(SEXP x) {
 
 inline void release(SEXP cell) noexcept {
 #if CPP4R_HAS_CXX20
-  if (__builtin_expect(cell == R_NilValue, 0)) CPP4R_UNLIKELY {
+  if (CPP4R_UNLIKELY(cell == R_NilValue)) {
     return;
   }
 #else

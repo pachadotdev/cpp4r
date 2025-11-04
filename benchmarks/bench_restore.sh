@@ -36,3 +36,7 @@ if [ -f ./benchmark.R ]; then
 	sed -E -i "s/^[[:space:]]*cpp_std[[:space:]]*<-[[:space:]]*\".*\"/cpp_std <- \"CXXNN\"/" benchmark.R || true
 	sed -E -i "s/^[[:space:]]*cpp_compiler[[:space:]]*<-[[:space:]]*\".*\"/cpp_compiler <- \"XYZ\"/" benchmark.R || true
 fi
+
+# Restore GCC by unsetting USE_CLANG
+echo "Unsetting USE_CLANG to restore GCC"
+unset USE_CLANG || true

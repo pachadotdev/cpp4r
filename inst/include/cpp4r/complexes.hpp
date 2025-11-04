@@ -32,9 +32,9 @@ template <>
 inline typename r_vector<r_complex>::underlying_type* r_vector<r_complex>::get_p(
     bool is_altrep, SEXP data) noexcept {
 #if CPP4R_HAS_CXX20
-  if (__builtin_expect(is_altrep, 0)) CPP4R_UNLIKELY {
+  if (CPP4R_UNLIKELY(is_altrep)) {
     return nullptr;
-  } else CPP4R_LIKELY {
+  } else {
     return COMPLEX(data);
   }
 #else
@@ -79,11 +79,11 @@ typedef r_vector<r_complex> complexes;
 
 inline complexes as_complexes(SEXP x) {
 #if CPP4R_HAS_CXX20
-  if (__builtin_expect(detail::r_typeof(x) == CPLXSXP, 1)) CPP4R_LIKELY {
+  if (CPP4R_LIKELY(detail::r_typeof(x) == CPLXSXP)) {
     return complexes(x);
   }
 
-  else if (__builtin_expect(detail::r_typeof(x) == INTSXP, 0)) CPP4R_UNLIKELY {
+  else if (CPP4R_UNLIKELY(detail::r_typeof(x) == INTSXP)) {
 #else
   if (__builtin_expect(detail::r_typeof(x) == CPLXSXP, 1)) {
     return complexes(x);
@@ -119,9 +119,9 @@ class r_vector<r_complex>::proxy {
 
 #if CPP4R_HAS_CXX20
   operator r_complex() const noexcept {
-    if (__builtin_expect(is_altrep_ && buf_ != nullptr, 0)) CPP4R_UNLIKELY {
+    if (CPP4R_UNLIKELY(is_altrep_ && buf_ != nullptr)) {
       return r_complex(buf_->r, buf_->i);
-    } else CPP4R_LIKELY {
+    } else {
       Rcomplex r = COMPLEX_ELT(data_, index_);
       return r_complex(r.r, r.i);
     }
@@ -139,10 +139,10 @@ class r_vector<r_complex>::proxy {
 
   proxy& operator=(const r_complex& value) noexcept {
 #if CPP4R_HAS_CXX20
-    if (__builtin_expect(is_altrep_ && buf_ != nullptr, 0)) CPP4R_UNLIKELY {
+    if (CPP4R_UNLIKELY(is_altrep_ && buf_ != nullptr)) {
       buf_->r = value.real();
       buf_->i = value.imag();
-    } else CPP4R_LIKELY {
+    } else {
       Rcomplex r;
       r.r = value.real();
       r.i = value.imag();
@@ -164,10 +164,10 @@ class r_vector<r_complex>::proxy {
 
   proxy& operator=(const std::complex<double>& value) noexcept {
 #if CPP4R_HAS_CXX20
-    if (__builtin_expect(is_altrep_ && buf_ != nullptr, 0)) CPP4R_UNLIKELY {
+    if (CPP4R_UNLIKELY(is_altrep_ && buf_ != nullptr)) {
       buf_->r = value.real();
       buf_->i = value.imag();
-    } else CPP4R_LIKELY {
+    } else {
       Rcomplex r;
       r.r = value.real();
       r.i = value.imag();
@@ -190,10 +190,10 @@ class r_vector<r_complex>::proxy {
   proxy& operator+=(const r_complex& value) noexcept {
     // Direct arithmetic on components to avoid temporary objects
 #if CPP4R_HAS_CXX20
-    if (__builtin_expect(is_altrep_ && buf_ != nullptr, 0)) CPP4R_UNLIKELY {
+    if (CPP4R_UNLIKELY(is_altrep_ && buf_ != nullptr)) {
       buf_->r += value.real();
       buf_->i += value.imag();
-    } else CPP4R_LIKELY {
+    } else {
       Rcomplex current = COMPLEX_ELT(data_, index_);
       current.r += value.real();
       current.i += value.imag();
@@ -216,10 +216,10 @@ class r_vector<r_complex>::proxy {
   proxy& operator-=(const r_complex& value) noexcept {
     // Direct arithmetic on components to avoid temporary objects
 #if CPP4R_HAS_CXX20
-    if (__builtin_expect(is_altrep_ && buf_ != nullptr, 0)) CPP4R_UNLIKELY {
+    if (CPP4R_UNLIKELY(is_altrep_ && buf_ != nullptr)) {
       buf_->r -= value.real();
       buf_->i -= value.imag();
-    } else CPP4R_LIKELY {
+    } else {
       Rcomplex current = COMPLEX_ELT(data_, index_);
       current.r -= value.real();
       current.i -= value.imag();
@@ -242,12 +242,12 @@ class r_vector<r_complex>::proxy {
   proxy& operator*=(const r_complex& value) noexcept {
     // Complex multiplication: (a+bi)(c+di) = (ac-bd) + (ad+bc)i
 #if CPP4R_HAS_CXX20
-    if (__builtin_expect(is_altrep_ && buf_ != nullptr, 0)) CPP4R_UNLIKELY {
+    if (CPP4R_UNLIKELY(is_altrep_ && buf_ != nullptr)) {
       double real_part = buf_->r * value.real() - buf_->i * value.imag();
       double imag_part = buf_->r * value.imag() + buf_->i * value.real();
       buf_->r = real_part;
       buf_->i = imag_part;
-    } else CPP4R_LIKELY {
+    } else {
       Rcomplex current = COMPLEX_ELT(data_, index_);
       double real_part = current.r * value.real() - current.i * value.imag();
       double imag_part = current.r * value.imag() + current.i * value.real();
@@ -280,12 +280,12 @@ class r_vector<r_complex>::proxy {
     const double denom_inv = 1.0 / (c * c + d * d);  // Compute reciprocal once
 
 #if CPP4R_HAS_CXX20
-    if (__builtin_expect(is_altrep_ && buf_ != nullptr, 0)) CPP4R_UNLIKELY {
+    if (CPP4R_UNLIKELY(is_altrep_ && buf_ != nullptr)) {
       const double a = buf_->r;
       const double b = buf_->i;
       buf_->r = (a * c + b * d) * denom_inv;
       buf_->i = (b * c - a * d) * denom_inv;
-    } else CPP4R_LIKELY {
+    } else {
       const Rcomplex current = COMPLEX_ELT(data_, index_);
       const double a = current.r;
       const double b = current.i;

@@ -141,7 +141,7 @@ class environment {
       // Reserve space if we know the vector size won't change
       const std::size_t size = assignments.size();
 #if CPP4R_HAS_CXX20
-      for (std::size_t i = 0; i < size; ++i) CPP4R_LIKELY {
+      for (std::size_t i = 0; i < size; ++i) {
 #else
       for (std::size_t i = 0; i < size; ++i) {
 #endif
@@ -157,7 +157,7 @@ class environment {
       // Use indexed loop for better performance
       const std::size_t size = names.size();
 #if CPP4R_HAS_CXX20
-      for (std::size_t i = 0; i < size; ++i) CPP4R_LIKELY {
+      for (std::size_t i = 0; i < size; ++i) {
 #else
       for (std::size_t i = 0; i < size; ++i) {
 #endif

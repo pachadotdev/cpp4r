@@ -132,22 +132,22 @@ enable_if_is_sexp<T, T> as_cpp(SEXP from) {
 template <typename T>
 enable_if_integral<T, T> as_cpp(SEXP from) {
 #if CPP4R_HAS_CXX20
-  if (__builtin_expect(Rf_xlength(from) != 1, 0)) CPP4R_UNLIKELY {
+  if (CPP4R_UNLIKELY(Rf_xlength(from) != 1)) {
     throw std::length_error("Expected single integer value");
   }
 
-  if (__builtin_expect(Rf_isInteger(from), 1)) CPP4R_LIKELY {
+  if (CPP4R_LIKELY(Rf_isInteger(from))) {
     return INTEGER_ELT(from, 0);
-  } else if (__builtin_expect(Rf_isReal(from), 0)) CPP4R_UNLIKELY {
-    if (__builtin_expect(ISNA(REAL_ELT(from, 0)), 0)) CPP4R_UNLIKELY {
+  } else if (CPP4R_UNLIKELY(Rf_isReal(from))) {
+    if (__builtin_expect(ISNA(REAL_ELT(from, 0)), 0)) {
       return NA_INTEGER;
     }
     double value = REAL_ELT(from, 0);
-    if (__builtin_expect(is_convertible_without_loss_to_integer(value), 1)) CPP4R_LIKELY {
+    if (CPP4R_LIKELY(is_convertible_without_loss_to_integer(value))) {
       return value;
     }
-  } else if (__builtin_expect(Rf_isLogical(from), 0)) CPP4R_UNLIKELY {
-    if (__builtin_expect(LOGICAL_ELT(from, 0) == NA_LOGICAL, 0)) CPP4R_UNLIKELY {
+  } else if (CPP4R_UNLIKELY(Rf_isLogical(from))) {
+    if (__builtin_expect(LOGICAL_ELT(from, 0) == NA_LOGICAL, 0)) {
       return NA_INTEGER;
     }
   }
@@ -205,7 +205,7 @@ enable_if_enum<E, E> as_cpp(SEXP from) {
 template <typename T>
 enable_if_bool<T, T> as_cpp(SEXP from) {
 #if CPP4R_HAS_CXX20
-  if (__builtin_expect(Rf_isLogical(from) && Rf_xlength(from) == 1, 1)) CPP4R_LIKELY {
+  if (CPP4R_LIKELY(Rf_isLogical(from) && Rf_xlength(from) == 1)) {
     return LOGICAL_ELT(from, 0) == 1;
   }
 #else
@@ -220,24 +220,24 @@ enable_if_bool<T, T> as_cpp(SEXP from) {
 template <typename T>
 enable_if_floating_point<T, T> as_cpp(SEXP from) {
 #if CPP4R_HAS_CXX20
-  if (__builtin_expect(Rf_xlength(from) != 1, 0)) CPP4R_UNLIKELY {
+  if (CPP4R_UNLIKELY(Rf_xlength(from) != 1)) {
     throw std::length_error("Expected single double value");
   }
 
-  if (__builtin_expect(Rf_isReal(from), 1)) CPP4R_LIKELY {
+  if (CPP4R_LIKELY(Rf_isReal(from))) {
     return REAL_ELT(from, 0);
   }
   // All 32 bit integers can be coerced to doubles, so we just convert them.
-  if (__builtin_expect(Rf_isInteger(from), 0)) CPP4R_UNLIKELY {
-    if (__builtin_expect(INTEGER_ELT(from, 0) == NA_INTEGER, 0)) CPP4R_UNLIKELY {
+  if (CPP4R_UNLIKELY(Rf_isInteger(from))) {
+    if (__builtin_expect(INTEGER_ELT(from, 0) == NA_INTEGER, 0)) {
       return NA_REAL;
     }
     return INTEGER_ELT(from, 0);
   }
 
   // Also allow NA values
-  if (__builtin_expect(Rf_isLogical(from), 0)) CPP4R_UNLIKELY {
-    if (__builtin_expect(LOGICAL_ELT(from, 0) == NA_LOGICAL, 0)) CPP4R_UNLIKELY {
+  if (CPP4R_UNLIKELY(Rf_isLogical(from))) {
+    if (__builtin_expect(LOGICAL_ELT(from, 0) == NA_LOGICAL, 0)) {
       return NA_REAL;
     }
   }
@@ -274,7 +274,7 @@ enable_if_floating_point<T, T> as_cpp(SEXP from) {
 template <typename T>
 enable_if_char<T, T> as_cpp(SEXP from) {
 #if CPP4R_HAS_CXX20
-  if (__builtin_expect(Rf_isString(from) && Rf_xlength(from) == 1, 1)) CPP4R_LIKELY {
+  if (CPP4R_LIKELY(Rf_isString(from) && Rf_xlength(from) == 1)) {
     return unwind_protect([&] { return Rf_translateCharUTF8(STRING_ELT(from, 0))[0]; });
   }
 #else
@@ -289,7 +289,7 @@ enable_if_char<T, T> as_cpp(SEXP from) {
 template <typename T>
 enable_if_c_string<T, T> as_cpp(SEXP from) {
 #if CPP4R_HAS_CXX20
-  if (__builtin_expect(Rf_isString(from) && Rf_xlength(from) == 1, 1)) CPP4R_LIKELY {
+  if (CPP4R_LIKELY(Rf_isString(from) && Rf_xlength(from) == 1)) {
     void* vmax = vmaxget();
 
     const char* result =

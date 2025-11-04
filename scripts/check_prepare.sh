@@ -2,19 +2,24 @@
 set -euo pipefail
 
 std=${1:-CXX11}
+compiler=${2:-gcc}
 
-echo "Preparing benchmark for $std"
-# write CXX_STD into package Makevars
-echo "CXX_STD = $std" > ./cpp4rtest/src/Makevars.in
+echo "==============================="
+echo "Preparing C++ code with $std standard and $compiler compiler"
+echo ""
 
-# update DESCRIPTION to set C++ standard placeholder C++NN -> actual
-if [ "$std" = "CXX11" ]; then cpp_std="C++11"
-elif [ "$std" = "CXX14" ]; then cpp_std="C++14"
-elif [ "$std" = "CXX17" ]; then cpp_std="C++17"
-elif [ "$std" = "CXX20" ]; then cpp_std="C++20"
-elif [ "$std" = "CXX23" ]; then cpp_std="C++23"
-else cpp_std="$std"; fi
+# Set compiler via environment variable for Make
+if [ "$compiler" = "clang" ]; then
+  export USE_CLANG=1
+else
+  unset USE_CLANG
+fi
 
-sed -i "s/C++NN/${cpp_std}/" ./cpp4rtest/DESCRIPTION
+# Install dependencies
+Rscript -e "install.packages('cpp11', repos = 'https://cloud.r-project.org')"
+Rscript -e "install.packages('Rcpp', repos = 'https://cloud.r-project.org')"
 
-echo "Prepared."
+Rscript -e "install.packages('cpp4r', repos = NULL, type = 'source')"
+
+# Set the C++ standard in DESCRIPTION
+sed -i -E "s|CXX_STD = CXX[0-9]{2}|CXX_STD = $std|" DESCRIPTION

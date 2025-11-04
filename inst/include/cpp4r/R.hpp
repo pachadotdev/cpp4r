@@ -122,16 +122,16 @@ template <typename T>
 inline T na();
 
 template <typename T>
-inline typename std::enable_if<!std::is_same<typename std::decay<T>::type, double>::value,
+CPP4R_NODISCARD inline typename std::enable_if<!std::is_same<typename std::decay<T>::type, double>::value,
                                bool>::type
-CPP4R_NODISCARD is_na(const T& value) noexcept {
+is_na(const T& value) noexcept {
   return value == na<T>();
 }
 
 template <typename T>
-inline typename std::enable_if<std::is_same<typename std::decay<T>::type, double>::value,
+CPP4R_NODISCARD inline typename std::enable_if<std::is_same<typename std::decay<T>::type, double>::value,
                                bool>::type
-CPP4R_NODISCARD is_na(const T& value) noexcept {
+is_na(const T& value) noexcept {
   return ISNA(value);
 }
 

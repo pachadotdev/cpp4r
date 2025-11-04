@@ -5,9 +5,9 @@ clean:
 
 bench:
 	@clear
-	@/bin/bash -euo pipefail -c './bench_loop.sh'
+	@export -p USE_CLANG; /bin/bash -euo pipefail -c './bench_loop.sh'
 
 # Run benchmarks for a specific compiler and standard
 bench-specific:
 	@clear
-	@/bin/bash -euo pipefail -c './bench_prepare.sh $(STD) $(COMPILER) && ./bench_install.sh $(STD) && ./bench_run.sh $(STD) $(COMPILER) && ./bench_restore.sh $(STD) $(COMPILER)'
+	@export -p USE_CLANG; /bin/bash -euo pipefail -c './bench_prepare.sh $(STD) $(COMPILER) && ./bench_install.sh $(STD) && ./bench_run.sh $(STD) $(COMPILER) && ./bench_restore.sh $(STD) $(COMPILER)'
