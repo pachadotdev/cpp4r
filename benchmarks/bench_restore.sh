@@ -2,8 +2,9 @@
 set -euo pipefail
 
 std=${1:-CXX11}
+compiler=${2:-gcc}
 
-echo "Restoring files for $std"
+echo "Restoring files for $std with $compiler"
 
 # Convert std to C++ format for DESCRIPTION (e.g., CXX20 -> C++20)
 if [ "$std" = "CXX11" ]; then cpp_std="C++11"
@@ -29,8 +30,9 @@ for pkg in "${pkgs[@]}"; do
 	fi
 done
 
-# Restore benchmark.R to read CPP_STD from environment
+# Restore benchmark.R placeholders
 if [ -f ./benchmark.R ]; then
-	echo "Reverting cpp_std assignment in benchmark.R to placeholder"
+	echo "Reverting cpp_std and cpp_compiler assignments in benchmark.R to placeholders"
 	sed -E -i "s/^[[:space:]]*cpp_std[[:space:]]*<-[[:space:]]*\".*\"/cpp_std <- \"CXXNN\"/" benchmark.R || true
+	sed -E -i "s/^[[:space:]]*cpp_compiler[[:space:]]*<-[[:space:]]*\".*\"/cpp_compiler <- \"XYZ\"/" benchmark.R || true
 fi

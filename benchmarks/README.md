@@ -47,7 +47,13 @@ Other Operations
 ## Running the benchmarks
 
 ```bash
+# Run all 10 combinations (2 compilers × 5 standards)
+make bench
 
+# Run specific combination
+make bench-specific STD=CXX17 COMPILER=clang
+make bench-gcc-cxx11
+make bench-clang-cxx17
 ```
 
 ## References
