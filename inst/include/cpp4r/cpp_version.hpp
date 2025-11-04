@@ -104,10 +104,12 @@
 #endif
 
 // CPP4R_LIKELY and CPP4R_UNLIKELY: branch prediction hints
-// These work as BOTH function-like macros AND statement attributes depending on usage
-// Usage 1 (function-like): if (CPP4R_UNLIKELY(condition)) { ... }
-// Usage 2 (statement attribute): if (condition) CPP4R_UNLIKELY { ... }
-// For maximum compatibility, we just make them empty for all compilers since the codebase
-// uses both styles inconsistently. Branch hints are optional optimizations anyway.
-#define CPP4R_LIKELY
-#define CPP4R_UNLIKELY
+// GCC and Clang support __builtin_expect
+// The !! converts the condition to 0 or 1 to avoid Clang's parentheses warning
+#if defined(__GNUC__) || defined(__clang__)
+  #define CPP4R_LIKELY(x)   __builtin_expect(!!(x), 1)
+  #define CPP4R_UNLIKELY(x) __builtin_expect(!!(x), 0)
+#else
+  #define CPP4R_LIKELY(x)   (x)
+  #define CPP4R_UNLIKELY(x) (x)
+#endif
