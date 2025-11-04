@@ -26,4 +26,3 @@ unset USE_CLANG || true
 
 # Clear check files
 rm -rf ./cpp4rtest.Rcheck || true
-rm cpp4rtest_.*tar.gz || true

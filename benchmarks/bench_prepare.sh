@@ -35,14 +35,8 @@ done
 
 echo "Prepared."
 
-# Set compiler via environment variable for Make
-if [ "$compiler" = "clang" ]; then
-	echo "Setting USE_CLANG=1 for Clang"
-	export USE_CLANG=1
-else
-	echo "Using GCC (USE_CLANG not set)"
-	unset USE_CLANG || true
-fi
+# Note: USE_CLANG should be set by the calling script (bench_loop.sh)
+# and will be read by Makevars during R CMD INSTALL
 
 # Embed cpp_std and cpp_compiler into central benchmark.R for reproducible output names
 if [ -f ./benchmark.R ]; then

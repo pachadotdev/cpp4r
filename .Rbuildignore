@@ -36,3 +36,4 @@
 ^benchmarks$
 ^cpp4rtest-check\.log$
 .*\.tar\.gz$
+^check-results\.md$
