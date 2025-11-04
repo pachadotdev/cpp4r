@@ -2,7 +2,7 @@ Manjaro uses `gcc` as the default compiler.
 
 
 ```bash
-sudo pacman -S clang
+sudo pacman -S clang libc++ libc++abi
 ```
 
 To be sure that `devtools::install()` uses the correct version of `clang++`, edit `~/.R/Makevars` file:
