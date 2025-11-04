@@ -26,11 +26,6 @@ for pkg in "${pkgs[@]}"; do
 	if [ -f "./${pkg}/DESCRIPTION" ]; then
 		sed -i "s/C++NN/${cpp_std}/" "./${pkg}/DESCRIPTION" || true
 	fi
-
-	# update run.R placeholder CXXNN -> actual (if exists)
-	if [ -f "./${pkg}/bench/run.R" ]; then
-		sed -i "s/CXXNN/${std}/" "./${pkg}/bench/run.R" || true
-	fi
 done
 
 echo "Prepared."
