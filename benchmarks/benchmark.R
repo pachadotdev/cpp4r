@@ -2,7 +2,7 @@ cpp_std <- "CXX11"
 
 library(bench)
 
-bench_all <- function(dat, iterations = 10L) {
+bench_all <- function(dat, iterations = 100L) {
     results <- list()
 
     results$prealloc_weighted_sum <- bench::mark(
@@ -104,7 +104,7 @@ for (sz in sizes) {
     }
     message("Running benchmarks for: ", sz)
     dat <- readRDS(path)
-    bench_results[[sz]] <- bench_all(dat, iterations = 10L)
+    bench_results[[sz]] <- bench_all(dat, iterations = 100L)
 
     # assign(paste0("bench_data_", sz), dat, envir = .GlobalEnv)
 
