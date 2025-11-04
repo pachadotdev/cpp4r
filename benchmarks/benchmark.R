@@ -83,9 +83,9 @@ bench_all <- function(dat, iterations = 10L) {
     )
 
     results$bootstrap_mean <- bench::mark(
-        cpp11benchmark::bench_bootstrap_mean(dat$x, 1000L),
-        cpp4rbenchmark::bench_bootstrap_mean(dat$x, 1000L),
-        Rcppbenchmark::bench_bootstrap_mean(dat$x, 1000L),
+        { set.seed(123L); cpp11benchmark::bench_bootstrap_mean(dat$x, 1000L) },
+        { set.seed(123L); cpp4rbenchmark::bench_bootstrap_mean(dat$x, 1000L) },
+        { set.seed(123L); Rcppbenchmark::bench_bootstrap_mean(dat$x, 1000L) },
         iterations = iterations
     )
 
