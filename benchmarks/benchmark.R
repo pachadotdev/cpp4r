@@ -1,4 +1,4 @@
-cpp_std <- "CXXNN"
+cpp_std <- "CXX11"
 
 library(bench)
 
@@ -108,6 +108,6 @@ for (sz in sizes) {
 
     # assign(paste0("bench_data_", sz), dat, envir = .GlobalEnv)
 
-    saveRDS(bench_results[[sz]], file = file.path("./", paste0("bench_results_", sz, "_, cpp_std, ".rds")))
+    saveRDS(bench_results[[sz]], file = file.path("./", paste0("bench_results_", sz, "_", cpp_std, ".rds")))
     gc()
 }
