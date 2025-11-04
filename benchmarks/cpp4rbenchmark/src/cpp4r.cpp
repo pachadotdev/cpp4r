@@ -34,10 +34,10 @@ extern "C" SEXP _cpp4rbenchmark_bench_dataframe_summary(SEXP tbl) {
   END_CPP4R
 }
 // code.cpp
-int bench_string_pattern_count(strings s, r_string p);
+int bench_string_pattern_count(strings s, strings p);
 extern "C" SEXP _cpp4rbenchmark_bench_string_pattern_count(SEXP s, SEXP p) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(bench_string_pattern_count(cpp4r::as_cpp<cpp4r::decay_t<strings>>(s), cpp4r::as_cpp<cpp4r::decay_t<r_string>>(p)));
+    return cpp4r::as_sexp(bench_string_pattern_count(cpp4r::as_cpp<cpp4r::decay_t<strings>>(s), cpp4r::as_cpp<cpp4r::decay_t<strings>>(p)));
   END_CPP4R
 }
 // code.cpp

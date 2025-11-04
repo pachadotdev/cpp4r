@@ -205,15 +205,21 @@ using namespace cpp4r;
 @param p Pattern to search for
 @export
 */
-[[cpp4r::register]] int bench_string_pattern_count(strings s, r_string p) {
+[[cpp4r::register]] int bench_string_pattern_count(strings s, strings p) {
   int n = s.size();
   int total_count = 0;
-  
-  std::string p_str(p);
-  
+
+  // pattern passed as length-1 character vector; convert its first element safely
+  std::string p_str;
+  if (p.size() > 0) {
+    r_string rp(p[0]);
+    p_str = std::string(rp);
+  }
+
   for (int i = 0; i < n; i++) {
-    std::string str(static_cast<r_string>(s[i]));
-    
+    r_string rs(s[i]);
+    std::string str(rs);
+
     // Count occurrences of pattern in string
     size_t pos = 0;
     while ((pos = str.find(p_str, pos)) != std::string::npos) {
@@ -221,7 +227,7 @@ using namespace cpp4r;
       pos += p_str.length();
     }
   }
-  
+
   return total_count;
 }
 
