@@ -37,3 +37,4 @@
 ^scripts$
 ^softwarex-article$
 ^vignettes$
+^\.github$
