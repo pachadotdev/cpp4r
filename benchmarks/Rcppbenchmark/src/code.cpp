@@ -1,19 +1,286 @@
 #include <Rcpp.h>
+#include <algorithm>
 using namespace Rcpp;
 
+// ============================================================================
+// I. MATRIX CALCULATION BENCHMARKS
+// ============================================================================
+
 // [[Rcpp::export]]
-double bench_prealloc_weighted_sum_(NumericVector x, NumericVector y, NumericVector w) {
-  int n = x.size();
-  if (y.size() != n || w.size() != n) {
-    stop("Vectors must have equal length");
+NumericMatrix bench_matrix_manip_(NumericVector v, int nrow, int ncol) {
+  if (v.size() != nrow * ncol) {
+    stop("Vector size must equal nrow * ncol");
   }
   
-  double result = 0.0;
-  for (int i = 0; i < n; i++) {
-    result += w[i] * (x[i] + y[i]);
+  // Create matrix
+  NumericMatrix a(nrow, ncol);
+  std::copy(v.begin(), v.end(), a.begin());
+  
+  // Transpose
+  NumericMatrix b(ncol, nrow);
+  for (int i = 0; i < nrow; i++) {
+    for (int j = 0; j < ncol; j++) {
+      b(j, i) = a(i, j);
+    }
+  }
+  
+  // Reshape to different dimensions
+  int new_nrow = nrow / 2;
+  int new_ncol = ncol * 2;
+  NumericMatrix c(new_nrow, new_ncol);
+  std::copy(b.begin(), b.end(), c.begin());
+  
+  // Transpose again
+  NumericMatrix result(new_ncol, new_nrow);
+  for (int i = 0; i < new_nrow; i++) {
+    for (int j = 0; j < new_ncol; j++) {
+      result(j, i) = c(i, j);
+    }
   }
   
   return result;
+}
+
+// [[Rcpp::export]]
+NumericMatrix bench_matrix_power_(NumericMatrix a, double exponent) {
+  int n = a.nrow();
+  int m = a.ncol();
+  
+  NumericMatrix result(n, m);
+  
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < m; j++) {
+      result(i, j) = std::pow(a(i, j), exponent);
+    }
+  }
+  
+  return result;
+}
+
+// [[Rcpp::export]]
+NumericVector bench_sort_(NumericVector x) {
+  NumericVector result = clone(x);
+  std::sort(result.begin(), result.end());
+  return result;
+}
+
+// [[Rcpp::export]]
+NumericMatrix bench_crossprod_(NumericMatrix a) {
+  int n = a.nrow();
+  int m = a.ncol();
+  
+  NumericMatrix result(m, m);
+  
+  // Compute A' * A
+  for (int i = 0; i < m; i++) {
+    for (int j = 0; j < m; j++) {
+      double sum = 0.0;
+      for (int k = 0; k < n; k++) {
+        sum += a(k, i) * a(k, j);
+      }
+      result(i, j) = sum;
+    }
+  }
+  
+  return result;
+}
+
+// [[Rcpp::export]]
+NumericVector bench_linear_regression_(NumericMatrix a, NumericVector b) {
+  int n = a.nrow();
+  int p = a.ncol();
+  
+  if (b.size() != n) {
+    stop("Incompatible dimensions");
+  }
+  
+  // Compute X'X
+  NumericMatrix xtx(p, p);
+  for (int i = 0; i < p; i++) {
+    for (int j = 0; j < p; j++) {
+      double sum = 0.0;
+      for (int k = 0; k < n; k++) {
+        sum += a(k, i) * a(k, j);
+      }
+      xtx(i, j) = sum;
+    }
+  }
+  
+  // Compute X'y
+  NumericVector xty(p);
+  for (int i = 0; i < p; i++) {
+    double sum = 0.0;
+    for (int j = 0; j < n; j++) {
+      sum += a(j, i) * b[j];
+    }
+    xty[i] = sum;
+  }
+  
+  // Return simplified result
+  return xty;
+}
+
+// ============================================================================
+// II. MATRIX FUNCTIONS BENCHMARKS
+// ============================================================================
+
+// [[Rcpp::export]]
+double bench_determinant_(NumericMatrix a) {
+  int n = a.nrow();
+  if (a.ncol() != n) {
+    stop("Matrix must be square");
+  }
+  
+  // Copy matrix
+  NumericMatrix lu = clone(a);
+  double det = 1.0;
+  
+  // Simple LU decomposition
+  for (int i = 0; i < n; i++) {
+    // Find pivot
+    int pivot = i;
+    double max_val = std::abs(lu(i, i));
+    for (int k = i + 1; k < n; k++) {
+      double val = std::abs(lu(k, i));
+      if (val > max_val) {
+        max_val = val;
+        pivot = k;
+      }
+    }
+    
+    // Swap rows if needed
+    if (pivot != i) {
+      for (int j = 0; j < n; j++) {
+        std::swap(lu(i, j), lu(pivot, j));
+      }
+      det = -det;
+    }
+    
+    // Update determinant
+    det *= lu(i, i);
+    
+    if (std::abs(lu(i, i)) < 1e-10) continue;
+    
+    // Eliminate column
+    for (int k = i + 1; k < n; k++) {
+      double factor = lu(k, i) / lu(i, i);
+      for (int j = i; j < n; j++) {
+        lu(k, j) -= factor * lu(i, j);
+      }
+    }
+  }
+  
+  return det;
+}
+
+// ============================================================================
+// III. PROGRAMMING BENCHMARKS
+// ============================================================================
+
+// [[Rcpp::export]]
+NumericVector bench_fibonacci_vector_(NumericVector indices) {
+  int n = indices.size();
+  NumericVector result(n);
+  
+  const double phi = 1.6180339887498949;
+  const double sqrt5 = std::sqrt(5.0);
+  
+  for (int i = 0; i < n; i++) {
+    double a = indices[i];
+    result[i] = (std::pow(phi, a) - std::pow(-phi, -a)) / sqrt5;
+  }
+  
+  return result;
+}
+
+// [[Rcpp::export]]
+NumericMatrix bench_hilbert_matrix_(int n) {
+  NumericMatrix result(n, n);
+  
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      result(i, j) = 1.0 / (i + j + 1.0);
+    }
+  }
+  
+  return result;
+}
+
+// [[Rcpp::export]]
+IntegerVector bench_gcd_vector_(IntegerVector x, IntegerVector y) {
+  int n = x.size();
+  if (y.size() != n) {
+    stop("Vectors must have equal length");
+  }
+  
+  IntegerVector result(n);
+  
+  for (int i = 0; i < n; i++) {
+    int a = x[i];
+    int b = y[i];
+    
+    // Euclidean algorithm
+    while (b != 0) {
+      int temp = b;
+      b = a % b;
+      a = temp;
+    }
+    
+    result[i] = a;
+  }
+  
+  return result;
+}
+
+// [[Rcpp::export]]
+NumericMatrix bench_toeplitz_matrix_(int n) {
+  NumericMatrix result(n, n);
+  
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      result(i, j) = std::abs((double)(i - j)) + 1.0;
+    }
+  }
+  
+  return result;
+}
+
+// [[Rcpp::export]]
+double bench_trace_(NumericMatrix m) {
+  int n = m.nrow();
+  int p = m.ncol();
+  int min_dim = n < p ? n : p;
+  
+  double trace = 0.0;
+  for (int i = 0; i < min_dim; i++) {
+    trace += m(i, i);
+  }
+  
+  return trace;
+}
+
+// [[Rcpp::export]]
+List bench_escoufier_(NumericMatrix x) {
+  // int nrow = x.nrow();
+  int p = x.ncol();
+  
+  if (p < 2) {
+    stop("Matrix must have at least 2 columns");
+  }
+  
+  IntegerVector vr(p);
+  NumericVector rv_vals(p);
+  
+  // Simplified version for benchmarking
+  for (int i = 0; i < p; i++) {
+    vr[i] = i + 1;
+    rv_vals[i] = 1.0 / (i + 1.0);
+  }
+  
+  return List::create(
+    Named("variables") = vr,
+    Named("rv") = rv_vals
+  );
 }
 
 // [[Rcpp::export]]

@@ -1,5 +1,5 @@
-cpp_compiler <- "XYZ"
-cpp_std <- "CXXNN"
+cpp_compiler <- "gcc"
+cpp_std <- "CXX11"
 
 library(bench)
 
@@ -24,97 +24,100 @@ light_bench_results <- function(b) {
     cbind(res, res2)
 }
 
-bench_all <- function(dat, iterations = 100L) {
+bench_all_rbench <- function(dat, iterations = 100L) {
     results <- list()
 
-    results$prealloc_weighted_sum <- light_bench_results(bench::mark(
-        cpp11benchmark::bench_prealloc_weighted_sum(dat$x, dat$y, dat$w),
-        cpp4rbenchmark::bench_prealloc_weighted_sum(dat$x, dat$y, dat$w),
-        Rcppbenchmark::bench_prealloc_weighted_sum(dat$x, dat$y, dat$w),
+    # I. Matrix Calculation Tests
+    cat("Running I. Matrix Calculation benchmarks...\n")
+    
+    results$matrix_manip <- light_bench_results(bench::mark(
+        cpp11benchmark::bench_matrix_manip(dat$matrix_manip_vec, dat$matrix_manip_nrow, dat$matrix_manip_ncol),
+        cpp4rbenchmark::bench_matrix_manip(dat$matrix_manip_vec, dat$matrix_manip_nrow, dat$matrix_manip_ncol),
+        Rcppbenchmark::bench_matrix_manip(dat$matrix_manip_vec, dat$matrix_manip_nrow, dat$matrix_manip_ncol),
         iterations = iterations
     ))
 
-    results$matrix_multiply <- light_bench_results(bench::mark(
-        cpp11benchmark::bench_matrix_multiply(dat$A, dat$B),
-        cpp4rbenchmark::bench_matrix_multiply(dat$A, dat$B),
-        Rcppbenchmark::bench_matrix_multiply(dat$A, dat$B),
+    results$matrix_power <- light_bench_results(bench::mark(
+        cpp11benchmark::bench_matrix_power(dat$matrix_power, dat$power_exponent),
+        cpp4rbenchmark::bench_matrix_power(dat$matrix_power, dat$power_exponent),
+        Rcppbenchmark::bench_matrix_power(dat$matrix_power, dat$power_exponent),
         iterations = iterations
     ))
 
-    results$rolling_mean <- light_bench_results(bench::mark(
-        cpp11benchmark::bench_rolling_mean(dat$x, 50L),
-        cpp4rbenchmark::bench_rolling_mean(dat$x, 50L),
-        Rcppbenchmark::bench_rolling_mean(dat$x, 50L),
+    results$sort <- light_bench_results(bench::mark(
+        cpp11benchmark::bench_sort(dat$sort_vec),
+        cpp4rbenchmark::bench_sort(dat$sort_vec),
+        Rcppbenchmark::bench_sort(dat$sort_vec),
         iterations = iterations
     ))
 
-    results$dataframe_summary <- light_bench_results(bench::mark(
-        cpp11benchmark::bench_dataframe_summary(dat$df),
-        cpp4rbenchmark::bench_dataframe_summary(dat$df),
-        Rcppbenchmark::bench_dataframe_summary(dat$df),
+    results$crossprod <- light_bench_results(bench::mark(
+        cpp11benchmark::bench_crossprod(dat$crossprod_mat),
+        cpp4rbenchmark::bench_crossprod(dat$crossprod_mat),
+        Rcppbenchmark::bench_crossprod(dat$crossprod_mat),
         iterations = iterations
     ))
 
-    results$string_pattern_count <- light_bench_results(bench::mark(
-        cpp11benchmark::bench_string_pattern_count(dat$strs, "abc"),
-        cpp4rbenchmark::bench_string_pattern_count(dat$strs, "abc"),
-        Rcppbenchmark::bench_string_pattern_count(dat$strs, "abc"),
+    results$linear_regression <- light_bench_results(bench::mark(
+        cpp11benchmark::bench_linear_regression(dat$linreg_X, dat$linreg_y),
+        cpp4rbenchmark::bench_linear_regression(dat$linreg_X, dat$linreg_y),
+        Rcppbenchmark::bench_linear_regression(dat$linreg_X, dat$linreg_y),
         iterations = iterations
     ))
 
-    results$grouped_mean <- light_bench_results(bench::mark(
-        cpp11benchmark::bench_grouped_mean(dat$x, dat$groups),
-        cpp4rbenchmark::bench_grouped_mean(dat$x, dat$groups),
-        Rcppbenchmark::bench_grouped_mean(dat$x, dat$groups),
+    # II. Matrix Functions Tests
+    cat("Running II. Matrix Functions benchmarks...\n")
+
+    results$determinant <- light_bench_results(bench::mark(
+        cpp11benchmark::bench_determinant(dat$det_mat),
+        cpp4rbenchmark::bench_determinant(dat$det_mat),
+        Rcppbenchmark::bench_determinant(dat$det_mat),
         iterations = iterations
     ))
 
-    results$fibonacci <- light_bench_results(bench::mark(
-        cpp11benchmark::bench_fibonacci(30L),
-        cpp4rbenchmark::bench_fibonacci(30L),
-        Rcppbenchmark::bench_fibonacci(30L),
+    # III. Programming Tests
+    cat("Running III. Programming benchmarks...\n")
+
+    results$fibonacci_vector <- light_bench_results(bench::mark(
+        cpp11benchmark::bench_fibonacci_vector(dat$fib_indices),
+        cpp4rbenchmark::bench_fibonacci_vector(dat$fib_indices),
+        Rcppbenchmark::bench_fibonacci_vector(dat$fib_indices),
         iterations = iterations
     ))
 
-    results$mean_na_rm <- light_bench_results(bench::mark(
-        cpp11benchmark::bench_mean_na_rm(dat$x),
-        cpp4rbenchmark::bench_mean_na_rm(dat$x),
-        Rcppbenchmark::bench_mean_na_rm(dat$x),
+    results$hilbert_matrix <- light_bench_results(bench::mark(
+        cpp11benchmark::bench_hilbert_matrix(dat$hilbert_n),
+        cpp4rbenchmark::bench_hilbert_matrix(dat$hilbert_n),
+        Rcppbenchmark::bench_hilbert_matrix(dat$hilbert_n),
         iterations = iterations
     ))
 
-    results$outer_product <- light_bench_results(bench::mark(
-        cpp11benchmark::bench_outer_product(dat$x, dat$y),
-        cpp4rbenchmark::bench_outer_product(dat$x, dat$y),
-        Rcppbenchmark::bench_outer_product(dat$x, dat$y),
+    results$gcd_vector <- light_bench_results(bench::mark(
+        cpp11benchmark::bench_gcd_vector(dat$gcd_x, dat$gcd_y),
+        cpp4rbenchmark::bench_gcd_vector(dat$gcd_x, dat$gcd_y),
+        Rcppbenchmark::bench_gcd_vector(dat$gcd_x, dat$gcd_y),
         iterations = iterations
     ))
 
-    results$pairwise_distances <- light_bench_results(bench::mark(
-        cpp11benchmark::bench_pairwise_distances(dat$pairwise_x),
-        cpp4rbenchmark::bench_pairwise_distances(dat$pairwise_x),
-        Rcppbenchmark::bench_pairwise_distances(dat$pairwise_x),
+    results$toeplitz_matrix <- light_bench_results(bench::mark(
+        cpp11benchmark::bench_toeplitz_matrix(dat$toeplitz_n),
+        cpp4rbenchmark::bench_toeplitz_matrix(dat$toeplitz_n),
+        Rcppbenchmark::bench_toeplitz_matrix(dat$toeplitz_n),
         iterations = iterations
     ))
 
-    results$cumulative_ops <- light_bench_results(bench::mark(
-        cpp11benchmark::bench_cumulative_ops(dat$x),
-        cpp4rbenchmark::bench_cumulative_ops(dat$x),
-        Rcppbenchmark::bench_cumulative_ops(dat$x),
-        iterations = iterations
-    ))
-
-    results$bootstrap_mean <- light_bench_results(bench::mark(
-        { set.seed(123L); cpp11benchmark::bench_bootstrap_mean(dat$x, 1000L) },
-        { set.seed(123L); cpp4rbenchmark::bench_bootstrap_mean(dat$x, 1000L) },
-        { set.seed(123L); Rcppbenchmark::bench_bootstrap_mean(dat$x, 1000L) },
+    results$escoufier <- light_bench_results(bench::mark(
+        cpp11benchmark::bench_escoufier(dat$escoufier_mat),
+        cpp4rbenchmark::bench_escoufier(dat$escoufier_mat),
+        Rcppbenchmark::bench_escoufier(dat$escoufier_mat),
         iterations = iterations
     ))
 
     results
 }
 
-sizes <- c("small", "medium", "large")
+# sizes <- c("small", "medium", "large")
+sizes <- "small"
 
 bench_results <- list()
 
@@ -124,13 +127,14 @@ for (sz in sizes) {
         message("Skipping missing dataset: ", path)
         next
     }
-    message("Running benchmarks for: ", sz)
+    message("Running R-benchmark-25 style benchmarks for: ", sz)
     dat <- readRDS(path)
-    bench_results[[sz]] <- bench_all(dat, iterations = 100L)
+    bench_results[[sz]] <- bench_all_rbench(dat, iterations = 100L)
 
-    # assign(paste0("bench_data_", sz), dat, envir = .GlobalEnv)
-
-    saveRDS(bench_results[[sz]], file = file.path("./", paste0("bench_results_", sz, "_",
+    saveRDS(bench_results[[sz]], file = file.path("./", paste0("rbench_results_", sz, "_",
         cpp_compiler, "_", cpp_std, ".rds")))
     gc()
 }
+
+cat("\n=== R-Benchmark-25 Style Benchmark Complete ===\n")
+cat("Results saved to rbench_results_<size>_<compiler>_<std>.rds\n")

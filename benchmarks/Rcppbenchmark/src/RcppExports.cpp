@@ -10,16 +10,140 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// bench_prealloc_weighted_sum_
-double bench_prealloc_weighted_sum_(NumericVector x, NumericVector y, NumericVector w);
-RcppExport SEXP _Rcppbenchmark_bench_prealloc_weighted_sum_(SEXP xSEXP, SEXP ySEXP, SEXP wSEXP) {
+// bench_matrix_manip_
+NumericMatrix bench_matrix_manip_(NumericVector v, int nrow, int ncol);
+RcppExport SEXP _Rcppbenchmark_bench_matrix_manip_(SEXP vSEXP, SEXP nrowSEXP, SEXP ncolSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type v(vSEXP);
+    Rcpp::traits::input_parameter< int >::type nrow(nrowSEXP);
+    Rcpp::traits::input_parameter< int >::type ncol(ncolSEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_matrix_manip_(v, nrow, ncol));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bench_matrix_power_
+NumericMatrix bench_matrix_power_(NumericMatrix a, double exponent);
+RcppExport SEXP _Rcppbenchmark_bench_matrix_power_(SEXP aSEXP, SEXP exponentSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type a(aSEXP);
+    Rcpp::traits::input_parameter< double >::type exponent(exponentSEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_matrix_power_(a, exponent));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bench_sort_
+NumericVector bench_sort_(NumericVector x);
+RcppExport SEXP _Rcppbenchmark_bench_sort_(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type w(wSEXP);
-    rcpp_result_gen = Rcpp::wrap(bench_prealloc_weighted_sum_(x, y, w));
+    rcpp_result_gen = Rcpp::wrap(bench_sort_(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bench_crossprod_
+NumericMatrix bench_crossprod_(NumericMatrix a);
+RcppExport SEXP _Rcppbenchmark_bench_crossprod_(SEXP aSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type a(aSEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_crossprod_(a));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bench_linear_regression_
+NumericVector bench_linear_regression_(NumericMatrix a, NumericVector b);
+RcppExport SEXP _Rcppbenchmark_bench_linear_regression_(SEXP aSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_linear_regression_(a, b));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bench_determinant_
+double bench_determinant_(NumericMatrix a);
+RcppExport SEXP _Rcppbenchmark_bench_determinant_(SEXP aSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type a(aSEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_determinant_(a));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bench_fibonacci_vector_
+NumericVector bench_fibonacci_vector_(NumericVector indices);
+RcppExport SEXP _Rcppbenchmark_bench_fibonacci_vector_(SEXP indicesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type indices(indicesSEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_fibonacci_vector_(indices));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bench_hilbert_matrix_
+NumericMatrix bench_hilbert_matrix_(int n);
+RcppExport SEXP _Rcppbenchmark_bench_hilbert_matrix_(SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_hilbert_matrix_(n));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bench_gcd_vector_
+IntegerVector bench_gcd_vector_(IntegerVector x, IntegerVector y);
+RcppExport SEXP _Rcppbenchmark_bench_gcd_vector_(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_gcd_vector_(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bench_toeplitz_matrix_
+NumericMatrix bench_toeplitz_matrix_(int n);
+RcppExport SEXP _Rcppbenchmark_bench_toeplitz_matrix_(SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_toeplitz_matrix_(n));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bench_trace_
+double bench_trace_(NumericMatrix m);
+RcppExport SEXP _Rcppbenchmark_bench_trace_(SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_trace_(m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bench_escoufier_
+List bench_escoufier_(NumericMatrix x);
+RcppExport SEXP _Rcppbenchmark_bench_escoufier_(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_escoufier_(x));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -152,7 +276,18 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_Rcppbenchmark_bench_prealloc_weighted_sum_", (DL_FUNC) &_Rcppbenchmark_bench_prealloc_weighted_sum_, 3},
+    {"_Rcppbenchmark_bench_matrix_manip_", (DL_FUNC) &_Rcppbenchmark_bench_matrix_manip_, 3},
+    {"_Rcppbenchmark_bench_matrix_power_", (DL_FUNC) &_Rcppbenchmark_bench_matrix_power_, 2},
+    {"_Rcppbenchmark_bench_sort_", (DL_FUNC) &_Rcppbenchmark_bench_sort_, 1},
+    {"_Rcppbenchmark_bench_crossprod_", (DL_FUNC) &_Rcppbenchmark_bench_crossprod_, 1},
+    {"_Rcppbenchmark_bench_linear_regression_", (DL_FUNC) &_Rcppbenchmark_bench_linear_regression_, 2},
+    {"_Rcppbenchmark_bench_determinant_", (DL_FUNC) &_Rcppbenchmark_bench_determinant_, 1},
+    {"_Rcppbenchmark_bench_fibonacci_vector_", (DL_FUNC) &_Rcppbenchmark_bench_fibonacci_vector_, 1},
+    {"_Rcppbenchmark_bench_hilbert_matrix_", (DL_FUNC) &_Rcppbenchmark_bench_hilbert_matrix_, 1},
+    {"_Rcppbenchmark_bench_gcd_vector_", (DL_FUNC) &_Rcppbenchmark_bench_gcd_vector_, 2},
+    {"_Rcppbenchmark_bench_toeplitz_matrix_", (DL_FUNC) &_Rcppbenchmark_bench_toeplitz_matrix_, 1},
+    {"_Rcppbenchmark_bench_trace_", (DL_FUNC) &_Rcppbenchmark_bench_trace_, 1},
+    {"_Rcppbenchmark_bench_escoufier_", (DL_FUNC) &_Rcppbenchmark_bench_escoufier_, 1},
     {"_Rcppbenchmark_bench_matrix_multiply_", (DL_FUNC) &_Rcppbenchmark_bench_matrix_multiply_, 2},
     {"_Rcppbenchmark_bench_rolling_mean_", (DL_FUNC) &_Rcppbenchmark_bench_rolling_mean_, 2},
     {"_Rcppbenchmark_bench_dataframe_summary_", (DL_FUNC) &_Rcppbenchmark_bench_dataframe_summary_, 1},
