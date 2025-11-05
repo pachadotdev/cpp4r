@@ -19,13 +19,6 @@
 ^benchmarks$
 ^build$
 ^check-results\.md$
-^cpp11sampling$
-^cpp4rexamples$
-^cpp4rgaussjordan$
-^cpp4rols$
-^cpp4romp$
-^cpp4rsampling$
-^cpp4rsimplexphase2$
 ^cpp4rtest$
 ^cpp4rtest-check\.log$
 ^cpp4rvendor$
@@ -33,6 +26,7 @@
 ^dev$
 ^doc$
 ^docs$
+^example-packages$
 ^pkgdown$
 ^scripts$
 ^softwarex-article$
