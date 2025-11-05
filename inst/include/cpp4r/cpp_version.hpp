@@ -104,8 +104,8 @@
 #endif
 
 // CPP4R_LIKELY and CPP4R_UNLIKELY: branch prediction hints
-// GCC and Clang support __builtin_expect
-// The !! converts the condition to 0 or 1 to avoid Clang's parentheses warning
+// These remain as function-like macros for consistency across all C++ versions
+// In C++20+, the compiler is smart enough to optimize these patterns anyway
 #if defined(__GNUC__) || defined(__clang__)
   #define CPP4R_LIKELY(x)   __builtin_expect(!!(x), 1)
   #define CPP4R_UNLIKELY(x) __builtin_expect(!!(x), 0)

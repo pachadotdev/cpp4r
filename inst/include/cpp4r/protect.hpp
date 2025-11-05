@@ -62,19 +62,11 @@ SEXP unwind_protect(Fun&& code) {
       },
       &code,
       [](void* jmpbuf, Rboolean jump) {
-#if CPP4R_HAS_CXX20
-        if (CPP4R_UNLIKELY(jump == TRUE)) {
-          // We need to first jump back into the C++ stacks because you can't safely
-          // throw exceptions from C stack frames.
-          longjmp(*static_cast<std::jmp_buf*>(jmpbuf), 1);
-        }
-#else
         if (jump == TRUE) {
           // We need to first jump back into the C++ stacks because you can't safely
           // throw exceptions from C stack frames.
           longjmp(*static_cast<std::jmp_buf*>(jmpbuf), 1);
         }
-#endif
       },
       &jmpbuf, token);
 
@@ -335,15 +327,9 @@ inline R_xlen_t count() noexcept {
 #endif
 
 inline SEXP insert(SEXP x) {
-#if CPP4R_HAS_CXX20
-  if (CPP4R_UNLIKELY(x == R_NilValue)) {
-    return R_NilValue;
-  }
-#else
   if (__builtin_expect(x == R_NilValue, 0)) {
     return R_NilValue;
   }
-#endif
 
   PROTECT(x);
 
@@ -369,15 +355,9 @@ inline SEXP insert(SEXP x) {
 }
 
 inline void release(SEXP cell) noexcept {
-#if CPP4R_HAS_CXX20
-  if (CPP4R_UNLIKELY(cell == R_NilValue)) {
-    return;
-  }
-#else
   if (__builtin_expect(cell == R_NilValue, 0)) {
     return;
   }
-#endif
 
   // Get a reference to the cells before and after the token.
   SEXP lhs = CAR(cell);

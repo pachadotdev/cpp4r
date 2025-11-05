@@ -211,8 +211,7 @@ inline integers as_integers(SEXP x) {
     if (CPP4R_LIKELY(src_ptr != nullptr && dest_ptr != nullptr)) {
       // Direct memory access - faster for large arrays
       for (R_xlen_t i = 0; i < len; ++i) {
-        dest_ptr[i] =
-            __builtin_expect(src_ptr[i] == NA_LOGICAL, 0) CPP4R_UNLIKELY ? NA_INTEGER : src_ptr[i];
+        dest_ptr[i] = (src_ptr[i] == NA_LOGICAL) ? NA_INTEGER : src_ptr[i];
       }
     } else {
 #else
@@ -240,10 +239,14 @@ inline integers as_integers(SEXP x) {
 template <>
 inline bool operator==(const r_vector<int>& lhs, const r_vector<int>& rhs) {
 #if CPP4R_HAS_CXX20
-  if (lhs.size() != rhs.size()) CPP4R_UNLIKELY return false;
+  if (CPP4R_UNLIKELY(lhs.size() != rhs.size())) {
+    return false;
+  }
 
   // Fast path: if both vectors point to the same data, they're equal
-  if (lhs.data() == rhs.data()) CPP4R_LIKELY return true;
+  if (CPP4R_LIKELY(lhs.data() == rhs.data())) {
+    return true;
+  }
 #else
   if (lhs.size() != rhs.size()) return false;
 
@@ -259,7 +262,9 @@ inline bool operator==(const r_vector<int>& lhs, const r_vector<int>& rhs) {
   if (CPP4R_LIKELY(lhs_ptr != nullptr && rhs_ptr != nullptr)) {
     R_xlen_t len = lhs.size();
     for (R_xlen_t i = 0; i < len; ++i) {
-      if (__builtin_expect(lhs_ptr[i] != rhs_ptr[i], 0)) CPP4R_UNLIKELY return false;
+      if (CPP4R_UNLIKELY(lhs_ptr[i] != rhs_ptr[i])) {
+        return false;
+      }
     }
     return true;
   } else {

@@ -1,4 +1,4 @@
-cpp_compiler <- "clang"
+cpp_compiler <- "XYZ"
 cpp_std <- "CXXNN"
 
 library(bench)

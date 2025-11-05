@@ -188,10 +188,14 @@ inline double na() {
 template <>
 inline bool operator==(const r_vector<double>& lhs, const r_vector<double>& rhs) {
 #if CPP4R_HAS_CXX20
-  if (lhs.size() != rhs.size()) CPP4R_UNLIKELY return false;
+  if (CPP4R_UNLIKELY(lhs.size() != rhs.size())) {
+    return false;
+  }
 
   // Fast path: if both vectors point to the same data, they're equal
-  if (lhs.data() == rhs.data()) CPP4R_LIKELY return true;
+  if (CPP4R_LIKELY(lhs.data() == rhs.data())) {
+    return true;
+  }
 #else
   if (lhs.size() != rhs.size()) return false;
 

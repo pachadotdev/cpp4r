@@ -180,19 +180,19 @@ class environment {
 
   // Comparison operators for environments
 #if CPP4R_HAS_CXX20
-  CPP4R_NODISCARD bool operator==(const environment& other) const noexcept CPP4R_LIKELY {
+  CPP4R_NODISCARD bool operator==(const environment& other) const noexcept {
     return env_.data() == other.env_.data();
   }
 
-  CPP4R_NODISCARD bool operator!=(const environment& other) const noexcept CPP4R_UNLIKELY {
+  CPP4R_NODISCARD bool operator!=(const environment& other) const noexcept {
     return !(*this == other);
   }
 
-  CPP4R_NODISCARD bool operator==(SEXP other) const noexcept CPP4R_LIKELY {
+  CPP4R_NODISCARD bool operator==(SEXP other) const noexcept {
     return env_.data() == other;
   }
 
-  CPP4R_NODISCARD bool operator!=(SEXP other) const noexcept CPP4R_UNLIKELY {
+  CPP4R_NODISCARD bool operator!=(SEXP other) const noexcept {
     return env_.data() != other;
   }
 #elif CPP4R_HAS_CXX17

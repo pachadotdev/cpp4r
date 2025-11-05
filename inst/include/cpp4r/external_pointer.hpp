@@ -53,7 +53,9 @@ class external_pointer {
 
   static void r_deleter(SEXP p) {
 #if CPP4R_HAS_CXX20
-    if (detail::r_typeof(p) != EXTPTRSXP) CPP4R_UNLIKELY return;
+    if (CPP4R_UNLIKELY(detail::r_typeof(p) != EXTPTRSXP)) {
+      return;
+    }
 #else
     if (detail::r_typeof(p) != EXTPTRSXP) return;
 #endif
