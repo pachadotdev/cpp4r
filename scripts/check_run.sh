@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Export USE_CLANG for R subprocesses if it's set
+if [ -n "${USE_CLANG:-}" ]; then
+  export USE_CLANG
+fi
+
 # Run the bench script (will exit on error)
 Rscript -e 'cpp4r::register("cpp4rtest")'
 Rscript -e 'devtools::document("cpp4rtest")'
@@ -26,5 +31,7 @@ if grep -q "\bERROR\b" "${LOG}"; then
 else
 	echo "R CMD check completed with no ERRORs. Warnings/Notes (if any) are allowed. See ${LOG} for full output."
 fi
+
+rm -f "${TARBALL}"
 
 echo "Run complete."

@@ -46,7 +46,7 @@ class attribute_proxy {
   template <typename C>
 #if CPP4R_HAS_CXX20
   // C++20: Use concepts for better type constraints (future enhancement)
-  inline attribute_proxy& operator=(C&& rhs) CPP4R_UNLIKELY {
+  inline attribute_proxy& operator=(C&& rhs) {
 #else
   inline attribute_proxy& operator=(C&& rhs) {
 #endif

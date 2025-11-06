@@ -141,7 +141,7 @@ class environment {
       // Reserve space if we know the vector size won't change
       const std::size_t size = assignments.size();
 #if CPP4R_HAS_CXX20
-      for (std::size_t i = 0; i < size; ++i) CPP4R_LIKELY {
+      for (std::size_t i = 0; i < size; ++i) {
 #else
       for (std::size_t i = 0; i < size; ++i) {
 #endif
@@ -157,7 +157,7 @@ class environment {
       // Use indexed loop for better performance
       const std::size_t size = names.size();
 #if CPP4R_HAS_CXX20
-      for (std::size_t i = 0; i < size; ++i) CPP4R_LIKELY {
+      for (std::size_t i = 0; i < size; ++i) {
 #else
       for (std::size_t i = 0; i < size; ++i) {
 #endif
@@ -180,19 +180,19 @@ class environment {
 
   // Comparison operators for environments
 #if CPP4R_HAS_CXX20
-  CPP4R_NODISCARD bool operator==(const environment& other) const noexcept CPP4R_LIKELY {
+  CPP4R_NODISCARD bool operator==(const environment& other) const noexcept {
     return env_.data() == other.env_.data();
   }
 
-  CPP4R_NODISCARD bool operator!=(const environment& other) const noexcept CPP4R_UNLIKELY {
+  CPP4R_NODISCARD bool operator!=(const environment& other) const noexcept {
     return !(*this == other);
   }
 
-  CPP4R_NODISCARD bool operator==(SEXP other) const noexcept CPP4R_LIKELY {
+  CPP4R_NODISCARD bool operator==(SEXP other) const noexcept {
     return env_.data() == other;
   }
 
-  CPP4R_NODISCARD bool operator!=(SEXP other) const noexcept CPP4R_UNLIKELY {
+  CPP4R_NODISCARD bool operator!=(SEXP other) const noexcept {
     return env_.data() != other;
   }
 #elif CPP4R_HAS_CXX17

@@ -1,23 +1,35 @@
 // issue 406
 
-std::random_device rd;
-std::mt19937 gen(rd());
+#include <R_ext/Random.h>
+
+void set_seed(int seed) {
+  // Use R's set.seed() by evaluating it
+  SEXP call = PROTECT(Rf_lang2(Rf_install("set.seed"), Rf_ScalarInteger(seed)));
+  Rf_eval(call, R_GlobalEnv);
+  UNPROTECT(1);
+}
 
 double random_double() {
-  std::uniform_real_distribution<double> dist(0.0, 1.0);
-  return dist(gen);
+  GetRNGstate();
+  double result = unif_rand();
+  PutRNGstate();
+  return result;
 }
 
 int random_int(int min, int max) {
-  std::uniform_int_distribution<int> dist(min, max);
-  return dist(gen);
+  GetRNGstate();
+  int result = min + static_cast<int>((max - min + 1) * unif_rand());
+  PutRNGstate();
+  return result;
 }
 
 std::string random_string() {
   std::string s(10, '\0');
+  GetRNGstate();
   for (size_t i = 0; i < 10; i++) {
-    s[i] = random_int(0, 25) + 'a';
+    s[i] = static_cast<char>('a' + static_cast<int>(26 * unif_rand()));
   }
+  PutRNGstate();
   return s;
 }
 
@@ -27,7 +39,7 @@ std::string random_string() {
 @keywords internal
 */
 [[cpp4r::register]] cpp4r::strings grow_strings_cpp4r_(size_t n, int seed) {
-  gen.seed(seed);
+  set_seed(seed);
   cpp4r::writable::strings x;
   for (size_t i = 0; i < n; ++i) {
     x.push_back(random_string());
@@ -41,7 +53,7 @@ std::string random_string() {
 @keywords internal
 */
 [[cpp4r::register]] SEXP grow_strings_manual_(size_t n, int seed) {
-  gen.seed(seed);
+  set_seed(seed);
   SEXP data_ = PROTECT(Rf_allocVector(STRSXP, 0));
   size_t size_ = 0;
   size_t capacity_ = 0;
@@ -77,7 +89,7 @@ std::string random_string() {
 @keywords internal
 */
 [[cpp4r::register]] cpp4r::strings assign_cpp4r_(size_t n, int seed) {
-  gen.seed(seed);
+  set_seed(seed);
   cpp4r::writable::strings x(n);
   for (size_t i = 0; i < n; ++i) {
     x[i] = random_string();

@@ -34,7 +34,7 @@ class data_frame : public list {
   static SEXP get_attrib0(SEXP x, SEXP sym) noexcept {
     for (SEXP attr = ATTRIB(x); attr != R_NilValue; attr = CDR(attr)) {
 #if CPP4R_HAS_CXX20
-      if (TAG(attr) == sym) CPP4R_LIKELY {
+      if (TAG(attr) == sym) {
         return CAR(attr);
       }
 #else
@@ -52,15 +52,15 @@ class data_frame : public list {
     bool has_short_rownames =
         (Rf_isInteger(nms) && Rf_xlength(nms) == 2 && INTEGER(nms)[0] == NA_INTEGER);
 #if CPP4R_HAS_CXX20
-    if (__builtin_expect(has_short_rownames, 1)) CPP4R_LIKELY {
+    if (CPP4R_LIKELY(has_short_rownames)) {
       return static_cast<R_xlen_t>(abs(INTEGER(nms)[1]));
     }
 
-    if (__builtin_expect(!Rf_isNull(nms), 0)) CPP4R_UNLIKELY {
+    if (CPP4R_UNLIKELY(!Rf_isNull(nms))) {
       return Rf_xlength(nms);
     }
 
-    if (__builtin_expect(Rf_xlength(x) == 0, 0)) CPP4R_UNLIKELY {
+    if (CPP4R_UNLIKELY(Rf_xlength(x) == 0)) {
       return 0;
     }
 #else

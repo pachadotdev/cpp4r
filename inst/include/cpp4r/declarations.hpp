@@ -41,9 +41,9 @@ using namespace ::cpp4r;
   catch (...) {                                                 \
     strncpy(buf, "C++ error (unknown cause)", sizeof(buf) - 1); \
   }                                                             \
-  if (buf[0] != '\0') CPP4R_UNLIKELY {                          \
+  if (CPP4R_UNLIKELY(buf[0] != '\0')) {                          \
     Rf_errorcall(R_NilValue, "%s", buf);                        \
-  } else if (err != R_NilValue) CPP4R_UNLIKELY {                \
+  } else if (CPP4R_UNLIKELY(err != R_NilValue)) {                \
     R_ContinueUnwind(err);                                      \
   }                                                             \
   return R_NilValue;

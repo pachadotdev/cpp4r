@@ -28,7 +28,7 @@ This example package covers the following topics:
 * Loops (`for`)
 * Vendoring
 
-See the [cpp4rgaussjordan](https://github.com/pachadotdev/cpp4r/tree/main/cpp4rgaussjordan) package.
+See the [cpp4rgaussjordan](https://github.com/pachadotdev/cpp4r/tree/main/example-packages/cpp4rgaussjordan) package.
 
 ### Details
 
@@ -80,7 +80,7 @@ This example package covers the following topics:
 * Doubles matrices
 * Conditionals
 
-See the [cpp4rols](https://github.com/pachadotdev/cpp4r/tree/main/cpp4rols) package.
+See the [cpp4rols](https://github.com/pachadotdev/cpp4r/tree/main/example-packages/cpp4rols) package.
 
 This implementation is extremely naive, quite similar to the Gauss-Jordan example with extra steps, and it is enough to show how to use C++ code within R.
 
@@ -101,7 +101,7 @@ This example package covers the following topics:
 *  Loops (`for` and `while`)
 *  Messages
 
-See the [cpp4rsimplex](https://github.com/pachadotdev/cpp4r/tree/main/cpp4rsimplexphase2) package.
+See the [cpp4rsimplex](https://github.com/pachadotdev/cpp4r/tree/main/example-packages/cpp4rsimplexphase2) package.
 
 ### Algorithm
 
@@ -268,7 +268,7 @@ This example package covers the following topics:
 *  Loops (`for`)
 *  OpenMP parallelization
 
-See the [cpp4romp](https://github.com/pachadotdev/cpp4r/tree/main/cpp4romp) package.
+See the [cpp4romp](https://github.com/pachadotdev/cpp4r/tree/main/example-packages/cpp4romp) package.
 
 ### Motivation
 
@@ -421,13 +421,13 @@ This example package covers the following topics:
 
 See the differences between cpp11, cpp4r and Rcpp:
 
-* [cpp11sampling](https://github.com/pachadotdev/cpp4r/tree/main/cpp11sampling) package.
-* [cpp4rsampling](https://github.com/pachadotdev/cpp4r/tree/main/cpp4rsampling) package.
-* [Rcppsampling](https://github.com/pachadotdev/cpp4r/tree/main/Rcppsampling) package.
+* [cpp11sampling](https://github.com/pachadotdev/cpp4r/tree/main/example-packages/cpp11sampling) package.
+* [cpp4rsampling](https://github.com/pachadotdev/cpp4r/tree/main/example-packages/cpp4rsampling) package.
+* [Rcppsampling](https://github.com/pachadotdev/cpp4r/tree/main/example-packages/Rcppsampling) package.
 
 # Extensive R/C++ tests
 
-See the [cpp4rtest](https://github.com/pachadotdev/cpp4r/tree/main/cpp4rtest) package. It covers over 1,000 unit tests
+See the [cpp4rtest](https://github.com/pachadotdev/cpp4r/tree/main/example-packages/cpp4rtest) package. It covers over 1,000 unit tests
 for `cpp4r` features, including:
 
 * Vectors (integers, doubles, logicals, strings)

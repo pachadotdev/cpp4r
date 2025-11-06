@@ -40,15 +40,10 @@ original cpp11 API.
 
 The landscape of C++ bindings for R has evolved significantly over the past two decades. The cxx package, released in
 2000, provided an early prototype of C++ bindings [@hornik01]. Rcpp, first published to CRAN in 2008, became the
-mainstream solution with over 2,000 reverse dependencies by 2020 [@eddelbuettel11]. A subsequent attempt, Rcpp11, was
-released in 2014 but did not achieve widespread adoption [@francois20].
+mainstream solution with over 2,000 reverse dependencies by 2020 [@eddelbuettel11].
 
-While Rcpp has been highly successful, adding modern C++ features or addressing certain architectural issues would
-require substantial breaking changes. These changes would compromise backward compatibility with the extensive ecosystem
-of dependent packages.
-
-To address these limitations, the cpp11 package [@cpp1123] was released in 2023 as a complete reimplementation of C++
-bindings to R, incorporating modern C++ features and different design trade-offs aiming to provide:
+cpp11 was released in 2023 as a complete reimplementation of C++ bindings to R, with different design trade-offs
+compared to Rcpp aiming to provide:
 
 - Enforced copy-on-write semantics consistent with R's behavior
 - Improved safety when interfacing with R's C API
@@ -58,6 +53,13 @@ bindings to R, incorporating modern C++ features and different design trade-offs
 - Simplified implementation compared to Rcpp
 - Faster compilation with reduced memory requirements
 - Completely header-only design to avoid Application Binary Interface (ABI) compatibility issues
+
+However, cpp11 lacks some Rcpp features that explain its widespread adoption, including:
+
+- Syntactic sugar (e.g., helper functions that allow for a more concise or convenient way to express common
+  patterns)
+- Modules (e.g., helpers to export C++ functions and/or classes to R more easily)
+- Attributes (e.g., decorators to expose C++ functions to R with minimal boilerplate code)
 
 # Software description
 
@@ -72,6 +74,8 @@ improve the library's usability. These enhancements include:
 - Bidirectional copy of complex number types
 - Flexibility in type conversions
 - Various performance optimizations
+- Specialized codebase to benefit from newer C++ standards (e.g., if C++20 is available, compiling a package will
+  use C++20 features instead of being limited to C++11)
 
 After discussing these proposed enhancements with the cpp11 maintainers, it became clear that the development priorities
 and timelines would not accommodate these features in the near term. This led to the creation of cpp4r, a fork of cpp11
@@ -192,117 +196,9 @@ my_square <- function(x) {
 }
 ```
 
-# Illustrative examples
+# benchmarks
 
-cpp4r uses lists to track managed objects. This approach is more efficient for large numbers of objects than Rcpp's use
-of `R_PreserveObject()`/`R_ReleaseObjects()`.
-
-When vector or matrix sizes are known beforehand, the performance difference between cpp4r/cpp11 and Rcpp is negligible.
-However, when the length is unknown beforehand, performance changes notably. This is the case with rejection sampling
-algorithms, which obtain $n$ accepted samples without knowing in advance how many candidates need to be generated.
-
-The C++ `push_back()` method is ideal for rejection sampling, where each candidate is either accepted (stored)
-or rejected (discarded). With low acceptance rates, we might need to generate $kn$ candidates ($k > 1$) to obtain
-$n$ final samples. Unlike Gibbs sampling algorithms, where iterations are known upfront, rejection sampling
-requires dynamically growing vectors or matrices. For example, with an 80% acceptance rate, we need to generate
-approximately $1.25n$ samples to obtain $n$ final samples.
-
-Rejection sampling is used in Monte Carlo methods, Bayesian inference, and simulation studies where cpp4r's design is
-advantageous because it reserves extra memory, making `push_back()` operations have $O(1)$ time complexity. In
-contrast, Rcpp does not reserve extra capacity, and its `push_back()` operations have $O(n)$ time complexity,
-leading to quadratic memory usage patterns. This design difference translates to
-performance differences with larger input data.
-
-The following code shows a rejection sampling implementation with lower and upper truncation bounds using cpp4r. The
-syntax is equivalent for cpp11 and Rcpp, but performance differs:
-
-```cpp
-// Reproducible examples via set.seed() in R
-class local_rng {
- public:
-  local_rng() { GetRNGstate(); }
-  ~local_rng() { PutRNGstate(); }
-};
-
-[[cpp4r::register]]
-doubles rejection_sampling(int n_samples, double mu = 0.0, double sigma = 1.0,
-                           double lower = -2.0, double upper = 2.0) {
-  local_rng rng_state;
-  
-  // Acceptance rate for better initial allocation
-  double z_lower = (lower - mu) / sigma, z_upper = (upper - mu) / sigma;
-  double acceptance_rate = Rf_pnorm5(z_upper, 0.0, 1.0, 1, 0) -
-    Rf_pnorm5(z_lower, 0.0, 1.0, 1, 0);
-  
-  // Allocate based on expected number of samples needed
-  // (add 20% to ensure minimum size)
-  R_xlen_t estimated_needed = static_cast<R_xlen_t>(n_samples / acceptance_rate * 1.2);
-  estimated_needed = std::max(estimated_needed, static_cast<R_xlen_t>(n_samples));
-  
-  writable::doubles accepted_samples;
-  accepted_samples.reserve(estimated_needed);
-  
-  // Keep sampling until we have enough accepted samples
-  int target_samples = static_cast<int>(n_samples);
-  
-  while (static_cast<int>(accepted_samples.size()) < target_samples) {
-    double candidate = Rf_rnorm(mu, sigma);
-    
-    if (candidate >= lower && candidate <= upper) {
-      accepted_samples.push_back(candidate);
-    }
-  }
-  
-  return accepted_samples;
-}
-```
-
-The following table shows the speed quantiles for the same rejection sampling algorithm implemented with cpp4r, cpp11,
-and Rcpp:
-
-```{r}
-#| label: ch1-tbl-speed
-#| tbl-cap: "Median speed and cumulative memory usage for the same rejection sampling algorithm written with different C++ backends for R (cpp11, cpp4r, and Rcpp). Source: own creation."
-#| message: false
-#| warning: false
-#| echo: false
-
-library(dplyr)
-library(purrr)
-library(scales)
-library(bench)
-library(kableExtra)
-
-rejection_bench <- readRDS("rejection_bench.rds")
-
-rejection_bench <- rejection_bench %>%
-  select(expression, len, median, mem_alloc) %>%
-  mutate(
-    expression = as.character(expression),
-    len = formatC(len, format = "d", big.mark = ",")
-  ) %>%
-  mutate(
-    expression = factor(expression, levels = c("cpp4r", "cpp11", "Rcpp")),
-    len = factor(len, levels = c("25,000", "50,000", "75,000", "100,000")),
-  ) %>%
-  arrange(expression, len)
-
-rejection_bench %>%
-  knitr::kable(
-    align = c("l", rep("r", 3)), booktabs = TRUE,
-    col.names = c("Backend", "Sample size", "Median speed", "Cumulative memory usage")
-  ) %>%
-  kable_styling(latex_options = c("hold_position")) %>%
-  collapse_rows(columns = 1, valign = "middle")
-```
-
-The benchmark shows that both cpp4r and cpp11 scale better than Rcpp when making repeated `push_back()` calls. 
-With Rcpp, the entire vector must be copied on each call. In contrast, cpp4r vectors grow efficiently by 
-reserving extra space, similar to `std::vector`.
-
-The benchmark followed the guidelines from @beyer19. It was conducted on a Lenovo ThinkPad X1 Carbon Gen 9 laptop
-equipped with an 11th Gen Intel Core i7-1185G7 processor (8 cores, 3.00GHz), 15.3 GiB of RAM and Manjaro Linux operating
-system.
+TODO.
 
 # Impact
 

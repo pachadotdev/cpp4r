@@ -15,12 +15,6 @@ test:
 	@echo "==============================="
 	@/bin/bash -euo pipefail -c './scripts/test_loop.sh'
 
-bench:
-	@clear
-	@Rscript -e 'devtools::install()'
-	@clear
-	@/bin/bash -euo pipefail -c './scripts/bench_loop.sh'
-
 check:
 	@clear
 	@echo "==============================="
@@ -29,7 +23,7 @@ check:
 	@clear
 	@echo "==============================="
 	@echo "Checking C++ code"
-	@/bin/bash -euo pipefail -c './scripts/check_loop.sh'
+	@export -p USE_CLANG; /bin/bash -euo pipefail -c './scripts/check_loop.sh'
 	@echo "==============================="
 
 clang_format=`which clang-format-18`
