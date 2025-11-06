@@ -20,8 +20,24 @@ bench_linear_regression_ <- function(a, b) {
   .Call(`_cpp11benchmark_bench_linear_regression_`, a, b)
 }
 
+bench_fft_ <- function(x) {
+  .Call(`_cpp11benchmark_bench_fft_`, x)
+}
+
+bench_eigenvalues_ <- function(a) {
+  .Call(`_cpp11benchmark_bench_eigenvalues_`, a)
+}
+
 bench_determinant_ <- function(a) {
   .Call(`_cpp11benchmark_bench_determinant_`, a)
+}
+
+bench_cholesky_ <- function(a) {
+  .Call(`_cpp11benchmark_bench_cholesky_`, a)
+}
+
+bench_inverse_ <- function(a) {
+  .Call(`_cpp11benchmark_bench_inverse_`, a)
 }
 
 bench_fibonacci_vector_ <- function(indices) {

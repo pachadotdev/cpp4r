@@ -69,6 +69,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// bench_fft_
+SEXP bench_fft_(NumericVector x);
+RcppExport SEXP _Rcppbenchmark_bench_fft_(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_fft_(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bench_eigenvalues_
+SEXP bench_eigenvalues_(NumericMatrix a);
+RcppExport SEXP _Rcppbenchmark_bench_eigenvalues_(SEXP aSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type a(aSEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_eigenvalues_(a));
+    return rcpp_result_gen;
+END_RCPP
+}
 // bench_determinant_
 double bench_determinant_(NumericMatrix a);
 RcppExport SEXP _Rcppbenchmark_bench_determinant_(SEXP aSEXP) {
@@ -77,6 +99,28 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type a(aSEXP);
     rcpp_result_gen = Rcpp::wrap(bench_determinant_(a));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bench_cholesky_
+SEXP bench_cholesky_(NumericMatrix a);
+RcppExport SEXP _Rcppbenchmark_bench_cholesky_(SEXP aSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type a(aSEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_cholesky_(a));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bench_inverse_
+SEXP bench_inverse_(NumericMatrix a);
+RcppExport SEXP _Rcppbenchmark_bench_inverse_(SEXP aSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type a(aSEXP);
+    rcpp_result_gen = Rcpp::wrap(bench_inverse_(a));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -281,7 +325,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rcppbenchmark_bench_sort_", (DL_FUNC) &_Rcppbenchmark_bench_sort_, 1},
     {"_Rcppbenchmark_bench_crossprod_", (DL_FUNC) &_Rcppbenchmark_bench_crossprod_, 1},
     {"_Rcppbenchmark_bench_linear_regression_", (DL_FUNC) &_Rcppbenchmark_bench_linear_regression_, 2},
+    {"_Rcppbenchmark_bench_fft_", (DL_FUNC) &_Rcppbenchmark_bench_fft_, 1},
+    {"_Rcppbenchmark_bench_eigenvalues_", (DL_FUNC) &_Rcppbenchmark_bench_eigenvalues_, 1},
     {"_Rcppbenchmark_bench_determinant_", (DL_FUNC) &_Rcppbenchmark_bench_determinant_, 1},
+    {"_Rcppbenchmark_bench_cholesky_", (DL_FUNC) &_Rcppbenchmark_bench_cholesky_, 1},
+    {"_Rcppbenchmark_bench_inverse_", (DL_FUNC) &_Rcppbenchmark_bench_inverse_, 1},
     {"_Rcppbenchmark_bench_fibonacci_vector_", (DL_FUNC) &_Rcppbenchmark_bench_fibonacci_vector_, 1},
     {"_Rcppbenchmark_bench_hilbert_matrix_", (DL_FUNC) &_Rcppbenchmark_bench_hilbert_matrix_, 1},
     {"_Rcppbenchmark_bench_gcd_vector_", (DL_FUNC) &_Rcppbenchmark_bench_gcd_vector_, 2},

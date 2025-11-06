@@ -41,10 +41,38 @@ extern "C" SEXP _cpp11benchmark_bench_linear_regression_(SEXP a, SEXP b) {
   END_CPP11
 }
 // code.cpp
+SEXP bench_fft_(doubles x);
+extern "C" SEXP _cpp11benchmark_bench_fft_(SEXP x) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(bench_fft_(cpp11::as_cpp<cpp11::decay_t<doubles>>(x)));
+  END_CPP11
+}
+// code.cpp
+SEXP bench_eigenvalues_(doubles_matrix<> a);
+extern "C" SEXP _cpp11benchmark_bench_eigenvalues_(SEXP a) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(bench_eigenvalues_(cpp11::as_cpp<cpp11::decay_t<doubles_matrix<>>>(a)));
+  END_CPP11
+}
+// code.cpp
 double bench_determinant_(doubles_matrix<> a);
 extern "C" SEXP _cpp11benchmark_bench_determinant_(SEXP a) {
   BEGIN_CPP11
     return cpp11::as_sexp(bench_determinant_(cpp11::as_cpp<cpp11::decay_t<doubles_matrix<>>>(a)));
+  END_CPP11
+}
+// code.cpp
+SEXP bench_cholesky_(doubles_matrix<> a);
+extern "C" SEXP _cpp11benchmark_bench_cholesky_(SEXP a) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(bench_cholesky_(cpp11::as_cpp<cpp11::decay_t<doubles_matrix<>>>(a)));
+  END_CPP11
+}
+// code.cpp
+SEXP bench_inverse_(doubles_matrix<> a);
+extern "C" SEXP _cpp11benchmark_bench_inverse_(SEXP a) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(bench_inverse_(cpp11::as_cpp<cpp11::decay_t<doubles_matrix<>>>(a)));
   END_CPP11
 }
 // code.cpp
@@ -170,16 +198,20 @@ extern "C" SEXP _cpp11benchmark_bench_bootstrap_mean_(SEXP x, SEXP n_boot) {
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
     {"_cpp11benchmark_bench_bootstrap_mean_",       (DL_FUNC) &_cpp11benchmark_bench_bootstrap_mean_,       2},
+    {"_cpp11benchmark_bench_cholesky_",             (DL_FUNC) &_cpp11benchmark_bench_cholesky_,             1},
     {"_cpp11benchmark_bench_crossprod_",            (DL_FUNC) &_cpp11benchmark_bench_crossprod_,            1},
     {"_cpp11benchmark_bench_cumulative_ops_",       (DL_FUNC) &_cpp11benchmark_bench_cumulative_ops_,       1},
     {"_cpp11benchmark_bench_dataframe_summary_",    (DL_FUNC) &_cpp11benchmark_bench_dataframe_summary_,    1},
     {"_cpp11benchmark_bench_determinant_",          (DL_FUNC) &_cpp11benchmark_bench_determinant_,          1},
+    {"_cpp11benchmark_bench_eigenvalues_",          (DL_FUNC) &_cpp11benchmark_bench_eigenvalues_,          1},
     {"_cpp11benchmark_bench_escoufier_",            (DL_FUNC) &_cpp11benchmark_bench_escoufier_,            1},
+    {"_cpp11benchmark_bench_fft_",                  (DL_FUNC) &_cpp11benchmark_bench_fft_,                  1},
     {"_cpp11benchmark_bench_fibonacci_",            (DL_FUNC) &_cpp11benchmark_bench_fibonacci_,            1},
     {"_cpp11benchmark_bench_fibonacci_vector_",     (DL_FUNC) &_cpp11benchmark_bench_fibonacci_vector_,     1},
     {"_cpp11benchmark_bench_gcd_vector_",           (DL_FUNC) &_cpp11benchmark_bench_gcd_vector_,           2},
     {"_cpp11benchmark_bench_grouped_mean_",         (DL_FUNC) &_cpp11benchmark_bench_grouped_mean_,         2},
     {"_cpp11benchmark_bench_hilbert_matrix_",       (DL_FUNC) &_cpp11benchmark_bench_hilbert_matrix_,       1},
+    {"_cpp11benchmark_bench_inverse_",              (DL_FUNC) &_cpp11benchmark_bench_inverse_,              1},
     {"_cpp11benchmark_bench_linear_regression_",    (DL_FUNC) &_cpp11benchmark_bench_linear_regression_,    2},
     {"_cpp11benchmark_bench_matrix_manip_",         (DL_FUNC) &_cpp11benchmark_bench_matrix_manip_,         3},
     {"_cpp11benchmark_bench_matrix_multiply_",      (DL_FUNC) &_cpp11benchmark_bench_matrix_multiply_,      2},

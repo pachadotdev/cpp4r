@@ -25,3 +25,4 @@ cpp4rtest-check.log
 benchmarks/Rcppbenchmark/src/Makevars
 benchmarks/cpp4rbenchmark/src/Makevars
 benchmarks/cpp11benchmark/src/Makevars
+benchmarks/bench_data.rds

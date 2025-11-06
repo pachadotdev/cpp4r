@@ -125,52 +125,45 @@ NumericVector bench_linear_regression_(NumericMatrix a, NumericVector b) {
 // ============================================================================
 
 // [[Rcpp::export]]
+SEXP bench_fft_(NumericVector x) {
+  // Call R's fft function
+  Environment base("package:base");
+  Function fft = base["fft"];
+  return fft(x);
+}
+
+// [[Rcpp::export]]
+SEXP bench_eigenvalues_(NumericMatrix a) {
+  // Call R's eigen function with symmetric=FALSE, only.values=TRUE
+  Environment base("package:base");
+  Function eigen = base["eigen"];
+  List result = eigen(a, Named("symmetric") = false, Named("only.values") = true);
+  return result["values"];
+}
+
+// [[Rcpp::export]]
 double bench_determinant_(NumericMatrix a) {
-  int n = a.nrow();
-  if (a.ncol() != n) {
-    stop("Matrix must be square");
-  }
-  
-  // Copy matrix
-  NumericMatrix lu = clone(a);
-  double det = 1.0;
-  
-  // Simple LU decomposition
-  for (int i = 0; i < n; i++) {
-    // Find pivot
-    int pivot = i;
-    double max_val = std::abs(lu(i, i));
-    for (int k = i + 1; k < n; k++) {
-      double val = std::abs(lu(k, i));
-      if (val > max_val) {
-        max_val = val;
-        pivot = k;
-      }
-    }
-    
-    // Swap rows if needed
-    if (pivot != i) {
-      for (int j = 0; j < n; j++) {
-        std::swap(lu(i, j), lu(pivot, j));
-      }
-      det = -det;
-    }
-    
-    // Update determinant
-    det *= lu(i, i);
-    
-    if (std::abs(lu(i, i)) < 1e-10) continue;
-    
-    // Eliminate column
-    for (int k = i + 1; k < n; k++) {
-      double factor = lu(k, i) / lu(i, i);
-      for (int j = i; j < n; j++) {
-        lu(k, j) -= factor * lu(i, j);
-      }
-    }
-  }
-  
-  return det;
+  // Call R's det function
+  Environment base("package:base");
+  Function det = base["det"];
+  NumericVector result = det(a);
+  return result[0];
+}
+
+// [[Rcpp::export]]
+SEXP bench_cholesky_(NumericMatrix a) {
+  // Call R's chol function
+  Environment base("package:base");
+  Function chol = base["chol"];
+  return chol(a);
+}
+
+// [[Rcpp::export]]
+SEXP bench_inverse_(NumericMatrix a) {
+  // Call R's solve function
+  Environment base("package:base");
+  Function solve = base["solve"];
+  return solve(a);
 }
 
 // ============================================================================
@@ -261,25 +254,118 @@ double bench_trace_(NumericMatrix m) {
 
 // [[Rcpp::export]]
 List bench_escoufier_(NumericMatrix x) {
-  // int nrow = x.nrow();
+  int nrow = x.nrow();
   int p = x.ncol();
   
   if (p < 2) {
     stop("Matrix must have at least 2 columns");
   }
   
-  IntegerVector vr(p);
-  NumericVector rv_vals(p);
+  // Prepare R functions
+  Environment stats("package:stats");
+  Function cor = stats["cor"];
   
-  // Simplified version for benchmarking
+  IntegerVector vr(p);
+  NumericVector RV(p);
+  
+  std::vector<int> vt;  // Variables to test
   for (int i = 0; i < p; i++) {
-    vr[i] = i + 1;
-    rv_vals[i] = 1.0 / (i + 1.0);
+    vt.push_back(i + 1);  // 1-based indexing for R
+  }
+  
+  // Main loop over variables
+  for (int j = 0; j < p; j++) {
+    double Rvmax = 0.0;
+    int vrt = 0;
+    int vt_size = p - j;
+    
+    // Loop over remaining variables to test
+    for (int k = 0; k < vt_size; k++) {
+      // Build x2 = cbind(x, x[,vr[0:j]], x[,vt[k]])
+      // Number of columns in x2: p + j + 1
+      int ncol_x2 = p + j + 1;
+      NumericMatrix x2(nrow, ncol_x2);
+      
+      // Copy original x (columns 0 to p-1)
+      for (int col = 0; col < p; col++) {
+        for (int row = 0; row < nrow; row++) {
+          x2(row, col) = x(row, col);
+        }
+      }
+      
+      // Copy selected columns from vr (if j > 0)
+      for (int idx = 0; idx < j; idx++) {
+        int src_col = vr[idx] - 1;  // Convert to 0-based
+        int dst_col = p + idx;
+        for (int row = 0; row < nrow; row++) {
+          x2(row, dst_col) = x(row, src_col);
+        }
+      }
+      
+      // Copy column vt[k]
+      int src_col = vt[k] - 1;  // Convert to 0-based
+      int dst_col = p + j;
+      for (int row = 0; row < nrow; row++) {
+        x2(row, dst_col) = x(row, src_col);
+      }
+      
+      // Compute correlation matrix R = cor(x2)
+      NumericMatrix R = cor(x2);
+      
+      // Extract submatrices
+      // Ryy = R[1:p, 1:p]
+      // Rxx = R[(p+1):(p+j+1), (p+1):(p+j+1)]
+      // Rxy = R[(p+1):(p+j+1), 1:p]
+      // Ryx = t(Rxy)
+      
+      // Compute Trace(Ryy %*% Ryy)
+      double trace_Ryy_sq = 0.0;
+      for (int i = 0; i < p; i++) {
+        for (int k2 = 0; k2 < p; k2++) {
+          trace_Ryy_sq += R(i, k2) * R(k2, i);
+        }
+      }
+      
+      // Compute Trace(Rxx %*% Rxx)
+      int rxx_size = j + 1;
+      double trace_Rxx_sq = 0.0;
+      for (int i = 0; i < rxx_size; i++) {
+        for (int k2 = 0; k2 < rxx_size; k2++) {
+          trace_Rxx_sq += R(p + i, p + k2) * R(p + k2, p + i);
+        }
+      }
+      
+      // Compute Ryx %*% Rxy and its trace
+      // Ryx is transpose of Rxy, so Ryx[i,j] = Rxy[j,i]
+      // (Ryx %*% Rxy)[i,j] = sum_k Ryx[i,k] * Rxy[k,j]
+      //                     = sum_k Rxy[k,i] * Rxy[k,j]
+      double trace_RyxRxy = 0.0;
+      for (int i = 0; i < p; i++) {
+        for (int k2 = 0; k2 < rxx_size; k2++) {
+          trace_RyxRxy += R(p + k2, i) * R(p + k2, i);
+        }
+      }
+      
+      // Compute RV coefficient
+      double rvt = trace_RyxRxy / std::sqrt(trace_Ryy_sq * trace_Rxx_sq);
+      
+      if (rvt > Rvmax) {
+        Rvmax = rvt;
+        vrt = vt[k];
+      }
+    }
+    
+    // Store results
+    vr[j] = vrt;
+    RV[j] = Rvmax;
+    
+    // Remove vrt from vt
+    vt.erase(std::remove(vt.begin(), vt.end(), vrt), vt.end());
   }
   
   return List::create(
     Named("variables") = vr,
-    Named("rv") = rv_vals
+    Named("rv") = RV
   );
 }
 

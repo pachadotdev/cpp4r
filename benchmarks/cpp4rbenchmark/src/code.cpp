@@ -185,62 +185,91 @@ using namespace cpp4r;
 // ============================================================================
 
 /* roxygen
+@title FFT Computation
+@description Computes FFT by calling R's fft function.
+@param x Input vector
+@export
+*/
+[[cpp4r::register]] SEXP bench_fft(doubles x) {
+  // Call R's fft function
+  SEXP fft_fn = PROTECT(Rf_install("fft"));
+  SEXP call = PROTECT(Rf_lang2(fft_fn, x.data()));
+  SEXP result = PROTECT(Rf_eval(call, R_BaseEnv));
+  UNPROTECT(3);
+  return result;
+}
+
+/* roxygen
+@title Eigenvalues Computation
+@description Computes eigenvalues by calling R's eigen function.
+@param a Input square matrix
+@export
+*/
+[[cpp4r::register]] SEXP bench_eigenvalues(doubles_matrix<> a) {
+  // Call R's eigen function with symmetric=FALSE, only.values=TRUE
+  SEXP eigen_fn = PROTECT(Rf_install("eigen"));
+  SEXP symmetric = PROTECT(Rf_ScalarLogical(0));
+  SEXP only_values = PROTECT(Rf_ScalarLogical(1));
+  
+  SEXP call = PROTECT(Rf_lang4(eigen_fn, a.data(), symmetric, only_values));
+  SET_TAG(CDR(call), Rf_install("x"));
+  SET_TAG(CDDR(call), Rf_install("symmetric"));
+  SET_TAG(CDDDR(call), Rf_install("only.values"));
+  
+  SEXP result = PROTECT(Rf_eval(call, R_BaseEnv));
+  
+  // Extract $values component
+  SEXP values = PROTECT(Rf_install("values"));
+  SEXP eigenvalues = PROTECT(Rf_getAttrib(result, values));
+  
+  UNPROTECT(7);
+  return eigenvalues;
+}
+
+/* roxygen
 @title Determinant Computation
-@description Computes matrix determinant using LU decomposition approach.
-  Simplified implementation for benchmarking.
+@description Computes matrix determinant using R's det function.
 @param a Input square matrix
 @export
 */
 [[cpp4r::register]] double bench_determinant(doubles_matrix<> a) {
-  int n = a.nrow();
-  if (a.ncol() != n) {
-    stop("Matrix must be square");
-  }
-  
-  // Copy matrix
-  writable::doubles_matrix<> lu(n, n);
-  const double* pa = REAL_OR_NULL(a.data());
-  double* plu = REAL(lu.data());
-  std::copy(pa, pa + n * n, plu);
-  
-  double det = 1.0;
-  
-  // Simple LU decomposition
-  for (int i = 0; i < n; i++) {
-    // Find pivot
-    int pivot = i;
-    double max_val = std::abs(plu[i + i * n]);
-    for (int k = i + 1; k < n; k++) {
-      double val = std::abs(plu[k + i * n]);
-      if (val > max_val) {
-        max_val = val;
-        pivot = k;
-      }
-    }
-    
-    // Swap rows if needed
-    if (pivot != i) {
-      for (int j = 0; j < n; j++) {
-        std::swap(plu[i + j * n], plu[pivot + j * n]);
-      }
-      det = -det;
-    }
-    
-    // Update determinant
-    det *= plu[i + i * n];
-    
-    if (std::abs(plu[i + i * n]) < 1e-10) continue;
-    
-    // Eliminate column
-    for (int k = i + 1; k < n; k++) {
-      double factor = plu[k + i * n] / plu[i + i * n];
-      for (int j = i; j < n; j++) {
-        plu[k + j * n] -= factor * plu[i + j * n];
-      }
-    }
-  }
-  
-  return det;
+  // Call R's det function
+  SEXP det_fn = PROTECT(Rf_install("det"));
+  SEXP call = PROTECT(Rf_lang2(det_fn, a.data()));
+  SEXP result = PROTECT(Rf_eval(call, R_BaseEnv));
+  double det_value = REAL(result)[0];
+  UNPROTECT(3);
+  return det_value;
+}
+
+/* roxygen
+@title Cholesky Decomposition
+@description Computes Cholesky decomposition by calling R's chol function.
+@param a Input positive definite matrix
+@export
+*/
+[[cpp4r::register]] SEXP bench_cholesky(doubles_matrix<> a) {
+  // Call R's chol function
+  SEXP chol_fn = PROTECT(Rf_install("chol"));
+  SEXP call = PROTECT(Rf_lang2(chol_fn, a.data()));
+  SEXP result = PROTECT(Rf_eval(call, R_BaseEnv));
+  UNPROTECT(3);
+  return result;
+}
+
+/* roxygen
+@title Matrix Inverse
+@description Computes matrix inverse by calling R's solve function.
+@param a Input square matrix
+@export
+*/
+[[cpp4r::register]] SEXP bench_inverse(doubles_matrix<> a) {
+  // Call R's solve function
+  SEXP solve_fn = PROTECT(Rf_install("solve"));
+  SEXP call = PROTECT(Rf_lang2(solve_fn, a.data()));
+  SEXP result = PROTECT(Rf_eval(call, R_BaseEnv));
+  UNPROTECT(3);
+  return result;
 }
 
 // ============================================================================
@@ -367,37 +396,138 @@ using namespace cpp4r;
 
 /* roxygen
 @title Escoufier's Method (RV Coefficient)
-@description Computes RV coefficient for variable selection.
-  This is a complex mixed test involving correlation matrices and matrix operations.
+@description Full implementation of Escoufier's equivalent vectors algorithm.
+  Computes RV coefficient for variable selection using correlation matrices.
+  This tests both R function calls (cor) and C++ matrix operations.
 @param x Input matrix
 @export
 */
 [[cpp4r::register]] list bench_escoufier(doubles_matrix<> x) {
-  // int nrow = x.nrow();
+  int nrow = x.nrow();
   int p = x.ncol();
   
   if (p < 2) {
     stop("Matrix must have at least 2 columns");
   }
   
-  // This is a simplified version - full implementation would require
-  // proper correlation matrix computation and iterative selection
-  // For benchmark purposes, we do matrix operations similar to the algorithm
+  // Prepare R functions
+  SEXP cor_fn = PROTECT(Rf_install("cor"));
   
   writable::integers vr(p);
-  writable::doubles rv_vals(p);
+  writable::doubles RV(p);
   int* pvr = INTEGER(vr.data());
-  double* prv = REAL(rv_vals.data());
+  double* pRV = REAL(RV.data());
   
-  // Simplified: just compute some matrix products
+  std::vector<int> vt;  // Variables to test
   for (int i = 0; i < p; i++) {
-    pvr[i] = i + 1;
-    prv[i] = 1.0 / (i + 1.0);
+    vt.push_back(i + 1);  // 1-based indexing for R
   }
+  
+  // Main loop over variables
+  for (int j = 0; j < p; j++) {
+    double Rvmax = 0.0;
+    int vrt = 0;
+    int vt_size = p - j;
+    
+    // Loop over remaining variables to test
+    for (int k = 0; k < vt_size; k++) {
+      // Build x2 = cbind(x, x[,vr[0:j]], x[,vt[k]])
+      // Number of columns in x2: p + j + 1
+      int ncol_x2 = p + j + 1;
+      writable::doubles_matrix<> x2(nrow, ncol_x2);
+      double* px2 = REAL(x2.data());
+      const double* px = REAL_OR_NULL(x.data());
+      
+      // Copy original x (columns 0 to p-1)
+      for (int col = 0; col < p; col++) {
+        for (int row = 0; row < nrow; row++) {
+          px2[row + col * nrow] = px[row + col * nrow];
+        }
+      }
+      
+      // Copy selected columns from vr (if j > 0)
+      for (int idx = 0; idx < j; idx++) {
+        int src_col = pvr[idx] - 1;  // Convert to 0-based
+        int dst_col = p + idx;
+        for (int row = 0; row < nrow; row++) {
+          px2[row + dst_col * nrow] = px[row + src_col * nrow];
+        }
+      }
+      
+      // Copy column vt[k]
+      int src_col = vt[k] - 1;  // Convert to 0-based
+      int dst_col = p + j;
+      for (int row = 0; row < nrow; row++) {
+        px2[row + dst_col * nrow] = px[row + src_col * nrow];
+      }
+      
+      // Compute correlation matrix R = cor(x2)
+      SEXP call = PROTECT(Rf_lang2(cor_fn, x2.data()));
+      SEXP R_sexp = PROTECT(Rf_eval(call, R_BaseEnv));
+      const double* pR = REAL_OR_NULL(R_sexp);
+      
+      // Extract submatrices
+      // Ryy = R[1:p, 1:p]
+      // Rxx = R[(p+1):(p+j+1), (p+1):(p+j+1)]
+      // Rxy = R[(p+1):(p+j+1), 1:p]
+      // Ryx = t(Rxy)
+      
+      // Compute Trace(Ryy %*% Ryy)
+      double trace_Ryy_sq = 0.0;
+      for (int i = 0; i < p; i++) {
+        for (int k2 = 0; k2 < p; k2++) {
+          trace_Ryy_sq += pR[i + k2 * ncol_x2] * pR[k2 + i * ncol_x2];
+        }
+      }
+      
+      // Compute Trace(Rxx %*% Rxx)
+      int rxx_size = j + 1;
+      double trace_Rxx_sq = 0.0;
+      for (int i = 0; i < rxx_size; i++) {
+        for (int k2 = 0; k2 < rxx_size; k2++) {
+          int idx1 = (p + i) + (p + k2) * ncol_x2;
+          int idx2 = (p + k2) + (p + i) * ncol_x2;
+          trace_Rxx_sq += pR[idx1] * pR[idx2];
+        }
+      }
+      
+      // Compute Ryx %*% Rxy and its trace
+      // Ryx is transpose of Rxy, so Ryx[i,j] = Rxy[j,i]
+      // (Ryx %*% Rxy)[i,j] = sum_k Ryx[i,k] * Rxy[k,j]
+      //                     = sum_k Rxy[k,i] * Rxy[k,j]
+      double trace_RyxRxy = 0.0;
+      for (int i = 0; i < p; i++) {
+        for (int k2 = 0; k2 < rxx_size; k2++) {
+          int rxy_ki = (p + k2) + i * ncol_x2;
+          int rxy_ki2 = (p + k2) + i * ncol_x2;
+          trace_RyxRxy += pR[rxy_ki] * pR[rxy_ki2];
+        }
+      }
+      
+      // Compute RV coefficient
+      double rvt = trace_RyxRxy / std::sqrt(trace_Ryy_sq * trace_Rxx_sq);
+      
+      UNPROTECT(2);  // R_sexp, call
+      
+      if (rvt > Rvmax) {
+        Rvmax = rvt;
+        vrt = vt[k];
+      }
+    }
+    
+    // Store results
+    pvr[j] = vrt;
+    pRV[j] = Rvmax;
+    
+    // Remove vrt from vt
+    vt.erase(std::remove(vt.begin(), vt.end(), vrt), vt.end());
+  }
+  
+  UNPROTECT(1);  // cor_fn
   
   writable::list result(2);
   result[0] = vr;
-  result[1] = rv_vals;
+  result[1] = RV;
   
   writable::strings names(2);
   names[0] = "variables";
