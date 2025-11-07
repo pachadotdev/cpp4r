@@ -326,7 +326,9 @@ class r_vector<r_complex>::proxy {
 
 #if !CPP4R_HAS_CXX20
   // C++20 automatically generates operator!= from operator==
-  friend bool operator!=(const proxy& lhs, const r_complex& rhs) { return !(lhs == rhs); }
+  friend bool operator!=(const proxy& lhs, const r_complex& rhs) { 
+    return !(static_cast<r_complex>(lhs) == rhs); 
+  }
 #endif
 
  private:
