@@ -26,3 +26,4 @@ benchmarks/Rcppbenchmark/src/Makevars
 benchmarks/cpp4rbenchmark/src/Makevars
 benchmarks/cpp11benchmark/src/Makevars
 benchmarks/bench_data.rds
+cpp4rtest_0.1.0.tar.gz

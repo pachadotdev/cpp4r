@@ -24,9 +24,6 @@ be called from R.
 
 Note registered functions will not be \emph{exported} from your package unless
 you also add a \verb{@export} roxygen2 directive for them.
-
-In order to use \code{register()} the \code{cli}, \code{decor}, \code{desc}, \code{glue},
-\code{tibble} and \code{vctrs} packages must also be installed.
 }
 \examples{
 # create a minimal package

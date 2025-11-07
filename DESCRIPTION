@@ -20,8 +20,6 @@ BugReports: https://github.com/pachadotdev/cpp4r/issues
 Depends:
     R (>= 4.0.0)
 Imports: 
-    brio,
-    cli,
     decor,
     desc,
     glue,
@@ -34,7 +32,6 @@ Suggests:
     mockery,
     roxygen2,
     testthat (>= 3.2.0)
-Config/Needs/cpp4r/register: brio, cli, decor, desc, glue, tibble, vctrs
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

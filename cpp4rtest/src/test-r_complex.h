@@ -26,7 +26,7 @@ context("r_complex-C++") {
   }
 
   test_that("explicit construction from Rcomplex") {
-    Rcomplex x{1, 2};
+    Rcomplex x{{1, 2}};
     cpp4r::r_complex y(x);
     expect_true(y.real() == x.r);
     expect_true(y.imag() == x.i);
