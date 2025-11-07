@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>09 - Rolling Functions with Missing Values • cpp4r</title><link rel="stylesheet" href="../menu.css"><link rel="stylesheet" href="../content.css"><!-- MathJax Configuration --><script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        packages: {'[+]': ['ams', 'newcommand', 'configmacros']}
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process'
+      }
+    };
+  </script><script id="MathJax-script" async src="../js/tex-svg.js"></script></head><body>
+<div class="main-container">
+<div id="menu">
+  <div>
+    <img src="../man/figures/logo.svg" align="center" height="139" alt="cpp4r logo"></div>
+
+  <div class="search-container">
+    <input type="text" id="search-box" placeholder="Search..."></div>
+
+  <div class="search-container">
+    <button id="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">Toggle theme</button>
+    <button id="font-decrease" title="Decrease font size" aria-label="Decrease font size">A-</button>
+    <button id="font-increase" title="Increase font size" aria-label="Increase font size">A+</button>
+  </div>
+
+  <div class="submenu">
+    <label style="border-bottom: 0;"><a style="padding-left: 0;" href="../index.html">Home 🏠</a></label>
+  </div>
+
+  <div class="submenu">
+    <label>Functions</label>
+    <a href="../reference/register.html">register</a>
+    <a href="../reference/pkg_template.html">pkg_template</a>
+    <a href="../reference/unvendor.html">unvendor</a>
+    <a href="../reference/vendor.html">vendor</a>
+  </div>
+
+  <div class="submenu">
+    <label>Vignettes</label>
+    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/02-setup.html">02 - Setup</a>
+    <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
+    <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
+    <a href="../vignettes/05-logical-functions.html">05 - Logical Functions</a>
+    <a href="../vignettes/06-rolling-functions.html">06 - Rolling Functions</a>
+    <a href="../vignettes/07-statistical-functions.html">07 - Statistical Functions</a>
+    <a href="../vignettes/08-logical-functions-2.html">08 - Logical Functions with Missing Values</a>
+    <a href="../vignettes/09-rolling-functions-2.html">09 - Rolling Functions with Missing Values</a>
+    <a href="../vignettes/10-statistical-functions-2.html">10 - Statistical Functions with Missing Values</a>
+    <a href="../vignettes/11-debugging.html">11 - Debugging R Packages</a>
+    <a href="../vignettes/12-external-pointers.html">12 - External Pointers</a>
+    <a href="../vignettes/13-compiler-optimization.html">13 - Compiler Optimizations</a>
+    <a href="../vignettes/14-linear-algebra.html">14 - Linear Algebra</a>
+    <a href="../vignettes/15-internals.html">15 - Internals</a>
+    <a href="../vignettes/16-FAQ.html">17 - FAQs</a>
+    <a href="../vignettes/17-worked-examples.html">16 - Worked Examples</a>
+  </div>
+
+  <div class="submenu">
+    <label>News</label>
+    <a href="../news/index.html">Changelog</a>
+  </div>
+</div>
+<div id="content">
+<div class="content-wrapper">
+        <div class="content-main">
+          <h1>09 - Rolling Functions with Missing Values</h1>
+<script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">09 - Rolling Functions with Missing
+Values</h1>
+
+
+
+<div id="note" class="section level1">
+<h1>Note</h1>
+<p>These functions ignore <code>NA</code> values for now. Adjustments
+for handling <code>NA</code> values are covered in a separate
+vignette.</p>
+<p>R already provides efficient versions of the functions covered here.
+This is just to illustrate how to use C++ code.</p>
+</div>
+<div id="cumulative-sum" class="section level1">
+<h1>Cumulative sum</h1>
+<p>The following function expands the previous <code>cumsum_cpp()</code>
+function to handle missing values.</p>
+<pre class="cpp"><code>[[cpp4r::register]]
+doubles cumsum2_cpp(doubles x, bool na_rm = false) {
+  int n = x.size();
+
+  writable::doubles out(n);
+  out[0] = x[0];
+
+  if (na_rm == true) {
+    for (int i = 1; i &lt; n; ++i) {
+      double y1 = out[i - 1], y2 = x[i];
+      if (ISNAN(y2)) {
+        out[i] = y1 + 0.0;
+      } else {
+        if (ISNAN(y1)) {
+          out[i] = 0.0 + y2;
+        } else {
+          out[i] = y1 + y2;
+        }
+      }
+    }
+  } else {
+    for (int i = 1; i &lt; n; ++i) {
+      double y1 = out[i - 1], y2 = x[i];
+      if (ISNAN(y2)) {
+        out[i] = NA_REAL;
+      } else {
+        if (ISNAN(y1)) {
+          out[i] = NA_REAL;
+        } else {
+          out[i] = y1 + y2;
+        }
+      }
+    }
+  }
+
+  return out;
+}</code></pre>
+<p>To test the functions, you can run the following benchmark code in
+the R console:</p>
+<pre class="r"><code>set.seed(123) # for reproducibility
+x &lt;- rpois(1e6, lambda = 2) # 1,000,000 elements
+
+cumsum(c(1, NA, 2, 4))
+cumsum2_cpp(c(1, NA, 2, 4))
+cumsum2_cpp(c(1, NA, 2, 4), na_rm = TRUE)
+
+mark(
+  cumsum(x),
+  cumsum2_cpp(x)
+)</code></pre>
+</div>
+<div id="cumulative-product" class="section level1">
+<h1>Cumulative product</h1>
+<p>The following function expands the previous
+<code>cumprod_cpp()</code> function to handle missing values.</p>
+<pre class="cpp"><code>[[cpp4r::register]]
+doubles cumprod2_cpp(doubles x, bool na_rm = false) {
+  int n = x.size();
+
+  writable::doubles out(n);
+  out[0] = x[0];
+
+  if (na_rm == true) {
+    for (int i = 1; i &lt; n; ++i) {
+      double y1 = out[i - 1], y2 = x[i];
+      if (ISNAN(y2)) {
+        out[i] = y1 * 1.0;
+      } else {
+        if (ISNAN(y1)) {
+          out[i] = 1.0 * y2;
+        } else {
+          out[i] = y1 * y2;
+        }
+      }
+    }
+  } else {
+    for (int i = 1; i &lt; n; ++i) {
+      double y1 = out[i - 1], y2 = x[i];
+      if (ISNAN(y2)) {
+        out[i] = NA_REAL;
+      } else {
+        if (ISNAN(y1)) {
+          out[i] = NA_REAL;
+        } else {
+          out[i] = y1 * y2;
+        }
+      }
+    }
+  }
+
+  return out;
+}</code></pre>
+<p>To test the functions, you can run the following benchmark code in
+the R console:</p>
+<pre class="r"><code>cumprod(c(1, NA, 2, 4))
+cumprod2_cpp(c(1, NA, 2, 4))
+cumprod2_cpp(c(1, NA, 2, 4), na_rm = TRUE)
+
+mark(
+  cumprod(x),
+  cumprod2_cpp(x)
+)</code></pre>
+</div>
+<div id="cumulative-minimum" class="section level1">
+<h1>Cumulative minimum</h1>
+<p>The next function calculates the cumulative minimum of the elements
+of a vector.</p>
+<pre class="cpp"><code>[[cpp4r::register]] doubles
+cummin_cpp(doubles x, bool na_rm = false) {
+  int n = x.size();
+
+  writable::doubles out(n);
+  out[0] = x[0];
+
+  if (na_rm == true) {
+    for (int i = 1; i &lt; n; ++i) {
+      double y1 = x[i - 1], y2 = x[i];
+      if (ISNAN(y1)) {
+        out[i] = y2;
+      } else {
+        out[i] = std::min(y1, y2);
+      }
+    }
+  } else {
+    for (int i = 1; i &lt; n; ++i) {
+      double y1 = out[i - 1], y2 = x[i];
+      if (ISNAN(y2)) {
+        out[i] = NA_REAL;
+      } else {
+        if (ISNAN(y1)) {
+          out[i] = NA_REAL;
+        } else {
+          out[i] = std::min(y1, y2);
+        }
+      }
+    }
+  }
+
+  return out;
+}</code></pre>
+<p>To test the function, you can run the following benchmark code in the
+R console:</p>
+<pre class="r"><code>cummin(c(1, NA, 2, 4))
+cummin_cpp(c(1, NA, 2, 4))
+cummin_cpp(c(1, NA, 2, 4), na_rm = TRUE)
+
+mark(
+  cummin(x),
+  cummin_cpp(x)
+)</code></pre>
+</div>
+<div id="cumulative-maximum" class="section level1">
+<h1>Cumulative maximum</h1>
+<p>The next function calculates the cumulative maximum of the elements
+of a vector.</p>
+<pre class="cpp"><code>[[cpp4r::register]]
+doubles cummax_cpp(doubles x, bool na_rm = false) {
+  int n = x.size();
+
+  writable::doubles out(n);
+  out[0] = x[0];
+
+  if (na_rm == true) {
+    for (int i = 1; i &lt; n; ++i) {
+      double y1 = out[i - 1], y2 = x[i];
+      if (ISNAN(y1)) {
+        out[i] = y2;
+      } else {
+        out[i] = std::max(y1, y2);
+      }
+    }
+  } else {
+    for (int i = 1; i &lt; n; ++i) {
+      double y1 = out[i - 1], y2 = x[i];
+      if (ISNAN(y2)) {
+        out[i] = NA_REAL;
+      } else {
+        if (ISNAN(y1)) {
+          out[i] = NA_REAL;
+        } else {
+          out[i] = std::max(y1, y2);
+        }
+      }
+    }
+  }
+
+  return out;
+}</code></pre>
+<p>To test the functions, you can run the following benchmark code in
+the R console:</p>
+<pre class="r"><code>cummax(c(1, NA, 2, 4))
+cummax_cpp(c(1, NA, 2, 4))
+cummax_cpp(c(1, NA, 2, 4), na_rm = TRUE)
+
+mark(
+  cummax(x),
+  cummax_cpp(x)
+)</code></pre>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script></div>
+        <footer><p id="last-updated">Loading...</p>
+</footer><script src="../js/footer.js"></script><script src="../js/theme.js"></script><script src="../js/search.js"></script><script src="../js/fontsize.js"></script></div>
+</div>
+</div>
+</body></html>
+

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>11 - Debugging R Packages • cpp4r</title><link rel="stylesheet" href="../menu.css"><link rel="stylesheet" href="../content.css"><!-- MathJax Configuration --><script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        packages: {'[+]': ['ams', 'newcommand', 'configmacros']}
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process'
+      }
+    };
+  </script><script id="MathJax-script" async src="../js/tex-svg.js"></script></head><body>
+<div class="main-container">
+<div id="menu">
+  <div>
+    <img src="../man/figures/logo.svg" align="center" height="139" alt="cpp4r logo"></div>
+
+  <div class="search-container">
+    <input type="text" id="search-box" placeholder="Search..."></div>
+
+  <div class="search-container">
+    <button id="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">Toggle theme</button>
+    <button id="font-decrease" title="Decrease font size" aria-label="Decrease font size">A-</button>
+    <button id="font-increase" title="Increase font size" aria-label="Increase font size">A+</button>
+  </div>
+
+  <div class="submenu">
+    <label style="border-bottom: 0;"><a style="padding-left: 0;" href="../index.html">Home 🏠</a></label>
+  </div>
+
+  <div class="submenu">
+    <label>Functions</label>
+    <a href="../reference/register.html">register</a>
+    <a href="../reference/pkg_template.html">pkg_template</a>
+    <a href="../reference/unvendor.html">unvendor</a>
+    <a href="../reference/vendor.html">vendor</a>
+  </div>
+
+  <div class="submenu">
+    <label>Vignettes</label>
+    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/02-setup.html">02 - Setup</a>
+    <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
+    <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
+    <a href="../vignettes/05-logical-functions.html">05 - Logical Functions</a>
+    <a href="../vignettes/06-rolling-functions.html">06 - Rolling Functions</a>
+    <a href="../vignettes/07-statistical-functions.html">07 - Statistical Functions</a>
+    <a href="../vignettes/08-logical-functions-2.html">08 - Logical Functions with Missing Values</a>
+    <a href="../vignettes/09-rolling-functions-2.html">09 - Rolling Functions with Missing Values</a>
+    <a href="../vignettes/10-statistical-functions-2.html">10 - Statistical Functions with Missing Values</a>
+    <a href="../vignettes/11-debugging.html">11 - Debugging R Packages</a>
+    <a href="../vignettes/12-external-pointers.html">12 - External Pointers</a>
+    <a href="../vignettes/13-compiler-optimization.html">13 - Compiler Optimizations</a>
+    <a href="../vignettes/14-linear-algebra.html">14 - Linear Algebra</a>
+    <a href="../vignettes/15-internals.html">15 - Internals</a>
+    <a href="../vignettes/16-FAQ.html">17 - FAQs</a>
+    <a href="../vignettes/17-worked-examples.html">16 - Worked Examples</a>
+  </div>
+
+  <div class="submenu">
+    <label>News</label>
+    <a href="../news/index.html">Changelog</a>
+  </div>
+</div>
+<div id="content">
+<div class="content-wrapper">
+        <div class="content-main">
+          <h1>11 - Debugging R Packages</h1>
+<script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">11 - Debugging R Packages</h1>
+
+
+
+<div id="motivation" class="section level1">
+<h1>Motivation</h1>
+<p>The previous package skeleton left out some essential details, such
+as testing for memory leaks and debugging. This vignette will cover
+these aspects in more detail. The references for this vignette are <span class="citation">Vaughan, Hester, and Francois (2024)</span>, <span class="citation">R-pkg-devel (2024)</span>, <span class="citation">Padgham (2022)</span>, <span class="citation">Vaughan
+(2019)</span>, and <span class="citation">Wickham (2019)</span>.</p>
+</div>
+<div id="compiler-setup" class="section level1">
+<h1>Compiler Setup</h1>
+<p>To test that your functions do not lead to memory errors, you can
+create/edit a <code>src/Makevars.in</code> file within the package
+folder and add:</p>
+<pre class="bash"><code>PKG_CXXFLAGS = -Wall -O0 -pedantic
+PKG_CPPFLAGS = -UDEBUG -g</code></pre>
+<p>On Windows, the file is <code>src/Makevars.win</code> and the content
+is the same.</p>
+<p>This requires some explanations:</p>
+<ul><li><code>-Wall</code>: Enables all warnings.</li>
+<li><code>-O0</code>: Disables optimizations for debugging purposes.
+Otherwise, the compiler will adjust the package compiled binaries for
+speedups, making it harder to debug. Once your code is working, you can
+switch to <code>-O2</code> or <code>-O3</code> to enable optimizations
+for production. If you plan to submit the package to CRAN, remove the
+flag, as they do not accept it.</li>
+<li><code>-pedantic</code>: Enforces strict ISO C++ compliance. This
+will warn about improper writing, similar to bad grammar or spelling
+errors in English.</li>
+<li><code>-UDEBUG -g</code>: Disables the <code>DEBUG</code> macro and
+enables debugging information. When a package is ready, <code>-g</code>
+can be removed to reduce the size of the compiled binaries.</li>
+</ul><p>In case that the “pedantic” part is not clear, here is an
+example:</p>
+<pre class="cpp"><code>#include "cpp4r.hpp"
+#include &lt;numeric&gt;
+
+using namespace cpp4r;
+
+// Non-ISO: Use a variable length array
+[[cpp4r::register]] double squared_sum_non_iso_(integers inp) {
+  int size = inp.size();
+  double array[size];  // will give a warning, but still compile
+
+  for (int i = 0; i &lt; size; ++i) {
+    array[i] = inp[i] * inp[i];
+  }
+
+  return std::accumulate(array, array + size, 0.0);
+}
+
+// ISO: Use a vector
+[[cpp4r::register]] double squared_sum_iso_(integers inp) {
+  int size = inp.size();
+  std::vector&lt;double&gt; vec(size);
+
+  for (int i = 0; i &lt; size; ++i) {
+    vec[i] = inp[i] * inp[i];
+  }
+
+  return std::accumulate(vec.begin(), vec.end(), 0.0);
+}</code></pre>
+<p>Even when the code compiles, it gives a warning:</p>
+<pre class="bash"><code>code.cpp:489:10: warning: ISO C++ forbids variable length array ‘array’ [-Wvla]
+  489 |   double array[size];  // will give a warning, but still compile</code></pre>
+<p>It is possible to verify that the functions are correct:</p>
+<pre class="r"><code>all.equal(sum((1:5)^2), squared_sum_non_iso_(1:5), squared_sum_iso_(1:5))</code></pre>
+</div>
+<div id="testing-for-memory-leaks" class="section level1">
+<h1>Testing for Memory Leaks</h1>
+<p>To test for memory leaks, you can use the <code>valgrind</code> tool.
+This tool is available on Linux and macOS.</p>
+<p>You can test for memory leaks by running the following command in the
+terminal:</p>
+<pre class="bash"><code>valgrind --leak-check=full Rscript -e "library(cpp4rexamples); squared_sum_iso_(1:5)"</code></pre>
+<p>Or, alternatively, to call R in vanilla mode:</p>
+<pre class="bash"><code>R --vanilla -d 'valgrind -s --track-origins=yes' -f test.R</code></pre>
+<p>with <code>test.R</code> containing:</p>
+<pre class="r"><code>library(cpp4rexamples)
+squared_sum_iso_(1:5)</code></pre>
+</div>
+<div id="adding-a-configure-script" class="section level1">
+<h1>Adding a configure script</h1>
+<p>For a portable package, it is recommended to add a
+<code>configure</code> script. This script will check for the necessary
+tools to build the package. The script is written in <code>bash</code>
+and is placed in the <code>configure</code> file in the package root
+directory.</p>
+<p>Here is an example of a <code>configure</code> script for the
+<code>cpp4rexamples</code> package:</p>
+<pre class="bash"><code>#!/bin/sh
+
+PKG_CONFIG_NAME="gccsanissue"
+
+pkg-config --version &gt;/dev/null 2&gt;&amp;1
+if [ $? -eq 0 ]; then
+  PKGCONFIG_CFLAGS=`pkg-config --cflags --silence-errors`
+  PKGCONFIG_LIBS=`pkg-config --libs`
+fi
+
+if [ "$PKGCONFIG_CFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
+  echo "Found pkg-config cflags and libs!"
+  PKG_CFLAGS=${PKGCONFIG_CFLAGS}
+  PKG_LIBS=${PKGCONFIG_LIBS}
+fi
+
+CXXFLAGS="-stdlib=libc++"
+# CXXFLAGS="-O0 -g -stdlib=libc++"
+
+LDFLAGS="-stdlib=libc++"
+
+sed -e "s|@cxxflags@|$CXXFLAGS|" \
+    -e "s|@ldflags@|$LDFLAGS|" \
+    src/Makevars.in &gt; src/Makevars
+
+exit 0</code></pre>
+<p>This file, meant for Unix systems, must be accompanied by an
+<code>configure.win</code> file for Windows systems.</p>
+<p>Besides the configure script, an <code>src/Makevars.in</code> file
+must be created. This file is a template for the
+<code>src/Makevars</code> file. Here is an example:</p>
+<pre><code>LDFLAGS=@ldflags@
+
+# Convert source files to object files
+SOURCES = code.cpp \
+                    cpp4r.cpp
+OBJECTS = $(SOURCES:.cpp=.o)
+
+all: $(SHLIB)
+
+$(SHLIB): $(OBJECTS)
+
+clean: rm -f $(OBJECTS) $(SHLIB)</code></pre>
+<p><code>Makevars.in</code> is also for Unix systems, and it must be
+accompanied by an empty <code>Makevars.win</code> for Windows
+systems.</p>
+<p>Finally, a <code>cleanup</code> script helps to get a tidy package
+build. Here is an example:</p>
+<pre><code>#!/bin/sh
+rm -f src/Makevars configure.log</code></pre>
+<p>The advantage of this approach is that it will create a
+<code>src/Makevars</code> file with the correct flags for the system.
+This way, the package will be portable and easier to test with GitHub
+Actions or Docker.</p>
+</div>
+<div id="testing-with-docker" class="section level1">
+<h1>Testing with Docker</h1>
+<p>CRAN checks packages on different Unix platforms, and additional
+tests for compiled code include testing for memory leaks with valgrind
+and address sanitizer.</p>
+<p>Derived from the recommendations made by Dr. Krylov and
+Dr. Eddelbuettel in the R-pkg-devel mailing list, you can create the
+following script to test the package in a Docker container:</p>
+<pre class="bash"><code>#!/bin/sh
+
+PACKAGE_DIR=$(pwd)
+
+# DOCKER_IMAGE="ghcr.io/r-hub/containers/valgrind:latest"
+DOCKER_IMAGE="ghcr.io/r-hub/containers/clang-asan:latest"
+
+docker pull $DOCKER_IMAGE
+
+docker run --rm -v "$PACKAGE_DIR":/workspace -w /workspace $DOCKER_IMAGE bash -c "
+  Rscript -e 'install.packages(\"cpp4r\", repos=\"https://cran.rstudio.com/\")'
+  R CMD build .
+  R CMD check --as-cran --no-manual gccsanissue_0.1.0.tar.gz
+"</code></pre>
+<p>You can add the following function to <code>cpp4rexamples</code>:</p>
+<pre><code>[[cpp4r::register]] int bad_() {
+  int x = 42;    // valid integer
+  int *ptr = &amp;x; // pointer to `x`
+
+  // undefined behavior (alignment issue)
+  auto misaligned_ptr = reinterpret_cast&lt;long*&gt;(ptr);
+  return *misaligned_ptr; // Read through misaligned pointer
+}</code></pre>
+<p>To access the function from the R session, you can add the following
+R code:</p>
+<pre><code>#' @title Bad function
+#' @description This function has a GCC SAN issue
+#' @export
+#' @examples
+#' bad()
+bad &lt;- function() {
+  bad_()
+}</code></pre>
+<p>The function <code>bad_</code> introduces undefined behavior by
+reading through a misaligned pointer. This is a common issue in C++
+code, and it is a good example to test the address sanitizer.</p>
+<p><code>reinterpret_cast&lt;long*&gt;</code> creates a misaligned
+pointer since <code>ptr</code> is aligned for <code>int</code>, not
+<code>long</code>. The pointer dereference <code>*misaligned_ptr</code>
+introduces an undefined behavior. Without sanitizers, this will silently
+execute, and it returns the value of <code>x</code>. With sanitizers, it
+will throw an error.</p>
+<p>When testing with the valgrind container and the command
+<code>bash dev/test-docker.sh</code>, the R checks will pass, but the
+valgrind check will fail with the following error:</p>
+<pre class="bash"><code>Shadow bytes around the buggy address:
+  0x6ffdc4008d80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1244==ABORTING</code></pre>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1 class="unnumbered">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-padgham22" class="csl-entry">
+Padgham, Mark. 2022. <span>“Debugging in <span>R</span> with a Single
+Command.”</span> <a href="https://mpadge.github.io/blog/blog012.html">https://mpadge.github.io/blog/blog012.html</a>.
+</div>
+<div id="ref-rpkgdevel24" class="csl-entry">
+R-pkg-devel. 2024. <span>“[<span>R</span>-Pkg-Devel]
+<span>Possible</span> False Negative for Compiled <span>C</span>++ Code
+in <span>CRAN</span> Checks.”</span> <a href="https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011193.html">https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011193.html</a>.
+</div>
+<div id="ref-vaughan19" class="csl-entry">
+Vaughan, Davis. 2019. <span>“Debugging an <span>R</span>
+<span>Package</span> with <span>C</span>++ – <span>Davis</span>
+<span>Vaughan</span>.”</span> <a href="https://blog.davisvaughan.com/posts/2019-04-05-debug-r-package-with-cpp/">https://blog.davisvaughan.com/posts/2019-04-05-debug-r-package-with-cpp/</a>.
+</div>
+<div id="ref-vaughan24" class="csl-entry">
+Vaughan, Davis, Jim Hester, and Roman Francois. 2024. <span>“Get Started
+with Cpp11.”</span> <a href="https://cpp11.r-lib.org/articles/cpp11.html#intro">https://cpp11.r-lib.org/articles/cpp11.html#intro</a>.
+</div>
+<div id="ref-wickham19" class="csl-entry">
+Wickham, Hadley. 2019. <em>Advanced <span>R</span></em>. 2nd ed. Boca
+Raton, Florida. <a href="https://adv-r.hadley.nz/rcpp.html">https://adv-r.hadley.nz/rcpp.html</a>.
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script></div>
+        <footer><p id="last-updated">Loading...</p>
+</footer><script src="../js/footer.js"></script><script src="../js/theme.js"></script><script src="../js/search.js"></script><script src="../js/fontsize.js"></script></div>
+</div>
+</div>
+</body></html>
+

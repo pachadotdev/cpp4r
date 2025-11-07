@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>register • cpp4r</title><link rel="stylesheet" href="../menu.css"><link rel="stylesheet" href="../content.css"><!-- MathJax Configuration --><script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        packages: {'[+]': ['ams', 'newcommand', 'configmacros']}
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process'
+      }
+    };
+  </script><script id="MathJax-script" async src="../js/tex-svg.js"></script></head><body>
+<div class="main-container">
+<div id="menu">
+  <div>
+    <img src="../man/figures/logo.svg" align="center" height="139" alt="cpp4r logo"></div>
+
+  <div class="search-container">
+    <input type="text" id="search-box" placeholder="Search..."></div>
+
+  <div class="search-container">
+    <button id="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">Toggle theme</button>
+    <button id="font-decrease" title="Decrease font size" aria-label="Decrease font size">A-</button>
+    <button id="font-increase" title="Increase font size" aria-label="Increase font size">A+</button>
+  </div>
+
+  <div class="submenu">
+    <label style="border-bottom: 0;"><a style="padding-left: 0;" href="../index.html">Home 🏠</a></label>
+  </div>
+
+  <div class="submenu">
+    <label>Functions</label>
+    <a href="../reference/register.html">register</a>
+    <a href="../reference/pkg_template.html">pkg_template</a>
+    <a href="../reference/unvendor.html">unvendor</a>
+    <a href="../reference/vendor.html">vendor</a>
+  </div>
+
+  <div class="submenu">
+    <label>Vignettes</label>
+    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/02-setup.html">02 - Setup</a>
+    <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
+    <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
+    <a href="../vignettes/05-logical-functions.html">05 - Logical Functions</a>
+    <a href="../vignettes/06-rolling-functions.html">06 - Rolling Functions</a>
+    <a href="../vignettes/07-statistical-functions.html">07 - Statistical Functions</a>
+    <a href="../vignettes/08-logical-functions-2.html">08 - Logical Functions with Missing Values</a>
+    <a href="../vignettes/09-rolling-functions-2.html">09 - Rolling Functions with Missing Values</a>
+    <a href="../vignettes/10-statistical-functions-2.html">10 - Statistical Functions with Missing Values</a>
+    <a href="../vignettes/11-debugging.html">11 - Debugging R Packages</a>
+    <a href="../vignettes/12-external-pointers.html">12 - External Pointers</a>
+    <a href="../vignettes/13-compiler-optimization.html">13 - Compiler Optimizations</a>
+    <a href="../vignettes/14-linear-algebra.html">14 - Linear Algebra</a>
+    <a href="../vignettes/15-internals.html">15 - Internals</a>
+    <a href="../vignettes/16-FAQ.html">17 - FAQs</a>
+    <a href="../vignettes/17-worked-examples.html">16 - Worked Examples</a>
+  </div>
+
+  <div class="submenu">
+    <label>News</label>
+    <a href="../news/index.html">Changelog</a>
+  </div>
+</div>
+<div id="content">
+<div class="content-wrapper">
+        <div class="content-main">
+
+<table style="width: 100%;"><tr><td>register {cpp4r}</td><td style="text-align: right;">R Documentation</td></tr></table><h2>Generates wrappers for registered C++ functions</h2>
+
+<h3>Description</h3>
+
+<p>Functions decorated with <code style="white-space: pre;">⁠[[cpp4r::register]]⁠</code> in files ending in <code>.cc</code>,
+<code>.cpp</code>, <code>.h</code> or <code>.hpp</code> will be wrapped in generated code and registered to
+be called from R.
+</p>
+<p>Note registered functions will not be <em>exported</em> from your package unless
+you also add a <code style="white-space: pre;">⁠@export⁠</code> roxygen2 directive for them.
+</p>
+<p>In order to use <code>register()</code> the <code>cli</code>, <code>decor</code>, <code>desc</code>, <code>glue</code>,
+<code>tibble</code> and <code>vctrs</code> packages must also be installed.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">register(path = NULL, quiet = !is_interactive(), extension = c(".cpp", ".cc"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table role="presentation"><tr><td><code id="path">path</code></td>
+<td>
+The path to the package root directory. The default is <code>NULL</code>,
+</td></tr><tr><td><code id="quiet">quiet</code></td>
+<td>
+If <code>TRUE</code> suppresses output from this function
+</td></tr><tr><td><code id="extension">extension</code></td>
+<td>
+The file extension to use for the generated src/cpp4r file.
+<code>.cpp</code> by default, but <code>.cc</code> is also supported.
+</td></tr></table><h3>Value</h3>
+
+<p>The paths to the generated R and C++ source files (in that order).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># create a minimal package
+dir &lt;- tempfile()
+dir.create(dir)
+
+writeLines("Package: testPkg", file.path(dir, "DESCRIPTION"))
+writeLines("useDynLib(testPkg, .registration = TRUE)", file.path(dir, "NAMESPACE"))
+
+# create a C++ file with a decorated function
+dir.create(file.path(dir, "src"))
+writeLines("[[cpp4r::register]] int one() { return 1; }", file.path(dir, "src", "one.cpp"))
+
+# register the functions in the package
+register(dir)
+
+# Files generated by registration
+file.exists(file.path(dir, "R", "cpp4r.R"))
+file.exists(file.path(dir, "src", "cpp4r.cpp"))
+
+# cleanup
+unlink(dir, recursive = TRUE)
+</code></pre>
+
+
+</div>
+        </div>
+        <footer><p id="last-updated">Loading...</p>
+</footer><script src="../js/footer.js"></script><script src="../js/theme.js"></script><script src="../js/search.js"></script><script src="../js/fontsize.js"></script></div>
+</div>
+
+</body></html>
+

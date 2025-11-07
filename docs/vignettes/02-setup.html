@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>02 - Setup • cpp4r</title><link rel="stylesheet" href="../menu.css"><link rel="stylesheet" href="../content.css"><!-- MathJax Configuration --><script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        packages: {'[+]': ['ams', 'newcommand', 'configmacros']}
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process'
+      }
+    };
+  </script><script id="MathJax-script" async src="../js/tex-svg.js"></script></head><body>
+<div class="main-container">
+<div id="menu">
+  <div>
+    <img src="../man/figures/logo.svg" align="center" height="139" alt="cpp4r logo"></div>
+
+  <div class="search-container">
+    <input type="text" id="search-box" placeholder="Search..."></div>
+
+  <div class="search-container">
+    <button id="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">Toggle theme</button>
+    <button id="font-decrease" title="Decrease font size" aria-label="Decrease font size">A-</button>
+    <button id="font-increase" title="Increase font size" aria-label="Increase font size">A+</button>
+  </div>
+
+  <div class="submenu">
+    <label style="border-bottom: 0;"><a style="padding-left: 0;" href="../index.html">Home 🏠</a></label>
+  </div>
+
+  <div class="submenu">
+    <label>Functions</label>
+    <a href="../reference/register.html">register</a>
+    <a href="../reference/pkg_template.html">pkg_template</a>
+    <a href="../reference/unvendor.html">unvendor</a>
+    <a href="../reference/vendor.html">vendor</a>
+  </div>
+
+  <div class="submenu">
+    <label>Vignettes</label>
+    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/02-setup.html">02 - Setup</a>
+    <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
+    <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
+    <a href="../vignettes/05-logical-functions.html">05 - Logical Functions</a>
+    <a href="../vignettes/06-rolling-functions.html">06 - Rolling Functions</a>
+    <a href="../vignettes/07-statistical-functions.html">07 - Statistical Functions</a>
+    <a href="../vignettes/08-logical-functions-2.html">08 - Logical Functions with Missing Values</a>
+    <a href="../vignettes/09-rolling-functions-2.html">09 - Rolling Functions with Missing Values</a>
+    <a href="../vignettes/10-statistical-functions-2.html">10 - Statistical Functions with Missing Values</a>
+    <a href="../vignettes/11-debugging.html">11 - Debugging R Packages</a>
+    <a href="../vignettes/12-external-pointers.html">12 - External Pointers</a>
+    <a href="../vignettes/13-compiler-optimization.html">13 - Compiler Optimizations</a>
+    <a href="../vignettes/14-linear-algebra.html">14 - Linear Algebra</a>
+    <a href="../vignettes/15-internals.html">15 - Internals</a>
+    <a href="../vignettes/16-FAQ.html">17 - FAQs</a>
+    <a href="../vignettes/17-worked-examples.html">16 - Worked Examples</a>
+  </div>
+
+  <div class="submenu">
+    <label>News</label>
+    <a href="../news/index.html">Changelog</a>
+  </div>
+</div>
+<div id="content">
+<div class="content-wrapper">
+        <div class="content-main">
+          <h1>02 - Setup</h1>
+<script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">02 - Setup</h1>
+
+
+
+<div id="c-setup" class="section level1">
+<h1>C++ Setup</h1>
+<p>You will need a working C++ compiler capable of compiling C++11 code.
+To get it:</p>
+<ul><li>On Windows, install <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a>.</li>
+<li>On Mac, install Xcode from the App Store.</li>
+<li>On Linux,
+<code>sudo pacman -Syu install build-essential g++-11</code> or
+similar.</li>
+</ul><div id="for-ubuntu-users" class="section level2">
+<h2>For Ubuntu Users</h2>
+<p>After installing <code>g++-11</code>, you may still encounter issues
+compiling C++ code due to missing standard library headers. This does
+not happen when testing on Manjaro Linux.</p>
+<p>You can try this:</p>
+<pre class="bash"><code>sudo apt install build-essential g++-11 libc++-11-dev libc++abi-11-dev</code></pre>
+<p>Then you can attempt to compile a simple example to print a
+number:</p>
+<pre class="cpp"><code>// save this as 01-print-number.cpp or similar
+#include &lt;iostream&gt; // required for the cout function
+
+// function to print a message
+int main() {
+    std::cout &lt;&lt; 1 &lt;&lt; std::endl;
+    return 0;
+}</code></pre>
+<p>Then try to compile and run it with the following bash
+instruction:</p>
+<pre class="bash"><code>g++ 01-print-number.cpp
+./01-print-number # prints "1"</code></pre>
+<p>Otherwise, not installing the additional packages may lead to the
+following error:</p>
+<pre class="bash"><code>fatal error: 'cstdio' file not found
+fatal error: 'vector' file not found
+cannot find -lc++abi: No such file or directory</code></pre>
+</div>
+</div>
+<div id="r-setup" class="section level1">
+<h1>R Setup</h1>
+<p>You can install the R packages <code>bench</code>,
+<code>cpp4r</code>, <code>devtools</code> and <code>usethis</code> with
+the following command:</p>
+<pre class="r"><code>install.packages(c("bench", "cpp4r", "devtools", "usethis"))</code></pre>
+<p>To verify that R can compile C++ code, you can run
+<code>pkgbuild::check_build_tools(debug = TRUE)</code>, which will
+return an output similar to:</p>
+<pre class="r"><code>Trying to compile a simple C file
+Running /usr/lib64/R/bin/R CMD SHLIB foo.c
+using C compiler: ‘gcc (GCC) 15.2.1 20250813’</code></pre>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script></div>
+        <footer><p id="last-updated">Loading...</p>
+</footer><script src="../js/footer.js"></script><script src="../js/theme.js"></script><script src="../js/search.js"></script><script src="../js/fontsize.js"></script></div>
+</div>
+</div>
+</body></html>
+

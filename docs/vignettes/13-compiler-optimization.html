@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>13 - Compiler Optimizations • cpp4r</title><link rel="stylesheet" href="../menu.css"><link rel="stylesheet" href="../content.css"><!-- MathJax Configuration --><script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        packages: {'[+]': ['ams', 'newcommand', 'configmacros']}
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process'
+      }
+    };
+  </script><script id="MathJax-script" async src="../js/tex-svg.js"></script></head><body>
+<div class="main-container">
+<div id="menu">
+  <div>
+    <img src="../man/figures/logo.svg" align="center" height="139" alt="cpp4r logo"></div>
+
+  <div class="search-container">
+    <input type="text" id="search-box" placeholder="Search..."></div>
+
+  <div class="search-container">
+    <button id="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">Toggle theme</button>
+    <button id="font-decrease" title="Decrease font size" aria-label="Decrease font size">A-</button>
+    <button id="font-increase" title="Increase font size" aria-label="Increase font size">A+</button>
+  </div>
+
+  <div class="submenu">
+    <label style="border-bottom: 0;"><a style="padding-left: 0;" href="../index.html">Home 🏠</a></label>
+  </div>
+
+  <div class="submenu">
+    <label>Functions</label>
+    <a href="../reference/register.html">register</a>
+    <a href="../reference/pkg_template.html">pkg_template</a>
+    <a href="../reference/unvendor.html">unvendor</a>
+    <a href="../reference/vendor.html">vendor</a>
+  </div>
+
+  <div class="submenu">
+    <label>Vignettes</label>
+    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/02-setup.html">02 - Setup</a>
+    <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
+    <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
+    <a href="../vignettes/05-logical-functions.html">05 - Logical Functions</a>
+    <a href="../vignettes/06-rolling-functions.html">06 - Rolling Functions</a>
+    <a href="../vignettes/07-statistical-functions.html">07 - Statistical Functions</a>
+    <a href="../vignettes/08-logical-functions-2.html">08 - Logical Functions with Missing Values</a>
+    <a href="../vignettes/09-rolling-functions-2.html">09 - Rolling Functions with Missing Values</a>
+    <a href="../vignettes/10-statistical-functions-2.html">10 - Statistical Functions with Missing Values</a>
+    <a href="../vignettes/11-debugging.html">11 - Debugging R Packages</a>
+    <a href="../vignettes/12-external-pointers.html">12 - External Pointers</a>
+    <a href="../vignettes/13-compiler-optimization.html">13 - Compiler Optimizations</a>
+    <a href="../vignettes/14-linear-algebra.html">14 - Linear Algebra</a>
+    <a href="../vignettes/15-internals.html">15 - Internals</a>
+    <a href="../vignettes/16-FAQ.html">17 - FAQs</a>
+    <a href="../vignettes/17-worked-examples.html">16 - Worked Examples</a>
+  </div>
+
+  <div class="submenu">
+    <label>News</label>
+    <a href="../news/index.html">Changelog</a>
+  </div>
+</div>
+<div id="content">
+<div class="content-wrapper">
+        <div class="content-main">
+          <h1>13 - Compiler Optimizations</h1>
+<script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">13 - Compiler Optimizations</h1>
+
+
+
+<div id="motivation" class="section level1">
+<h1>Motivation</h1>
+<p>R uses default GCC/Clang compiler optimizations, which can limit the
+performance of C++ code.</p>
+</div>
+<div id="user-wide-makevars" class="section level1">
+<h1>User-wide Makevars</h1>
+<p>You can use the following Makevars example, which should be placed in
+<code>~/.R/Makevars</code>, to set the optimization level to
+<code>-O3</code> for all C++ code compiled by R and use additional flags
+to enable more aggressive optimizations that can be set at setup level
+but not package level (or CRAN will reject the package):</p>
+<pre class="bash"><code># Override R's optimization level
+CXXFLAGS = -g -O3 -march=native
+CXX11FLAGS = -g -O3 -march=native
+CXX14FLAGS = -g -O3 -march=native
+CXX17FLAGS = -g -O3 -march=native
+
+# Additional optimizations
+CXXFLAGS += -funroll-loops -ftree-vectorize -fprefetch-loop-arrays
+CXXFLAGS += -fomit-frame-pointer -fstrict-aliasing
+
+# Link-time optimization
+CXXFLAGS += -flto=auto
+LDFLAGS += -flto=auto</code></pre>
+</div>
+<div id="anticonf-scripts" class="section level1">
+<h1>Anticonf scripts</h1>
+<p>The idea of an “anticonf” configure script is to provide a tailored
+Makevars file with the understanding that a package will be run on
+different systems. The anticonf name comes from the fact that it is not
+a standard <code>configure</code> script created with tools such as GNU
+Autoconf, but rather a templated script that generates a
+<code>Makevars</code> by detecting the system and compiler settings
+(e.g., number of cores, optimization flags, etc.).</p>
+<p>The <a href="https://github.com/pachadotdev/capybara">capybara</a>
+package has the following <code>Makevars.in</code> file:</p>
+<pre class="make"><code>CXX_STD ?= CXX11 CXX14 CXX17
+PKG_CXXFLAGS = -DARMA_NO_DEBUG -DARMA_USE_BLAS -DARMA_USE_LAPACK -DCAPYBARA_NCORES=@ncores@ $(SHLIB_OPENMP_CXXFLAGS) @SAFE_OPTFLAGS@
+PKG_LIBS = $(SHLIB_OPENMP_CXXFLAGS) $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)</code></pre>
+<p>This file serves as a template for the <code>Makevars</code> file.
+The <code>configure</code> script, which runs when the package is
+installed, replaces the <code>@ncores@</code> and
+<code>@SAFE_OPTFLAGS@</code> placeholders.</p>
+<p>The Capybara package uses the following <code>configure</code>
+script:</p>
+<pre class="bash"><code># Anticonf script by Pacha (2025)
+
+PKG_CONFIG_NAME="capybara"
+
+# Get R configuration
+CXX=$(${R_HOME}/bin/R CMD config CXX)
+CXXFLAGS=$(${R_HOME}/bin/R CMD config CXXFLAGS)
+
+# Function to test compiler flag
+test_flag() {
+  echo 'int main(){return 0;}' &gt; conftest.cpp
+  if $CXX $CXXFLAGS $1 conftest.cpp -o conftest &gt;/dev/null 2&gt;&amp;1; then
+    rm -f conftest conftest.cpp
+    return 0
+  else
+    rm -f conftest conftest.cpp
+    return 1
+  fi
+}
+
+# For CRAN, we cannot override -O2, but we can add other safe optimizations
+SAFE_OPTFLAGS=""
+
+# Test portable optimization flags that do not change the -O level
+PORTABLE_OPTS="-funroll-loops -ftree-vectorize"
+for opt in $PORTABLE_OPTS; do
+  if test_flag "$opt"; then
+    SAFE_OPTFLAGS="$SAFE_OPTFLAGS $opt"
+  fi
+done
+
+if [ -n "$SAFE_OPTFLAGS" ]; then
+  echo "Additional optimizations:$SAFE_OPTFLAGS"
+fi
+
+# Detect number of cores
+if [ -n "$CAPYBARA_NCORES" ]; then
+  num_cores="$CAPYBARA_NCORES"
+else
+  if [ -f /proc/cpuinfo ]; then
+    num_cores=$(grep -c "^processor" /proc/cpuinfo 2&gt;/dev/null || echo 1)
+  elif [ "$(uname)" = "Darwin" ]; then
+    num_cores=$(sysctl -n hw.ncpu 2&gt;/dev/null || echo 1)
+  else
+    num_cores=1
+  fi
+
+  if [ "$num_cores" -gt 2 ]; then
+    num_cores=$((num_cores - 1))
+  fi
+fi
+
+echo "Default thread count: $num_cores"
+
+# Create Makevars from template
+echo "Creating src/Makevars"
+sed -e "s|@ncores@|${num_cores}|g" \
+    -e "s|@SAFE_OPTFLAGS@|${SAFE_OPTFLAGS}|g" \
+    src/Makevars.in &gt; src/Makevars
+
+echo "Configuration complete"
+echo ""
+echo "NOTE: This build will use the default -O2 optimization level for CRAN compliance."
+echo "For maximum performance, see inst/Makevars.user.example"
+
+exit 0</code></pre>
+<p>This script detects the number of cores available on the system and
+sets the <code>CAPYBARA_NCORES</code> variable accordingly. It also
+tests for safe optimization flags that can be added to the
+<code>Makevars</code> file without changing the default <code>-O2</code>
+optimization level used by R. It also serves the goal of testing that a
+simple file can be compiled.</p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script></div>
+        <footer><p id="last-updated">Loading...</p>
+</footer><script src="../js/footer.js"></script><script src="../js/theme.js"></script><script src="../js/search.js"></script><script src="../js/fontsize.js"></script></div>
+</div>
+</div>
+</body></html>
+

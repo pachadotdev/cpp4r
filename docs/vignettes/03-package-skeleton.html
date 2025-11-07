@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>03 - Package Skeleton • cpp4r</title><link rel="stylesheet" href="../menu.css"><link rel="stylesheet" href="../content.css"><!-- MathJax Configuration --><script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        packages: {'[+]': ['ams', 'newcommand', 'configmacros']}
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process'
+      }
+    };
+  </script><script id="MathJax-script" async src="../js/tex-svg.js"></script></head><body>
+<div class="main-container">
+<div id="menu">
+  <div>
+    <img src="../man/figures/logo.svg" align="center" height="139" alt="cpp4r logo"></div>
+
+  <div class="search-container">
+    <input type="text" id="search-box" placeholder="Search..."></div>
+
+  <div class="search-container">
+    <button id="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">Toggle theme</button>
+    <button id="font-decrease" title="Decrease font size" aria-label="Decrease font size">A-</button>
+    <button id="font-increase" title="Increase font size" aria-label="Increase font size">A+</button>
+  </div>
+
+  <div class="submenu">
+    <label style="border-bottom: 0;"><a style="padding-left: 0;" href="../index.html">Home 🏠</a></label>
+  </div>
+
+  <div class="submenu">
+    <label>Functions</label>
+    <a href="../reference/register.html">register</a>
+    <a href="../reference/pkg_template.html">pkg_template</a>
+    <a href="../reference/unvendor.html">unvendor</a>
+    <a href="../reference/vendor.html">vendor</a>
+  </div>
+
+  <div class="submenu">
+    <label>Vignettes</label>
+    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/02-setup.html">02 - Setup</a>
+    <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
+    <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
+    <a href="../vignettes/05-logical-functions.html">05 - Logical Functions</a>
+    <a href="../vignettes/06-rolling-functions.html">06 - Rolling Functions</a>
+    <a href="../vignettes/07-statistical-functions.html">07 - Statistical Functions</a>
+    <a href="../vignettes/08-logical-functions-2.html">08 - Logical Functions with Missing Values</a>
+    <a href="../vignettes/09-rolling-functions-2.html">09 - Rolling Functions with Missing Values</a>
+    <a href="../vignettes/10-statistical-functions-2.html">10 - Statistical Functions with Missing Values</a>
+    <a href="../vignettes/11-debugging.html">11 - Debugging R Packages</a>
+    <a href="../vignettes/12-external-pointers.html">12 - External Pointers</a>
+    <a href="../vignettes/13-compiler-optimization.html">13 - Compiler Optimizations</a>
+    <a href="../vignettes/14-linear-algebra.html">14 - Linear Algebra</a>
+    <a href="../vignettes/15-internals.html">15 - Internals</a>
+    <a href="../vignettes/16-FAQ.html">17 - FAQs</a>
+    <a href="../vignettes/17-worked-examples.html">16 - Worked Examples</a>
+  </div>
+
+  <div class="submenu">
+    <label>News</label>
+    <a href="../news/index.html">Changelog</a>
+  </div>
+</div>
+<div id="content">
+<div class="content-wrapper">
+        <div class="content-main">
+          <h1>03 - Package Skeleton</h1>
+<script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">03 - Package Skeleton</h1>
+
+
+
+<p>The reference for this vignette is <span class="citation">Wickham et
+al. (2024)</span>.</p>
+<div id="loading-the-required-r-packages" class="section level1">
+<h1>Loading the Required R Packages</h1>
+<p>This vignette and the next use the following R packages:</p>
+<pre class="r"><code>library(cpp4r)
+library(devtools)
+library(bench)
+library(usethis)</code></pre>
+</div>
+<div id="creating-a-dummy-package" class="section level1">
+<h1>Creating a Dummy Package</h1>
+<p>You can create a new package in RStudio (or VSCode) by running:</p>
+<pre class="r"><code>pkg_template("~/github/cpp4r/cpp4rexamples")</code></pre>
+<p>This command will create a new folder containing the
+<code>cpp4rexamples</code> package. Afterward, you can run
+<code>use_cpp4r()</code> to add the necessary code to the package.</p>
+</div>
+<div id="print-a-number" class="section level1">
+<h1>Print a Number</h1>
+<p>The <code>pkg_template()</code> function automatically creates
+<code>./cpp4rexamples/R/cpp4rexamples-package.R</code> with the
+following content:</p>
+<pre class="r"><code>#' @useDynLib cpp4rexamples, .registration = TRUE
+#' @keywords internal
+"_PACKAGE"</code></pre>
+<p>It also creates <code>./cpp4rexamples/src/main.cpp</code>. The rest
+of <code>src/</code> aims to provide an organization to keep the code
+organized into different files according to their purpose.</p>
+<p>Give a look at <code>./cpp4rexamples/src/01_plus_one.h</code>, which
+contains the following C++ code:</p>
+<pre class="cpp"><code>/* roxygen
+@title Plus 1 (C++)
+@param x integer
+@description It adds 1 to an integer value.
+@export
+@examples plus_one(1)
+*/
+[[cpp4r::register]]
+int plus_one(int x) {
+  return x + 1;
+}</code></pre>
+<p>This code is called by <code>main.cpp</code> and it makes sense to
+keep this organization when the codebase grows, otherwise you can end up
+with a single large cpp file containing thousands of lines of code that
+will be harder to maintain. With R packages, there is no need to create
+a <code>main()</code> function in C++, which is the entry point of a
+standalone C++ program.</p>
+<p>Unlike cpp11, cpp4r can document the C++ functions using roxygen2
+comments. The comments must be placed before the
+<code>[[cpp4r::register]]</code> attribute.</p>
+<p>With cpp11, you would need to write a separate wrapper, like
+this:</p>
+<pre class="cpp"><code>[[cpp4r::register]]
+int plus_one_(int x) {
+  return x + 1;
+}</code></pre>
+<pre class="r"><code>#' @title Plus 1 (C++)
+#' @param x integer
+#' @description It adds 1 to an integer value.
+#' @export
+#' @examples plus_one(1)
+plus_one &lt;- function(x) {
+  plus_one_(x)
+}</code></pre>
+<p>The R version of the previous function is as follows:</p>
+<pre class="r"><code>#' Plus one (R)
+#' @param x integer
+#' @description It adds 1 to an integer value.
+#' @export
+#' @examples plus_one_r(1)
+plus_one_r &lt;- function(x) {
+  x + 1
+}</code></pre>
+<p>To use the C++ function, you can register and document it by
+running:</p>
+<pre class="r"><code>cpp4r::register()
+devtools::document()
+devtools::load_all()</code></pre>
+<p>Which should print:</p>
+<pre class="r"><code>&gt; plus_one(1)
+[1] 2</code></pre>
+<p>For development and live testing, you should use the
+<code>load_all()</code>:</p>
+<pre class="r"><code>load_all()</code></pre>
+<p>Try <code>plus_two(1)</code> and <code>plus_two(1.0)</code>. Why does
+1 and 1.0 matter in C++?</p>
+</div>
+<div id="numbers-sign" class="section level1">
+<h1>Number’s Sign</h1>
+<p>A more complex function is one that returns the sign of a number:</p>
+<pre class="cpp"><code>[[cpp4r::register]] int sign_cpp(double x) {
+  if (x &gt; 0) {
+    return 1;
+  } else if (x == 0) {
+    return 0;
+  } else {
+    return -1;
+  }
+}</code></pre>
+<p>Add this function to a new file <code>src/03_sign.h</code>.</p>
+<p>Here is the R version of the function:</p>
+<pre class="r"><code>sign_r &lt;- function(x) {
+  if (x &gt; 0) {
+    1
+  } else if (x == 0) {
+    0
+  } else {
+    -1
+  }
+}</code></pre>
+<p>Do not forget to include the new header file in
+<code>main.cpp</code>.</p>
+<p>Document both functions and compare their outputs.</p>
+</div>
+<div id="installing-the-package" class="section level1">
+<h1>Installing the Package</h1>
+<p>To document and install the package as an R library, you can run the
+following functions:</p>
+<pre class="r"><code>cpp4r::register()
+devtools::document()
+devtools::install()</code></pre>
+<p>Afterward, you can access the functions by loading the package with
+<code>library(cpp4rexamples)</code>.</p>
+<p>Each time you need to make changes to the C++ code, you can run
+<code>load_all()</code> again to test and then reinstall the
+package.</p>
+</div>
+<div id="good-practice" class="section level1">
+<h1>Good Practice</h1>
+<p>It is good practice to include a license for your code. For example,
+you can use the Apache license by running:</p>
+<pre class="r"><code>usethis::use_apache_license()</code></pre>
+<p>Additionally, it is recommended to use
+<code>use_build_ignore()</code> to ignore files that are unnecessary for
+package installation. For example, to ignore the <code>docs</code>
+folder, you can run:</p>
+<pre class="r"><code>usethis::use_build_ignore("docs")</code></pre>
+<p>Your <code>.Rbuildignore</code> file can include the following lines,
+which you can edit manually to exclude specific files and
+directories:</p>
+<pre><code>^\.vscode$
+^LICENSE\.md$
+^cpp4rexamples\.Rproj$</code></pre>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1 class="unnumbered">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-usethis24" class="csl-entry">
+Wickham, Hadley, Jenny Bryan, Malcolm Barrett, and Andy Teucher. 2024.
+<span>“Automate <span>Package</span> and <span>Project</span>
+<span>Setup</span>.”</span> <a href="https://usethis.r-lib.org/">https://usethis.r-lib.org/</a>.
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script></div>
+        <footer><p id="last-updated">Loading...</p>
+</footer><script src="../js/footer.js"></script><script src="../js/theme.js"></script><script src="../js/search.js"></script><script src="../js/fontsize.js"></script></div>
+</div>
+</div>
+</body></html>
+
