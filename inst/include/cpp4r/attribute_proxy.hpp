@@ -46,17 +46,17 @@ class attribute_proxy {
   template <typename C>
 #if CPP4R_HAS_CXX20
   // C++20: Use concepts for better type constraints (future enhancement)
-  inline attribute_proxy& operator=(C&& rhs) {
+  inline attribute_proxy& operator=(C&& rhs){
 #else
   inline attribute_proxy& operator=(C&& rhs) {
 #endif
-    // Universal reference for optimal forwarding
+  // Universal reference for optimal forwarding
 #if CPP4R_HAS_CXX17
-    // C++17: More efficient with guaranteed copy elision
-    unwind_protect([&] {
-      SEXP value = as_sexp(std::forward<C>(rhs));
-      Rf_setAttrib(parent_.data(), symbol_, value);
-    });
+      // C++17: More efficient with guaranteed copy elision
+      unwind_protect([&] {
+        SEXP value = as_sexp(std::forward<C>(rhs));
+        Rf_setAttrib(parent_.data(), symbol_, value);
+      });
 #else
     // C++11/14: Standard approach
     unwind_protect([&] {
@@ -64,17 +64,17 @@ class attribute_proxy {
       Rf_setAttrib(parent_.data(), symbol_, value);
     });
 #endif
-    return *this;
-  }
+  return *this;
+}
 
-  template <typename C>
-  inline attribute_proxy& operator=(std::initializer_list<C> rhs) {
+template <typename C>
+inline attribute_proxy& operator=(std::initializer_list<C> rhs) {
 #if CPP4R_HAS_CXX17
-    // C++17: Guaranteed copy elision and better optimization
-    unwind_protect([&] {
-      SEXP value = as_sexp(rhs);
-      Rf_setAttrib(parent_.data(), symbol_, value);
-    });
+  // C++17: Guaranteed copy elision and better optimization
+  unwind_protect([&] {
+    SEXP value = as_sexp(rhs);
+    Rf_setAttrib(parent_.data(), symbol_, value);
+  });
 #else
     // C++11/14: Standard approach
     unwind_protect([&] {
@@ -82,20 +82,20 @@ class attribute_proxy {
       Rf_setAttrib(parent_.data(), symbol_, value);
     });
 #endif
-    return *this;
-  }
+  return *this;
+}
 
 #if CPP4R_HAS_CXX17
-  // C++17: Mark as [[nodiscard]] to warn about unused results
-  CPP4R_NODISCARD inline operator SEXP() const noexcept {
-    return safe[Rf_getAttrib](parent_.data(), symbol_);
-  }
+// C++17: Mark as [[nodiscard]] to warn about unused results
+CPP4R_NODISCARD inline operator SEXP() const noexcept {
+  return safe[Rf_getAttrib](parent_.data(), symbol_);
+}
 #else
   // C++11/14: No nodiscard attribute
   inline operator SEXP() const noexcept {
     return safe[Rf_getAttrib](parent_.data(), symbol_);
   }
 #endif
-};
+};  // namespace cpp4r
 
 }  // namespace cpp4r

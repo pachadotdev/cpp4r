@@ -71,11 +71,11 @@ class package {
   CPP4R_NODISCARD inline function operator[](const char* name) {
     return safe[Rf_findFun](safe[Rf_install](name), data_);
   }
-  CPP4R_NODISCARD inline function operator[](const std::string& name) { 
-    return operator[](name.c_str()); 
+  CPP4R_NODISCARD inline function operator[](const std::string& name) {
+    return operator[](name.c_str());
   }
-  CPP4R_NODISCARD inline function operator[](std::string_view name) { 
-    return safe[Rf_findFun](safe[Rf_install](name.data()), data_); 
+  CPP4R_NODISCARD inline function operator[](std::string_view name) {
+    return safe[Rf_findFun](safe[Rf_install](name.data()), data_);
   }
 #else
   inline function operator[](const char* name) {

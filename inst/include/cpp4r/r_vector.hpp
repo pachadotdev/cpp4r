@@ -293,11 +293,12 @@ class r_vector : public cpp4r::r_vector<T> {
     proxy& operator=(const proxy& rhs);
 
     proxy& operator=(const T& rhs);
-    
+
     // Template assignment for automatic type conversion (specialized for lists)
-    template <typename U, typename = typename std::enable_if<!std::is_same<U, T>::value>::type>
+    template <typename U,
+              typename = typename std::enable_if<!std::is_same<U, T>::value>::type>
     proxy& operator=(const U& rhs);
-    
+
     proxy& operator+=(const T& rhs);
     proxy& operator-=(const T& rhs);
     proxy& operator*=(const T& rhs);
@@ -725,8 +726,7 @@ r_vector<T>::const_iterator::const_iterator(const r_vector* data, R_xlen_t pos)
 template <typename T>
 inline typename r_vector<T>::const_iterator& r_vector<T>::const_iterator::operator++() {
   ++pos_;
-  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep())) &&
-      pos_ >= block_start_ + length_) {
+  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep())) && pos_ >= block_start_ + length_) {
     fill_buf(pos_);
   } else if (__builtin_expect(!use_buf(data_->is_altrep()) && data_->data_p_ != nullptr &&
                                   pos_ % 64 == 0,
@@ -750,11 +750,10 @@ template <typename T>
 inline typename r_vector<T>::const_iterator& r_vector<T>::const_iterator::operator+=(
     R_xlen_t i) {
   pos_ += i;
-  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep())) &&
-      pos_ >= block_start_ + length_) {
+  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep())) && pos_ >= block_start_ + length_) {
     fill_buf(pos_);
-  } else if (CPP4R_UNLIKELY(
-                 !use_buf(data_->is_altrep()) && data_->data_p_ != nullptr && i > 32)) {
+  } else if (CPP4R_UNLIKELY(!use_buf(data_->is_altrep()) && data_->data_p_ != nullptr &&
+                            i > 32)) {
     // Prefetch for large jumps in sequential access
     __builtin_prefetch(&data_->data_p_[pos_ + 64], 0, 3);
   }
@@ -1070,8 +1069,7 @@ inline typename r_vector<T>::proxy r_vector<T>::operator[](const R_xlen_t pos) c
   if (CPP4R_UNLIKELY(is_altrep_)) {
     return {data_, pos, nullptr, true};
   }
-  return {data_, pos, CPP4R_LIKELY(data_p_ != nullptr) ? &data_p_[pos] : nullptr,
-          false};
+  return {data_, pos, CPP4R_LIKELY(data_p_ != nullptr) ? &data_p_[pos] : nullptr, false};
 }
 
 template <typename T>
@@ -1369,8 +1367,7 @@ r_vector<T>::iterator::iterator(const r_vector* data, R_xlen_t pos)
 template <typename T>
 inline typename r_vector<T>::iterator& r_vector<T>::iterator::operator++() {
   ++pos_;
-  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep())) &&
-      pos_ >= block_start_ + length_) {
+  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep())) && pos_ >= block_start_ + length_) {
     fill_buf(pos_);
   } else if (CPP4R_UNLIKELY(!use_buf(data_->is_altrep()) && data_->data_p_ != nullptr &&
                             pos_ % 64 == 0)) {
@@ -1390,19 +1387,17 @@ inline typename r_vector<T>::proxy r_vector<T>::iterator::operator*() const {
   } else {
     return proxy(
         data_->data(), pos_,
-        CPP4R_LIKELY(data_->data_p_ != nullptr) ? &data_->data_p_[pos_] : nullptr,
-        false);
+        CPP4R_LIKELY(data_->data_p_ != nullptr) ? &data_->data_p_[pos_] : nullptr, false);
   }
 }
 
 template <typename T>
 inline typename r_vector<T>::iterator& r_vector<T>::iterator::operator+=(R_xlen_t rhs) {
   pos_ += rhs;
-  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep())) &&
-      pos_ >= block_start_ + length_) {
+  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep())) && pos_ >= block_start_ + length_) {
     fill_buf(pos_);
-  } else if (CPP4R_UNLIKELY(
-                 !use_buf(data_->is_altrep()) && data_->data_p_ != nullptr && rhs > 32)) {
+  } else if (CPP4R_UNLIKELY(!use_buf(data_->is_altrep()) && data_->data_p_ != nullptr &&
+                            rhs > 32)) {
     // Prefetch for large jumps in sequential access
     __builtin_prefetch(&data_->data_p_[pos_ + 64], 0, 3);
   }

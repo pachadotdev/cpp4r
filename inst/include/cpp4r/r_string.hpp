@@ -73,7 +73,9 @@ class r_string {
     return data_.data() == rhs.data_.data();
   }
 
-  CPP4R_NODISCARD bool operator==(const SEXP rhs) const noexcept { return data_.data() == rhs; }
+  CPP4R_NODISCARD bool operator==(const SEXP rhs) const noexcept {
+    return data_.data() == rhs;
+  }
 
   CPP4R_NODISCARD bool operator==(const char* rhs) const {
     return static_cast<std::string>(*this) == rhs;

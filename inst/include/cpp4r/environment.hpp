@@ -40,11 +40,11 @@ class environment {
 
     // Optimized conversion operators - cache the result for reuse
 #if CPP4R_HAS_CXX17
-    CPP4R_NODISCARD operator SEXP() const { 
-      return safe[detail::r_env_get](parent_, name_); 
+    CPP4R_NODISCARD operator SEXP() const {
+      return safe[detail::r_env_get](parent_, name_);
     }
-    CPP4R_NODISCARD operator sexp() const { 
-      return sexp(safe[detail::r_env_get](parent_, name_)); 
+    CPP4R_NODISCARD operator sexp() const {
+      return sexp(safe[detail::r_env_get](parent_, name_));
     }
 #else
     operator SEXP() const { return safe[detail::r_env_get](parent_, name_); }
@@ -152,65 +152,67 @@ class environment {
     });
   }
 
-  void remove_multiple(const std::vector<std::string>& names) {
-    unwind_protect([&] {
-      // Use indexed loop for better performance
-      const std::size_t size = names.size();
+  void remove_multiple(const std::vector<std::string>& names){unwind_protect([&] {
+    // Use indexed loop for better performance
+    const std::size_t size = names.size();
 #if CPP4R_HAS_CXX20
-      for (std::size_t i = 0; i < size; ++i) {
+    for (std::size_t i = 0; i < size; ++i) {
 #else
-      for (std::size_t i = 0; i < size; ++i) {
+    for (std::size_t i = 0; i < size; ++i) {
 #endif
-        SEXP symbol = safe[Rf_install](names[i].c_str());
-        R_removeVarFromFrame(symbol, env_);
-      }
-    });
-  }
-
-  // Fast path for checking if environment is global or base
+      SEXP symbol = safe[Rf_install](names[i].c_str());
+      R_removeVarFromFrame(symbol, env_);
+    }
+  });
+}
+// Fast path for checking if environment is global or base
 #if CPP4R_HAS_CXX17
-  CPP4R_NODISCARD bool is_global_env() const noexcept { return env_.data() == R_GlobalEnv; }
+CPP4R_NODISCARD bool is_global_env() const noexcept {
+  return env_.data() == R_GlobalEnv;
+}
 
-  CPP4R_NODISCARD bool is_base_env() const noexcept { return env_.data() == R_BaseEnv; }
+CPP4R_NODISCARD bool is_base_env() const noexcept { return env_.data() == R_BaseEnv; }
 #else
-  bool is_global_env() const noexcept { return env_.data() == R_GlobalEnv; }
+bool is_global_env() const noexcept {
+  return env_.data() == R_GlobalEnv;
+}
 
-  bool is_base_env() const noexcept { return env_.data() == R_BaseEnv; }
+bool is_base_env() const noexcept { return env_.data() == R_BaseEnv; }
 #endif
 
-  // Comparison operators for environments
+// Comparison operators for environments
 #if CPP4R_HAS_CXX20
-  CPP4R_NODISCARD bool operator==(const environment& other) const noexcept {
-    return env_.data() == other.env_.data();
-  }
+CPP4R_NODISCARD bool operator==(const environment& other) const noexcept {
+  return env_.data() == other.env_.data();
+}
 
-  CPP4R_NODISCARD bool operator!=(const environment& other) const noexcept {
-    return !(*this == other);
-  }
+CPP4R_NODISCARD bool operator!=(const environment& other) const noexcept {
+  return !(*this == other);
+}
 
-  CPP4R_NODISCARD bool operator==(SEXP other) const noexcept {
-    return env_.data() == other;
-  }
+CPP4R_NODISCARD bool operator==(SEXP other) const noexcept {
+  return env_.data() == other;
+}
 
-  CPP4R_NODISCARD bool operator!=(SEXP other) const noexcept {
-    return env_.data() != other;
-  }
+CPP4R_NODISCARD bool operator!=(SEXP other) const noexcept {
+  return env_.data() != other;
+}
 #elif CPP4R_HAS_CXX17
-  CPP4R_NODISCARD bool operator==(const environment& other) const noexcept {
-    return env_.data() == other.env_.data();
-  }
+CPP4R_NODISCARD bool operator==(const environment& other) const noexcept {
+  return env_.data() == other.env_.data();
+}
 
-  CPP4R_NODISCARD bool operator!=(const environment& other) const noexcept {
-    return !(*this == other);
-  }
+CPP4R_NODISCARD bool operator!=(const environment& other) const noexcept {
+  return !(*this == other);
+}
 
-  CPP4R_NODISCARD bool operator==(SEXP other) const noexcept {
-    return env_.data() == other;
-  }
+CPP4R_NODISCARD bool operator==(SEXP other) const noexcept {
+  return env_.data() == other;
+}
 
-  CPP4R_NODISCARD bool operator!=(SEXP other) const noexcept {
-    return env_.data() != other;
-  }
+CPP4R_NODISCARD bool operator!=(SEXP other) const noexcept {
+  return env_.data() != other;
+}
 #else
   bool operator==(const environment& other) const noexcept {
     return env_.data() == other.env_.data();
@@ -223,7 +225,7 @@ class environment {
   bool operator!=(SEXP other) const noexcept { return env_.data() != other; }
 #endif
 
-  operator SEXP() const { return env_; }
-};
+operator SEXP() const { return env_; }
+};  // namespace cpp4r
 
 }  // namespace cpp4r

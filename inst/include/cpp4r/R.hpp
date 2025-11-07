@@ -66,7 +66,9 @@ namespace detail {
 
 // Annoyingly, `TYPEOF()` returns an `int` rather than a `SEXPTYPE`,
 // which can throw warnings with `-Wsign-compare` on Windows.
-CPP4R_NODISCARD inline SEXPTYPE r_typeof(SEXP x) noexcept { return static_cast<SEXPTYPE>(TYPEOF(x)); }
+CPP4R_NODISCARD inline SEXPTYPE r_typeof(SEXP x) noexcept {
+  return static_cast<SEXPTYPE>(TYPEOF(x));
+}
 
 /// Get an object from an environment
 ///
@@ -122,16 +124,18 @@ template <typename T>
 inline T na();
 
 template <typename T>
-CPP4R_NODISCARD inline typename std::enable_if<!std::is_same<typename std::decay<T>::type, double>::value,
-                               bool>::type
-is_na(const T& value) noexcept {
+CPP4R_NODISCARD inline
+    typename std::enable_if<!std::is_same<typename std::decay<T>::type, double>::value,
+                            bool>::type
+    is_na(const T& value) noexcept {
   return value == na<T>();
 }
 
 template <typename T>
-CPP4R_NODISCARD inline typename std::enable_if<std::is_same<typename std::decay<T>::type, double>::value,
-                               bool>::type
-is_na(const T& value) noexcept {
+CPP4R_NODISCARD inline
+    typename std::enable_if<std::is_same<typename std::decay<T>::type, double>::value,
+                            bool>::type
+    is_na(const T& value) noexcept {
   return ISNA(value);
 }
 
@@ -146,26 +150,44 @@ CPP4R_NODISCARD inline bool is_vector_type(SEXPTYPE type) noexcept {
          type == CPLXSXP || type == RAWSXP;
 }
 
-CPP4R_NODISCARD inline bool is_atomic(SEXP x) noexcept { return is_vector_type(detail::r_typeof(x)); }
+CPP4R_NODISCARD inline bool is_atomic(SEXP x) noexcept {
+  return is_vector_type(detail::r_typeof(x));
+}
 
 // Fast length check with early return for null
-CPP4R_NODISCARD inline R_xlen_t safe_length(SEXP x) noexcept { return CPP4R_UNLIKELY(is_null(x)) ? 0 : Rf_length(x); }
+CPP4R_NODISCARD inline R_xlen_t safe_length(SEXP x) noexcept {
+  return CPP4R_UNLIKELY(is_null(x)) ? 0 : Rf_length(x);
+}
 
 // Optimized type checking with branch prediction
-CPP4R_NODISCARD inline bool is_real(SEXP x) noexcept { return detail::r_typeof(x) == REALSXP; }
+CPP4R_NODISCARD inline bool is_real(SEXP x) noexcept {
+  return detail::r_typeof(x) == REALSXP;
+}
 
-CPP4R_NODISCARD inline bool is_integer(SEXP x) noexcept { return detail::r_typeof(x) == INTSXP; }
+CPP4R_NODISCARD inline bool is_integer(SEXP x) noexcept {
+  return detail::r_typeof(x) == INTSXP;
+}
 
-CPP4R_NODISCARD inline bool is_logical(SEXP x) noexcept { return detail::r_typeof(x) == LGLSXP; }
+CPP4R_NODISCARD inline bool is_logical(SEXP x) noexcept {
+  return detail::r_typeof(x) == LGLSXP;
+}
 
-CPP4R_NODISCARD inline bool is_character(SEXP x) noexcept { return detail::r_typeof(x) == STRSXP; }
+CPP4R_NODISCARD inline bool is_character(SEXP x) noexcept {
+  return detail::r_typeof(x) == STRSXP;
+}
 
-CPP4R_NODISCARD inline bool is_complex(SEXP x) noexcept { return detail::r_typeof(x) == CPLXSXP; }
+CPP4R_NODISCARD inline bool is_complex(SEXP x) noexcept {
+  return detail::r_typeof(x) == CPLXSXP;
+}
 
-CPP4R_NODISCARD inline bool is_raw(SEXP x) noexcept { return detail::r_typeof(x) == RAWSXP; }
+CPP4R_NODISCARD inline bool is_raw(SEXP x) noexcept {
+  return detail::r_typeof(x) == RAWSXP;
+}
 
 // Fast environment checking
-CPP4R_NODISCARD inline bool is_environment(SEXP x) noexcept { return detail::r_typeof(x) == ENVSXP; }
+CPP4R_NODISCARD inline bool is_environment(SEXP x) noexcept {
+  return detail::r_typeof(x) == ENVSXP;
+}
 
 CPP4R_NODISCARD inline bool is_function(SEXP x) noexcept {
   SEXPTYPE type = detail::r_typeof(x);

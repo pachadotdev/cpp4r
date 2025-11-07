@@ -127,7 +127,8 @@ class matrix : public matrix_slices<S> {
 
     bool operator==(const slice& rhs) const noexcept {
 #if CPP4R_HAS_CXX20
-      return CPP4R_LIKELY((index_ == rhs.index_) && (parent_.data() == rhs.parent_.data()));
+      return CPP4R_LIKELY((index_ == rhs.index_) &&
+                          (parent_.data() == rhs.parent_.data()));
 #else
       return (index_ == rhs.index_) && (parent_.data() == rhs.parent_.data());
 #endif
@@ -345,9 +346,13 @@ class matrix : public matrix_slices<S> {
   }
 
 #if CPP4R_HAS_CXX17
-  CPP4R_NODISCARD r_vector<r_string> names() const { return r_vector<r_string>(vector_.names()); }
+  CPP4R_NODISCARD r_vector<r_string> names() const {
+    return r_vector<r_string>(vector_.names());
+  }
 
-  CPP4R_NODISCARD T operator()(int row, int col) const noexcept { return vector_[row + (col * nrow())]; }
+  CPP4R_NODISCARD T operator()(int row, int col) const noexcept {
+    return vector_[row + (col * nrow())];
+  }
 
   CPP4R_NODISCARD slice operator[](int index) const { return {*this, index}; }
 #else

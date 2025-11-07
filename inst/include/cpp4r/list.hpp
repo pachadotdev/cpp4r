@@ -38,8 +38,7 @@ inline typename r_vector<SEXP>::underlying_type const* r_vector<SEXP>::get_const
     bool is_altrep, SEXP data) noexcept {
   // No `VECTOR_PTR_OR_NULL()`
 #if CPP4R_HAS_CXX20
-  return CPP4R_UNLIKELY(is_altrep) ? nullptr
-                                        : static_cast<SEXP const*>(DATAPTR_RO(data));
+  return CPP4R_UNLIKELY(is_altrep) ? nullptr : static_cast<SEXP const*>(DATAPTR_RO(data));
 #else
   return __builtin_expect(is_altrep, 0) ? nullptr
                                         : static_cast<SEXP const*>(DATAPTR_RO(data));

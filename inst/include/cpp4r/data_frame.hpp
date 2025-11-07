@@ -140,7 +140,8 @@ class data_frame : public cpp4r::data_frame {
     return {*this, name};
   }
 
-  CPP4R_NODISCARD attribute_proxy<data_frame> attr(const std::string& name) const noexcept {
+  CPP4R_NODISCARD attribute_proxy<data_frame> attr(
+      const std::string& name) const noexcept {
     return {*this, name.c_str()};
   }
 
@@ -149,12 +150,12 @@ class data_frame : public cpp4r::data_frame {
     return {*this, name};
   }
 
-  CPP4R_NODISCARD attribute_proxy<data_frame> attr(SEXP name) const noexcept { 
-    return {*this, name}; 
+  CPP4R_NODISCARD attribute_proxy<data_frame> attr(SEXP name) const noexcept {
+    return {*this, name};
   }
 
-  CPP4R_NODISCARD attribute_proxy<data_frame> names() const noexcept { 
-    return {*this, R_NamesSymbol}; 
+  CPP4R_NODISCARD attribute_proxy<data_frame> names() const noexcept {
+    return {*this, R_NamesSymbol};
   }
 #else
   // C++11/14: No nodiscard or string_view
@@ -166,13 +167,9 @@ class data_frame : public cpp4r::data_frame {
     return {*this, name.c_str()};
   }
 
-  attribute_proxy<data_frame> attr(SEXP name) const noexcept { 
-    return {*this, name}; 
-  }
+  attribute_proxy<data_frame> attr(SEXP name) const noexcept { return {*this, name}; }
 
-  attribute_proxy<data_frame> names() const noexcept { 
-    return {*this, R_NamesSymbol}; 
-  }
+  attribute_proxy<data_frame> names() const noexcept { return {*this, R_NamesSymbol}; }
 #endif
 };
 

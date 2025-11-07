@@ -15,16 +15,19 @@
   std::vector<double> nine = {9.0, 9.0, 9.0};
   std::vector<std::string> ten = {"ten", "ten"};
 
-  result.push_back({"one"_nm = one});  // Using literal + assignment
-  result.push_back(named_arg("two", two));  // Using named_arg constructor
-  result.push_back({"three"_nm = three});  // Using literal + assignment
-  result.push_back({"four"_nm = 4});  // Using literal + assignment
-  result.push_back({"five"_nm = false});  // Using literal + assignment
-  result.push_back({"six"_nm = "six"});  // Using literal + assignment
+  result.push_back({"one"_nm = one});                     // Using literal + assignment
+  result.push_back(named_arg("two", two));                // Using named_arg constructor
+  result.push_back({"three"_nm = three});                 // Using literal + assignment
+  result.push_back({"four"_nm = 4});                      // Using literal + assignment
+  result.push_back({"five"_nm = false});                  // Using literal + assignment
+  result.push_back({"six"_nm = "six"});                   // Using literal + assignment
   result.push_back({"seven"_nm = std::string("seven")});  // Using literal + assignment
-  result.push_back({"eight"_nm = std::vector<int>{8, 8, 8}});  // Using literal + assignment + std::vector
-  result.push_back({"nine"_nm = std::vector<double>{9.0, 9.0, 9.0}});  // Using literal + assignment + std::vector
-  result.push_back({"ten"_nm = std::vector<std::string>{"ten", "ten"}});  // Using literal + assignment + std::vector
+  result.push_back({"eight"_nm = std::vector<int>{
+                        8, 8, 8}});  // Using literal + assignment + std::vector
+  result.push_back({"nine"_nm = std::vector<double>{
+                        9.0, 9.0, 9.0}});  // Using literal + assignment + std::vector
+  result.push_back({"ten"_nm = std::vector<std::string>{
+                        "ten", "ten"}});  // Using literal + assignment + std::vector
 
   return result;
 }
@@ -57,7 +60,8 @@
   result[8] = nine;
   result[9] = ten;
 
-  result.names() = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"};
-  
+  result.names() = {"one", "two",   "three", "four", "five",
+                    "six", "seven", "eight", "nine", "ten"};
+
   return result;
 }

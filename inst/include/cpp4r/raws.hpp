@@ -172,8 +172,8 @@ inline raws as_raws(SEXP x) {
         if (CPP4R_UNLIKELY(ISNA(src_ptr[i]))) {
           throw std::runtime_error("Cannot convert NA real to raw");
         }
-        if (CPP4R_UNLIKELY(
-                src_ptr[i] < 0.0 || src_ptr[i] > 255.0 || src_ptr[i] != floor(src_ptr[i]))) {
+        if (CPP4R_UNLIKELY(src_ptr[i] < 0.0 || src_ptr[i] > 255.0 ||
+                           src_ptr[i] != floor(src_ptr[i]))) {
           throw std::runtime_error(
               "Real value out of range or not integer-like for raw conversion (0-255)");
         }

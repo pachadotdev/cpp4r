@@ -358,9 +358,8 @@ enable_if_std_string<T, SEXP> as_sexp(const T& from) {
 #if CPP4R_HAS_CXX17
 // C++17: std::string_view overload
 inline SEXP as_sexp(std::string_view from) {
-  return unwind_protect([&] { 
-    return Rf_ScalarString(Rf_mkCharLenCE(from.data(), from.size(), CE_UTF8)); 
-  });
+  return unwind_protect(
+      [&] { return Rf_ScalarString(Rf_mkCharLenCE(from.data(), from.size(), CE_UTF8)); });
 }
 #endif
 

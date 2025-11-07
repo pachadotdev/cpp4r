@@ -10,14 +10,14 @@ context("complexes-C++") {
 
   test_that("complexes::r_vector::const_iterator()") {
     cpp4r::complexes x(Rf_allocVector(CPLXSXP, 100));
-    COMPLEX(x)[0] = Rcomplex{{1, 1}};
-    COMPLEX(x)[1] = Rcomplex{{2, 2}};
-    COMPLEX(x)[2] = Rcomplex{{3, 3}};
-    COMPLEX(x)[3] = Rcomplex{{4, 4}};
-    COMPLEX(x)[4] = Rcomplex{{5, 5}};
-    COMPLEX(x)[97] = Rcomplex{{98, 98}};
-    COMPLEX(x)[98] = Rcomplex{{99, 99}};
-    COMPLEX(x)[99] = Rcomplex{{100, 100}};
+    COMPLEX(x)[0] = {1, 1};
+    COMPLEX(x)[1] = {2, 2};
+    COMPLEX(x)[2] = {3, 3};
+    COMPLEX(x)[3] = {4, 4};
+    COMPLEX(x)[4] = {5, 5};
+    COMPLEX(x)[97] = {98, 98};
+    COMPLEX(x)[98] = {99, 99};
+    COMPLEX(x)[99] = {100, 100};
     expect_true(x.size() == 100);
 
     auto it = x.begin();
@@ -179,13 +179,13 @@ context("complexes-C++") {
   }
 
   test_that("writable::complexes(SEXP)") {
-    Rcomplex one{{1, 1}};
-    Rcomplex two{{2, 2}};
-    Rcomplex three{{3, 3}};
-    Rcomplex four{{4, 4}};
-    Rcomplex five{{5, 5}};
-    Rcomplex six{{6, 6}};
-    Rcomplex seven{{7, 7}};
+    Rcomplex one{1, 1};
+    Rcomplex two{2, 2};
+    Rcomplex three{3, 3};
+    Rcomplex four{4, 4};
+    Rcomplex five{5, 5};
+    Rcomplex six{6, 6};
+    Rcomplex seven{7, 7};
 
     SEXP x = PROTECT(Rf_allocVector(CPLXSXP, 5));
 
@@ -217,7 +217,7 @@ context("complexes-C++") {
     UNPROTECT(1);
   }
   test_that("writable::complexes(SEXP, bool)") {
-    Rcomplex five{{5, 5}};
+    Rcomplex five{5, 5};
     SEXP x = PROTECT(Rf_ScalarComplex(five));
     cpp4r::writable::complexes y(x, false);
 
@@ -292,8 +292,8 @@ context("complexes-C++") {
 
   test_that("complexes::attr") {
     cpp4r::complexes x(PROTECT(Rf_allocVector(CPLXSXP, 2)));
-    COMPLEX(x)[0] = Rcomplex{{1, 1}};
-    COMPLEX(x)[1] = Rcomplex{{2, 2}};
+    COMPLEX(x)[0] = {1, 1};
+    COMPLEX(x)[1] = {2, 2};
 
     SEXP foo = Rf_install("foo");
     Rf_setAttrib(x, foo, Rf_mkString("bar"));
@@ -360,16 +360,16 @@ context("complexes-C++") {
     cpp4r::complexes diff_length(Rf_allocVector(CPLXSXP, 1));
     cpp4r::complexes diff_values(Rf_allocVector(CPLXSXP, 2));
 
-    COMPLEX(base)[0] = Rcomplex{{1, 1}};
-    COMPLEX(base)[1] = Rcomplex{{2, 2}};
+    COMPLEX(base)[0] = {1, 1};
+    COMPLEX(base)[1] = {2, 2};
 
-    COMPLEX(same_values)[0] = Rcomplex{{1, 1}};
-    COMPLEX(same_values)[1] = Rcomplex{{2, 2}};
+    COMPLEX(same_values)[0] = {1, 1};
+    COMPLEX(same_values)[1] = {2, 2};
 
-    COMPLEX(diff_length)[0] = Rcomplex{{1, 1}};
+    COMPLEX(diff_length)[0] = {1, 1};
 
-    COMPLEX(diff_values)[0] = Rcomplex{{1, 1}};
-    COMPLEX(diff_values)[1] = Rcomplex{{3, 3}};
+    COMPLEX(diff_values)[0] = {1, 1};
+    COMPLEX(diff_values)[1] = {3, 3};
 
     expect_true(base == base);
     expect_true(base == same_values);

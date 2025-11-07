@@ -345,7 +345,8 @@ inline bool operator!=(const r_vector<r_string>& lhs, const r_vector<r_string>& 
 }
 
 // Optimized string utility functions
-CPP4R_NODISCARD inline bool string_vector_contains_na(const r_vector<r_string>& vec) noexcept {
+CPP4R_NODISCARD inline bool string_vector_contains_na(
+    const r_vector<r_string>& vec) noexcept {
   R_xlen_t len = vec.size();
   for (R_xlen_t i = 0; i < len; ++i) {
     if (CPP4R_UNLIKELY(STRING_ELT(vec.data(), i) == NA_STRING)) {
@@ -355,7 +356,8 @@ CPP4R_NODISCARD inline bool string_vector_contains_na(const r_vector<r_string>& 
   return false;
 }
 
-CPP4R_NODISCARD inline R_xlen_t count_non_na_strings(const r_vector<r_string>& vec) noexcept {
+CPP4R_NODISCARD inline R_xlen_t count_non_na_strings(
+    const r_vector<r_string>& vec) noexcept {
   R_xlen_t count = 0;
   R_xlen_t len = vec.size();
   for (R_xlen_t i = 0; i < len; ++i) {

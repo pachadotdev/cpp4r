@@ -34,7 +34,9 @@ class r_bool {
 #if CPP4R_HAS_CXX17
   CPP4R_NODISCARD constexpr operator bool() const noexcept { return value_ == TRUE; }
   CPP4R_NODISCARD constexpr operator int() const noexcept { return value_; }
-  CPP4R_NODISCARD constexpr operator Rboolean() const noexcept { return value_ ? TRUE : FALSE; }
+  CPP4R_NODISCARD constexpr operator Rboolean() const noexcept {
+    return value_ ? TRUE : FALSE;
+  }
 #else
   constexpr operator bool() const noexcept { return value_ == TRUE; }
   constexpr operator int() const noexcept { return value_; }
@@ -63,8 +65,9 @@ class r_bool {
   static constexpr int na = std::numeric_limits<int>::min();
 
   static constexpr int from_int(int value) noexcept {
-    return (value == static_cast<int>(FALSE)) ? FALSE : 
-           (value == static_cast<int>(na)) ? na : TRUE;
+    return (value == static_cast<int>(FALSE)) ? FALSE
+           : (value == static_cast<int>(na))  ? na
+                                              : TRUE;
   }
 
   int value_ = na;

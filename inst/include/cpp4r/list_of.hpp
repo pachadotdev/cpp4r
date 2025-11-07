@@ -31,12 +31,12 @@ class list_of : public list {
 #endif
 
 #if CPP4R_HAS_CXX17
-  CPP4R_NODISCARD inline T operator[](const R_xlen_t pos) const { 
-    return list::operator[](pos); 
+  CPP4R_NODISCARD inline T operator[](const R_xlen_t pos) const {
+    return list::operator[](pos);
   }
 
-  CPP4R_NODISCARD inline T operator[](const char* pos) const { 
-    return list::operator[](pos); 
+  CPP4R_NODISCARD inline T operator[](const char* pos) const {
+    return list::operator[](pos);
   }
 
   CPP4R_NODISCARD inline T operator[](const std::string& pos) const {
@@ -74,7 +74,9 @@ class list_of : public writable::list {
 
 #if CPP4R_HAS_CXX17
     CPP4R_NODISCARD inline operator T() const { return static_cast<SEXP>(*this); }
-    CPP4R_NODISCARD inline operator SEXP() const noexcept { return static_cast<SEXP>(data_); }
+    CPP4R_NODISCARD inline operator SEXP() const noexcept {
+      return static_cast<SEXP>(data_);
+    }
 #else
     inline operator T() const { return static_cast<SEXP>(*this); }
     inline operator SEXP() const noexcept { return static_cast<SEXP>(data_); }

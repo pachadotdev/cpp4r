@@ -35,9 +35,8 @@ class sexp {
   // We maintain our own new `preserve_token_`
   sexp(const sexp& rhs) : data_(rhs.data_) {
     // Only insert if data is not R_NilValue to avoid unnecessary work
-    preserve_token_ = CPP4R_UNLIKELY(data_ == R_NilValue)
-                          ? R_NilValue
-                          : detail::store::insert(data_);
+    preserve_token_ =
+        CPP4R_UNLIKELY(data_ == R_NilValue) ? R_NilValue : detail::store::insert(data_);
   }
 
   // We take ownership over the `rhs.preserve_token_`.
@@ -51,20 +50,21 @@ class sexp {
   }
 
   sexp& operator=(const sexp& rhs) {
-    if (CPP4R_LIKELY(this != &rhs)) {  // Self-assignment check - expect it's not self-assignment
+    if (CPP4R_LIKELY(this !=
+                     &rhs)) {  // Self-assignment check - expect it's not self-assignment
       detail::store::release(preserve_token_);
 
       data_ = rhs.data_;
-      preserve_token_ = CPP4R_UNLIKELY(data_ == R_NilValue)
-                            ? R_NilValue
-                            : detail::store::insert(data_);
+      preserve_token_ =
+          CPP4R_UNLIKELY(data_ == R_NilValue) ? R_NilValue : detail::store::insert(data_);
     }
 
     return *this;
   }
 
   sexp& operator=(sexp&& rhs) noexcept {
-    if (CPP4R_LIKELY(this != &rhs)) {  // Self-assignment check - expect it's not self-assignment
+    if (CPP4R_LIKELY(this !=
+                     &rhs)) {  // Self-assignment check - expect it's not self-assignment
       detail::store::release(preserve_token_);
 
       data_ = rhs.data_;
@@ -139,9 +139,13 @@ class sexp {
   }
 
   // Optimized comparison operators
-  CPP4R_NODISCARD bool operator==(const sexp& other) const noexcept { return data_ == other.data_; }
+  CPP4R_NODISCARD bool operator==(const sexp& other) const noexcept {
+    return data_ == other.data_;
+  }
 
-  CPP4R_NODISCARD bool operator!=(const sexp& other) const noexcept { return data_ != other.data_; }
+  CPP4R_NODISCARD bool operator!=(const sexp& other) const noexcept {
+    return data_ != other.data_;
+  }
 
   CPP4R_NODISCARD bool operator==(SEXP other) const noexcept { return data_ == other; }
 
@@ -149,15 +153,25 @@ class sexp {
 };
 
 // Free function comparison operators for symmetry
-CPP4R_NODISCARD inline bool operator==(SEXP lhs, const sexp& rhs) noexcept { return lhs == rhs.data(); }
+CPP4R_NODISCARD inline bool operator==(SEXP lhs, const sexp& rhs) noexcept {
+  return lhs == rhs.data();
+}
 
-CPP4R_NODISCARD inline bool operator!=(SEXP lhs, const sexp& rhs) noexcept { return lhs != rhs.data(); }
+CPP4R_NODISCARD inline bool operator!=(SEXP lhs, const sexp& rhs) noexcept {
+  return lhs != rhs.data();
+}
 
 // Utility functions for common operations
-CPP4R_NODISCARD inline bool is_null(const sexp& x) noexcept { return x.data() == R_NilValue; }
+CPP4R_NODISCARD inline bool is_null(const sexp& x) noexcept {
+  return x.data() == R_NilValue;
+}
 
-CPP4R_NODISCARD inline SEXPTYPE sexp_type(const sexp& x) noexcept { return detail::r_typeof(x.data()); }
+CPP4R_NODISCARD inline SEXPTYPE sexp_type(const sexp& x) noexcept {
+  return detail::r_typeof(x.data());
+}
 
-CPP4R_NODISCARD inline R_xlen_t sexp_length(const sexp& x) noexcept { return Rf_length(x.data()); }
+CPP4R_NODISCARD inline R_xlen_t sexp_length(const sexp& x) noexcept {
+  return Rf_length(x.data());
+}
 
 }  // namespace cpp4r

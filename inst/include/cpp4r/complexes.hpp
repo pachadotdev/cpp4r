@@ -117,8 +117,9 @@ class r_vector<r_complex>::proxy {
   proxy(SEXP data, R_xlen_t index, Rcomplex* buf, bool is_altrep) noexcept
       : data_(data), index_(index), buf_(buf), is_altrep_(is_altrep) {}
 
-  // Explicitly default special member functions to avoid Clang 20 implicit declaration issues
-  // Note: When declaring move constructor, must also declare copy assignment to avoid it being deleted
+  // Explicitly default special member functions to avoid Clang 20 implicit declaration
+  // issues Note: When declaring move constructor, must also declare copy assignment to
+  // avoid it being deleted
   proxy(const proxy&) noexcept = default;
   proxy(proxy&&) noexcept = default;
   proxy& operator=(const proxy&) noexcept = default;
@@ -326,8 +327,8 @@ class r_vector<r_complex>::proxy {
 
 #if !CPP4R_HAS_CXX20
   // C++20 automatically generates operator!= from operator==
-  friend bool operator!=(const proxy& lhs, const r_complex& rhs) { 
-    return !(static_cast<r_complex>(lhs) == rhs); 
+  friend bool operator!=(const proxy& lhs, const r_complex& rhs) {
+    return !(static_cast<r_complex>(lhs) == rhs);
   }
 #endif
 

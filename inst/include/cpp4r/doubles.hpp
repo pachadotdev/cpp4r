@@ -31,8 +31,8 @@ inline typename r_vector<double>::underlying_type r_vector<double>::get_elt(SEXP
 }
 
 template <>
-inline typename r_vector<double>::underlying_type* r_vector<double>::get_p(bool is_altrep,
-                                                                           SEXP data) noexcept {
+inline typename r_vector<double>::underlying_type* r_vector<double>::get_p(
+    bool is_altrep, SEXP data) noexcept {
 #if CPP4R_HAS_CXX20
   if (CPP4R_UNLIKELY(is_altrep)) {
     return nullptr;

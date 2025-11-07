@@ -42,11 +42,13 @@ class named_arg {
   named_arg(const char* name, int value) : name_(name), value_(as_sexp(value)) {}
   named_arg(const char* name, bool value) : name_(name), value_(as_sexp(value)) {}
   named_arg(const char* name, const char* value) : name_(name), value_(as_sexp(value)) {}
-  named_arg(const char* name, const std::string& value) : name_(name), value_(as_sexp(value)) {}
+  named_arg(const char* name, const std::string& value)
+      : name_(name), value_(as_sexp(value)) {}
 
 #if CPP4R_HAS_CXX17
   // C++17: Add string_view overload for zero-copy construction
-  named_arg(const char* name, std::string_view value) : name_(name), value_(as_sexp(value)) {}
+  named_arg(const char* name, std::string_view value)
+      : name_(name), value_(as_sexp(value)) {}
 #endif
 
   named_arg& operator=(std::initializer_list<int> il) {
@@ -116,13 +118,11 @@ class named_arg {
 namespace literals {
 
 #if CPP4R_HAS_CXX17
-CPP4R_NODISCARD inline named_arg operator""_nm(const char* name, std::size_t) { 
-  return named_arg(name); 
+CPP4R_NODISCARD inline named_arg operator""_nm(const char* name, std::size_t) {
+  return named_arg(name);
 }
 #else
-inline named_arg operator""_nm(const char* name, std::size_t) { 
-  return named_arg(name); 
-}
+inline named_arg operator""_nm(const char* name, std::size_t) { return named_arg(name); }
 #endif
 
 }  // namespace literals
