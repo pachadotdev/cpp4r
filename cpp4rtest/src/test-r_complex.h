@@ -1,9 +1,10 @@
 #include <testthat.h>
 
 // Helper to initialize Rcomplex portably across compilers
-// Modern compilers prefer {{r,i}} but older Windows MinGW doesn't support it
-#if defined(_WIN32) && defined(__GNUC__) && !defined(__clang__)
-  // MinGW on Windows - use direct member initialization with different param names
+// Modern compilers prefer {{r,i}} but older compilers don't support it
+#if (defined(_WIN32) && defined(__GNUC__) && !defined(__clang__)) || \
+    (defined(__GNUC__) && !defined(__clang__) && __GNUC__ < 8)
+  // MinGW on Windows or older GCC - use direct member initialization with different param names
   #define MAKE_RCOMPLEX(real, imag) []() { Rcomplex c; c.r = (real); c.i = (imag); return c; }()
 #else
   // Modern compilers - use aggregate initialization
