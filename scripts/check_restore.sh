@@ -15,8 +15,22 @@ elif [ "$std" = "CXX20" ]; then cpp_std="C++20"
 elif [ "$std" = "CXX23" ]; then cpp_std="C++23"
 else cpp_std="$std"; fi
 
-# Restore Makevars.in placeholder
-echo "CXX_STD = CXXNN" > ./cpp4rtest/src/Makevars.in
+mfile="./cpp4rtest/src/Makevars.in"
+if [ -f "$mfile" ]; then
+    # replace existing CXX_STD line (handles optional quotes)
+    if grep -q '^CXX_STD[[:space:]]*=' "$mfile"; then
+        sed -E -i 's|^CXX_STD[[:space:]]*=.*|CXX_STD = CXXNN|' "$mfile"
+    else
+        # Prepend CXX_STD line to the existing Makevars.in
+        tmpfile="${mfile}.tmp"
+        printf "CXX_STD = CXXNN\n" > "$tmpfile"
+        cat "$mfile" >> "$tmpfile"
+        mv "$tmpfile" "$mfile"
+    fi
+else
+    # File doesn't exist: create with CXX_STD line
+    echo "CXX_STD = CXXNN" > "$mfile"
+fi
 
 # Restore GCC by unsetting USE_CLANG
 unset USE_CLANG || true
