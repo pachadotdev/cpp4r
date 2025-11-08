@@ -2,8 +2,8 @@
 
 // Helper to initialize Rcomplex portably across compilers
 // Modern compilers prefer {{r,i}} but older Windows MinGW doesn't support it
-#if defined(_WIN32) && defined(__GNUC__) && !defined(__clang__) && __GNUC__ < 8
-  // Old MinGW on Windows - use direct member initialization
+#if defined(_WIN32) && defined(__GNUC__) && !defined(__clang__)
+  // MinGW on Windows - use direct member initialization
   #define MAKE_RCOMPLEX(r, i) []() { Rcomplex c; c.r = (r); c.i = (i); return c; }()
 #else
   // Modern compilers - use aggregate initialization
