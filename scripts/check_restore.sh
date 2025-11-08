@@ -18,9 +18,6 @@ else cpp_std="$std"; fi
 # Restore Makevars.in placeholder
 echo "CXX_STD = CXXNN" > ./cpp4rtest/src/Makevars.in
 
-# Restore DESCRIPTION placeholder (needs C++ format)
-sed -i "s/${cpp_std}/C++NN/" ./cpp4rtest/DESCRIPTION || true
-
 # Restore GCC by unsetting USE_CLANG
 unset USE_CLANG || true
 
