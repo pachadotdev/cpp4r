@@ -155,8 +155,8 @@ inline SEXP as_sexp(std::initializer_list<r_string> il) {
 template <typename T, typename R = void>
 using enable_if_r_string = enable_if_t<std::is_same<T, cpp4r::r_string>::value, R>;
 
-template <typename T>
-enable_if_r_string<T, SEXP> as_sexp(T from) {
+template <typename T, typename = enable_if_r_string<T>>
+SEXP as_sexp(T from) {
   r_string str(from);
   sexp res;
   unwind_protect([&] {
