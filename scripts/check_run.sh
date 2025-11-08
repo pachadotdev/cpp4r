@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Accept std and compiler as positional parameters
+std="$1"
+compiler="$2"
+
 # Export USE_CLANG for R subprocesses if it's set
 if [ -n "${USE_CLANG:-}" ]; then
   export USE_CLANG
@@ -9,13 +13,12 @@ fi
 # Run the bench script (will exit on error)
 Rscript -e 'cpp4r::register("cpp4rtest")'
 Rscript -e 'devtools::document("cpp4rtest")'
-PACKAGE="cpp4rtest"
-LOG="${PACKAGE}-check.log"
+LOG="check-${std}-${compiler}.log"
 
 # Build package tarball first (devtools::build returns path)
 TARBALL=$(Rscript -e 'cat(devtools::build("cpp4rtest", quiet = TRUE))' 2>/dev/null)
 if [ -z "${TARBALL}" ]; then
-	echo "Failed to build tarball for ${PACKAGE}."
+	echo "Failed to build tarball for cpp4rtest."
 	exit 1
 fi
 

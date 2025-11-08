@@ -23,6 +23,8 @@
 unvendor <- function(path = NULL) {
   stopifnot(!is.null(path), dir.exists(path))
 
+  path <- normalizePath(path)
+
   # Check if the cpp4r directory exists
   cpp4r_dir <- file.path(path, "cpp4r")
   cpp4r_hpp_path <- file.path(path, "cpp4r.hpp")
@@ -51,8 +53,12 @@ unvendor <- function(path = NULL) {
   }
 
   # Remove the info file if it exists
-  if (has_info_file) {
-    unlink(info_file_path)
+  unlink(info_file_path)
+  
+  # If path does not contain any other files, remove the directory
+  remaining_files <- list.files(path, all.files = TRUE, no.. = TRUE)
+  if (length(remaining_files) == 0) {
+    unlink(path, recursive = TRUE)
   }
 
   if (is_interactive()) {

@@ -32,3 +32,4 @@
 ^softwarex-article$
 ^vignettes$
 ^\.github$
+^.*\.log$
