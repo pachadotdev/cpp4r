@@ -1,5 +1,15 @@
 #include <testthat.h>
 
+// Helper to initialize Rcomplex portably across compilers
+// Modern compilers prefer {{r,i}} but older Windows MinGW doesn't support it
+#if defined(_WIN32) && defined(__GNUC__) && !defined(__clang__) && __GNUC__ < 8
+  // Old MinGW on Windows - use direct member initialization
+  #define MAKE_RCOMPLEX(r, i) []() { Rcomplex c; c.r = (r); c.i = (i); return c; }()
+#else
+  // Modern compilers - use aggregate initialization
+  #define MAKE_RCOMPLEX(r, i) Rcomplex{{r, i}}
+#endif
+
 context("r_complex-C++") {
   test_that("r_complex() zero initialization") {
     // `cpp4r::r_complex x;` is "not initialized", this is "zero initialized"
@@ -26,7 +36,7 @@ context("r_complex-C++") {
   }
 
   test_that("explicit construction from Rcomplex") {
-    Rcomplex x{{1, 2}};
+    Rcomplex x = MAKE_RCOMPLEX(1, 2);
     cpp4r::r_complex y(x);
     expect_true(y.real() == x.r);
     expect_true(y.imag() == x.i);
@@ -88,3 +98,5 @@ context("r_complex-C++") {
     expect_true(COMPLEX(value)[0].i == x.imag());
   }
 }
+
+#undef MAKE_RCOMPLEX

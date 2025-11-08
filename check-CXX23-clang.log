@@ -11,7 +11,7 @@ Loading required package: usethis
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.1.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [3s/19s] NOTE
+* checking CRAN incoming feasibility ... [5s/23s] NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
@@ -24,7 +24,7 @@ New submission
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
 * checking serialization versions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [34s/34s] OK
+* checking whether package ‘cpp4rtest’ can be installed ... [38s/38s] OK
 * used C++ compiler: ‘clang version 20.1.8’
 * checking installed package size ... OK
 * checking package directory ... OK
