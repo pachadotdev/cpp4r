@@ -51,31 +51,17 @@ class data_frame : public list {
     auto nms = get_attrib0(x, R_RowNamesSymbol);
     bool has_short_rownames =
         (Rf_isInteger(nms) && Rf_xlength(nms) == 2 && INTEGER(nms)[0] == NA_INTEGER);
-#if CPP4R_HAS_CXX20
-    if (CPP4R_LIKELY(has_short_rownames)) {
+    if (has_short_rownames) {
       return static_cast<R_xlen_t>(abs(INTEGER(nms)[1]));
     }
 
-    if (CPP4R_UNLIKELY(!Rf_isNull(nms))) {
+    if (!Rf_isNull(nms)) {
       return Rf_xlength(nms);
     }
 
-    if (CPP4R_UNLIKELY(Rf_xlength(x) == 0)) {
+    if (Rf_xlength(x) == 0) {
       return 0;
     }
-#else
-    if (__builtin_expect(has_short_rownames, 1)) {
-      return static_cast<R_xlen_t>(abs(INTEGER(nms)[1]));
-    }
-
-    if (__builtin_expect(!Rf_isNull(nms), 0)) {
-      return Rf_xlength(nms);
-    }
-
-    if (__builtin_expect(Rf_xlength(x) == 0, 0)) {
-      return 0;
-    }
-#endif
 
     return Rf_xlength(VECTOR_ELT(x, 0));
   }

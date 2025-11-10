@@ -26,51 +26,29 @@ class external_pointer {
 
   static SEXP valid_type(SEXP data) {
     // Pacha: Allow nullable external_pointer (#312)
-#if CPP4R_HAS_CXX20
-    if (CPP4R_UNLIKELY(data == R_NilValue)) {
+    if (data == R_NilValue) {
       return data;
     }
-#else
-    if (__builtin_expect(data == R_NilValue, 0)) {
-      return data;
-    }
-#endif
 
     // Cache the type check to avoid multiple calls
     SEXPTYPE data_type = detail::r_typeof(data);
-#if CPP4R_HAS_CXX20
-    if (CPP4R_UNLIKELY(data_type != EXTPTRSXP)) {
+    if (data_type != EXTPTRSXP) {
       throw type_error(EXTPTRSXP, data_type);
     }
-#else
-    if (__builtin_expect(data_type != EXTPTRSXP, 0)) {
-      throw type_error(EXTPTRSXP, data_type);
-    }
-#endif
 
     return data;
   }
 
   static void r_deleter(SEXP p) {
-#if CPP4R_HAS_CXX20
-    if (CPP4R_UNLIKELY(detail::r_typeof(p) != EXTPTRSXP)) {
+    if (detail::r_typeof(p) != EXTPTRSXP) {
       return;
     }
-#else
-    if (detail::r_typeof(p) != EXTPTRSXP) return;
-#endif
 
     T* ptr = static_cast<T*>(R_ExternalPtrAddr(p));
 
-#if CPP4R_HAS_CXX20
-    if (CPP4R_UNLIKELY(ptr == nullptr)) {
-      return;
-    }
-#else
     if (ptr == nullptr) {
       return;
     }
-#endif
 
     R_ClearExternalPtr(p);
 
@@ -97,15 +75,9 @@ class external_pointer {
   }
 
   external_pointer& operator=(const external_pointer& rhs) {
-#if CPP4R_HAS_CXX20
-    if (CPP4R_LIKELY(this != &rhs)) {
-      data_ = safe[Rf_shallow_duplicate](rhs.data_);
-    }
-#else
     if (this != &rhs) {
       data_ = safe[Rf_shallow_duplicate](rhs.data_);
     }
-#endif
     return *this;
   }
 
@@ -119,17 +91,10 @@ class external_pointer {
   // same for the old external_pointer& operator=(external_pointer&& rhs) noexcept {
   // reset(rhs.release()); }
   external_pointer& operator=(external_pointer&& rhs) noexcept {
-#if CPP4R_HAS_CXX20
-    if (CPP4R_LIKELY(this != &rhs)) {
-      data_ = rhs.data_;
-      rhs.data_ = R_NilValue;
-    }
-#else
     if (this != &rhs) {
       data_ = rhs.data_;
       rhs.data_ = R_NilValue;
     }
-#endif
     return *this;
   }
 
@@ -157,15 +122,9 @@ class external_pointer {
 #if CPP4R_HAS_CXX14
   typename std::add_lvalue_reference<T>::type operator*() {
     pointer addr = get();
-#if CPP4R_HAS_CXX20
-    if (CPP4R_UNLIKELY(addr == nullptr)) {
-      throw std::bad_weak_ptr();
-    }
-#else
     if (addr == nullptr) {
       throw std::bad_weak_ptr();
     }
-#endif
     return *addr;  // Use cached addr instead of calling get() again
   }
 #else
@@ -180,29 +139,17 @@ class external_pointer {
 
   pointer operator->() const {
     pointer addr = get();
-#if CPP4R_HAS_CXX20
-    if (CPP4R_UNLIKELY(addr == nullptr)) {
-      throw std::bad_weak_ptr();
-    }
-#else
     if (addr == nullptr) {
       throw std::bad_weak_ptr();
     }
-#endif
     return addr;  // Use cached addr instead of calling get() again
   }
 
   pointer release() noexcept {
     pointer ptr = get();
-#if CPP4R_HAS_CXX20
-    if (CPP4R_UNLIKELY(ptr == nullptr)) {
-      return nullptr;
-    }
-#else
     if (ptr == nullptr) {
       return nullptr;
     }
-#endif
     R_ClearExternalPtr(data_);
 
     return ptr;
@@ -210,29 +157,15 @@ class external_pointer {
 
   void reset(pointer ptr = pointer()) {
     SEXP old_data = data_;
-#if CPP4R_HAS_CXX20
-    if (CPP4R_LIKELY(ptr != nullptr)) {
-      data_ = safe[R_MakeExternalPtr]((void*)ptr, R_NilValue, R_NilValue);
-    } else {
-      data_ = R_NilValue;
-    }
-#else
     if (ptr != nullptr) {
       data_ = safe[R_MakeExternalPtr]((void*)ptr, R_NilValue, R_NilValue);
     } else {
       data_ = R_NilValue;
     }
-#endif
     // Clean up old data if it was an external pointer
-#if CPP4R_HAS_CXX20
-    if (CPP4R_LIKELY(old_data != R_NilValue)) {
-      r_deleter(old_data);
-    }
-#else
     if (old_data != R_NilValue) {
       r_deleter(old_data);
     }
-#endif
   }
 
   void swap(external_pointer& other) noexcept {

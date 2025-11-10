@@ -61,6 +61,42 @@ However, cpp11 lacks some Rcpp features that explain its widespread adoption, in
 - Modules (e.g., helpers to export C++ functions and/or classes to R more easily)
 - Attributes (e.g., decorators to expose C++ functions to R with minimal boilerplate code)
 
+As the benchmarks reveal, cpp4r additional features simplify the development of R packages using C++ code without
+sacrificing performance or memory efficiency compared to cpp11 or Rcpp. In terms of speed and memory usage,
+users should follow the following decision diagram when choosing between these three C++ bindings for R:
+
+\begin{tikzpicture}[node distance=12mm, >=stealth]
+  \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=6mm,text centered, draw=black, fill=gray!10]
+  \tikzstyle{decision} = [diamond, aspect=2, text width=3.6em, text centered, draw=black, fill=blue!10]
+  \tikzstyle{arrow} = [thick,->]
+
+  % Nodes
+  \node (start) [startstop] {Should you use cpp4r in your package?};
+  \node (q1) [decision, below=of start] {Does it currently use cpp11?};
+  \node (q2) [decision, right=18mm of q1] {Does it currently use Rcpp?};
+  \node (askFeatures) [decision, below=of q1, yshift=-6mm] {Any lacking features (e.g. vendoring)?};
+  \node (yes) [startstop, below=of askFeatures, yshift=-4mm, fill=green!10] {Yes: use cpp4r};
+  \node (no) [startstop, left=of yes, xshift=-28mm, fill=red!8] {No: keep current binding};
+
+  % Arrows
+  \draw [arrow] (start) -- (q1);
+
+  % From q1 yes -> askFeatures
+  \draw [arrow] (q1) -- node[midway,left]{Yes} (askFeatures);
+  % From q1 no -> check q2
+  \draw [arrow] (q1) -- node[midway,above]{No} (q2);
+
+  % From q2 yes -> askFeatures
+  \draw [arrow] (q2) -- node[midway,above]{Yes} (askFeatures);
+  % From q2 no -> no
+  \draw [arrow] (q2) -- node[midway,right]{No} (no);
+
+  % From askFeatures
+  \draw [arrow] (askFeatures) -- node[midway,left]{Yes} (yes);
+  \draw [arrow] (askFeatures) -- node[midway,right]{No} (no);
+
+\end{tikzpicture}
+
 # Software description
 
 While using cpp11 for my thesis project, I identified several enhancements that could benefit the R community and
@@ -196,9 +232,128 @@ my_square <- function(x) {
 }
 ```
 
-# benchmarks
+# Benchmarks
 
-TODO.
+The goal of these benchmarks is to compare the speed and memory efficiency of cpp11, cpp4r, and Rcpp relative to base R
+linear algebra operations. Each of these have Armadillo wrappers: cpp11armadillo, armadillo4r, and RcppArmadillo. Being
+Armadillo a heavily optimized linear algebra library, it is expected that the differences in performance between these
+packages will be minimal and attributed to the overhead of each C++ binding to R.
+
+The tested armadillo4r 0.6.0 cannot be tested with C++11 as it uses Armadillo "Stochastic Parrot 14.2.2" which requires
+C++14 or newer.
+
+The other software versions used are:
+
+1. cpp11armadillo 0.5.4 uses Armadillo "Medium Roast Deluxe 15.2.1"
+2. RcppArmadillo 15.0.2-2 uses Armadillo "Medium Roast 15.0.2"
+
+The following benchmarks were adapted from the official [Armadillo](https://arma.sourceforge.net/speed.html)
+documentation:
+
+|C++ standard | Function                |Avg. time cpp11armadillo |Avg. time RcppArmadillo |Avg. time cpp4rarmadillo |
+|:----------|:--------------------------|:-----------------------|:----------------------|:-----------------------|
+|C++11      |Multiple matrix operations |4.03 x 10^-6            |3.43 x 10^-3           |                     |
+|C++14      |Multiple matrix operations |4.02 x 10^-6            |3.2 x 10^-3            |3.34 x 10^-3            |
+|C++17      |Multiple matrix operations |4.41 x 10^-6            |3.45 x 10^-3           |3.5 x 10^-3             |
+|C++20      |Multiple matrix operations |4.75 x 10^-6            |3.54 x 10^-3           |3.59 x 10^-3            |
+|C++23      |Multiple matrix operations |5.11 x 10^-6            |3.82 x 10^-3           |3.8 x 10^-3             |
+|C++11      |Multiply four matrices     |1.42 x 10^-1            |1.42 x 10^-1           |                     |
+|C++14      |Multiply four matrices     |1.46 x 10^-1            |1.3 x 10^-1            |1.26 x 10^-1            |
+|C++17      |Multiply four matrices     |1.37 x 10^-1            |1.4 x 10^-1            |1.31 x 10^-1            |
+|C++20      |Multiply four matrices     |2.26 x 10^-1            |1.69 x 10^-1           |1.87 x 10^-1            |
+|C++23      |Multiply four matrices     |1.38 x 10^-1            |1.38 x 10^-1           |1.41 x 10^-1            |
+|C++11      |Submatrix manipulation     |3.42 x 10^-3            |5.9 x 10^-3            |                     |
+|C++14      |Submatrix manipulation     |1.72 x 10^-3            |4.06 x 10^-3           |4.44 x 10^-3            |
+|C++17      |Submatrix manipulation     |1.73 x 10^-3            |4.25 x 10^-3           |4.35 x 10^-3            |
+|C++20      |Submatrix manipulation     |1.92 x 10^-3            |4.68 x 10^-3           |4.65 x 10^-3            |
+|C++23      |Submatrix manipulation     |1.92 x 10^-3            |5.2 x 10^-3            |4.97 x 10^-3            |
+
+In relative terms, compared to base R implementation, the results are:
+
+|C++ standard | Function                |Rel. time cpp11armadillo |Rel. time RcppArmadillo |Rel. time cpp4rarmadillo |
+|:----------|:--------------------------|:-----------------------|:----------------------|:-----------------------|
+|C++11      |Multiple matrix operations |7.21 x 10^-6            |6.14 x 10^-3           |                     |
+|C++14      |Multiple matrix operations |7.01 x 10^-6            |5.73 x 10^-3           |3.1 x 10^-3             |
+|C++17      |Multiple matrix operations |7.81 x 10^-6            |6.17 x 10^-3           |3.28 x 10^-3            |
+|C++20      |Multiple matrix operations |8.41 x 10^-6            |6.32 x 10^-3           |3.41 x 10^-3            |
+|C++23      |Multiple matrix operations |8.86 x 10^-6            |6.81 x 10^-3           |3.57 x 10^-3            |
+|C++11      |Multiply four matrices     |4.98 x 10^-2            |4.98 x 10^-2           |                     |
+|C++14      |Multiply four matrices     |5.1 x 10^-2             |4.54 x 10^-2           |4.41 x 10^-2            |
+|C++17      |Multiply four matrices     |4.8 x 10^-2             |4.9 x 10^-2            |4.58 x 10^-2            |
+|C++20      |Multiply four matrices     |7.5 x 10^-2             |5.86 x 10^-2           |6.4 x 10^-2             |
+|C++23      |Multiply four matrices     |4.76 x 10^-2            |4.81 x 10^-2           |4.9 x 10^-2             |
+|C++11      |Submatrix manipulation     |2.3 x 10^-1             |4.24 x 10^-1           |                     |
+|C++14      |Submatrix manipulation     |1.22 x 10^-1            |2.91 x 10^-1           |2.33 x 10^-1            |
+|C++17      |Submatrix manipulation     |1.23 x 10^-1            |3.03 x 10^-1           |2.28 x 10^-1            |
+|C++20      |Submatrix manipulation     |1.35 x 10^-1            |3.36 x 10^-1           |2.44 x 10^-1            |
+|C++23      |Submatrix manipulation     |1.36 x 10^-1            |3.68 x 10^-1           |2.61 x 10^-1            |
+
+These benchmarks indicate that it is indistinct to use cpp11, cpp4r, or Rcpp for Armadillo-based linear algebra
+operations, as the differences in speed are minimal. However, cpp4r has some convenient features that may make it more
+appealing for certain projects, including C++-side roxygen support that prevents the need for separate R wrapper
+functions as with the other wrappers
+
+The benchmark functions for cpp4r are as follows (this is identical for cpp11 and Rcpp):
+
+```
+/* roxygen
+@title Multiply Four Matrices
+@export
+*/
+[[cpp4r::register]] doubles_matrix<> multiply_four_cpp4r(const doubles_matrix<>& a, const doubles_matrix<>& b,
+  const doubles_matrix<>& c, const doubles_matrix<>& d) {
+  mat A = as_mat(a);
+  mat B = as_mat(b);
+  mat C = as_mat(c);
+  mat D = as_mat(d);
+
+  uword n = A.n_cols;
+  uword n5 = n / 5;
+  uword n10 = n / 10;
+
+  // Break the chained multiply into a sequence that reuses temporaries
+  // and lets BLAS operate on larger contiguous blocks where possible.
+  mat T1 = B.cols(0, n5 - 1); // view (no copy)
+  mat T2 = C.submat(0, 0, n5 - 1, n10 - 1); // view
+
+  // Compute intermediate as A * T1 into a temporary (uses BLAS)
+  mat I = A * T1; // one allocation for I
+
+  // Then I * T2 -> J
+  mat J = I * T2; // one allocation for J
+
+  // Finally multiply by D.submat(...) and return
+  mat Z = J * D.submat(0, 0, n10 - 1, n10 - 1);
+  return as_doubles_matrix(Z);
+}
+
+/* roxygen
+@title Submatrix Manipulation
+@export
+*/
+[[cpp4r::register]] doubles_matrix<> submatrix_manipulation_cpp4r(const doubles_matrix<>& a, const doubles_matrix<>& b) {
+  mat A = as_mat(a);
+  mat B = as_mat(b);
+  mat Z = B;
+  Z.row(Z.n_rows - 1) = A.row(0);
+  return as_doubles_matrix(Z);
+}
+
+/* roxygen
+@title Multi-Operation Expression
+@export
+*/
+[[cpp4r::register]] double multi_operation_cpp4r(const doubles_matrix<>& a, const doubles_matrix<>& b,
+  const doubles_matrix<>& c) {
+  mat A = as_mat(a);
+  mat B = as_mat(b);
+  mat C = as_mat(c);
+
+  double Z = as_scalar(A.col(0).t() * inv(diagmat(diagvec(B))) * C.col(0));
+
+  return Z;
+}
+```
 
 # Impact
 

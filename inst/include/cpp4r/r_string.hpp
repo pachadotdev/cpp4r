@@ -38,7 +38,7 @@ class r_string {
 
   // Copy assignment
   r_string& operator=(const r_string& other) {
-    if (CPP4R_LIKELY(this != &other)) {
+    if (this != &other) {
       data_ = other.data_;
     }
     return *this;
@@ -49,7 +49,7 @@ class r_string {
 
   // Move assignment
   r_string& operator=(r_string&& other) noexcept {
-    if (CPP4R_LIKELY(this != &other)) {
+    if (this != &other) {
       data_ = other.data_;
       other.data_ = R_NilValue;
     }
@@ -142,7 +142,7 @@ inline SEXP as_sexp(std::initializer_list<r_string> il) {
     data = Rf_allocVector(STRSXP, size);
     auto it = il.begin();
     for (R_xlen_t i = 0; i < size; ++i, ++it) {
-      if (CPP4R_UNLIKELY(*it == NA_STRING)) {
+      if (*it == NA_STRING) {
         SET_STRING_ELT(data, i, *it);
       } else {
         SET_STRING_ELT(data, i, Rf_mkCharCE(Rf_translateCharUTF8(*it), CE_UTF8));
@@ -162,7 +162,7 @@ SEXP as_sexp(T from) {
   unwind_protect([&] {
     res = Rf_allocVector(STRSXP, 1);
 
-    if (CPP4R_UNLIKELY(str == NA_STRING)) {
+    if (str == NA_STRING) {
       SET_STRING_ELT(res, 0, str);
     } else {
       SET_STRING_ELT(res, 0, Rf_mkCharCE(Rf_translateCharUTF8(str), CE_UTF8));

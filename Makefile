@@ -1,5 +1,8 @@
 clean:
-	@Rscript -e 'devtools::clean_dll("cpp4rtest"); cpp4r::register("cpp4rtest")'
+	@Rscript -e 'devtools::clean_dll("extended-tests/cpp4rtest"); cpp4r::register("extended-tests/cpp4rtest")'
+	@Rscript -e 'devtools::clean_dll("extended-tests/cpp11benchmark")'
+	@Rscript -e 'devtools::clean_dll("extended-tests/cpp4rbenchmark")'
+	@Rscript -e 'devtools::clean_dll("extended-tests/Rcppbenchmark")'
 
 install:
 	@Rscript -e 'devtools::clean_dll("cpp4rtest"); devtools::install()'
@@ -13,7 +16,7 @@ test:
 	@echo "Testing R code"
 	@Rscript -e 'devtools::document(); devtools::test(); devtools::install()'
 	@echo "==============================="
-	@/bin/bash -euo pipefail -c './scripts/test_loop.sh'
+	@/bin/bash -euo pipefail -c './extended-tests/test_loop.sh'
 
 check:
 	@clear
@@ -23,8 +26,12 @@ check:
 	@clear
 	@echo "==============================="
 	@echo "Checking C++ code"
-	@export -p USE_CLANG; /bin/bash -euo pipefail -c './scripts/check_loop.sh'
+	@export -p USE_CLANG; /bin/bash -euo pipefail -c './extended-tests/check_loop.sh'
 	@echo "==============================="
+
+bench:
+	@clear
+	@export -p USE_CLANG; /bin/bash -euo pipefail -c './bench_loop.sh'
 
 clang_format=`which clang-format-18`
 

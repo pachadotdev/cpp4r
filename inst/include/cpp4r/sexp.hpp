@@ -28,15 +28,12 @@ class sexp {
 
   sexp(SEXP data)
       : data_(data),
-        preserve_token_(CPP4R_UNLIKELY(data == R_NilValue)
-                            ? R_NilValue
-                            : detail::store::insert(data)) {}
+        preserve_token_(data == R_NilValue ? R_NilValue : detail::store::insert(data)) {}
 
   // We maintain our own new `preserve_token_`
   sexp(const sexp& rhs) : data_(rhs.data_) {
     // Only insert if data is not R_NilValue to avoid unnecessary work
-    preserve_token_ =
-        CPP4R_UNLIKELY(data_ == R_NilValue) ? R_NilValue : detail::store::insert(data_);
+    preserve_token_ = data_ == R_NilValue ? R_NilValue : detail::store::insert(data_);
   }
 
   // We take ownership over the `rhs.preserve_token_`.
@@ -50,21 +47,18 @@ class sexp {
   }
 
   sexp& operator=(const sexp& rhs) {
-    if (CPP4R_LIKELY(this !=
-                     &rhs)) {  // Self-assignment check - expect it's not self-assignment
+    if (this != &rhs) {  // Self-assignment check
       detail::store::release(preserve_token_);
 
       data_ = rhs.data_;
-      preserve_token_ =
-          CPP4R_UNLIKELY(data_ == R_NilValue) ? R_NilValue : detail::store::insert(data_);
+      preserve_token_ = data_ == R_NilValue ? R_NilValue : detail::store::insert(data_);
     }
 
     return *this;
   }
 
   sexp& operator=(sexp&& rhs) noexcept {
-    if (CPP4R_LIKELY(this !=
-                     &rhs)) {  // Self-assignment check - expect it's not self-assignment
+    if (this != &rhs) {  // Self-assignment check
       detail::store::release(preserve_token_);
 
       data_ = rhs.data_;
@@ -78,7 +72,7 @@ class sexp {
   }
 
   ~sexp() {
-    if (CPP4R_LIKELY(preserve_token_ != R_NilValue)) {
+    if (preserve_token_ != R_NilValue) {
       detail::store::release(preserve_token_);
     }
   }
@@ -111,20 +105,20 @@ class sexp {
 
   // Implicit conversion operators for common types
   CPP4R_NODISCARD operator double() const {
-    if (CPP4R_LIKELY(TYPEOF(data_) == REALSXP && Rf_length(data_) == 1)) {
+    if (TYPEOF(data_) == REALSXP && Rf_length(data_) == 1) {
       return REAL_ELT(data_, 0);
     }
-    if (CPP4R_UNLIKELY(TYPEOF(data_) == INTSXP && Rf_length(data_) == 1)) {
+    if (TYPEOF(data_) == INTSXP && Rf_length(data_) == 1) {
       return static_cast<double>(INTEGER_ELT(data_, 0));
     }
     throw std::invalid_argument("Cannot convert SEXP to double");
   }
 
   CPP4R_NODISCARD operator int() const {
-    if (CPP4R_LIKELY(TYPEOF(data_) == INTSXP && Rf_length(data_) == 1)) {
+    if (TYPEOF(data_) == INTSXP && Rf_length(data_) == 1) {
       return INTEGER_ELT(data_, 0);
     }
-    if (CPP4R_UNLIKELY(TYPEOF(data_) == REALSXP && Rf_length(data_) == 1)) {
+    if (TYPEOF(data_) == REALSXP && Rf_length(data_) == 1) {
       double val = REAL_ELT(data_, 0);
       return static_cast<int>(val);
     }
@@ -132,7 +126,7 @@ class sexp {
   }
 
   CPP4R_NODISCARD operator bool() const {
-    if (CPP4R_LIKELY(TYPEOF(data_) == LGLSXP && Rf_length(data_) == 1)) {
+    if (TYPEOF(data_) == LGLSXP && Rf_length(data_) == 1) {
       return LOGICAL_ELT(data_, 0) != 0;
     }
     throw std::invalid_argument("Cannot convert SEXP to bool");

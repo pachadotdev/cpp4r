@@ -20,7 +20,7 @@ class r_complex {
     ptr[0].i = 0.0;
   }
   r_complex(SEXP data) : data_(data) {
-    if (CPP4R_UNLIKELY(data_ == R_NilValue)) {
+    if (data_ == R_NilValue) {
       data_ = safe[Rf_allocVector](CPLXSXP, 0);
     }
   }
@@ -37,7 +37,7 @@ class r_complex {
 
   // Copy assignment
   r_complex& operator=(const r_complex& other) {
-    if (CPP4R_LIKELY(this != &other)) {
+    if (this != &other) {
       data_ = other.data_;
     }
     return *this;
@@ -48,7 +48,7 @@ class r_complex {
 
   // Move assignment
   r_complex& operator=(r_complex&& other) noexcept {
-    if (CPP4R_LIKELY(this != &other)) {
+    if (this != &other) {
       data_ = other.data_;
       other.data_ = R_NilValue;
     }
@@ -58,14 +58,14 @@ class r_complex {
   CPP4R_NODISCARD operator SEXP() const noexcept { return data_; }
   CPP4R_NODISCARD operator sexp() const noexcept { return data_; }
   CPP4R_NODISCARD operator std::complex<double>() const {
-    if (CPP4R_UNLIKELY(data_ == R_NilValue || Rf_length(data_) == 0)) {
+    if (data_ == R_NilValue || Rf_length(data_) == 0) {
       return {NA_REAL, NA_REAL};
     }
     return {COMPLEX(data_)[0].r, COMPLEX(data_)[0].i};
   }
   CPP4R_NODISCARD operator Rcomplex() const {
     Rcomplex r;
-    if (CPP4R_UNLIKELY(data_ == R_NilValue || Rf_length(data_) == 0)) {
+    if (data_ == R_NilValue || Rf_length(data_) == 0) {
       r.r = NA_REAL;
       r.i = NA_REAL;
     } else {
@@ -76,13 +76,13 @@ class r_complex {
   }
 
   CPP4R_NODISCARD double real() const noexcept {
-    if (CPP4R_UNLIKELY(data_ == R_NilValue || Rf_length(data_) == 0)) {
+    if (data_ == R_NilValue || Rf_length(data_) == 0) {
       return NA_REAL;
     }
     return COMPLEX(data_)[0].r;
   }
   CPP4R_NODISCARD double imag() const noexcept {
-    if (CPP4R_UNLIKELY(data_ == R_NilValue || Rf_length(data_) == 0)) {
+    if (data_ == R_NilValue || Rf_length(data_) == 0) {
       return NA_REAL;
     }
     return COMPLEX(data_)[0].i;
@@ -95,8 +95,8 @@ class r_complex {
   bool operator!=(const r_complex& rhs) const { return !(*this == rhs); }
 
   r_complex& operator+=(const r_complex& rhs) {
-    if (CPP4R_UNLIKELY(data_ == R_NilValue || Rf_length(data_) == 0 ||
-                       rhs.data_ == R_NilValue || Rf_length(rhs.data_) == 0)) {
+    if (data_ == R_NilValue || Rf_length(data_) == 0 || rhs.data_ == R_NilValue ||
+        Rf_length(rhs.data_) == 0) {
       *this = r_complex(real() + rhs.real(), imag() + rhs.imag());
     } else {
       COMPLEX(data_)[0].r += COMPLEX(rhs.data_)[0].r;
@@ -106,8 +106,8 @@ class r_complex {
   }
 
   r_complex& operator-=(const r_complex& rhs) {
-    if (CPP4R_UNLIKELY(data_ == R_NilValue || Rf_length(data_) == 0 ||
-                       rhs.data_ == R_NilValue || Rf_length(rhs.data_) == 0)) {
+    if (data_ == R_NilValue || Rf_length(data_) == 0 || rhs.data_ == R_NilValue ||
+        Rf_length(rhs.data_) == 0) {
       *this = r_complex(real() - rhs.real(), imag() - rhs.imag());
     } else {
       COMPLEX(data_)[0].r -= COMPLEX(rhs.data_)[0].r;

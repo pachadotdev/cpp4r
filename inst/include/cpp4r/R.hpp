@@ -87,16 +87,16 @@ inline SEXP r_env_get(SEXP env, SEXP sym) {
   // - Promises can't leak from an `env` anymore
 
   // Most lookups succeed, so optimize for the common case
-  if (CPP4R_UNLIKELY(out == R_MissingArg)) {
+  if (out == R_MissingArg) {
     Rf_errorcall(R_NilValue, "argument \"%s\" is missing, with no default",
                  CHAR(PRINTNAME(sym)));
   }
 
-  if (CPP4R_UNLIKELY(out == R_UnboundValue)) {
+  if (out == R_UnboundValue) {
     Rf_errorcall(R_NilValue, "object '%s' not found", CHAR(PRINTNAME(sym)));
   }
 
-  if (CPP4R_UNLIKELY(r_typeof(out) == PROMSXP)) {
+  if (r_typeof(out) == PROMSXP) {
     PROTECT(out);
     out = Rf_eval(out, env);
     UNPROTECT(1);
@@ -156,7 +156,7 @@ CPP4R_NODISCARD inline bool is_atomic(SEXP x) noexcept {
 
 // Fast length check with early return for null
 CPP4R_NODISCARD inline R_xlen_t safe_length(SEXP x) noexcept {
-  return CPP4R_UNLIKELY(is_null(x)) ? 0 : Rf_length(x);
+  return is_null(x) ? 0 : Rf_length(x);
 }
 
 // Optimized type checking with branch prediction

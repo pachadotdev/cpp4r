@@ -131,48 +131,28 @@ enable_if_is_sexp<T, T> as_cpp(SEXP from) {
 
 template <typename T>
 enable_if_integral<T, T> as_cpp(SEXP from) {
-#if CPP4R_HAS_CXX20
-  if (CPP4R_UNLIKELY(Rf_xlength(from) != 1)) {
-    throw std::length_error("Expected single integer value");
-  }
-
-  if (CPP4R_LIKELY(Rf_isInteger(from))) {
-    return INTEGER_ELT(from, 0);
-  } else if (CPP4R_UNLIKELY(Rf_isReal(from))) {
-    if (__builtin_expect(ISNA(REAL_ELT(from, 0)), 0)) {
-      return NA_INTEGER;
+  // Check type first, then length - only pay length check cost for valid types
+  if (Rf_isInteger(from)) {
+    if (Rf_xlength(from) == 1) {
+      return INTEGER_ELT(from, 0);
     }
-    double value = REAL_ELT(from, 0);
-    if (CPP4R_LIKELY(is_convertible_without_loss_to_integer(value))) {
-      return value;
+  } else if (Rf_isReal(from)) {
+    if (Rf_xlength(from) == 1) {
+      if (ISNA(REAL_ELT(from, 0))) {
+        return NA_INTEGER;
+      }
+      double value = REAL_ELT(from, 0);
+      if (is_convertible_without_loss_to_integer(value)) {
+        return value;
+      }
     }
-  } else if (CPP4R_UNLIKELY(Rf_isLogical(from))) {
-    if (__builtin_expect(LOGICAL_ELT(from, 0) == NA_LOGICAL, 0)) {
-      return NA_INTEGER;
-    }
-  }
-#else
-  // C++11/14/17: No [[likely]]/[[unlikely]] attributes
-  if (__builtin_expect(Rf_xlength(from) != 1, 0)) {
-    throw std::length_error("Expected single integer value");
-  }
-
-  if (__builtin_expect(Rf_isInteger(from), 1)) {
-    return INTEGER_ELT(from, 0);
-  } else if (__builtin_expect(Rf_isReal(from), 0)) {
-    if (__builtin_expect(ISNA(REAL_ELT(from, 0)), 0)) {
-      return NA_INTEGER;
-    }
-    double value = REAL_ELT(from, 0);
-    if (__builtin_expect(is_convertible_without_loss_to_integer(value), 1)) {
-      return value;
-    }
-  } else if (__builtin_expect(Rf_isLogical(from), 0)) {
-    if (__builtin_expect(LOGICAL_ELT(from, 0) == NA_LOGICAL, 0)) {
-      return NA_INTEGER;
+  } else if (Rf_isLogical(from)) {
+    if (Rf_xlength(from) == 1) {
+      if (LOGICAL_ELT(from, 0) == NA_LOGICAL) {
+        return NA_INTEGER;
+      }
     }
   }
-#endif
 
   throw std::length_error("Expected single integer value");
 }
@@ -204,68 +184,38 @@ enable_if_enum<E, E> as_cpp(SEXP from) {
 
 template <typename T>
 enable_if_bool<T, T> as_cpp(SEXP from) {
-#if CPP4R_HAS_CXX20
-  if (CPP4R_LIKELY(Rf_isLogical(from) && Rf_xlength(from) == 1)) {
+  if (Rf_isLogical(from) && Rf_xlength(from) == 1) {
     return LOGICAL_ELT(from, 0) == 1;
   }
-#else
-  if (__builtin_expect(Rf_isLogical(from) && Rf_xlength(from) == 1, 1)) {
-    return LOGICAL_ELT(from, 0) == 1;
-  }
-#endif
 
   throw std::length_error("Expected single logical value");
 }
 
 template <typename T>
 enable_if_floating_point<T, T> as_cpp(SEXP from) {
-#if CPP4R_HAS_CXX20
-  if (CPP4R_UNLIKELY(Rf_xlength(from) != 1)) {
-    throw std::length_error("Expected single double value");
+  if (Rf_xlength(from) != 1) {
+    throw std::length_error("Expected single floating point value");
   }
 
-  if (CPP4R_LIKELY(Rf_isReal(from))) {
-    return REAL_ELT(from, 0);
+  if (Rf_isReal(from)) {
+    return static_cast<T>(REAL_ELT(from, 0));
   }
   // All 32 bit integers can be coerced to doubles, so we just convert them.
-  if (CPP4R_UNLIKELY(Rf_isInteger(from))) {
-    if (__builtin_expect(INTEGER_ELT(from, 0) == NA_INTEGER, 0)) {
-      return NA_REAL;
+  if (Rf_isInteger(from)) {
+    if (INTEGER_ELT(from, 0) == NA_INTEGER) {
+      return static_cast<T>(NA_REAL);
     }
-    return INTEGER_ELT(from, 0);
+    return static_cast<T>(INTEGER_ELT(from, 0));
   }
 
   // Also allow NA values
-  if (CPP4R_UNLIKELY(Rf_isLogical(from))) {
-    if (__builtin_expect(LOGICAL_ELT(from, 0) == NA_LOGICAL, 0)) {
-      return NA_REAL;
+  if (Rf_isLogical(from)) {
+    if (LOGICAL_ELT(from, 0) == NA_LOGICAL) {
+      return static_cast<T>(NA_REAL);
     }
   }
-#else
-  if (__builtin_expect(Rf_xlength(from) != 1, 0)) {
-    throw std::length_error("Expected single double value");
-  }
 
-  if (__builtin_expect(Rf_isReal(from), 1)) {
-    return REAL_ELT(from, 0);
-  }
-  // All 32 bit integers can be coerced to doubles, so we just convert them.
-  if (__builtin_expect(Rf_isInteger(from), 0)) {
-    if (__builtin_expect(INTEGER_ELT(from, 0) == NA_INTEGER, 0)) {
-      return NA_REAL;
-    }
-    return INTEGER_ELT(from, 0);
-  }
-
-  // Also allow NA values
-  if (__builtin_expect(Rf_isLogical(from), 0)) {
-    if (__builtin_expect(LOGICAL_ELT(from, 0) == NA_LOGICAL, 0)) {
-      return NA_REAL;
-    }
-  }
-#endif
-
-  throw std::length_error("Expected single double value");
+  throw std::length_error("Expected single floating point value");
 }
 
 // Removed generic complex template to avoid ambiguity - use specific specializations
@@ -273,23 +223,16 @@ enable_if_floating_point<T, T> as_cpp(SEXP from) {
 
 template <typename T>
 enable_if_char<T, T> as_cpp(SEXP from) {
-#if CPP4R_HAS_CXX20
-  if (CPP4R_LIKELY(Rf_isString(from) && Rf_xlength(from) == 1)) {
+  if (Rf_isString(from) && Rf_xlength(from) == 1) {
     return unwind_protect([&] { return Rf_translateCharUTF8(STRING_ELT(from, 0))[0]; });
   }
-#else
-  if (__builtin_expect(Rf_isString(from) && Rf_xlength(from) == 1, 1)) {
-    return unwind_protect([&] { return Rf_translateCharUTF8(STRING_ELT(from, 0))[0]; });
-  }
-#endif
 
   throw std::length_error("Expected string vector of length 1");
 }
 
 template <typename T>
 enable_if_c_string<T, T> as_cpp(SEXP from) {
-#if CPP4R_HAS_CXX20
-  if (CPP4R_LIKELY(Rf_isString(from) && Rf_xlength(from) == 1)) {
+  if (Rf_isString(from) && Rf_xlength(from) == 1) {
     void* vmax = vmaxget();
 
     const char* result =
@@ -299,18 +242,6 @@ enable_if_c_string<T, T> as_cpp(SEXP from) {
 
     return {result};
   }
-#else
-  if (__builtin_expect(Rf_isString(from) && Rf_xlength(from) == 1, 1)) {
-    void* vmax = vmaxget();
-
-    const char* result =
-        unwind_protect([&] { return Rf_translateCharUTF8(STRING_ELT(from, 0)); });
-
-    vmaxset(vmax);
-
-    return {result};
-  }
-#endif
 
   throw std::length_error("Expected string vector of length 1");
 }
@@ -371,14 +302,14 @@ enable_if_integral<T, SEXP> as_sexp(const Container& from) {
 
   auto it = from.begin();
   int* data_p = INTEGER(data);
-  for (R_xlen_t i = 0; __builtin_expect(i < size, 1); ++i, ++it) {
+  for (R_xlen_t i = 0; i < size; ++i, ++it) {
     data_p[i] = *it;
   }
   return data;
 }
 
 inline SEXP as_sexp(std::initializer_list<int> from) {
-  return as_sexp(std::vector<int>(from));
+  return as_sexp<std::initializer_list<int>>(from);
 }
 
 template <typename Container, typename T = typename Container::value_type,
@@ -390,14 +321,14 @@ enable_if_floating_point<T, SEXP> as_sexp(const Container& from) {
 
   auto it = from.begin();
   double* data_p = REAL(data);
-  for (R_xlen_t i = 0; __builtin_expect(i < size, 1); ++i, ++it) {
+  for (R_xlen_t i = 0; i < size; ++i, ++it) {
     data_p[i] = *it;
   }
   return data;
 }
 
 inline SEXP as_sexp(std::initializer_list<double> from) {
-  return as_sexp(std::vector<double>(from));
+  return as_sexp<std::initializer_list<double>>(from);
 }
 
 template <typename Container, typename T = typename Container::value_type,
@@ -409,14 +340,14 @@ enable_if_bool<T, SEXP> as_sexp(const Container& from) {
 
   auto it = from.begin();
   int* data_p = LOGICAL(data);
-  for (R_xlen_t i = 0; __builtin_expect(i < size, 1); ++i, ++it) {
+  for (R_xlen_t i = 0; i < size; ++i, ++it) {
     data_p[i] = *it;
   }
   return data;
 }
 
 inline SEXP as_sexp(std::initializer_list<bool> from) {
-  return as_sexp(std::vector<bool>(from));
+  return as_sexp<std::initializer_list<bool>>(from);
 }
 
 namespace detail {
@@ -458,7 +389,7 @@ enable_if_c_string<T, SEXP> as_sexp(const Container& from) {
 }
 
 inline SEXP as_sexp(std::initializer_list<const char*> from) {
-  return as_sexp(std::vector<const char*>(from));
+  return as_sexp<std::initializer_list<const char*>>(from);
 }
 
 template <typename T, typename = disable_if_r_string<T>>

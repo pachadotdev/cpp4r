@@ -20,7 +20,7 @@ class r_bool {
   r_bool() = default;
 
   r_bool(SEXP data) {
-    if (CPP4R_LIKELY(Rf_isLogical(data) && Rf_xlength(data) == 1)) {
+    if (Rf_isLogical(data) && Rf_xlength(data) == 1) {
       value_ = static_cast<Rboolean>(LOGICAL_ELT(data, 0));
       return;
     }
@@ -74,7 +74,7 @@ class r_bool {
 };
 
 inline std::ostream& operator<<(std::ostream& os, r_bool const& value) {
-  if (CPP4R_UNLIKELY(value.is_na())) {
+  if (value.is_na()) {
     os << "NA";
   } else {
     os << (static_cast<bool>(value) ? "TRUE" : "FALSE");

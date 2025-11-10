@@ -303,7 +303,7 @@ inline SEXP init() {
   return out;
 }
 
-inline SEXP get() noexcept {
+inline SEXP get() {
   // Note the `static` local variable in the inline extern function here! Guarantees we
   // have 1 unique preserve list across all compilation units in the package.
   static SEXP out = init();
@@ -327,7 +327,7 @@ inline R_xlen_t count() noexcept {
 #endif
 
 inline SEXP insert(SEXP x) {
-  if (__builtin_expect(x == R_NilValue, 0)) {
+  if (x == R_NilValue) {
     return R_NilValue;
   }
 
@@ -354,8 +354,8 @@ inline SEXP insert(SEXP x) {
   return cell;
 }
 
-inline void release(SEXP cell) noexcept {
-  if (__builtin_expect(cell == R_NilValue, 0)) {
+inline void release(SEXP cell) {
+  if (cell == R_NilValue) {
     return;
   }
 

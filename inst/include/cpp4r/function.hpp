@@ -86,15 +86,9 @@ class package {
 
  private:
   static inline SEXP get_namespace(const char* name) {
-#if CPP4R_HAS_CXX20
-    if (__builtin_expect(std::strcmp(name, "base") == 0, 1)) {
+    if (std::strcmp(name, "base") == 0) {
       return R_BaseEnv;
     }
-#else
-    if (__builtin_expect(std::strcmp(name, "base") == 0, 1)) {
-      return R_BaseEnv;
-    }
-#endif
     sexp name_sexp = safe[Rf_install](name);
     return safe[detail::r_env_get](R_NamespaceRegistry, name_sexp);
   }
@@ -116,11 +110,7 @@ namespace detail {
 inline void r_message(const char* x) {
   static SEXP fn = NULL;
 
-#if CPP4R_HAS_CXX20
-  if (CPP4R_UNLIKELY(fn == NULL)) {
-#else
   if (fn == NULL) {
-#endif
     fn = Rf_findFun(Rf_install("message"), R_BaseEnv);
     R_PreserveObject(fn);
   }
@@ -145,15 +135,9 @@ inline void message(const char* fmt_arg) {
   char buff[1024];
   int msg;
   msg = std::snprintf(buff, 1024, "%s", fmt_arg);
-#if CPP4R_HAS_CXX20
-  if (CPP4R_LIKELY(msg >= 0 && msg < 1024)) {
-    safe[detail::r_message](buff);
-  }
-#else
   if (msg >= 0 && msg < 1024) {
     safe[detail::r_message](buff);
   }
-#endif
 #endif
 }
 
@@ -166,15 +150,9 @@ void message(const char* fmt_arg, Args... args) {
   char buff[1024];
   int msg;
   msg = std::snprintf(buff, 1024, fmt_arg, args...);
-#if CPP4R_HAS_CXX20
-  if (CPP4R_LIKELY(msg >= 0 && msg < 1024)) {
-    safe[detail::r_message](buff);
-  }
-#else
   if (msg >= 0 && msg < 1024) {
     safe[detail::r_message](buff);
   }
-#endif
 #endif
 }
 

@@ -104,12 +104,6 @@
 #endif
 
 // CPP4R_LIKELY and CPP4R_UNLIKELY: branch prediction hints
-// These remain as function-like macros for consistency across all C++ versions
-// In C++20+, the compiler is smart enough to optimize these patterns anyway
-#if defined(__GNUC__) || defined(__clang__)
-#define CPP4R_LIKELY(x) __builtin_expect(!!(x), 1)
-#define CPP4R_UNLIKELY(x) __builtin_expect(!!(x), 0)
-#else
+// Neutralized - modern compilers optimize better without manual hints
 #define CPP4R_LIKELY(x) (x)
 #define CPP4R_UNLIKELY(x) (x)
-#endif

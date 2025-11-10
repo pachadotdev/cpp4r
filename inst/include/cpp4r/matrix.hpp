@@ -30,8 +30,8 @@ struct matrix_dims {
   matrix_dims(int nrow, int ncol) : nrow_(nrow), ncol_(ncol) {}
 
 #if CPP4R_HAS_CXX17
-  CPP4R_NODISCARD int nrow() const { return nrow_; }
-  CPP4R_NODISCARD int ncol() const { return ncol_; }
+  int nrow() const { return nrow_; }
+  int ncol() const { return ncol_; }
 #else
   int nrow() const { return nrow_; }
   int ncol() const { return ncol_; }
@@ -67,10 +67,10 @@ struct matrix_slices<by_row> : public matrix_dims {
   using matrix_dims::nrow;
 
 #if CPP4R_HAS_CXX17
-  CPP4R_NODISCARD int nslices() const { return nrow(); }
-  CPP4R_NODISCARD int slice_size() const { return ncol(); }
-  CPP4R_NODISCARD int slice_stride() const { return nrow(); }
-  CPP4R_NODISCARD int slice_offset(int pos) const { return pos; }
+  int nslices() const { return nrow(); }
+  int slice_size() const { return ncol(); }
+  int slice_stride() const { return nrow(); }
+  int slice_offset(int pos) const { return pos; }
 #else
   int nslices() const { return nrow(); }
   int slice_size() const { return ncol(); }
@@ -88,10 +88,10 @@ struct matrix_slices<by_column> : public matrix_dims {
   using matrix_dims::nrow;
 
 #if CPP4R_HAS_CXX17
-  CPP4R_NODISCARD int nslices() const { return ncol(); }
-  CPP4R_NODISCARD int slice_size() const { return nrow(); }
-  CPP4R_NODISCARD int slice_stride() const { return 1; }
-  CPP4R_NODISCARD int slice_offset(int pos) const { return pos * nrow(); }
+  int nslices() const { return ncol(); }
+  int slice_size() const { return nrow(); }
+  int slice_stride() const { return 1; }
+  int slice_offset(int pos) const { return pos * nrow(); }
 #else
   int nslices() const { return ncol(); }
   int slice_size() const { return nrow(); }
@@ -118,25 +118,20 @@ class matrix : public matrix_slices<S> {
         : parent_(parent), index_(index), offset_(parent.slice_offset(index)) {}
 
 #if CPP4R_HAS_CXX17
-    CPP4R_NODISCARD R_xlen_t stride() const noexcept { return parent_.slice_stride(); }
-    CPP4R_NODISCARD R_xlen_t size() const noexcept { return parent_.slice_size(); }
+    R_xlen_t stride() const noexcept { return parent_.slice_stride(); }
+    R_xlen_t size() const noexcept { return parent_.slice_size(); }
 #else
     R_xlen_t stride() const noexcept { return parent_.slice_stride(); }
     R_xlen_t size() const noexcept { return parent_.slice_size(); }
 #endif
 
     bool operator==(const slice& rhs) const noexcept {
-#if CPP4R_HAS_CXX20
-      return CPP4R_LIKELY((index_ == rhs.index_) &&
-                          (parent_.data() == rhs.parent_.data()));
-#else
       return (index_ == rhs.index_) && (parent_.data() == rhs.parent_.data());
-#endif
     }
     bool operator!=(const slice& rhs) const noexcept { return !operator==(rhs); }
 
 #if CPP4R_HAS_CXX17
-    CPP4R_NODISCARD T operator[](int pos) const noexcept {
+    T operator[](int pos) const noexcept {
       return parent_.vector_[offset_ + stride() * pos];
     }
 #else
@@ -166,16 +161,12 @@ class matrix : public matrix_slices<S> {
       }
 
       bool operator==(const iterator& rhs) const noexcept {
-#if CPP4R_HAS_CXX20
-        return CPP4R_LIKELY((pos_ == rhs.pos_) && (slice_ == rhs.slice_));
-#else
         return (pos_ == rhs.pos_) && (slice_ == rhs.slice_);
-#endif
       }
       bool operator!=(const iterator& rhs) const noexcept { return !operator==(rhs); }
 
 #if CPP4R_HAS_CXX17
-      CPP4R_NODISCARD T operator*() const noexcept { return slice_[pos_]; };
+      T operator*() const noexcept { return slice_[pos_]; };
 #else
       T operator*() const noexcept { return slice_[pos_]; };
 #endif
@@ -207,16 +198,12 @@ class matrix : public matrix_slices<S> {
     }
 
     bool operator==(const slice_iterator& rhs) const noexcept {
-#if CPP4R_HAS_CXX20
-      return CPP4R_LIKELY((pos_ == rhs.pos_) && (parent_.data() == rhs.parent_.data()));
-#else
       return (pos_ == rhs.pos_) && (parent_.data() == rhs.parent_.data());
-#endif
     }
     bool operator!=(const slice_iterator& rhs) const noexcept { return !operator==(rhs); }
 
 #if CPP4R_HAS_CXX17
-    CPP4R_NODISCARD slice operator*() { return parent_[pos_]; };
+    slice operator*() { return parent_[pos_]; };
 #else
     slice operator*() { return parent_[pos_]; };
 #endif
@@ -269,13 +256,13 @@ class matrix : public matrix_slices<S> {
   using matrix_slices<S>::slice_offset;
 
 #if CPP4R_HAS_CXX17
-  CPP4R_NODISCARD V vector() const { return vector_; }
+  V vector() const { return vector_; }
 
-  CPP4R_NODISCARD SEXP data() const { return vector_.data(); }
+  SEXP data() const { return vector_.data(); }
 
-  CPP4R_NODISCARD R_xlen_t size() const { return vector_.size(); }
+  R_xlen_t size() const { return vector_.size(); }
 
-  CPP4R_NODISCARD operator SEXP() const { return SEXP(vector_); }
+  operator SEXP() const { return SEXP(vector_); }
 #else
   V vector() const { return vector_; }
 
@@ -346,15 +333,15 @@ class matrix : public matrix_slices<S> {
   }
 
 #if CPP4R_HAS_CXX17
-  CPP4R_NODISCARD r_vector<r_string> names() const {
+  r_vector<r_string> names() const {
     return r_vector<r_string>(vector_.names());
   }
 
-  CPP4R_NODISCARD T operator()(int row, int col) const noexcept {
+  T operator()(int row, int col) const noexcept {
     return vector_[row + (col * nrow())];
   }
 
-  CPP4R_NODISCARD slice operator[](int index) const { return {*this, index}; }
+  slice operator[](int index) const { return {*this, index}; }
 #else
   r_vector<r_string> names() const { return r_vector<r_string>(vector_.names()); }
 

@@ -11,12 +11,12 @@ if [ -n "${USE_CLANG:-}" ]; then
 fi
 
 # Run the bench script (will exit on error)
-Rscript -e 'cpp4r::register("cpp4rtest")'
-Rscript -e 'devtools::document("cpp4rtest")'
+Rscript -e 'cpp4r::register("./extended-tests/cpp4rtest")'
+Rscript -e 'devtools::document("./extended-tests/cpp4rtest")'
 LOG="check-${std}-${compiler}.log"
 
 # Build package tarball first (devtools::build returns path)
-TARBALL=$(Rscript -e 'cat(devtools::build("cpp4rtest", quiet = TRUE))' 2>/dev/null)
+TARBALL=$(Rscript -e 'cat(devtools::build("./extended-tests/cpp4rtest", quiet = TRUE))' 2>/dev/null)
 if [ -z "${TARBALL}" ]; then
 	echo "Failed to build tarball for cpp4rtest."
 	exit 1

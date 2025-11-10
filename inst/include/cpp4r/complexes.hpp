@@ -31,24 +31,16 @@ inline typename r_vector<r_complex>::underlying_type r_vector<r_complex>::get_el
 template <>
 inline typename r_vector<r_complex>::underlying_type* r_vector<r_complex>::get_p(
     bool is_altrep, SEXP data) noexcept {
-#if CPP4R_HAS_CXX20
-  if (CPP4R_UNLIKELY(is_altrep)) {
+  if (is_altrep) {
     return nullptr;
   } else {
     return COMPLEX(data);
   }
-#else
-  if (__builtin_expect(is_altrep, 0)) {
-    return nullptr;
-  } else {
-    return COMPLEX(data);
-  }
-#endif
 }
 
 template <>
 inline typename r_vector<r_complex>::underlying_type const*
-r_vector<r_complex>::get_const_p(bool is_altrep, SEXP data) noexcept {
+r_vector<r_complex>::get_const_p(bool is_altrep, SEXP data) {
   return COMPLEX_OR_NULL(data);
 }
 
@@ -59,8 +51,8 @@ inline void r_vector<r_complex>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
 }
 
 template <>
-inline bool r_vector<r_complex>::const_iterator::use_buf(bool is_altrep) noexcept {
-  return __builtin_expect(is_altrep, 0);
+inline bool r_vector<r_complex>::const_iterator::use_buf(bool is_altrep) {
+  return is_altrep;
 }
 
 typedef r_vector<r_complex> complexes;
@@ -78,26 +70,17 @@ typedef r_vector<r_complex> complexes;
 }  // namespace writable
 
 inline complexes as_complexes(SEXP x) {
-#if CPP4R_HAS_CXX20
-  if (CPP4R_LIKELY(detail::r_typeof(x) == CPLXSXP)) {
+  if (detail::r_typeof(x) == CPLXSXP) {
     return complexes(x);
   }
 
-  else if (CPP4R_UNLIKELY(detail::r_typeof(x) == INTSXP)) {
-#else
-  if (__builtin_expect(detail::r_typeof(x) == CPLXSXP, 1)) {
-    return complexes(x);
-  }
-
-  else if (__builtin_expect(detail::r_typeof(x) == INTSXP, 0)) {
-#endif
+  else if (detail::r_typeof(x) == INTSXP) {
     r_vector<int> xn(x);
     size_t len = xn.size();
     writable::complexes ret(len);
     std::transform(xn.begin(), xn.end(), ret.begin(), [](int value) noexcept {
-      return __builtin_expect(value == NA_INTEGER, 0)
-                 ? r_complex(NA_REAL, NA_REAL)
-                 : r_complex(static_cast<double>(value), 0.0);
+      return (value == NA_INTEGER) ? r_complex(NA_REAL, NA_REAL)
+                                   : r_complex(static_cast<double>(value), 0.0);
     });
     return ret;
   }
@@ -125,29 +108,17 @@ class r_vector<r_complex>::proxy {
   proxy& operator=(const proxy&) noexcept = default;
   proxy& operator=(proxy&&) noexcept = default;
 
-#if CPP4R_HAS_CXX20
   operator r_complex() const noexcept {
-    if (CPP4R_UNLIKELY(is_altrep_ && buf_ != nullptr)) {
+    if (is_altrep_ && buf_ != nullptr) {
       return r_complex(buf_->r, buf_->i);
     } else {
       Rcomplex r = COMPLEX_ELT(data_, index_);
       return r_complex(r.r, r.i);
     }
   }
-#else
-  operator r_complex() const noexcept {
-    if (__builtin_expect(is_altrep_ && buf_ != nullptr, 0)) {
-      return r_complex(buf_->r, buf_->i);
-    } else {
-      Rcomplex r = COMPLEX_ELT(data_, index_);
-      return r_complex(r.r, r.i);
-    }
-  }
-#endif
 
   proxy& operator=(const r_complex& value) noexcept {
-#if CPP4R_HAS_CXX20
-    if (CPP4R_UNLIKELY(is_altrep_ && buf_ != nullptr)) {
+    if (is_altrep_ && buf_ != nullptr) {
       buf_->r = value.real();
       buf_->i = value.imag();
     } else {
@@ -156,23 +127,11 @@ class r_vector<r_complex>::proxy {
       r.i = value.imag();
       SET_COMPLEX_ELT(data_, index_, r);
     }
-#else
-    if (__builtin_expect(is_altrep_ && buf_ != nullptr, 0)) {
-      buf_->r = value.real();
-      buf_->i = value.imag();
-    } else {
-      Rcomplex r;
-      r.r = value.real();
-      r.i = value.imag();
-      SET_COMPLEX_ELT(data_, index_, r);
-    }
-#endif
     return *this;
   }
 
   proxy& operator=(const std::complex<double>& value) noexcept {
-#if CPP4R_HAS_CXX20
-    if (CPP4R_UNLIKELY(is_altrep_ && buf_ != nullptr)) {
+    if (is_altrep_ && buf_ != nullptr) {
       buf_->r = value.real();
       buf_->i = value.imag();
     } else {
@@ -181,24 +140,12 @@ class r_vector<r_complex>::proxy {
       r.i = value.imag();
       SET_COMPLEX_ELT(data_, index_, r);
     }
-#else
-    if (__builtin_expect(is_altrep_ && buf_ != nullptr, 0)) {
-      buf_->r = value.real();
-      buf_->i = value.imag();
-    } else {
-      Rcomplex r;
-      r.r = value.real();
-      r.i = value.imag();
-      SET_COMPLEX_ELT(data_, index_, r);
-    }
-#endif
     return *this;
   }
 
   proxy& operator+=(const r_complex& value) noexcept {
     // Direct arithmetic on components to avoid temporary objects
-#if CPP4R_HAS_CXX20
-    if (CPP4R_UNLIKELY(is_altrep_ && buf_ != nullptr)) {
+    if (is_altrep_ && buf_ != nullptr) {
       buf_->r += value.real();
       buf_->i += value.imag();
     } else {
@@ -207,24 +154,12 @@ class r_vector<r_complex>::proxy {
       current.i += value.imag();
       SET_COMPLEX_ELT(data_, index_, current);
     }
-#else
-    if (__builtin_expect(is_altrep_ && buf_ != nullptr, 0)) {
-      buf_->r += value.real();
-      buf_->i += value.imag();
-    } else {
-      Rcomplex current = COMPLEX_ELT(data_, index_);
-      current.r += value.real();
-      current.i += value.imag();
-      SET_COMPLEX_ELT(data_, index_, current);
-    }
-#endif
     return *this;
   }
 
   proxy& operator-=(const r_complex& value) noexcept {
     // Direct arithmetic on components to avoid temporary objects
-#if CPP4R_HAS_CXX20
-    if (CPP4R_UNLIKELY(is_altrep_ && buf_ != nullptr)) {
+    if (is_altrep_ && buf_ != nullptr) {
       buf_->r -= value.real();
       buf_->i -= value.imag();
     } else {
@@ -233,24 +168,12 @@ class r_vector<r_complex>::proxy {
       current.i -= value.imag();
       SET_COMPLEX_ELT(data_, index_, current);
     }
-#else
-    if (__builtin_expect(is_altrep_ && buf_ != nullptr, 0)) {
-      buf_->r -= value.real();
-      buf_->i -= value.imag();
-    } else {
-      Rcomplex current = COMPLEX_ELT(data_, index_);
-      current.r -= value.real();
-      current.i -= value.imag();
-      SET_COMPLEX_ELT(data_, index_, current);
-    }
-#endif
     return *this;
   }
 
   proxy& operator*=(const r_complex& value) noexcept {
     // Complex multiplication: (a+bi)(c+di) = (ac-bd) + (ad+bc)i
-#if CPP4R_HAS_CXX20
-    if (CPP4R_UNLIKELY(is_altrep_ && buf_ != nullptr)) {
+    if (is_altrep_ && buf_ != nullptr) {
       double real_part = buf_->r * value.real() - buf_->i * value.imag();
       double imag_part = buf_->r * value.imag() + buf_->i * value.real();
       buf_->r = real_part;
@@ -263,21 +186,6 @@ class r_vector<r_complex>::proxy {
       current.i = imag_part;
       SET_COMPLEX_ELT(data_, index_, current);
     }
-#else
-    if (__builtin_expect(is_altrep_ && buf_ != nullptr, 0)) {
-      double real_part = buf_->r * value.real() - buf_->i * value.imag();
-      double imag_part = buf_->r * value.imag() + buf_->i * value.real();
-      buf_->r = real_part;
-      buf_->i = imag_part;
-    } else {
-      Rcomplex current = COMPLEX_ELT(data_, index_);
-      double real_part = current.r * value.real() - current.i * value.imag();
-      double imag_part = current.r * value.imag() + current.i * value.real();
-      current.r = real_part;
-      current.i = imag_part;
-      SET_COMPLEX_ELT(data_, index_, current);
-    }
-#endif
     return *this;
   }
 
@@ -287,8 +195,7 @@ class r_vector<r_complex>::proxy {
     const double d = value.imag();
     const double denom_inv = 1.0 / (c * c + d * d);  // Compute reciprocal once
 
-#if CPP4R_HAS_CXX20
-    if (CPP4R_UNLIKELY(is_altrep_ && buf_ != nullptr)) {
+    if (is_altrep_ && buf_ != nullptr) {
       const double a = buf_->r;
       const double b = buf_->i;
       buf_->r = (a * c + b * d) * denom_inv;
@@ -302,22 +209,6 @@ class r_vector<r_complex>::proxy {
       result.i = (b * c - a * d) * denom_inv;
       SET_COMPLEX_ELT(data_, index_, result);
     }
-#else
-    if (__builtin_expect(is_altrep_ && buf_ != nullptr, 0)) {
-      const double a = buf_->r;
-      const double b = buf_->i;
-      buf_->r = (a * c + b * d) * denom_inv;
-      buf_->i = (b * c - a * d) * denom_inv;
-    } else {
-      const Rcomplex current = COMPLEX_ELT(data_, index_);
-      const double a = current.r;
-      const double b = current.i;
-      Rcomplex result;
-      result.r = (a * c + b * d) * denom_inv;
-      result.i = (b * c - a * d) * denom_inv;
-      SET_COMPLEX_ELT(data_, index_, result);
-    }
-#endif
     return *this;
   }
 
@@ -410,36 +301,5 @@ inline r_vector<r_complex>::r_vector(std::initializer_list<r_complex> il)
 }
 
 }  // namespace writable
-
-// Comparison operators for r_vector<r_complex>
-template <>
-inline bool operator==(const r_vector<r_complex>& lhs, const r_vector<r_complex>& rhs) {
-#if CPP4R_HAS_CXX20
-  if (CPP4R_UNLIKELY(lhs.size() != rhs.size())) return false;
-
-  // Fast path: if both vectors point to the same data, they're equal
-  if (CPP4R_LIKELY(lhs.data() == rhs.data())) return true;
-#else
-  if (lhs.size() != rhs.size()) return false;
-
-  // Fast path: if both vectors point to the same data, they're equal
-  if (lhs.data() == rhs.data()) return true;
-#endif
-
-  // Use iterators for potentially better performance
-  auto lhs_it = lhs.cbegin();
-  auto rhs_it = rhs.cbegin();
-  auto lhs_end = lhs.cend();
-
-  for (; lhs_it != lhs_end; ++lhs_it, ++rhs_it) {
-    if (!(*lhs_it == *rhs_it)) return false;
-  }
-  return true;
-}
-
-template <>
-inline bool operator!=(const r_vector<r_complex>& lhs, const r_vector<r_complex>& rhs) {
-  return !(lhs == rhs);
-}
 
 }  // namespace cpp4r

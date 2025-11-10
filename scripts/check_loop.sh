@@ -17,16 +17,16 @@ for std in CXX11 CXX14 CXX17 CXX20 CXX23; do
 
     ./scripts/check_prepare.sh "$std" "$compiler"
 
-    touch check-results.md
+    touch ./extended-tests-results/check-results.md
     
     # Run check, but don't exit on failure
     # Pass the current loop's std and compiler so `check_run.sh` can create
     # a per-iteration LOG file (avoids overwriting the previous run's log).
     if ! ./scripts/check_run.sh "$std" "$compiler"; then
       echo "WARNING: check_run.sh failed for $std standard with $compiler, continuing..."
-      echo "$std + $compiler = fail" >> check-results.md || true
+      echo "$std + $compiler = fail" >> ./extended-tests-results/check-results.md || true
     else 
-      echo "$std + $compiler = ok" >> check-results.md || true
+      echo "$std + $compiler = ok" >> ./extended-tests-results/check-results.md || true
     fi
 
     ./scripts/check_restore.sh "$std" "$compiler"

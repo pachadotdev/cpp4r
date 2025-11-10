@@ -15,7 +15,7 @@ elif [ "$std" = "CXX20" ]; then cpp_std="C++20"
 elif [ "$std" = "CXX23" ]; then cpp_std="C++23"
 else cpp_std="$std"; fi
 
-mfile="./cpp4rtest/src/Makevars.in"
+mfile="./extended-tests/cpp4rtest/src/Makevars.in"
 if [ -f "$mfile" ]; then
     # replace existing CXX_STD line (handles optional quotes)
     if grep -q '^CXX_STD[[:space:]]*=' "$mfile"; then
