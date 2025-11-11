@@ -1,5 +1,5 @@
-cpp_compiler <- "XYZ"
-cpp_std <- "CXXNN"
+cpp_compiler <- "gcc"
+cpp_std <- "CXX11"
 
 library(bench)
 library(cpp11benchmark)
@@ -166,7 +166,7 @@ bench_cpp <- function(d, iterations = 1L) {
 }
 
 fout <- file.path(
-    "./results/",
+    "./extended-tests-results/",
     paste0("bench_results_", cpp_compiler, "_", cpp_std, ".rds")
 )
 

@@ -21,3 +21,4 @@
 ^scripts$
 ^vignettes$
 ^cpp11headers$
+.*\.md$

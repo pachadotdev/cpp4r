@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-for std in CXX23 CXX20 CXX17 CXX14 CXX11; do
+# for std in CXX23 CXX20 CXX17 CXX14 CXX11; do
+for std in CXX23; do
   for compiler in clang gcc; do
     echo "==============================="
     echo "Benchmarking R code with $std standard and $compiler compiler"
@@ -25,31 +26,31 @@ for std in CXX23 CXX20 CXX17 CXX14 CXX11; do
     # (restore and exit), while prepare/run failures restore and continue.
 
     # Prepare
-    if ! ./bench_prepare.sh "$std" "$compiler"; then
+    if ! ./scripts/bench_prepare.sh "$std" "$compiler"; then
       rc=$?
       echo "Prepare failed (std=$std compiler=$compiler) with code $rc; running restore and exiting benchmark run..."
-      ./bench_restore.sh "$std" "$compiler" || true
+      ./scripts/bench_restore.sh "$std" "$compiler" || true
       exit $rc
     fi
 
     # Install (fatal on failure)
-    if ! ./bench_install.sh "$std"; then
+    if ! ./scripts/bench_install.sh "$std"; then
       rc=$?
       echo "Install failed (std=$std compiler=$compiler) with code $rc; running restore and exiting benchmark run..."
-      ./bench_restore.sh "$std" "$compiler" || true
+      ./scripts/bench_restore.sh "$std" "$compiler" || true
       exit $rc
     fi
 
     # Run
-    if ! ./bench_run.sh "$std" "$compiler"; then
+    if ! ./scripts/bench_run.sh "$std" "$compiler"; then
       rc=$?
       echo "Run failed (std=$std compiler=$compiler) with code $rc; running restore and exiting benchmark run..."
-      ./bench_restore.sh "$std" "$compiler" || true
+      ./scripts/bench_restore.sh "$std" "$compiler" || true
       exit $rc
     fi
 
     # Success: restore to neutral state
-    ./bench_restore.sh "$std" "$compiler" || true
+    ./scripts/bench_restore.sh "$std" "$compiler" || true
 
     echo "==============================="
     echo ""

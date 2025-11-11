@@ -31,7 +31,7 @@ fmt_sci <- function(x, digits = 3) {
     out
 }
 
-finp <- list.files(pattern = "bench_results_clang|bench_results_gcc", full.names = TRUE, recursive = TRUE)
+finp <- list.files(path = "extended-tests-results", pattern = "bench_results_clang|bench_results_gcc", full.names = TRUE, recursive = TRUE)
 
 bench_all <- map_df(
     finp,
@@ -170,4 +170,4 @@ res <- res %>%
     ) %>%
     select(-starts_with("rel_time_"))
 
-writeLines(knitr::kable(res), "./results/bench_summary.md")
+writeLines(knitr::kable(res), "./extended-tests-results/bench_summary.md")

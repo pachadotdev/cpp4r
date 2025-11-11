@@ -1,37 +1,51 @@
 clean:
-	@Rscript -e 'devtools::clean_dll("extended-tests/cpp4rtest"); cpp4r::register("extended-tests/cpp4rtest")'
+	@clear
+	@Rscript -e 'devtools::clean_dll("extended-tests/cpp4rtest");'
 	@Rscript -e 'devtools::clean_dll("extended-tests/cpp11benchmark")'
 	@Rscript -e 'devtools::clean_dll("extended-tests/cpp4rbenchmark")'
 	@Rscript -e 'devtools::clean_dll("extended-tests/Rcppbenchmark")'
 
 install:
-	@Rscript -e 'devtools::clean_dll("cpp4rtest"); devtools::install()'
+	@clear
+	@Rscript -e 'devtools::install("./")'
 
 docs:
-	@Rscript -e 'devtools::document(); pkgsite::build_site()'
+	@clear
+	@Rscript -e 'devtools::document("./"); pkgsite::build_site("./")'
 
 test:
 	@clear
 	@echo "==============================="
 	@echo "Testing R code"
-	@Rscript -e 'devtools::document(); devtools::test(); devtools::install()'
+	@Rscript -e 'devtools::document("./"); devtools::test("./")'
 	@echo "==============================="
-	@/bin/bash -euo pipefail -c './extended-tests/test_loop.sh'
+	@/bin/bash -euo pipefail -c './scripts/test_loop.sh'
 
 check:
 	@clear
 	@echo "==============================="
 	@echo "Checking R code"
-	@Rscript -e 'devtools::install(); devtools::check(error_on = "error")'
+	@$(MAKE) install
+	@Rscript -e	'cpp4r::register("extended-tests/cpp4rtest")'
+	@Rscript -e 'devtools::check("./", error_on = "error")'
+
+check_all:
 	@clear
 	@echo "==============================="
 	@echo "Checking C++ code"
-	@export -p USE_CLANG; /bin/bash -euo pipefail -c './extended-tests/check_loop.sh'
+	@$(MAKE) install
+	@$(MAKE) check
+	@rm -f extended-tests-results/*.log
+	@rm -f extended-tests-results/check-results.md
+	@export -p USE_CLANG; /bin/bash -euo pipefail -c './scripts/check_loop.sh'
 	@echo "==============================="
 
 bench:
 	@clear
-	@export -p USE_CLANG; /bin/bash -euo pipefail -c './bench_loop.sh'
+	@rm -f extended-tests-results/*.rds
+	@rm -f extended-tests-results/bench_summary.md
+	@export -p USE_CLANG; /bin/bash -euo pipefail -c './scripts/bench_loop.sh'
+	@Rscript './scripts/combine-benchmarks.R'
 
 clang_format=`which clang-format-18`
 

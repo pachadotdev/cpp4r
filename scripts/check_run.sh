@@ -10,20 +10,28 @@ if [ -n "${USE_CLANG:-}" ]; then
   export USE_CLANG
 fi
 
+# Ensure results directory and set per-iteration log
+mkdir -p ./extended-tests-results
+LOG="./extended-tests-results/check-${std}-${compiler}.log"
+
+# Capture everything (stdout+stderr) from this point into the per-iteration log
+# while still printing to the console via tee. This ensures all printed lines
+# (from Rscript, R CMD check and this script) are saved.
+exec > >(tee -a "${LOG}") 2>&1
+
 # Run the bench script (will exit on error)
 Rscript -e 'cpp4r::register("./extended-tests/cpp4rtest")'
 Rscript -e 'devtools::document("./extended-tests/cpp4rtest")'
-LOG="check-${std}-${compiler}.log"
 
 # Build package tarball first (devtools::build returns path)
-TARBALL=$(Rscript -e 'cat(devtools::build("./extended-tests/cpp4rtest", quiet = TRUE))' 2>/dev/null)
+TARBALL=$(Rscript -e 'cat(devtools::build("./extended-tests/cpp4rtest", quiet = TRUE))')
 if [ -z "${TARBALL}" ]; then
 	echo "Failed to build tarball for cpp4rtest."
 	exit 1
 fi
 
 # Run R CMD check on the tarball and capture output. Skip PDF/manual to avoid TeX font issues.
-R CMD check --as-cran --no-manual "${TARBALL}" &> "${LOG}" || true
+R CMD check --as-cran --no-manual "${TARBALL}" || true
 
 # Inspect log for ERRORs only. Allow WARNINGs and NOTEs.
 if grep -q "\bERROR\b" "${LOG}"; then

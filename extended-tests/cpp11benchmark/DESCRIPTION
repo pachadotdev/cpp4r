@@ -19,5 +19,6 @@ BugReports: https://github.com/USERNAME/PKGNAME/issues
 URL: https://WEBSITE.COM
 RoxygenNote: 7.3.3
 Encoding: UTF-8
+LinkingTo: cpp11
 NeedsCompilation: yes
 Config/testthat/edition: 3
