@@ -467,6 +467,16 @@ inline typename r_vector<T>::proxy& r_vector<T>::proxy::operator=(const T& rhs) 
 }
 
 template <typename T>
+template <typename U>
+inline typename r_vector<T>::proxy& r_vector<T>::proxy::operator=(const U& rhs) {
+  // Default implementation: only allows conversion from U to T
+  const T converted = static_cast<T>(rhs);
+  const underlying_type elt = static_cast<underlying_type>(converted);
+  set(elt);
+  return *this;
+}
+
+template <typename T>
 inline typename r_vector<T>::proxy& r_vector<T>::proxy::operator+=(const T& rhs) {
   operator=(static_cast<T>(*this) + rhs);
   return *this;

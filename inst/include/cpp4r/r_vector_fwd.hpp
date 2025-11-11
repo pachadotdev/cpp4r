@@ -61,7 +61,6 @@ class r_vector {
   r_vector(const r_vector& x);
   r_vector(r_vector<T>&& x);
   r_vector(const writable::r_vector<T>& x);
-  r_vector(named_arg) = delete;
 
   r_vector& operator=(const r_vector& rhs);
   r_vector& operator=(r_vector&& rhs);
@@ -206,7 +205,7 @@ class r_vector : public cpp4r::r_vector<T> {
   r_vector(r_vector&& rhs);
   r_vector(const cpp4r::r_vector<T>& rhs);
   r_vector(std::initializer_list<T> il);
-  r_vector(std::initializer_list<named_arg> il);
+  explicit r_vector(std::initializer_list<named_arg> il);
 
   explicit r_vector(const R_xlen_t size);
 
@@ -287,6 +286,10 @@ class r_vector : public cpp4r::r_vector<T> {
     proxy& operator=(const proxy& rhs);
 
     proxy& operator=(const T& rhs);
+    
+    template <typename U>
+    proxy& operator=(const U& rhs);
+    
     proxy& operator+=(const T& rhs);
     proxy& operator-=(const T& rhs);
     proxy& operator*=(const T& rhs);

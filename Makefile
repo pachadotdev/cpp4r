@@ -20,13 +20,9 @@ check:
 	@$(MAKE) install
 	@Rscript -e	'cpp4r::register("extended-tests/cpp4rtest")'
 	@Rscript -e 'devtools::check("./", error_on = "error")'
-
-check_all:
-	@clear
 	@echo "==============================="
 	@echo "Checking C++ code"
 	@$(MAKE) install
-	@$(MAKE) check
 	@rm -f extended-tests-results/*.log
 	@rm -f extended-tests-results/check-results.md
 	@export -p USE_CLANG; /bin/bash -euo pipefail -c './scripts/check_loop.sh'

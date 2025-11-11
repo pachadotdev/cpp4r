@@ -97,6 +97,14 @@ inline r_vector<SEXP>::r_vector(std::initializer_list<named_arg> il)
   });
 }
 
+// Specialization of proxy::operator= for list to allow list[i] = value for any convertible type
+template <>
+template <typename U>
+inline r_vector<SEXP>::proxy& r_vector<SEXP>::proxy::operator=(const U& rhs) {
+  set(as_sexp(rhs));
+  return *this;
+}
+
 typedef r_vector<SEXP> list;
 
 }  // namespace writable

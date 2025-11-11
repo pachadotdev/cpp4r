@@ -1,26 +1,20 @@
-// clang-format off
+#include <cpp4r.hpp>
 
-#include <algorithm>
-#include <cstring>
-#include <vector>
-#include <random>
-#include <numeric>
-#include <deque>
-#include <string>
-#include <cstring>
-#include <iostream>
-#include "Rmath.h"
-#include "cpp4r.hpp"
+#include <numeric>  // for std::accumulate
+#include <deque>    // for std::deque
+#include <Rmath.h>  // for Rf_rgamma, Rf_rnorm
 
 using namespace cpp4r;
 
+// Include all test function headers
 #include "add.h"
 #include "data_frame.h"
-#include "errors_fmt.h"
 #include "errors.h"
+#include "errors_fmt.h"
 #include "find-intervals.h"
 #include "grow.h"
 #include "insert.h"
+#include "lists.h"
 #include "map.h"
 #include "matrix.h"
 #include "protect.h"
@@ -33,9 +27,8 @@ using namespace cpp4r;
 #include "sum.h"
 #include "sum_int.h"
 #include "truncate.h"
-#include "lists.h"
 
-#include "test-runner.h"
+// Test headers (these contain testthat tests, not exported functions)
 #include "test-as.h"
 #include "test-complex.h"
 #include "test-data_frame.h"
@@ -49,11 +42,11 @@ using namespace cpp4r;
 #include "test-logicals.h"
 #include "test-matrix.h"
 #include "test-nas.h"
-#include "test-protect.h"
 #include "test-protect-nested.h"
-#include "test-raws.h"
+#include "test-protect.h"
 #include "test-r_complex.h"
 #include "test-r_vector.h"
+#include "test-raws.h"
 #include "test-sexp.h"
 #include "test-string.h"
 #include "test-strings.h"

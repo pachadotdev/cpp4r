@@ -36,13 +36,13 @@
 
 #if defined(R_VERSION) && R_VERSION >= R_Version(4, 4, 0)
 // Use R's new macro
-#define cpp4r_PRIdXLEN_T R_PRIdXLEN_T
+#define CPP4R_PRIdXLEN_T R_PRIdXLEN_T
 #else
 // Recreate what new R does
 #ifdef LONG_VECTOR_SUPPORT
-#define cpp4r_PRIdXLEN_T "td"
+#define CPP4R_PRIdXLEN_T "td"
 #else
-#define cpp4r_PRIdXLEN_T "d"
+#define CPP4R_PRIdXLEN_T "d"
 #endif
 #endif
 

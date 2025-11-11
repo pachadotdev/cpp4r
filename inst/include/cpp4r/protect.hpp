@@ -14,7 +14,7 @@
 #include "R_ext/Print.h"    // for REprintf
 #include "R_ext/Utils.h"    // for R_CheckUserInterrupt
 
-#ifdef cpp4r_USE_FMT
+#ifdef CPP4R_USE_FMT
 #define FMT_HEADER_ONLY
 #include "fmt/core.h"
 #endif
@@ -183,7 +183,7 @@ constexpr struct protect safe = {};
 
 inline void check_user_interrupt() { safe[R_CheckUserInterrupt](); }
 
-#ifdef cpp4r_USE_FMT
+#ifdef CPP4R_USE_FMT
 template <typename... Args>
 void stop [[noreturn]] (const char* fmt_arg, Args&&... args) {
   std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);

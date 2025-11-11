@@ -280,8 +280,8 @@ inline SEXP r_vector<T>::valid_length(SEXP x, R_xlen_t n) {
 
   char message[128];
   snprintf(message, 128,
-           "Invalid input length, expected '%" cpp4r_PRIdXLEN_T
-           "' actual '%" cpp4r_PRIdXLEN_T "'.",
+           "Invalid input length, expected '%" CPP4R_PRIdXLEN_T
+           "' actual '%" CPP4R_PRIdXLEN_T "'.",
            n, x_n);
 
   throw std::length_error(message);

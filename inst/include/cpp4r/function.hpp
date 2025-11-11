@@ -106,7 +106,7 @@ inline void r_message(const char* x) {
 }  // namespace detail
 
 inline void message(const char* fmt_arg) {
-#ifdef cpp4r_USE_FMT
+#ifdef CPP4R_USE_FMT
   std::string msg = fmt::format(fmt_arg);
   safe[detail::r_message](msg.c_str());
 #else
@@ -121,7 +121,7 @@ inline void message(const char* fmt_arg) {
 
 template <typename... Args>
 void message(const char* fmt_arg, Args... args) {
-#ifdef cpp4r_USE_FMT
+#ifdef CPP4R_USE_FMT
   std::string msg = fmt::format(fmt_arg, args...);
   safe[detail::r_message](msg.c_str());
 #else
