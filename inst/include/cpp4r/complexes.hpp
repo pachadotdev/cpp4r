@@ -69,6 +69,15 @@ inline void r_vector<r_complex>::set_elt(
   COMPLEX(x)[i] = value;
 }
 
+// Comparison operator for proxy
+inline bool operator==(const r_vector<r_complex>::proxy& lhs, r_complex rhs) {
+  return static_cast<r_complex>(lhs) == rhs;
+}
+
+inline bool operator!=(const r_vector<r_complex>::proxy& lhs, r_complex rhs) {
+  return !(lhs == rhs);
+}
+
 typedef r_vector<r_complex> complexes;
 
 }  // namespace writable
@@ -92,109 +101,7 @@ inline complexes as_complexes(SEXP x) {
   throw type_error(CPLXSXP, detail::r_typeof(x));
 }
 
-// Define comparison operators within the proxy class
-namespace writable {
-
-template <>
-class r_vector<r_complex>::proxy {
- public:
-  proxy(SEXP data, R_xlen_t index)
-      : data_(data), index_(index), buf_(nullptr), is_altrep_(false) {}
-
-  proxy(SEXP data, R_xlen_t index, Rcomplex* buf, bool is_altrep)
-      : data_(data), index_(index), buf_(buf), is_altrep_(is_altrep) {}
-
-  operator r_complex() const {
-    if (is_altrep_ && buf_ != nullptr) {
-      return r_complex(buf_->r, buf_->i);
-    } else {
-      Rcomplex r = COMPLEX_ELT(data_, index_);
-      return r_complex(r.r, r.i);
-    }
-  }
-
-  proxy& operator=(const r_complex& value) {
-    if (is_altrep_ && buf_ != nullptr) {
-      buf_->r = value.real();
-      buf_->i = value.imag();
-    } else {
-      Rcomplex r;
-      r.r = value.real();
-      r.i = value.imag();
-      SET_COMPLEX_ELT(data_, index_, r);
-    }
-    return *this;
-  }
-
-  proxy& operator=(const std::complex<double>& value) {
-    if (is_altrep_ && buf_ != nullptr) {
-      buf_->r = value.real();
-      buf_->i = value.imag();
-    } else {
-      Rcomplex r;
-      r.r = value.real();
-      r.i = value.imag();
-      SET_COMPLEX_ELT(data_, index_, r);
-    }
-    return *this;
-  }
-
-  proxy& operator+=(const r_complex& value) {
-    *this = static_cast<r_complex>(*this) + value;
-    return *this;
-  }
-
-  proxy& operator-=(const r_complex& value) {
-    *this = static_cast<r_complex>(*this) - value;
-    return *this;
-  }
-
-  proxy& operator*=(const r_complex& value) {
-    *this = static_cast<r_complex>(*this) * value;
-    return *this;
-  }
-
-  proxy& operator/=(const r_complex& value) {
-    *this = static_cast<r_complex>(*this) / value;
-    return *this;
-  }
-
-  proxy& operator++() {
-    *this += r_complex(1, 0);
-    return *this;
-  }
-
-  proxy operator++(int) {
-    proxy tmp(*this);
-    operator++();
-    return tmp;
-  }
-
-  proxy& operator--() {
-    *this -= r_complex(1, 0);
-    return *this;
-  }
-
-  proxy operator--(int) {
-    proxy tmp(*this);
-    operator--();
-    return tmp;
-  }
-
-  friend bool operator==(const proxy& lhs, const r_complex& rhs) {
-    return static_cast<r_complex>(lhs) == rhs;
-  }
-
-  friend bool operator!=(const proxy& lhs, const r_complex& rhs) { return !(lhs == rhs); }
-
- private:
-  SEXP data_;
-  R_xlen_t index_;
-  Rcomplex* buf_;
-  bool is_altrep_;
-};
-
-}  // namespace writable
+// No proxy redefinition here — use the generic proxy implementation from r_vector_writable_impl.hpp
 
 // New complex_vector class for handling complex numbers in SEXP
 class complex_vector {

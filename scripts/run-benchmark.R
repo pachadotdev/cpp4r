@@ -19,8 +19,8 @@ message(
     "\n==============================================================================="
 )
 
-n <- 500L
-iterations <- 100L
+n <- 1000L
+iterations <- 250L
 
 set.seed(42)
 A <- matrix(rnorm(n * n), nrow = n, ncol = n)

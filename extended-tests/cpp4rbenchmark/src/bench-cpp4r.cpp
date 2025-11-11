@@ -5,7 +5,7 @@
 using namespace cpp4r;
 
 /* roxygen
-@title Add Two Matrices (Optimized)
+@title Add Two Matrices
 @export
 */
 [[cpp4r::register]] doubles_matrix<> add_two_cpp4r(const doubles_matrix<>& a,
@@ -31,7 +31,7 @@ using namespace cpp4r;
 }
 
 /* roxygen
-@title Add Four Matrices (Optimized)
+@title Add Four Matrices
 @export
 */
 [[cpp4r::register]] doubles_matrix<> add_four_cpp4r(const doubles_matrix<>& a,
@@ -59,7 +59,7 @@ using namespace cpp4r;
 }
 
 /* roxygen
-@title Multiply Four Matrices (Optimized)
+@title Multiply Four Matrices
 @export
 */
 [[cpp4r::register]] doubles_matrix<> multiply_four_cpp4r(const doubles_matrix<>& a,
@@ -130,7 +130,7 @@ using namespace cpp4r;
 }
 
 /* roxygen
-@title Submatrix Manipulation (Optimized)
+@title Submatrix Manipulation
 @export
 */
 [[cpp4r::register]] doubles_matrix<> submatrix_manipulation_cpp4r(
@@ -160,7 +160,7 @@ using namespace cpp4r;
 }
 
 /* roxygen
-@title Multi-Operation Expression (Optimized)
+@title Multi-Operation Expression
 @export
 */
 [[cpp4r::register]] double multi_operation_cpp4r(const doubles_matrix<>& a,
