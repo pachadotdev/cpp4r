@@ -1,15 +1,9 @@
 #pragma once
 
-#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
-
 #include <cstdlib>           // for abs
 #include <initializer_list>  // for initializer_list
 #include <string>            // for string, basic_string
 #include <utility>           // for move
-
-#if CPP4R_HAS_CXX17
-#include <string_view>  // for std::string_view (C++17)
-#endif
 
 #include "R_ext/Arith.h"              // for NA_INTEGER
 #include "cpp4r/R.hpp"                // for Rf_xlength, SEXP, SEXPREC, INTEGER
@@ -31,23 +25,17 @@ class data_frame : public list {
 
   /* we cannot use Rf_getAttrib because it has a special case for c(NA, -n) and creates
    * the full vector */
-  static SEXP get_attrib0(SEXP x, SEXP sym) noexcept {
+  static SEXP get_attrib0(SEXP x, SEXP sym) {
     for (SEXP attr = ATTRIB(x); attr != R_NilValue; attr = CDR(attr)) {
-#if CPP4R_HAS_CXX20
       if (TAG(attr) == sym) {
         return CAR(attr);
       }
-#else
-      if (TAG(attr) == sym) {
-        return CAR(attr);
-      }
-#endif
     }
 
     return R_NilValue;
   }
 
-  static R_xlen_t calc_nrow(SEXP x) noexcept {
+  static R_xlen_t calc_nrow(SEXP x) {
     auto nms = get_attrib0(x, R_RowNamesSymbol);
     bool has_short_rownames =
         (Rf_isInteger(nms) && Rf_xlength(nms) == 2 && INTEGER(nms)[0] == NA_INTEGER);
@@ -70,20 +58,13 @@ class data_frame : public list {
   /* Adapted from
    * https://github.com/wch/r-source/blob/f2a0dfab3e26fb42b8b296fcba40cbdbdbec767d/src/main/attrib.c#L198-L207
    */
-#if CPP4R_HAS_CXX17
-  CPP4R_NODISCARD R_xlen_t nrow() const noexcept { return calc_nrow(*this); }
-  CPP4R_NODISCARD R_xlen_t ncol() const noexcept { return size(); }
-#else
-  R_xlen_t nrow() const noexcept { return calc_nrow(*this); }
-  R_xlen_t ncol() const noexcept { return size(); }
-#endif
+  R_xlen_t nrow() const { return calc_nrow(*this); }
+  R_xlen_t ncol() const { return size(); }
 };
 
 namespace writable {
 class data_frame : public cpp4r::data_frame {
  private:
-#if CPP4R_HAS_CXX17
-  // C++17: Use move semantics more efficiently
   writable::list set_data_frame_attributes(writable::list&& x) {
     return set_data_frame_attributes(std::move(x), calc_nrow(x));
   }
@@ -93,18 +74,6 @@ class data_frame : public cpp4r::data_frame {
     x.attr(R_ClassSymbol) = "data.frame";
     return std::move(x);
   }
-#else
-  // C++11/14: Standard move semantics
-  writable::list set_data_frame_attributes(writable::list&& x) {
-    return set_data_frame_attributes(std::move(x), calc_nrow(x));
-  }
-
-  writable::list set_data_frame_attributes(writable::list&& x, R_xlen_t nrow) {
-    x.attr(R_RowNamesSymbol) = {NA_INTEGER, -static_cast<int>(nrow)};
-    x.attr(R_ClassSymbol) = "data.frame";
-    return std::move(x);
-  }
-#endif
 
  public:
   data_frame(const SEXP data) : cpp4r::data_frame(set_data_frame_attributes(data)) {}
@@ -120,43 +89,15 @@ class data_frame : public cpp4r::data_frame {
   using cpp4r::data_frame::ncol;
   using cpp4r::data_frame::nrow;
 
-#if CPP4R_HAS_CXX17
-  // C++17: Return type can use [[nodiscard]]
-  CPP4R_NODISCARD attribute_proxy<data_frame> attr(const char* name) const noexcept {
-    return {*this, name};
-  }
+  attribute_proxy<data_frame> attr(const char* name) const { return {*this, name}; }
 
-  CPP4R_NODISCARD attribute_proxy<data_frame> attr(
-      const std::string& name) const noexcept {
+  attribute_proxy<data_frame> attr(const std::string& name) const {
     return {*this, name.c_str()};
   }
 
-  // C++17: Add string_view overload for zero-copy
-  CPP4R_NODISCARD attribute_proxy<data_frame> attr(std::string_view name) const noexcept {
-    return {*this, name};
-  }
+  attribute_proxy<data_frame> attr(SEXP name) const { return {*this, name}; }
 
-  CPP4R_NODISCARD attribute_proxy<data_frame> attr(SEXP name) const noexcept {
-    return {*this, name};
-  }
-
-  CPP4R_NODISCARD attribute_proxy<data_frame> names() const noexcept {
-    return {*this, R_NamesSymbol};
-  }
-#else
-  // C++11/14: No nodiscard or string_view
-  attribute_proxy<data_frame> attr(const char* name) const noexcept {
-    return {*this, name};
-  }
-
-  attribute_proxy<data_frame> attr(const std::string& name) const noexcept {
-    return {*this, name.c_str()};
-  }
-
-  attribute_proxy<data_frame> attr(SEXP name) const noexcept { return {*this, name}; }
-
-  attribute_proxy<data_frame> names() const noexcept { return {*this, R_NamesSymbol}; }
-#endif
+  attribute_proxy<data_frame> names() const { return {*this, R_NamesSymbol}; }
 };
 
 }  // namespace writable

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
-
 #include <algorithm>         // for min, tranform
 #include <array>             // for array
 #include <initializer_list>  // for initializer_list
@@ -31,8 +29,8 @@ inline typename r_vector<double>::underlying_type r_vector<double>::get_elt(SEXP
 }
 
 template <>
-inline typename r_vector<double>::underlying_type* r_vector<double>::get_p(
-    bool is_altrep, SEXP data) {
+inline typename r_vector<double>::underlying_type* r_vector<double>::get_p(bool is_altrep,
+                                                                           SEXP data) {
   if (is_altrep) {
     return nullptr;
   } else {
@@ -77,45 +75,32 @@ typedef r_vector<int> integers;
 typedef r_vector<r_bool> logicals;
 
 inline doubles as_doubles(SEXP x) {
-  SEXPTYPE x_type = detail::r_typeof(x);
-  if (x_type == REALSXP) {
+  if (detail::r_typeof(x) == REALSXP) {
     return doubles(x);
-  }
-
-  if (x_type == INTSXP) {
+  } else if (detail::r_typeof(x) == INTSXP) {
     integers xn(x);
     size_t len = xn.size();
     writable::doubles ret(len);
-    // Trust the compiler to optimize std::transform - it will use SIMD vectorization
-    // and is faster than manual pointer loops with branching
     std::transform(xn.begin(), xn.end(), ret.begin(), [](int value) {
       return value == NA_INTEGER ? NA_REAL : static_cast<double>(value);
     });
     return ret;
-  }
-
-  if (x_type == LGLSXP) {
+  } else if (detail::r_typeof(x) == LGLSXP) {
     logicals xn(x);
     size_t len = xn.size();
     writable::doubles ret(len);
-    std::transform(xn.begin(), xn.end(), ret.begin(), [](r_bool value) {
-      return value == NA_LOGICAL ? NA_REAL : static_cast<double>(static_cast<int>(value));
+    std::transform(xn.begin(), xn.end(), ret.begin(), [](bool value) {
+      return value == NA_LOGICAL ? NA_REAL : static_cast<double>(value);
     });
     return ret;
   }
 
-  throw type_error(REALSXP, x_type);
+  throw type_error(REALSXP, detail::r_typeof(x));
 }
 
 template <>
-#if CPP4R_HAS_CXX17
-CPP4R_NODISCARD inline double na() {
-  return NA_REAL;
-}
-#else
 inline double na() {
   return NA_REAL;
 }
-#endif
 
 }  // namespace cpp4r

@@ -1,21 +1,15 @@
 #pragma once
 
-#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
-
 #include <initializer_list>  // for initializer_list
 #include <iterator>
 #include <string>  // for string
 
-#if CPP4R_HAS_CXX17
-#include <string_view>  // for std::string_view (C++17)
-#endif
-
-#include "cpp4r/R.hpp"          // for SEXP, SEXPREC, R_xlen_t, INT...
-#include "cpp4r/r_bool.hpp"     // for r_bool
-#include "cpp4r/r_complex.hpp"  // for r_complex
-#include "cpp4r/r_string.hpp"   // for r_string
-#include "cpp4r/r_vector.hpp"   // for r_vector
-#include "cpp4r/sexp.hpp"       // for sexp
+#include "cpp4r/R.hpp"                // for SEXP, SEXPREC, R_xlen_t, INT...
+#include "cpp4r/attribute_proxy.hpp"  // for attribute_proxy
+#include "cpp4r/r_bool.hpp"           // for r_bool
+#include "cpp4r/r_string.hpp"         // for r_string
+#include "cpp4r/r_vector.hpp"         // for r_vector
+#include "cpp4r/sexp.hpp"             // for sexp
 
 namespace cpp4r {
 
@@ -29,13 +23,8 @@ struct matrix_dims {
   matrix_dims(SEXP data) : nrow_(Rf_nrows(data)), ncol_(Rf_ncols(data)) {}
   matrix_dims(int nrow, int ncol) : nrow_(nrow), ncol_(ncol) {}
 
-#if CPP4R_HAS_CXX17
   int nrow() const { return nrow_; }
   int ncol() const { return ncol_; }
-#else
-  int nrow() const { return nrow_; }
-  int ncol() const { return ncol_; }
-#endif
 };
 
 // base type for dimension-wise matrix access specialization
@@ -66,17 +55,10 @@ struct matrix_slices<by_row> : public matrix_dims {
   using matrix_dims::ncol;
   using matrix_dims::nrow;
 
-#if CPP4R_HAS_CXX17
   int nslices() const { return nrow(); }
   int slice_size() const { return ncol(); }
   int slice_stride() const { return nrow(); }
   int slice_offset(int pos) const { return pos; }
-#else
-  int nslices() const { return nrow(); }
-  int slice_size() const { return ncol(); }
-  int slice_stride() const { return nrow(); }
-  int slice_offset(int pos) const { return pos; }
-#endif
 };
 
 // basic properties of matrix column slices
@@ -87,17 +69,10 @@ struct matrix_slices<by_column> : public matrix_dims {
   using matrix_dims::ncol;
   using matrix_dims::nrow;
 
-#if CPP4R_HAS_CXX17
   int nslices() const { return ncol(); }
   int slice_size() const { return nrow(); }
   int slice_stride() const { return 1; }
   int slice_offset(int pos) const { return pos * nrow(); }
-#else
-  int nslices() const { return ncol(); }
-  int slice_size() const { return nrow(); }
-  int slice_stride() const { return 1; }
-  int slice_offset(int pos) const { return pos * nrow(); }
-#endif
 };
 
 template <typename V, typename T, typename S = by_column>
@@ -117,28 +92,15 @@ class matrix : public matrix_slices<S> {
     slice(const matrix& parent, int index)
         : parent_(parent), index_(index), offset_(parent.slice_offset(index)) {}
 
-#if CPP4R_HAS_CXX17
-    R_xlen_t stride() const noexcept { return parent_.slice_stride(); }
-    R_xlen_t size() const noexcept { return parent_.slice_size(); }
-#else
-    R_xlen_t stride() const noexcept { return parent_.slice_stride(); }
-    R_xlen_t size() const noexcept { return parent_.slice_size(); }
-#endif
+    R_xlen_t stride() const { return parent_.slice_stride(); }
+    R_xlen_t size() const { return parent_.slice_size(); }
 
-    bool operator==(const slice& rhs) const noexcept {
+    bool operator==(const slice& rhs) const {
       return (index_ == rhs.index_) && (parent_.data() == rhs.parent_.data());
     }
-    bool operator!=(const slice& rhs) const noexcept { return !operator==(rhs); }
+    bool operator!=(const slice& rhs) const { return !operator==(rhs); }
 
-#if CPP4R_HAS_CXX17
-    T operator[](int pos) const noexcept {
-      return parent_.vector_[offset_ + stride() * pos];
-    }
-#else
-    T operator[](int pos) const noexcept {
-      return parent_.vector_[offset_ + stride() * pos];
-    }
-#endif
+    T operator[](int pos) const { return parent_.vector_[offset_ + stride() * pos]; }
 
     // iterates elements of a slice
     class iterator {
@@ -155,21 +117,17 @@ class matrix : public matrix_slices<S> {
 
       iterator(const slice& slice, R_xlen_t pos) : slice_(slice), pos_(pos) {}
 
-      iterator& operator++() noexcept {
+      iterator& operator++() {
         ++pos_;
         return *this;
       }
 
-      bool operator==(const iterator& rhs) const noexcept {
+      bool operator==(const iterator& rhs) const {
         return (pos_ == rhs.pos_) && (slice_ == rhs.slice_);
       }
-      bool operator!=(const iterator& rhs) const noexcept { return !operator==(rhs); }
+      bool operator!=(const iterator& rhs) const { return !operator==(rhs); }
 
-#if CPP4R_HAS_CXX17
-      T operator*() const noexcept { return slice_[pos_]; };
-#else
-      T operator*() const noexcept { return slice_[pos_]; };
-#endif
+      T operator*() const { return slice_[pos_]; };
     };
 
     iterator begin() const { return {*this, 0}; }
@@ -192,21 +150,17 @@ class matrix : public matrix_slices<S> {
 
     slice_iterator(const matrix& parent, R_xlen_t pos) : parent_(parent), pos_(pos) {}
 
-    slice_iterator& operator++() noexcept {
+    slice_iterator& operator++() {
       ++pos_;
       return *this;
     }
 
-    bool operator==(const slice_iterator& rhs) const noexcept {
+    bool operator==(const slice_iterator& rhs) const {
       return (pos_ == rhs.pos_) && (parent_.data() == rhs.parent_.data());
     }
-    bool operator!=(const slice_iterator& rhs) const noexcept { return !operator==(rhs); }
+    bool operator!=(const slice_iterator& rhs) const { return !operator==(rhs); }
 
-#if CPP4R_HAS_CXX17
     slice operator*() { return parent_[pos_]; };
-#else
-    slice operator*() { return parent_[pos_]; };
-#endif
   };
 
  public:
@@ -221,33 +175,6 @@ class matrix : public matrix_slices<S> {
     vector_.attr(R_DimSymbol) = {nrow, ncol};
   }
 
-  // Copy constructor
-  matrix(const matrix& other)
-      : matrix_slices<S>(other.nrow(), other.ncol()), vector_(other.vector_) {}
-
-  // Copy assignment
-  matrix& operator=(const matrix& other) {
-    if (this != &other) {
-      vector_ = other.vector_;
-      // Note: matrix_slices dimensions are recalculated from vector
-    }
-    return *this;
-  }
-
-  // Move constructor
-  matrix(matrix&& other) noexcept
-      : matrix_slices<S>(other.nrow(), other.ncol()), vector_(std::move(other.vector_)) {}
-
-  // Move assignment
-  matrix& operator=(matrix&& other) noexcept {
-    if (this != &other) {
-      vector_ = std::move(other.vector_);
-      // Note: matrix_slices is not copyable/moveable, but dimensions are recalculated
-      // from vector
-    }
-    return *this;
-  }
-
   using matrix_slices<S>::nrow;
   using matrix_slices<S>::ncol;
   using matrix_slices<S>::nslices;
@@ -255,7 +182,6 @@ class matrix : public matrix_slices<S> {
   using matrix_slices<S>::slice_stride;
   using matrix_slices<S>::slice_offset;
 
-#if CPP4R_HAS_CXX17
   V vector() const { return vector_; }
 
   SEXP data() const { return vector_.data(); }
@@ -263,15 +189,6 @@ class matrix : public matrix_slices<S> {
   R_xlen_t size() const { return vector_.size(); }
 
   operator SEXP() const { return SEXP(vector_); }
-#else
-  V vector() const { return vector_; }
-
-  SEXP data() const { return vector_.data(); }
-
-  R_xlen_t size() const { return vector_.size(); }
-
-  operator SEXP() const { return SEXP(vector_); }
-#endif
 
   // operator sexp() { return sexp(vector_); }
 
@@ -281,74 +198,49 @@ class matrix : public matrix_slices<S> {
     return attribute_proxy<V>(vector_, name.c_str());
   }
 
-#if CPP4R_HAS_CXX17
-  // C++17: Add string_view overload
-  attribute_proxy<V> attr(std::string_view name) {
-    return attribute_proxy<V>(vector_, name.data());
-  }
-#endif
-
   attribute_proxy<V> attr(SEXP name) { return attribute_proxy<V>(vector_, name); }
 
   void attr(const char* name, SEXP value) { vector_.attr(name) = value; }
 
   void attr(const std::string& name, SEXP value) { vector_.attr(name) = value; }
 
-#if CPP4R_HAS_CXX17
-  // C++17: Add string_view overload
-  void attr(std::string_view name, SEXP value) { vector_.attr(name.data()) = value; }
-#endif
-
   void attr(SEXP name, SEXP value) { vector_.attr(name) = value; }
 
- private:
-  SEXP create_sexp_list(std::initializer_list<SEXP> value) const {
+  void attr(const char* name, std::initializer_list<SEXP> value) {
     SEXP attr = PROTECT(Rf_allocVector(VECSXP, value.size()));
     int i = 0;
     for (SEXP v : value) {
       SET_VECTOR_ELT(attr, i++, v);
     }
+    vector_.attr(name) = attr;
     UNPROTECT(1);
-    return attr;
-  }
-
- public:
-  void attr(const char* name, std::initializer_list<SEXP> value) {
-    vector_.attr(name) = create_sexp_list(value);
   }
 
   void attr(const std::string& name, std::initializer_list<SEXP> value) {
-    vector_.attr(name) = create_sexp_list(value);
+    SEXP attr = PROTECT(Rf_allocVector(VECSXP, value.size()));
+    int i = 0;
+    for (SEXP v : value) {
+      SET_VECTOR_ELT(attr, i++, v);
+    }
+    vector_.attr(name) = attr;
+    UNPROTECT(1);
   }
-
-#if CPP4R_HAS_CXX17
-  // C++17: Add string_view overload
-  void attr(std::string_view name, std::initializer_list<SEXP> value) {
-    vector_.attr(name.data()) = create_sexp_list(value);
-  }
-#endif
 
   void attr(SEXP name, std::initializer_list<SEXP> value) {
-    vector_.attr(name) = create_sexp_list(value);
+    SEXP attr = PROTECT(Rf_allocVector(VECSXP, value.size()));
+    int i = 0;
+    for (SEXP v : value) {
+      SET_VECTOR_ELT(attr, i++, v);
+    }
+    vector_.attr(name) = attr;
+    UNPROTECT(1);
   }
 
-#if CPP4R_HAS_CXX17
-  r_vector<r_string> names() const {
-    return r_vector<r_string>(vector_.names());
-  }
-
-  T operator()(int row, int col) const noexcept {
-    return vector_[row + (col * nrow())];
-  }
-
-  slice operator[](int index) const { return {*this, index}; }
-#else
   r_vector<r_string> names() const { return r_vector<r_string>(vector_.names()); }
 
-  T operator()(int row, int col) const noexcept { return vector_[row + (col * nrow())]; }
+  T operator()(int row, int col) const { return vector_[row + (col * nrow())]; }
 
   slice operator[](int index) const { return {*this, index}; }
-#endif
 
   slice_iterator begin() const { return {*this, 0}; }
   slice_iterator end() const { return {*this, nslices()}; }

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
-
 #include <initializer_list>  // for initializer_list
 
 #include "cpp4r/R.hpp"                // for SEXP, SEXPREC, SET_VECTOR_ELT
@@ -28,33 +26,27 @@ inline typename r_vector<SEXP>::underlying_type r_vector<SEXP>::get_elt(SEXP x,
 }
 
 template <>
-inline typename r_vector<SEXP>::underlying_type* r_vector<SEXP>::get_p(bool,
-                                                                       SEXP) noexcept {
+inline typename r_vector<SEXP>::underlying_type* r_vector<SEXP>::get_p(bool, SEXP) {
   return nullptr;
 }
 
 template <>
 inline typename r_vector<SEXP>::underlying_type const* r_vector<SEXP>::get_const_p(
-    bool is_altrep, SEXP data) noexcept {
+    bool is_altrep, SEXP data) {
   // No `VECTOR_PTR_OR_NULL()`
   if (is_altrep) {
     return nullptr;
   } else {
+    // TODO: Use `VECTOR_PTR_RO()` conditionally once R 4.5.0 is officially released
     return static_cast<SEXP const*>(DATAPTR_RO(data));
   }
 }
 
 /// Specialization for lists, where `x["oob"]` returns `R_NilValue`, like at the R level
 template <>
-#if CPP4R_HAS_CXX17
-CPP4R_NODISCARD inline SEXP r_vector<SEXP>::get_oob() {
-  return R_NilValue;
-}
-#else
 inline SEXP r_vector<SEXP>::get_oob() {
   return R_NilValue;
 }
-#endif
 
 template <>
 inline void r_vector<SEXP>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
@@ -78,14 +70,6 @@ inline void r_vector<SEXP>::set_elt(SEXP x, R_xlen_t i,
   SET_VECTOR_ELT(x, i, value);
 }
 
-// Specialization for list proxy to allow automatic conversion from C++ types to SEXP
-template <>
-template <typename U, typename>
-inline r_vector<SEXP>::proxy& r_vector<SEXP>::proxy::operator=(const U& rhs) {
-  set(as_sexp(rhs));
-  return *this;
-}
-
 // Requires specialization to handle the fact that, for lists, each element of the
 // initializer list is considered the scalar "element", i.e. we don't expect that
 // each `named_arg` contains a list of length 1, like we do for the other vector types.
@@ -100,9 +84,8 @@ inline r_vector<SEXP>::r_vector(std::initializer_list<named_arg> il)
     Rf_setAttrib(data_, R_NamesSymbol, names);
 
     auto it = il.begin();
-    const auto end = il.end();
 
-    for (R_xlen_t i = 0; it != end; ++i, ++it) {
+    for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
       SEXP elt = it->value();
       set_elt(data_, i, elt);
 

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
-
 #include <algorithm>         // for std::transform
 #include <complex>           // for std::complex
 #include <initializer_list>  // for std::initializer_list
@@ -12,6 +10,12 @@
 #include "cpp4r/r_complex.hpp"  // for r_complex
 #include "cpp4r/r_vector.hpp"   // for r_vector, r_vector<>::proxy
 #include "cpp4r/sexp.hpp"       // for sexp
+
+// Define SET_COMPLEX_ELT if not defined
+// for compatibility with older R versions, such as ubuntu 20.04 oldrel-4
+#ifndef SET_COMPLEX_ELT
+#define SET_COMPLEX_ELT(x, i, v) (COMPLEX(x)[i] = v)
+#endif
 
 namespace cpp4r {
 
@@ -30,7 +34,7 @@ inline typename r_vector<r_complex>::underlying_type r_vector<r_complex>::get_el
 
 template <>
 inline typename r_vector<r_complex>::underlying_type* r_vector<r_complex>::get_p(
-    bool is_altrep, SEXP data) noexcept {
+    bool is_altrep, SEXP data) {
   if (is_altrep) {
     return nullptr;
   } else {
@@ -78,9 +82,9 @@ inline complexes as_complexes(SEXP x) {
     r_vector<int> xn(x);
     size_t len = xn.size();
     writable::complexes ret(len);
-    std::transform(xn.begin(), xn.end(), ret.begin(), [](int value) noexcept {
-      return (value == NA_INTEGER) ? r_complex(NA_REAL, NA_REAL)
-                                   : r_complex(static_cast<double>(value), 0.0);
+    std::transform(xn.begin(), xn.end(), ret.begin(), [](int value) {
+      return value == NA_INTEGER ? r_complex(NA_REAL, NA_REAL)
+                                 : r_complex(static_cast<double>(value), 0.0);
     });
     return ret;
   }
@@ -94,21 +98,13 @@ namespace writable {
 template <>
 class r_vector<r_complex>::proxy {
  public:
-  proxy(SEXP data, R_xlen_t index) noexcept
+  proxy(SEXP data, R_xlen_t index)
       : data_(data), index_(index), buf_(nullptr), is_altrep_(false) {}
 
-  proxy(SEXP data, R_xlen_t index, Rcomplex* buf, bool is_altrep) noexcept
+  proxy(SEXP data, R_xlen_t index, Rcomplex* buf, bool is_altrep)
       : data_(data), index_(index), buf_(buf), is_altrep_(is_altrep) {}
 
-  // Explicitly default special member functions to avoid Clang 20 implicit declaration
-  // issues Note: When declaring move constructor, must also declare copy assignment to
-  // avoid it being deleted
-  proxy(const proxy&) noexcept = default;
-  proxy(proxy&&) noexcept = default;
-  proxy& operator=(const proxy&) noexcept = default;
-  proxy& operator=(proxy&&) noexcept = default;
-
-  operator r_complex() const noexcept {
+  operator r_complex() const {
     if (is_altrep_ && buf_ != nullptr) {
       return r_complex(buf_->r, buf_->i);
     } else {
@@ -117,7 +113,7 @@ class r_vector<r_complex>::proxy {
     }
   }
 
-  proxy& operator=(const r_complex& value) noexcept {
+  proxy& operator=(const r_complex& value) {
     if (is_altrep_ && buf_ != nullptr) {
       buf_->r = value.real();
       buf_->i = value.imag();
@@ -130,7 +126,7 @@ class r_vector<r_complex>::proxy {
     return *this;
   }
 
-  proxy& operator=(const std::complex<double>& value) noexcept {
+  proxy& operator=(const std::complex<double>& value) {
     if (is_altrep_ && buf_ != nullptr) {
       buf_->r = value.real();
       buf_->i = value.imag();
@@ -143,85 +139,53 @@ class r_vector<r_complex>::proxy {
     return *this;
   }
 
-  proxy& operator+=(const r_complex& value) noexcept {
-    // Direct arithmetic on components to avoid temporary objects
-    if (is_altrep_ && buf_ != nullptr) {
-      buf_->r += value.real();
-      buf_->i += value.imag();
-    } else {
-      Rcomplex current = COMPLEX_ELT(data_, index_);
-      current.r += value.real();
-      current.i += value.imag();
-      SET_COMPLEX_ELT(data_, index_, current);
-    }
+  proxy& operator+=(const r_complex& value) {
+    *this = static_cast<r_complex>(*this) + value;
     return *this;
   }
 
-  proxy& operator-=(const r_complex& value) noexcept {
-    // Direct arithmetic on components to avoid temporary objects
-    if (is_altrep_ && buf_ != nullptr) {
-      buf_->r -= value.real();
-      buf_->i -= value.imag();
-    } else {
-      Rcomplex current = COMPLEX_ELT(data_, index_);
-      current.r -= value.real();
-      current.i -= value.imag();
-      SET_COMPLEX_ELT(data_, index_, current);
-    }
+  proxy& operator-=(const r_complex& value) {
+    *this = static_cast<r_complex>(*this) - value;
     return *this;
   }
 
-  proxy& operator*=(const r_complex& value) noexcept {
-    // Complex multiplication: (a+bi)(c+di) = (ac-bd) + (ad+bc)i
-    if (is_altrep_ && buf_ != nullptr) {
-      double real_part = buf_->r * value.real() - buf_->i * value.imag();
-      double imag_part = buf_->r * value.imag() + buf_->i * value.real();
-      buf_->r = real_part;
-      buf_->i = imag_part;
-    } else {
-      Rcomplex current = COMPLEX_ELT(data_, index_);
-      double real_part = current.r * value.real() - current.i * value.imag();
-      double imag_part = current.r * value.imag() + current.i * value.real();
-      current.r = real_part;
-      current.i = imag_part;
-      SET_COMPLEX_ELT(data_, index_, current);
-    }
+  proxy& operator*=(const r_complex& value) {
+    *this = static_cast<r_complex>(*this) * value;
     return *this;
   }
 
-  proxy& operator/=(const r_complex& value) noexcept {
-    // Complex division: (a+bi)/(c+di) = ((ac+bd) + (bc-ad)i)/(c²+d²)
-    const double c = value.real();
-    const double d = value.imag();
-    const double denom_inv = 1.0 / (c * c + d * d);  // Compute reciprocal once
-
-    if (is_altrep_ && buf_ != nullptr) {
-      const double a = buf_->r;
-      const double b = buf_->i;
-      buf_->r = (a * c + b * d) * denom_inv;
-      buf_->i = (b * c - a * d) * denom_inv;
-    } else {
-      const Rcomplex current = COMPLEX_ELT(data_, index_);
-      const double a = current.r;
-      const double b = current.i;
-      Rcomplex result;
-      result.r = (a * c + b * d) * denom_inv;
-      result.i = (b * c - a * d) * denom_inv;
-      SET_COMPLEX_ELT(data_, index_, result);
-    }
+  proxy& operator/=(const r_complex& value) {
+    *this = static_cast<r_complex>(*this) / value;
     return *this;
+  }
+
+  proxy& operator++() {
+    *this += r_complex(1, 0);
+    return *this;
+  }
+
+  proxy operator++(int) {
+    proxy tmp(*this);
+    operator++();
+    return tmp;
+  }
+
+  proxy& operator--() {
+    *this -= r_complex(1, 0);
+    return *this;
+  }
+
+  proxy operator--(int) {
+    proxy tmp(*this);
+    operator--();
+    return tmp;
   }
 
   friend bool operator==(const proxy& lhs, const r_complex& rhs) {
     return static_cast<r_complex>(lhs) == rhs;
   }
 
-#if !CPP4R_HAS_CXX20
-  // C++20 automatically generates operator!= from operator==
-  friend bool operator!=(const proxy& lhs, const r_complex& rhs) {
-    return !(static_cast<r_complex>(lhs) == rhs);
-  }
-#endif
+  friend bool operator!=(const proxy& lhs, const r_complex& rhs) { return !(lhs == rhs); }
 
  private:
   SEXP data_;
@@ -232,31 +196,15 @@ class r_vector<r_complex>::proxy {
 
 }  // namespace writable
 
-// New complexes_vector class for handling complex numbers in SEXP
-class complexes_vector {
+// New complex_vector class for handling complex numbers in SEXP
+class complex_vector {
  public:
-#if CPP4R_HAS_CXX17
-  // C++17: Mark constructor as [[nodiscard]] candidate
-  CPP4R_NODISCARD explicit complexes_vector(SEXP x) noexcept
+  explicit complex_vector(SEXP x)
       : data_(reinterpret_cast<Rcomplex*>(DATAPTR(x))), size_(Rf_length(x)) {}
-#else
-  explicit complexes_vector(SEXP x) noexcept
-      : data_(reinterpret_cast<Rcomplex*>(DATAPTR(x))), size_(Rf_length(x)) {}
-#endif
 
-#if CPP4R_HAS_CXX17
-  CPP4R_NODISCARD std::complex<double> operator[](R_xlen_t i) const noexcept {
-    return {data_[i].r, data_[i].i};
-  }
+  std::complex<double> operator[](R_xlen_t i) const { return {data_[i].r, data_[i].i}; }
 
-  CPP4R_NODISCARD size_t size() const noexcept { return size_; }
-#else
-  std::complex<double> operator[](R_xlen_t i) const noexcept {
-    return {data_[i].r, data_[i].i};
-  }
-
-  size_t size() const noexcept { return size_; }
-#endif
+  size_t size() const { return size_; }
 
  private:
   Rcomplex* data_;
@@ -266,17 +214,8 @@ class complexes_vector {
 // Template specialization for adding cpp4r::r_complex to std::complex<double>
 template <typename T>
 inline std::complex<T>& operator+=(std::complex<T>& lhs, const cpp4r::r_complex& rhs) {
-#if CPP4R_HAS_CXX17
-  // C++17: More efficient with guaranteed copy elision and structured initialization
-  T new_real = lhs.real() + static_cast<T>(rhs.real());
-  T new_imag = lhs.imag() + static_cast<T>(rhs.imag());
-  lhs = std::complex<T>(new_real, new_imag);
-#else
-  // C++11/14: Standard approach
-  T new_real = lhs.real() + static_cast<T>(rhs.real());
-  T new_imag = lhs.imag() + static_cast<T>(rhs.imag());
-  lhs = std::complex<T>(new_real, new_imag);
-#endif
+  lhs.real(lhs.real() + rhs.real());
+  lhs.imag(lhs.imag() + rhs.imag());
   return lhs;
 }
 
@@ -301,5 +240,20 @@ inline r_vector<r_complex>::r_vector(std::initializer_list<r_complex> il)
 }
 
 }  // namespace writable
+
+// Comparison operators for r_vector<r_complex>
+template <>
+inline bool operator==(const r_vector<r_complex>& lhs, const r_vector<r_complex>& rhs) {
+  if (lhs.size() != rhs.size()) return false;
+  for (R_xlen_t i = 0; i < lhs.size(); ++i) {
+    if (!(lhs[i] == rhs[i])) return false;
+  }
+  return true;
+}
+
+template <>
+inline bool operator!=(const r_vector<r_complex>& lhs, const r_vector<r_complex>& rhs) {
+  return !(lhs == rhs);
+}
 
 }  // namespace cpp4r

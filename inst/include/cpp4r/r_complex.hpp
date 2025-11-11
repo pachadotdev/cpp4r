@@ -1,9 +1,6 @@
 #pragma once
 
-#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
-
 #include <complex>  // for std::complex
-#include <utility>  // for move
 
 #include "cpp4r/R.hpp"        // for SEXP, SEXPREC, Rf_mkCharCE, Rf_translateCharUTF8
 #include "cpp4r/as.hpp"       // for as_sexp
@@ -15,55 +12,31 @@ namespace cpp4r {
 class r_complex {
  public:
   r_complex() : data_(safe[Rf_allocVector](CPLXSXP, 1)) {
-    Rcomplex* ptr = COMPLEX(data_);
-    ptr[0].r = 0.0;
-    ptr[0].i = 0.0;
+    COMPLEX(data_)[0].r = 0;
+    COMPLEX(data_)[0].i = 0;
   }
   r_complex(SEXP data) : data_(data) {
     if (data_ == R_NilValue) {
-      data_ = safe[Rf_allocVector](CPLXSXP, 0);
+      data_ = PROTECT(Rf_allocVector(CPLXSXP, 0));
+      UNPROTECT(1);
     }
   }
   r_complex(double real, double imag) : data_(safe[Rf_allocVector](CPLXSXP, 1)) {
-    Rcomplex* ptr = COMPLEX(data_);
-    ptr[0].r = real;
-    ptr[0].i = imag;
+    COMPLEX(data_)[0].r = real;
+    COMPLEX(data_)[0].i = imag;
   }
   r_complex(const std::complex<double>& data) : r_complex(data.real(), data.imag()) {}
   r_complex(const Rcomplex& data) : r_complex(data.r, data.i) {}
 
-  // Copy constructor
-  r_complex(const r_complex& other) : data_(other.data_) {}
-
-  // Copy assignment
-  r_complex& operator=(const r_complex& other) {
-    if (this != &other) {
-      data_ = other.data_;
-    }
-    return *this;
-  }
-
-  // Move constructor
-  r_complex(r_complex&& other) noexcept : data_(other.data_) { other.data_ = R_NilValue; }
-
-  // Move assignment
-  r_complex& operator=(r_complex&& other) noexcept {
-    if (this != &other) {
-      data_ = other.data_;
-      other.data_ = R_NilValue;
-    }
-    return *this;
-  }
-
-  CPP4R_NODISCARD operator SEXP() const noexcept { return data_; }
-  CPP4R_NODISCARD operator sexp() const noexcept { return data_; }
-  CPP4R_NODISCARD operator std::complex<double>() const {
+  operator SEXP() const { return data_; }
+  operator sexp() const { return data_; }
+  operator std::complex<double>() const {
     if (data_ == R_NilValue || Rf_length(data_) == 0) {
       return {NA_REAL, NA_REAL};
     }
     return {COMPLEX(data_)[0].r, COMPLEX(data_)[0].i};
   }
-  CPP4R_NODISCARD operator Rcomplex() const {
+  operator Rcomplex() const {
     Rcomplex r;
     if (data_ == R_NilValue || Rf_length(data_) == 0) {
       r.r = NA_REAL;
@@ -75,13 +48,13 @@ class r_complex {
     return r;
   }
 
-  CPP4R_NODISCARD double real() const noexcept {
+  double real() const {
     if (data_ == R_NilValue || Rf_length(data_) == 0) {
       return NA_REAL;
     }
     return COMPLEX(data_)[0].r;
   }
-  CPP4R_NODISCARD double imag() const noexcept {
+  double imag() const {
     if (data_ == R_NilValue || Rf_length(data_) == 0) {
       return NA_REAL;
     }
@@ -95,24 +68,12 @@ class r_complex {
   bool operator!=(const r_complex& rhs) const { return !(*this == rhs); }
 
   r_complex& operator+=(const r_complex& rhs) {
-    if (data_ == R_NilValue || Rf_length(data_) == 0 || rhs.data_ == R_NilValue ||
-        Rf_length(rhs.data_) == 0) {
-      *this = r_complex(real() + rhs.real(), imag() + rhs.imag());
-    } else {
-      COMPLEX(data_)[0].r += COMPLEX(rhs.data_)[0].r;
-      COMPLEX(data_)[0].i += COMPLEX(rhs.data_)[0].i;
-    }
+    *this = r_complex(real() + rhs.real(), imag() + rhs.imag());
     return *this;
   }
 
   r_complex& operator-=(const r_complex& rhs) {
-    if (data_ == R_NilValue || Rf_length(data_) == 0 || rhs.data_ == R_NilValue ||
-        Rf_length(rhs.data_) == 0) {
-      *this = r_complex(real() - rhs.real(), imag() - rhs.imag());
-    } else {
-      COMPLEX(data_)[0].r -= COMPLEX(rhs.data_)[0].r;
-      COMPLEX(data_)[0].i -= COMPLEX(rhs.data_)[0].i;
-    }
+    *this = r_complex(real() - rhs.real(), imag() - rhs.imag());
     return *this;
   }
 
@@ -150,7 +111,7 @@ class r_complex {
     return lhs;
   }
 
-  CPP4R_NODISCARD bool is_na() const { return R_IsNA(real()) || R_IsNA(imag()); }
+  bool is_na() const { return R_IsNA(real()) || R_IsNA(imag()); }
 
  private:
   sexp data_ = R_NilValue;
@@ -183,13 +144,8 @@ inline SEXP as_sexp(std::initializer_list<r_complex> il) {
 }
 
 template <>
-CPP4R_NODISCARD inline r_complex na() {
+inline r_complex na() {
   return r_complex(NA_REAL, NA_REAL);
-}
-
-// Specialized is_na for r_complex
-CPP4R_NODISCARD inline bool is_na(const r_complex& value) noexcept {
-  return value.is_na();
 }
 
 namespace traits {

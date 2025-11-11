@@ -1,7 +1,5 @@
 #pragma once
 
-#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
-
 #include <algorithm>         // for min
 #include <array>             // for array
 #include <initializer_list>  // for initializer_list
@@ -33,7 +31,7 @@ inline typename r_vector<int>::underlying_type r_vector<int>::get_elt(SEXP x,
 
 template <>
 inline typename r_vector<int>::underlying_type* r_vector<int>::get_p(bool is_altrep,
-                                                                      SEXP data) {
+                                                                     SEXP data) {
   if (is_altrep) {
     return nullptr;
   } else {
@@ -45,7 +43,9 @@ template <>
 inline typename r_vector<int>::underlying_type const* r_vector<int>::get_const_p(
     bool is_altrep, SEXP data) {
   return INTEGER_OR_NULL(data);
-}template <>
+}
+
+template <>
 inline void r_vector<int>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
                                       typename r_vector::underlying_type* buf) {
   // NOPROTECT: likely too costly to unwind protect here
@@ -68,40 +68,14 @@ inline void r_vector<int>::set_elt(SEXP x, R_xlen_t i,
   SET_INTEGER_ELT(x, i, value);
 }
 
-// No special conversions needed for int - it's the native type
-
 typedef r_vector<int> integers;
-
-// Add constructor for initializer_list for the writable r_vector specialization
-template <>
-inline r_vector<int>::r_vector(std::initializer_list<int> il)
-    : cpp4r::r_vector<int>(safe[Rf_allocVector](INTSXP, il.size())),
-      capacity_(il.size()) {
-  auto it = il.begin();
-
-  if (data_p_ != nullptr) {
-    for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
-      data_p_[i] = *it;
-    }
-  } else {
-    for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
-      set_elt(data_, i, *it);
-    }
-  }
-}
 
 }  // namespace writable
 
 template <>
-#if CPP4R_HAS_CXX17
-CPP4R_NODISCARD inline int na() {
-  return NA_INTEGER;
-}
-#else
 inline int na() {
   return NA_INTEGER;
 }
-#endif
 
 // forward declaration
 
@@ -109,15 +83,11 @@ typedef r_vector<double> doubles;
 typedef r_vector<r_bool> logicals;
 
 inline integers as_integers(SEXP x) {
-  SEXPTYPE x_type = detail::r_typeof(x);
-  if (x_type == INTSXP) {
+  if (detail::r_typeof(x) == INTSXP) {
     return integers(x);
-  }
-
-  if (x_type == REALSXP) {
+  } else if (detail::r_typeof(x) == REALSXP) {
     doubles xn(x);
     writable::integers ret(xn.size());
-    // Trust the compiler to optimize std::transform
     std::transform(xn.begin(), xn.end(), ret.begin(), [](double value) {
       if (ISNA(value)) {
         return NA_INTEGER;
@@ -128,18 +98,40 @@ inline integers as_integers(SEXP x) {
       return static_cast<int>(value);
     });
     return ret;
-  }
-
-  if (x_type == LGLSXP) {
+  } else if (detail::r_typeof(x) == LGLSXP) {
     logicals xn(x);
-    writable::integers ret(xn.size());
-    std::transform(xn.begin(), xn.end(), ret.begin(), [](r_bool value) {
-      return value == NA_LOGICAL ? NA_INTEGER : static_cast<int>(static_cast<int>(value));
+    size_t len = xn.size();
+    writable::integers ret(len);
+    std::transform(xn.begin(), xn.end(), ret.begin(), [](bool value) {
+      return value == NA_LOGICAL ? NA_INTEGER : static_cast<int>(value);
     });
     return ret;
   }
 
-  throw type_error(INTSXP, x_type);
+  throw type_error(INTSXP, detail::r_typeof(x));
 }
 
 }  // namespace cpp4r
+
+// Note: Proxy Behavior in writable::integers
+//
+// When using writable::integers, operator[] returns a proxy object that allows
+// both reading and writing. For cases where you need the actual int value
+// (e.g., when using with C-style variadic functions like Rprintf), use one of
+// these three approaches:
+//
+// 1. Direct value access: vec.value(i)        [Recommended]
+// 2. Explicit cast: (int)vec[i]
+// 3. Auto with explicit type: int val = vec[i];
+//
+// Example demonstrating the issue and solutions:
+//   writable::integers vec;
+//   vec.push_back(42);
+//
+//   // This may print garbage due to proxy object:
+//   // Rprintf("Value: %d\n", vec[0]);  // DON'T DO THIS
+//
+//   // These all work correctly:
+//   Rprintf("Value: %d\n", vec.value(0));  // Recommended
+//   Rprintf("Value: %d\n", (int)vec[0]);   // Also works
+//   int val = vec[0]; Rprintf("Value: %d\n", val);  // Also works

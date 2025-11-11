@@ -13,14 +13,6 @@ docs:
 	@clear
 	@Rscript -e 'devtools::document("./"); pkgsite::build_site("./")'
 
-test:
-	@clear
-	@echo "==============================="
-	@echo "Testing R code"
-	@Rscript -e 'devtools::document("./"); devtools::test("./")'
-	@echo "==============================="
-	@/bin/bash -euo pipefail -c './scripts/test_loop.sh'
-
 check:
 	@clear
 	@echo "==============================="

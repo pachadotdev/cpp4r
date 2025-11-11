@@ -1,16 +1,10 @@
 #pragma once
 
-#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
-
 #include <csetjmp>    // for longjmp, setjmp, jmp_buf
 #include <exception>  // for exception
 #include <stdexcept>  // for std::runtime_error
 #include <string>     // for string, basic_string
 #include <tuple>      // for tuple, make_tuple
-
-#if CPP4R_HAS_CXX17
-#include <string_view>  // for std::string_view (C++17)
-#endif
 
 // NB: cpp4r/R.hpp must precede R_ext/Error.h to ensure R_NO_REMAP is defined
 #include "cpp4r/R.hpp"  // for SEXP, SEXPREC, CDR, R_NilValue, CAR, R_Pres...
@@ -20,7 +14,7 @@
 #include "R_ext/Print.h"    // for REprintf
 #include "R_ext/Utils.h"    // for R_CheckUserInterrupt
 
-#ifdef CPP4R_USE_FMT
+#ifdef cpp4r_USE_FMT
 #define FMT_HEADER_ONLY
 #include "fmt/core.h"
 #endif
@@ -29,7 +23,7 @@ namespace cpp4r {
 class unwind_exception : public std::exception {
  public:
   SEXP token;
-  explicit unwind_exception(SEXP token_) noexcept : token(token_) {}
+  unwind_exception(SEXP token_) : token(token_) {}
 };
 
 /// Unwind Protection from C longjmp's, like those used in R error handling
@@ -45,15 +39,9 @@ SEXP unwind_protect(Fun&& code) {
   }();
 
   std::jmp_buf jmpbuf;
-#if CPP4R_HAS_CXX20
   if (setjmp(jmpbuf)) {
     throw unwind_exception(token);
   }
-#else
-  if (setjmp(jmpbuf)) {
-    throw unwind_exception(token);
-  }
-#endif
 
   SEXP res = R_UnwindProtect(
       [](void* data) -> SEXP {
@@ -168,7 +156,7 @@ struct protect {
   /// bears the [[noreturn]] attribute and must be protected with safe.noreturn rather
   /// than safe.operator[]).
   template <typename F>
-  constexpr function<F> operator[](F* raw) const noexcept {
+  constexpr function<F> operator[](F* raw) const {
     return {raw};
   }
 
@@ -187,7 +175,7 @@ struct protect {
   };
 
   template <typename F>
-  constexpr noreturn_function<F> noreturn(F* raw) const noexcept {
+  constexpr noreturn_function<F> noreturn(F* raw) const {
     return {raw};
   }
 };
@@ -195,7 +183,7 @@ constexpr struct protect safe = {};
 
 inline void check_user_interrupt() { safe[R_CheckUserInterrupt](); }
 
-#ifdef CPP4R_USE_FMT
+#ifdef cpp4r_USE_FMT
 template <typename... Args>
 void stop [[noreturn]] (const char* fmt_arg, Args&&... args) {
   std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
@@ -208,15 +196,6 @@ void stop [[noreturn]] (const std::string& fmt_arg, Args&&... args) {
   safe.noreturn(Rf_errorcall)(R_NilValue, "%s", msg.c_str());
 }
 
-#if CPP4R_HAS_CXX17
-// C++17: Add string_view overload
-template <typename... Args>
-void stop [[noreturn]] (std::string_view fmt_arg, Args&&... args) {
-  std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
-  safe.noreturn(Rf_errorcall)(R_NilValue, "%s", msg.c_str());
-}
-#endif
-
 template <typename... Args>
 void warning(const char* fmt_arg, Args&&... args) {
   std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
@@ -228,15 +207,6 @@ void warning(const std::string& fmt_arg, Args&&... args) {
   std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
   safe[Rf_warningcall](R_NilValue, "%s", msg.c_str());
 }
-
-#if CPP4R_HAS_CXX17
-// C++17: Add string_view overload
-template <typename... Args>
-void warning(std::string_view fmt_arg, Args&&... args) {
-  std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
-  safe[Rf_warningcall](R_NilValue, "%s", msg.c_str());
-}
-#endif
 #else
 template <typename... Args>
 void stop [[noreturn]] (const char* fmt, Args... args) {
@@ -248,14 +218,6 @@ void stop [[noreturn]] (const std::string& fmt, Args... args) {
   safe.noreturn(Rf_errorcall)(R_NilValue, fmt.c_str(), args...);
 }
 
-#if CPP4R_HAS_CXX17
-// C++17: Add string_view overload
-template <typename... Args>
-void stop [[noreturn]] (std::string_view fmt, Args... args) {
-  safe.noreturn(Rf_errorcall)(R_NilValue, fmt.data(), args...);
-}
-#endif
-
 template <typename... Args>
 void warning(const char* fmt, Args... args) {
   safe[Rf_warningcall](R_NilValue, fmt, args...);
@@ -265,14 +227,6 @@ template <typename... Args>
 void warning(const std::string& fmt, Args... args) {
   safe[Rf_warningcall](R_NilValue, fmt.c_str(), args...);
 }
-
-#if CPP4R_HAS_CXX17
-// C++17: Add string_view overload
-template <typename... Args>
-void warning(std::string_view fmt, Args... args) {
-  safe[Rf_warningcall](R_NilValue, fmt.data(), args...);
-}
-#endif
 #endif
 
 namespace detail {
@@ -291,7 +245,7 @@ namespace detail {
 // preserve list per package, which seems to work nicely.
 // https://stackoverflow.com/questions/185624/what-happens-to-static-variables-in-inline-functions
 // https://stackoverflow.com/questions/51612866/global-variables-in-header-only-library
-// https://github.com/r-lib/cpp11/issues/330
+// https://github.com/r-lib/cpp4r/issues/330
 //
 // > A static local variable in an extern inline function always refers to the
 //   same object. 7.1.2/4 - C++98/C++14 (n3797)
@@ -310,21 +264,12 @@ inline SEXP get() {
   return out;
 }
 
-#if CPP4R_HAS_CXX17
-CPP4R_NODISCARD inline R_xlen_t count() noexcept {
-  constexpr R_xlen_t head = 1;
-  constexpr R_xlen_t tail = 1;
+inline R_xlen_t count() {
+  const R_xlen_t head = 1;
+  const R_xlen_t tail = 1;
   SEXP list = get();
   return Rf_xlength(list) - head - tail;
 }
-#else
-inline R_xlen_t count() noexcept {
-  constexpr R_xlen_t head = 1;
-  constexpr R_xlen_t tail = 1;
-  SEXP list = get();
-  return Rf_xlength(list) - head - tail;
-}
-#endif
 
 inline SEXP insert(SEXP x) {
   if (x == R_NilValue) {
@@ -370,7 +315,7 @@ inline void release(SEXP cell) {
   SETCAR(rhs, lhs);
 }
 
-inline void print() noexcept {
+inline void print() {
   SEXP list = get();
   for (SEXP cell = list; cell != R_NilValue; cell = CDR(cell)) {
     REprintf("%p CAR: %p CDR: %p TAG: %p\n", reinterpret_cast<void*>(cell),

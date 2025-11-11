@@ -1,7 +1,5 @@
 #pragma once
 
-#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
-
 #include <algorithm>         // for min
 #include <array>             // for array
 #include <initializer_list>  // for initializer_list
@@ -30,8 +28,8 @@ inline typename r_vector<r_bool>::underlying_type r_vector<r_bool>::get_elt(SEXP
 }
 
 template <>
-inline typename r_vector<r_bool>::underlying_type* r_vector<r_bool>::get_p(
-    bool is_altrep, SEXP data) {
+inline typename r_vector<r_bool>::underlying_type* r_vector<r_bool>::get_p(bool is_altrep,
+                                                                           SEXP data) {
   if (is_altrep) {
     return nullptr;
   } else {

@@ -1,14 +1,9 @@
 #pragma once
 
-#include "cpp4r/cpp_version.hpp"  // Must be first for version detection
-
 #include <algorithm>         // for min
 #include <array>             // for array
-#include <cmath>             // for floor
 #include <cstdint>           // for uint8_t
-#include <cstring>           // for memcmp, memcpy, memset
 #include <initializer_list>  // for initializer_list
-#include <stdexcept>         // for runtime_error, out_of_range
 
 #include "Rversion.h"
 #include "cpp4r/R.hpp"                // for RAW, SEXP, SEXPREC, Rf_allocVector
@@ -42,13 +37,13 @@ inline typename r_vector<uint8_t>::underlying_type r_vector<uint8_t>::get_elt(
 
 template <>
 inline typename r_vector<uint8_t>::underlying_type const* r_vector<uint8_t>::get_const_p(
-    bool is_altrep, SEXP data) noexcept {
+    bool is_altrep, SEXP data) {
   return RAW_OR_NULL(data);
 }
 
 template <>
 inline typename r_vector<uint8_t>::underlying_type* r_vector<uint8_t>::get_p(
-    bool is_altrep, SEXP data) noexcept {
+    bool is_altrep, SEXP data) {
   if (is_altrep) {
     return nullptr;
   } else {

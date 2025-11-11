@@ -4,7 +4,6 @@
 #include "cpp4r/as.hpp"
 #include "cpp4r/attribute_proxy.hpp"
 #include "cpp4r/complexes.hpp"
-#include "cpp4r/cpp_version.hpp"
 #include "cpp4r/data_frame.hpp"
 #include "cpp4r/doubles.hpp"
 #include "cpp4r/environment.hpp"

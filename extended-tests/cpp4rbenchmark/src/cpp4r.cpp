@@ -5,35 +5,35 @@
 #include "cpp4r/declarations.hpp"
 #include <R_ext/Visibility.h>
 
-// att-cpp4r.cpp
+// bench-cpp4r.cpp
 doubles_matrix<> add_two_cpp4r(const doubles_matrix<>& a, const doubles_matrix<>& b);
 extern "C" SEXP _cpp4rbenchmark_add_two_cpp4r(SEXP a, SEXP b) {
   BEGIN_CPP4R
     return cpp4r::as_sexp(add_two_cpp4r(cpp4r::as_cpp<cpp4r::decay_t<const doubles_matrix<>&>>(a), cpp4r::as_cpp<cpp4r::decay_t<const doubles_matrix<>&>>(b)));
   END_CPP4R
 }
-// att-cpp4r.cpp
+// bench-cpp4r.cpp
 doubles_matrix<> add_four_cpp4r(const doubles_matrix<>& a, const doubles_matrix<>& b, const doubles_matrix<>& c, const doubles_matrix<>& d);
 extern "C" SEXP _cpp4rbenchmark_add_four_cpp4r(SEXP a, SEXP b, SEXP c, SEXP d) {
   BEGIN_CPP4R
     return cpp4r::as_sexp(add_four_cpp4r(cpp4r::as_cpp<cpp4r::decay_t<const doubles_matrix<>&>>(a), cpp4r::as_cpp<cpp4r::decay_t<const doubles_matrix<>&>>(b), cpp4r::as_cpp<cpp4r::decay_t<const doubles_matrix<>&>>(c), cpp4r::as_cpp<cpp4r::decay_t<const doubles_matrix<>&>>(d)));
   END_CPP4R
 }
-// att-cpp4r.cpp
+// bench-cpp4r.cpp
 doubles_matrix<> multiply_four_cpp4r(const doubles_matrix<>& a, const doubles_matrix<>& b, const doubles_matrix<>& c, const doubles_matrix<>& d);
 extern "C" SEXP _cpp4rbenchmark_multiply_four_cpp4r(SEXP a, SEXP b, SEXP c, SEXP d) {
   BEGIN_CPP4R
     return cpp4r::as_sexp(multiply_four_cpp4r(cpp4r::as_cpp<cpp4r::decay_t<const doubles_matrix<>&>>(a), cpp4r::as_cpp<cpp4r::decay_t<const doubles_matrix<>&>>(b), cpp4r::as_cpp<cpp4r::decay_t<const doubles_matrix<>&>>(c), cpp4r::as_cpp<cpp4r::decay_t<const doubles_matrix<>&>>(d)));
   END_CPP4R
 }
-// att-cpp4r.cpp
+// bench-cpp4r.cpp
 doubles_matrix<> submatrix_manipulation_cpp4r(const doubles_matrix<>& a, const doubles_matrix<>& b);
 extern "C" SEXP _cpp4rbenchmark_submatrix_manipulation_cpp4r(SEXP a, SEXP b) {
   BEGIN_CPP4R
     return cpp4r::as_sexp(submatrix_manipulation_cpp4r(cpp4r::as_cpp<cpp4r::decay_t<const doubles_matrix<>&>>(a), cpp4r::as_cpp<cpp4r::decay_t<const doubles_matrix<>&>>(b)));
   END_CPP4R
 }
-// att-cpp4r.cpp
+// bench-cpp4r.cpp
 double multi_operation_cpp4r(const doubles_matrix<>& a, const doubles_matrix<>& b, const doubles_matrix<>& c);
 extern "C" SEXP _cpp4rbenchmark_multi_operation_cpp4r(SEXP a, SEXP b, SEXP c) {
   BEGIN_CPP4R
