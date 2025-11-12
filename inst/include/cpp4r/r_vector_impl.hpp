@@ -261,12 +261,23 @@ template <typename T>
 inline SEXP r_vector<T>::valid_type(SEXP x) {
   const SEXPTYPE type = get_sexptype();
 
+#if CPP4R_HAS_CXX20
+  // C++20: Use standard [[unlikely]] attribute for error paths
+  if (x == nullptr) [[unlikely]] {
+    throw type_error(type, NILSXP);
+  }
+  if (detail::r_typeof(x) != type) [[unlikely]] {
+    throw type_error(type, detail::r_typeof(x));
+  }
+#else
+  // C++11-17: Use __builtin_expect
   if (CPP4R_UNLIKELY(x == nullptr)) {
     throw type_error(type, NILSXP);
   }
   if (CPP4R_UNLIKELY(detail::r_typeof(x) != type)) {
     throw type_error(type, detail::r_typeof(x));
   }
+#endif
 
   return x;
 }
@@ -319,9 +330,17 @@ r_vector<T>::const_iterator::const_iterator(const r_vector* data, R_xlen_t pos)
 template <typename T>
 CPP4R_ALWAYS_INLINE typename r_vector<T>::const_iterator& r_vector<T>::const_iterator::operator++() {
   ++pos_;
+#if CPP4R_HAS_CXX20
+  // C++20: Use standard [[unlikely]] attribute (better understood by modern optimizers)
+  if (use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_) [[unlikely]] {
+    fill_buf(pos_);
+  }
+#else
+  // C++11-17: Use __builtin_expect
   if (CPP4R_UNLIKELY(use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_)) {
     fill_buf(pos_);
   }
+#endif
   return *this;
 }
 
@@ -398,6 +417,17 @@ inline typename r_vector<T>::const_iterator r_vector<T>::find(
 
 template <typename T>
 CPP4R_ALWAYS_INLINE T r_vector<T>::const_iterator::operator*() const {
+#if CPP4R_HAS_CXX20
+  // C++20: Use standard [[unlikely]] attribute
+  if (use_buf(data_->is_altrep())) [[unlikely]] {
+    // Use pre-loaded buffer for compatible ALTREP types
+    return static_cast<T>(buf_[pos_ - block_start_]);
+  } else {
+    // Otherwise pass through to normal retrieval method (common case)
+    return data_->operator[](pos_);
+  }
+#else
+  // C++11-17: Use __builtin_expect
   if (CPP4R_UNLIKELY(use_buf(data_->is_altrep()))) {
     // Use pre-loaded buffer for compatible ALTREP types
     return static_cast<T>(buf_[pos_ - block_start_]);
@@ -405,6 +435,7 @@ CPP4R_ALWAYS_INLINE T r_vector<T>::const_iterator::operator*() const {
     // Otherwise pass through to normal retrieval method (common case)
     return data_->operator[](pos_);
   }
+#endif
 }
 
 template <typename T>

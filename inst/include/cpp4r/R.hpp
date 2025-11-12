@@ -119,6 +119,21 @@ inline bool r_env_has(SEXP env, SEXP sym) {
 template <typename T>
 inline T na();
 
+// Progressive C++ optimization: Use if constexpr in C++17+ for zero-overhead type dispatch
+#if CPP4R_HAS_CXX17
+template <typename T>
+CPP4R_HOT inline bool is_na(const T& value) {
+  // C++17+: Use if constexpr - compiler only compiles the taken branch
+  if constexpr (std::is_same<typename std::decay<T>::type, double>::value) {
+    return ISNA(value);  // Fast R macro for doubles
+  } else if constexpr (std::is_same<typename std::decay<T>::type, int>::value) {
+    return value == NA_INTEGER;  // Direct comparison for integers
+  } else {
+    return value == na<T>();  // Generic fallback
+  }
+}
+#else
+// C++11/14: Use SFINAE (slower compilation, same runtime performance)
 template <typename T>
 CPP4R_HOT inline typename std::enable_if<!std::is_same<typename std::decay<T>::type, double>::value,
                                bool>::type
@@ -132,5 +147,6 @@ CPP4R_HOT inline typename std::enable_if<std::is_same<typename std::decay<T>::ty
 is_na(const T& value) {
   return ISNA(value);
 }
+#endif
 
 }  // namespace cpp4r
