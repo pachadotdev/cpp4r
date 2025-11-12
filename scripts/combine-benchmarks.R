@@ -171,6 +171,14 @@ res <- res %>%
         rel_cpp4r_Rcpp = signif(rel_time_cpp4r / rel_time_Rcpp, 3)
     )
 
+# add rel time for cpp4r within the same test group
+res <- res %>%
+    group_by(test) %>%
+    mutate(
+        rel_cpp4r_within_test = signif(rel_time_cpp4r / min(rel_time_cpp4r, na.rm = TRUE), 3)
+    ) %>%
+    ungroup()
+
 res <- res %>%
     mutate(
         avg_time_cpp11 = paste(avg_time_cpp11, paste0("(", rel_time_cpp11, ")")),

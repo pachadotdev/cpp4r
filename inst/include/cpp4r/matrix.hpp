@@ -101,7 +101,9 @@ class matrix : public matrix_slices<S> {
     }
     bool operator!=(const slice& rhs) const noexcept { return !operator==(rhs); }
 
-    T operator[](int pos) const { return parent_.vector_[offset_ + stride() * pos]; }
+    CPP4R_ALWAYS_INLINE T operator[](int pos) const { 
+      return parent_.vector_[offset_ + stride() * pos]; 
+    }
 
     // iterates elements of a slice
     class iterator {
@@ -239,7 +241,9 @@ class matrix : public matrix_slices<S> {
 
   r_vector<r_string> names() const { return r_vector<r_string>(vector_.names()); }
 
-  T operator()(int row, int col) const { return vector_[row + (col * nrow())]; }
+  CPP4R_ALWAYS_INLINE T operator()(int row, int col) const { 
+    return vector_[row + (col * nrow())]; 
+  }
 
   slice operator[](int index) const { return {*this, index}; }
 

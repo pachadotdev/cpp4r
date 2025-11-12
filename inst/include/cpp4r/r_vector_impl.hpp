@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cpp4r/r_vector_fwd.hpp"
+#include "cpp4r/cpp_version.hpp"  // for CPP4R optimization macros
 
 namespace cpp4r {
 
@@ -252,7 +253,7 @@ inline r_vector<r_string> r_vector<T>::names() const {
 }
 
 template <typename T>
-inline T r_vector<T>::get_oob() {
+CPP4R_COLD inline T r_vector<T>::get_oob() {
   throw std::out_of_range("r_vector");
 }
 
@@ -260,10 +261,10 @@ template <typename T>
 inline SEXP r_vector<T>::valid_type(SEXP x) {
   const SEXPTYPE type = get_sexptype();
 
-  if (x == nullptr) {
+  if (CPP4R_UNLIKELY(x == nullptr)) {
     throw type_error(type, NILSXP);
   }
-  if (detail::r_typeof(x) != type) {
+  if (CPP4R_UNLIKELY(detail::r_typeof(x) != type)) {
     throw type_error(type, detail::r_typeof(x));
   }
 
@@ -316,9 +317,9 @@ r_vector<T>::const_iterator::const_iterator(const r_vector* data, R_xlen_t pos)
 }
 
 template <typename T>
-inline typename r_vector<T>::const_iterator& r_vector<T>::const_iterator::operator++() {
+CPP4R_ALWAYS_INLINE typename r_vector<T>::const_iterator& r_vector<T>::const_iterator::operator++() {
   ++pos_;
-  if (use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_) {
+  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_)) {
     fill_buf(pos_);
   }
   return *this;
@@ -396,12 +397,12 @@ inline typename r_vector<T>::const_iterator r_vector<T>::find(
 }
 
 template <typename T>
-inline T r_vector<T>::const_iterator::operator*() const {
-  if (use_buf(data_->is_altrep())) {
+CPP4R_ALWAYS_INLINE T r_vector<T>::const_iterator::operator*() const {
+  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep()))) {
     // Use pre-loaded buffer for compatible ALTREP types
     return static_cast<T>(buf_[pos_ - block_start_]);
   } else {
-    // Otherwise pass through to normal retrieval method
+    // Otherwise pass through to normal retrieval method (common case)
     return data_->operator[](pos_);
   }
 }

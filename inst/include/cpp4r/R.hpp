@@ -33,6 +33,7 @@
 // clang-format on
 
 #include <type_traits>
+#include "cpp4r/cpp_version.hpp"  // for CPP4R optimization macros
 
 #if defined(R_VERSION) && R_VERSION >= R_Version(4, 4, 0)
 // Use R's new macro
@@ -119,14 +120,14 @@ template <typename T>
 inline T na();
 
 template <typename T>
-inline typename std::enable_if<!std::is_same<typename std::decay<T>::type, double>::value,
+CPP4R_HOT inline typename std::enable_if<!std::is_same<typename std::decay<T>::type, double>::value,
                                bool>::type
 is_na(const T& value) {
   return value == na<T>();
 }
 
 template <typename T>
-inline typename std::enable_if<std::is_same<typename std::decay<T>::type, double>::value,
+CPP4R_HOT inline typename std::enable_if<std::is_same<typename std::decay<T>::type, double>::value,
                                bool>::type
 is_na(const T& value) {
   return ISNA(value);

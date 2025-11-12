@@ -113,3 +113,38 @@
 #define CPP4R_LIKELY(x) (x)
 #define CPP4R_UNLIKELY(x) (x)
 #endif
+
+// CPP4R_RESTRICT: pointer aliasing hints for better optimization
+#if defined(__GNUC__) || defined(__clang__)
+#define CPP4R_RESTRICT __restrict__
+#elif defined(_MSC_VER)
+#define CPP4R_RESTRICT __restrict
+#else
+#define CPP4R_RESTRICT
+#endif
+
+// CPP4R_ALWAYS_INLINE: force inlining of hot path functions
+// CPP4R_NOINLINE: prevent inlining of cold path functions
+#if CPP4R_HAS_CXX17 && (defined(__GNUC__) || defined(__clang__))
+#define CPP4R_ALWAYS_INLINE [[gnu::always_inline]] inline
+#define CPP4R_NOINLINE [[gnu::noinline]]
+#elif defined(__GNUC__) || defined(__clang__)
+#define CPP4R_ALWAYS_INLINE __attribute__((always_inline)) inline
+#define CPP4R_NOINLINE __attribute__((noinline))
+#elif defined(_MSC_VER)
+#define CPP4R_ALWAYS_INLINE __forceinline
+#define CPP4R_NOINLINE __declspec(noinline)
+#else
+#define CPP4R_ALWAYS_INLINE inline
+#define CPP4R_NOINLINE
+#endif
+
+// CPP4R_HOT: mark frequently executed functions for better optimization
+// CPP4R_COLD: mark rarely executed functions (errors, initialization)
+#if defined(__GNUC__) || defined(__clang__)
+#define CPP4R_HOT __attribute__((hot))
+#define CPP4R_COLD __attribute__((cold))
+#else
+#define CPP4R_HOT
+#define CPP4R_COLD
+#endif
