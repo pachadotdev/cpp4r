@@ -49,7 +49,7 @@
 namespace cpp4r {
 namespace literals {
 
-constexpr R_xlen_t operator""_xl(unsigned long long int value) { return value; }
+constexpr R_xlen_t operator""_xl(unsigned long long int value) noexcept { return value; }
 
 }  // namespace literals
 
@@ -64,7 +64,7 @@ namespace detail {
 
 // Annoyingly, `TYPEOF()` returns an `int` rather than a `SEXPTYPE`,
 // which can throw warnings with `-Wsign-compare` on Windows.
-inline SEXPTYPE r_typeof(SEXP x) { return static_cast<SEXPTYPE>(TYPEOF(x)); }
+inline SEXPTYPE r_typeof(SEXP x) noexcept { return static_cast<SEXPTYPE>(TYPEOF(x)); }
 
 /// Get an object from an environment
 ///

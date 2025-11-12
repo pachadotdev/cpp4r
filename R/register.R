@@ -349,38 +349,8 @@ convert_cpp_default_to_r <- function(cpp_default) {
 
 # Helper function to generate type checking/coercion code
 generate_type_check <- function(param_name, param_type) {
-  # Map C++ types to R coercion functions
-  if (param_type == "int" || grepl("^int[[:space:]]*$", param_type)) {
-    return(glue::glue("{param_name} <- as.integer({param_name})"))
-  } else if (param_type == "double" || grepl("^double[[:space:]]*$", param_type)) {
-    return(glue::glue("{param_name} <- as.numeric({param_name})"))
-  } else if (param_type == "bool" || grepl("^bool[[:space:]]*$", param_type)) {
-    return(glue::glue("{param_name} <- as.logical({param_name})"))
-  } else if (grepl("string", param_type, ignore.case = TRUE)) {
-    return(glue::glue("{param_name} <- as.character({param_name})"))
-  }
-  
-  # Handle cpp4r matrix types - set proper storage mode
-  if (grepl("integers_matrix", param_type)) {
-    return(glue::glue("storage.mode({param_name}) <- \"integer\""))
-  } else if (grepl("doubles_matrix", param_type)) {
-    return(glue::glue("storage.mode({param_name}) <- \"double\""))
-  } else if (grepl("logicals_matrix", param_type)) {
-    return(glue::glue("storage.mode({param_name}) <- \"logical\""))
-  }
-  
-  # Handle cpp4r vector types - set proper storage mode as well
-  if (grepl("^integers[^_]", param_type) || param_type == "integers") {
-    return(glue::glue("storage.mode({param_name}) <- \"integer\""))
-  } else if (grepl("^doubles[^_]", param_type) || param_type == "doubles") {
-    return(glue::glue("storage.mode({param_name}) <- \"double\""))
-  } else if (grepl("^logicals[^_]", param_type) || param_type == "logicals") {
-    return(glue::glue("storage.mode({param_name}) <- \"logical\""))
-  } else if (grepl("^strings[^_]", param_type) || param_type == "strings") {
-    return(glue::glue("storage.mode({param_name}) <- \"character\""))
-  }
-  
-  # For other cpp4r types, don't add checks (they handle conversion internally)
+  # No type checking or coercion - match cpp11's approach
+  # The C++ side handles all type validation and conversion
   return("")
 }
 

@@ -15,7 +15,7 @@ namespace cpp4r {
 
 class r_bool {
  public:
-  r_bool() = default;
+  r_bool() noexcept = default;
 
   r_bool(SEXP data) {
     if (Rf_isLogical(data)) {
@@ -26,23 +26,23 @@ class r_bool {
     throw std::invalid_argument("Invalid r_bool value");
   }
 
-  r_bool(bool value) : value_(value ? TRUE : FALSE) {}
-  r_bool(Rboolean value) : value_(value) {}
-  r_bool(int value) : value_(from_int(value)) {}
+  r_bool(bool value) noexcept : value_(value ? TRUE : FALSE) {}
+  r_bool(Rboolean value) noexcept : value_(value) {}
+  r_bool(int value) noexcept : value_(from_int(value)) {}
 
-  operator bool() const { return value_ == TRUE; }
-  operator int() const { return value_; }
-  operator Rboolean() const { return value_ ? TRUE : FALSE; }
+  operator bool() const noexcept { return value_ == TRUE; }
+  operator int() const noexcept { return value_; }
+  operator Rboolean() const noexcept { return value_ ? TRUE : FALSE; }
 
-  bool operator==(r_bool rhs) const { return value_ == rhs.value_; }
-  bool operator==(bool rhs) const { return operator==(r_bool(rhs)); }
-  bool operator==(Rboolean rhs) const { return operator==(r_bool(rhs)); }
-  bool operator==(int rhs) const { return operator==(r_bool(rhs)); }
+  bool operator==(r_bool rhs) const noexcept { return value_ == rhs.value_; }
+  bool operator==(bool rhs) const noexcept { return operator==(r_bool(rhs)); }
+  bool operator==(Rboolean rhs) const noexcept { return operator==(r_bool(rhs)); }
+  bool operator==(int rhs) const noexcept { return operator==(r_bool(rhs)); }
 
  private:
   static constexpr int na = std::numeric_limits<int>::min();
 
-  static int from_int(int value) {
+  static constexpr int from_int(int value) noexcept {
     if (value == static_cast<int>(FALSE)) return FALSE;
     if (value == static_cast<int>(na)) return na;
     return TRUE;

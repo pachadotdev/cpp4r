@@ -14,13 +14,13 @@ namespace cpp4r {
 class r_string {
  public:
   r_string() = default;
-  r_string(SEXP data) : data_(data) {}
+  r_string(SEXP data) noexcept : data_(data) {}
   r_string(const char* data) : data_(safe[Rf_mkCharCE](data, CE_UTF8)) {}
   r_string(const std::string& data)
       : data_(safe[Rf_mkCharLenCE](data.c_str(), data.size(), CE_UTF8)) {}
 
-  operator SEXP() const { return data_; }
-  operator sexp() const { return data_; }
+  operator SEXP() const noexcept { return data_; }
+  operator sexp() const noexcept { return data_; }
   operator std::string() const {
     std::string res;
     res.reserve(size());
@@ -32,9 +32,9 @@ class r_string {
     return res;
   }
 
-  bool operator==(const r_string& rhs) const { return data_.data() == rhs.data_.data(); }
+  bool operator==(const r_string& rhs) const noexcept { return data_.data() == rhs.data_.data(); }
 
-  bool operator==(const SEXP rhs) const { return data_.data() == rhs; }
+  bool operator==(const SEXP rhs) const noexcept { return data_.data() == rhs; }
 
   bool operator==(const char* rhs) const {
     return static_cast<std::string>(*this) == rhs;
@@ -44,7 +44,7 @@ class r_string {
     return static_cast<std::string>(*this) == rhs;
   }
 
-  R_xlen_t size() const { return Rf_xlength(data_); }
+  R_xlen_t size() const noexcept { return Rf_xlength(data_); }
 
  private:
   sexp data_ = R_NilValue;

@@ -98,3 +98,20 @@
 
   return sums;
 }
+
+// Test function for automatic integer to double matrix coercion
+[[cpp4r::register]] cpp4r::doubles_matrix<> matrix_add(
+    const cpp4r::doubles_matrix<>& x, const cpp4r::doubles_matrix<>& y) {
+  int nrow = x.nrow();
+  int ncol = x.ncol();
+
+  cpp4r::writable::doubles_matrix<> result(nrow, ncol);
+
+  for (int i = 0; i < nrow; i++) {
+    for (int j = 0; j < ncol; j++) {
+      result(i, j) = x(i, j) + y(i, j);
+    }
+  }
+
+  return result;
+}

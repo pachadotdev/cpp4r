@@ -25,7 +25,7 @@ class data_frame : public list {
 
   /* we cannot use Rf_getAttrib because it has a special case for c(NA, -n) and creates
    * the full vector */
-  static SEXP get_attrib0(SEXP x, SEXP sym) {
+  static SEXP get_attrib0(SEXP x, SEXP sym) noexcept {
     for (SEXP attr = ATTRIB(x); attr != R_NilValue; attr = CDR(attr)) {
       if (TAG(attr) == sym) {
         return CAR(attr);
@@ -35,7 +35,7 @@ class data_frame : public list {
     return R_NilValue;
   }
 
-  static R_xlen_t calc_nrow(SEXP x) {
+  static R_xlen_t calc_nrow(SEXP x) noexcept {
     auto nms = get_attrib0(x, R_RowNamesSymbol);
     bool has_short_rownames =
         (Rf_isInteger(nms) && Rf_xlength(nms) == 2 && INTEGER(nms)[0] == NA_INTEGER);
@@ -58,8 +58,8 @@ class data_frame : public list {
   /* Adapted from
    * https://github.com/wch/r-source/blob/f2a0dfab3e26fb42b8b296fcba40cbdbdbec767d/src/main/attrib.c#L198-L207
    */
-  R_xlen_t nrow() const { return calc_nrow(*this); }
-  R_xlen_t ncol() const { return size(); }
+  R_xlen_t nrow() const noexcept { return calc_nrow(*this); }
+  R_xlen_t ncol() const noexcept { return size(); }
 };
 
 namespace writable {

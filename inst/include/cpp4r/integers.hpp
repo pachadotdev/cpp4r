@@ -8,6 +8,7 @@
 #include "cpp4r/R.hpp"                // for SEXP, SEXPREC, Rf_allocVector
 #include "cpp4r/as.hpp"               // for as_sexp
 #include "cpp4r/attribute_proxy.hpp"  // for attribute_proxy
+#include "cpp4r/cpp_version.hpp"      // for CPP4R feature detection
 #include "cpp4r/protect.hpp"          // for safe
 #include "cpp4r/r_bool.hpp"           // for r_bool
 #include "cpp4r/r_vector.hpp"         // for r_vector, r_vector<>::proxy
@@ -87,7 +88,9 @@ inline integers as_integers(SEXP x) {
     return integers(x);
   } else if (detail::r_typeof(x) == REALSXP) {
     doubles xn(x);
-    writable::integers ret(xn.size());
+    size_t len = xn.size();
+    writable::integers ret(len);
+    
     std::transform(xn.begin(), xn.end(), ret.begin(), [](double value) {
       if (ISNA(value)) {
         return NA_INTEGER;
@@ -97,14 +100,17 @@ inline integers as_integers(SEXP x) {
       }
       return static_cast<int>(value);
     });
+    
     return ret;
   } else if (detail::r_typeof(x) == LGLSXP) {
     logicals xn(x);
     size_t len = xn.size();
     writable::integers ret(len);
+    
     std::transform(xn.begin(), xn.end(), ret.begin(), [](bool value) {
       return value == NA_LOGICAL ? NA_INTEGER : static_cast<int>(value);
     });
+    
     return ret;
   }
 

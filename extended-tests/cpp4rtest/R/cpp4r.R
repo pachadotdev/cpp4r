@@ -4,7 +4,6 @@
 #' @rdname testing-add
 #' @keywords internal
 cpp4r_add_vec_for_ <- function(x, num) {
-	num <- as.numeric(num)
 	.Call(`_cpp4rtest_cpp4r_add_vec_for_`, x, num)
 }
 
@@ -16,68 +15,50 @@ data_frame_ <- function() {
 }
 
 my_stop_n1fmt <- function(mystring) {
-	mystring <- as.character(mystring)
 	invisible(.Call(`_cpp4rtest_my_stop_n1fmt`, mystring))
 }
 
 my_stop_n2fmt <- function(mystring, myarg) {
-	mystring <- as.character(mystring)
-	myarg <- as.character(myarg)
 	invisible(.Call(`_cpp4rtest_my_stop_n2fmt`, mystring, myarg))
 }
 
 my_warning_n1fmt <- function(mystring) {
-	mystring <- as.character(mystring)
 	invisible(.Call(`_cpp4rtest_my_warning_n1fmt`, mystring))
 }
 
 my_warning_n2fmt <- function(mystring, myarg) {
-	mystring <- as.character(mystring)
-	myarg <- as.character(myarg)
 	invisible(.Call(`_cpp4rtest_my_warning_n2fmt`, mystring, myarg))
 }
 
 my_message_n1fmt <- function(mystring) {
-	mystring <- as.character(mystring)
 	invisible(.Call(`_cpp4rtest_my_message_n1fmt`, mystring))
 }
 
 my_message_n2fmt <- function(mystring, myarg) {
-	mystring <- as.character(mystring)
-	myarg <- as.character(myarg)
 	invisible(.Call(`_cpp4rtest_my_message_n2fmt`, mystring, myarg))
 }
 
 my_stop <- function(mystring, myarg) {
-	mystring <- as.character(mystring)
-	myarg <- as.integer(myarg)
 	invisible(.Call(`_cpp4rtest_my_stop`, mystring, myarg))
 }
 
 my_stop_n1 <- function(mystring) {
-	mystring <- as.character(mystring)
 	invisible(.Call(`_cpp4rtest_my_stop_n1`, mystring))
 }
 
 my_warning <- function(mystring, myarg) {
-	mystring <- as.character(mystring)
-	myarg <- as.character(myarg)
 	invisible(.Call(`_cpp4rtest_my_warning`, mystring, myarg))
 }
 
 my_warning_n1 <- function(mystring) {
-	mystring <- as.character(mystring)
 	invisible(.Call(`_cpp4rtest_my_warning_n1`, mystring))
 }
 
 my_message <- function(mystring, myarg) {
-	mystring <- as.character(mystring)
-	myarg <- as.character(myarg)
 	invisible(.Call(`_cpp4rtest_my_message`, mystring, myarg))
 }
 
 my_message_n1 <- function(mystring) {
-	mystring <- as.character(mystring)
 	invisible(.Call(`_cpp4rtest_my_message_n1`, mystring))
 }
 
@@ -86,26 +67,18 @@ remove_altrep <- function(x) {
 }
 
 upper_bound <- function(x, breaks) {
-	storage.mode(x) <- "double"
-	storage.mode(breaks) <- "double"
 	.Call(`_cpp4rtest_upper_bound`, x, breaks)
 }
 
 findInterval2 <- function(x, breaks) {
-	storage.mode(x) <- "double"
-	storage.mode(breaks) <- "double"
 	.Call(`_cpp4rtest_findInterval2`, x, breaks)
 }
 
 findInterval2_5 <- function(x, breaks) {
-	storage.mode(x) <- "double"
-	storage.mode(breaks) <- "double"
 	.Call(`_cpp4rtest_findInterval2_5`, x, breaks)
 }
 
 findInterval3 <- function(x, breaks) {
-	storage.mode(x) <- "double"
-	storage.mode(breaks) <- "double"
 	.Call(`_cpp4rtest_findInterval3`, x, breaks)
 }
 
@@ -159,29 +132,22 @@ unordered_map_to_list_ <- function(x) {
 }
 
 gibbs_cpp <- function(N, thin) {
-	N <- as.integer(N)
-	thin <- as.integer(thin)
 	.Call(`_cpp4rtest_gibbs_cpp`, N, thin)
 }
 
 gibbs_cpp2 <- function(N, thin) {
-	N <- as.integer(N)
-	thin <- as.integer(thin)
 	.Call(`_cpp4rtest_gibbs_cpp2`, N, thin)
 }
 
 row_sums <- function(x) {
-	storage.mode(x) <- "double"
 	.Call(`_cpp4rtest_row_sums`, x)
 }
 
 mat_mat_copy_dimnames <- function(x) {
-	storage.mode(x) <- "double"
 	.Call(`_cpp4rtest_mat_mat_copy_dimnames`, x)
 }
 
 mat_sexp_copy_dimnames <- function(x) {
-	storage.mode(x) <- "double"
 	.Call(`_cpp4rtest_mat_sexp_copy_dimnames`, x)
 }
 
@@ -190,15 +156,17 @@ mat_mat_create_dimnames <- function() {
 }
 
 col_sums <- function(x) {
-	storage.mode(x) <- "double"
 	.Call(`_cpp4rtest_col_sums`, x)
+}
+
+matrix_add <- function(x, y) {
+	.Call(`_cpp4rtest_matrix_add`, x, y)
 }
 
 #' @title Protect functions
 #' @rdname testing-protect
 #' @keywords internal
 protect_one_ <- function(x, n) {
-	n <- as.integer(n)
 	invisible(.Call(`_cpp4rtest_protect_one_`, x, n))
 }
 
@@ -206,7 +174,6 @@ protect_one_ <- function(x, n) {
 #' @rdname testing-protect
 #' @keywords internal
 protect_one_sexp_ <- function(x, n) {
-	n <- as.integer(n)
 	invisible(.Call(`_cpp4rtest_protect_one_sexp_`, x, n))
 }
 
@@ -214,7 +181,6 @@ protect_one_sexp_ <- function(x, n) {
 #' @rdname testing-protect
 #' @keywords internal
 protect_one_cpp4r_ <- function(x, n) {
-	n <- as.integer(n)
 	invisible(.Call(`_cpp4rtest_protect_one_cpp4r_`, x, n))
 }
 
@@ -222,7 +188,6 @@ protect_one_cpp4r_ <- function(x, n) {
 #' @rdname testing-protect
 #' @keywords internal
 protect_one_preserve_ <- function(x, n) {
-	n <- as.integer(n)
 	invisible(.Call(`_cpp4rtest_protect_one_preserve_`, x, n))
 }
 
@@ -230,7 +195,6 @@ protect_one_preserve_ <- function(x, n) {
 #' @rdname testing-protect
 #' @keywords internal
 protect_many_ <- function(n) {
-	n <- as.integer(n)
 	invisible(.Call(`_cpp4rtest_protect_many_`, n))
 }
 
@@ -238,7 +202,6 @@ protect_many_ <- function(n) {
 #' @rdname testing-protect
 #' @keywords internal
 protect_many_cpp4r_ <- function(n) {
-	n <- as.integer(n)
 	invisible(.Call(`_cpp4rtest_protect_many_cpp4r_`, n))
 }
 
@@ -246,7 +209,6 @@ protect_many_cpp4r_ <- function(n) {
 #' @rdname testing-protect
 #' @keywords internal
 protect_many_sexp_ <- function(n) {
-	n <- as.integer(n)
 	invisible(.Call(`_cpp4rtest_protect_many_sexp_`, n))
 }
 
@@ -254,7 +216,6 @@ protect_many_sexp_ <- function(n) {
 #' @rdname testing-protect
 #' @keywords internal
 protect_many_preserve_ <- function(n) {
-	n <- as.integer(n)
 	invisible(.Call(`_cpp4rtest_protect_many_preserve_`, n))
 }
 
@@ -262,12 +223,10 @@ protect_many_preserve_ <- function(n) {
 #' @rdname testing-release
 #' @keywords internal
 cpp4r_release_ <- function(n) {
-	n <- as.integer(n)
 	invisible(.Call(`_cpp4rtest_cpp4r_release_`, n))
 }
 
 notroxcpp1_ <- function(x) {
-	x <- as.numeric(x)
 	.Call(`_cpp4rtest_notroxcpp1_`, x)
 }
 
@@ -277,7 +236,6 @@ notroxcpp1_ <- function(x) {
 #' @export
 #' @examples roxcpp2(1.0)
 roxcpp2 <- function(x) {
-	x <- as.numeric(x)
 	.Call(`_cpp4rtest_roxcpp2`, x)
 }
 
@@ -287,7 +245,6 @@ roxcpp2 <- function(x) {
 #' @export
 #' @examples roxcpp3(1.0)
 roxcpp3 <- function(x) {
-	x <- as.numeric(x)
 	.Call(`_cpp4rtest_roxcpp3`, x)
 }
 
@@ -297,7 +254,6 @@ roxcpp3 <- function(x) {
 #' @export
 #' @examples roxcpp4(1.0)
 roxcpp4 <- function(x) {
-	x <- as.numeric(x)
 	.Call(`_cpp4rtest_roxcpp4`, x)
 }
 
@@ -307,12 +263,10 @@ roxcpp4 <- function(x) {
 #' @export
 #' @examples roxcpp5(1.0)
 roxcpp5 <- function(x) {
-	x <- as.numeric(x)
 	.Call(`_cpp4rtest_roxcpp5`, x)
 }
 
 notroxcpp6_ <- function(x) {
-	x <- as.numeric(x)
 	.Call(`_cpp4rtest_notroxcpp6_`, x)
 }
 
@@ -326,7 +280,6 @@ notroxcpp6_ <- function(x) {
 #' }
 #' @seealso \code{\link{roxcpp3}}
 roxcpp7 <- function(x) {
-	x <- as.numeric(x)
 	.Call(`_cpp4rtest_roxcpp7`, x)
 }
 
@@ -341,7 +294,6 @@ cpp4r_safe_ <- function(x_sxp) {
 #' @rdname testing-grow-strings
 #' @keywords internal
 grow_strings_cpp4r_ <- function(n, seed) {
-	seed <- as.integer(seed)
 	.Call(`_cpp4rtest_grow_strings_cpp4r_`, n, seed)
 }
 
@@ -349,7 +301,6 @@ grow_strings_cpp4r_ <- function(n, seed) {
 #' @rdname testing-grow-strings
 #' @keywords internal
 grow_strings_manual_ <- function(n, seed) {
-	seed <- as.integer(seed)
 	.Call(`_cpp4rtest_grow_strings_manual_`, n, seed)
 }
 
@@ -357,7 +308,6 @@ grow_strings_manual_ <- function(n, seed) {
 #' @rdname testing-grow-strings
 #' @keywords internal
 assign_cpp4r_ <- function(n, seed) {
-	seed <- as.integer(seed)
 	.Call(`_cpp4rtest_assign_cpp4r_`, n, seed)
 }
 

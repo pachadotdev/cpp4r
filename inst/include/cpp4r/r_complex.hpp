@@ -28,15 +28,15 @@ class r_complex {
   r_complex(const std::complex<double>& data) : r_complex(data.real(), data.imag()) {}
   r_complex(const Rcomplex& data) : r_complex(data.r, data.i) {}
 
-  operator SEXP() const { return data_; }
-  operator sexp() const { return data_; }
-  operator std::complex<double>() const {
+  operator SEXP() const noexcept { return data_; }
+  operator sexp() const noexcept { return data_; }
+  operator std::complex<double>() const noexcept {
     if (data_ == R_NilValue || Rf_length(data_) == 0) {
       return {NA_REAL, NA_REAL};
     }
     return {COMPLEX(data_)[0].r, COMPLEX(data_)[0].i};
   }
-  operator Rcomplex() const {
+  operator Rcomplex() const noexcept {
     Rcomplex r;
     if (data_ == R_NilValue || Rf_length(data_) == 0) {
       r.r = NA_REAL;
@@ -48,24 +48,24 @@ class r_complex {
     return r;
   }
 
-  double real() const {
+  double real() const noexcept {
     if (data_ == R_NilValue || Rf_length(data_) == 0) {
       return NA_REAL;
     }
     return COMPLEX(data_)[0].r;
   }
-  double imag() const {
+  double imag() const noexcept {
     if (data_ == R_NilValue || Rf_length(data_) == 0) {
       return NA_REAL;
     }
     return COMPLEX(data_)[0].i;
   }
 
-  bool operator==(const r_complex& rhs) const {
+  bool operator==(const r_complex& rhs) const noexcept {
     return (is_na() && rhs.is_na()) || (real() == rhs.real() && imag() == rhs.imag());
   }
 
-  bool operator!=(const r_complex& rhs) const { return !(*this == rhs); }
+  bool operator!=(const r_complex& rhs) const noexcept { return !(*this == rhs); }
 
   r_complex& operator+=(const r_complex& rhs) {
     *this = r_complex(real() + rhs.real(), imag() + rhs.imag());
@@ -111,7 +111,7 @@ class r_complex {
     return lhs;
   }
 
-  bool is_na() const { return R_IsNA(real()) || R_IsNA(imag()); }
+  bool is_na() const noexcept { return R_IsNA(real()) || R_IsNA(imag()); }
 
  private:
   sexp data_ = R_NilValue;

@@ -151,4 +151,210 @@ context("matrix-C++") {
     cpp4r::writable::doubles_matrix<cpp4r::by_row> x(5, 2);
     expect_error(cpp4r::writable::integers_matrix<cpp4r::by_column>(x));
   }
+
+  test_that("as_doubles_matrix coerces integer matrix to double") {
+    // Create an integer matrix
+    SEXP int_mat = PROTECT(Rf_allocMatrix(INTSXP, 2, 3));
+    INTEGER(int_mat)[0] = 1;
+    INTEGER(int_mat)[1] = 2;
+    INTEGER(int_mat)[2] = 3;
+    INTEGER(int_mat)[3] = 4;
+    INTEGER(int_mat)[4] = 5;
+    INTEGER(int_mat)[5] = 6;
+
+    // Coerce to doubles
+    cpp4r::doubles_matrix<> result = cpp4r::as_doubles_matrix<>(int_mat);
+
+    expect_true(result.nrow() == 2);
+    expect_true(result.ncol() == 3);
+    expect_true(result(0, 0) == 1.0);
+    expect_true(result(1, 0) == 2.0);
+    expect_true(result(0, 1) == 3.0);
+    expect_true(result(1, 1) == 4.0);
+    expect_true(result(0, 2) == 5.0);
+    expect_true(result(1, 2) == 6.0);
+
+    // Check it's actually double type
+    expect_true(cpp4r::detail::r_typeof(result.data()) == REALSXP);
+
+    UNPROTECT(1);
+  }
+
+  test_that("as_doubles_matrix handles NA values correctly") {
+    SEXP int_mat = PROTECT(Rf_allocMatrix(INTSXP, 2, 2));
+    INTEGER(int_mat)[0] = 1;
+    INTEGER(int_mat)[1] = NA_INTEGER;
+    INTEGER(int_mat)[2] = 3;
+    INTEGER(int_mat)[3] = 4;
+
+    cpp4r::doubles_matrix<> result = cpp4r::as_doubles_matrix<>(int_mat);
+
+    expect_true(result(0, 0) == 1.0);
+    expect_true(cpp4r::is_na(result(1, 0)));
+    expect_true(result(0, 1) == 3.0);
+    expect_true(result(1, 1) == 4.0);
+
+    UNPROTECT(1);
+  }
+
+  test_that("as_doubles_matrix preserves dimnames") {
+    // Create integer matrix with dimnames
+    SEXP int_mat = PROTECT(Rf_allocMatrix(INTSXP, 2, 2));
+    INTEGER(int_mat)[0] = 1;
+    INTEGER(int_mat)[1] = 2;
+    INTEGER(int_mat)[2] = 3;
+    INTEGER(int_mat)[3] = 4;
+
+    SEXP dimnames = PROTECT(Rf_allocVector(VECSXP, 2));
+    SEXP rownames = PROTECT(Rf_allocVector(STRSXP, 2));
+    SEXP colnames = PROTECT(Rf_allocVector(STRSXP, 2));
+
+    SET_STRING_ELT(rownames, 0, Rf_mkChar("r1"));
+    SET_STRING_ELT(rownames, 1, Rf_mkChar("r2"));
+    SET_STRING_ELT(colnames, 0, Rf_mkChar("c1"));
+    SET_STRING_ELT(colnames, 1, Rf_mkChar("c2"));
+
+    SET_VECTOR_ELT(dimnames, 0, rownames);
+    SET_VECTOR_ELT(dimnames, 1, colnames);
+    Rf_setAttrib(int_mat, R_DimNamesSymbol, dimnames);
+
+    cpp4r::doubles_matrix<> result = cpp4r::as_doubles_matrix<>(int_mat);
+
+    // Check dimnames are preserved
+    SEXP result_dimnames = Rf_getAttrib(result.data(), R_DimNamesSymbol);
+    expect_true(result_dimnames != R_NilValue);
+
+    SEXP result_rownames = VECTOR_ELT(result_dimnames, 0);
+    SEXP result_colnames = VECTOR_ELT(result_dimnames, 1);
+
+    expect_true(strcmp(CHAR(STRING_ELT(result_rownames, 0)), "r1") == 0);
+    expect_true(strcmp(CHAR(STRING_ELT(result_rownames, 1)), "r2") == 0);
+    expect_true(strcmp(CHAR(STRING_ELT(result_colnames, 0)), "c1") == 0);
+    expect_true(strcmp(CHAR(STRING_ELT(result_colnames, 1)), "c2") == 0);
+
+    UNPROTECT(4);
+  }
+
+  test_that("as_doubles_matrix handles logical matrix") {
+    SEXP lgl_mat = PROTECT(Rf_allocMatrix(LGLSXP, 2, 2));
+    LOGICAL(lgl_mat)[0] = TRUE;
+    LOGICAL(lgl_mat)[1] = FALSE;
+    LOGICAL(lgl_mat)[2] = TRUE;
+    LOGICAL(lgl_mat)[3] = NA_LOGICAL;
+
+    cpp4r::doubles_matrix<> result = cpp4r::as_doubles_matrix<>(lgl_mat);
+
+    expect_true(result(0, 0) == 1.0);
+    expect_true(result(1, 0) == 0.0);
+    expect_true(result(0, 1) == 1.0);
+    expect_true(cpp4r::is_na(result(1, 1)));
+
+    UNPROTECT(1);
+  }
+
+  test_that("as_doubles_matrix rejects non-matrix types") {
+    SEXP str_mat = PROTECT(Rf_allocMatrix(STRSXP, 2, 2));
+    expect_error(cpp4r::as_doubles_matrix<>(str_mat));
+    UNPROTECT(1);
+  }
+
+  test_that("as_integers_matrix coerces integer-like doubles") {
+    SEXP dbl_mat = PROTECT(Rf_allocMatrix(REALSXP, 2, 2));
+    REAL(dbl_mat)[0] = 1.0;
+    REAL(dbl_mat)[1] = 2.0;
+    REAL(dbl_mat)[2] = 3.0;
+    REAL(dbl_mat)[3] = 4.0;
+
+    cpp4r::integers_matrix<> result = cpp4r::as_integers_matrix<>(dbl_mat);
+
+    expect_true(result(0, 0) == 1);
+    expect_true(result(1, 0) == 2);
+    expect_true(result(0, 1) == 3);
+    expect_true(result(1, 1) == 4);
+
+    expect_true(cpp4r::detail::r_typeof(result.data()) == INTSXP);
+
+    UNPROTECT(1);
+  }
+
+  test_that("as_integers_matrix rejects non-integer-like doubles") {
+    SEXP dbl_mat = PROTECT(Rf_allocMatrix(REALSXP, 2, 2));
+    REAL(dbl_mat)[0] = 1.0;
+    REAL(dbl_mat)[1] = 2.5;  // Has fractional part!
+    REAL(dbl_mat)[2] = 3.0;
+    REAL(dbl_mat)[3] = 4.0;
+
+    expect_error(cpp4r::as_integers_matrix<>(dbl_mat));
+
+    UNPROTECT(1);
+  }
+
+  test_that("as_integers_matrix handles NA values") {
+    SEXP dbl_mat = PROTECT(Rf_allocMatrix(REALSXP, 2, 2));
+    REAL(dbl_mat)[0] = 1.0;
+    REAL(dbl_mat)[1] = NA_REAL;
+    REAL(dbl_mat)[2] = 3.0;
+    REAL(dbl_mat)[3] = 4.0;
+
+    cpp4r::integers_matrix<> result = cpp4r::as_integers_matrix<>(dbl_mat);
+
+    expect_true(result(0, 0) == 1);
+    expect_true(result(1, 0) == NA_INTEGER);
+    expect_true(result(0, 1) == 3);
+    expect_true(result(1, 1) == 4);
+
+    UNPROTECT(1);
+  }
+
+  test_that("as_integers_matrix from logical matrix") {
+    SEXP lgl_mat = PROTECT(Rf_allocMatrix(LGLSXP, 2, 2));
+    LOGICAL(lgl_mat)[0] = TRUE;
+    LOGICAL(lgl_mat)[1] = FALSE;
+    LOGICAL(lgl_mat)[2] = TRUE;
+    LOGICAL(lgl_mat)[3] = NA_LOGICAL;
+
+    cpp4r::integers_matrix<> result = cpp4r::as_integers_matrix<>(lgl_mat);
+
+    expect_true(result(0, 0) == 1);
+    expect_true(result(1, 0) == 0);
+    expect_true(result(0, 1) == 1);
+    expect_true(result(1, 1) == NA_INTEGER);
+
+    UNPROTECT(1);
+  }
+
+  test_that("as_integers_matrix preserves dimnames") {
+    SEXP dbl_mat = PROTECT(Rf_allocMatrix(REALSXP, 2, 2));
+    REAL(dbl_mat)[0] = 10.0;
+    REAL(dbl_mat)[1] = 20.0;
+    REAL(dbl_mat)[2] = 30.0;
+    REAL(dbl_mat)[3] = 40.0;
+
+    SEXP dimnames = PROTECT(Rf_allocVector(VECSXP, 2));
+    SEXP rownames = PROTECT(Rf_allocVector(STRSXP, 2));
+    SEXP colnames = PROTECT(Rf_allocVector(STRSXP, 2));
+
+    SET_STRING_ELT(rownames, 0, Rf_mkChar("row1"));
+    SET_STRING_ELT(rownames, 1, Rf_mkChar("row2"));
+    SET_STRING_ELT(colnames, 0, Rf_mkChar("col1"));
+    SET_STRING_ELT(colnames, 1, Rf_mkChar("col2"));
+
+    SET_VECTOR_ELT(dimnames, 0, rownames);
+    SET_VECTOR_ELT(dimnames, 1, colnames);
+    Rf_setAttrib(dbl_mat, R_DimNamesSymbol, dimnames);
+
+    cpp4r::integers_matrix<> result = cpp4r::as_integers_matrix<>(dbl_mat);
+
+    // Check dimnames are preserved
+    SEXP result_dimnames = Rf_getAttrib(result.data(), R_DimNamesSymbol);
+    expect_true(result_dimnames != R_NilValue);
+
+    SEXP result_rownames = VECTOR_ELT(result_dimnames, 0);
+    SEXP result_colnames = VECTOR_ELT(result_dimnames, 1);
+
+    expect_true(strcmp(CHAR(STRING_ELT(result_rownames, 0)), "row1") == 0);
+    expect_true(strcmp(CHAR(STRING_ELT(result_colnames, 1)), "col2") == 0);
+
+    UNPROTECT(4);
+  }
 }

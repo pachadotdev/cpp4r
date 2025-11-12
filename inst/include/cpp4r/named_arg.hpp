@@ -33,8 +33,8 @@ class named_arg {
     return *this;
   }
 
-  const char* name() const { return name_; }
-  SEXP value() const { return value_; }
+  const char* name() const noexcept { return name_; }
+  SEXP value() const noexcept { return value_; }
 
  private:
   const char* name_;

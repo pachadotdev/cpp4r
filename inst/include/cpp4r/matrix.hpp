@@ -6,6 +6,7 @@
 
 #include "cpp4r/R.hpp"                // for SEXP, SEXPREC, R_xlen_t, INT...
 #include "cpp4r/attribute_proxy.hpp"  // for attribute_proxy
+#include "cpp4r/cpp_version.hpp"      // for CPP4R feature detection
 #include "cpp4r/r_bool.hpp"           // for r_bool
 #include "cpp4r/r_string.hpp"         // for r_string
 #include "cpp4r/r_vector.hpp"         // for r_vector
@@ -23,8 +24,8 @@ struct matrix_dims {
   matrix_dims(SEXP data) : nrow_(Rf_nrows(data)), ncol_(Rf_ncols(data)) {}
   matrix_dims(int nrow, int ncol) : nrow_(nrow), ncol_(ncol) {}
 
-  int nrow() const { return nrow_; }
-  int ncol() const { return ncol_; }
+  int nrow() const noexcept { return nrow_; }
+  int ncol() const noexcept { return ncol_; }
 };
 
 // base type for dimension-wise matrix access specialization
@@ -55,10 +56,10 @@ struct matrix_slices<by_row> : public matrix_dims {
   using matrix_dims::ncol;
   using matrix_dims::nrow;
 
-  int nslices() const { return nrow(); }
-  int slice_size() const { return ncol(); }
-  int slice_stride() const { return nrow(); }
-  int slice_offset(int pos) const { return pos; }
+  int nslices() const noexcept { return nrow(); }
+  int slice_size() const noexcept { return ncol(); }
+  int slice_stride() const noexcept { return nrow(); }
+  int slice_offset(int pos) const noexcept { return pos; }
 };
 
 // basic properties of matrix column slices
@@ -69,10 +70,10 @@ struct matrix_slices<by_column> : public matrix_dims {
   using matrix_dims::ncol;
   using matrix_dims::nrow;
 
-  int nslices() const { return ncol(); }
-  int slice_size() const { return nrow(); }
-  int slice_stride() const { return 1; }
-  int slice_offset(int pos) const { return pos * nrow(); }
+  int nslices() const noexcept { return ncol(); }
+  int slice_size() const noexcept { return nrow(); }
+  int slice_stride() const noexcept { return 1; }
+  int slice_offset(int pos) const noexcept { return pos * nrow(); }
 };
 
 template <typename V, typename T, typename S = by_column>
@@ -92,13 +93,13 @@ class matrix : public matrix_slices<S> {
     slice(const matrix& parent, int index)
         : parent_(parent), index_(index), offset_(parent.slice_offset(index)) {}
 
-    R_xlen_t stride() const { return parent_.slice_stride(); }
-    R_xlen_t size() const { return parent_.slice_size(); }
+    R_xlen_t stride() const noexcept { return parent_.slice_stride(); }
+    R_xlen_t size() const noexcept { return parent_.slice_size(); }
 
-    bool operator==(const slice& rhs) const {
+    bool operator==(const slice& rhs) const noexcept {
       return (index_ == rhs.index_) && (parent_.data() == rhs.parent_.data());
     }
-    bool operator!=(const slice& rhs) const { return !operator==(rhs); }
+    bool operator!=(const slice& rhs) const noexcept { return !operator==(rhs); }
 
     T operator[](int pos) const { return parent_.vector_[offset_ + stride() * pos]; }
 
@@ -269,6 +270,131 @@ using strings_matrix = matrix<r_vector<r_string>, r_vector<r_string>::proxy, S>;
 template <typename S = by_column>
 using complexes_matrix = matrix<r_vector<r_complex>, r_vector<r_complex>::proxy, S>;
 }  // namespace writable
+
+// Automatic coercion functions for matrices
+
+/// Coerce an integer or logical matrix to a doubles matrix
+/// This allows you to pass integer matrices where doubles matrices are expected
+template <typename S = by_column>
+inline doubles_matrix<S> as_doubles_matrix(SEXP x) {
+  if (detail::r_typeof(x) == REALSXP) {
+    return doubles_matrix<S>(x);
+  } else if (detail::r_typeof(x) == INTSXP) {
+    // Create a new doubles matrix with the same dimensions
+    integers_matrix<S> xn(x);
+    int nrow = xn.nrow();
+    int ncol = xn.ncol();
+    R_xlen_t size = static_cast<R_xlen_t>(nrow) * ncol;
+    writable::doubles_matrix<S> ret(nrow, ncol);
+    
+    const int* x_ptr = INTEGER(xn.data());
+    double* ret_ptr = REAL(ret.data());
+    
+    // Simple loop (compiler can auto-vectorize)
+    for (R_xlen_t i = 0; i < size; ++i) {
+      ret_ptr[i] = (x_ptr[i] == NA_INTEGER) ? NA_REAL : static_cast<double>(x_ptr[i]);
+    }
+    
+    // Preserve attributes like dimnames
+    SEXP dimnames = Rf_getAttrib(x, R_DimNamesSymbol);
+    if (dimnames != R_NilValue) {
+      Rf_setAttrib(ret.data(), R_DimNamesSymbol, dimnames);
+    }
+    
+    return ret;
+  } else if (detail::r_typeof(x) == LGLSXP) {
+    // Create a new doubles matrix from logical
+    logicals_matrix<S> xn(x);
+    int nrow = xn.nrow();
+    int ncol = xn.ncol();
+    R_xlen_t size = static_cast<R_xlen_t>(nrow) * ncol;
+    writable::doubles_matrix<S> ret(nrow, ncol);
+    
+    const int* x_ptr = LOGICAL(xn.data());
+    double* ret_ptr = REAL(ret.data());
+    
+    // Simple loop
+    for (R_xlen_t i = 0; i < size; ++i) {
+      ret_ptr[i] = (x_ptr[i] == NA_LOGICAL) ? NA_REAL : static_cast<double>(x_ptr[i]);
+    }
+    
+    // Preserve dimnames
+    SEXP dimnames = Rf_getAttrib(x, R_DimNamesSymbol);
+    if (dimnames != R_NilValue) {
+      Rf_setAttrib(ret.data(), R_DimNamesSymbol, dimnames);
+    }
+    
+    return ret;
+  }
+  
+  throw type_error(REALSXP, detail::r_typeof(x));
+}
+
+/// Coerce a doubles or logical matrix to an integers matrix
+/// Only works if all values are integer-like (no fractional parts)
+template <typename S = by_column>
+inline integers_matrix<S> as_integers_matrix(SEXP x) {
+  if (detail::r_typeof(x) == INTSXP) {
+    return integers_matrix<S>(x);
+  } else if (detail::r_typeof(x) == REALSXP) {
+    // Check if all values are integer-like before converting
+    doubles_matrix<S> xn(x);
+    int nrow = xn.nrow();
+    int ncol = xn.ncol();
+    R_xlen_t size = static_cast<R_xlen_t>(nrow) * ncol;
+    
+    const double* x_ptr = REAL(xn.data());
+    
+    // First pass: validate all values are integer-like
+    // Note: Cannot easily parallelize validation with early exit
+    for (R_xlen_t i = 0; i < size; ++i) {
+      if (!ISNA(x_ptr[i]) && !is_convertible_without_loss_to_integer(x_ptr[i])) {
+        throw std::runtime_error("Cannot convert doubles matrix to integers: not all elements are integer-like");
+      }
+    }
+    
+    // Second pass: convert
+    writable::integers_matrix<S> ret(nrow, ncol);
+    int* ret_ptr = INTEGER(ret.data());
+    
+    // Simple loop
+    for (R_xlen_t i = 0; i < size; ++i) {
+      ret_ptr[i] = ISNA(x_ptr[i]) ? NA_INTEGER : static_cast<int>(x_ptr[i]);
+    }
+    
+    // Preserve dimnames
+    SEXP dimnames = Rf_getAttrib(x, R_DimNamesSymbol);
+    if (dimnames != R_NilValue) {
+      Rf_setAttrib(ret.data(), R_DimNamesSymbol, dimnames);
+    }
+    
+    return ret;
+  } else if (detail::r_typeof(x) == LGLSXP) {
+    logicals_matrix<S> xn(x);
+    int nrow = xn.nrow();
+    int ncol = xn.ncol();
+    R_xlen_t size = static_cast<R_xlen_t>(nrow) * ncol;
+    writable::integers_matrix<S> ret(nrow, ncol);
+    
+    const int* x_ptr = LOGICAL(xn.data());
+    int* ret_ptr = INTEGER(ret.data());
+    
+    // Simple loop
+    for (R_xlen_t i = 0; i < size; ++i) {
+      ret_ptr[i] = (x_ptr[i] == NA_LOGICAL) ? NA_INTEGER : x_ptr[i];
+    }
+    
+    // Preserve dimnames
+    SEXP dimnames = Rf_getAttrib(x, R_DimNamesSymbol);
+    if (dimnames != R_NilValue) {
+      Rf_setAttrib(ret.data(), R_DimNamesSymbol, dimnames);
+    }
+    
+    return ret;
+  }
+  
+  throw type_error(INTSXP, detail::r_typeof(x));
+}
 
 // TODO: Add tests for Matrix class
 }  // namespace cpp4r

@@ -17,7 +17,7 @@ class sexp {
   SEXP preserve_token_ = R_NilValue;
 
  public:
-  sexp() = default;
+  sexp() noexcept = default;
 
   sexp(SEXP data) : data_(data), preserve_token_(detail::store::insert(data_)) {}
 
@@ -29,7 +29,7 @@ class sexp {
 
   // We take ownership over the `rhs.preserve_token_`.
   // Importantly we clear it in the `rhs` so it can't release the object upon destruction.
-  sexp(sexp&& rhs) {
+  sexp(sexp&& rhs) noexcept {
     data_ = rhs.data_;
     preserve_token_ = rhs.preserve_token_;
 
@@ -64,8 +64,8 @@ class sexp {
     return attribute_proxy<sexp>(*this, R_NamesSymbol);
   }
 
-  operator SEXP() const { return data_; }
-  SEXP data() const { return data_; }
+  operator SEXP() const noexcept { return data_; }
+  SEXP data() const noexcept { return data_; }
 
   /// DEPRECATED: Do not use this, it will be removed soon.
   operator double() const { return REAL_ELT(data_, 0); }

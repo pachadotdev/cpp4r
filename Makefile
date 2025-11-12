@@ -1,23 +1,25 @@
 clean:
-	@clear
 	@Rscript -e 'devtools::clean_dll("extended-tests/cpp4rtest");'
 	@Rscript -e 'devtools::clean_dll("extended-tests/cpp11benchmark")'
 	@Rscript -e 'devtools::clean_dll("extended-tests/cpp4rbenchmark")'
 	@Rscript -e 'devtools::clean_dll("extended-tests/Rcppbenchmark")'
 
+register:
+	@Rscript -e	'cpp4r::register("extended-tests/cpp4rtest")'
+	@Rscript -e	'cpp4r::register("extended-tests/cpp4rbenchmark")'
+
 install:
-	@clear
 	@Rscript -e 'devtools::install("./")'
 
 docs:
-	@clear
 	@Rscript -e 'devtools::document("./"); pkgsite::build_site("./")'
 
 check:
-	@clear
 	@echo "==============================="
 	@echo "Checking R code"
+	@$(MAKE) clean
 	@$(MAKE) install
+	@$(MAKE) register
 	@Rscript -e	'cpp4r::register("extended-tests/cpp4rtest")'
 	@Rscript -e 'devtools::check("./", error_on = "error")'
 	@echo "==============================="
@@ -29,9 +31,11 @@ check:
 	@echo "==============================="
 
 bench:
-	@clear
 	@rm -f extended-tests-results/*.rds
 	@rm -f extended-tests-results/bench_summary.md
+	@$(MAKE) clean
+	@$(MAKE) install
+	@$(MAKE) register
 	@export -p USE_CLANG; /bin/bash -euo pipefail -c './scripts/bench_loop.sh'
 	@Rscript './scripts/combine-benchmarks.R'
 

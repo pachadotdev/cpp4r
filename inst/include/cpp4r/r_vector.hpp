@@ -40,7 +40,7 @@ is_vector_of_strings<C, T> as_cpp(SEXP from) {
 // Comparison operators
 
 template <typename T>
-bool operator==(const r_vector<T>& lhs, const r_vector<T>& rhs) {
+bool operator==(const r_vector<T>& lhs, const r_vector<T>& rhs) noexcept {
   if (lhs.size() != rhs.size()) {
     return false;
   }
@@ -60,7 +60,7 @@ bool operator==(const r_vector<T>& lhs, const r_vector<T>& rhs) {
 }
 
 template <typename T>
-bool operator!=(const r_vector<T>& lhs, const r_vector<T>& rhs) {
+bool operator!=(const r_vector<T>& lhs, const r_vector<T>& rhs) noexcept {
   return !(lhs == rhs);
 }
 

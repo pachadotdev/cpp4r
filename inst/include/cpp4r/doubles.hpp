@@ -7,6 +7,7 @@
 #include "R_ext/Arith.h"       // for ISNA
 #include "cpp4r/R.hpp"         // for SEXP, SEXPREC, Rf_allocVector, REAL
 #include "cpp4r/as.hpp"        // for as_sexp
+#include "cpp4r/cpp_version.hpp"  // for CPP4R feature detection
 #include "cpp4r/protect.hpp"   // for safe
 #include "cpp4r/r_bool.hpp"    // for r_bool
 #include "cpp4r/r_vector.hpp"  // for vector, vector<>::proxy, vector<>::...
@@ -81,17 +82,21 @@ inline doubles as_doubles(SEXP x) {
     integers xn(x);
     size_t len = xn.size();
     writable::doubles ret(len);
+    
     std::transform(xn.begin(), xn.end(), ret.begin(), [](int value) {
       return value == NA_INTEGER ? NA_REAL : static_cast<double>(value);
     });
+    
     return ret;
   } else if (detail::r_typeof(x) == LGLSXP) {
     logicals xn(x);
     size_t len = xn.size();
     writable::doubles ret(len);
+    
     std::transform(xn.begin(), xn.end(), ret.begin(), [](bool value) {
       return value == NA_LOGICAL ? NA_REAL : static_cast<double>(value);
     });
+    
     return ret;
   }
 

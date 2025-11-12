@@ -441,7 +441,6 @@ describe("generate_r_functions", {
     expect_equal(
       generate_r_functions(funs, package = "cpp4r"),
       "foo <- function(bar) {
-\tbar <- as.integer(bar)
 \tinvisible(.Call(`_cpp4r_foo`, bar))
 }"
     )
@@ -462,7 +461,6 @@ describe("generate_r_functions", {
     expect_equal(
       generate_r_functions(funs, package = "cpp4r"),
       "foo <- function(bar) {
-\tbar <- as.integer(bar)
 \t.Call(`_cpp4r_foo`, bar)
 }"
     )
@@ -486,12 +484,10 @@ describe("generate_r_functions", {
     expect_equal(
       generate_r_functions(funs, package = "cpp4r"),
       "foo <- function(bar) {
-\tbar <- as.integer(bar)
 \t.Call(`_cpp4r_foo`, bar)
 }
 
 bar <- function(baz) {
-\tbaz <- as.numeric(baz)
 \t.Call(`_cpp4r_bar`, baz)
 }"
     )

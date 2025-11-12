@@ -248,6 +248,13 @@ extern "C" SEXP _cpp4rtest_col_sums(SEXP x) {
     return cpp4r::as_sexp(col_sums(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::doubles_matrix<cpp4r::by_column>>>(x)));
   END_CPP4R
 }
+// matrix.h
+cpp4r::doubles_matrix<> matrix_add(const cpp4r::doubles_matrix<>& x, const cpp4r::doubles_matrix<>& y);
+extern "C" SEXP _cpp4rtest_matrix_add(SEXP x, SEXP y) {
+  BEGIN_CPP4R
+    return cpp4r::as_sexp(matrix_add(cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(x), cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(y)));
+  END_CPP4R
+}
 // protect.h
 void protect_one_(SEXP x, int n);
 extern "C" SEXP _cpp4rtest_protect_one_(SEXP x, SEXP n) {
@@ -602,6 +609,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_cpp4rtest_mat_mat_copy_dimnames",       (DL_FUNC) &_cpp4rtest_mat_mat_copy_dimnames,       1},
     {"_cpp4rtest_mat_mat_create_dimnames",     (DL_FUNC) &_cpp4rtest_mat_mat_create_dimnames,     0},
     {"_cpp4rtest_mat_sexp_copy_dimnames",      (DL_FUNC) &_cpp4rtest_mat_sexp_copy_dimnames,      1},
+    {"_cpp4rtest_matrix_add",                  (DL_FUNC) &_cpp4rtest_matrix_add,                  2},
     {"_cpp4rtest_my_message",                  (DL_FUNC) &_cpp4rtest_my_message,                  2},
     {"_cpp4rtest_my_message_n1",               (DL_FUNC) &_cpp4rtest_my_message_n1,               1},
     {"_cpp4rtest_my_message_n1fmt",            (DL_FUNC) &_cpp4rtest_my_message_n1fmt,            1},

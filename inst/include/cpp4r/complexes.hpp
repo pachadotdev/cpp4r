@@ -150,7 +150,7 @@ inline r_vector<r_complex>::r_vector(std::initializer_list<r_complex> il)
 
 // Comparison operators for r_vector<r_complex>
 template <>
-inline bool operator==(const r_vector<r_complex>& lhs, const r_vector<r_complex>& rhs) {
+inline bool operator==(const r_vector<r_complex>& lhs, const r_vector<r_complex>& rhs) noexcept {
   if (lhs.size() != rhs.size()) return false;
   for (R_xlen_t i = 0; i < lhs.size(); ++i) {
     if (!(lhs[i] == rhs[i])) return false;
@@ -159,7 +159,7 @@ inline bool operator==(const r_vector<r_complex>& lhs, const r_vector<r_complex>
 }
 
 template <>
-inline bool operator!=(const r_vector<r_complex>& lhs, const r_vector<r_complex>& rhs) {
+inline bool operator!=(const r_vector<r_complex>& lhs, const r_vector<r_complex>& rhs) noexcept {
   return !(lhs == rhs);
 }
 

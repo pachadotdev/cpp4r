@@ -6,8 +6,6 @@ library(cpp11benchmark)
 library(cpp4rbenchmark)
 library(Rcppbenchmark)
 
-try(dir.create("./results/"), silent = TRUE)
-
 message(
     "\n==============================================================================="
 )
