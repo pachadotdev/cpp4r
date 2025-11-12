@@ -1,5 +1,5 @@
 cpp_compiler <- "gcc"
-cpp_std <- "CXX23"
+cpp_std <- "CXX11"
 
 library(bench)
 library(cpp11benchmark)

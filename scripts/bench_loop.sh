@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# for std in CXX23 CXX20 CXX17 CXX14 CXX11; do
-for std in CXX23; do
+for std in CXX23 CXX20 CXX17 CXX14 CXX11; do
   for compiler in clang gcc; do
     echo "==============================="
     echo "Benchmarking R code with $std standard and $compiler compiler"

@@ -162,7 +162,16 @@ res <- res %>%
         rel_time_cpp11 = signif(rel_time_cpp11, 3),
         rel_time_cpp4r = signif(rel_time_cpp4r, 3),
         rel_time_Rcpp = signif(rel_time_Rcpp, 3)
-    ) %>%
+    )
+
+# add cpp4/cpp11 time and cpp4r/Rcpp time ratios
+res <- res %>%
+    mutate(
+        rel_cpp4r_cpp11 = signif(rel_time_cpp4r / rel_time_cpp11, 3),
+        rel_cpp4r_Rcpp = signif(rel_time_cpp4r / rel_time_Rcpp, 3)
+    )
+
+res <- res %>%
     mutate(
         avg_time_cpp11 = paste(avg_time_cpp11, paste0("(", rel_time_cpp11, ")")),
         avg_time_cpp4r = paste(avg_time_cpp4r, paste0("(", rel_time_cpp4r, ")")),
