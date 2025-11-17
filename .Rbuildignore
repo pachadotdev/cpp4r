@@ -11,6 +11,7 @@
 ^Makefile$
 ^README\.Rmd$
 ^README\.html$
+^README\.md$
 ^cran-comments\.md$
 ^dev$
 ^doc$
@@ -21,5 +22,3 @@
 ^scripts$
 ^vignettes$
 ^cpp11headers$
-^.*\.md$
-!^tests/testthat/_snaps/.*\.md$
