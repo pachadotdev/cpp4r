@@ -106,32 +106,20 @@ inline void r_message(const char* x) {
 }  // namespace detail
 
 inline void message(const char* fmt_arg) {
-#ifdef CPP4R_USE_FMT
-  std::string msg = fmt::format(fmt_arg);
-  safe[detail::r_message](msg.c_str());
-#else
   char buff[1024];
-  int msg;
-  msg = std::snprintf(buff, 1024, "%s", fmt_arg);
+  int msg = std::snprintf(buff, 1024, "%s", fmt_arg);
   if (msg >= 0 && msg < 1024) {
     safe[detail::r_message](buff);
   }
-#endif
 }
 
 template <typename... Args>
 void message(const char* fmt_arg, Args... args) {
-#ifdef CPP4R_USE_FMT
-  std::string msg = fmt::format(fmt_arg, args...);
-  safe[detail::r_message](msg.c_str());
-#else
   char buff[1024];
-  int msg;
-  msg = std::snprintf(buff, 1024, fmt_arg, args...);
+  int msg = std::snprintf(buff, 1024, fmt_arg, args...);
   if (msg >= 0 && msg < 1024) {
     safe[detail::r_message](buff);
   }
-#endif
 }
 
 inline void message(const std::string& fmt_arg) { message(fmt_arg.c_str()); }

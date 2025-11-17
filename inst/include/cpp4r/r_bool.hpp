@@ -42,10 +42,11 @@ class r_bool {
  private:
   static constexpr int na = std::numeric_limits<int>::min();
 
+  // C++11 constexpr must be single return statement
   static constexpr int from_int(int value) noexcept {
-    if (value == static_cast<int>(FALSE)) return FALSE;
-    if (value == static_cast<int>(na)) return na;
-    return TRUE;
+    return (value == static_cast<int>(FALSE)) ? FALSE :
+           (value == static_cast<int>(na)) ? na :
+           TRUE;
   }
 
   int value_ = na;

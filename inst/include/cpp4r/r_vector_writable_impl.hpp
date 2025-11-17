@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cpp4r/r_vector_fwd.hpp"
+#include "cpp4r/cpp_version.hpp"  // for CPP4R feature detection
 
 namespace cpp4r {
 namespace writable {
@@ -119,6 +120,8 @@ inline r_vector<T>::r_vector(std::initializer_list<named_arg> il)
       // SAFETY: We've validated type and length ahead of this.
       const underlying_type elt = get_elt(value, 0);
 
+#if CPP4R_HAS_CXX17
+      // C++17+: Use if constexpr for compile-time dispatch
       if constexpr (std::is_same<T, cpp4r::r_string>::value) {
         // Translate to UTF-8 before assigning for string types
         SEXP translated_elt = Rf_mkCharCE(Rf_translateCharUTF8(elt), CE_UTF8);
@@ -137,6 +140,25 @@ inline r_vector<T>::r_vector(std::initializer_list<named_arg> il)
           set_elt(data_, i, elt);
         }
       }
+#else
+      // C++11/14: Runtime check instead of if constexpr
+      if (std::is_same<T, cpp4r::r_string>::value) {
+        // Translate to UTF-8 before assigning for string types
+        SEXP translated_elt = Rf_mkCharCE(Rf_translateCharUTF8(elt), CE_UTF8);
+
+        if (data_p_ != nullptr) {
+          data_p_[i] = translated_elt;
+        } else {
+          set_elt(data_, i, translated_elt);
+        }
+      } else {
+        if (data_p_ != nullptr) {
+          data_p_[i] = elt;
+        } else {
+          set_elt(data_, i, elt);
+        }
+      }
+#endif
 
       SEXP name = Rf_mkCharCE(it->name(), CE_UTF8);
       SET_STRING_ELT(names, i, name);

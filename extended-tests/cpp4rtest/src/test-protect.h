@@ -1,5 +1,3 @@
-#define CPP4R_USE_FMT
-
 #include <testthat.h>
 
 context("unwind_protect-C++") {
@@ -39,9 +37,7 @@ context("unwind_protect-C++") {
 
   test_that("stop throws an unwind_exception") {
     expect_error_as(cpp4r::stop("error"), cpp4r::unwind_exception);
-    expect_error_as(cpp4r::stop("error {}", "message"), cpp4r::unwind_exception);
-    expect_error_as(cpp4r::stop("error {a}", fmt::arg("a", "message")),
-                    cpp4r::unwind_exception);
+    expect_error_as(cpp4r::stop("error %s", "message"), cpp4r::unwind_exception);
   }
 
   test_that("safe wraps R functions and works if there is an R error") {

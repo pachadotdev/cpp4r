@@ -187,4 +187,81 @@ res <- res %>%
     ) %>%
     select(-starts_with("rel_time_"))
 
+# write markdown summary
 writeLines(knitr::kable(res), "./extended-tests-results/bench_summary.md")
+
+# LaTeX export: create table with division lines and two-line cells
+write_latex_table <- function(df, out_file = "./extended-tests-results/bench_summary.tex") {
+    # Helper to make two-line cell: time \newline (rel)
+    two_line <- function(time_str, rel_str) {
+        # Escape percent signs and backslashes
+        time_str <- gsub("%", "\\%", time_str, fixed = TRUE)
+        rel_str <- gsub("%", "\\%", rel_str, fixed = TRUE)
+        # Use \shortstack to stack lines within a cell
+        sprintf("\\shortstack{ %s \\\\ (%s) }", time_str, rel_str)
+    }
+
+    # Ensure test grouping order
+    df <- df %>% arrange(test, cpp_standard, cpp_compiler)
+
+    # Unique tests and counts
+    tests <- unique(df$test)
+
+    # Begin LaTeX table
+    con <- file(out_file, open = "w")
+    writeLines(
+        c(
+            "% Auto-generated benchmark summary",
+            "\\begin{table}[ht]",
+            "\\centering",
+            "\\begin{tabular}{|l|l|l|c|c|c|}",
+            "\\hline",
+            "Test & Standard & Compiler & cpp11 & cpp4r & Rcpp \\\\ ",
+            "\\hline"
+        ), con
+    )
+
+    for (t in tests) {
+        sub <- df %>% filter(test == t)
+        nrows <- nrow(sub)
+        first_row <- TRUE
+        for (i in seq_len(nrows)) {
+            row <- sub[i, ]
+            # build two-line strings by splitting the "time (rel)" format
+            extract_parts <- function(cell) {
+                if (is.na(cell) || nchar(cell) == 0) return(c("", ""))
+                # cell format is like "0.00421 (0.664)" or similar
+                m <- regmatches(cell, regexec('^(\\S+)\\s*\\(([^)]+)\\)$', cell))[[1]]
+                if (length(m) == 3) return(c(m[2], m[3]))
+                return(c(cell, ""))
+            }
+
+            p11 <- extract_parts(row$avg_time_cpp11)
+            p4r <- extract_parts(row$avg_time_cpp4r)
+            prc <- extract_parts(row$avg_time_Rcpp)
+
+            cpp11_cell <- if (p11[1] != "") two_line(p11[1], p11[2]) else ""
+            cpp4r_cell <- if (p4r[1] != "") two_line(p4r[1], p4r[2]) else ""
+            rcpp_cell <- if (prc[1] != "") two_line(prc[1], prc[2]) else ""
+
+            test_cell <- if (first_row) sprintf("\\multirow{%d}{*}{%s}", nrows, t) else ""
+            first_row <- FALSE
+
+            line <- sprintf("%s & %s & %s & %s & %s & %s \\\\",
+                            test_cell,
+                            row$cpp_standard,
+                            row$cpp_compiler,
+                            cpp11_cell,
+                            cpp4r_cell,
+                            rcpp_cell)
+            writeLines(line, con)
+            writeLines("\\hline", con)
+        }
+    }
+
+    writeLines(c("\\end{tabular}", "\\caption{Benchmark summary}", "\\end{table}"), con)
+    close(con)
+}
+
+# call LaTeX export
+write_latex_table(res)
