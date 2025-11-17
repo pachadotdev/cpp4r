@@ -6,6 +6,36 @@
 namespace cpp4r {
 namespace writable {
 
+// Helper functions for named_arg assignment to handle C++11/14 compatibility
+namespace detail_named_arg {
+  // General case: just assign the element directly
+  template <typename T>
+  inline typename std::enable_if<!std::is_same<T, cpp4r::r_string>::value>::type
+  assign_element(typename r_vector<T>::underlying_type* data_p,
+                SEXP data, R_xlen_t i,
+                typename r_vector<T>::underlying_type elt) {
+    if (data_p != nullptr) {
+      data_p[i] = elt;
+    } else {
+      r_vector<T>::set_elt(data, i, elt);
+    }
+  }
+  
+  // Specialization for r_string: translate to UTF-8
+  template <typename T>
+  inline typename std::enable_if<std::is_same<T, cpp4r::r_string>::value>::type
+  assign_element(typename r_vector<T>::underlying_type* data_p, SEXP data, R_xlen_t i,
+                 SEXP elt) {
+    SEXP translated_elt = Rf_mkCharCE(Rf_translateCharUTF8(elt), CE_UTF8);
+    if (data_p != nullptr) {
+      data_p[i] = translated_elt;
+    } else {
+      // Use the R API macro directly to avoid accessing private members
+      SET_STRING_ELT(data, i, translated_elt);
+    }
+  }
+}
+
 // Writable r_vector implementations
 
 template <typename T>
@@ -129,9 +159,8 @@ inline r_vector<T>::r_vector(std::initializer_list<named_arg> il)
         if (data_p_ != nullptr) {
           data_p_[i] = translated_elt;
         } else {
-          // Handles STRSXP case. VECSXP case has its own specialization.
-          // We don't expect any ALTREP cases since we just freshly allocated `data_`.
-          set_elt(data_, i, translated_elt);
+          // Use direct R API macro to avoid accessing private member
+          SET_STRING_ELT(data_, i, translated_elt);
         }
       } else {
         if (data_p_ != nullptr) {
@@ -141,23 +170,8 @@ inline r_vector<T>::r_vector(std::initializer_list<named_arg> il)
         }
       }
 #else
-      // C++11/14: Runtime check instead of if constexpr
-      if (std::is_same<T, cpp4r::r_string>::value) {
-        // Translate to UTF-8 before assigning for string types
-        SEXP translated_elt = Rf_mkCharCE(Rf_translateCharUTF8(elt), CE_UTF8);
-
-        if (data_p_ != nullptr) {
-          data_p_[i] = translated_elt;
-        } else {
-          set_elt(data_, i, translated_elt);
-        }
-      } else {
-        if (data_p_ != nullptr) {
-          data_p_[i] = elt;
-        } else {
-          set_elt(data_, i, elt);
-        }
-      }
+      // C++11/14: Use SFINAE helper function for type-specific logic
+      detail_named_arg::assign_element<T>(data_p_, data_, i, elt);
 #endif
 
       SEXP name = Rf_mkCharCE(it->name(), CE_UTF8);
