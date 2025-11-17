@@ -175,7 +175,12 @@ class matrix : public matrix_slices<S> {
 
   matrix(int nrow, int ncol)
       : matrix_slices<S>(nrow, ncol), vector_(R_xlen_t(nrow * ncol)) {
-    vector_.attr(R_DimSymbol) = {nrow, ncol};
+    // Fast path: Set dimensions directly using R API without intermediate protection
+    SEXP dims = PROTECT(Rf_allocVector(INTSXP, 2));
+    INTEGER(dims)[0] = nrow;
+    INTEGER(dims)[1] = ncol;
+    Rf_setAttrib(vector_.data(), R_DimSymbol, dims);
+    UNPROTECT(1);
   }
 
   using matrix_slices<S>::nrow;
@@ -241,6 +246,15 @@ class matrix : public matrix_slices<S> {
 
   r_vector<r_string> names() const { return r_vector<r_string>(vector_.names()); }
 
+  // Fast-path accessors for high-performance operations
+  CPP4R_ALWAYS_INLINE const double* CPP4R_RESTRICT data_ptr() const {
+    return REAL(vector_.data());
+  }
+  
+  CPP4R_ALWAYS_INLINE double* CPP4R_RESTRICT data_ptr_writable() {
+    return REAL(vector_.data());
+  }
+
   CPP4R_ALWAYS_INLINE T operator()(int row, int col) const { 
     return vector_[row + (col * nrow())]; 
   }
@@ -291,17 +305,18 @@ inline doubles_matrix<S> as_doubles_matrix(SEXP x) {
     R_xlen_t size = static_cast<R_xlen_t>(nrow) * ncol;
     writable::doubles_matrix<S> ret(nrow, ncol);
     
-    const int* x_ptr = INTEGER(xn.data());
-    double* ret_ptr = REAL(ret.data());
+    const int* CPP4R_RESTRICT x_ptr = INTEGER(xn.data());
+    double* CPP4R_RESTRICT ret_ptr = REAL(ret.data());
     
-    // Simple loop (compiler can auto-vectorize)
+    // Optimized loop that compiler can auto-vectorize
     for (R_xlen_t i = 0; i < size; ++i) {
-      ret_ptr[i] = (x_ptr[i] == NA_INTEGER) ? NA_REAL : static_cast<double>(x_ptr[i]);
+      int val = x_ptr[i];
+      ret_ptr[i] = CPP4R_LIKELY(val != NA_INTEGER) ? static_cast<double>(val) : NA_REAL;
     }
     
     // Preserve attributes like dimnames
     SEXP dimnames = Rf_getAttrib(x, R_DimNamesSymbol);
-    if (dimnames != R_NilValue) {
+    if (CPP4R_UNLIKELY(dimnames != R_NilValue)) {
       Rf_setAttrib(ret.data(), R_DimNamesSymbol, dimnames);
     }
     
@@ -314,17 +329,18 @@ inline doubles_matrix<S> as_doubles_matrix(SEXP x) {
     R_xlen_t size = static_cast<R_xlen_t>(nrow) * ncol;
     writable::doubles_matrix<S> ret(nrow, ncol);
     
-    const int* x_ptr = LOGICAL(xn.data());
-    double* ret_ptr = REAL(ret.data());
+    const int* CPP4R_RESTRICT x_ptr = LOGICAL(xn.data());
+    double* CPP4R_RESTRICT ret_ptr = REAL(ret.data());
     
-    // Simple loop
+    // Optimized loop
     for (R_xlen_t i = 0; i < size; ++i) {
-      ret_ptr[i] = (x_ptr[i] == NA_LOGICAL) ? NA_REAL : static_cast<double>(x_ptr[i]);
+      int val = x_ptr[i];
+      ret_ptr[i] = CPP4R_LIKELY(val != NA_LOGICAL) ? static_cast<double>(val) : NA_REAL;
     }
     
     // Preserve dimnames
     SEXP dimnames = Rf_getAttrib(x, R_DimNamesSymbol);
-    if (dimnames != R_NilValue) {
+    if (CPP4R_UNLIKELY(dimnames != R_NilValue)) {
       Rf_setAttrib(ret.data(), R_DimNamesSymbol, dimnames);
     }
     
@@ -347,28 +363,29 @@ inline integers_matrix<S> as_integers_matrix(SEXP x) {
     int ncol = xn.ncol();
     R_xlen_t size = static_cast<R_xlen_t>(nrow) * ncol;
     
-    const double* x_ptr = REAL(xn.data());
+    const double* CPP4R_RESTRICT x_ptr = REAL(xn.data());
     
     // First pass: validate all values are integer-like
-    // Note: Cannot easily parallelize validation with early exit
     for (R_xlen_t i = 0; i < size; ++i) {
-      if (!ISNA(x_ptr[i]) && !is_convertible_without_loss_to_integer(x_ptr[i])) {
+      double val = x_ptr[i];
+      if (CPP4R_UNLIKELY(!ISNA(val) && !is_convertible_without_loss_to_integer(val))) {
         throw std::runtime_error("Cannot convert doubles matrix to integers: not all elements are integer-like");
       }
     }
     
     // Second pass: convert
     writable::integers_matrix<S> ret(nrow, ncol);
-    int* ret_ptr = INTEGER(ret.data());
+    int* CPP4R_RESTRICT ret_ptr = INTEGER(ret.data());
     
-    // Simple loop
+    // Optimized conversion loop
     for (R_xlen_t i = 0; i < size; ++i) {
-      ret_ptr[i] = ISNA(x_ptr[i]) ? NA_INTEGER : static_cast<int>(x_ptr[i]);
+      double val = x_ptr[i];
+      ret_ptr[i] = CPP4R_LIKELY(!ISNA(val)) ? static_cast<int>(val) : NA_INTEGER;
     }
     
     // Preserve dimnames
     SEXP dimnames = Rf_getAttrib(x, R_DimNamesSymbol);
-    if (dimnames != R_NilValue) {
+    if (CPP4R_UNLIKELY(dimnames != R_NilValue)) {
       Rf_setAttrib(ret.data(), R_DimNamesSymbol, dimnames);
     }
     
@@ -380,17 +397,18 @@ inline integers_matrix<S> as_integers_matrix(SEXP x) {
     R_xlen_t size = static_cast<R_xlen_t>(nrow) * ncol;
     writable::integers_matrix<S> ret(nrow, ncol);
     
-    const int* x_ptr = LOGICAL(xn.data());
-    int* ret_ptr = INTEGER(ret.data());
+    const int* CPP4R_RESTRICT x_ptr = LOGICAL(xn.data());
+    int* CPP4R_RESTRICT ret_ptr = INTEGER(ret.data());
     
-    // Simple loop
+    // Optimized loop
     for (R_xlen_t i = 0; i < size; ++i) {
-      ret_ptr[i] = (x_ptr[i] == NA_LOGICAL) ? NA_INTEGER : x_ptr[i];
+      int val = x_ptr[i];
+      ret_ptr[i] = CPP4R_LIKELY(val != NA_LOGICAL) ? val : NA_INTEGER;
     }
     
     // Preserve dimnames
     SEXP dimnames = Rf_getAttrib(x, R_DimNamesSymbol);
-    if (dimnames != R_NilValue) {
+    if (CPP4R_UNLIKELY(dimnames != R_NilValue)) {
       Rf_setAttrib(ret.data(), R_DimNamesSymbol, dimnames);
     }
     

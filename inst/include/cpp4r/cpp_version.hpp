@@ -148,3 +148,20 @@
 #define CPP4R_HOT
 #define CPP4R_COLD
 #endif
+
+// CPP4R_ASSUME_ALIGNED: hint to compiler about pointer alignment
+// Useful for SIMD optimization when working with R vector data
+#if defined(__GNUC__) || defined(__clang__)
+#define CPP4R_ASSUME_ALIGNED(ptr, alignment) __builtin_assume_aligned(ptr, alignment)
+#else
+#define CPP4R_ASSUME_ALIGNED(ptr, alignment) (ptr)
+#endif
+
+// CPP4R_PREFETCH: prefetch data to cache for better performance
+#if defined(__GNUC__) || defined(__clang__)
+#define CPP4R_PREFETCH(addr) __builtin_prefetch(addr)
+#define CPP4R_PREFETCH_WRITE(addr) __builtin_prefetch(addr, 1)
+#else
+#define CPP4R_PREFETCH(addr) ((void)0)
+#define CPP4R_PREFETCH_WRITE(addr) ((void)0)
+#endif

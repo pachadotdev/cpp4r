@@ -133,9 +133,9 @@ inline T r_vector<T>::operator[](const int pos) const {
 #endif
 
 template <typename T>
-inline T r_vector<T>::operator[](const R_xlen_t pos) const {
+CPP4R_ALWAYS_INLINE T r_vector<T>::operator[](const R_xlen_t pos) const {
   // Handles ALTREP, VECSXP, and STRSXP cases through `get_elt()`
-  const underlying_type elt = (data_p_ != nullptr) ? data_p_[pos] : get_elt(data_, pos);
+  const underlying_type elt = CPP4R_LIKELY(data_p_ != nullptr) ? data_p_[pos] : get_elt(data_, pos);
   return static_cast<T>(elt);
 }
 

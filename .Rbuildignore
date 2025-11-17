@@ -21,4 +21,5 @@
 ^scripts$
 ^vignettes$
 ^cpp11headers$
-.*\.md$
+^.*\.md$
+!^tests/testthat/_snaps/.*\.md$

@@ -83,9 +83,14 @@ inline doubles as_doubles(SEXP x) {
     size_t len = xn.size();
     writable::doubles ret(len);
     
-    std::transform(xn.begin(), xn.end(), ret.begin(), [](int value) {
-      return value == NA_INTEGER ? NA_REAL : static_cast<double>(value);
-    });
+    const int* CPP4R_RESTRICT x_ptr = INTEGER(xn.data());
+    double* CPP4R_RESTRICT ret_ptr = REAL(ret.data());
+    
+    // Optimized loop with branch prediction hints
+    for (size_t i = 0; i < len; ++i) {
+      int val = x_ptr[i];
+      ret_ptr[i] = CPP4R_LIKELY(val != NA_INTEGER) ? static_cast<double>(val) : NA_REAL;
+    }
     
     return ret;
   } else if (detail::r_typeof(x) == LGLSXP) {
@@ -93,9 +98,14 @@ inline doubles as_doubles(SEXP x) {
     size_t len = xn.size();
     writable::doubles ret(len);
     
-    std::transform(xn.begin(), xn.end(), ret.begin(), [](bool value) {
-      return value == NA_LOGICAL ? NA_REAL : static_cast<double>(value);
-    });
+    const int* CPP4R_RESTRICT x_ptr = LOGICAL(xn.data());
+    double* CPP4R_RESTRICT ret_ptr = REAL(ret.data());
+    
+    // Optimized loop with branch prediction hints
+    for (size_t i = 0; i < len; ++i) {
+      int val = x_ptr[i];
+      ret_ptr[i] = CPP4R_LIKELY(val != NA_LOGICAL) ? static_cast<double>(val) : NA_REAL;
+    }
     
     return ret;
   }
