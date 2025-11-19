@@ -178,6 +178,8 @@ class r_vector : public cpp4r::r_vector<T> {
   class proxy;
   class iterator;
 
+  using typename cpp4r::r_vector<T>::underlying_type;
+
  private:
   R_xlen_t capacity_ = 0;
 
@@ -186,8 +188,6 @@ class r_vector : public cpp4r::r_vector<T> {
   using cpp4r::r_vector<T>::is_altrep_;
   using cpp4r::r_vector<T>::length_;
   using cpp4r::r_vector<T>::protect_;
-
-  using typename cpp4r::r_vector<T>::underlying_type;
 
  public:
   typedef ptrdiff_t difference_type;
