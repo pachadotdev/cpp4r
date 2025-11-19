@@ -44,6 +44,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      TESTTHAT_PARALLEL: false
 
     steps:
       - uses: actions/checkout@v4
@@ -78,20 +79,19 @@ jobs:
         if: matrix.config.custom != 'no-cpp4rtest'
         run: |
           options(warn = 2)
-          pak::local_install_dev_deps("./extended-tests/cpp4rtest", dependencies = TRUE)
+          pak::local_install_dev_deps("extended-tests/cpp4rtest", dependencies = TRUE)
           install.packages("./", repos = NULL, type = "source")
-          install.packages("./extended-tests/cpp4rtest", repos = NULL, INSTALL_opts = "--install-tests", type = "source")
+          install.packages("extended-tests/cpp4rtest", repos = NULL, INSTALL_opts = "--install-tests", type = "source")
         shell: Rscript {0}
 
       - uses: r-lib/actions/check-r-package@v2
         with:
-          upload-snapshots: true
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
 
       - name: Run cpp4rtest tests
         if: matrix.config.custom != 'no-cpp4rtest'
         run: |
-          setwd("./extended-tests/cpp4rtest/tests")
+          setwd("extended-tests/cpp4rtest/tests")
           library(testthat)
           library(cpp4rtest)
           test_check("cpp4rtest", reporter = "progress")

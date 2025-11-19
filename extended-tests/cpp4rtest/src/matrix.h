@@ -100,8 +100,8 @@
 }
 
 // Test function for automatic integer to double matrix coercion
-[[cpp4r::register]] cpp4r::doubles_matrix<> matrix_add(
-    const cpp4r::doubles_matrix<>& x, const cpp4r::doubles_matrix<>& y) {
+[[cpp4r::register]] cpp4r::doubles_matrix<> matrix_add(const cpp4r::doubles_matrix<>& x,
+                                                       const cpp4r::doubles_matrix<>& y) {
   int nrow = x.nrow();
   int ncol = x.ncol();
 

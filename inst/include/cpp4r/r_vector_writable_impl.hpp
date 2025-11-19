@@ -1,10 +1,39 @@
 #pragma once
 
-#include "cpp4r/r_vector_fwd.hpp"
 #include "cpp4r/cpp_version.hpp"  // for CPP4R feature detection
+#include "cpp4r/r_vector_fwd.hpp"
 
 namespace cpp4r {
 namespace writable {
+
+// Helper functions for named_arg assignment to handle C++11/14 compatibility
+namespace detail_named_arg {
+// General case: just assign the element directly
+template <typename T>
+inline typename std::enable_if<!std::is_same<T, cpp4r::r_string>::value>::type
+assign_element(typename r_vector<T>::underlying_type* data_p, SEXP data, R_xlen_t i,
+               typename r_vector<T>::underlying_type elt) {
+  if (data_p != nullptr) {
+    data_p[i] = elt;
+  } else {
+    r_vector<T>::set_elt(data, i, elt);
+  }
+}
+
+// Specialization for r_string: translate to UTF-8
+template <typename T>
+inline typename std::enable_if<std::is_same<T, cpp4r::r_string>::value>::type
+assign_element(typename r_vector<T>::underlying_type* data_p, SEXP data, R_xlen_t i,
+               SEXP elt) {
+  SEXP translated_elt = Rf_mkCharCE(Rf_translateCharUTF8(elt), CE_UTF8);
+  if (data_p != nullptr) {
+    data_p[i] = translated_elt;
+  } else {
+    // Use the R API macro directly to avoid accessing private members
+    SET_STRING_ELT(data, i, translated_elt);
+  }
+}
+}  // namespace detail_named_arg
 
 // Writable r_vector implementations
 
@@ -129,9 +158,8 @@ inline r_vector<T>::r_vector(std::initializer_list<named_arg> il)
         if (data_p_ != nullptr) {
           data_p_[i] = translated_elt;
         } else {
-          // Handles STRSXP case. VECSXP case has its own specialization.
-          // We don't expect any ALTREP cases since we just freshly allocated `data_`.
-          set_elt(data_, i, translated_elt);
+          // Use direct R API macro to avoid accessing private member
+          SET_STRING_ELT(data_, i, translated_elt);
         }
       } else {
         if (data_p_ != nullptr) {
@@ -141,23 +169,8 @@ inline r_vector<T>::r_vector(std::initializer_list<named_arg> il)
         }
       }
 #else
-      // C++11/14: Runtime check instead of if constexpr
-      if (std::is_same<T, cpp4r::r_string>::value) {
-        // Translate to UTF-8 before assigning for string types
-        SEXP translated_elt = Rf_mkCharCE(Rf_translateCharUTF8(elt), CE_UTF8);
-
-        if (data_p_ != nullptr) {
-          data_p_[i] = translated_elt;
-        } else {
-          set_elt(data_, i, translated_elt);
-        }
-      } else {
-        if (data_p_ != nullptr) {
-          data_p_[i] = elt;
-        } else {
-          set_elt(data_, i, elt);
-        }
-      }
+      // C++11/14: Use SFINAE helper function for type-specific logic
+      detail_named_arg::assign_element<T>(data_p_, data_, i, elt);
 #endif
 
       SEXP name = Rf_mkCharCE(it->name(), CE_UTF8);
@@ -353,12 +366,12 @@ inline void r_vector<T>::resize(R_xlen_t count) {
   length_ = count;
 }
 
-/// Reserve a new capacity and copy all elements over
-///
-/// SAFETY: The new capacity is allowed to be smaller than the current capacity, which
-/// is used in the `SEXP` conversion operator during truncation, but if that occurs then
-/// we also need to update the `length_`, so if you need to truncate then you should call
-/// `resize()` instead.
+// Reserve a new capacity and copy all elements over
+//
+// SAFETY: The new capacity is allowed to be smaller than the current capacity, which
+// is used in the `SEXP` conversion operator during truncation, but if that occurs then
+// we also need to update the `length_`, so if you need to truncate then you should call
+// `resize()` instead.
 template <typename T>
 inline void r_vector<T>::reserve(R_xlen_t new_capacity) {
   SEXP old_protect = protect_;
@@ -612,14 +625,14 @@ inline typename r_vector<T>::iterator r_vector<T>::iterator::operator+(R_xlen_t 
   return it;
 }
 
-/// Compared to `Rf_xlengthgets()`:
-/// - This copies over attributes with `Rf_copyMostAttrib()`, which is important when we
-///   truncate right before returning from the `SEXP` operator.
-/// - This always allocates, even if it is the same size.
-/// - This is more friendly to ALTREP `x`.
-///
-/// SAFETY: For use only by `reserve()`! This won't retain the `dim` or `dimnames`
-/// attributes (which doesn't make much sense anyways).
+// Compared to `Rf_xlengthgets()`:
+// - This copies over attributes with `Rf_copyMostAttrib()`, which is important when we
+//   truncate right before returning from the `SEXP` operator.
+// - This always allocates, even if it is the same size.
+// - This is more friendly to ALTREP `x`.
+//
+// SAFETY: For use only by `reserve()`! This won't retain the `dim` or `dimnames`
+// attributes (which doesn't make much sense anyways).
 template <typename T>
 inline SEXP r_vector<T>::reserve_data(SEXP x, bool is_altrep, R_xlen_t size) {
   // Resize core data

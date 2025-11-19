@@ -90,7 +90,7 @@ inline integers as_integers(SEXP x) {
     doubles xn(x);
     size_t len = xn.size();
     writable::integers ret(len);
-    
+
     std::transform(xn.begin(), xn.end(), ret.begin(), [](double value) {
       if (ISNA(value)) {
         return NA_INTEGER;
@@ -100,17 +100,17 @@ inline integers as_integers(SEXP x) {
       }
       return static_cast<int>(value);
     });
-    
+
     return ret;
   } else if (detail::r_typeof(x) == LGLSXP) {
     logicals xn(x);
     size_t len = xn.size();
     writable::integers ret(len);
-    
+
     std::transform(xn.begin(), xn.end(), ret.begin(), [](bool value) {
       return value == NA_LOGICAL ? NA_INTEGER : static_cast<int>(value);
     });
-    
+
     return ret;
   }
 

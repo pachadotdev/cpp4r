@@ -32,7 +32,9 @@ class r_string {
     return res;
   }
 
-  bool operator==(const r_string& rhs) const noexcept { return data_.data() == rhs.data_.data(); }
+  bool operator==(const r_string& rhs) const noexcept {
+    return data_.data() == rhs.data_.data();
+  }
 
   bool operator==(const SEXP rhs) const noexcept { return data_.data() == rhs; }
 

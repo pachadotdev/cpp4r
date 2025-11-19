@@ -141,23 +141,23 @@ class r_vector {
     friend class writable::r_vector<T>::iterator;
 
    private:
-    /// Implemented in specialization
+    // Implemented in specialization
     static bool use_buf(bool is_altrep);
     void fill_buf(R_xlen_t pos);
   };
 
  private:
-  /// Implemented in specialization
+  // Implemented in specialization
   static underlying_type get_elt(SEXP x, R_xlen_t i);
-  /// Implemented in specialization
+  // Implemented in specialization
   static underlying_type* get_p(bool is_altrep, SEXP data);
-  /// Implemented in specialization
+  // Implemented in specialization
   static underlying_type const* get_const_p(bool is_altrep, SEXP data);
-  /// Implemented in specialization
+  // Implemented in specialization
   static void get_region(SEXP x, R_xlen_t i, R_xlen_t n, underlying_type* buf);
-  /// Implemented in specialization
+  // Implemented in specialization
   static SEXPTYPE get_sexptype();
-  /// Implemented in specialization (throws by default, specialization in list type)
+  // Implemented in specialization (throws by default, specialization in list type)
   static T get_oob();
   static SEXP valid_type(SEXP x);
   static SEXP valid_length(SEXP x, R_xlen_t n);
@@ -170,13 +170,15 @@ namespace writable {
 template <typename T>
 using has_begin_fun = std::decay<decltype(*begin(std::declval<T>()))>;
 
-/// Read/write access to new or copied r_vectors
+// Read/write access to new or copied r_vectors
 template <typename T>
 class r_vector : public cpp4r::r_vector<T> {
  public:
   // Forward declare
   class proxy;
   class iterator;
+
+  using typename cpp4r::r_vector<T>::underlying_type;
 
  private:
   R_xlen_t capacity_ = 0;
@@ -186,8 +188,6 @@ class r_vector : public cpp4r::r_vector<T> {
   using cpp4r::r_vector<T>::is_altrep_;
   using cpp4r::r_vector<T>::length_;
   using cpp4r::r_vector<T>::protect_;
-
-  using typename cpp4r::r_vector<T>::underlying_type;
 
  public:
   typedef ptrdiff_t difference_type;
@@ -258,9 +258,9 @@ class r_vector : public cpp4r::r_vector<T> {
 
   iterator find(const r_string& name) const;
 
-  /// Get the value at position without returning a proxy
-  /// This is useful when you need the actual value (e.g., for C-style printf functions)
-  /// that don't trigger implicit conversions from proxy types
+  // Get the value at position without returning a proxy
+  // This is useful when you need the actual value (e.g., for C-style printf functions)
+  // that don't trigger implicit conversions from proxy types
 #ifdef LONG_VECTOR_SUPPORT
   T value(const int pos) const;
 #endif
@@ -272,6 +272,9 @@ class r_vector : public cpp4r::r_vector<T> {
   attribute_proxy<r_vector<T>> attr(SEXP name) const;
 
   attribute_proxy<r_vector<T>> names() const;
+
+  // Implemented in specialization
+  static void set_elt(SEXP x, R_xlen_t i, underlying_type value);
 
   class proxy {
    private:
@@ -286,10 +289,10 @@ class r_vector : public cpp4r::r_vector<T> {
     proxy& operator=(const proxy& rhs);
 
     proxy& operator=(const T& rhs);
-    
+
     template <typename U>
     proxy& operator=(const U& rhs);
-    
+
     proxy& operator+=(const T& rhs);
     proxy& operator-=(const T& rhs);
     proxy& operator*=(const T& rhs);
@@ -337,9 +340,6 @@ class r_vector : public cpp4r::r_vector<T> {
   };
 
  private:
-  /// Implemented in specialization
-  static void set_elt(SEXP x, R_xlen_t i, underlying_type value);
-
   static SEXP reserve_data(SEXP x, bool is_altrep, R_xlen_t size);
   static SEXP resize_data(SEXP x, bool is_altrep, R_xlen_t size);
   static SEXP resize_names(SEXP x, R_xlen_t size);

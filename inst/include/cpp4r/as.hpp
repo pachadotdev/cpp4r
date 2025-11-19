@@ -224,7 +224,7 @@ enable_if_std_string<T, T> as_cpp(SEXP from) {
   return {as_cpp<const char*>(from)};
 }
 
-/// Temporary workaround for compatibility with cpp4r 0.1.0
+// Temporary workaround for compatibility with cpp4r 0.1.0
 template <typename T>
 enable_if_t<!std::is_same<decay_t<T>, T>::value, decay_t<T>> as_cpp(SEXP from) {
   return as_cpp<decay_t<T>>(from);

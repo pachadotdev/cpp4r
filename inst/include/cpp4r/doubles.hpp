@@ -4,14 +4,14 @@
 #include <array>             // for array
 #include <initializer_list>  // for initializer_list
 
-#include "R_ext/Arith.h"       // for ISNA
-#include "cpp4r/R.hpp"         // for SEXP, SEXPREC, Rf_allocVector, REAL
-#include "cpp4r/as.hpp"        // for as_sexp
+#include "R_ext/Arith.h"          // for ISNA
+#include "cpp4r/R.hpp"            // for SEXP, SEXPREC, Rf_allocVector, REAL
+#include "cpp4r/as.hpp"           // for as_sexp
 #include "cpp4r/cpp_version.hpp"  // for CPP4R feature detection
-#include "cpp4r/protect.hpp"   // for safe
-#include "cpp4r/r_bool.hpp"    // for r_bool
-#include "cpp4r/r_vector.hpp"  // for vector, vector<>::proxy, vector<>::...
-#include "cpp4r/sexp.hpp"      // for sexp
+#include "cpp4r/protect.hpp"      // for safe
+#include "cpp4r/r_bool.hpp"       // for r_bool
+#include "cpp4r/r_vector.hpp"     // for vector, vector<>::proxy, vector<>::...
+#include "cpp4r/sexp.hpp"         // for sexp
 
 // Specializations for doubles
 
@@ -82,21 +82,31 @@ inline doubles as_doubles(SEXP x) {
     integers xn(x);
     size_t len = xn.size();
     writable::doubles ret(len);
-    
-    std::transform(xn.begin(), xn.end(), ret.begin(), [](int value) {
-      return value == NA_INTEGER ? NA_REAL : static_cast<double>(value);
-    });
-    
+
+    const int* CPP4R_RESTRICT x_ptr = INTEGER(xn.data());
+    double* CPP4R_RESTRICT ret_ptr = REAL(ret.data());
+
+    // Optimized loop with branch prediction hints
+    for (size_t i = 0; i < len; ++i) {
+      int val = x_ptr[i];
+      ret_ptr[i] = CPP4R_LIKELY(val != NA_INTEGER) ? static_cast<double>(val) : NA_REAL;
+    }
+
     return ret;
   } else if (detail::r_typeof(x) == LGLSXP) {
     logicals xn(x);
     size_t len = xn.size();
     writable::doubles ret(len);
-    
-    std::transform(xn.begin(), xn.end(), ret.begin(), [](bool value) {
-      return value == NA_LOGICAL ? NA_REAL : static_cast<double>(value);
-    });
-    
+
+    const int* CPP4R_RESTRICT x_ptr = LOGICAL(xn.data());
+    double* CPP4R_RESTRICT ret_ptr = REAL(ret.data());
+
+    // Optimized loop with branch prediction hints
+    for (size_t i = 0; i < len; ++i) {
+      int val = x_ptr[i];
+      ret_ptr[i] = CPP4R_LIKELY(val != NA_LOGICAL) ? static_cast<double>(val) : NA_REAL;
+    }
+
     return ret;
   }
 

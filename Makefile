@@ -20,6 +20,7 @@ check:
 	@$(MAKE) clean
 	@$(MAKE) install
 	@$(MAKE) register
+	@Rscript -e 'devtools::check("./", error_on = "error")'
 	@Rscript -e	'cpp4r::register("extended-tests/cpp4rtest")'
 	@Rscript -e 'devtools::check("./", error_on = "error")'
 	@echo "==============================="
@@ -29,7 +30,7 @@ check:
 	@rm -f extended-tests-results/check-results.md
 	@export -p USE_CLANG; /bin/bash -euo pipefail -c './scripts/check_loop.sh'
 	@echo "==============================="
-
+	
 bench:
 	@rm -f extended-tests-results/*.rds
 	@rm -f extended-tests-results/bench_summary.md

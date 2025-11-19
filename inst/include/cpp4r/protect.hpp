@@ -21,9 +21,9 @@ class unwind_exception : public std::exception {
   unwind_exception(SEXP token_) : token(token_) {}
 };
 
-/// Unwind Protection from C longjmp's, like those used in R error handling
-///
-/// @param code The code to which needs to be protected, as a nullary callable
+// Unwind Protection from C longjmp's, like those used in R error handling
+//
+// @param code The code to which needs to be protected, as a nullary callable
 template <typename Fun, typename = typename std::enable_if<std::is_same<
                             decltype(std::declval<Fun&&>()()), SEXP>::value>::type>
 SEXP unwind_protect(Fun&& code) {
@@ -146,10 +146,10 @@ struct protect {
     F* ptr_;
   };
 
-  /// May not be applied to a function bearing attributes, which interfere with linkage on
-  /// some compilers; use an appropriately attributed alternative. (For example, Rf_error
-  /// bears the [[noreturn]] attribute and must be protected with safe.noreturn rather
-  /// than safe.operator[]).
+  // May not be applied to a function bearing attributes, which interfere with linkage on
+  // some compilers; use an appropriately attributed alternative. (For example, Rf_error
+  // bears the [[noreturn]] attribute and must be protected with safe.noreturn rather
+  // than safe.operator[]).
   template <typename F>
   constexpr function<F> operator[](F* raw) const {
     return {raw};

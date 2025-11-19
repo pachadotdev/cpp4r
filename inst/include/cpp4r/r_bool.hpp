@@ -44,9 +44,9 @@ class r_bool {
 
   // C++11 constexpr must be single return statement
   static constexpr int from_int(int value) noexcept {
-    return (value == static_cast<int>(FALSE)) ? FALSE :
-           (value == static_cast<int>(na)) ? na :
-           TRUE;
+    return (value == static_cast<int>(FALSE)) ? FALSE
+           : (value == static_cast<int>(na))  ? na
+                                              : TRUE;
   }
 
   int value_ = na;
