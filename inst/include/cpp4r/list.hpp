@@ -42,7 +42,7 @@ inline typename r_vector<SEXP>::underlying_type const* r_vector<SEXP>::get_const
   }
 }
 
-/// Specialization for lists, where `x["oob"]` returns `R_NilValue`, like at the R level
+// Specialization for lists, where `x["oob"]` returns `R_NilValue`, like at the R level
 template <>
 inline SEXP r_vector<SEXP>::get_oob() {
   return R_NilValue;
@@ -97,7 +97,8 @@ inline r_vector<SEXP>::r_vector(std::initializer_list<named_arg> il)
   });
 }
 
-// Specialization of proxy::operator= for list to allow list[i] = value for any convertible type
+// Specialization of proxy::operator= for list to allow list[i] = value for any
+// convertible type
 template <>
 template <typename U>
 inline r_vector<SEXP>::proxy& r_vector<SEXP>::proxy::operator=(const U& rhs) {

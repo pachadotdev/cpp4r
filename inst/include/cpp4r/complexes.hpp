@@ -101,7 +101,8 @@ inline complexes as_complexes(SEXP x) {
   throw type_error(CPLXSXP, detail::r_typeof(x));
 }
 
-// No proxy redefinition here — use the generic proxy implementation from r_vector_writable_impl.hpp
+// No proxy redefinition here — use the generic proxy implementation from
+// r_vector_writable_impl.hpp
 
 // New complex_vector class for handling complex numbers in SEXP
 class complex_vector {
@@ -150,7 +151,8 @@ inline r_vector<r_complex>::r_vector(std::initializer_list<r_complex> il)
 
 // Comparison operators for r_vector<r_complex>
 template <>
-inline bool operator==(const r_vector<r_complex>& lhs, const r_vector<r_complex>& rhs) noexcept {
+inline bool operator==(const r_vector<r_complex>& lhs,
+                       const r_vector<r_complex>& rhs) noexcept {
   if (lhs.size() != rhs.size()) return false;
   for (R_xlen_t i = 0; i < lhs.size(); ++i) {
     if (!(lhs[i] == rhs[i])) return false;
@@ -159,7 +161,8 @@ inline bool operator==(const r_vector<r_complex>& lhs, const r_vector<r_complex>
 }
 
 template <>
-inline bool operator!=(const r_vector<r_complex>& lhs, const r_vector<r_complex>& rhs) noexcept {
+inline bool operator!=(const r_vector<r_complex>& lhs,
+                       const r_vector<r_complex>& rhs) noexcept {
   return !(lhs == rhs);
 }
 

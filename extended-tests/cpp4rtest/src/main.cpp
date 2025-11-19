@@ -1,8 +1,8 @@
 #include <cpp4r.hpp>
 
-#include <numeric>  // for std::accumulate
-#include <deque>    // for std::deque
 #include <Rmath.h>  // for Rf_rgamma, Rf_rnorm
+#include <deque>    // for std::deque
+#include <numeric>  // for std::accumulate
 
 using namespace cpp4r;
 

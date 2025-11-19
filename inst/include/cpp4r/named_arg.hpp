@@ -12,10 +12,10 @@ namespace cpp4r {
 class named_arg {
  public:
   explicit named_arg(const char* name) : name_(name), value_(R_NilValue) {}
-  
+
   template <typename T>
   explicit named_arg(const char* name, T value) : name_(name), value_(as_sexp(value)) {}
-  
+
   named_arg& operator=(std::initializer_list<int> il) {
     value_ = as_sexp(il);
     return *this;

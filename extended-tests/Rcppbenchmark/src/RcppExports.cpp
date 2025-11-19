@@ -6,86 +6,92 @@
 using namespace Rcpp;
 
 #ifdef RCPP_USE_GLOBAL_ROSTREAM
-Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<true>& Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // add_two_rcpp_
 NumericMatrix add_two_rcpp_(NumericMatrix a, NumericMatrix b);
 RcppExport SEXP _Rcppbenchmark_add_two_rcpp_(SEXP aSEXP, SEXP bSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type a(aSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(add_two_rcpp_(a, b));
-    return rcpp_result_gen;
-END_RCPP
+  BEGIN_RCPP
+  Rcpp::RObject rcpp_result_gen;
+  Rcpp::RNGScope rcpp_rngScope_gen;
+  Rcpp::traits::input_parameter<NumericMatrix>::type a(aSEXP);
+  Rcpp::traits::input_parameter<NumericMatrix>::type b(bSEXP);
+  rcpp_result_gen = Rcpp::wrap(add_two_rcpp_(a, b));
+  return rcpp_result_gen;
+  END_RCPP
 }
 // add_four_rcpp_
-NumericMatrix add_four_rcpp_(NumericMatrix a, NumericMatrix b, NumericMatrix c, NumericMatrix d);
-RcppExport SEXP _Rcppbenchmark_add_four_rcpp_(SEXP aSEXP, SEXP bSEXP, SEXP cSEXP, SEXP dSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type a(aSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type b(bSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type c(cSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type d(dSEXP);
-    rcpp_result_gen = Rcpp::wrap(add_four_rcpp_(a, b, c, d));
-    return rcpp_result_gen;
-END_RCPP
+NumericMatrix add_four_rcpp_(NumericMatrix a, NumericMatrix b, NumericMatrix c,
+                             NumericMatrix d);
+RcppExport SEXP _Rcppbenchmark_add_four_rcpp_(SEXP aSEXP, SEXP bSEXP, SEXP cSEXP,
+                                              SEXP dSEXP) {
+  BEGIN_RCPP
+  Rcpp::RObject rcpp_result_gen;
+  Rcpp::RNGScope rcpp_rngScope_gen;
+  Rcpp::traits::input_parameter<NumericMatrix>::type a(aSEXP);
+  Rcpp::traits::input_parameter<NumericMatrix>::type b(bSEXP);
+  Rcpp::traits::input_parameter<NumericMatrix>::type c(cSEXP);
+  Rcpp::traits::input_parameter<NumericMatrix>::type d(dSEXP);
+  rcpp_result_gen = Rcpp::wrap(add_four_rcpp_(a, b, c, d));
+  return rcpp_result_gen;
+  END_RCPP
 }
 // multiply_four_rcpp_
-NumericMatrix multiply_four_rcpp_(NumericMatrix a, NumericMatrix b, NumericMatrix c, NumericMatrix d);
-RcppExport SEXP _Rcppbenchmark_multiply_four_rcpp_(SEXP aSEXP, SEXP bSEXP, SEXP cSEXP, SEXP dSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type a(aSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type b(bSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type c(cSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type d(dSEXP);
-    rcpp_result_gen = Rcpp::wrap(multiply_four_rcpp_(a, b, c, d));
-    return rcpp_result_gen;
-END_RCPP
+NumericMatrix multiply_four_rcpp_(NumericMatrix a, NumericMatrix b, NumericMatrix c,
+                                  NumericMatrix d);
+RcppExport SEXP _Rcppbenchmark_multiply_four_rcpp_(SEXP aSEXP, SEXP bSEXP, SEXP cSEXP,
+                                                   SEXP dSEXP) {
+  BEGIN_RCPP
+  Rcpp::RObject rcpp_result_gen;
+  Rcpp::RNGScope rcpp_rngScope_gen;
+  Rcpp::traits::input_parameter<NumericMatrix>::type a(aSEXP);
+  Rcpp::traits::input_parameter<NumericMatrix>::type b(bSEXP);
+  Rcpp::traits::input_parameter<NumericMatrix>::type c(cSEXP);
+  Rcpp::traits::input_parameter<NumericMatrix>::type d(dSEXP);
+  rcpp_result_gen = Rcpp::wrap(multiply_four_rcpp_(a, b, c, d));
+  return rcpp_result_gen;
+  END_RCPP
 }
 // submatrix_manipulation_rcpp_
 NumericMatrix submatrix_manipulation_rcpp_(NumericMatrix a, NumericMatrix b);
 RcppExport SEXP _Rcppbenchmark_submatrix_manipulation_rcpp_(SEXP aSEXP, SEXP bSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type a(aSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(submatrix_manipulation_rcpp_(a, b));
-    return rcpp_result_gen;
-END_RCPP
+  BEGIN_RCPP
+  Rcpp::RObject rcpp_result_gen;
+  Rcpp::RNGScope rcpp_rngScope_gen;
+  Rcpp::traits::input_parameter<NumericMatrix>::type a(aSEXP);
+  Rcpp::traits::input_parameter<NumericMatrix>::type b(bSEXP);
+  rcpp_result_gen = Rcpp::wrap(submatrix_manipulation_rcpp_(a, b));
+  return rcpp_result_gen;
+  END_RCPP
 }
 // multi_operation_rcpp_
 double multi_operation_rcpp_(NumericMatrix a, NumericMatrix b, NumericMatrix c);
 RcppExport SEXP _Rcppbenchmark_multi_operation_rcpp_(SEXP aSEXP, SEXP bSEXP, SEXP cSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type a(aSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type b(bSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type c(cSEXP);
-    rcpp_result_gen = Rcpp::wrap(multi_operation_rcpp_(a, b, c));
-    return rcpp_result_gen;
-END_RCPP
+  BEGIN_RCPP
+  Rcpp::RObject rcpp_result_gen;
+  Rcpp::RNGScope rcpp_rngScope_gen;
+  Rcpp::traits::input_parameter<NumericMatrix>::type a(aSEXP);
+  Rcpp::traits::input_parameter<NumericMatrix>::type b(bSEXP);
+  Rcpp::traits::input_parameter<NumericMatrix>::type c(cSEXP);
+  rcpp_result_gen = Rcpp::wrap(multi_operation_rcpp_(a, b, c));
+  return rcpp_result_gen;
+  END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_Rcppbenchmark_add_two_rcpp_", (DL_FUNC) &_Rcppbenchmark_add_two_rcpp_, 2},
-    {"_Rcppbenchmark_add_four_rcpp_", (DL_FUNC) &_Rcppbenchmark_add_four_rcpp_, 4},
-    {"_Rcppbenchmark_multiply_four_rcpp_", (DL_FUNC) &_Rcppbenchmark_multiply_four_rcpp_, 4},
-    {"_Rcppbenchmark_submatrix_manipulation_rcpp_", (DL_FUNC) &_Rcppbenchmark_submatrix_manipulation_rcpp_, 2},
-    {"_Rcppbenchmark_multi_operation_rcpp_", (DL_FUNC) &_Rcppbenchmark_multi_operation_rcpp_, 3},
-    {NULL, NULL, 0}
-};
+    {"_Rcppbenchmark_add_two_rcpp_", (DL_FUNC)&_Rcppbenchmark_add_two_rcpp_, 2},
+    {"_Rcppbenchmark_add_four_rcpp_", (DL_FUNC)&_Rcppbenchmark_add_four_rcpp_, 4},
+    {"_Rcppbenchmark_multiply_four_rcpp_", (DL_FUNC)&_Rcppbenchmark_multiply_four_rcpp_,
+     4},
+    {"_Rcppbenchmark_submatrix_manipulation_rcpp_",
+     (DL_FUNC)&_Rcppbenchmark_submatrix_manipulation_rcpp_, 2},
+    {"_Rcppbenchmark_multi_operation_rcpp_",
+     (DL_FUNC)&_Rcppbenchmark_multi_operation_rcpp_, 3},
+    {NULL, NULL, 0}};
 
-RcppExport void R_init_Rcppbenchmark(DllInfo *dll) {
-    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
-    R_useDynamicSymbols(dll, FALSE);
+RcppExport void R_init_Rcppbenchmark(DllInfo* dll) {
+  R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+  R_useDynamicSymbols(dll, FALSE);
 }

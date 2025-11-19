@@ -1,7 +1,7 @@
 #pragma once
 
-#include "cpp4r/r_vector_fwd.hpp"
 #include "cpp4r/cpp_version.hpp"  // for CPP4R optimization macros
+#include "cpp4r/r_vector_fwd.hpp"
 
 namespace cpp4r {
 
@@ -135,7 +135,8 @@ inline T r_vector<T>::operator[](const int pos) const {
 template <typename T>
 CPP4R_ALWAYS_INLINE T r_vector<T>::operator[](const R_xlen_t pos) const {
   // Handles ALTREP, VECSXP, and STRSXP cases through `get_elt()`
-  const underlying_type elt = CPP4R_LIKELY(data_p_ != nullptr) ? data_p_[pos] : get_elt(data_, pos);
+  const underlying_type elt =
+      CPP4R_LIKELY(data_p_ != nullptr) ? data_p_[pos] : get_elt(data_, pos);
   return static_cast<T>(elt);
 }
 
@@ -220,8 +221,8 @@ inline bool r_vector<T>::empty() const {
   return (!(this->size() > 0));
 }
 
-/// Provide access to the underlying data, mainly for interface
-/// compatibility with std::vector
+// Provide access to the underlying data, mainly for interface
+// compatibility with std::vector
 template <typename T>
 inline SEXP r_vector<T>::data() const {
   return data_;
@@ -328,7 +329,8 @@ r_vector<T>::const_iterator::const_iterator(const r_vector* data, R_xlen_t pos)
 }
 
 template <typename T>
-CPP4R_ALWAYS_INLINE typename r_vector<T>::const_iterator& r_vector<T>::const_iterator::operator++() {
+CPP4R_ALWAYS_INLINE typename r_vector<T>::const_iterator&
+r_vector<T>::const_iterator::operator++() {
   ++pos_;
 #if CPP4R_HAS_CXX20
   // C++20: Use standard [[unlikely]] attribute (better understood by modern optimizers)

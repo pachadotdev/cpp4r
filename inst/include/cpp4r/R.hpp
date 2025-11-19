@@ -67,10 +67,10 @@ namespace detail {
 // which can throw warnings with `-Wsign-compare` on Windows.
 inline SEXPTYPE r_typeof(SEXP x) noexcept { return static_cast<SEXPTYPE>(TYPEOF(x)); }
 
-/// Get an object from an environment
-///
-/// SAFETY: Keep as a pure C function. Call like an R API function, i.e. wrap in `safe[]`
-/// as required.
+// Get an object from an environment
+//
+// SAFETY: Keep as a pure C function. Call like an R API function, i.e. wrap in `safe[]`
+// as required.
 inline SEXP r_env_get(SEXP env, SEXP sym) {
 #if defined(R_VERSION) && R_VERSION >= R_Version(4, 5, 0)
   const Rboolean inherits = FALSE;
@@ -102,10 +102,10 @@ inline SEXP r_env_get(SEXP env, SEXP sym) {
 #endif
 }
 
-/// Check if an object exists in an environment
-///
-/// SAFETY: Keep as a pure C function. Call like an R API function, i.e. wrap in `safe[]`
-/// as required.
+// Check if an object exists in an environment
+//
+// SAFETY: Keep as a pure C function. Call like an R API function, i.e. wrap in `safe[]`
+// as required.
 inline bool r_env_has(SEXP env, SEXP sym) {
 #if R_VERSION >= R_Version(4, 2, 0)
   return R_existsVarInFrame(env, sym);
@@ -119,7 +119,8 @@ inline bool r_env_has(SEXP env, SEXP sym) {
 template <typename T>
 inline T na();
 
-// Progressive C++ optimization: Use if constexpr in C++17+ for zero-overhead type dispatch
+// Progressive C++ optimization: Use if constexpr in C++17+ for zero-overhead type
+// dispatch
 #if CPP4R_HAS_CXX17
 template <typename T>
 CPP4R_HOT inline bool is_na(const T& value) {
@@ -135,16 +136,18 @@ CPP4R_HOT inline bool is_na(const T& value) {
 #else
 // C++11/14: Use SFINAE (slower compilation, same runtime performance)
 template <typename T>
-CPP4R_HOT inline typename std::enable_if<!std::is_same<typename std::decay<T>::type, double>::value,
-                               bool>::type
-is_na(const T& value) {
+CPP4R_HOT inline
+    typename std::enable_if<!std::is_same<typename std::decay<T>::type, double>::value,
+                            bool>::type
+    is_na(const T& value) {
   return value == na<T>();
 }
 
 template <typename T>
-CPP4R_HOT inline typename std::enable_if<std::is_same<typename std::decay<T>::type, double>::value,
-                               bool>::type
-is_na(const T& value) {
+CPP4R_HOT inline
+    typename std::enable_if<std::is_same<typename std::decay<T>::type, double>::value,
+                            bool>::type
+    is_na(const T& value) {
   return ISNA(value);
 }
 #endif
