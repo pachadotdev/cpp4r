@@ -437,43 +437,6 @@ get_call_entries <- function(path, names, package) {
 
   mid <- grep("static const R_CallMethodDef CallEntries[] = {", res, fixed = TRUE)
 
-  # If there is a CallEntries block, extract the entries and return them in a
-  # deterministic order (sorted by registered symbol) so that generated files
-  # are stable across filesystems / platforms.
-  if (length(mid) > 0) {
-    entries_start <- mid + 1
-    entries_end <- end - 1
-    entries <- res[seq(entries_start, entries_end)]
-
-    # Split into non-empty, non-NULL entries and keep the NULL terminator
-    non_null <- nzchar(trimws(entries)) & !grepl("NULL", entries)
-    null_lines <- entries[!non_null]
-    sortable_entries <- entries[non_null]
-
-    if (length(sortable_entries) > 0) {
-      # Extract names for sorting from the first quoted field
-      names <- vapply(sortable_entries, function(line) {
-        m <- regmatches(line, regexpr('"[^"]+"', line))
-        if (length(m) && nzchar(m)) {
-          sub('^"|"$', '', m)
-        } else {
-          ""
-        }
-      }, character(1))
-
-      order_idx <- order(names)
-      entries_sorted <- sortable_entries[order_idx]
-    } else {
-      entries_sorted <- character()
-    }
-
-    final_entries <- c(entries_sorted, null_lines)
-
-    res_out <- c(res[seq(1, mid)], final_entries, res[seq(end, length(res))])
-    # Return only the CallEntries block lines (like the original function did)
-    return(res_out[seq(mid, end)])
-  }
-
   res[seq(mid, end)]
 }
 
