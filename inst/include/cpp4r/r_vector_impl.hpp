@@ -323,7 +323,11 @@ inline typename r_vector<T>::const_iterator r_vector<T>::cend() const {
 template <typename T>
 r_vector<T>::const_iterator::const_iterator(const r_vector* data, R_xlen_t pos)
     : data_(data), pos_(pos), buf_() {
-  if (use_buf(data_->is_altrep())) {
+  // Only use the ALTREP region buffer when the specialization allows it and the
+  // vector is larger than the tunable threshold. Small vectors are faster when
+  // accessed per-element.
+  if (use_buf(data_->is_altrep()) &&
+      data_->size() > static_cast<R_xlen_t>(r_vector<T>::const_iterator::BUF_THRESHOLD)) {
     fill_buf(pos);
   }
 }
@@ -349,8 +353,11 @@ r_vector<T>::const_iterator::operator++() {
 template <typename T>
 inline typename r_vector<T>::const_iterator& r_vector<T>::const_iterator::operator--() {
   --pos_;
-  if (use_buf(data_->is_altrep()) && pos_ > 0 && pos_ < block_start_) {
-    fill_buf(std::max(0_xl, pos_ - 64));
+  if (use_buf(data_->is_altrep()) &&
+      data_->size() > static_cast<R_xlen_t>(r_vector<T>::const_iterator::BUF_THRESHOLD) &&
+      pos_ > 0 && pos_ < block_start_) {
+    fill_buf(std::max(
+        0_xl, pos_ - static_cast<R_xlen_t>(r_vector<T>::const_iterator::BUF_CAP)));
   }
   return *this;
 }
@@ -370,7 +377,8 @@ inline typename r_vector<T>::const_iterator& r_vector<T>::const_iterator::operat
     R_xlen_t i) {
   pos_ -= i;
   if (use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_) {
-    fill_buf(std::max(0_xl, pos_ - 64));
+    fill_buf(std::max(
+        0_xl, pos_ - static_cast<R_xlen_t>(r_vector<T>::const_iterator::BUF_CAP)));
   }
   return *this;
 }
@@ -418,10 +426,34 @@ inline typename r_vector<T>::const_iterator r_vector<T>::find(
 }
 
 template <typename T>
+inline typename r_vector<T>::const_iterator r_vector<T>::find(
+    const std::vector<std::string>& names_cache, const r_string& name) const {
+  for (R_xlen_t pos = 0; pos < static_cast<R_xlen_t>(names_cache.size()); ++pos) {
+    if (names_cache[pos] == static_cast<std::string>(name)) {
+      return begin() + pos;
+    }
+  }
+  return end();
+}
+
+template <typename T>
+inline typename r_vector<T>::const_iterator r_vector<T>::find_cached(
+    const std::vector<std::string>& names_cache, const r_string& name) const {
+  for (R_xlen_t pos = 0; pos < static_cast<R_xlen_t>(names_cache.size()); ++pos) {
+    if (names_cache[pos] == static_cast<std::string>(name)) {
+      return begin() + pos;
+    }
+  }
+  return end();
+}
+
+template <typename T>
 CPP4R_ALWAYS_INLINE T r_vector<T>::const_iterator::operator*() const {
 #if CPP4R_HAS_CXX20
   // C++20: Use standard [[unlikely]] attribute
-  if (use_buf(data_->is_altrep())) [[unlikely]] {
+  if (use_buf(data_->is_altrep()) &&
+      data_->size() > static_cast<R_xlen_t>(r_vector<T>::const_iterator::BUF_THRESHOLD))
+      [[unlikely]] {
     // Use pre-loaded buffer for compatible ALTREP types
     return static_cast<T>(buf_[pos_ - block_start_]);
   } else {
@@ -430,7 +462,9 @@ CPP4R_ALWAYS_INLINE T r_vector<T>::const_iterator::operator*() const {
   }
 #else
   // C++11-17: Use __builtin_expect
-  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep()))) {
+  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep()) &&
+                     data_->size() > static_cast<R_xlen_t>(
+                                         r_vector<T>::const_iterator::BUF_THRESHOLD))) {
     // Use pre-loaded buffer for compatible ALTREP types
     return static_cast<T>(buf_[pos_ - block_start_]);
   } else {
@@ -443,7 +477,20 @@ CPP4R_ALWAYS_INLINE T r_vector<T>::const_iterator::operator*() const {
 template <typename T>
 inline void r_vector<T>::const_iterator::fill_buf(R_xlen_t pos) {
   using namespace cpp4r::literals;
-  length_ = std::min(64_xl, data_->size() - pos);
+  // Guard against buffering for small vectors — callers should avoid invoking
+  // this when data is small, but double-guard here to be safe. If the vector
+  // is small, avoid filling the buffer and leave length_ == 0.
+  if (data_->size() <=
+      static_cast<R_xlen_t>(r_vector<T>::const_iterator::BUF_THRESHOLD)) {
+    length_ = 0;
+    block_start_ = pos;
+    return;
+  }
+
+  // Limit region size to the iterator buffer capacity (BUF_CAP) to avoid
+  // overrunning the buffer and to keep fills predictable.
+  length_ = static_cast<R_xlen_t>(std::min(
+      static_cast<R_xlen_t>(r_vector<T>::const_iterator::BUF_CAP), data_->size() - pos));
   get_region(data_->data_, pos, length_, buf_.data());
   block_start_ = pos;
 }

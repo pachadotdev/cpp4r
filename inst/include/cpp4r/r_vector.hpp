@@ -59,6 +59,48 @@ bool operator==(const r_vector<T>& lhs, const r_vector<T>& rhs) noexcept {
   return true;
 }
 
+// Utility: translate an R `names` STRSXP into a std::vector<std::string> once.
+// This is intended for callers that perform many name lookups and want to avoid
+// repeated calls to `Rf_translateCharUTF8(STRING_ELT(...))`.
+inline std::vector<std::string> translate_names_to_vector(SEXP names) {
+  std::vector<std::string> out;
+  if (names == R_NilValue) return out;
+
+  R_xlen_t n = Rf_xlength(names);
+  out.reserve(static_cast<size_t>(n));
+  for (R_xlen_t i = 0; i < n; ++i) {
+    const char* s = Rf_translateCharUTF8(STRING_ELT(names, i));
+    out.emplace_back(s ? s : "");
+  }
+  return out;
+}
+
+// Utility: find name position using a pre-translated vector of names. Returns
+// -1 if not found. This is intentionally simple and avoids creating temporary
+// r_string objects.
+inline ptrdiff_t find_name_pos_cached(const std::vector<std::string>& names,
+                                      const r_string& key) {
+  for (ptrdiff_t i = 0; i < static_cast<ptrdiff_t>(names.size()); ++i) {
+    if (names[i] == static_cast<std::string>(key)) return i;
+  }
+  return -1;
+}
+
+// Convenience wrappers to forward cached lookups to r_vector implementations.
+template <typename T>
+inline typename r_vector<T>::const_iterator find_cached(
+    const r_vector<T>& v, const std::vector<std::string>& names_cache,
+    const r_string& key) {
+  return v.find_cached(names_cache, key);
+}
+
+template <typename T>
+inline typename writable::r_vector<T>::iterator find_cached(
+    const writable::r_vector<T>& v, const std::vector<std::string>& names_cache,
+    const r_string& key) {
+  return v.find_cached(names_cache, key);
+}
+
 template <typename T>
 bool operator!=(const r_vector<T>& lhs, const r_vector<T>& rhs) noexcept {
   return !(lhs == rhs);

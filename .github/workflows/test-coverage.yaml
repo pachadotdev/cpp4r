@@ -33,14 +33,13 @@ jobs:
       - name: Install package
         run: |
           options(warn = 2)
-          pak::pkg_install("pachadotdev/cpp4r", dependencies = TRUE)
-          pak::local_install_dev_deps("cpp4rtest", dependencies = TRUE)
-          install.packages("cpp4rtest", repos = NULL, INSTALL_opts = "--install-tests", type = "source")
+          pak::local_install("./", dependencies = TRUE)
+          pak::local_install("./extended-tests/cpp4rtest", dependencies = TRUE)
         shell: Rscript {0}
 
       - name: Test coverage
         run: |
-          coverage <- covr::package_coverage(quiet = FALSE)
+          coverage <- covr::package_coverage("./extended-tests/cpp4rtest", quiet = FALSE)
           percent <- round(covr::percent_coverage(coverage))
           cat("Coverage:", percent, "%\n")
           

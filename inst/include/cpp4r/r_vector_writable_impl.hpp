@@ -141,6 +141,13 @@ inline r_vector<T>::r_vector(std::initializer_list<named_arg> il)
     PROTECT(names = Rf_allocVector(STRSXP, capacity_));
     Rf_setAttrib(data_, R_NamesSymbol, names);
 
+    // Precompute CHARSXP for all provided names to avoid repeated allocations
+    std::vector<SEXP> name_syms;
+    name_syms.reserve(static_cast<size_t>(capacity_));
+    for (auto itn = il.begin(); itn != il.end(); ++itn) {
+      name_syms.push_back(Rf_mkCharCE(itn->name(), CE_UTF8));
+    }
+
     auto it = il.begin();
 
     for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
@@ -173,8 +180,7 @@ inline r_vector<T>::r_vector(std::initializer_list<named_arg> il)
       detail_named_arg::assign_element<T>(data_p_, data_, i, elt);
 #endif
 
-      SEXP name = Rf_mkCharCE(it->name(), CE_UTF8);
-      SET_STRING_ELT(names, i, name);
+      SET_STRING_ELT(names, i, name_syms[static_cast<size_t>(i)]);
     }
 
     UNPROTECT(1);
@@ -376,12 +382,27 @@ template <typename T>
 inline void r_vector<T>::reserve(R_xlen_t new_capacity) {
   SEXP old_protect = protect_;
 
-  data_ = (data_ == R_NilValue) ? safe[Rf_allocVector](get_sexptype(), new_capacity)
-                                : reserve_data(data_, is_altrep_, new_capacity);
-  protect_ = detail::store::insert(data_);
-  is_altrep_ = ALTREP(data_);
-  data_p_ = get_p(is_altrep_, data_);
-  capacity_ = new_capacity;
+  // Fast-path: if `data_` is a non-ALTREP object and not shared (NAMED == 0),
+  // we can try to resize it in-place using `Rf_xlengthgets` which avoids a
+  // full allocation + attribute copy. This is safe only when there are no other
+  // owners of `data_` (NAMED == 0) and the object is not ALTREP.
+  if (data_ != R_NilValue && !ALTREP(data_) && NAMED(data_) == 0) {
+    // Attempt in-place resize
+    Rf_xlengthgets(data_, new_capacity);
+    // Update internal pointers / capacity
+    protect_ = detail::store::insert(data_);
+    is_altrep_ = ALTREP(data_);
+    data_p_ = get_p(is_altrep_, data_);
+    capacity_ = new_capacity;
+  } else {
+    // Fallback: allocate/copy via reserve_data (handles ALTREP and attributes)
+    data_ = (data_ == R_NilValue) ? safe[Rf_allocVector](get_sexptype(), new_capacity)
+                                  : reserve_data(data_, is_altrep_, new_capacity);
+    protect_ = detail::store::insert(data_);
+    is_altrep_ = ALTREP(data_);
+    data_p_ = get_p(is_altrep_, data_);
+    capacity_ = new_capacity;
+  }
 
   detail::store::release(old_protect);
 }
@@ -441,6 +462,28 @@ inline typename r_vector<T>::iterator r_vector<T>::find(const r_string& name) co
   }
 
   UNPROTECT(1);
+  return end();
+}
+
+template <typename T>
+inline typename r_vector<T>::iterator r_vector<T>::find(
+    const std::vector<std::string>& names_cache, const r_string& name) const {
+  for (R_xlen_t pos = 0; pos < static_cast<R_xlen_t>(names_cache.size()); ++pos) {
+    if (names_cache[pos] == static_cast<std::string>(name)) {
+      return begin() + pos;
+    }
+  }
+  return end();
+}
+
+template <typename T>
+inline typename r_vector<T>::iterator r_vector<T>::find_cached(
+    const std::vector<std::string>& names_cache, const r_string& name) const {
+  for (R_xlen_t pos = 0; pos < static_cast<R_xlen_t>(names_cache.size()); ++pos) {
+    if (names_cache[pos] == static_cast<std::string>(name)) {
+      return begin() + pos;
+    }
+  }
   return end();
 }
 

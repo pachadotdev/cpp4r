@@ -100,6 +100,12 @@ class r_vector {
   const_iterator cbegin() const;
   const_iterator cend() const;
   const_iterator find(const r_string& name) const;
+  // Overload: use a pre-translated names cache for faster lookups (opt-in)
+  const_iterator find(const std::vector<std::string>& names_cache,
+                      const r_string& name) const;
+  // Fast-path find using a pre-translated names vector (opt-in).
+  const_iterator find_cached(const std::vector<std::string>& names_cache,
+                             const r_string& name) const;
 
   class const_iterator {
     // Iterator references:
@@ -111,7 +117,13 @@ class r_vector {
    private:
     const r_vector* data_;
     R_xlen_t pos_;
-    std::array<underlying_type, 64 * 64> buf_;
+    // Buffer used for ALTREP region reads. Keep this small to avoid large
+    // stack frames for iterator objects. Tunable via BUF_CAP.
+    static constexpr std::size_t BUF_CAP = 64;
+    // Don't attempt ALTREP region buffering for tiny vectors (cheap per-elt
+    // access is preferable). Tunable threshold.
+    static constexpr R_xlen_t BUF_THRESHOLD = static_cast<R_xlen_t>(256);
+    std::array<underlying_type, BUF_CAP> buf_;
     R_xlen_t block_start_ = 0;
     R_xlen_t length_ = 0;
 
@@ -257,6 +269,11 @@ class r_vector : public cpp4r::r_vector<T> {
   using cpp4r::r_vector<T>::size;
 
   iterator find(const r_string& name) const;
+  // Overload: use a pre-translated names cache for faster lookups (opt-in)
+  iterator find(const std::vector<std::string>& names_cache, const r_string& name) const;
+  // Fast-path find using a pre-translated names vector (opt-in).
+  iterator find_cached(const std::vector<std::string>& names_cache,
+                       const r_string& name) const;
 
   // Get the value at position without returning a proxy
   // This is useful when you need the actual value (e.g., for C-style printf functions)

@@ -13,4 +13,5 @@ extended-tests/cpp4rtest/src/Makevars
 extended-tests/cpp11benchmark/src/Makevars
 extended-tests/cpp4rbenchmark/src/Makevars
 extended-tests/Rcppbenchmark/src/Makevars
-extended-tests-results
+extended-tests-results/*.rds
+extended-tests-results/*.log
