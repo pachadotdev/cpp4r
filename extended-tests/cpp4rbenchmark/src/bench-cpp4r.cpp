@@ -16,10 +16,10 @@ using namespace cpp4r;
   // Create output matrix
   writable::doubles_matrix<> Z(nrow, ncol);
 
-  // Cache pointers for direct access
-  const double* a_ptr = REAL(a.data());
-  const double* b_ptr = REAL(b.data());
-  double* z_ptr = REAL(Z.data());
+  // Use optimized data_ptr() methods to avoid REAL() macro overhead
+  const double* CPP4R_RESTRICT a_ptr = a.data_ptr();
+  const double* CPP4R_RESTRICT b_ptr = b.data_ptr();
+  double* CPP4R_RESTRICT z_ptr = Z.data_ptr_writable();
 
   // Vectorized operation on flattened data
   int size = nrow * ncol;
@@ -43,12 +43,12 @@ using namespace cpp4r;
 
   writable::doubles_matrix<> Z(nrow, ncol);
 
-  // Cache pointers
-  const double* a_ptr = REAL(a.data());
-  const double* b_ptr = REAL(b.data());
-  const double* c_ptr = REAL(c.data());
-  const double* d_ptr = REAL(d.data());
-  double* z_ptr = REAL(Z.data());
+  // Use optimized data_ptr() methods
+  const double* CPP4R_RESTRICT a_ptr = a.data_ptr();
+  const double* CPP4R_RESTRICT b_ptr = b.data_ptr();
+  const double* CPP4R_RESTRICT c_ptr = c.data_ptr();
+  const double* CPP4R_RESTRICT d_ptr = d.data_ptr();
+  double* CPP4R_RESTRICT z_ptr = Z.data_ptr_writable();
 
   int size = nrow * ncol;
   for (int i = 0; i < size; ++i) {
@@ -72,15 +72,15 @@ using namespace cpp4r;
   int n15 = n / 15;
   int n20 = n / 20;
 
-  // Cache pointers
-  const double* a_ptr = REAL(a.data());
-  const double* b_ptr = REAL(b.data());
-  const double* c_ptr = REAL(c.data());
-  const double* d_ptr = REAL(d.data());
+  // Use optimized data_ptr() methods
+  const double* CPP4R_RESTRICT a_ptr = a.data_ptr();
+  const double* CPP4R_RESTRICT b_ptr = b.data_ptr();
+  const double* CPP4R_RESTRICT c_ptr = c.data_ptr();
+  const double* CPP4R_RESTRICT d_ptr = d.data_ptr();
 
   // Step 1: A[1:n5, 1:n5] %*% B[1:n5, 1:n10]
   writable::doubles_matrix<> temp1(n5, n10);
-  double* temp1_ptr = REAL(temp1.data());
+  double* CPP4R_RESTRICT temp1_ptr = temp1.data_ptr_writable();
 
   for (int i = 0; i < n5; ++i) {
     for (int j = 0; j < n10; ++j) {
@@ -96,7 +96,7 @@ using namespace cpp4r;
 
   // Step 2: temp1 %*% C[1:n10, 1:n15]
   writable::doubles_matrix<> temp2(n5, n15);
-  double* temp2_ptr = REAL(temp2.data());
+  double* CPP4R_RESTRICT temp2_ptr = temp2.data_ptr_writable();
 
   for (int i = 0; i < n5; ++i) {
     for (int j = 0; j < n15; ++j) {
@@ -112,7 +112,7 @@ using namespace cpp4r;
 
   // Step 3: temp2 %*% D[1:n15, 1:n20]
   writable::doubles_matrix<> Z(n5, n20);
-  double* z_ptr = REAL(Z.data());
+  double* CPP4R_RESTRICT z_ptr = Z.data_ptr_writable();
 
   for (int i = 0; i < n5; ++i) {
     for (int j = 0; j < n20; ++j) {
@@ -140,10 +140,10 @@ using namespace cpp4r;
 
   writable::doubles_matrix<> Z(nrow, ncol);
 
-  // Cache pointers
-  const double* a_ptr = REAL(a.data());
-  const double* b_ptr = REAL(b.data());
-  double* z_ptr = REAL(Z.data());
+  // Use optimized data_ptr() methods
+  const double* CPP4R_RESTRICT a_ptr = a.data_ptr();
+  const double* CPP4R_RESTRICT b_ptr = b.data_ptr();
+  double* CPP4R_RESTRICT z_ptr = Z.data_ptr_writable();
 
   // Copy entire b matrix
   std::memcpy(z_ptr, b_ptr, nrow * ncol * sizeof(double));
@@ -168,10 +168,10 @@ using namespace cpp4r;
                                                  const doubles_matrix<>& c) {
   int n = a.nrow();
 
-  // Cache pointers
-  const double* a_ptr = REAL(a.data());
-  const double* b_ptr = REAL(b.data());
-  const double* c_ptr = REAL(c.data());
+  // Use optimized data_ptr() methods
+  const double* CPP4R_RESTRICT a_ptr = a.data_ptr();
+  const double* CPP4R_RESTRICT b_ptr = b.data_ptr();
+  const double* CPP4R_RESTRICT c_ptr = c.data_ptr();
 
   // Compute: t(a_col) %*% solve(diag(b_diag)) %*% c_col
   // This is equivalent to: sum(a[i,0] * (1/b[i,i]) * c[i,0]) for i in 0..n-1

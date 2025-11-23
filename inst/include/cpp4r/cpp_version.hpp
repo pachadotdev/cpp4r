@@ -165,3 +165,51 @@
 #define CPP4R_PREFETCH(addr) ((void)0)
 #define CPP4R_PREFETCH_WRITE(addr) ((void)0)
 #endif
+
+// CPP4R_ASSUME: hint to compiler about invariants (C++23 std::assume)
+// Helps compiler optimize by asserting conditions that are always true
+#if CPP4R_HAS_CXX23 && defined(__cpp_lib_unreachable) && __cpp_lib_unreachable >= 202202L
+#include <utility>
+#define CPP4R_ASSUME(expr)           \
+  do {                               \
+    if (!(expr)) std::unreachable(); \
+  } while (0)
+#elif defined(__clang__)
+#define CPP4R_ASSUME(expr) __builtin_assume(expr)
+#elif defined(__GNUC__) && __GNUC__ >= 13
+#define CPP4R_ASSUME(expr)                \
+  do {                                    \
+    if (!(expr)) __builtin_unreachable(); \
+  } while (0)
+#elif defined(_MSC_VER)
+#define CPP4R_ASSUME(expr) __assume(expr)
+#else
+#define CPP4R_ASSUME(expr) ((void)0)
+#endif
+
+// CPP4R_UNROLL: hint to compiler to unroll loops
+// C++20 added #pragma unroll, but compiler support varies
+#if defined(__clang__)
+#define CPP4R_UNROLL_LOOP _Pragma("clang loop unroll(full)")
+#define CPP4R_UNROLL_N(n) _Pragma(CPP4R_STRINGIFY(clang loop unroll_count(n)))
+#elif defined(__GNUC__) && __GNUC__ >= 8
+#define CPP4R_UNROLL_LOOP _Pragma("GCC unroll 8")
+#define CPP4R_UNROLL_N(n) _Pragma(CPP4R_STRINGIFY(GCC unroll n))
+#else
+#define CPP4R_UNROLL_LOOP
+#define CPP4R_UNROLL_N(n)
+#endif
+
+#define CPP4R_STRINGIFY(x) CPP4R_STRINGIFY_IMPL(x)
+#define CPP4R_STRINGIFY_IMPL(x) #x
+
+// CPP4R_VECTORIZE: hint to compiler to vectorize loops (SIMD)
+#if defined(__clang__)
+#define CPP4R_VECTORIZE _Pragma("clang loop vectorize(enable)")
+#elif defined(__GNUC__) && __GNUC__ >= 5
+#define CPP4R_VECTORIZE _Pragma("GCC ivdep")
+#elif defined(_MSC_VER)
+#define CPP4R_VECTORIZE __pragma(loop(ivdep))
+#else
+#define CPP4R_VECTORIZE
+#endif

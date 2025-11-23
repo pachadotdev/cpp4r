@@ -141,6 +141,37 @@ res <- res %>%
     ) %>%
     ungroup()
 
+readr::write_csv(res, "./extended-tests-results/bench_summary.csv")
+
+old_bench_file <- "./extended-tests-results/bench_summary.csv.old"
+
+if (file.exists(old_bench_file)) {
+    # res <- readr::read_csv("./extended-tests-results/bench_summary.csv")
+
+    old_bench <- readr::read_csv(old_bench_file)
+
+    res %>%
+        select(test, cpp_standard, cpp_compiler, rel_cpp4r_cpp11, rel_cpp4r_Rcpp) %>%
+        filter(rel_cpp4r_cpp11 > 1 | rel_cpp4r_Rcpp > 1) %>%
+        readr::write_csv("./extended-tests-results/bench_summary_rel.csv")
+
+    res %>%
+        select(test, cpp_standard, cpp_compiler, rel_cpp4r_cpp11, rel_cpp4r_Rcpp) %>%
+        left_join(
+            old_bench %>%
+                select(test, cpp_standard, cpp_compiler, rel_cpp4r_cpp11, rel_cpp4r_Rcpp),
+            by = c("test", "cpp_standard", "cpp_compiler"),
+            suffix = c("_new", "_old")
+        ) %>%
+        filter(rel_cpp4r_cpp11_old > 1 | rel_cpp4r_Rcpp_old > 1) %>%
+        mutate(
+            diff_cpp4r = rel_cpp4r_cpp11_new / rel_cpp4r_cpp11_old,
+            diff_Rcpp = rel_cpp4r_Rcpp_new / rel_cpp4r_Rcpp_old
+        ) %>%
+        select(-starts_with("rel_")) %>%
+        readr::write_csv("./extended-tests-results/bench_summary_change.csv")
+}
+
 format_small <- function(x, digits = 2, threshold = 0.01) {
     # x: numeric vector. For |x| in (0, threshold) produce scientific 'e' format
     xnum <- as.numeric(x)

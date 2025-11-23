@@ -22,12 +22,37 @@ as_cpp(SEXP from) {
   return {obj.begin(), obj.end()};
 }
 
+namespace detail {
+// SFINAE check for reserve method
+template <typename T>
+class has_reserve {
+  template <typename C>
+  static std::true_type test(decltype(std::declval<C>().reserve(0))*);
+  template <typename C>
+  static std::false_type test(...);
+
+ public:
+  static constexpr bool value = decltype(test<T>(nullptr))::value;
+};
+
+template <typename C>
+typename std::enable_if<has_reserve<C>::value>::type try_reserve(C& c, size_t n) {
+  c.reserve(n);
+}
+
+template <typename C>
+typename std::enable_if<!has_reserve<C>::value>::type try_reserve(C&, size_t) {
+  // No-op
+}
+}  // namespace detail
+
 // TODO: could we make this generalize outside of std::string?
 template <typename C, typename T = typename std::decay<C>::type::value_type>
 // typename T = typename C::value_type>
 is_vector_of_strings<C, T> as_cpp(SEXP from) {
   auto obj = cpp4r::r_vector<cpp4r::r_string>(from);
   typename std::decay<C>::type res;
+  detail::try_reserve(res, obj.size());
   auto it = obj.begin();
   while (it != obj.end()) {
     r_string s = *it;

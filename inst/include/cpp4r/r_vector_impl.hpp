@@ -17,7 +17,7 @@ inline r_vector<T>::r_vector(const SEXP data)
     : data_(valid_type(data)),
       protect_(detail::store::insert(data)),
       is_altrep_(ALTREP(data)),
-      data_p_(get_p(ALTREP(data), data)),
+      data_p_(get_p(is_altrep_, data)),
       length_(Rf_xlength(data)) {}
 
 template <typename T>
@@ -69,6 +69,26 @@ inline r_vector<T>::r_vector(r_vector&& x) {
 template <typename T>
 inline r_vector<T>::r_vector(const writable::r_vector<T>& x)
     : r_vector(static_cast<SEXP>(x)) {}
+
+// Move constructor from writable::r_vector
+// This allows efficient conversion from writable to read-only vector
+// by stealing the underlying SEXP and protection token.
+template <typename T>
+inline r_vector<T>::r_vector(writable::r_vector<T>&& x) {
+  data_ = x.data_;
+  protect_ = x.protect_;
+  is_altrep_ = x.is_altrep_;
+  data_p_ = x.data_p_;
+  length_ = x.length_;
+
+  // Important: nullify source to prevent double release
+  x.data_ = R_NilValue;
+  x.protect_ = R_NilValue;
+  x.is_altrep_ = false;
+  x.data_p_ = nullptr;
+  x.length_ = 0;
+  x.capacity_ = 0;
+}
 
 // Same reasoning as `r_vector(const r_vector& x)` constructor
 template <typename T>
@@ -135,9 +155,17 @@ inline T r_vector<T>::operator[](const int pos) const {
 template <typename T>
 CPP4R_ALWAYS_INLINE T r_vector<T>::operator[](const R_xlen_t pos) const {
   // Handles ALTREP, VECSXP, and STRSXP cases through `get_elt()`
+#if CPP4R_HAS_CXX20
+  if (data_p_ != nullptr) [[likely]] {
+    return static_cast<T>(data_p_[pos]);
+  } else {
+    return static_cast<T>(get_elt(data_, pos));
+  }
+#else
   const underlying_type elt =
       CPP4R_LIKELY(data_p_ != nullptr) ? data_p_[pos] : get_elt(data_, pos);
   return static_cast<T>(elt);
+#endif
 }
 
 template <typename T>
@@ -212,19 +240,19 @@ inline bool r_vector<T>::named() const {
 }
 
 template <typename T>
-inline R_xlen_t r_vector<T>::size() const {
+CPP4R_ALWAYS_INLINE R_xlen_t r_vector<T>::size() const {
   return length_;
 }
 
 template <typename T>
-inline bool r_vector<T>::empty() const {
+CPP4R_ALWAYS_INLINE bool r_vector<T>::empty() const {
   return (!(this->size() > 0));
 }
 
 // Provide access to the underlying data, mainly for interface
 // compatibility with std::vector
 template <typename T>
-inline SEXP r_vector<T>::data() const {
+CPP4R_ALWAYS_INLINE SEXP r_vector<T>::data() const {
   return data_;
 }
 
@@ -302,39 +330,47 @@ inline SEXP r_vector<T>::valid_length(SEXP x, R_xlen_t n) {
 
 template <typename T>
 inline typename r_vector<T>::const_iterator r_vector<T>::begin() const {
-  return const_iterator(this, 0);
+  if constexpr (traits::use_raw_pointer<T>::value) {
+    return reinterpret_cast<const_iterator>(data_p_);
+  } else {
+    return generic_const_iterator(this, 0);
+  }
 }
 
 template <typename T>
 inline typename r_vector<T>::const_iterator r_vector<T>::end() const {
-  return const_iterator(this, length_);
+  if constexpr (traits::use_raw_pointer<T>::value) {
+    return reinterpret_cast<const_iterator>(data_p_ + length_);
+  } else {
+    return generic_const_iterator(this, length_);
+  }
 }
 
 template <typename T>
 inline typename r_vector<T>::const_iterator r_vector<T>::cbegin() const {
-  return const_iterator(this, 0);
+  return begin();
 }
 
 template <typename T>
 inline typename r_vector<T>::const_iterator r_vector<T>::cend() const {
-  return const_iterator(this, length_);
+  return end();
 }
 
 template <typename T>
-r_vector<T>::const_iterator::const_iterator(const r_vector* data, R_xlen_t pos)
+r_vector<T>::generic_const_iterator::generic_const_iterator(const r_vector* data, R_xlen_t pos)
     : data_(data), pos_(pos), buf_() {
   // Only use the ALTREP region buffer when the specialization allows it and the
   // vector is larger than the tunable threshold. Small vectors are faster when
   // accessed per-element.
   if (use_buf(data_->is_altrep()) &&
-      data_->size() > static_cast<R_xlen_t>(r_vector<T>::const_iterator::BUF_THRESHOLD)) {
+      data_->size() > static_cast<R_xlen_t>(r_vector<T>::generic_const_iterator::BUF_THRESHOLD)) {
     fill_buf(pos);
   }
 }
 
 template <typename T>
-CPP4R_ALWAYS_INLINE typename r_vector<T>::const_iterator&
-r_vector<T>::const_iterator::operator++() {
+CPP4R_ALWAYS_INLINE typename r_vector<T>::generic_const_iterator&
+r_vector<T>::generic_const_iterator::operator++() {
   ++pos_;
 #if CPP4R_HAS_CXX20
   // C++20: Use standard [[unlikely]] attribute (better understood by modern optimizers)
@@ -351,19 +387,19 @@ r_vector<T>::const_iterator::operator++() {
 }
 
 template <typename T>
-inline typename r_vector<T>::const_iterator& r_vector<T>::const_iterator::operator--() {
+inline typename r_vector<T>::generic_const_iterator& r_vector<T>::generic_const_iterator::operator--() {
   --pos_;
   if (use_buf(data_->is_altrep()) &&
-      data_->size() > static_cast<R_xlen_t>(r_vector<T>::const_iterator::BUF_THRESHOLD) &&
+      data_->size() > static_cast<R_xlen_t>(r_vector<T>::generic_const_iterator::BUF_THRESHOLD) &&
       pos_ > 0 && pos_ < block_start_) {
     fill_buf(std::max(
-        0_xl, pos_ - static_cast<R_xlen_t>(r_vector<T>::const_iterator::BUF_CAP)));
+        0_xl, pos_ - static_cast<R_xlen_t>(r_vector<T>::generic_const_iterator::BUF_CAP)));
   }
   return *this;
 }
 
 template <typename T>
-inline typename r_vector<T>::const_iterator& r_vector<T>::const_iterator::operator+=(
+inline typename r_vector<T>::generic_const_iterator& r_vector<T>::generic_const_iterator::operator+=(
     R_xlen_t i) {
   pos_ += i;
   if (use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_) {
@@ -373,36 +409,36 @@ inline typename r_vector<T>::const_iterator& r_vector<T>::const_iterator::operat
 }
 
 template <typename T>
-inline typename r_vector<T>::const_iterator& r_vector<T>::const_iterator::operator-=(
+inline typename r_vector<T>::generic_const_iterator& r_vector<T>::generic_const_iterator::operator-=(
     R_xlen_t i) {
   pos_ -= i;
   if (use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_) {
     fill_buf(std::max(
-        0_xl, pos_ - static_cast<R_xlen_t>(r_vector<T>::const_iterator::BUF_CAP)));
+        0_xl, pos_ - static_cast<R_xlen_t>(r_vector<T>::generic_const_iterator::BUF_CAP)));
   }
   return *this;
 }
 
 template <typename T>
-inline bool r_vector<T>::const_iterator::operator!=(
-    const r_vector::const_iterator& other) const {
+inline bool r_vector<T>::generic_const_iterator::operator!=(
+    const r_vector::generic_const_iterator& other) const {
   return pos_ != other.pos_;
 }
 
 template <typename T>
-inline bool r_vector<T>::const_iterator::operator==(
-    const r_vector::const_iterator& other) const {
+inline bool r_vector<T>::generic_const_iterator::operator==(
+    const r_vector::generic_const_iterator& other) const {
   return pos_ == other.pos_;
 }
 
 template <typename T>
-inline ptrdiff_t r_vector<T>::const_iterator::operator-(
-    const r_vector::const_iterator& other) const {
+inline ptrdiff_t r_vector<T>::generic_const_iterator::operator-(
+    const r_vector::generic_const_iterator& other) const {
   return pos_ - other.pos_;
 }
 
 template <typename T>
-inline typename r_vector<T>::const_iterator r_vector<T>::const_iterator::operator+(
+inline typename r_vector<T>::generic_const_iterator r_vector<T>::generic_const_iterator::operator+(
     R_xlen_t rhs) {
   auto it = *this;
   it += rhs;
@@ -448,11 +484,11 @@ inline typename r_vector<T>::const_iterator r_vector<T>::find_cached(
 }
 
 template <typename T>
-CPP4R_ALWAYS_INLINE T r_vector<T>::const_iterator::operator*() const {
+CPP4R_ALWAYS_INLINE T r_vector<T>::generic_const_iterator::operator*() const {
 #if CPP4R_HAS_CXX20
   // C++20: Use standard [[unlikely]] attribute
   if (use_buf(data_->is_altrep()) &&
-      data_->size() > static_cast<R_xlen_t>(r_vector<T>::const_iterator::BUF_THRESHOLD))
+      data_->size() > static_cast<R_xlen_t>(r_vector<T>::generic_const_iterator::BUF_THRESHOLD))
       [[unlikely]] {
     // Use pre-loaded buffer for compatible ALTREP types
     return static_cast<T>(buf_[pos_ - block_start_]);
@@ -464,7 +500,7 @@ CPP4R_ALWAYS_INLINE T r_vector<T>::const_iterator::operator*() const {
   // C++11-17: Use __builtin_expect
   if (CPP4R_UNLIKELY(use_buf(data_->is_altrep()) &&
                      data_->size() > static_cast<R_xlen_t>(
-                                         r_vector<T>::const_iterator::BUF_THRESHOLD))) {
+                                         r_vector<T>::generic_const_iterator::BUF_THRESHOLD))) {
     // Use pre-loaded buffer for compatible ALTREP types
     return static_cast<T>(buf_[pos_ - block_start_]);
   } else {
@@ -475,13 +511,13 @@ CPP4R_ALWAYS_INLINE T r_vector<T>::const_iterator::operator*() const {
 }
 
 template <typename T>
-inline void r_vector<T>::const_iterator::fill_buf(R_xlen_t pos) {
+inline void r_vector<T>::generic_const_iterator::fill_buf(R_xlen_t pos) {
   using namespace cpp4r::literals;
   // Guard against buffering for small vectors — callers should avoid invoking
   // this when data is small, but double-guard here to be safe. If the vector
   // is small, avoid filling the buffer and leave length_ == 0.
   if (data_->size() <=
-      static_cast<R_xlen_t>(r_vector<T>::const_iterator::BUF_THRESHOLD)) {
+      static_cast<R_xlen_t>(r_vector<T>::generic_const_iterator::BUF_THRESHOLD)) {
     length_ = 0;
     block_start_ = pos;
     return;
@@ -490,7 +526,7 @@ inline void r_vector<T>::const_iterator::fill_buf(R_xlen_t pos) {
   // Limit region size to the iterator buffer capacity (BUF_CAP) to avoid
   // overrunning the buffer and to keep fills predictable.
   length_ = static_cast<R_xlen_t>(std::min(
-      static_cast<R_xlen_t>(r_vector<T>::const_iterator::BUF_CAP), data_->size() - pos));
+      static_cast<R_xlen_t>(r_vector<T>::generic_const_iterator::BUF_CAP), data_->size() - pos));
   get_region(data_->data_, pos, length_, buf_.data());
   block_start_ = pos;
 }

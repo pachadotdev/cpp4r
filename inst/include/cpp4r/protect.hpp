@@ -220,24 +220,20 @@ namespace detail {
 //   same object. 7.1.2/4 - C++98/C++14 (n3797)
 namespace store {
 
-inline SEXP init() {
-  SEXP out = Rf_cons(R_NilValue, Rf_cons(R_NilValue, R_NilValue));
-  R_PreserveObject(out);
-  return out;
+inline int& get_counter() {
+  static int counter = 0;
+  return counter;
 }
 
-inline SEXP get() {
-  // Note the `static` local variable in the inline extern function here! Guarantees we
-  // have 1 unique preserve list across all compilation units in the package.
-  static SEXP out = init();
-  return out;
-}
-
-inline R_xlen_t count() {
-  const R_xlen_t head = 1;
-  const R_xlen_t tail = 1;
-  SEXP list = get();
-  return Rf_xlength(list) - head - tail;
+inline SEXP& get_root() {
+  static SEXP root = []() {
+    // Index 0: Active list head
+    // Index 1: Free list head
+    SEXP r = Rf_allocVector(VECSXP, 2);
+    R_PreserveObject(r);
+    return r;
+  }();
+  return root;
 }
 
 inline SEXP insert(SEXP x) {
@@ -245,54 +241,82 @@ inline SEXP insert(SEXP x) {
     return R_NilValue;
   }
 
+  // Protect x because it might be an unprotected result from allocVector
   PROTECT(x);
 
-  SEXP list = get();
+  SEXP root = get_root();
+  SEXP free_head = VECTOR_ELT(root, 1);
+  SEXP node;
 
-  // Get references to the head of the preserve list and the next element
-  // after the head
-  SEXP head = list;
-  SEXP next = CDR(list);
+  if (free_head != R_NilValue) {
+    node = free_head;
+    // Remove from free list
+    SET_VECTOR_ELT(root, 1, VECTOR_ELT(node, 2));
+  } else {
+    // Node structure: [prev, data, next]
+    node = Rf_allocVector(VECSXP, 3);
+  }
 
-  // Add a new cell that points to the current head + next.
-  SEXP cell = PROTECT(Rf_cons(head, next));
-  SET_TAG(cell, x);
+  PROTECT(node);
 
-  // Update the head + next to point at the newly-created cell,
-  // effectively inserting that cell between the current head + next.
-  SETCDR(head, cell);
-  SETCAR(next, cell);
+  SET_VECTOR_ELT(node, 1, x);
+
+  SEXP head = VECTOR_ELT(root, 0);
+
+  SET_VECTOR_ELT(node, 2, head);        // next = old_head
+  // prev is already R_NilValue (from allocVector or release)
+
+  if (head != R_NilValue) {
+    SET_VECTOR_ELT(head, 0, node);  // old_head.prev = node
+  }
+
+  SET_VECTOR_ELT(root, 0, node);  // root.head = node
 
   UNPROTECT(2);
 
-  return cell;
+  get_counter()++;
+  return node;
 }
 
-inline void release(SEXP cell) {
-  if (cell == R_NilValue) {
+inline void release(SEXP node) {
+  if (node == R_NilValue) {
     return;
   }
 
-  // Get a reference to the cells before and after the token.
-  SEXP lhs = CAR(cell);
-  SEXP rhs = CDR(cell);
+  // node is [prev, data, next]
+  SEXP prev = VECTOR_ELT(node, 0);
+  SEXP next = VECTOR_ELT(node, 2);
 
-  // Remove the cell from the preserve list -- effectively, we do this
-  // by updating the 'lhs' and 'rhs' references to point at each-other,
-  // effectively removing any references to the cell in the pairlist.
-  SETCDR(lhs, rhs);
-  SETCAR(rhs, lhs);
-}
-
-inline void print() {
-  SEXP list = get();
-  for (SEXP cell = list; cell != R_NilValue; cell = CDR(cell)) {
-    REprintf("%p CAR: %p CDR: %p TAG: %p\n", reinterpret_cast<void*>(cell),
-             reinterpret_cast<void*>(CAR(cell)), reinterpret_cast<void*>(CDR(cell)),
-             reinterpret_cast<void*>(TAG(cell)));
+  if (prev != R_NilValue) {
+    SET_VECTOR_ELT(prev, 2, next);
+  } else {
+    // node was head
+    SEXP root = get_root();
+    SET_VECTOR_ELT(root, 0, next);
   }
-  REprintf("---\n");
+
+  if (next != R_NilValue) {
+    SET_VECTOR_ELT(next, 0, prev);
+  }
+
+  // Clear data to allow GC
+  SET_VECTOR_ELT(node, 1, R_NilValue);
+  // Clear prev
+  SET_VECTOR_ELT(node, 0, R_NilValue);
+
+  // Add to free list
+  SEXP root = get_root();
+  SEXP free_head = VECTOR_ELT(root, 1);
+
+  SET_VECTOR_ELT(node, 2, free_head);  // next = old_free_head
+  SET_VECTOR_ELT(root, 1, node);       // root.free_head = node
+
+  get_counter()--;
 }
+
+inline R_xlen_t count() { return get_counter(); }
+
+inline void print() { REprintf("Preserved objects count: %d\n", get_counter()); }
 
 }  // namespace store
 

@@ -33,17 +33,13 @@ inline typename r_vector<int>::underlying_type r_vector<int>::get_elt(SEXP x,
 template <>
 inline typename r_vector<int>::underlying_type* r_vector<int>::get_p(bool is_altrep,
                                                                      SEXP data) {
-  if (is_altrep) {
-    return nullptr;
-  } else {
-    return INTEGER(data);
-  }
+  return INTEGER(data);
 }
 
 template <>
 inline typename r_vector<int>::underlying_type const* r_vector<int>::get_const_p(
     bool is_altrep, SEXP data) {
-  return INTEGER_OR_NULL(data);
+  return INTEGER(data);
 }
 
 template <>
@@ -91,15 +87,52 @@ inline integers as_integers(SEXP x) {
     size_t len = xn.size();
     writable::integers ret(len);
 
-    std::transform(xn.begin(), xn.end(), ret.begin(), [](double value) {
+#if CPP4R_HAS_CXX20
+    // C++20: Use [[likely]] attribute and direct pointer access for best performance
+    const double* CPP4R_RESTRICT x_ptr = REAL(xn.data());
+    int* CPP4R_RESTRICT ret_ptr = INTEGER(ret.data());
+
+    for (size_t i = 0; i < len; ++i) {
+      double value = x_ptr[i];
       if (ISNA(value)) {
-        return NA_INTEGER;
-      }
-      if (!is_convertible_without_loss_to_integer(value)) {
+        ret_ptr[i] = NA_INTEGER;
+      } else if (!is_convertible_without_loss_to_integer(value)) [[unlikely]] {
         throw std::runtime_error("All elements must be integer-like");
+      } else {
+        ret_ptr[i] = static_cast<int>(value);
       }
-      return static_cast<int>(value);
-    });
+    }
+#elif CPP4R_HAS_CXX17
+    // C++17: Use if constexpr and direct pointers for good performance
+    const double* CPP4R_RESTRICT x_ptr = REAL(xn.data());
+    int* CPP4R_RESTRICT ret_ptr = INTEGER(ret.data());
+
+    for (size_t i = 0; i < len; ++i) {
+      double value = x_ptr[i];
+      if (ISNA(value)) {
+        ret_ptr[i] = NA_INTEGER;
+      } else if (CPP4R_UNLIKELY(!is_convertible_without_loss_to_integer(value))) {
+        throw std::runtime_error("All elements must be integer-like");
+      } else {
+        ret_ptr[i] = static_cast<int>(value);
+      }
+    }
+#else
+    // C++11-14: Use raw loop with direct pointers
+    const double* CPP4R_RESTRICT x_ptr = REAL(xn.data());
+    int* CPP4R_RESTRICT ret_ptr = INTEGER(ret.data());
+
+    for (size_t i = 0; i < len; ++i) {
+      double value = x_ptr[i];
+      if (ISNA(value)) {
+        ret_ptr[i] = NA_INTEGER;
+      } else if (CPP4R_UNLIKELY(!is_convertible_without_loss_to_integer(value))) {
+        throw std::runtime_error("All elements must be integer-like");
+      } else {
+        ret_ptr[i] = static_cast<int>(value);
+      }
+    }
+#endif
 
     return ret;
   } else if (detail::r_typeof(x) == LGLSXP) {
@@ -107,9 +140,40 @@ inline integers as_integers(SEXP x) {
     size_t len = xn.size();
     writable::integers ret(len);
 
-    std::transform(xn.begin(), xn.end(), ret.begin(), [](bool value) {
-      return value == NA_LOGICAL ? NA_INTEGER : static_cast<int>(value);
-    });
+#if CPP4R_HAS_CXX20
+    // C++20: Direct pointer access with [[likely]] attribute
+    const int* CPP4R_RESTRICT x_ptr = LOGICAL(xn.data());
+    int* CPP4R_RESTRICT ret_ptr = INTEGER(ret.data());
+
+    for (size_t i = 0; i < len; ++i) {
+      int value = x_ptr[i];
+      if (value == NA_LOGICAL) [[unlikely]] {
+        ret_ptr[i] = NA_INTEGER;
+      } else {
+        ret_ptr[i] = static_cast<int>(value);
+      }
+    }
+#elif CPP4R_HAS_CXX17
+    // C++17: Direct pointer access with builtin hints
+    const int* CPP4R_RESTRICT x_ptr = LOGICAL(xn.data());
+    int* CPP4R_RESTRICT ret_ptr = INTEGER(ret.data());
+
+    for (size_t i = 0; i < len; ++i) {
+      int value = x_ptr[i];
+      ret_ptr[i] =
+          CPP4R_UNLIKELY(value == NA_LOGICAL) ? NA_INTEGER : static_cast<int>(value);
+    }
+#else
+    // C++11-14: Use raw loop with direct pointers
+    const int* CPP4R_RESTRICT x_ptr = LOGICAL(xn.data());
+    int* CPP4R_RESTRICT ret_ptr = INTEGER(ret.data());
+
+    for (size_t i = 0; i < len; ++i) {
+      int value = x_ptr[i];
+      ret_ptr[i] =
+          CPP4R_UNLIKELY(value == NA_LOGICAL) ? NA_INTEGER : static_cast<int>(value);
+    }
+#endif
 
     return ret;
   }

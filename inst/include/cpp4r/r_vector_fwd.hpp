@@ -26,6 +26,13 @@ namespace cpp4r {
 
 using namespace cpp4r::literals;
 
+namespace traits {
+template <typename T> struct use_raw_pointer : std::false_type {};
+template <> struct use_raw_pointer<double> : std::true_type {};
+template <> struct use_raw_pointer<int> : std::true_type {};
+template <> struct use_raw_pointer<r_complex> : std::true_type {};
+}
+
 namespace writable {
 template <typename T>
 class r_vector;
@@ -36,8 +43,11 @@ template <typename T>
 class r_vector {
  public:
   // Forward declare
-  class const_iterator;
+  class generic_const_iterator;
   using underlying_type = typename traits::get_underlying_type<T>::type;
+
+  // Expose scalar type for template metaprogramming (e.g. matrix allocation)
+  using scalar_type = T;
 
  private:
   SEXP data_ = R_NilValue;
@@ -61,6 +71,7 @@ class r_vector {
   r_vector(const r_vector& x);
   r_vector(r_vector<T>&& x);
   r_vector(const writable::r_vector<T>& x);
+  r_vector(writable::r_vector<T>&& x);
 
   r_vector& operator=(const r_vector& rhs);
   r_vector& operator=(r_vector&& rhs);
@@ -89,25 +100,19 @@ class r_vector {
   bool empty() const;
   SEXP data() const;
 
+  // Fast-path pointer accessor to avoid REAL(data()) overhead in tight loops
+  // Returns nullptr for ALTREP or writable vectors - use data_p_ field for those cases
+  CPP4R_ALWAYS_INLINE const underlying_type* CPP4R_RESTRICT data_ptr() const noexcept {
+    return data_p_;
+  }
+
   const sexp attr(const char* name) const;
   const sexp attr(const std::string& name) const;
   const sexp attr(SEXP name) const;
 
   r_vector<r_string> names() const;
 
-  const_iterator begin() const;
-  const_iterator end() const;
-  const_iterator cbegin() const;
-  const_iterator cend() const;
-  const_iterator find(const r_string& name) const;
-  // Overload: use a pre-translated names cache for faster lookups (opt-in)
-  const_iterator find(const std::vector<std::string>& names_cache,
-                      const r_string& name) const;
-  // Fast-path find using a pre-translated names vector (opt-in).
-  const_iterator find_cached(const std::vector<std::string>& names_cache,
-                             const r_string& name) const;
-
-  class const_iterator {
+  class generic_const_iterator {
     // Iterator references:
     // https://cplusplus.com/reference/iterator/
     // https://stackoverflow.com/questions/8054273/how-to-implement-an-stl-style-iterator-and-avoid-common-pitfalls
@@ -134,29 +139,47 @@ class r_vector {
     using reference = T&;
     using iterator_category = std::random_access_iterator_tag;
 
-    const_iterator(const r_vector* data, R_xlen_t pos);
+    generic_const_iterator(const r_vector* data, R_xlen_t pos);
 
-    const_iterator operator+(R_xlen_t pos);
-    ptrdiff_t operator-(const const_iterator& other) const;
+    generic_const_iterator operator+(R_xlen_t pos);
+    ptrdiff_t operator-(const generic_const_iterator& other) const;
 
-    const_iterator& operator++();
-    const_iterator& operator--();
+    generic_const_iterator& operator++();
+    generic_const_iterator& operator--();
 
-    const_iterator& operator+=(R_xlen_t pos);
-    const_iterator& operator-=(R_xlen_t pos);
+    generic_const_iterator& operator+=(R_xlen_t pos);
+    generic_const_iterator& operator-=(R_xlen_t pos);
 
-    bool operator!=(const const_iterator& other) const;
-    bool operator==(const const_iterator& other) const;
+    bool operator!=(const generic_const_iterator& other) const;
+    bool operator==(const generic_const_iterator& other) const;
 
     T operator*() const;
 
-    friend class writable::r_vector<T>::iterator;
+    friend class writable::r_vector<T>;
 
    private:
     // Implemented in specialization
     static bool use_buf(bool is_altrep);
     void fill_buf(R_xlen_t pos);
   };
+
+  using const_iterator = typename std::conditional<
+      traits::use_raw_pointer<T>::value,
+      const T*,
+      generic_const_iterator
+  >::type;
+
+  const_iterator begin() const;
+  const_iterator end() const;
+  const_iterator cbegin() const;
+  const_iterator cend() const;
+  const_iterator find(const r_string& name) const;
+  // Overload: use a pre-translated names cache for faster lookups (opt-in)
+  const_iterator find(const std::vector<std::string>& names_cache,
+                      const r_string& name) const;
+  // Fast-path find using a pre-translated names vector (opt-in).
+  const_iterator find_cached(const std::vector<std::string>& names_cache,
+                             const r_string& name) const;
 
  private:
   // Implemented in specialization
@@ -188,7 +211,7 @@ class r_vector : public cpp4r::r_vector<T> {
  public:
   // Forward declare
   class proxy;
-  class iterator;
+  class generic_iterator;
 
   using typename cpp4r::r_vector<T>::underlying_type;
 
@@ -204,9 +227,20 @@ class r_vector : public cpp4r::r_vector<T> {
  public:
   typedef ptrdiff_t difference_type;
   typedef size_t size_type;
-  typedef proxy value_type;
-  typedef proxy* pointer;
-  typedef proxy& reference;
+  
+  using reference = typename std::conditional<
+      traits::use_raw_pointer<T>::value,
+      T&,
+      proxy
+  >::type;
+
+  using value_type = typename std::conditional<
+      traits::use_raw_pointer<T>::value,
+      T,
+      proxy
+  >::type;
+
+  typedef value_type* pointer;
 
   r_vector() noexcept = default;
   r_vector(const SEXP& data);
@@ -233,18 +267,18 @@ class r_vector : public cpp4r::r_vector<T> {
   operator SEXP() const;
 
 #ifdef LONG_VECTOR_SUPPORT
-  proxy operator[](const int pos) const;
+  reference operator[](const int pos) const;
 #endif
-  proxy operator[](const R_xlen_t pos) const;
-  proxy operator[](const size_type pos) const;
-  proxy operator[](const r_string& name) const;
+  reference operator[](const R_xlen_t pos) const;
+  reference operator[](const size_type pos) const;
+  reference operator[](const r_string& name) const;
 
 #ifdef LONG_VECTOR_SUPPORT
-  proxy at(const int pos) const;
+  reference at(const int pos) const;
 #endif
-  proxy at(const R_xlen_t pos) const;
-  proxy at(const size_type pos) const;
-  proxy at(const r_string& name) const;
+  reference at(const R_xlen_t pos) const;
+  reference at(const size_type pos) const;
+  reference at(const r_string& name) const;
 
   void push_back(T value);
   template <typename U = T,
@@ -256,10 +290,48 @@ class r_vector : public cpp4r::r_vector<T> {
   void resize(R_xlen_t count);
   void reserve(R_xlen_t new_capacity);
 
-  iterator insert(R_xlen_t pos, T value);
-  iterator erase(R_xlen_t pos);
+  // iterator insert(R_xlen_t pos, T value); // Return type depends on iterator
+  // iterator erase(R_xlen_t pos);
 
   void clear();
+
+  class generic_iterator : public cpp4r::r_vector<T>::generic_const_iterator {
+   private:
+    using cpp4r::r_vector<T>::generic_const_iterator::data_;
+    using cpp4r::r_vector<T>::generic_const_iterator::block_start_;
+    using cpp4r::r_vector<T>::generic_const_iterator::pos_;
+    using cpp4r::r_vector<T>::generic_const_iterator::buf_;
+    using cpp4r::r_vector<T>::generic_const_iterator::length_;
+    using cpp4r::r_vector<T>::generic_const_iterator::use_buf;
+    using cpp4r::r_vector<T>::generic_const_iterator::fill_buf;
+
+   public:
+    using difference_type = ptrdiff_t;
+    using value_type = proxy;
+    using pointer = proxy*;
+    using reference = proxy&;
+    using iterator_category = std::forward_iterator_tag;
+
+    generic_iterator(const r_vector* data, R_xlen_t pos);
+
+    generic_iterator& operator++();
+
+    proxy operator*() const;
+
+    using cpp4r::r_vector<T>::generic_const_iterator::operator!=;
+
+    generic_iterator& operator+=(R_xlen_t rhs);
+    generic_iterator operator+(R_xlen_t rhs);
+  };
+
+  using iterator = typename std::conditional<
+      traits::use_raw_pointer<T>::value,
+      T*,
+      generic_iterator
+  >::type;
+
+  iterator insert(R_xlen_t pos, T value);
+  iterator erase(R_xlen_t pos);
 
   iterator begin() const;
   iterator end() const;
@@ -267,6 +339,16 @@ class r_vector : public cpp4r::r_vector<T> {
   using cpp4r::r_vector<T>::cbegin;
   using cpp4r::r_vector<T>::cend;
   using cpp4r::r_vector<T>::size;
+
+  // Fast-path pointer accessor for writable vectors
+  // Returns nullptr for ALTREP vectors
+  CPP4R_ALWAYS_INLINE underlying_type* CPP4R_RESTRICT data_ptr_writable() noexcept {
+    return data_p_;
+  }
+
+  CPP4R_ALWAYS_INLINE const underlying_type* CPP4R_RESTRICT data_ptr() const noexcept {
+    return data_p_;
+  }
 
   iterator find(const r_string& name) const;
   // Overload: use a pre-translated names cache for faster lookups (opt-in)
@@ -325,35 +407,6 @@ class r_vector : public cpp4r::r_vector<T> {
    private:
     underlying_type get() const;
     void set(underlying_type x);
-  };
-
-  class iterator : public cpp4r::r_vector<T>::const_iterator {
-   private:
-    using cpp4r::r_vector<T>::const_iterator::data_;
-    using cpp4r::r_vector<T>::const_iterator::block_start_;
-    using cpp4r::r_vector<T>::const_iterator::pos_;
-    using cpp4r::r_vector<T>::const_iterator::buf_;
-    using cpp4r::r_vector<T>::const_iterator::length_;
-    using cpp4r::r_vector<T>::const_iterator::use_buf;
-    using cpp4r::r_vector<T>::const_iterator::fill_buf;
-
-   public:
-    using difference_type = ptrdiff_t;
-    using value_type = proxy;
-    using pointer = proxy*;
-    using reference = proxy&;
-    using iterator_category = std::forward_iterator_tag;
-
-    iterator(const r_vector* data, R_xlen_t pos);
-
-    iterator& operator++();
-
-    proxy operator*() const;
-
-    using cpp4r::r_vector<T>::const_iterator::operator!=;
-
-    iterator& operator+=(R_xlen_t rhs);
-    iterator operator+(R_xlen_t rhs);
   };
 
  private:

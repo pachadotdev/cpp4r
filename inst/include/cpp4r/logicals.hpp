@@ -30,17 +30,13 @@ inline typename r_vector<r_bool>::underlying_type r_vector<r_bool>::get_elt(SEXP
 template <>
 inline typename r_vector<r_bool>::underlying_type* r_vector<r_bool>::get_p(bool is_altrep,
                                                                            SEXP data) {
-  if (is_altrep) {
-    return nullptr;
-  } else {
-    return LOGICAL(data);
-  }
+  return LOGICAL(data);
 }
 
 template <>
 inline typename r_vector<r_bool>::underlying_type const* r_vector<r_bool>::get_const_p(
     bool is_altrep, SEXP data) {
-  return LOGICAL_OR_NULL(data);
+  return LOGICAL(data);
 }
 
 template <>

@@ -14,6 +14,31 @@
 
 namespace cpp4r {
 
+namespace detail {
+template <typename T>
+struct get_sexptype_v;
+template <>
+struct get_sexptype_v<double> {
+  static constexpr SEXPTYPE value = REALSXP;
+};
+template <>
+struct get_sexptype_v<int> {
+  static constexpr SEXPTYPE value = INTSXP;
+};
+template <>
+struct get_sexptype_v<r_bool> {
+  static constexpr SEXPTYPE value = LGLSXP;
+};
+template <>
+struct get_sexptype_v<r_complex> {
+  static constexpr SEXPTYPE value = CPLXSXP;
+};
+template <>
+struct get_sexptype_v<r_string> {
+  static constexpr SEXPTYPE value = STRSXP;
+};
+}  // namespace detail
+
 // matrix dimensions
 struct matrix_dims {
  protected:
@@ -24,8 +49,8 @@ struct matrix_dims {
   matrix_dims(SEXP data) : nrow_(Rf_nrows(data)), ncol_(Rf_ncols(data)) {}
   matrix_dims(int nrow, int ncol) : nrow_(nrow), ncol_(ncol) {}
 
-  int nrow() const noexcept { return nrow_; }
-  int ncol() const noexcept { return ncol_; }
+  CPP4R_ALWAYS_INLINE int nrow() const noexcept { return nrow_; }
+  CPP4R_ALWAYS_INLINE int ncol() const noexcept { return ncol_; }
 };
 
 // base type for dimension-wise matrix access specialization
@@ -56,10 +81,10 @@ struct matrix_slices<by_row> : public matrix_dims {
   using matrix_dims::ncol;
   using matrix_dims::nrow;
 
-  int nslices() const noexcept { return nrow(); }
-  int slice_size() const noexcept { return ncol(); }
-  int slice_stride() const noexcept { return nrow(); }
-  int slice_offset(int pos) const noexcept { return pos; }
+  CPP4R_ALWAYS_INLINE int nslices() const noexcept { return nrow(); }
+  CPP4R_ALWAYS_INLINE int slice_size() const noexcept { return ncol(); }
+  CPP4R_ALWAYS_INLINE int slice_stride() const noexcept { return nrow(); }
+  CPP4R_ALWAYS_INLINE int slice_offset(int pos) const noexcept { return pos; }
 };
 
 // basic properties of matrix column slices
@@ -70,10 +95,10 @@ struct matrix_slices<by_column> : public matrix_dims {
   using matrix_dims::ncol;
   using matrix_dims::nrow;
 
-  int nslices() const noexcept { return ncol(); }
-  int slice_size() const noexcept { return nrow(); }
-  int slice_stride() const noexcept { return 1; }
-  int slice_offset(int pos) const noexcept { return pos * nrow(); }
+  CPP4R_ALWAYS_INLINE int nslices() const noexcept { return ncol(); }
+  CPP4R_ALWAYS_INLINE int slice_size() const noexcept { return nrow(); }
+  CPP4R_ALWAYS_INLINE int slice_stride() const noexcept { return 1; }
+  CPP4R_ALWAYS_INLINE int slice_offset(int pos) const noexcept { return pos * nrow(); }
 };
 
 template <typename V, typename T, typename S = by_column>
@@ -81,7 +106,12 @@ class matrix : public matrix_slices<S> {
  private:
   V vector_;
 
+  template <typename V2, typename T2, typename S2>
+  friend class matrix;
+
  public:
+  using underlying_type = typename V::underlying_type;
+
   // matrix slice: row (if S=by_row) or a column (if S=by_column)
   class slice {
    private:
@@ -171,17 +201,17 @@ class matrix : public matrix_slices<S> {
 
   template <typename V2, typename T2, typename S2>
   matrix(const cpp4r::matrix<V2, T2, S2>& rhs)
-      : matrix_slices<S>(rhs.nrow(), rhs.ncol()), vector_(rhs.vector()) {}
+      : matrix_slices<S>(rhs.nrow(), rhs.ncol()), vector_(rhs.vector_) {}
 
-  matrix(int nrow, int ncol)
-      : matrix_slices<S>(nrow, ncol), vector_(R_xlen_t(nrow * ncol)) {
-    // Fast path: Set dimensions directly using R API without intermediate protection
-    SEXP dims = PROTECT(Rf_allocVector(INTSXP, 2));
-    INTEGER(dims)[0] = nrow;
-    INTEGER(dims)[1] = ncol;
-    Rf_setAttrib(vector_.data(), R_DimSymbol, dims);
-    UNPROTECT(1);
-  }
+  template <typename V2, typename T2, typename S2>
+  matrix(cpp4r::matrix<V2, T2, S2>&& rhs)
+      : matrix_slices<S>(rhs.nrow(), rhs.ncol()), vector_(std::move(rhs.vector_)) {}
+
+  // Optimized constructor for writable matrices to minimize allocation overhead
+  CPP4R_ALWAYS_INLINE matrix(int nrow, int ncol)
+      : matrix_slices<S>(nrow, ncol),
+        vector_(Rf_allocMatrix(
+            detail::get_sexptype_v<typename V::scalar_type>::value, nrow, ncol)) {}
 
   using matrix_slices<S>::nrow;
   using matrix_slices<S>::ncol;
@@ -247,15 +277,25 @@ class matrix : public matrix_slices<S> {
   r_vector<r_string> names() const { return r_vector<r_string>(vector_.names()); }
 
   // Fast-path accessors for high-performance operations
-  CPP4R_ALWAYS_INLINE const double* CPP4R_RESTRICT data_ptr() const {
-    return REAL(vector_.data());
+  // These use the underlying r_vector's optimized data_ptr() methods
+  CPP4R_ALWAYS_INLINE const underlying_type* CPP4R_RESTRICT data_ptr() const noexcept {
+    return vector_.data_ptr();
   }
 
-  CPP4R_ALWAYS_INLINE double* CPP4R_RESTRICT data_ptr_writable() {
-    return REAL(vector_.data());
+  // Writable data pointer - only available for writable matrices
+  // Enable only if V has data_ptr_writable() method
+  template <typename V2 = V>
+  CPP4R_ALWAYS_INLINE underlying_type* CPP4R_RESTRICT data_ptr_writable() noexcept {
+    return vector_.data_ptr_writable();
   }
 
   CPP4R_ALWAYS_INLINE T operator()(int row, int col) const {
+    return vector_[row + (col * nrow())];
+  }
+
+  // Optimized operator() for writable matrices using direct pointer access when possible
+  template <typename V2 = V, typename = decltype(std::declval<V2>().data_ptr_writable())>
+  CPP4R_ALWAYS_INLINE typename V2::proxy operator()(int row, int col) {
     return vector_[row + (col * nrow())];
   }
 
@@ -308,11 +348,29 @@ inline doubles_matrix<S> as_doubles_matrix(SEXP x) {
     const int* CPP4R_RESTRICT x_ptr = INTEGER(xn.data());
     double* CPP4R_RESTRICT ret_ptr = REAL(ret.data());
 
-    // Optimized loop that compiler can auto-vectorize
+#if CPP4R_HAS_CXX20
+    // C++20: Use [[likely]] attribute for better optimization
+    for (R_xlen_t i = 0; i < size; ++i) {
+      int val = x_ptr[i];
+      if (val != NA_INTEGER) [[likely]] {
+        ret_ptr[i] = static_cast<double>(val);
+      } else {
+        ret_ptr[i] = NA_REAL;
+      }
+    }
+#elif CPP4R_HAS_CXX17
+    // C++17: Compiler can better optimize with more context
     for (R_xlen_t i = 0; i < size; ++i) {
       int val = x_ptr[i];
       ret_ptr[i] = CPP4R_LIKELY(val != NA_INTEGER) ? static_cast<double>(val) : NA_REAL;
     }
+#else
+    // C++11-14: Basic optimized loop
+    for (R_xlen_t i = 0; i < size; ++i) {
+      int val = x_ptr[i];
+      ret_ptr[i] = CPP4R_LIKELY(val != NA_INTEGER) ? static_cast<double>(val) : NA_REAL;
+    }
+#endif
 
     // Preserve attributes like dimnames
     SEXP dimnames = Rf_getAttrib(x, R_DimNamesSymbol);
@@ -332,11 +390,23 @@ inline doubles_matrix<S> as_doubles_matrix(SEXP x) {
     const int* CPP4R_RESTRICT x_ptr = LOGICAL(xn.data());
     double* CPP4R_RESTRICT ret_ptr = REAL(ret.data());
 
-    // Optimized loop
+#if CPP4R_HAS_CXX20
+    // C++20: Use [[likely]] attribute for better optimization
+    for (R_xlen_t i = 0; i < size; ++i) {
+      int val = x_ptr[i];
+      if (val != NA_LOGICAL) [[likely]] {
+        ret_ptr[i] = static_cast<double>(val);
+      } else {
+        ret_ptr[i] = NA_REAL;
+      }
+    }
+#else
+    // C++11-17: Use compiler builtin hints
     for (R_xlen_t i = 0; i < size; ++i) {
       int val = x_ptr[i];
       ret_ptr[i] = CPP4R_LIKELY(val != NA_LOGICAL) ? static_cast<double>(val) : NA_REAL;
     }
+#endif
 
     // Preserve dimnames
     SEXP dimnames = Rf_getAttrib(x, R_DimNamesSymbol);
@@ -379,11 +449,23 @@ inline integers_matrix<S> as_integers_matrix(SEXP x) {
     writable::integers_matrix<S> ret(nrow, ncol);
     int* CPP4R_RESTRICT ret_ptr = INTEGER(ret.data());
 
-    // Optimized conversion loop
+#if CPP4R_HAS_CXX20
+    // C++20: Use [[likely]] attribute for better optimization
+    for (R_xlen_t i = 0; i < size; ++i) {
+      double val = x_ptr[i];
+      if (!ISNA(val)) [[likely]] {
+        ret_ptr[i] = static_cast<int>(val);
+      } else {
+        ret_ptr[i] = NA_INTEGER;
+      }
+    }
+#else
+    // C++11-17: Use compiler builtin hints
     for (R_xlen_t i = 0; i < size; ++i) {
       double val = x_ptr[i];
       ret_ptr[i] = CPP4R_LIKELY(!ISNA(val)) ? static_cast<int>(val) : NA_INTEGER;
     }
+#endif
 
     // Preserve dimnames
     SEXP dimnames = Rf_getAttrib(x, R_DimNamesSymbol);
@@ -402,11 +484,23 @@ inline integers_matrix<S> as_integers_matrix(SEXP x) {
     const int* CPP4R_RESTRICT x_ptr = LOGICAL(xn.data());
     int* CPP4R_RESTRICT ret_ptr = INTEGER(ret.data());
 
-    // Optimized loop
+#if CPP4R_HAS_CXX20
+    // C++20: Use [[likely]] attribute for better optimization
+    for (R_xlen_t i = 0; i < size; ++i) {
+      int val = x_ptr[i];
+      if (val != NA_LOGICAL) [[likely]] {
+        ret_ptr[i] = val;
+      } else {
+        ret_ptr[i] = NA_INTEGER;
+      }
+    }
+#else
+    // C++11-17: Use compiler builtin hints
     for (R_xlen_t i = 0; i < size; ++i) {
       int val = x_ptr[i];
       ret_ptr[i] = CPP4R_LIKELY(val != NA_LOGICAL) ? val : NA_INTEGER;
     }
+#endif
 
     // Preserve dimnames
     SEXP dimnames = Rf_getAttrib(x, R_DimNamesSymbol);

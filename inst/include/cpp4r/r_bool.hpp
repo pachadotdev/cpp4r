@@ -18,10 +18,9 @@ class r_bool {
   r_bool() noexcept = default;
 
   r_bool(SEXP data) {
-    if (Rf_isLogical(data)) {
-      if (Rf_xlength(data) == 1) {
-        value_ = static_cast<Rboolean>(LOGICAL_ELT(data, 0));
-      }
+    if (Rf_isLogical(data) && Rf_xlength(data) == 1) {
+      value_ = static_cast<Rboolean>(LOGICAL_ELT(data, 0));
+      return;
     }
     throw std::invalid_argument("Invalid r_bool value");
   }

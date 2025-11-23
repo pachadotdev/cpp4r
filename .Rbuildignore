@@ -21,4 +21,4 @@
 ^extended-tests-results$
 ^scripts$
 ^vignettes$
-^cpp11headers$
+^others$

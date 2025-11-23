@@ -35,17 +35,13 @@ inline typename r_vector<r_complex>::underlying_type r_vector<r_complex>::get_el
 template <>
 inline typename r_vector<r_complex>::underlying_type* r_vector<r_complex>::get_p(
     bool is_altrep, SEXP data) {
-  if (is_altrep) {
-    return nullptr;
-  } else {
-    return COMPLEX(data);
-  }
+  return COMPLEX(data);
 }
 
 template <>
 inline typename r_vector<r_complex>::underlying_type const*
 r_vector<r_complex>::get_const_p(bool is_altrep, SEXP data) {
-  return COMPLEX_OR_NULL(data);
+  return COMPLEX(data);
 }
 
 template <>
@@ -91,10 +87,20 @@ inline complexes as_complexes(SEXP x) {
     r_vector<int> xn(x);
     size_t len = xn.size();
     writable::complexes ret(len);
-    std::transform(xn.begin(), xn.end(), ret.begin(), [](int value) {
-      return value == NA_INTEGER ? r_complex(NA_REAL, NA_REAL)
-                                 : r_complex(static_cast<double>(value), 0.0);
-    });
+
+    const int* CPP4R_RESTRICT x_ptr = INTEGER(xn.data());
+    Rcomplex* CPP4R_RESTRICT ret_ptr = COMPLEX(ret.data());
+
+    for (size_t i = 0; i < len; ++i) {
+      int value = x_ptr[i];
+      if (value == NA_INTEGER) {
+        ret_ptr[i].r = NA_REAL;
+        ret_ptr[i].i = NA_REAL;
+      } else {
+        ret_ptr[i].r = static_cast<double>(value);
+        ret_ptr[i].i = 0.0;
+      }
+    }
     return ret;
   }
 

@@ -1,0 +1,31 @@
+test,cpp_standard,cpp_compiler,rel_cpp4r_cpp11,rel_cpp4r_Rcpp
+Add four matrices,C++11,Clang,0.921,1.38
+Add four matrices,C++11,GCC,0.863,1.13
+Add four matrices,C++14,Clang,0.959,1.07
+Add four matrices,C++14,GCC,0.929,1.14
+Add four matrices,C++17,Clang,0.898,1.26
+Add four matrices,C++17,GCC,0.933,1.32
+Add four matrices,C++20,Clang,0.89,1.24
+Add four matrices,C++20,GCC,0.878,1.34
+Add four matrices,C++23,Clang,0.896,1.34
+Add four matrices,C++23,GCC,0.788,1.25
+Add two matrices,C++11,Clang,2.35,1.54
+Add two matrices,C++11,GCC,2.04,1.59
+Add two matrices,C++14,Clang,1.86,1.53
+Add two matrices,C++14,GCC,2.22,1.62
+Add two matrices,C++17,Clang,2.06,1.66
+Add two matrices,C++17,GCC,2.02,1.84
+Add two matrices,C++20,Clang,2.35,1.73
+Add two matrices,C++20,GCC,2.11,1.61
+Add two matrices,C++23,Clang,2,1.74
+Add two matrices,C++23,GCC,2.12,1.36
+Multiple matrix operations,C++14,Clang,0.903,1.01
+Multiply four matrices,C++11,Clang,1.05,0.921
+Multiply four matrices,C++14,Clang,1.03,1.02
+Multiply four matrices,C++17,Clang,1.03,1.03
+Multiply four matrices,C++17,GCC,0.98,1.02
+Multiply four matrices,C++20,GCC,1.07,1.01
+Multiply four matrices,C++23,Clang,0.956,1.02
+Multiply four matrices,C++23,GCC,0.963,1.85
+Submatrix manipulation,C++11,Clang,0.826,1.17
+Submatrix manipulation,C++14,Clang,0.92,1.05

@@ -32,17 +32,13 @@ inline typename r_vector<double>::underlying_type r_vector<double>::get_elt(SEXP
 template <>
 inline typename r_vector<double>::underlying_type* r_vector<double>::get_p(bool is_altrep,
                                                                            SEXP data) {
-  if (is_altrep) {
-    return nullptr;
-  } else {
-    return REAL(data);
-  }
+  return REAL(data);
 }
 
 template <>
 inline typename r_vector<double>::underlying_type const* r_vector<double>::get_const_p(
     bool is_altrep, SEXP data) {
-  return REAL_OR_NULL(data);
+  return REAL(data);
 }
 
 template <>
@@ -72,6 +68,26 @@ typedef r_vector<double> doubles;
 
 }  // namespace writable
 
+// Specialized fast-path accessors for doubles (most common benchmark case)
+template <>
+inline const double* CPP4R_RESTRICT r_vector<double>::data_ptr() const noexcept {
+  // For non-ALTREP doubles, data_p_ points directly to REAL(data_)
+  // This avoids repeated REAL() macro calls in tight loops
+  return data_p_;
+}
+
+namespace writable {
+template <>
+inline double* CPP4R_RESTRICT r_vector<double>::data_ptr_writable() noexcept {
+  return data_p_;
+}
+
+template <>
+inline const double* CPP4R_RESTRICT r_vector<double>::data_ptr() const noexcept {
+  return data_p_;
+}
+}  // namespace writable
+
 typedef r_vector<int> integers;
 typedef r_vector<r_bool> logicals;
 
@@ -86,11 +102,23 @@ inline doubles as_doubles(SEXP x) {
     const int* CPP4R_RESTRICT x_ptr = INTEGER(xn.data());
     double* CPP4R_RESTRICT ret_ptr = REAL(ret.data());
 
-    // Optimized loop with branch prediction hints
+#if CPP4R_HAS_CXX20
+    // C++20: Use [[likely]] attribute for better branch prediction
+    for (size_t i = 0; i < len; ++i) {
+      int val = x_ptr[i];
+      if (val != NA_INTEGER) [[likely]] {
+        ret_ptr[i] = static_cast<double>(val);
+      } else {
+        ret_ptr[i] = NA_REAL;
+      }
+    }
+#else
+    // C++11-17: Use compiler builtin hints
     for (size_t i = 0; i < len; ++i) {
       int val = x_ptr[i];
       ret_ptr[i] = CPP4R_LIKELY(val != NA_INTEGER) ? static_cast<double>(val) : NA_REAL;
     }
+#endif
 
     return ret;
   } else if (detail::r_typeof(x) == LGLSXP) {
@@ -101,11 +129,23 @@ inline doubles as_doubles(SEXP x) {
     const int* CPP4R_RESTRICT x_ptr = LOGICAL(xn.data());
     double* CPP4R_RESTRICT ret_ptr = REAL(ret.data());
 
-    // Optimized loop with branch prediction hints
+#if CPP4R_HAS_CXX20
+    // C++20: Use [[likely]] attribute for better branch prediction
+    for (size_t i = 0; i < len; ++i) {
+      int val = x_ptr[i];
+      if (val != NA_LOGICAL) [[likely]] {
+        ret_ptr[i] = static_cast<double>(val);
+      } else {
+        ret_ptr[i] = NA_REAL;
+      }
+    }
+#else
+    // C++11-17: Use compiler builtin hints
     for (size_t i = 0; i < len; ++i) {
       int val = x_ptr[i];
       ret_ptr[i] = CPP4R_LIKELY(val != NA_LOGICAL) ? static_cast<double>(val) : NA_REAL;
     }
+#endif
 
     return ret;
   }
