@@ -28,9 +28,6 @@ using namespace cpp4r::literals;
 
 namespace traits {
 template <typename T> struct use_raw_pointer : std::false_type {};
-template <> struct use_raw_pointer<double> : std::true_type {};
-template <> struct use_raw_pointer<int> : std::true_type {};
-template <> struct use_raw_pointer<r_complex> : std::true_type {};
 }
 
 namespace writable {
@@ -71,7 +68,6 @@ class r_vector {
   r_vector(const r_vector& x);
   r_vector(r_vector<T>&& x);
   r_vector(const writable::r_vector<T>& x);
-  r_vector(writable::r_vector<T>&& x);
 
   r_vector& operator=(const r_vector& rhs);
   r_vector& operator=(r_vector&& rhs);
@@ -223,6 +219,8 @@ class r_vector : public cpp4r::r_vector<T> {
   using cpp4r::r_vector<T>::is_altrep_;
   using cpp4r::r_vector<T>::length_;
   using cpp4r::r_vector<T>::protect_;
+
+  friend class cpp4r::r_vector<T>;
 
  public:
   typedef ptrdiff_t difference_type;

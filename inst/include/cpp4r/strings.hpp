@@ -149,11 +149,14 @@ template <typename T>
 inline void r_vector<T>::push_back(const named_arg& value) {
   push_back(value.value());
   if (Rf_xlength(this->names()) == 0) {
-    cpp4r::writable::strings new_nms(this->size());
+    cpp4r::writable::strings new_nms(this->capacity_);
+    new_nms[this->length_ - 1] = value.name();
     this->names() = new_nms;
+  } else {
+    cpp4r::writable::strings nms(this->names());
+    nms[this->length_ - 1] = value.name();
+    this->names() = nms;
   }
-  cpp4r::writable::strings nms(this->names());
-  nms[this->size() - 1] = value.name();
 }
 
 }  // namespace writable

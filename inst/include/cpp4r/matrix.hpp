@@ -295,7 +295,7 @@ class matrix : public matrix_slices<S> {
 
   // Optimized operator() for writable matrices using direct pointer access when possible
   template <typename V2 = V, typename = decltype(std::declval<V2>().data_ptr_writable())>
-  CPP4R_ALWAYS_INLINE typename V2::proxy operator()(int row, int col) {
+  CPP4R_ALWAYS_INLINE typename V2::reference operator()(int row, int col) {
     return vector_[row + (col * nrow())];
   }
 
@@ -318,15 +318,15 @@ using complexes_matrix = matrix<r_vector<r_complex>, r_complex, S>;
 
 namespace writable {
 template <typename S = by_column>
-using doubles_matrix = matrix<r_vector<double>, r_vector<double>::proxy, S>;
+using doubles_matrix = matrix<r_vector<double>, typename r_vector<double>::reference, S>;
 template <typename S = by_column>
-using integers_matrix = matrix<r_vector<int>, r_vector<int>::proxy, S>;
+using integers_matrix = matrix<r_vector<int>, typename r_vector<int>::reference, S>;
 template <typename S = by_column>
-using logicals_matrix = matrix<r_vector<r_bool>, r_vector<r_bool>::proxy, S>;
+using logicals_matrix = matrix<r_vector<r_bool>, typename r_vector<r_bool>::reference, S>;
 template <typename S = by_column>
-using strings_matrix = matrix<r_vector<r_string>, r_vector<r_string>::proxy, S>;
+using strings_matrix = matrix<r_vector<r_string>, typename r_vector<r_string>::reference, S>;
 template <typename S = by_column>
-using complexes_matrix = matrix<r_vector<r_complex>, r_vector<r_complex>::proxy, S>;
+using complexes_matrix = matrix<r_vector<r_complex>, typename r_vector<r_complex>::reference, S>;
 }  // namespace writable
 
 // Automatic coercion functions for matrices

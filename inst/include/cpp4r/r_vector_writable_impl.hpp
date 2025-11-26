@@ -479,8 +479,33 @@ inline typename r_vector<T>::proxy& r_vector<T>::proxy::operator=(const T& rhs) 
 template <typename T>
 template <typename U>
 inline typename r_vector<T>::proxy& r_vector<T>::proxy::operator=(const U& rhs) {
-  const underlying_type elt = static_cast<underlying_type>(rhs);
-  set(elt);
+  if constexpr (std::is_same<T, cpp4r::r_string>::value) {
+    // Handle string assignment specially
+    SEXP s = as_sexp(rhs);
+    if (TYPEOF(s) == STRSXP && Rf_xlength(s) > 0) {
+      s = STRING_ELT(s, 0);
+    }
+    SEXP char_sexp = Rf_mkCharCE(Rf_translateCharUTF8(s), CE_UTF8);
+    set(char_sexp);
+  } else if constexpr (std::is_same<T, cpp4r::r_complex>::value) {
+    if constexpr (std::is_same<typename std::decay<U>::type, std::complex<double>>::value) {
+      Rcomplex c;
+      c.r = rhs.real();
+      c.i = rhs.imag();
+      set(c);
+    } else if constexpr (std::is_arithmetic<U>::value) {
+      Rcomplex c;
+      c.r = static_cast<double>(rhs);
+      c.i = 0.0;
+      set(c);
+    } else {
+      const underlying_type elt = static_cast<underlying_type>(rhs);
+      set(elt);
+    }
+  } else {
+    const underlying_type elt = static_cast<underlying_type>(rhs);
+    set(elt);
+  }
   return *this;
 }
 

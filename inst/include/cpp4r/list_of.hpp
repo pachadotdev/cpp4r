@@ -40,11 +40,11 @@ class list_of : public writable::list {
     operator T() const { return static_cast<SEXP>(*this); }
     operator SEXP() const { return static_cast<SEXP>(data_); }
 #ifdef LONG_VECTOR_SUPPORT
-    typename T::proxy operator[](int pos) { return static_cast<T>(data_)[pos]; }
+    typename T::reference operator[](int pos) { return static_cast<T>(data_)[pos]; }
 #endif
-    typename T::proxy operator[](R_xlen_t pos) { return static_cast<T>(data_)[pos]; }
-    proxy operator[](const char* pos) { static_cast<T>(data_)[pos]; }
-    proxy operator[](const std::string& pos) { return static_cast<T>(data_)[pos]; }
+    typename T::reference operator[](R_xlen_t pos) { return static_cast<T>(data_)[pos]; }
+    typename T::reference operator[](const char* pos) { return static_cast<T>(data_)[pos]; }
+    typename T::reference operator[](const std::string& pos) { return static_cast<T>(data_)[pos]; }
     proxy& operator=(const T& rhs) {
       data_ = rhs;
 

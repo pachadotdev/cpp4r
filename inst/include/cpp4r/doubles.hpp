@@ -49,7 +49,7 @@ inline void r_vector<double>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
 }
 
 template <>
-inline bool r_vector<double>::const_iterator::use_buf(bool is_altrep) {
+inline bool r_vector<double>::generic_const_iterator::use_buf(bool is_altrep) {
   return is_altrep;
 }
 

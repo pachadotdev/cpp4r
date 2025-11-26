@@ -251,23 +251,24 @@ inline SEXP insert(SEXP x) {
   if (free_head != R_NilValue) {
     node = free_head;
     // Remove from free list
-    SET_VECTOR_ELT(root, 1, VECTOR_ELT(node, 2));
+    SET_VECTOR_ELT(root, 1, CDR(node));
   } else {
-    // Node structure: [prev, data, next]
-    node = Rf_allocVector(VECSXP, 3);
+    // Node structure: [prev (TAG), data (CAR), next (CDR)]
+    node = Rf_cons(R_NilValue, R_NilValue);
+    SET_TAG(node, R_NilValue);
   }
 
   PROTECT(node);
 
-  SET_VECTOR_ELT(node, 1, x);
+  SETCAR(node, x);
 
   SEXP head = VECTOR_ELT(root, 0);
 
-  SET_VECTOR_ELT(node, 2, head);        // next = old_head
-  // prev is already R_NilValue (from allocVector or release)
+  SETCDR(node, head);        // next = old_head
+  // prev is already R_NilValue (from cons or release)
 
   if (head != R_NilValue) {
-    SET_VECTOR_ELT(head, 0, node);  // old_head.prev = node
+    SET_TAG(head, node);  // old_head.prev = node
   }
 
   SET_VECTOR_ELT(root, 0, node);  // root.head = node
@@ -283,12 +284,12 @@ inline void release(SEXP node) {
     return;
   }
 
-  // node is [prev, data, next]
-  SEXP prev = VECTOR_ELT(node, 0);
-  SEXP next = VECTOR_ELT(node, 2);
+  // node is [prev (TAG), data (CAR), next (CDR)]
+  SEXP prev = TAG(node);
+  SEXP next = CDR(node);
 
   if (prev != R_NilValue) {
-    SET_VECTOR_ELT(prev, 2, next);
+    SETCDR(prev, next);
   } else {
     // node was head
     SEXP root = get_root();
@@ -296,19 +297,19 @@ inline void release(SEXP node) {
   }
 
   if (next != R_NilValue) {
-    SET_VECTOR_ELT(next, 0, prev);
+    SET_TAG(next, prev);
   }
 
   // Clear data to allow GC
-  SET_VECTOR_ELT(node, 1, R_NilValue);
+  SETCAR(node, R_NilValue);
   // Clear prev
-  SET_VECTOR_ELT(node, 0, R_NilValue);
+  SET_TAG(node, R_NilValue);
 
   // Add to free list
   SEXP root = get_root();
   SEXP free_head = VECTOR_ELT(root, 1);
 
-  SET_VECTOR_ELT(node, 2, free_head);  // next = old_free_head
+  SETCDR(node, free_head);  // next = old_free_head
   SET_VECTOR_ELT(root, 1, node);       // root.free_head = node
 
   get_counter()--;

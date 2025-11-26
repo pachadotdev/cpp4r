@@ -51,7 +51,7 @@ inline void r_vector<r_complex>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
 }
 
 template <>
-inline bool r_vector<r_complex>::const_iterator::use_buf(bool is_altrep) {
+inline bool r_vector<r_complex>::generic_const_iterator::use_buf(bool is_altrep) {
   return is_altrep;
 }
 

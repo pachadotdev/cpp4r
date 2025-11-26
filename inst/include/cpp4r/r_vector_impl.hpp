@@ -70,26 +70,6 @@ template <typename T>
 inline r_vector<T>::r_vector(const writable::r_vector<T>& x)
     : r_vector(static_cast<SEXP>(x)) {}
 
-// Move constructor from writable::r_vector
-// This allows efficient conversion from writable to read-only vector
-// by stealing the underlying SEXP and protection token.
-template <typename T>
-inline r_vector<T>::r_vector(writable::r_vector<T>&& x) {
-  data_ = x.data_;
-  protect_ = x.protect_;
-  is_altrep_ = x.is_altrep_;
-  data_p_ = x.data_p_;
-  length_ = x.length_;
-
-  // Important: nullify source to prevent double release
-  x.data_ = R_NilValue;
-  x.protect_ = R_NilValue;
-  x.is_altrep_ = false;
-  x.data_p_ = nullptr;
-  x.length_ = 0;
-  x.capacity_ = 0;
-}
-
 // Same reasoning as `r_vector(const r_vector& x)` constructor
 template <typename T>
 inline r_vector<T>& r_vector<T>::operator=(const r_vector& rhs) {
