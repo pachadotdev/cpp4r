@@ -1,3 +1,5 @@
+// using optimization hints for a fair and direct comparison between cpp11-cpp4r-Rcpp
+
 #include <cpp11.hpp>
 #include <cstring>
 #include <vector>
@@ -13,9 +15,9 @@ using namespace cpp11;
   writable::doubles_matrix<> Z(nrow, ncol);
 
   // Cache pointers for direct access
-  const double* a_ptr = REAL(a.data());
-  const double* b_ptr = REAL(b.data());
-  double* z_ptr = REAL(Z.data());
+  const double* __restrict__ a_ptr = REAL(a.data());
+  const double* __restrict__ b_ptr = REAL(b.data());
+  double* __restrict__ z_ptr = REAL(Z.data());
 
   // Vectorized operation on flattened data
   int size = nrow * ncol;
@@ -36,11 +38,11 @@ using namespace cpp11;
   writable::doubles_matrix<> Z(nrow, ncol);
 
   // Cache pointers
-  const double* a_ptr = REAL(a.data());
-  const double* b_ptr = REAL(b.data());
-  const double* c_ptr = REAL(c.data());
-  const double* d_ptr = REAL(d.data());
-  double* z_ptr = REAL(Z.data());
+  const double* __restrict__ a_ptr = REAL(a.data());
+  const double* __restrict__ b_ptr = REAL(b.data());
+  const double* __restrict__ c_ptr = REAL(c.data());
+  const double* __restrict__ d_ptr = REAL(d.data());
+  double* __restrict__ z_ptr = REAL(Z.data());
 
   int size = nrow * ncol;
   for (int i = 0; i < size; ++i) {
@@ -61,14 +63,14 @@ using namespace cpp11;
   int n20 = n / 20;
 
   // Cache pointers
-  const double* a_ptr = REAL(a.data());
-  const double* b_ptr = REAL(b.data());
-  const double* c_ptr = REAL(c.data());
-  const double* d_ptr = REAL(d.data());
+  const double* __restrict__ a_ptr = REAL(a.data());
+  const double* __restrict__ b_ptr = REAL(b.data());
+  const double* __restrict__ c_ptr = REAL(c.data());
+  const double* __restrict__ d_ptr = REAL(d.data());
 
   // Step 1: A[1:n5, 1:n5] %*% B[1:n5, 1:n10]
   writable::doubles_matrix<> temp1(n5, n10);
-  double* temp1_ptr = REAL(temp1.data());
+  double* __restrict__ temp1_ptr = REAL(temp1.data());
 
   for (int i = 0; i < n5; ++i) {
     for (int j = 0; j < n10; ++j) {
@@ -84,7 +86,7 @@ using namespace cpp11;
 
   // Step 2: temp1 %*% C[1:n10, 1:n15]
   writable::doubles_matrix<> temp2(n5, n15);
-  double* temp2_ptr = REAL(temp2.data());
+  double* __restrict__ temp2_ptr = REAL(temp2.data());
 
   for (int i = 0; i < n5; ++i) {
     for (int j = 0; j < n15; ++j) {
@@ -100,7 +102,7 @@ using namespace cpp11;
 
   // Step 3: temp2 %*% D[1:n15, 1:n20]
   writable::doubles_matrix<> Z(n5, n20);
-  double* z_ptr = REAL(Z.data());
+  double* __restrict__ z_ptr = REAL(Z.data());
 
   for (int i = 0; i < n5; ++i) {
     for (int j = 0; j < n20; ++j) {
@@ -125,9 +127,9 @@ using namespace cpp11;
   writable::doubles_matrix<> Z(nrow, ncol);
 
   // Cache pointers
-  const double* a_ptr = REAL(a.data());
-  const double* b_ptr = REAL(b.data());
-  double* z_ptr = REAL(Z.data());
+  const double* __restrict__ a_ptr = REAL(a.data());
+  const double* __restrict__ b_ptr = REAL(b.data());
+  double* __restrict__ z_ptr = REAL(Z.data());
 
   // Copy entire b matrix
   std::memcpy(z_ptr, b_ptr, nrow * ncol * sizeof(double));
@@ -149,9 +151,9 @@ using namespace cpp11;
   int n = a.nrow();
 
   // Cache pointers
-  const double* a_ptr = REAL(a.data());
-  const double* b_ptr = REAL(b.data());
-  const double* c_ptr = REAL(c.data());
+  const double* __restrict__ a_ptr = REAL(a.data());
+  const double* __restrict__ b_ptr = REAL(b.data());
+  const double* __restrict__ c_ptr = REAL(c.data());
 
   // Compute: t(a_col) %*% solve(diag(b_diag)) %*% c_col
   // This is equivalent to: sum(a[i,0] * (1/b[i,i]) * c[i,0]) for i in 0..n-1

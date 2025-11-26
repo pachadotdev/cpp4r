@@ -52,7 +52,7 @@
 */
 [[cpp4r::register]] double sum_dbl_foreach_(cpp4r::doubles x) {
   double sum = 0.;
-  for (const auto&& val : x) {
+  for (const auto& val : x) {
     sum += val;
   }
   return sum;
@@ -66,7 +66,7 @@
 [[cpp4r::register]] double sum_dbl_foreach2_(SEXP x_sxp) {
   const cpp4r::doubles x(x_sxp, false);
   double sum = 0.;
-  for (const auto&& val : x) {
+  for (const auto& val : x) {
     sum += val;
   }
   return sum;
@@ -210,7 +210,7 @@
 */
 [[cpp4r::register]] std::complex<double> sum_cplx_foreach_(cpp4r::complexes x) {
   std::complex<double> sum = {0.0, 0.0};
-  for (const auto&& val : x) {
+  for (const auto& val : x) {
     // sum.real(sum.real() + val.real());
     // sum.imag(sum.imag() + val.imag());
     sum += val;

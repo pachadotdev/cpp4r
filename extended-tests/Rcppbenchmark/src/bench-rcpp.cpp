@@ -1,3 +1,5 @@
+// using optimization hints for a fair and direct comparison between cpp11-cpp4r-Rcpp
+
 #include <Rcpp.h>
 #include <cstring>
 #include <vector>
@@ -12,9 +14,9 @@ NumericMatrix add_two_rcpp_(NumericMatrix a, NumericMatrix b) {
   NumericMatrix Z(nrow, ncol);
 
   // Cache pointers for direct access
-  const double* a_ptr = REAL(a);
-  const double* b_ptr = REAL(b);
-  double* z_ptr = REAL(Z);
+  const double* __restrict__ a_ptr = REAL(a);
+  const double* __restrict__ b_ptr = REAL(b);
+  double* __restrict__ z_ptr = REAL(Z);
 
   // Vectorized operation on flattened data
   int size = nrow * ncol;
@@ -34,11 +36,11 @@ NumericMatrix add_four_rcpp_(NumericMatrix a, NumericMatrix b, NumericMatrix c,
   NumericMatrix Z(nrow, ncol);
 
   // Cache pointers
-  const double* a_ptr = REAL(a);
-  const double* b_ptr = REAL(b);
-  const double* c_ptr = REAL(c);
-  const double* d_ptr = REAL(d);
-  double* z_ptr = REAL(Z);
+  const double* __restrict__ a_ptr = REAL(a);
+  const double* __restrict__ b_ptr = REAL(b);
+  const double* __restrict__ c_ptr = REAL(c);
+  const double* __restrict__ d_ptr = REAL(d);
+  double* __restrict__ z_ptr = REAL(Z);
 
   int size = nrow * ncol;
   for (int i = 0; i < size; ++i) {
@@ -58,14 +60,14 @@ NumericMatrix multiply_four_rcpp_(NumericMatrix a, NumericMatrix b, NumericMatri
   int n20 = n / 20;
 
   // Cache pointers
-  const double* a_ptr = REAL(a);
-  const double* b_ptr = REAL(b);
-  const double* c_ptr = REAL(c);
-  const double* d_ptr = REAL(d);
+  const double* __restrict__ a_ptr = REAL(a);
+  const double* __restrict__ b_ptr = REAL(b);
+  const double* __restrict__ c_ptr = REAL(c);
+  const double* __restrict__ d_ptr = REAL(d);
 
   // Step 1: A[1:n5, 1:n5] %*% B[1:n5, 1:n10]
   NumericMatrix temp1(n5, n10);
-  double* temp1_ptr = REAL(temp1);
+  double* __restrict__ temp1_ptr = REAL(temp1);
 
   for (int i = 0; i < n5; ++i) {
     for (int j = 0; j < n10; ++j) {
@@ -81,7 +83,7 @@ NumericMatrix multiply_four_rcpp_(NumericMatrix a, NumericMatrix b, NumericMatri
 
   // Step 2: temp1 %*% C[1:n10, 1:n15]
   NumericMatrix temp2(n5, n15);
-  double* temp2_ptr = REAL(temp2);
+  double* __restrict__ temp2_ptr = REAL(temp2);
 
   for (int i = 0; i < n5; ++i) {
     for (int j = 0; j < n15; ++j) {
@@ -97,7 +99,7 @@ NumericMatrix multiply_four_rcpp_(NumericMatrix a, NumericMatrix b, NumericMatri
 
   // Step 3: temp2 %*% D[1:n15, 1:n20]
   NumericMatrix Z(n5, n20);
-  double* z_ptr = REAL(Z);
+  double* __restrict__ z_ptr = REAL(Z);
 
   for (int i = 0; i < n5; ++i) {
     for (int j = 0; j < n20; ++j) {
@@ -122,9 +124,9 @@ NumericMatrix submatrix_manipulation_rcpp_(NumericMatrix a, NumericMatrix b) {
   NumericMatrix Z(nrow, ncol);
 
   // Cache pointers
-  const double* a_ptr = REAL(a);
-  const double* b_ptr = REAL(b);
-  double* z_ptr = REAL(Z);
+  const double* __restrict__ a_ptr = REAL(a);
+  const double* __restrict__ b_ptr = REAL(b);
+  double* __restrict__ z_ptr = REAL(Z);
 
   // Copy entire b matrix
   std::memcpy(z_ptr, b_ptr, nrow * ncol * sizeof(double));
@@ -145,9 +147,9 @@ double multi_operation_rcpp_(NumericMatrix a, NumericMatrix b, NumericMatrix c) 
   int n = a.nrow();
 
   // Cache pointers
-  const double* a_ptr = REAL(a);
-  const double* b_ptr = REAL(b);
-  const double* c_ptr = REAL(c);
+  const double* __restrict__ a_ptr = REAL(a);
+  const double* __restrict__ b_ptr = REAL(b);
+  const double* __restrict__ c_ptr = REAL(c);
 
   // Compute: t(a_col) %*% solve(diag(b_diag)) %*% c_col
   // This is equivalent to: sum(a[i,0] * (1/b[i,i]) * c[i,0]) for i in 0..n-1

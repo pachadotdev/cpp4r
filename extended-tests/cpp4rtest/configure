@@ -1,0 +1,12 @@
+#!/bin/sh
+# cpp4rtest's anticonf script by Pacha (2025)
+
+# Find OpenMP
+SHLIB_OPENMP_CXXFLAGS=$(${R_HOME}/bin/R CMD config SHLIB_OPENMP_CXXFLAGS 2>/dev/null || echo "")
+
+# Find BLAS/LAPACK
+BLAS_LIBS=$(${R_HOME}/bin/R CMD config BLAS_LIBS)
+LAPACK_LIBS=$(${R_HOME}/bin/R CMD config LAPACK_LIBS)
+
+sed -e "s|@CXX_STD@|${CXX_STD}|g" \
+    src/Makevars.in > src/Makevars

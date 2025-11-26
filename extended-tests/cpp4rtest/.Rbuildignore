@@ -1,2 +1,3 @@
 ^\.here$
 ^LICENSE\.md$
+^src/Makevars$
