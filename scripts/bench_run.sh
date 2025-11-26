@@ -2,6 +2,7 @@
 set -euo pipefail
 
 std=${1:-CXX11}
+std=$(echo "$std" | tr '[:lower:]' '[:upper:]')
 compiler=${2:-gcc}
 
 # Export the C++ standard and compiler so R can pick them up

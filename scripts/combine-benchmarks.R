@@ -19,11 +19,7 @@ bench_all <- map_df(
         d$finp <- f
         as_tibble(d)
     }
-    )
-
-# bench_all %>%
-#     filter(test == "multi_operation") %>%
-#     pull(time)
+    ) 
 
 res <- map_df(
     finp,
@@ -118,22 +114,15 @@ res <- res %>%
     )
 
 res <- res %>%
-    # filter(benchmark %in% c(
-    #     "Multiply four matrices",
-    #     "Submatrix manipulation",
-    #     "Multiple matrix operations"
-    # )) %>%
     arrange(test, cpp_standard, cpp_compiler) %>%
     select(test, everything())
 
-# add cpp4/cpp11 time and cpp4r/Rcpp time ratios (compute while values are numeric)
 res <- res %>%
     mutate(
         rel_cpp4r_cpp11 = signif(rel_time_cpp4r / rel_time_cpp11, 3),
         rel_cpp4r_Rcpp = signif(rel_time_cpp4r / rel_time_Rcpp, 3)
     )
 
-# add rel time for cpp4r within the same test group (numeric)
 res <- res %>%
     group_by(test) %>%
     mutate(
@@ -141,39 +130,7 @@ res <- res %>%
     ) %>%
     ungroup()
 
-readr::write_csv(res, "./extended-tests-results/bench_summary.csv")
-
-old_bench_file <- "./extended-tests-results/bench_summary.csv.old"
-
-if (file.exists(old_bench_file)) {
-    # res <- readr::read_csv("./extended-tests-results/bench_summary.csv")
-
-    old_bench <- readr::read_csv(old_bench_file)
-
-    res %>%
-        select(test, cpp_standard, cpp_compiler, rel_cpp4r_cpp11, rel_cpp4r_Rcpp) %>%
-        filter(rel_cpp4r_cpp11 > 1 | rel_cpp4r_Rcpp > 1) %>%
-        readr::write_csv("./extended-tests-results/bench_summary_rel.csv")
-
-    res %>%
-        select(test, cpp_standard, cpp_compiler, rel_cpp4r_cpp11, rel_cpp4r_Rcpp) %>%
-        left_join(
-            old_bench %>%
-                select(test, cpp_standard, cpp_compiler, rel_cpp4r_cpp11, rel_cpp4r_Rcpp),
-            by = c("test", "cpp_standard", "cpp_compiler"),
-            suffix = c("_new", "_old")
-        ) %>%
-        filter(rel_cpp4r_cpp11_old > 1 | rel_cpp4r_Rcpp_old > 1) %>%
-        mutate(
-            diff_cpp4r = rel_cpp4r_cpp11_new / rel_cpp4r_cpp11_old,
-            diff_Rcpp = rel_cpp4r_Rcpp_new / rel_cpp4r_Rcpp_old
-        ) %>%
-        select(-starts_with("rel_")) %>%
-        readr::write_csv("./extended-tests-results/bench_summary_change.csv")
-}
-
 format_small <- function(x, digits = 2, threshold = 0.01) {
-    # x: numeric vector. For |x| in (0, threshold) produce scientific 'e' format
     xnum <- as.numeric(x)
     out <- character(length(xnum))
     na_idx <- is.na(xnum) | !is.finite(xnum)
@@ -215,31 +172,15 @@ res <- res %>%
     ) %>%
     select(-starts_with("rel_time_"))
 
-# write markdown summary
 writeLines(knitr::kable(res), "./extended-tests-results/bench_summary.md")
 
-# LaTeX export: create table with division lines and two-line cells
 write_latex_table <- function(df, out_file = "./extended-tests-results/bench_summary.tex", arraystretch = 1.2, top_padding_pt = 6) {
-    # (old two_line helper removed — cells are constructed inline now)
-
-    # Ensure test grouping order
     df <- df %>% arrange(test, cpp_standard, cpp_compiler)
 
-    # Unique tests
     tests <- unique(df$test)
 
-    # Open output file for writing all tables
     con <- file(out_file, open = "w")
-    # Request makecell and multirow packages. If this .tex is included into a larger
-    # document, prefer loading these packages in the main preamble instead of here.
-    # writeLines(c(
-    #     "% Auto-generated benchmark summary",
-    #     "% Ensure makecell and multirow packages are available for cell padding and vertical spanning",
-    #     "\\RequirePackage{makecell}",
-    #     "\\RequirePackage{multirow}"
-    # ), con)
 
-    # Helper to extract time and rel parts from "time (rel)" strings
     extract_parts <- function(cell) {
         if (is.na(cell) || nchar(cell) == 0) return(c("", ""))
         m <- regmatches(cell, regexec('^(\\S+)\\s*\\(([^)]+)\\)$', cell))[[1]]
@@ -250,11 +191,6 @@ write_latex_table <- function(df, out_file = "./extended-tests-results/bench_sum
     for (t in tests) {
         sub <- df %>% filter(test == t)
 
-        # Set per-table cell gap (inner padding). Use the provided top_padding_pt.
-        # writeLines(sprintf("\\setcellgapes{%dpt}\\makegapedcells", as.integer(top_padding_pt)), con)
-
-        # Begin a table for this benchmark (no Test column)
-        # Use a local group to set \arraystretch (row vertical spacing)
         writeLines(c(
             "\\begin{table}[H]",
             "\\centering",
@@ -265,12 +201,8 @@ write_latex_table <- function(df, out_file = "./extended-tests-results/bench_sum
             "\\hline"
         ), con)
 
-    # New layout: one physical row per compiler
-    # Each backend cell will contain "time (rel)" on the same line using \makecell
-    # Multirow spans: Standard spans n_compilers rows; Compiler spans 1 row
     back_order <- c("cpp11", "cpp4r", "Rcpp")
 
-    # collect a table of values per (standard, compiler) into a small list
     entries <- purrr::map(seq_len(nrow(sub)), function(ii) {
         row <- sub[ii, ]
         vals_time <- list()
@@ -289,8 +221,6 @@ write_latex_table <- function(df, out_file = "./extended-tests-results/bench_sum
         list(cpp_standard = row$cpp_standard, cpp_compiler = row$cpp_compiler, time = vals_time, rel = vals_rel)
     })
 
-    # Now write rows: one row per compiler entry
-    # compute how many compiler entries per standard to set multirow spans
     std_table <- tibble::tibble(cpp_standard = sapply(entries, `[[`, "cpp_standard")) %>%
         dplyr::group_by(cpp_standard) %>% dplyr::summarise(n_compilers = dplyr::n()) %>% ungroup()
 
@@ -299,7 +229,6 @@ write_latex_table <- function(df, out_file = "./extended-tests-results/bench_sum
         n_compilers <- std_table$n_compilers[std_table$cpp_standard == e$cpp_standard]
         std_span <- as.integer(n_compilers)
 
-        # Standard cell only at the first appearance of this standard
         first_std <- TRUE
         if (idx > 1 && entries[[idx - 1]]$cpp_standard == e$cpp_standard) first_std <- FALSE
 
@@ -307,19 +236,15 @@ write_latex_table <- function(df, out_file = "./extended-tests-results/bench_sum
             if (std_span > 1) sprintf("\\multirow{%d}{*}{%s}", std_span, e$cpp_standard) else e$cpp_standard
         } else ""
 
-        # Compiler cell spans exactly 1 row now
         comp_cell <- sprintf("\\multirow{1}{*}{%s}", e$cpp_compiler)
 
-        # Build cells that contain "time (rel)" on the same line using \makecell
         time_cells <- vapply(back_order, function(b) {
             tval <- e$time[[b]]
             rval <- e$rel[[b]]
             if ((is.null(tval) || nchar(tval) == 0) && (is.null(rval) || nchar(rval) == 0)) return("")
-            # escape percent signs (produce literal \% for LaTeX)
             tval <- if (is.null(tval) || nchar(tval) == 0) "" else gsub("%", "\\\\%", tval, fixed = TRUE)
             rval <- if (is.null(rval) || nchar(rval) == 0) "" else gsub("%", "\\\\%", rval, fixed = TRUE)
             if (nchar(rval) == 0) return(tval)
-            # sprintf("\\makecell{%s (%s)}", tval, rval)
             sprintf("%s (%s)", tval, rval)
         }, FUN.VALUE = "")
 
@@ -328,9 +253,7 @@ write_latex_table <- function(df, out_file = "./extended-tests-results/bench_sum
 
         # normalize exponents: remove leading zeros and any leading '+' inside braces
         # examples: {+06} -> {6}, {06} -> {6}, {-06} -> {-6}
-        # First remove a leading '+' sign inside the braces
         time_cells <- gsub("\\^\\{\\+([0-9]+)\\}", "^{\\1}", time_cells)
-        # Then remove leading zeros (but keep a possible leading '-')
         time_cells <- gsub("\\^\\{(-?)0+([0-9]+)\\}", "^{\\1\\2}", time_cells)
 
         # $ cell $
@@ -351,7 +274,6 @@ write_latex_table <- function(df, out_file = "./extended-tests-results/bench_sum
         }
     }
 
-    # Caption per-benchmark
     caption <- sprintf("%s benchmark", t)
     writeLines(c("\\end{tabular}", sprintf("\\caption{%s}", caption), "\\endgroup"), con)
     writeLines("\\end{table}", con)
@@ -361,5 +283,4 @@ write_latex_table <- function(df, out_file = "./extended-tests-results/bench_sum
     close(con)
 }
 
-# call LaTeX export
 write_latex_table(res)

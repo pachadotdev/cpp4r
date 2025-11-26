@@ -3,6 +3,7 @@ set -euo pipefail
 
 # Accept std and compiler as positional parameters
 std="$1"
+std=$(echo "$std" | tr '[:lower:]' '[:upper:]')
 compiler="$2"
 
 # Export USE_CLANG for R subprocesses if it's set
@@ -10,9 +11,15 @@ if [ -n "${USE_CLANG:-}" ]; then
   export USE_CLANG
 fi
 
+# Export CXX_STD for configure script
+export CXX_STD="${std}"
+
 # Ensure results directory and set per-iteration log
 mkdir -p ./extended-tests-results
 LOG="./extended-tests-results/check-${std}-${compiler}.log"
+
+# clear previous log if it exists
+rm -f "${LOG}"
 
 # Capture everything (stdout+stderr) from this point into the per-iteration log
 # while still printing to the console via tee. This ensures all printed lines

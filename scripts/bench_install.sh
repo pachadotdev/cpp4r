@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Accept arguments but ignore them (for Makefile compatibility)
+# std=$1
+# compiler=$2
+
 echo "Cleaning, documenting and installing benchmark packages"
 
 # Ensure USE_CLANG is exported if it's set
