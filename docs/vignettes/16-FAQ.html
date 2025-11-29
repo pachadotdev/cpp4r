@@ -42,7 +42,7 @@
 
   <div class="submenu">
     <label>Vignettes</label>
-    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/01-intro.html">01 - Introduction</a>
     <a href="../vignettes/02-setup.html">02 - Setup</a>
     <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
     <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
@@ -69,7 +69,7 @@
 <div id="content">
 <div class="content-wrapper">
         <div class="content-main">
-          <h1>17 - FAQs</h1>
+          <h1></h1>
 <script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">17 - FAQs</h1>
 
 
@@ -82,15 +82,15 @@ library(cpp4r)</code></pre>
 <p>Below are some Frequently Asked Questions about cpp4r. If you have a
 question that you think would fit well here please <a href="https://github.com/pachadotdev/cpp4r/issues/new/choose">open an
 issue</a>.</p>
-<div id="is-this-only-compatible-with-c11" class="section level1">
-<h1>Is this only compatible with C++11?</h1>
+<div id="is-this-only-compatible-with-c11" class="section level2">
+<h2>Is this only compatible with C++11?</h2>
 <p>No, cpp4r requires at least C++11. It is compatible with C++14,
 C++17, C++20, C++23 as well. The headers are written in a way that is
 compatible with all of these standards and newer features are used if
 the compiler supports them.</p>
 </div>
-<div id="can-i-specify-which-c-standard-to-use" class="section level1">
-<h1>Can I specify which C++ standard to use?</h1>
+<div id="can-i-specify-which-c-standard-to-use" class="section level2">
+<h2>Can I specify which C++ standard to use?</h2>
 <p>Yes, you can specify the C++ standard to use when compiling your
 cpp4r code. Some packages like <code>tesseract</code> use a
 <code>SystemRequirements</code> field in their <code>DESCRIPTION</code>
@@ -101,9 +101,9 @@ C++ standard must be written in the <code>DESCRIPTION</code> file if and
 only if it is essential to build the package. Otherwise, it is not
 necessary to specify the C++ standard.</p>
 </div>
-<div id="my-laptop-uses-cnn-but-my-cluster-uses-cmm-how-can-i-make-sure-my-code-works-on-both" class="section level1">
-<h1>My laptop uses C++NN but my cluster uses C++MM, how can I make sure
-my code works on both?</h1>
+<div id="my-laptop-uses-cnn-but-my-cluster-uses-cmm-how-can-i-make-sure-my-code-works-on-both" class="section level2">
+<h2>My laptop uses C++NN but my cluster uses C++MM, how can I make sure
+my code works on both?</h2>
 <p>The headers were tested to verify that all the unit tests for cpp4r
 pass when compiled with C++11, C++14, C++17, C++20, and C++23.</p>
 <p>For consistency, which is not required unless you have a dependency
@@ -128,8 +128,8 @@ SystemRequirements: C++11/14/17/20/23</code></pre>
 <p>See the compiler optimization vignette for more details on how to set
 compiler flags and use anticonf scripts.</p>
 </div>
-<div id="what-are-the-underlying-types-of-cpp4r-objects" class="section level1">
-<h1>What are the underlying types of cpp4r objects?</h1>
+<div id="what-are-the-underlying-types-of-cpp4r-objects" class="section level2">
+<h2>What are the underlying types of cpp4r objects?</h2>
 <table><thead><tr class="header"><th>vector</th>
 <th>element</th>
 </tr></thead><tbody><tr class="odd"><td>cpp4r::integers</td>
@@ -145,8 +145,8 @@ compiler flags and use anticonf scripts.</p>
 </tr><tr class="even"><td>cpp4r::list</td>
 <td>SEXP</td>
 </tr></tbody></table></div>
-<div id="how-do-i-add-elements-to-a-list" class="section level1">
-<h1>How do I add elements to a list?</h1>
+<div id="how-do-i-add-elements-to-a-list" class="section level2">
+<h2>How do I add elements to a list?</h2>
 <p>Use the <code>push_back()</code> method. You will need to use
 <code>cpp4r::as_sexp()</code> if you want to convert arbitrary C++
 objects to <code>SEXP</code> before inserting them into the list.</p>
@@ -203,8 +203,8 @@ cpp4r::writable::list foo_push_sized() {
   return x;
 }</code></pre>
 </div>
-<div id="does-cpp4r-support-default-arguments" class="section level1">
-<h1>Does cpp4r support default arguments?</h1>
+<div id="does-cpp4r-support-default-arguments" class="section level2">
+<h2>Does cpp4r support default arguments?</h2>
 <p>cpp4r does not support default arguments, while convenient they would
 require more complexity to support than is currently worthwhile. If you
 need default argument support you can use a wrapper function around your
@@ -221,18 +221,18 @@ double add_some_(double x, double amount) {
 add_some(1)
 add_some(1, amount = 5)</code></pre>
 </div>
-<div id="how-do-i-create-a-new-empty-list" class="section level1">
-<h1>How do I create a new empty list?</h1>
+<div id="how-do-i-create-a-new-empty-list" class="section level2">
+<h2>How do I create a new empty list?</h2>
 <p>Define a new writable list object.</p>
 <p><code>cpp4r::writable::list x;</code></p>
 </div>
-<div id="how-do-i-retrieve-named-elements-from-a-named-vectorlist" class="section level1">
-<h1>How do I retrieve (named) elements from a named vector/list?</h1>
+<div id="how-do-i-retrieve-named-elements-from-a-named-vectorlist" class="section level2">
+<h2>How do I retrieve (named) elements from a named vector/list?</h2>
 <p>Use the <code>[]</code> accessor function.</p>
 <p><code>x["foo"]</code></p>
 </div>
-<div id="how-can-i-tell-whether-a-vector-is-named" class="section level1">
-<h1>How can I tell whether a vector is named?</h1>
+<div id="how-can-i-tell-whether-a-vector-is-named" class="section level2">
+<h2>How can I tell whether a vector is named?</h2>
 <p>Use the <code>named()</code> method for vector classes.</p>
 <pre class="cpp"><code>#include &lt;cpp4r.hpp&gt;
 
@@ -244,9 +244,9 @@ bool is_named(cpp4r::strings x) {
 
 is_named(c(x = "foo"))</code></pre>
 </div>
-<div id="how-do-i-return-a-cpp4rwritablelogicals-object-with-only-a-false-value" class="section level1">
-<h1>How do I return a “cpp4r::writable::logicals” object with only a
-“FALSE” value?</h1>
+<div id="how-do-i-return-a-cpp4rwritablelogicals-object-with-only-a-false-value" class="section level2">
+<h2>How do I return a “cpp4r::writable::logicals” object with only a
+“FALSE” value?</h2>
 <p>You need to use <a href="https://en.cppreference.com/w/cpp/language/list_initialization.html">list
 initialization</a> with <code>{}</code> to create the object.</p>
 <pre class="cpp"><code>#include &lt;cpp4r.hpp&gt;
@@ -271,8 +271,8 @@ my_true()
 
 my_both()</code></pre>
 </div>
-<div id="how-do-i-create-a-new-empty-environment" class="section level1">
-<h1>How do I create a new empty environment?</h1>
+<div id="how-do-i-create-a-new-empty-environment" class="section level2">
+<h2>How do I create a new empty environment?</h2>
 <p>To do this you need to call the <code>base::new.env()</code> function
 from C++. This can be done by creating a <code>cpp4r::function</code>
 object and then calling it to generate the new environment.</p>
@@ -284,9 +284,9 @@ cpp4r::environment create_environment() {
   return new_env();
 }</code></pre>
 </div>
-<div id="how-do-i-assign-and-retrieve-values-in-an-environment-what-happens-if-i-try-to-get-a-value-that-does-not-exist" class="section level1">
-<h1>How do I assign and retrieve values in an environment? What happens
-if I try to get a value that does not exist?</h1>
+<div id="how-do-i-assign-and-retrieve-values-in-an-environment-what-happens-if-i-try-to-get-a-value-that-does-not-exist" class="section level2">
+<h2>How do I assign and retrieve values in an environment? What happens
+if I try to get a value that does not exist?</h2>
 <p>Use <code>[]</code> to retrieve or assign values from an environment
 by name. If a value does not exist, it will error. To check for
 existence ahead of time, use the <code>exists()</code> method.</p>
@@ -309,8 +309,8 @@ set_foo(x, 1)
 
 foo_exists(x)</code></pre>
 </div>
-<div id="how-can-i-create-a-cpp4rraws-from-a-stdstring" class="section level1">
-<h1>How can I create a “cpp4r:raws” from a “std::string”?</h1>
+<div id="how-can-i-create-a-cpp4rraws-from-a-stdstring" class="section level2">
+<h2>How can I create a “cpp4r:raws” from a “std::string”?</h2>
 <p>There is no built in way to do this. One method would be to
 <code>push_back()</code> each element of the string individually.</p>
 <pre class="cpp"><code>#include &lt;cpp4r.hpp&gt;
@@ -328,9 +328,9 @@ cpp4r::raws push_raws() {
 }</code></pre>
 <pre class="r"><code>push_raws()</code></pre>
 </div>
-<div id="how-can-i-create-a-stdstring-from-a-cpp4rwritablestring" class="section level1">
-<h1>How can I create a “std::string” from a
-“cpp4r::writable::string”?</h1>
+<div id="how-can-i-create-a-stdstring-from-a-cpp4rwritablestring" class="section level2">
+<h2>How can I create a “std::string” from a
+“cpp4r::writable::string”?</h2>
 <p>Because C++ does not allow for two implicit cast, explicitly cast to
 <code>cpp4r::r_string</code> first.</p>
 <pre class="cpp"><code>#include &lt;cpp4r.hpp&gt;
@@ -343,8 +343,8 @@ std::string my_string() {
   return elt;
 }</code></pre>
 </div>
-<div id="what-are-the-types-for-c-iterators" class="section level1">
-<h1>What are the types for C++ iterators?</h1>
+<div id="what-are-the-types-for-c-iterators" class="section level2">
+<h2>What are the types for C++ iterators?</h2>
 <p>The iterators are <code>::iterator</code> classes contained inside
 the vector classes. For example the iterator for
 <code>cpp4r::doubles</code> would be
@@ -352,8 +352,8 @@ the vector classes. For example the iterator for
 <code>cpp4r::writable::doubles</code> would be
 <code>cpp4r::writable::doubles::iterator</code>.</p>
 </div>
-<div id="whats-wrong-with-using-namespace-std" class="section level1">
-<h1>What’s wrong with “using namespace std”?</h1>
+<div id="whats-wrong-with-using-namespace-std" class="section level2">
+<h2>What’s wrong with “using namespace std”?</h2>
 <p>The <code>using namespace std</code> directive will not be included
 in the generated code of the function signatures, and it will not be
 included in future releases.</p>
@@ -388,8 +388,8 @@ std::string foobar() {
   return std::string("foo") + "-bar";
 }</code></pre>
 </div>
-<div id="how-do-i-modify-a-vector-in-place" class="section level1">
-<h1>How do I modify a vector in place?</h1>
+<div id="how-do-i-modify-a-vector-in-place" class="section level2">
+<h2>How do I modify a vector in place?</h2>
 <p>In place modification breaks the normal semantics of R code. In
 general it should be avoided, which is why <code>cpp4r::writable</code>
 classes always copy their data when constructed.</p>
@@ -411,8 +411,8 @@ add_one(x)
 .Internal(inspect(x))
 x</code></pre>
 </div>
-<div id="should-i-call-unwind_protect-manually" class="section level1">
-<h1>Should I call “unwind_protect” manually?</h1>
+<div id="should-i-call-unwind_protect-manually" class="section level2">
+<h2>Should I call “unwind_protect” manually?</h2>
 <p><code>cpp4r::unwind_protect()</code> is cpp4r’s way of safely calling
 R’s C API. In short, it allows you to run a function that might throw an
 R error, catch the <code>longjmp()</code> of that error, promote it to
@@ -424,8 +424,8 @@ objects have had a chance to destruct as needed.</p>
 function, you may be wondering if you should use it for your own custom
 needs. In general, this is advised against because this is an extremely
 advanced feature that is prone to subtle and hard to debug issues.</p>
-<div id="destructors" class="section level2">
-<h2>Destructors</h2>
+<div id="destructors" class="section level3">
+<h3>Destructors</h3>
 <p>The following setup for <code>test_destructor_ok()</code> with a
 manual call to <code>unwind_protect()</code> would work:</p>
 <pre class="cpp"><code>#include &lt;cpp4r.hpp&gt;
@@ -468,8 +468,8 @@ C++ objects with R’s C API within <code>unwind_protect()</code>, then
 any R errors will result in a jump that prevents your destructors from
 running.</p>
 </div>
-<div id="nested-unwind_protect" class="section level2">
-<h2>Nested <code>unwind_protect()</code></h2>
+<div id="nested-unwind_protect" class="section level3">
+<h3>Nested <code>unwind_protect()</code></h3>
 <p>Another issue that can arise has to do with <em>nested</em> calls to
 <code>unwind_protect()</code>. It is very hard (if not impossible) to
 end up with invalidly nested <code>unwind_protect()</code> calls when
@@ -624,8 +624,8 @@ one of the only places where it is felt to be reasonable to call
 <code>unwind_protect()</code> manually.</p>
 </div>
 </div>
-<div id="how-do-i-modify-a-matrix-rownamescolnames-on-c-side" class="section level1">
-<h1>How do I modify a matrix rownames/colnames on C++ side?</h1>
+<div id="how-do-i-modify-a-matrix-rownamescolnames-on-c-side" class="section level2">
+<h2>How do I modify a matrix rownames/colnames on C++ side?</h2>
 <p>Any of the following options will work (the commented code works with
 cpp4r):</p>
 <pre class="cpp"><code>[[cpp4r::register]]

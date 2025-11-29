@@ -11,11 +11,11 @@ editor:
 bibliography: ["references.bib"]
 ---
 
-# Motivation
+## Motivation
 
 R provides out-of-box support for matrices and vectors. This is not the case for C++ code, where you need to use a library such as [Armadillo](https://arma.sourceforge.net/) that has a wrapper for R [@vargassepulveda25]. One of the nicest Armadillo features is that it has a similar syntax to MATLAB.
 
-# Using Armadillo
+## Using Armadillo
 
 [cpp11armadillo](https://pacha.dev/cpp11armadillo/) provides a detailed R-specific documentation with worked examples.
 
@@ -52,4 +52,4 @@ One of the advantages of cpp11armadillo is that it connects cpp11 (and cpp4r) wi
 `as_Mat()` and `as_doubles_matrix()` functions as the "bread" of the sandwich, where pure Armadillo code serves as the
 "meat".
 
-# References
+## References

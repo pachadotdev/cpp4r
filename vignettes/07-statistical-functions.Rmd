@@ -11,16 +11,14 @@ editor:
 bibliography: ["references.bib"]
 ---
 
-# Note
+## Notes
 
-These functions ignore `NA` values for now. Adjustments for handling `NA` values are covered in a separate vignette.
+* These functions ignore `NA` values for now. Adjustments for handling `NA` values are covered in a separate vignette.
+* R already provides efficient versions of the functions covered here. This is just to illustrate how to use C++ code.
+* The explanations and equations used for the functions are taken from @diez15 and @hansen22. Some examples were adapted
+  from @vaughan24.
 
-R already provides efficient versions of the functions covered here. This is just to illustrate how to use C++ code.
-
-The explanations and equations used for the functions are taken from @diez15 and @hansen22. Some examples were adapted from
-@vaughan24.
-
-# Sum
+## Sum
 
 For a vector of $n$ elements $x_1, x_2, \ldots, x_n$, the sum is calculated as:
 
@@ -80,7 +78,7 @@ mark(
 )
 ```
 
-# Arithmetic mean
+## Arithmetic mean
 
 The arithmetic mean of a vector of $n$ elements $x_1, x_2, \ldots, x_n$ is calculated as:
 
@@ -127,7 +125,7 @@ mark(
 )
 ```
 
-# Variance
+## Variance
 
 The variance of a vector of $n$ elements $x_1, x_2, \ldots, x_n$ is calculated as:
 
@@ -175,7 +173,7 @@ mark(
 )
 ```
 
-# Root Mean Square Error (RMSE)
+## Root Mean Square Error (RMSE)
 
 The RMSE function measures the differences between observed values and the true value.
 
@@ -235,4 +233,4 @@ mark(
 )
 ```
 
-# References
+## References

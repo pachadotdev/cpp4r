@@ -42,7 +42,7 @@
 
   <div class="submenu">
     <label>Vignettes</label>
-    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/01-intro.html">01 - Introduction</a>
     <a href="../vignettes/02-setup.html">02 - Setup</a>
     <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
     <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
@@ -69,22 +69,22 @@
 <div id="content">
 <div class="content-wrapper">
         <div class="content-main">
-          <h1>08 - Logical Functions with Missing Values</h1>
+          <h1></h1>
 <script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">08 - Logical Functions with Missing
 Values</h1>
 
 
 
-<div id="note" class="section level1">
-<h1>Note</h1>
-<p>These functions ignore <code>NA</code> values for now. Adjustments
+<div id="notes" class="section level2">
+<h2>Notes</h2>
+<ul><li>These functions ignore <code>NA</code> values for now. Adjustments
 for handling <code>NA</code> values are covered in a separate
-vignette.</p>
-<p>R already provides efficient versions of the functions covered here.
-This is just to illustrate how to use C++ code.</p>
-</div>
-<div id="is-any-value-in-a-vector-true" class="section level1">
-<h1>Is any value in a vector ‘true’?</h1>
+vignette.</li>
+<li>R already provides efficient versions of the functions covered here.
+This is just to illustrate how to use C++ code.</li>
+</ul></div>
+<div id="is-any-value-in-a-vector-true" class="section level2">
+<h2>Is any value in a vector ‘true’?</h2>
 <p>The following function expands the previous <code>any_cpp()</code>
 function to handle missing values.</p>
 <pre class="cpp"><code>[[cpp4r::register]]
@@ -125,8 +125,8 @@ mark(
   any2_cpp(y)
 )</code></pre>
 </div>
-<div id="which-elements-in-a-vector-are-true" class="section level1">
-<h1>Which elements in a vector are ‘true’?</h1>
+<div id="which-elements-in-a-vector-are-true" class="section level2">
+<h2>Which elements in a vector are ‘true’?</h2>
 <p>The following function expands the previous <code>which_cpp()</code>
 function to handle missing values.</p>
 <pre class="cpp"><code>[[cpp4r::register]]
@@ -164,8 +164,8 @@ mark(
   which2_cpp(y[1:1000])
 )</code></pre>
 </div>
-<div id="are-all-values-in-a-vector-true" class="section level1">
-<h1>Are all values in a vector ‘true’?</h1>
+<div id="are-all-values-in-a-vector-true" class="section level2">
+<h2>Are all values in a vector ‘true’?</h2>
 <p>The following function expands the previous <code>all_cpp()</code>
 function to handle missing values.</p>
 <pre class="cpp"><code>[[cpp4r::register]]
@@ -260,8 +260,8 @@ all2_cpp_3(x &gt;= 0)</code></pre>
   all2_cpp_3(x &gt; 2)
 )</code></pre>
 </div>
-<div id="references" class="section level1">
-<h1>References</h1>
+<div id="references" class="section level2">
+<h2>References</h2>
 </div>
 
 

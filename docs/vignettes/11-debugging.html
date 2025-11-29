@@ -42,7 +42,7 @@
 
   <div class="submenu">
     <label>Vignettes</label>
-    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/01-intro.html">01 - Introduction</a>
     <a href="../vignettes/02-setup.html">02 - Setup</a>
     <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
     <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
@@ -69,20 +69,20 @@
 <div id="content">
 <div class="content-wrapper">
         <div class="content-main">
-          <h1>11 - Debugging R Packages</h1>
+          <h1></h1>
 <script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">11 - Debugging R Packages</h1>
 
 
 
-<div id="motivation" class="section level1">
-<h1>Motivation</h1>
+<div id="motivation" class="section level2">
+<h2>Motivation</h2>
 <p>The previous package skeleton left out some essential details, such
 as testing for memory leaks and debugging. This vignette will cover
 these aspects in more detail. The references for this vignette are <span class="citation">Vaughan, Hester, and Francois (2024)</span>, <span class="citation">R-pkg-devel (2024)</span>, <span class="citation">Padgham (2022)</span>, <span class="citation">Vaughan
 (2019)</span>, and <span class="citation">Wickham (2019)</span>.</p>
 </div>
-<div id="compiler-setup" class="section level1">
-<h1>Compiler Setup</h1>
+<div id="compiler-setup" class="section level2">
+<h2>Compiler Setup</h2>
 <p>To test that your functions do not lead to memory errors, you can
 create/edit a <code>src/Makevars.in</code> file within the package
 folder and add:</p>
@@ -140,8 +140,8 @@ using namespace cpp4r;
 <p>It is possible to verify that the functions are correct:</p>
 <pre class="r"><code>all.equal(sum((1:5)^2), squared_sum_non_iso_(1:5), squared_sum_iso_(1:5))</code></pre>
 </div>
-<div id="testing-for-memory-leaks" class="section level1">
-<h1>Testing for Memory Leaks</h1>
+<div id="testing-for-memory-leaks" class="section level2">
+<h2>Testing for Memory Leaks</h2>
 <p>To test for memory leaks, you can use the <code>valgrind</code> tool.
 This tool is available on Linux and macOS.</p>
 <p>You can test for memory leaks by running the following command in the
@@ -153,8 +153,8 @@ terminal:</p>
 <pre class="r"><code>library(cpp4rexamples)
 squared_sum_iso_(1:5)</code></pre>
 </div>
-<div id="adding-a-configure-script" class="section level1">
-<h1>Adding a configure script</h1>
+<div id="adding-a-configure-script" class="section level2">
+<h2>Adding a configure script</h2>
 <p>For a portable package, it is recommended to add a
 <code>configure</code> script. This script will check for the necessary
 tools to build the package. The script is written in <code>bash</code>
@@ -217,8 +217,8 @@ rm -f src/Makevars configure.log</code></pre>
 This way, the package will be portable and easier to test with GitHub
 Actions or Docker.</p>
 </div>
-<div id="testing-with-docker" class="section level1">
-<h1>Testing with Docker</h1>
+<div id="testing-with-docker" class="section level2">
+<h2>Testing with Docker</h2>
 <p>CRAN checks packages on different Unix platforms, and additional
 tests for compiled code include testing for memory leaks with valgrind
 and address sanitizer.</p>
@@ -293,8 +293,8 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   Right alloca redzone:    cb
 ==1244==ABORTING</code></pre>
 </div>
-<div id="references" class="section level1 unnumbered">
-<h1 class="unnumbered">References</h1>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-padgham22" class="csl-entry">
 Padgham, Mark. 2022. <span>“Debugging in <span>R</span> with a Single

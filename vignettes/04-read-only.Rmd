@@ -11,7 +11,7 @@ editor:
 bibliography: ["references.bib"]
 ---
 
-# Read and write
+## Read and write
 
 In `cpp4r`, when you declare a variable, it is read-only by default as in cpp11 [@vaughan24]. This is different from 
 `Rcpp`, where variables are read-write by default [@eddelbuettel11].
@@ -76,4 +76,4 @@ Compare `square_coordinates(1:3)`, `square_coordinates(c(1, 2, 3))`, and `square
 Why do the outputs differ? Are `integers` and `doubles` interchangeable as `double` and `int` in C++ for reasonable
 cases?
 
-# References
+## References

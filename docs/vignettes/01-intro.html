@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>01 - Motivations for cpp4r • cpp4r</title><link rel="stylesheet" href="../menu.css"><link rel="stylesheet" href="../content.css"><!-- MathJax Configuration --><script>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>01 - Introduction • cpp4r</title><link rel="stylesheet" href="../menu.css"><link rel="stylesheet" href="../content.css"><!-- MathJax Configuration --><script>
     window.MathJax = {
       tex: {
         inlineMath: [['\\(', '\\)'], ['$', '$']],
@@ -42,7 +42,7 @@
 
   <div class="submenu">
     <label>Vignettes</label>
-    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/01-intro.html">01 - Introduction</a>
     <a href="../vignettes/02-setup.html">02 - Setup</a>
     <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
     <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
@@ -69,24 +69,34 @@
 <div id="content">
 <div class="content-wrapper">
         <div class="content-main">
-          <h1>01 - Motivations for cpp4r</h1>
-<script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">01 - Motivations for cpp4r</h1>
+          <h1></h1>
+<script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">01 - Introduction</h1>
 
 
 
-<div id="motivation-and-significance" class="section level2">
-<h2>Motivation and significance</h2>
-<p>The R programming language has maintained a long-standing tradition
-of interfacing with compiled languages, dating back to the original S
-implementation in the late 1970s, which served primarily as a wrapper
-around FORTRAN routines <span class="citation">(Chambers 2006)</span>.
-This integration remains relevant today, as R code sometimes lacks the
-performance needed for computationally intensive tasks. Even after
-optimizing R code through vectorization and avoiding unnecessary object
-copying, bottlenecks may persist that require compiled language
-solutions.</p>
-<p>C++ offers particular advantages for addressing common R performance
-bottlenecks, including:</p>
+<p><em>For an extended review of the topics discussed in this vignette,
+please refer to the pre-print <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5583590">cpp4r:
+A Header-Only C++ and R Interface</a>.</em></p>
+<p>cpp4r is an R package that provides C++11 bindings to R, enabling the
+use of C++ code in R packages. It is a fork of the cpp11 package <span class="citation">(Vaughan, Hester, and François 2025)</span> aiming to
+provide additional features and improvements while maintaining
+compatibility with the original cpp11 API.</p>
+<p>The R programming language is an open-source version of the S
+programming language dating back to the 1970s, and even today its
+internals use C and FORTRAN routines for some tasks <span class="citation">(Chambers 2006)</span>. This design decision is not
+arbitrary: C and FORTRAN, while not particularly easy to use, are highly
+efficient for computationally intensive tasks. Even after optimizing R
+code through vectorization and avoiding unnecessary object copying,
+bottlenecks may persist and require compiled language solutions.</p>
+<p>For certain applications, such as fitting regression models with a
+large number of fixed effects <span class="citation">(Yotov et al.
+2017)</span>, computational efficiency can be an issue for any
+interpreted language, not just R which is in the interpreted languages
+family. Other examples of interpreted languages are Python, JavaScript
+and proprietary languages such as MATLAB, Maple, and Wolfram.</p>
+<p>C++ is a compiled language (as C and FORTRAN) that offers particular
+advantages for addressing common R performance bottlenecks,
+including:</p>
 <ul><li>Loops that cannot be easily vectorized due to dependencies between
 iterations</li>
 <li>Recursive functions or problems requiring many function calls</li>
@@ -94,16 +104,44 @@ iterations</li>
 does not let the end-user use pointers and pass-by-reference
 semantics)</li>
 <li>Problems requiring fine-tuning memory management</li>
-</ul><p>cpp4r is an R package that provides C++11 bindings to R, enabling the
-use of C++ code in R packages. It is a fork of the cpp11 package <span class="citation">(Vaughan, Hester, and François 2025)</span> aiming to
-provide additional features and improvements while maintaining
-compatibility with the original cpp11 API.</p>
-<p>The landscape of C++ bindings for R has evolved significantly over
-the past two decades. The cxx package, released in 2000, provided an
-early prototype of C++ bindings <span class="citation">(Hornik
-2001)</span>. Rcpp, first published to CRAN in 2008, became the
-mainstream solution with over 2,000 reverse dependencies by 2020 <span class="citation">(Eddelbuettel and Francois 2011)</span>.</p>
-<p>cpp11 was released in 2023 as a complete reimplementation of C++
+</ul><p>C++, like any compiled language, offers additional computational
+efficiency, but it involves setup effort that can be considerable in
+terms of time and configuring the required software stack to compile
+code and create an executable. R, like other interpreted languages, does
+not require creating executable files; it can execute instructions line
+by line, offering greater portability and the ability to introduce small
+changes to the code without the need to recompile.</p>
+<p>Compiled languages do not reduce time complexity, and a direct
+rewrite of R code in C++ can reduce runtime because C++ typically
+executes each operation faster. In practical terms, a double loop in R
+can be as inefficient as a double for loop in C++, with the difference
+that C++ typically takes less time per operation. For some problems it
+is possible to derive reduced forms or new algorithms that require a
+different set of instructions to obtain the same result; an example of
+this is <span class="citation">Vargas Sepulveda (2025)</span>, which
+discusses an alternative formulation to compute Kendall’s correlation
+coefficient with time complexity <span class="math inline">\(O(n
+\log(n))\)</span> instead of <span class="math inline">\(O(n^2)\)</span>
+using the traditional algorithm.</p>
+<p>Additionally, C++ offers more flexible data structures and allows the
+direct creation of operator overloads and friend functions that provide
+flexibility to work with a wide range of data formats <span class="citation">(Emara 2024)</span>, even ‘esoteric’ binary formats
+lacking documentation <span class="citation">(Sepúlveda and Barkai
+2025)</span>. While it is possible to write R functions using C, for
+simplicity it is often more convenient to use C++, as it is a superset
+of C and supports object-oriented programming rather than purely
+functional programming <span class="citation">(Emara 2024)</span>. This
+facilitates working with matrices, complex numbers, and other data
+structures such as cubes and fields <span class="citation">(Sanderson
+and Curtin 2016)</span>. Choosing C++ over FORTRAN is also often a
+matter of simplicity.</p>
+<p>C++ bindings for R date back to the early 2000s. The cxx package
+<span class="citation">(Hornik 2001)</span>, released in 2000 and now
+discontinued, provided an early prototype of C++ bindings. Rcpp <span class="citation">(Eddelbuettel and Francois 2011)</span>, first
+published to CRAN in 2008, is the mainstream solution and used by over
+3,000 packages as of 2025.</p>
+<p>cpp11 <span class="citation">(Vaughan, Hester, and François
+2025)</span> was released in 2023 as a complete reimplementation of C++
 bindings to R, with different design trade-offs compared to Rcpp aiming
 to provide:</p>
 <ul><li>Enforced copy-on-write semantics consistent with R’s behavior</li>
@@ -123,10 +161,7 @@ concise or convenient way to express common patterns)</li>
 more easily)</li>
 <li>Attributes (e.g., decorators to expose C++ functions to R with
 minimal boilerplate code)</li>
-</ul></div>
-<div id="software-description" class="section level1">
-<h1>Software description</h1>
-<p>While using cpp11 for my thesis project, I identified several
+</ul><p>While using cpp11 for my thesis project, I identified several
 enhancements that could benefit the R community and improve the
 library’s usability. These enhancements include:</p>
 <ul><li>Support for converting C++ maps to R lists</li>
@@ -203,99 +238,10 @@ headers. Most packages should not vendor the cpp4r dependency, except
 for projects designed to run in restricted environments where internet
 access is limited or unavailable for security reasons (e.g.,
 high-performance computing clusters).</p>
-</div>
-<div id="software-functionalities" class="section level1">
-<h1>Software functionalities</h1>
 <p>cpp4r is designed as a drop-in replacement for cpp11, using identical
 syntax and API patterns. Existing cpp11 code can typically be migrated
 to cpp4r with minimal changes, primarily involving header includes and
 namespace references.</p>
-<p>To use cpp4r, users must first install the package from CRAN or
-GitHub. The following code shows how to install the package:</p>
-<pre class="r"><code>install.packages("cpp4r", repos = "https://cran.rstudio.com")
-
-# or
-remotes::install_github("pachadotdev/cpp4r")</code></pre>
-<p>Once installed, users can use the provided package template function
-to create a new package that uses C++ code. The package template
-includes simple examples and all the necessary files to compile the code
-and install the new R package. The following code shows how to create a
-new package:</p>
-<pre class="r"><code>cpp4r::pkg_template("~/rstats/mypkg")</code></pre>
-<p>The package skeleton includes standard practices:</p>
-<pre class="r"><code># In DESCRIPTION file
-LinkingTo: cpp4r
-
-# In R code
-#' @useDynLib mypkg, .registration = TRUE
-#' @keywords internal
-"_PACKAGE"</code></pre>
-<p>C++ functions are exposed to R using the attribute syntax and
-documented with roxygen comments:</p>
-<pre class="cpp"><code>/* roxygen
-@title Square of Each Element in 'x'
-@param x Numeric vector
-@return Numeric vector
-@export
-*/
-[[cpp4r::register]]
-cpp4r::doubles my_square(cpp4r::doubles x) {
-  return x * x;
-}</code></pre>
-<p>The equivalent cpp11 code would be:</p>
-<pre class="cpp"><code>[[cpp11::register]]
-cpp11::doubles my_square_cpp(cpp11::doubles x) {
-  return x * x;
-}</code></pre>
-<pre class="r"><code>#' @title Square of Each Element in 'x'
-#' @param x Numeric vector
-#' @return Numeric vector
-#' @export
-my_square &lt;- function(x) {
-  my_square_cpp(x)
-}</code></pre>
-</div>
-<div id="benchmarks" class="section level1">
-<h1>benchmarks</h1>
-<p>TODO.</p>
-</div>
-<div id="impact" class="section level1">
-<h1>Impact</h1>
-<p>By providing a portable interface for C++ integration, cpp4r enables
-R developers to leverage the power of modern C++ while minimizing the
-complexity typically associated with writing compiled code. The
-benchmarks demonstrate substantial speed and memory usage improvements
-compared to existing implementations, providing researchers with a
-useful tool to write R packages to analyze large datasets and intensive
-computations.</p>
-<p>Beyond improved memory usage, which can determine whether an analysis
-is feasible, cpp4r’s design also offers faster compilation times,
-enhancing development workflow and testing. This is particularly
-beneficial in academic and business settings, where prototyping and
-iteration are common before final implementation.</p>
-<p>cpp4r represents an evolution in C++ bindings for R, building upon
-the solid foundation established by cpp11 while addressing specific
-limitations and adding features that can benefit the R community. By
-maintaining API compatibility with cpp11, cpp4r provides a migration
-path for developers seeking enhanced functionality without requiring
-significant code restructuring.</p>
-</div>
-<div id="conclusion" class="section level1">
-<h1>Conclusion</h1>
-<p>The development of cpp4r demonstrates the value of open-source
-transparency and how it enables derived works. While cpp11 and Rcpp
-continue to serve the broader R community effectively, cpp4r offers an
-alternative for projects requiring its specific enhancements,
-particularly in academic research contexts where documentation features
-and additional data types support reduce the coding effort for advancing
-computational methods.</p>
-<p>The software, documentation, and replication code are available on <a href="https://github.com/pachadotdev/cpp4r">GitHub</a>. The codebase is
-released under the Apache 2.0 license. Contributions and feedback from
-the R community are welcome to help improve the package further. We hope
-that cpp4r will be a valuable tool for R developers, providing a simple
-solution for performance bottlenecks by integrating C++ code into R
-packages.</p>
-</div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
@@ -310,16 +256,45 @@ Eddelbuettel, Dirk, and Romain Francois. 2011. <span>“Rcpp:
 <span>Integration</span>.”</span> <em>Journal of Statistical
 Software</em> 40 (April): 1–18. <a href="https://doi.org/10.18637/jss.v040.i08">https://doi.org/10.18637/jss.v040.i08</a>.
 </div>
+<div id="ref-emara24" class="csl-entry">
+Emara, Salma. 2024. <span>“Khufu:
+<span>Object</span>-<span>Oriented</span> <span>Programming</span> Using
+<span>C</span>++.”</span> <a href="https://learningcpp.org/cover.html">https://learningcpp.org/cover.html</a>.
+</div>
 <div id="ref-hornik01" class="csl-entry">
 Hornik, Kurt. 2001. <span>“Cxx: <span>C</span>++ Test.”</span> <a href="https://cran.r-project.org/src/contrib/Archive/cxx/">https://cran.r-project.org/src/contrib/Archive/cxx/</a>.
+</div>
+<div id="ref-sanderson16" class="csl-entry">
+Sanderson, Conrad, and Ryan Curtin. 2016. <span>“Armadillo: A
+Template-Based <span>C</span>++ Library for Linear Algebra.”</span>
+<em>Journal of Open Source Software</em> 1 (2): 26. <a href="https://doi.org/10.21105/joss.00026">https://doi.org/10.21105/joss.00026</a>.
+</div>
+<div id="ref-vargassepulvedaredatam25" class="csl-entry">
+Sepúlveda, Mauricio Vargas, and Lital Barkai. 2025. <span>“The
+<span>REDATAM</span> Format and Its Challenges for Data Access and
+Information Creation in Public Policy.”</span> <em>Data &amp;
+Policy</em> 7 (January): e18. <a href="https://doi.org/10.1017/dap.2025.4">https://doi.org/10.1017/dap.2025.4</a>.
 </div>
 <div id="ref-go24" class="csl-entry">
 The Go Authors. 2024. <span>“Go <span>Modules</span>
 <span>Reference</span>.”</span> <a href="https://go.dev/ref/mod">https://go.dev/ref/mod</a>.
 </div>
+<div id="ref-vargassepulvedakendallknight25" class="csl-entry">
+Vargas Sepulveda, Mauricio. 2025. <span>“Kendallknight: <span>An</span>
+<span>R</span> Package for Efficient Implementation of
+<span>Kendall</span>’s Correlation Coefficient Computation.”</span>
+<em>PLOS ONE</em> 20 (6): e0326090. <a href="https://doi.org/10.1371/journal.pone.0326090">https://doi.org/10.1371/journal.pone.0326090</a>.
+</div>
 <div id="ref-cpp1125" class="csl-entry">
 Vaughan, Davis, Jim Hester, and Romain François. 2025. <em>‘Cpp11‘: A
 <span>C++</span>11 Interface for <span>R</span>’s c Interface</em>. <a href="https://CRAN.R-project.org/package=cpp11">https://CRAN.R-project.org/package=cpp11</a>.
+</div>
+<div id="ref-yotov17" class="csl-entry">
+Yotov, Yoto V., Roberta Piermartini, José-Antonio Monteiro, and Mario
+Larch. 2017. <em>An <span>Advanced</span> <span>Guide</span> to
+<span>Trade</span> <span>Policy</span> <span>Analysis</span>:
+<span>The</span> <span>Structural</span> <span>Gravity</span>
+<span>Model</span></em>. United Nations. <a href="https://doi.org/10.18356/57a768e5-en">https://doi.org/10.18356/57a768e5-en</a>.
 </div>
 </div>
 </div>

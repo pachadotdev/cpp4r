@@ -42,7 +42,7 @@
 
   <div class="submenu">
     <label>Vignettes</label>
-    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/01-intro.html">01 - Introduction</a>
     <a href="../vignettes/02-setup.html">02 - Setup</a>
     <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
     <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
@@ -69,31 +69,31 @@
 <div id="content">
 <div class="content-wrapper">
         <div class="content-main">
-          <h1>03 - Package Skeleton</h1>
+          <h1></h1>
 <script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">03 - Package Skeleton</h1>
 
 
 
 <p>The reference for this vignette is <span class="citation">Wickham et
 al. (2024)</span>.</p>
-<div id="loading-the-required-r-packages" class="section level1">
-<h1>Loading the Required R Packages</h1>
+<div id="loading-the-required-r-packages" class="section level2">
+<h2>Loading the Required R Packages</h2>
 <p>This vignette and the next use the following R packages:</p>
 <pre class="r"><code>library(cpp4r)
 library(devtools)
 library(bench)
 library(usethis)</code></pre>
 </div>
-<div id="creating-a-dummy-package" class="section level1">
-<h1>Creating a Dummy Package</h1>
+<div id="creating-a-dummy-package" class="section level2">
+<h2>Creating a Dummy Package</h2>
 <p>You can create a new package in RStudio (or VSCode) by running:</p>
 <pre class="r"><code>pkg_template("~/github/cpp4r/cpp4rexamples")</code></pre>
 <p>This command will create a new folder containing the
 <code>cpp4rexamples</code> package. Afterward, you can run
 <code>use_cpp4r()</code> to add the necessary code to the package.</p>
 </div>
-<div id="print-a-number" class="section level1">
-<h1>Print a Number</h1>
+<div id="print-a-number" class="section level2">
+<h2>Print a Number</h2>
 <p>The <code>pkg_template()</code> function automatically creates
 <code>./cpp4rexamples/R/cpp4rexamples-package.R</code> with the
 following content:</p>
@@ -162,8 +162,8 @@ devtools::load_all()</code></pre>
 <p>Try <code>plus_two(1)</code> and <code>plus_two(1.0)</code>. Why does
 1 and 1.0 matter in C++?</p>
 </div>
-<div id="numbers-sign" class="section level1">
-<h1>Number’s Sign</h1>
+<div id="numbers-sign" class="section level2">
+<h2>Number’s Sign</h2>
 <p>A more complex function is one that returns the sign of a number:</p>
 <pre class="cpp"><code>[[cpp4r::register]] int sign_cpp(double x) {
   if (x &gt; 0) {
@@ -189,8 +189,8 @@ devtools::load_all()</code></pre>
 <code>main.cpp</code>.</p>
 <p>Document both functions and compare their outputs.</p>
 </div>
-<div id="installing-the-package" class="section level1">
-<h1>Installing the Package</h1>
+<div id="installing-the-package" class="section level2">
+<h2>Installing the Package</h2>
 <p>To document and install the package as an R library, you can run the
 following functions:</p>
 <pre class="r"><code>cpp4r::register()
@@ -202,8 +202,8 @@ devtools::install()</code></pre>
 <code>load_all()</code> again to test and then reinstall the
 package.</p>
 </div>
-<div id="good-practice" class="section level1">
-<h1>Good Practice</h1>
+<div id="good-practice" class="section level2">
+<h2>Good Practice</h2>
 <p>It is good practice to include a license for your code. For example,
 you can use the Apache license by running:</p>
 <pre class="r"><code>usethis::use_apache_license()</code></pre>
@@ -219,8 +219,8 @@ directories:</p>
 ^LICENSE\.md$
 ^cpp4rexamples\.Rproj$</code></pre>
 </div>
-<div id="references" class="section level1 unnumbered">
-<h1 class="unnumbered">References</h1>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-usethis24" class="csl-entry">
 Wickham, Hadley, Jenny Bryan, Malcolm Barrett, and Andy Teucher. 2024.

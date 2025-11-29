@@ -42,7 +42,7 @@
 
   <div class="submenu">
     <label>Vignettes</label>
-    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/01-intro.html">01 - Introduction</a>
     <a href="../vignettes/02-setup.html">02 - Setup</a>
     <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
     <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
@@ -69,23 +69,22 @@
 <div id="content">
 <div class="content-wrapper">
         <div class="content-main">
-          <h1>06 - Rolling Functions</h1>
+          <h1></h1>
 <script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">06 - Rolling Functions</h1>
 
 
 
-<p>These examples were adapted from <span class="citation">Vaughan,
-Hester, and Francois (2024)</span>.</p>
-<div id="note" class="section level1">
-<h1>Note</h1>
-<p>These functions ignore <code>NA</code> values for now. Adjustments
-for handling <code>NA</code> values are covered in a separate
-vignette.</p>
-<p>R already provides efficient versions of the functions covered here.
-This is just to illustrate how to use C++ code.</p>
-</div>
-<div id="cumulative-sum" class="section level1">
-<h1>Cumulative sum</h1>
+<div id="notes" class="section level2">
+<h2>Notes</h2>
+<ul><li>These examples were adapted from <span class="citation">Vaughan,
+Hester, and Francois (2024)</span>.</li>
+<li>These functions ignore <code>NA</code> values for now. Adjustments
+for handling <code>NA</code> values are covered in a separate vignette.
+*R already provides efficient versions of the functions covered here.
+This is just to illustrate how to use C++ code.</li>
+</ul></div>
+<div id="cumulative-sum" class="section level2">
+<h2>Cumulative sum</h2>
 <p>Base R provides the <code>cumsum()</code> function to compute the
 cumulative sum of a vector:</p>
 <pre class="r"><code>cumsum(1:5)</code></pre>
@@ -129,8 +128,8 @@ mark(
   cumsum_r(x)
 )</code></pre>
 </div>
-<div id="cumulative-product" class="section level1">
-<h1>Cumulative product</h1>
+<div id="cumulative-product" class="section level2">
+<h2>Cumulative product</h2>
 <p>Base R provides the <code>cumprod()</code> function to compute the
 cumulative product of a vector:</p>
 <pre class="r"><code>cumprod(1:5)</code></pre>
@@ -163,8 +162,8 @@ the R console:</p>
   cumprod_r(x)
 )</code></pre>
 </div>
-<div id="range-of-values" class="section level1">
-<h1>Range of values</h1>
+<div id="range-of-values" class="section level2">
+<h2>Range of values</h2>
 <p>A simple example of the <code>range()</code> function in R is:</p>
 <pre class="r"><code>range(x)</code></pre>
 <p>One possible C++ function to implement this is:</p>
@@ -238,8 +237,8 @@ g2 &lt;- ggplot(d, aes(x = n, y = mem_alloc, color = expression)) +
 
 g1 / g2</code></pre>
 </div>
-<div id="references" class="section level1 unnumbered">
-<h1 class="unnumbered">References</h1>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-vaughan24" class="csl-entry">
 Vaughan, Davis, Jim Hester, and Roman Francois. 2024. <span>“Get Started

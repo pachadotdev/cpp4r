@@ -42,7 +42,7 @@
 
   <div class="submenu">
     <label>Vignettes</label>
-    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/01-intro.html">01 - Introduction</a>
     <a href="../vignettes/02-setup.html">02 - Setup</a>
     <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
     <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
@@ -69,22 +69,22 @@
 <div id="content">
 <div class="content-wrapper">
         <div class="content-main">
-          <h1>16 - Worked Examples</h1>
+          <h1></h1>
 <script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">16 - Worked Examples</h1>
 
 
 
-<div id="motivation" class="section level1">
-<h1>Motivation</h1>
+<div id="motivation" class="section level2">
+<h2>Motivation</h2>
 <p>The previous package skeleton left out some essential details, such
 as testing for memory leaks and debugging. This vignette will cover
 these aspects in more detail. The references for this vignette are <span class="citation">Vaughan, Hester, and Francois (2024)</span>, <span class="citation">Padgham (2022)</span>, <span class="citation">Vaughan
 (2019)</span>, and <span class="citation">Wickham (2019)</span>.</p>
 </div>
-<div id="instructional-examples" class="section level1">
-<h1>Instructional examples</h1>
-<div id="solving-a-matrix-using-the-gauss-jordan-method" class="section level2">
-<h2>Solving a matrix using the Gauss-Jordan method</h2>
+<div id="instructional-examples" class="section level2">
+<h2>Instructional examples</h2>
+<div id="solving-a-matrix-using-the-gauss-jordan-method" class="section level3">
+<h3>Solving a matrix using the Gauss-Jordan method</h3>
 <p>This example package covers the following topics:</p>
 <ul><li>Integers</li>
 <li>Doubles</li>
@@ -94,8 +94,8 @@ these aspects in more detail. The references for this vignette are <span class="
 <li>Vendoring</li>
 </ul><p>See the <a href="https://github.com/pachadotdev/cpp4r/tree/main/example-packages/cpp4rgaussjordan">cpp4rgaussjordan</a>
 package.</p>
-<div id="details" class="section level3">
-<h3>Details</h3>
+<div id="details" class="section level4">
+<h4>Details</h4>
 <p>This implementation is a naive approach, but it can be used, for
 example, to obtain the Ordinary Least Squares (OLS) estimator as shown
 in the next section.</p>
@@ -107,8 +107,8 @@ package could never break the package’s code. The disadvantage is that
 fixes and new features will be available after vendoring the code
 again.</p>
 </div>
-<div id="vendoring" class="section level3">
-<h3>Vendoring</h3>
+<div id="vendoring" class="section level4">
+<h4>Vendoring</h4>
 <p>You can start with
 <code>create_package("~/github/cpp4rgaussjordan")</code>. You can use
 VSCode, but all the steps also apply to RStudio.</p>
@@ -121,8 +121,8 @@ your package is distributed under the Apache License.</p>
 <p>Then you can run <code>cpp_vendor()</code> to copy the C++ headers
 into <code>inst/include</code>.</p>
 </div>
-<div id="building-and-testing" class="section level3">
-<h3>Building and testing</h3>
+<div id="building-and-testing" class="section level4">
+<h4>Building and testing</h4>
 <p>You can use <code>devtools</code> to build and test the package:</p>
 <pre class="r"><code># build
 
@@ -142,8 +142,8 @@ invert_matrix(A)
 [2,]  0.2 -0.4</code></pre>
 </div>
 </div>
-<div id="ordinary-least-squares-ols-estimator" class="section level2">
-<h2>Ordinary Least Squares (OLS) estimator</h2>
+<div id="ordinary-least-squares-ols-estimator" class="section level3">
+<h3>Ordinary Least Squares (OLS) estimator</h3>
 <p>This example package covers the following topics:</p>
 <ul><li>Integers</li>
 <li>Doubles</li>
@@ -169,8 +169,8 @@ good starting point, this is not trivial to implement.</p>
 in R, which calls compiled C and FORTRAN functions, and these functions
 are fast and robust <code>lm()</code>.</p>
 </div>
-<div id="linear-programming-simplex-phase-2" class="section level2">
-<h2>Linear programming (Simplex phase 2)</h2>
+<div id="linear-programming-simplex-phase-2" class="section level3">
+<h3>Linear programming (Simplex phase 2)</h3>
 <p>This example package covers the following topics:</p>
 <ul><li>Integers</li>
 <li>Doubles</li>
@@ -180,8 +180,8 @@ are fast and robust <code>lm()</code>.</p>
 <li>Messages</li>
 </ul><p>See the <a href="https://github.com/pachadotdev/cpp4r/tree/main/example-packages/cpp4rsimplexphase2">cpp4rsimplex</a>
 package.</p>
-<div id="algorithm" class="section level3">
-<h3>Algorithm</h3>
+<div id="algorithm" class="section level4">
+<h4>Algorithm</h4>
 <p>The simplex algorithm is well described in <a href="http://athenasc.com/linoptbook.html">Introduction to Linear
 Optimization</a> and there is efficient software to solve this,
 including <span class="citation">Berkelaar and Csardi (2023)</span>.</p>
@@ -229,8 +229,8 @@ a_{rs}\)</span></li>
 </ol><p>This algorithm is equivalent to Gauss method to solve linear
 systems.</p>
 </div>
-<div id="numerical-example" class="section level3">
-<h3>Numerical example</h3>
+<div id="numerical-example" class="section level4">
+<h4>Numerical example</h4>
 <p>A simple example is the following minimization problem:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -285,8 +285,8 @@ x_1 &amp; x_2 &amp; x_3 &amp; x_4 &amp; -z \\
 non-negative, therefore the solution is optimal and is <span class="math inline">\(x^* = (1/4, 11/4, 0 , 0)\)</span> with an optimal
 value <span class="math inline">\(z^* = -17/2\)</span>.</p>
 </div>
-<div id="building-and-testing-1" class="section level3">
-<h3>Building and testing</h3>
+<div id="building-and-testing-1" class="section level4">
+<h4>Building and testing</h4>
 <p>You can use <code>devtools</code> to build and test the package:</p>
 <pre class="r"><code># build
 
@@ -333,8 +333,8 @@ Minimum cost: 0
 Optimal solution found in 2 steps !</code></pre>
 </div>
 </div>
-<div id="using-omp-parallelization" class="section level2">
-<h2>Using OMP (parallelization)</h2>
+<div id="using-omp-parallelization" class="section level3">
+<h3>Using OMP (parallelization)</h3>
 <p>This example package covers the following topics:</p>
 <ul><li>Integers</li>
 <li>Doubles</li>
@@ -343,8 +343,8 @@ Optimal solution found in 2 steps !</code></pre>
 <li>OpenMP parallelization</li>
 </ul><p>See the <a href="https://github.com/pachadotdev/cpp4r/tree/main/example-packages/cpp4romp">cpp4romp</a>
 package.</p>
-<div id="motivation-1" class="section level3">
-<h3>Motivation</h3>
+<div id="motivation-1" class="section level4">
+<h4>Motivation</h4>
 <p>One common phrase that you might find when you need to search how to
 do something with <code>cpp4r</code> is: “cpp4r does not offer OpenMP
 support.” This is a myth. <code>cpp4r</code> does offer OpenMP support.
@@ -362,8 +362,8 @@ documentation</a> <span class="citation">(<span>“Enable
 <span>For</span> <span>Building</span> Scikit-Learn -
 <span>OpenBox</span> Documentation”</span> n.d.)</span>.</p>
 </div>
-<div id="enabling-openmp" class="section level3">
-<h3>Enabling OpenMP</h3>
+<div id="enabling-openmp" class="section level4">
+<h4>Enabling OpenMP</h4>
 <p>You can create an R package called <code>cpp4romp</code> with the
 following code:</p>
 <pre class="r"><code>usethis::create_project("cpp4romp")
@@ -382,8 +382,8 @@ CXX_STD = CXX11</code></pre>
 <p>Not adding this means that the pragma instruction will be ignored and
 the functions will run in a single thread.</p>
 </div>
-<div id="unnamed-list" class="section level3">
-<h3>Unnamed list</h3>
+<div id="unnamed-list" class="section level4">
+<h4>Unnamed list</h4>
 <p>You can add a function called <code>squared_unnamed_</code> in
 <code>src/code.cpp</code> that will square each element in a vector of
 doubles, so the file content corresponds to the following:</p>
@@ -423,8 +423,8 @@ squared_unnamed &lt;- function(x) {
   squared_unnamed_(as.double(x))
 }</code></pre>
 </div>
-<div id="named-list" class="section level3">
-<h3>Named list</h3>
+<div id="named-list" class="section level4">
+<h4>Named list</h4>
 <p>You can add a function called <code>squared_named_</code> in
 <code>src/code.cpp</code> that does the same but returns a named list.
 The additional content corresponds to the following:</p>
@@ -454,8 +454,8 @@ squared_named &lt;- function(x) {
   squared_named_(as.double(x))
 }</code></pre>
 </div>
-<div id="building-and-testing-2" class="section level3">
-<h3>Building and testing</h3>
+<div id="building-and-testing-2" class="section level4">
+<h4>Building and testing</h4>
 <p>You can use <code>devtools</code> to build and test the package:</p>
 <pre class="r"><code>cpp4r::cpp_register()
 devtools::document()
@@ -477,8 +477,8 @@ $thread
  [1] 0 0 1 1 2 3 4 5 6 7</code></pre>
 </div>
 </div>
-<div id="implementing-a-rejection-and-bootstrap-sampler" class="section level2">
-<h2>Implementing a rejection and bootstrap sampler</h2>
+<div id="implementing-a-rejection-and-bootstrap-sampler" class="section level3">
+<h3>Implementing a rejection and bootstrap sampler</h3>
 <p>This example package covers the following topics:</p>
 <ul><li>Integers</li>
 <li>Doubles</li>
@@ -494,8 +494,8 @@ package.</li>
 package.</li>
 </ul></div>
 </div>
-<div id="extensive-rc-tests" class="section level1">
-<h1>Extensive R/C++ tests</h1>
+<div id="extensive-rc-tests" class="section level2">
+<h2>Extensive R/C++ tests</h2>
 <p>See the <a href="https://github.com/pachadotdev/cpp4r/tree/main/example-packages/cpp4rtest">cpp4rtest</a>
 package. It covers over 1,000 unit tests for <code>cpp4r</code>
 features, including:</p>
@@ -507,8 +507,8 @@ features, including:</p>
 <li>C++ side unit tests with testthat</li>
 <li>Roxygen documentation</li>
 </ul></div>
-<div id="useful-rc-integration-examples" class="section level1">
-<h1>Useful R/C++ Integration Examples</h1>
+<div id="useful-rc-integration-examples" class="section level2">
+<h2>Useful R/C++ Integration Examples</h2>
 <p>Here are some examples of C++ code integration with R using the
 <code>cpp11</code> package:</p>
 <ul><li><a href="https://arrow.apache.org/docs/r/">arrow</a>: An R package
@@ -537,8 +537,8 @@ interface to PostgreSQL using <code>cpp4r</code>.</li>
 <li><a href="https://github.com/tidyverse/tidyr/">tidyr</a>: A package
 that uses C++ functions to reshape data frames.</li>
 </ul></div>
-<div id="references" class="section level1 unnumbered">
-<h1 class="unnumbered">References</h1>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-lpsolve23" class="csl-entry">
 Berkelaar, Michel, and Gabor Csardi. 2023. <em>lpSolve: Interface to

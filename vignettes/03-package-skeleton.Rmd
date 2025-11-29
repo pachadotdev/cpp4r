@@ -13,7 +13,7 @@ bibliography: ["references.bib"]
 
 The reference for this vignette is @usethis24.
 
-# Loading the Required R Packages
+## Loading the Required R Packages
 
 This vignette and the next use the following R packages:
 
@@ -24,7 +24,7 @@ library(bench)
 library(usethis)
 ```
 
-# Creating a Dummy Package
+## Creating a Dummy Package
 
 You can create a new package in RStudio (or VSCode) by running:
 
@@ -34,7 +34,7 @@ pkg_template("~/github/cpp4r/cpp4rexamples")
 
 This command will create a new folder containing the `cpp4rexamples` package. Afterward, you can run `use_cpp4r()` to add the necessary code to the package.
 
-# Print a Number
+## Print a Number
 
 The `pkg_template()` function automatically creates `./cpp4rexamples/R/cpp4rexamples-package.R` with the following content:
 
@@ -127,7 +127,7 @@ load_all()
 
 Try `plus_two(1)` and `plus_two(1.0)`. Why does 1 and 1.0 matter in C++?
 
-# Number's Sign
+## Number's Sign
 
 A more complex function is one that returns the sign of a number:
 
@@ -163,7 +163,7 @@ Do not forget to include the new header file in `main.cpp`.
 
 Document both functions and compare their outputs.
 
-# Installing the Package
+## Installing the Package
 
 To document and install the package as an R library, you can run the following functions:
 
@@ -177,7 +177,7 @@ Afterward, you can access the functions by loading the package with `library(cpp
 
 Each time you need to make changes to the C++ code, you can run `load_all()` again to test and then reinstall the package.
 
-# Good Practice
+## Good Practice
 
 It is good practice to include a license for your code. For example, you can use the Apache license by running:
 
@@ -199,4 +199,4 @@ Your `.Rbuildignore` file can include the following lines, which you can edit ma
 ^cpp4rexamples\.Rproj$
 ```
 
-# References
+## References

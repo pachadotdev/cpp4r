@@ -42,7 +42,7 @@
 
   <div class="submenu">
     <label>Vignettes</label>
-    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/01-intro.html">01 - Introduction</a>
     <a href="../vignettes/02-setup.html">02 - Setup</a>
     <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
     <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
@@ -69,22 +69,27 @@
 <div id="content">
 <div class="content-wrapper">
         <div class="content-main">
-          <h1>02 - Setup</h1>
+          <h1></h1>
 <script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">02 - Setup</h1>
 
 
 
-<div id="c-setup" class="section level1">
-<h1>C++ Setup</h1>
-<p>You will need a working C++ compiler capable of compiling C++11 code.
-To get it:</p>
+<div id="c-setup" class="section level2">
+<h2>C++ Setup</h2>
+<p>You will need a working C++ compiler capable of compiling C++ code
+using the C++11 standard or newer. To get it:</p>
 <ul><li>On Windows, install <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a>.</li>
 <li>On Mac, install Xcode from the App Store.</li>
 <li>On Linux,
 <code>sudo pacman -Syu install build-essential g++-11</code> or
 similar.</li>
-</ul><div id="for-ubuntu-users" class="section level2">
-<h2>For Ubuntu Users</h2>
+</ul><p>On my laptop, this is the output of <code>g++ --version</code>:</p>
+<pre class="bash"><code>g++ (GCC) 15.2.1 20250813
+Copyright (C) 2025 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</code></pre>
+<div id="for-ubuntu-users" class="section level3">
+<h3>For Ubuntu Users</h3>
 <p>After installing <code>g++-11</code>, you may still encounter issues
 compiling C++ code due to missing standard library headers. This does
 not happen when testing on Manjaro Linux.</p>
@@ -111,8 +116,8 @@ fatal error: 'vector' file not found
 cannot find -lc++abi: No such file or directory</code></pre>
 </div>
 </div>
-<div id="r-setup" class="section level1">
-<h1>R Setup</h1>
+<div id="r-setup" class="section level2">
+<h2>R Setup</h2>
 <p>You can install the R packages <code>bench</code>,
 <code>cpp4r</code>, <code>devtools</code> and <code>usethis</code> with
 the following command:</p>

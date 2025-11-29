@@ -11,11 +11,11 @@ editor:
 bibliography: ["references.bib"]
 ---
 
-# Motivation
+## Motivation
 
 R uses default GCC/Clang compiler optimizations, which can limit the performance of C++ code. 
 
-# User-wide Makevars
+## User-wide Makevars
 
 You can use the following Makevars example, which should be placed in `~/.R/Makevars`, to set the optimization level to `-O3` for all C++ code compiled by R and use additional flags to enable more aggressive optimizations that can be set at setup level but not package level (or CRAN will reject the package):
 
@@ -35,7 +35,7 @@ CXXFLAGS += -flto=auto
 LDFLAGS += -flto=auto
 ```
 
-# Anticonf scripts
+## Anticonf scripts
 
 The idea of an "anticonf" configure script is to provide a tailored Makevars file with the understanding that a package will be run on different systems. The anticonf name comes from the fact that it is not a standard `configure` script created with tools such as GNU Autoconf, but rather a templated script that generates a `Makevars` by detecting the system and compiler settings (e.g., number of cores, optimization flags, etc.).
 
@@ -121,5 +121,3 @@ exit 0
 ```
 
 This script detects the number of cores available on the system and sets the `CAPYBARA_NCORES` variable accordingly. It also tests for safe optimization flags that can be added to the `Makevars` file without changing the default `-O2` optimization level used by R. It also serves the goal of testing that a simple file can be compiled.
-
-# References

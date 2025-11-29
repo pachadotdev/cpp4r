@@ -42,7 +42,7 @@
 
   <div class="submenu">
     <label>Vignettes</label>
-    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/01-intro.html">01 - Introduction</a>
     <a href="../vignettes/02-setup.html">02 - Setup</a>
     <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
     <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
@@ -69,22 +69,22 @@
 <div id="content">
 <div class="content-wrapper">
         <div class="content-main">
-          <h1>10 - Statistical Functions with Missing Values</h1>
+          <h1></h1>
 <script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">10 - Statistical Functions with Missing
 Values</h1>
 
 
 
-<div id="note" class="section level1">
-<h1>Note</h1>
-<p>These functions ignore <code>NA</code> values for now. Adjustments
+<div id="notes" class="section level2">
+<h2>Notes</h2>
+<ul><li>These functions ignore <code>NA</code> values for now. Adjustments
 for handling <code>NA</code> values are covered in a separate
-vignette.</p>
-<p>R already provides efficient versions of the functions covered here.
-This is just to illustrate how to use C++ code.</p>
-</div>
-<div id="sum" class="section level1">
-<h1>Sum</h1>
+vignette.</li>
+<li>R already provides efficient versions of the functions covered here.
+This is just to illustrate how to use C++ code.</li>
+</ul></div>
+<div id="sum" class="section level2">
+<h2>Sum</h2>
 <p>The following function expands the previous <code>sum_cpp()</code>
 function to handle missing values.</p>
 <pre class="cpp"><code>[[cpp4r::register]]
@@ -117,8 +117,8 @@ mark(
   sum2_cpp(x, na_rm = TRUE)
 )</code></pre>
 </div>
-<div id="arithmetic-mean" class="section level1">
-<h1>Arithmetic mean</h1>
+<div id="arithmetic-mean" class="section level2">
+<h2>Arithmetic mean</h2>
 <p>The following function expands the previous <code>mean_cpp()</code>
 function to handle missing values.</p>
 <pre class="cpp"><code>[[cpp4r::register]]
@@ -162,8 +162,8 @@ mark(
   mean2_cpp(x, na_rm = TRUE)
 )</code></pre>
 </div>
-<div id="variance" class="section level1">
-<h1>Variance</h1>
+<div id="variance" class="section level2">
+<h2>Variance</h2>
 <p>The following function expands the previous <code>var_cpp()</code>
 function to handle missing values.</p>
 <pre class="cpp"><code>[[cpp4r::register]]
@@ -201,8 +201,8 @@ mark(
   var2_cpp(x, na_rm = TRUE)
 )</code></pre>
 </div>
-<div id="root-mean-square-error-rmse" class="section level1">
-<h1>Root Mean Square Error (RMSE)</h1>
+<div id="root-mean-square-error-rmse" class="section level2">
+<h2>Root Mean Square Error (RMSE)</h2>
 <p>The following function expands the previous <code>rmse_cpp()</code>
 function to handle missing values.</p>
 <pre class="cpp"><code>[[cpp4r::register]]
@@ -249,8 +249,8 @@ mark(
   rmse2_cpp(x, 0, na_rm = TRUE)
 )</code></pre>
 </div>
-<div id="references" class="section level1">
-<h1>References</h1>
+<div id="references" class="section level2">
+<h2>References</h2>
 </div>
 
 

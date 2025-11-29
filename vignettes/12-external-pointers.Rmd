@@ -51,5 +51,3 @@ Similarly, the `Rcpp` version checks the engine with:
 ```r
 stopifnot(inherits(engine, "tesseract"))
 ```
-
-# References

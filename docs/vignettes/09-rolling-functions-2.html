@@ -42,7 +42,7 @@
 
   <div class="submenu">
     <label>Vignettes</label>
-    <a href="../vignettes/01-motivations.html">01 - Motivations for cpp4r</a>
+    <a href="../vignettes/01-intro.html">01 - Introduction</a>
     <a href="../vignettes/02-setup.html">02 - Setup</a>
     <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
     <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
@@ -69,22 +69,22 @@
 <div id="content">
 <div class="content-wrapper">
         <div class="content-main">
-          <h1>09 - Rolling Functions with Missing Values</h1>
+          <h1></h1>
 <script src="libs/header-attrs-2.30/header-attrs.js"></script><h1 class="title toc-ignore">09 - Rolling Functions with Missing
 Values</h1>
 
 
 
-<div id="note" class="section level1">
-<h1>Note</h1>
-<p>These functions ignore <code>NA</code> values for now. Adjustments
+<div id="notes" class="section level2">
+<h2>Notes</h2>
+<ul><li>These functions ignore <code>NA</code> values for now. Adjustments
 for handling <code>NA</code> values are covered in a separate
-vignette.</p>
-<p>R already provides efficient versions of the functions covered here.
-This is just to illustrate how to use C++ code.</p>
-</div>
-<div id="cumulative-sum" class="section level1">
-<h1>Cumulative sum</h1>
+vignette.</li>
+<li>R already provides efficient versions of the functions covered here.
+This is just to illustrate how to use C++ code.</li>
+</ul></div>
+<div id="cumulative-sum" class="section level2">
+<h2>Cumulative sum</h2>
 <p>The following function expands the previous <code>cumsum_cpp()</code>
 function to handle missing values.</p>
 <pre class="cpp"><code>[[cpp4r::register]]
@@ -138,8 +138,8 @@ mark(
   cumsum2_cpp(x)
 )</code></pre>
 </div>
-<div id="cumulative-product" class="section level1">
-<h1>Cumulative product</h1>
+<div id="cumulative-product" class="section level2">
+<h2>Cumulative product</h2>
 <p>The following function expands the previous
 <code>cumprod_cpp()</code> function to handle missing values.</p>
 <pre class="cpp"><code>[[cpp4r::register]]
@@ -190,8 +190,8 @@ mark(
   cumprod2_cpp(x)
 )</code></pre>
 </div>
-<div id="cumulative-minimum" class="section level1">
-<h1>Cumulative minimum</h1>
+<div id="cumulative-minimum" class="section level2">
+<h2>Cumulative minimum</h2>
 <p>The next function calculates the cumulative minimum of the elements
 of a vector.</p>
 <pre class="cpp"><code>[[cpp4r::register]] doubles
@@ -238,8 +238,8 @@ mark(
   cummin_cpp(x)
 )</code></pre>
 </div>
-<div id="cumulative-maximum" class="section level1">
-<h1>Cumulative maximum</h1>
+<div id="cumulative-maximum" class="section level2">
+<h2>Cumulative maximum</h2>
 <p>The next function calculates the cumulative maximum of the elements
 of a vector.</p>
 <pre class="cpp"><code>[[cpp4r::register]]
@@ -286,8 +286,8 @@ mark(
   cummax_cpp(x)
 )</code></pre>
 </div>
-<div id="references" class="section level1">
-<h1>References</h1>
+<div id="references" class="section level2">
+<h2>References</h2>
 </div>
 
 

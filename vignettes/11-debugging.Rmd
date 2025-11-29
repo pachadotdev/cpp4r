@@ -11,13 +11,13 @@ editor:
 bibliography: ["references.bib"]
 ---
 
-# Motivation
+## Motivation
 
 The previous package skeleton left out some essential details, such as testing for memory leaks and debugging. This
 vignette will cover these aspects in more detail. The references for this vignette are @vaughan24, @rpkgdevel24,
 @padgham22, @vaughan19, and @wickham19.
 
-# Compiler Setup
+## Compiler Setup
 
 To test that your functions do not lead to memory errors, you can create/edit a `src/Makevars.in` file within the
 package folder and add:
@@ -82,7 +82,7 @@ It is possible to verify that the functions are correct:
 all.equal(sum((1:5)^2), squared_sum_non_iso_(1:5), squared_sum_iso_(1:5))
 ```
 
-# Testing for Memory Leaks
+## Testing for Memory Leaks
 
 To test for memory leaks, you can use the `valgrind` tool. This tool is available on Linux and macOS.
 
@@ -105,7 +105,7 @@ library(cpp4rexamples)
 squared_sum_iso_(1:5)
 ```
 
-# Adding a configure script
+## Adding a configure script
 
 For a portable package, it is recommended to add a `configure` script. This script will check for the necessary tools to build the package. The script is written in `bash` and is placed in the `configure` file in the package root directory.
 
@@ -170,7 +170,7 @@ rm -f src/Makevars configure.log
 
 The advantage of this approach is that it will create a `src/Makevars` file with the correct flags for the system. This way, the package will be portable and easier to test with GitHub Actions or Docker.
 
-# Testing with Docker
+## Testing with Docker
 
 CRAN checks packages on different Unix platforms, and additional tests for compiled code include testing for memory leaks with valgrind and address sanitizer.
 
@@ -250,4 +250,4 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
 ==1244==ABORTING
 ```
 
-# References
+## References

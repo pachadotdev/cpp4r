@@ -11,15 +11,13 @@ editor:
 bibliography: ["references.bib"]
 ---
 
-These examples were adapted from @vaughan24.
+## Notes
 
-# Note
+* These examples were adapted from @vaughan24.
+* These functions ignore `NA` values for now. Adjustments for handling `NA` values are covered in a separate vignette.
+* R already provides efficient versions of the functions covered here. This is just to illustrate how to use C++ code.
 
-These functions ignore `NA` values for now. Adjustments for handling `NA` values are covered in a separate vignette.
-
-R already provides efficient versions of the functions covered here. This is just to illustrate how to use C++ code.
-
-# Is any value in a vector 'true'?
+## Is any value in a vector 'true'?
 
 Base R's `any()` function returns `TRUE` if there is at least one `TRUE` element in a vector, and `FALSE` otherwise.
 Below is one possible C++ implementation:
@@ -79,7 +77,7 @@ mark(
 )
 ```
 
-# Which elements in a vector are 'true'?
+## Which elements in a vector are 'true'?
 
 Base R's `which()` function returns the indices of the `TRUE` elements in a vector. Here is a possible C++ implementation:
 
@@ -142,7 +140,7 @@ mark(
 )
 ```
 
-# Are all values in a vector 'true'?
+## Are all values in a vector 'true'?
 
 Base R's `all()` function checks if all elements in a vector are `TRUE`. Here is a possible C++ implementation that loops over the vector:
 

@@ -11,13 +11,12 @@ editor:
 bibliography: ["references.bib"]
 ---
 
-# Note
+## Notes
 
-These functions ignore `NA` values for now. Adjustments for handling `NA` values are covered in a separate vignette.
+* These functions ignore `NA` values for now. Adjustments for handling `NA` values are covered in a separate vignette.
+* R already provides efficient versions of the functions covered here. This is just to illustrate how to use C++ code.
 
-R already provides efficient versions of the functions covered here. This is just to illustrate how to use C++ code.
-
-# Is any value in a vector 'true'?
+## Is any value in a vector 'true'?
 
 The following function expands the previous `any_cpp()` function to handle missing values.
 
@@ -68,7 +67,7 @@ mark(
 )
 ```
 
-# Which elements in a vector are 'true'?
+## Which elements in a vector are 'true'?
 
 The following function expands the previous `which_cpp()` function to handle missing values.
 
@@ -112,7 +111,7 @@ mark(
 )
 ```
 
-# Are all values in a vector 'true'?
+## Are all values in a vector 'true'?
 
 The following function expands the previous `all_cpp()` function to handle missing values.
 
@@ -219,5 +218,3 @@ mark(
   all2_cpp_3(x > 2)
 )
 ```
-
-# References

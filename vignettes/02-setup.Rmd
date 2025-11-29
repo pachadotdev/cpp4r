@@ -11,16 +11,24 @@ editor:
 bibliography: ["references.bib"]
 ---
 
-# C++ Setup
+## C++ Setup
 
-You will need a working C++ compiler capable of compiling C++11 code.
-To get it:
+You will need a working C++ compiler capable of compiling C++ code using the C++11 standard or newer. To get it:
 
 -   On Windows, install [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
 -   On Mac, install Xcode from the App Store.
 -   On Linux, `sudo pacman -Syu install build-essential g++-11` or similar.
 
-## For Ubuntu Users
+On my laptop, this is the output of `g++ --version`:
+
+```bash
+g++ (GCC) 15.2.1 20250813
+Copyright (C) 2025 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+### For Ubuntu Users
 
 After installing `g++-11`, you may still encounter issues compiling C++ code due to missing standard library headers. This does not happen when testing on Manjaro Linux.
 
@@ -58,7 +66,7 @@ fatal error: 'vector' file not found
 cannot find -lc++abi: No such file or directory
 ```
 
-# R Setup
+## R Setup
 
 You can install the R packages `bench`, `cpp4r`, `devtools` and `usethis` with the following command:
 
