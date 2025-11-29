@@ -22,6 +22,23 @@ template <typename T>
 inline r_vector<T>::r_vector(SEXP&& data, bool is_altrep)
     : cpp4r::r_vector<T>(data, is_altrep), capacity_(length_) {}
 
+// Fast-path constructor for freshly allocated data
+// Optimized for performance-critical paths like matrix allocation
+// Preconditions:
+//   - data was just allocated by Rf_allocVector/Rf_allocMatrix
+//   - data is NOT ALTREP (fresh allocations never are)
+//   - data is owned (no duplicate needed)
+template <typename T>
+CPP4R_ALWAYS_INLINE r_vector<T>::r_vector(SEXP data, fresh_allocation_tag)
+    : cpp4r::r_vector<T>(), capacity_(Rf_xlength(data)) {
+  // Direct initialization bypassing parent constructor overhead
+  data_ = data;
+  protect_ = detail::store::insert(data);
+  is_altrep_ = false;  // Fresh allocations are never ALTREP
+  data_p_ = get_p(false, data);
+  length_ = capacity_;
+}
+
 template <typename T>
 inline r_vector<T>::r_vector(const r_vector& rhs) {
   // We don't want to just pass through to the read-only constructor because we'd
@@ -117,6 +134,7 @@ inline r_vector<T>::r_vector(std::initializer_list<named_arg> il)
       // SAFETY: We've validated type and length ahead of this.
       const underlying_type elt = get_elt(value, 0);
 
+#if CPP4R_HAS_CXX17
       if constexpr (std::is_same<T, cpp4r::r_string>::value) {
         // Translate to UTF-8 before assigning for string types
         SEXP translated_elt = Rf_mkCharCE(Rf_translateCharUTF8(elt), CE_UTF8);
@@ -135,6 +153,9 @@ inline r_vector<T>::r_vector(std::initializer_list<named_arg> il)
           set_elt(data_, i, elt);
         }
       }
+#else
+      named_arg_assign_elt(i, elt, std::is_same<T, cpp4r::r_string>{});
+#endif
 
       SEXP name = Rf_mkCharCE(it->name(), CE_UTF8);
       SET_STRING_ELT(names, i, name);
@@ -144,10 +165,37 @@ inline r_vector<T>::r_vector(std::initializer_list<named_arg> il)
   });
 }
 
+#if !CPP4R_HAS_CXX17
+// Helper for named_arg constructor when T is r_string
 template <typename T>
-inline r_vector<T>::r_vector(const R_xlen_t size) : r_vector() {
-  resize(size);
+inline void r_vector<T>::named_arg_assign_elt(R_xlen_t i, underlying_type elt,
+                                              std::true_type) {
+  // Translate to UTF-8 before assigning for string types
+  SEXP translated_elt = Rf_mkCharCE(Rf_translateCharUTF8(elt), CE_UTF8);
+
+  if (data_p_ != nullptr) {
+    data_p_[i] = translated_elt;
+  } else {
+    set_elt(data_, i, translated_elt);
+  }
 }
+
+// Helper for named_arg constructor when T is not r_string
+template <typename T>
+inline void r_vector<T>::named_arg_assign_elt(R_xlen_t i, underlying_type elt,
+                                              std::false_type) {
+  if (data_p_ != nullptr) {
+    data_p_[i] = elt;
+  } else {
+    set_elt(data_, i, elt);
+  }
+}
+#endif
+
+// Optimized size constructor using fast-path allocation
+template <typename T>
+CPP4R_ALWAYS_INLINE r_vector<T>::r_vector(const R_xlen_t size)
+    : r_vector(safe[Rf_allocVector](get_sexptype(), size), fresh_allocation_tag{}) {}
 
 template <typename T>
 template <typename Iter>
@@ -215,58 +263,86 @@ inline r_vector<T>& r_vector<T>::operator=(r_vector&& rhs) {
 }
 
 template <typename T>
-inline r_vector<T>::operator SEXP() const {
+CPP4R_ALWAYS_INLINE r_vector<T>::operator SEXP() const {
+  // Fast path: most common case - data is valid and length == capacity
+  if (CPP4R_LIKELY(data_ != R_NilValue && length_ == capacity_)) {
+    return data_;
+  }
+
+  // Slow paths for edge cases
   // Throwing away the const-ness is a bit gross, but we only modify
   // internal details here, and updating the internal data after we resize allows
   // statements like `Rf_setAttrib(<r_vector>, name, value)` to make sense, where
   // people expect that the SEXP inside the `<r_vector>` gets the updated attribute.
   auto* p = const_cast<r_vector<T>*>(this);
 
-  if (data_ == R_NilValue) {
+  if (CPP4R_UNLIKELY(data_ == R_NilValue)) {
     // Specially call out the `NULL` case, which can occur if immediately
     // returning a default constructed writable `r_vector` as a `SEXP`.
     p->resize(0);
     return data_;
   }
 
-  if (length_ < capacity_) {
-    // Truncate the vector to its `length_`. This unfortunately typically forces
-    // an allocation if the user has called `push_back()` on a writable
-    // `r_vector`. Importantly, going through `resize()` updates: `data_` and
-    // protection of it, `data_p_`, and `capacity_`.
-    p->resize(length_);
-    return data_;
-  }
-
+  // length_ < capacity_: Truncate the vector to its `length_`.
+  // This unfortunately typically forces an allocation if the user has called
+  // `push_back()` on a writable `r_vector`. Importantly, going through `resize()`
+  // updates: `data_` and protection of it, `data_p_`, and `capacity_`.
+  p->resize(length_);
   return data_;
 }
 
 #ifdef LONG_VECTOR_SUPPORT
 template <typename T>
-inline typename r_vector<T>::reference r_vector<T>::operator[](const int pos) const {
+CPP4R_ALWAYS_INLINE
+    typename r_vector<T>::reference r_vector<T>::operator[](const int pos) const {
   return operator[](static_cast<R_xlen_t>(pos));
 }
 #endif
 
 template <typename T>
-inline typename r_vector<T>::reference r_vector<T>::operator[](const R_xlen_t pos) const {
+CPP4R_ALWAYS_INLINE
+    typename r_vector<T>::reference r_vector<T>::operator[](const R_xlen_t pos) const {
+#if CPP4R_HAS_CXX17
   if constexpr (traits::use_raw_pointer<T>::value) {
     return data_p_[pos];
   } else {
-    if (is_altrep_) {
+    if (CPP4R_UNLIKELY(is_altrep_)) {
       return {data_, pos, nullptr, true};
     }
     return {data_, pos, data_p_ != nullptr ? &data_p_[pos] : nullptr, false};
   }
+#else
+  return subscript_impl(pos, traits::use_raw_pointer<T>{});
+#endif
+}
+
+#if !CPP4R_HAS_CXX17
+template <typename T>
+CPP4R_ALWAYS_INLINE
+    typename r_vector<T>::reference r_vector<T>::subscript_impl(const R_xlen_t pos,
+                                                                std::true_type) const {
+  return data_p_[pos];
 }
 
 template <typename T>
-inline typename r_vector<T>::reference r_vector<T>::operator[](const size_type pos) const {
+CPP4R_ALWAYS_INLINE typename r_vector<T>::reference r_vector<T>::subscript_impl(
+    const R_xlen_t pos, std::false_type) const {
+  if (CPP4R_UNLIKELY(is_altrep_)) {
+    return {data_, pos, nullptr, true};
+  }
+  return {data_, pos, data_p_ != nullptr ? &data_p_[pos] : nullptr, false};
+}
+#endif
+
+template <typename T>
+CPP4R_ALWAYS_INLINE
+    typename r_vector<T>::reference r_vector<T>::operator[](const size_type pos) const {
   return operator[](static_cast<R_xlen_t>(pos));
 }
 
 template <typename T>
-inline typename r_vector<T>::reference r_vector<T>::operator[](const r_string& name) const {
+inline typename r_vector<T>::reference r_vector<T>::operator[](
+    const r_string& name) const {
   SEXP names = PROTECT(this->names());
   R_xlen_t size = Rf_xlength(names);
 
@@ -385,22 +461,58 @@ inline void r_vector<T>::clear() {
 }
 
 template <typename T>
-inline typename r_vector<T>::iterator r_vector<T>::begin() const {
+CPP4R_ALWAYS_INLINE typename r_vector<T>::iterator r_vector<T>::begin() const {
+#if CPP4R_HAS_CXX17
   if constexpr (traits::use_raw_pointer<T>::value) {
     return reinterpret_cast<iterator>(data_p_);
   } else {
     return generic_iterator(this, 0);
   }
+#else
+  return begin_impl(traits::use_raw_pointer<T>{});
+#endif
+}
+
+#if !CPP4R_HAS_CXX17
+template <typename T>
+CPP4R_ALWAYS_INLINE
+    typename r_vector<T>::iterator r_vector<T>::begin_impl(std::true_type) const {
+  return reinterpret_cast<iterator>(data_p_);
 }
 
 template <typename T>
-inline typename r_vector<T>::iterator r_vector<T>::end() const {
+CPP4R_ALWAYS_INLINE typename r_vector<T>::iterator r_vector<T>::begin_impl(
+    std::false_type) const {
+  return generic_iterator(this, 0);
+}
+#endif
+
+template <typename T>
+CPP4R_ALWAYS_INLINE typename r_vector<T>::iterator r_vector<T>::end() const {
+#if CPP4R_HAS_CXX17
   if constexpr (traits::use_raw_pointer<T>::value) {
     return reinterpret_cast<iterator>(data_p_ + length_);
   } else {
     return generic_iterator(this, length_);
   }
+#else
+  return end_impl(traits::use_raw_pointer<T>{});
+#endif
 }
+
+#if !CPP4R_HAS_CXX17
+template <typename T>
+CPP4R_ALWAYS_INLINE
+    typename r_vector<T>::iterator r_vector<T>::end_impl(std::true_type) const {
+  return reinterpret_cast<iterator>(data_p_ + length_);
+}
+
+template <typename T>
+CPP4R_ALWAYS_INLINE typename r_vector<T>::iterator r_vector<T>::end_impl(
+    std::false_type) const {
+  return generic_iterator(this, length_);
+}
+#endif
 
 template <typename T>
 inline typename r_vector<T>::iterator r_vector<T>::find(const r_string& name) const {
@@ -479,6 +591,7 @@ inline typename r_vector<T>::proxy& r_vector<T>::proxy::operator=(const T& rhs) 
 template <typename T>
 template <typename U>
 inline typename r_vector<T>::proxy& r_vector<T>::proxy::operator=(const U& rhs) {
+#if CPP4R_HAS_CXX17
   if constexpr (std::is_same<T, cpp4r::r_string>::value) {
     // Handle string assignment specially
     SEXP s = as_sexp(rhs);
@@ -488,7 +601,8 @@ inline typename r_vector<T>::proxy& r_vector<T>::proxy::operator=(const U& rhs) 
     SEXP char_sexp = Rf_mkCharCE(Rf_translateCharUTF8(s), CE_UTF8);
     set(char_sexp);
   } else if constexpr (std::is_same<T, cpp4r::r_complex>::value) {
-    if constexpr (std::is_same<typename std::decay<U>::type, std::complex<double>>::value) {
+    if constexpr (std::is_same<typename std::decay<U>::type,
+                               std::complex<double>>::value) {
       Rcomplex c;
       c.r = rhs.real();
       c.i = rhs.imag();
@@ -506,8 +620,88 @@ inline typename r_vector<T>::proxy& r_vector<T>::proxy::operator=(const U& rhs) 
     const underlying_type elt = static_cast<underlying_type>(rhs);
     set(elt);
   }
+#else
+  proxy_assign_dispatch(rhs, std::is_same<T, cpp4r::r_string>{},
+                        std::is_same<T, cpp4r::r_complex>{});
+#endif
   return *this;
 }
+
+#if !CPP4R_HAS_CXX17
+// Dispatch for r_string type
+template <typename T>
+template <typename U>
+inline void r_vector<T>::proxy::proxy_assign_dispatch(const U& rhs, std::true_type,
+                                                      std::false_type) {
+  SEXP s = as_sexp(rhs);
+  if (TYPEOF(s) == STRSXP && Rf_xlength(s) > 0) {
+    s = STRING_ELT(s, 0);
+  }
+  SEXP char_sexp = Rf_mkCharCE(Rf_translateCharUTF8(s), CE_UTF8);
+  set(char_sexp);
+}
+
+// Dispatch for r_complex type
+template <typename T>
+template <typename U>
+inline void r_vector<T>::proxy::proxy_assign_dispatch(const U& rhs, std::false_type,
+                                                      std::true_type) {
+  proxy_assign_complex(
+      rhs, std::is_same<typename std::decay<U>::type, std::complex<double>>{},
+      typename std::conditional<std::is_arithmetic<U>::value, std::true_type,
+                                std::false_type>::type{});
+}
+
+// Dispatch for other types
+template <typename T>
+template <typename U>
+inline void r_vector<T>::proxy::proxy_assign_dispatch(const U& rhs, std::false_type,
+                                                      std::false_type) {
+  const underlying_type elt = static_cast<underlying_type>(rhs);
+  set(elt);
+}
+
+// Complex assignment when U is std::complex<double>
+template <typename T>
+template <typename U>
+inline void r_vector<T>::proxy::proxy_assign_complex(const U& rhs, std::true_type,
+                                                     std::false_type) {
+  Rcomplex c;
+  c.r = rhs.real();
+  c.i = rhs.imag();
+  set(c);
+}
+
+template <typename T>
+template <typename U>
+inline void r_vector<T>::proxy::proxy_assign_complex(const U& rhs, std::true_type,
+                                                     std::true_type) {
+  Rcomplex c;
+  c.r = rhs.real();
+  c.i = rhs.imag();
+  set(c);
+}
+
+// Complex assignment when U is arithmetic (but not complex)
+template <typename T>
+template <typename U>
+inline void r_vector<T>::proxy::proxy_assign_complex(const U& rhs, std::false_type,
+                                                     std::true_type) {
+  Rcomplex c;
+  c.r = static_cast<double>(rhs);
+  c.i = 0.0;
+  set(c);
+}
+
+// Complex assignment fallback
+template <typename T>
+template <typename U>
+inline void r_vector<T>::proxy::proxy_assign_complex(const U& rhs, std::false_type,
+                                                     std::false_type) {
+  const underlying_type elt = static_cast<underlying_type>(rhs);
+  set(elt);
+}
+#endif
 
 template <typename T>
 inline typename r_vector<T>::proxy& r_vector<T>::proxy::operator+=(const T& rhs) {
@@ -586,7 +780,8 @@ r_vector<T>::generic_iterator::generic_iterator(const r_vector* data, R_xlen_t p
     : r_vector::generic_const_iterator(data, pos) {}
 
 template <typename T>
-inline typename r_vector<T>::generic_iterator& r_vector<T>::generic_iterator::operator++() {
+inline typename r_vector<T>::generic_iterator&
+r_vector<T>::generic_iterator::operator++() {
   ++pos_;
   if (use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_) {
     fill_buf(pos_);
@@ -608,7 +803,8 @@ inline typename r_vector<T>::proxy r_vector<T>::generic_iterator::operator*() co
 }
 
 template <typename T>
-inline typename r_vector<T>::generic_iterator& r_vector<T>::generic_iterator::operator+=(R_xlen_t rhs) {
+inline typename r_vector<T>::generic_iterator& r_vector<T>::generic_iterator::operator+=(
+    R_xlen_t rhs) {
   pos_ += rhs;
   if (use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_) {
     fill_buf(pos_);
@@ -617,7 +813,8 @@ inline typename r_vector<T>::generic_iterator& r_vector<T>::generic_iterator::op
 }
 
 template <typename T>
-inline typename r_vector<T>::generic_iterator r_vector<T>::generic_iterator::operator+(R_xlen_t rhs) {
+inline typename r_vector<T>::generic_iterator r_vector<T>::generic_iterator::operator+(
+    R_xlen_t rhs) {
   auto it = *this;
   it += rhs;
   return it;

@@ -5,25 +5,25 @@
 \hline
 Standard & Compiler & cpp11 & cpp4r & Rcpp \\
 \hline
-\multirow{2}{*}{C++11} & \multirow{1}{*}{Clang} & $0.011 (0.64)$ & $8.0 \times 10^{-3} (0.49)$ & $9.2 \times 10^{-3} (0.56)$ \\
+\multirow{2}{*}{C++11} & \multirow{1}{*}{Clang} & $0.015 (0.75)$ & $0.011 (0.55)$ & $0.014 (0.65)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $0.011 (0.65)$ & $8.4 \times 10^{-3} (0.49)$ & $9.7 \times 10^{-3} (0.57)$ \\
+ & \multirow{1}{*}{GCC} & $0.016 (0.75)$ & $0.012 (0.57)$ & $0.014 (0.64)$ \\
 \hline
-\multirow{2}{*}{C++14} & \multirow{1}{*}{Clang} & $0.011 (0.66)$ & $8.5 \times 10^{-3} (0.5)$ & $9.6 \times 10^{-3} (0.57)$ \\
+\multirow{2}{*}{C++14} & \multirow{1}{*}{Clang} & $0.016 (0.78)$ & $0.013 (0.63)$ & $0.018 (0.86)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $9.8 \times 10^{-3} (0.64)$ & $7.4 \times 10^{-3} (0.49)$ & $8.1 \times 10^{-3} (0.53)$ \\
+ & \multirow{1}{*}{GCC} & $0.015 (0.75)$ & $0.012 (0.58)$ & $0.015 (0.7)$ \\
 \hline
-\multirow{2}{*}{C++17} & \multirow{1}{*}{Clang} & $0.01 (0.64)$ & $7.6 \times 10^{-3} (0.47)$ & $8.4 \times 10^{-3} (0.53)$ \\
+\multirow{2}{*}{C++17} & \multirow{1}{*}{Clang} & $0.02 (0.75)$ & $0.015 (0.55)$ & $0.018 (0.67)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $9.7 \times 10^{-3} (0.63)$ & $7.3 \times 10^{-3} (0.49)$ & $8.5 \times 10^{-3} (0.56)$ \\
+ & \multirow{1}{*}{GCC} & $0.02 (0.72)$ & $0.016 (0.56)$ & $0.019 (0.68)$ \\
 \hline
-\multirow{2}{*}{C++20} & \multirow{1}{*}{Clang} & $9.9 \times 10^{-3} (0.61)$ & $7.4 \times 10^{-3} (0.46)$ & $8.3 \times 10^{-3} (0.52)$ \\
+\multirow{2}{*}{C++20} & \multirow{1}{*}{Clang} & $0.019 (0.68)$ & $0.014 (0.51)$ & $0.016 (0.56)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $0.011 (0.65)$ & $0.01 (0.6)$ & $0.01 (0.6)$ \\
+ & \multirow{1}{*}{GCC} & $0.02 (0.82)$ & $0.016 (0.68)$ & $0.017 (0.67)$ \\
 \hline
-\multirow{2}{*}{C++23} & \multirow{1}{*}{Clang} & $0.01 (0.64)$ & $7.3 \times 10^{-3} (0.47)$ & $8.2 \times 10^{-3} (0.53)$ \\
+\multirow{2}{*}{C++23} & \multirow{1}{*}{Clang} & $0.014 (0.69)$ & $0.012 (0.6)$ & $0.016 (0.75)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $0.01 (0.61)$ & $7.5 \times 10^{-3} (0.45)$ & $8.2 \times 10^{-3} (0.5)$ \\
+ & \multirow{1}{*}{GCC} & $0.015 (0.69)$ & $0.012 (0.55)$ & $0.016 (0.68)$ \\
 \hline
 \end{tabular}
 \caption{Add four matrices benchmark}
@@ -37,25 +37,25 @@ Standard & Compiler & cpp11 & cpp4r & Rcpp \\
 \hline
 Standard & Compiler & cpp11 & cpp4r & Rcpp \\
 \hline
-\multirow{2}{*}{C++11} & \multirow{1}{*}{Clang} & $7.7 \times 10^{-3} (0.84)$ & $5.2 \times 10^{-3} (0.57)$ & $7.0 \times 10^{-3} (0.74)$ \\
+\multirow{2}{*}{C++11} & \multirow{1}{*}{Clang} & $8.9 \times 10^{-3} (0.43)$ & $6.8 \times 10^{-3} (0.31)$ & $0.013 (0.52)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $8.9 \times 10^{-3} (0.87)$ & $5.8 \times 10^{-3} (0.56)$ & $7.5 \times 10^{-3} (0.71)$ \\
+ & \multirow{1}{*}{GCC} & $9.2 \times 10^{-3} (0.41)$ & $6.2 \times 10^{-3} (0.27)$ & $0.012 (0.48)$ \\
 \hline
-\multirow{2}{*}{C++14} & \multirow{1}{*}{Clang} & $7.4 \times 10^{-3} (0.84)$ & $5.0 \times 10^{-3} (0.56)$ & $6.9 \times 10^{-3} (0.76)$ \\
+\multirow{2}{*}{C++14} & \multirow{1}{*}{Clang} & $9.0 \times 10^{-3} (0.43)$ & $6.6 \times 10^{-3} (0.3)$ & $0.012 (0.49)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $6.7 \times 10^{-3} (0.8)$ & $4.8 \times 10^{-3} (0.57)$ & $6.5 \times 10^{-3} (0.76)$ \\
+ & \multirow{1}{*}{GCC} & $8.4 \times 10^{-3} (0.41)$ & $6.6 \times 10^{-3} (0.3)$ & $0.011 (0.48)$ \\
 \hline
-\multirow{2}{*}{C++17} & \multirow{1}{*}{Clang} & $7.4 \times 10^{-3} (0.87)$ & $5.0 \times 10^{-3} (0.59)$ & $6.6 \times 10^{-3} (0.76)$ \\
+\multirow{2}{*}{C++17} & \multirow{1}{*}{Clang} & $9.8 \times 10^{-3} (0.36)$ & $7.7 \times 10^{-3} (0.26)$ & $0.016 (0.51)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $6.8 \times 10^{-3} (0.85)$ & $4.8 \times 10^{-3} (0.59)$ & $6.3 \times 10^{-3} (0.77)$ \\
+ & \multirow{1}{*}{GCC} & $0.014 (0.45)$ & $8.9 \times 10^{-3} (0.28)$ & $0.017 (0.47)$ \\
 \hline
-\multirow{2}{*}{C++20} & \multirow{1}{*}{Clang} & $7.1 \times 10^{-3} (0.82)$ & $5.0 \times 10^{-3} (0.57)$ & $6.3 \times 10^{-3} (0.71)$ \\
+\multirow{2}{*}{C++20} & \multirow{1}{*}{Clang} & $0.01 (0.38)$ & $8.3 \times 10^{-3} (0.29)$ & $0.015 (0.48)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $7.4 \times 10^{-3} (0.75)$ & $5.1 \times 10^{-3} (0.51)$ & $7.0 \times 10^{-3} (0.69)$ \\
+ & \multirow{1}{*}{GCC} & $9.4 \times 10^{-3} (0.35)$ & $7.0 \times 10^{-3} (0.24)$ & $0.013 (0.4)$ \\
 \hline
-\multirow{2}{*}{C++23} & \multirow{1}{*}{Clang} & $6.9 \times 10^{-3} (0.8)$ & $4.9 \times 10^{-3} (0.56)$ & $6.3 \times 10^{-3} (0.71)$ \\
+\multirow{2}{*}{C++23} & \multirow{1}{*}{Clang} & $8.8 \times 10^{-3} (0.44)$ & $6.3 \times 10^{-3} (0.3)$ & $0.012 (0.5)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $7.3 \times 10^{-3} (0.81)$ & $4.9 \times 10^{-3} (0.55)$ & $6.5 \times 10^{-3} (0.72)$ \\
+ & \multirow{1}{*}{GCC} & $9.3 \times 10^{-3} (0.43)$ & $7.3 \times 10^{-3} (0.32)$ & $0.013 (0.53)$ \\
 \hline
 \end{tabular}
 \caption{Add two matrices benchmark}
@@ -69,25 +69,25 @@ Standard & Compiler & cpp11 & cpp4r & Rcpp \\
 \hline
 Standard & Compiler & cpp11 & cpp4r & Rcpp \\
 \hline
-\multirow{2}{*}{C++11} & \multirow{1}{*}{Clang} & $3.4 \times 10^{-6} (1.6 \times 10^{-5})$ & $3.0 \times 10^{-6} (1.4 \times 10^{-5})$ & $3.7 \times 10^{-6} (1.8 \times 10^{-5})$ \\
+\multirow{2}{*}{C++11} & \multirow{1}{*}{Clang} & $1.8 \times 10^{-5} (4.8 \times 10^{-5})$ & $1.7 \times 10^{-5} (4.6 \times 10^{-5})$ & $1.9 \times 10^{-5} (5.1 \times 10^{-5})$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $5.8 \times 10^{-6} (2.2 \times 10^{-5})$ & $5.2 \times 10^{-6} (1.9 \times 10^{-5})$ & $6.3 \times 10^{-6} (2.4 \times 10^{-5})$ \\
+ & \multirow{1}{*}{GCC} & $1.7 \times 10^{-5} (4.7 \times 10^{-5})$ & $1.6 \times 10^{-5} (4.4 \times 10^{-5})$ & $1.8 \times 10^{-5} (4.9 \times 10^{-5})$ \\
 \hline
-\multirow{2}{*}{C++14} & \multirow{1}{*}{Clang} & $6.0 \times 10^{-6} (2.2 \times 10^{-5})$ & $5.3 \times 10^{-6} (2.0 \times 10^{-5})$ & $6.4 \times 10^{-6} (2.4 \times 10^{-5})$ \\
+\multirow{2}{*}{C++14} & \multirow{1}{*}{Clang} & $1.8 \times 10^{-5} (5.0 \times 10^{-5})$ & $1.7 \times 10^{-5} (4.7 \times 10^{-5})$ & $1.8 \times 10^{-5} (5.2 \times 10^{-5})$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $5.4 \times 10^{-6} (2.6 \times 10^{-5})$ & $5.0 \times 10^{-6} (2.4 \times 10^{-5})$ & $5.8 \times 10^{-6} (2.9 \times 10^{-5})$ \\
+ & \multirow{1}{*}{GCC} & $1.8 \times 10^{-5} (4.9 \times 10^{-5})$ & $1.6 \times 10^{-5} (4.5 \times 10^{-5})$ & $1.9 \times 10^{-5} (5.1 \times 10^{-5})$ \\
 \hline
-\multirow{2}{*}{C++17} & \multirow{1}{*}{Clang} & $6.2 \times 10^{-6} (2.4 \times 10^{-5})$ & $5.5 \times 10^{-6} (2.1 \times 10^{-5})$ & $6.7 \times 10^{-6} (2.6 \times 10^{-5})$ \\
+\multirow{2}{*}{C++17} & \multirow{1}{*}{Clang} & $2.4 \times 10^{-5} (4.9 \times 10^{-5})$ & $1.9 \times 10^{-5} (4.1 \times 10^{-5})$ & $2.3 \times 10^{-5} (4.8 \times 10^{-5})$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $3.4 \times 10^{-6} (1.7 \times 10^{-5})$ & $2.9 \times 10^{-6} (1.4 \times 10^{-5})$ & $3.5 \times 10^{-6} (1.8 \times 10^{-5})$ \\
+ & \multirow{1}{*}{GCC} & $1.8 \times 10^{-5} (3.9 \times 10^{-5})$ & $1.6 \times 10^{-5} (3.5 \times 10^{-5})$ & $1.8 \times 10^{-5} (3.9 \times 10^{-5})$ \\
 \hline
-\multirow{2}{*}{C++20} & \multirow{1}{*}{Clang} & $3.7 \times 10^{-6} (1.8 \times 10^{-5})$ & $3.3 \times 10^{-6} (1.5 \times 10^{-5})$ & $3.9 \times 10^{-6} (1.9 \times 10^{-5})$ \\
+\multirow{2}{*}{C++20} & \multirow{1}{*}{Clang} & $1.9 \times 10^{-5} (4.8 \times 10^{-5})$ & $1.9 \times 10^{-5} (4.6 \times 10^{-5})$ & $2.4 \times 10^{-5} (5.9 \times 10^{-5})$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $3.5 \times 10^{-6} (1.9 \times 10^{-5})$ & $3.1 \times 10^{-6} (1.7 \times 10^{-5})$ & $3.8 \times 10^{-6} (2.1 \times 10^{-5})$ \\
+ & \multirow{1}{*}{GCC} & $2.4 \times 10^{-5} (4.9 \times 10^{-5})$ & $2.2 \times 10^{-5} (4.6 \times 10^{-5})$ & $3.4 \times 10^{-5} (6.7 \times 10^{-5})$ \\
 \hline
-\multirow{2}{*}{C++23} & \multirow{1}{*}{Clang} & $4.5 \times 10^{-6} (2.1 \times 10^{-5})$ & $4.2 \times 10^{-6} (2.0 \times 10^{-5})$ & $5.3 \times 10^{-6} (2.5 \times 10^{-5})$ \\
+\multirow{2}{*}{C++23} & \multirow{1}{*}{Clang} & $1.8 \times 10^{-5} (4.1 \times 10^{-5})$ & $1.9 \times 10^{-5} (4.3 \times 10^{-5})$ & $2.4 \times 10^{-5} (5.3 \times 10^{-5})$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $6.7 \times 10^{-6} (2.3 \times 10^{-5})$ & $8.5 \times 10^{-6} (2.6 \times 10^{-5})$ & $8.3 \times 10^{-6} (2.8 \times 10^{-5})$ \\
+ & \multirow{1}{*}{GCC} & $1.7 \times 10^{-5} (3.2 \times 10^{-5})$ & $1.6 \times 10^{-5} (3.0 \times 10^{-5})$ & $1.8 \times 10^{-5} (3.4 \times 10^{-5})$ \\
 \hline
 \end{tabular}
 \caption{Multiple matrix operations benchmark}
@@ -101,25 +101,25 @@ Standard & Compiler & cpp11 & cpp4r & Rcpp \\
 \hline
 Standard & Compiler & cpp11 & cpp4r & Rcpp \\
 \hline
-\multirow{2}{*}{C++11} & \multirow{1}{*}{Clang} & $0.047 (1.8)$ & $0.046 (1.7)$ & $0.047 (1.7)$ \\
+\multirow{2}{*}{C++11} & \multirow{1}{*}{Clang} & $0.056 (1.7)$ & $0.051 (1.5)$ & $0.05 (1.5)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $0.044 (1.5)$ & $0.041 (1.4)$ & $0.041 (1.4)$ \\
+ & \multirow{1}{*}{GCC} & $0.056 (1.7)$ & $0.054 (1.6)$ & $0.055 (1.6)$ \\
 \hline
-\multirow{2}{*}{C++14} & \multirow{1}{*}{Clang} & $0.045 (1.6)$ & $0.045 (1.6)$ & $0.044 (1.5)$ \\
+\multirow{2}{*}{C++14} & \multirow{1}{*}{Clang} & $0.055 (1.2)$ & $0.054 (1.2)$ & $0.054 (1.2)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $0.045 (1.8)$ & $0.042 (1.7)$ & $0.044 (1.8)$ \\
+ & \multirow{1}{*}{GCC} & $0.053 (1.5)$ & $0.055 (1.6)$ & $0.055 (1.6)$ \\
 \hline
-\multirow{2}{*}{C++17} & \multirow{1}{*}{Clang} & $0.042 (1.6)$ & $0.041 (1.6)$ & $0.039 (1.5)$ \\
+\multirow{2}{*}{C++17} & \multirow{1}{*}{Clang} & $0.066 (1.7)$ & $0.061 (1.6)$ & $0.056 (1.4)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $0.044 (1.8)$ & $0.043 (1.8)$ & $0.043 (1.7)$ \\
+ & \multirow{1}{*}{GCC} & $0.063 (1.5)$ & $0.064 (1.6)$ & $0.068 (1.6)$ \\
 \hline
-\multirow{2}{*}{C++20} & \multirow{1}{*}{Clang} & $0.042 (1.7)$ & $0.04 (1.6)$ & $0.041 (1.6)$ \\
+\multirow{2}{*}{C++20} & \multirow{1}{*}{Clang} & $0.061 (1.4)$ & $0.062 (1.4)$ & $0.052 (1.2)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $0.043 (1.6)$ & $0.041 (1.5)$ & $0.041 (1.5)$ \\
+ & \multirow{1}{*}{GCC} & $0.064 (1.8)$ & $0.068 (2)$ & $0.062 (1.8)$ \\
 \hline
-\multirow{2}{*}{C++23} & \multirow{1}{*}{Clang} & $0.04 (1.6)$ & $0.038 (1.5)$ & $0.038 (1.5)$ \\
+\multirow{2}{*}{C++23} & \multirow{1}{*}{Clang} & $0.055 (1.5)$ & $0.058 (1.6)$ & $0.052 (1.4)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $0.044 (1.7)$ & $0.043 (1.7)$ & $0.044 (1.7)$ \\
+ & \multirow{1}{*}{GCC} & $0.062 (1.4)$ & $0.065 (1.5)$ & $0.067 (1.5)$ \\
 \hline
 \end{tabular}
 \caption{Multiply four matrices benchmark}
@@ -133,25 +133,25 @@ Standard & Compiler & cpp11 & cpp4r & Rcpp \\
 \hline
 Standard & Compiler & cpp11 & cpp4r & Rcpp \\
 \hline
-\multirow{2}{*}{C++11} & \multirow{1}{*}{Clang} & $5.2 \times 10^{-3} (1.8)$ & $3.2 \times 10^{-3} (1.1)$ & $4.1 \times 10^{-3} (1.4)$ \\
+\multirow{2}{*}{C++11} & \multirow{1}{*}{Clang} & $8.3 \times 10^{-3} (1.7)$ & $6.4 \times 10^{-3} (1)$ & $7.6 \times 10^{-3} (1.3)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $4.7 \times 10^{-3} (1.8)$ & $2.8 \times 10^{-3} (0.98)$ & $3.6 \times 10^{-3} (1.3)$ \\
+ & \multirow{1}{*}{GCC} & $7.9 \times 10^{-3} (1.6)$ & $6.0 \times 10^{-3} (0.99)$ & $7.3 \times 10^{-3} (1.3)$ \\
 \hline
-\multirow{2}{*}{C++14} & \multirow{1}{*}{Clang} & $4.8 \times 10^{-3} (1.8)$ & $2.9 \times 10^{-3} (0.99)$ & $3.8 \times 10^{-3} (1.3)$ \\
+\multirow{2}{*}{C++14} & \multirow{1}{*}{Clang} & $7.6 \times 10^{-3} (1.7)$ & $5.8 \times 10^{-3} (1.1)$ & $7.4 \times 10^{-3} (1.4)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $4.7 \times 10^{-3} (1.8)$ & $2.9 \times 10^{-3} (1)$ & $3.5 \times 10^{-3} (1.3)$ \\
+ & \multirow{1}{*}{GCC} & $7.9 \times 10^{-3} (1.7)$ & $6.2 \times 10^{-3} (1.1)$ & $7.0 \times 10^{-3} (1.3)$ \\
 \hline
-\multirow{2}{*}{C++17} & \multirow{1}{*}{Clang} & $4.5 \times 10^{-3} (1.7)$ & $2.7 \times 10^{-3} (0.98)$ & $3.4 \times 10^{-3} (1.3)$ \\
+\multirow{2}{*}{C++17} & \multirow{1}{*}{Clang} & $0.015 (2.7)$ & $7.7 \times 10^{-3} (1.1)$ & $8.6 \times 10^{-3} (1.3)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $4.8 \times 10^{-3} (1.8)$ & $2.9 \times 10^{-3} (1)$ & $3.8 \times 10^{-3} (1.4)$ \\
+ & \multirow{1}{*}{GCC} & $0.01 (1.7)$ & $8.2 \times 10^{-3} (1.2)$ & $8.2 \times 10^{-3} (1.2)$ \\
 \hline
-\multirow{2}{*}{C++20} & \multirow{1}{*}{Clang} & $5.3 \times 10^{-3} (1.9)$ & $3.1 \times 10^{-3} (1.1)$ & $3.8 \times 10^{-3} (1.3)$ \\
+\multirow{2}{*}{C++20} & \multirow{1}{*}{Clang} & $9.3 \times 10^{-3} (1.9)$ & $7.0 \times 10^{-3} (1.2)$ & $8.4 \times 10^{-3} (1.5)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $4.7 \times 10^{-3} (1.8)$ & $2.9 \times 10^{-3} (1)$ & $3.6 \times 10^{-3} (1.3)$ \\
+ & \multirow{1}{*}{GCC} & $9.3 \times 10^{-3} (1.5)$ & $8.7 \times 10^{-3} (1.2)$ & $0.011 (1.6)$ \\
 \hline
-\multirow{2}{*}{C++23} & \multirow{1}{*}{Clang} & $5.2 \times 10^{-3} (2)$ & $2.9 \times 10^{-3} (1)$ & $3.4 \times 10^{-3} (1.2)$ \\
+\multirow{2}{*}{C++23} & \multirow{1}{*}{Clang} & $8.4 \times 10^{-3} (1.6)$ & $6.6 \times 10^{-3} (1)$ & $8.1 \times 10^{-3} (1.4)$ \\
 \cline{2-5}
- & \multirow{1}{*}{GCC} & $5.3 \times 10^{-3} (1.9)$ & $3.1 \times 10^{-3} (1.1)$ & $3.6 \times 10^{-3} (1.3)$ \\
+ & \multirow{1}{*}{GCC} & $0.012 (1.8)$ & $7.6 \times 10^{-3} (0.94)$ & $8.8 \times 10^{-3} (1.2)$ \\
 \hline
 \end{tabular}
 \caption{Submatrix manipulation benchmark}

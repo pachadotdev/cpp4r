@@ -7,7 +7,8 @@
 #include <tuple>      // for tuple, make_tuple
 
 // NB: cpp4r/R.hpp must precede R_ext/Error.h to ensure R_NO_REMAP is defined
-#include "cpp4r/R.hpp"  // for SEXP, SEXPREC, CDR, R_NilValue, CAR, R_Pres...
+#include "cpp4r/R.hpp"            // for SEXP, SEXPREC, CDR, R_NilValue, CAR, R_Pres...
+#include "cpp4r/cpp_version.hpp"  // for CPP4R_ALWAYS_INLINE, CPP4R_LIKELY, etc.
 
 #include "R_ext/Boolean.h"  // for Rboolean
 #include "R_ext/Error.h"    // for Rf_error, Rf_warning
@@ -236,8 +237,8 @@ inline SEXP& get_root() {
   return root;
 }
 
-inline SEXP insert(SEXP x) {
-  if (x == R_NilValue) {
+CPP4R_ALWAYS_INLINE SEXP insert(SEXP x) {
+  if (CPP4R_UNLIKELY(x == R_NilValue)) {
     return R_NilValue;
   }
 
@@ -248,7 +249,7 @@ inline SEXP insert(SEXP x) {
   SEXP free_head = VECTOR_ELT(root, 1);
   SEXP node;
 
-  if (free_head != R_NilValue) {
+  if (CPP4R_LIKELY(free_head != R_NilValue)) {
     node = free_head;
     // Remove from free list
     SET_VECTOR_ELT(root, 1, CDR(node));
@@ -264,7 +265,7 @@ inline SEXP insert(SEXP x) {
 
   SEXP head = VECTOR_ELT(root, 0);
 
-  SETCDR(node, head);        // next = old_head
+  SETCDR(node, head);  // next = old_head
   // prev is already R_NilValue (from cons or release)
 
   if (head != R_NilValue) {
@@ -279,8 +280,8 @@ inline SEXP insert(SEXP x) {
   return node;
 }
 
-inline void release(SEXP node) {
-  if (node == R_NilValue) {
+CPP4R_ALWAYS_INLINE void release(SEXP node) {
+  if (CPP4R_UNLIKELY(node == R_NilValue)) {
     return;
   }
 
@@ -288,7 +289,7 @@ inline void release(SEXP node) {
   SEXP prev = TAG(node);
   SEXP next = CDR(node);
 
-  if (prev != R_NilValue) {
+  if (CPP4R_LIKELY(prev != R_NilValue)) {
     SETCDR(prev, next);
   } else {
     // node was head
@@ -296,7 +297,7 @@ inline void release(SEXP node) {
     SET_VECTOR_ELT(root, 0, next);
   }
 
-  if (next != R_NilValue) {
+  if (CPP4R_LIKELY(next != R_NilValue)) {
     SET_TAG(next, prev);
   }
 
@@ -309,8 +310,8 @@ inline void release(SEXP node) {
   SEXP root = get_root();
   SEXP free_head = VECTOR_ELT(root, 1);
 
-  SETCDR(node, free_head);  // next = old_free_head
-  SET_VECTOR_ELT(root, 1, node);       // root.free_head = node
+  SETCDR(node, free_head);        // next = old_free_head
+  SET_VECTOR_ELT(root, 1, node);  // root.free_head = node
 
   get_counter()--;
 }

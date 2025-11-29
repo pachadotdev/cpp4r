@@ -27,8 +27,19 @@ namespace cpp4r {
 using namespace cpp4r::literals;
 
 namespace traits {
-template <typename T> struct use_raw_pointer : std::false_type {};
-}
+// By default, types don't use raw pointer iterators
+template <typename T>
+struct use_raw_pointer : std::false_type {};
+
+// Specialize for primitive numeric types that can use raw pointer iterators
+// This enables Rcpp-style direct pointer access for maximum performance
+template <>
+struct use_raw_pointer<double> : std::true_type {};
+template <>
+struct use_raw_pointer<int> : std::true_type {};
+// Note: r_bool, r_string, r_complex, and list types still need generic iterators
+// because they require special handling (proxies, ALTREP awareness, etc.)
+}  // namespace traits
 
 namespace writable {
 template <typename T>
@@ -47,11 +58,14 @@ class r_vector {
   using scalar_type = T;
 
  private:
+  // Memory layout optimized for cache locality in hot paths:
+  // - data_, data_p_, length_ are accessed together in operator[] and iterators
+  // - protect_ and is_altrep_ are accessed less frequently
   SEXP data_ = R_NilValue;
-  SEXP protect_ = R_NilValue;
-  bool is_altrep_ = false;
-  underlying_type* data_p_ = nullptr;
-  R_xlen_t length_ = 0;
+  underlying_type* data_p_ = nullptr;  // Frequently accessed with data_
+  R_xlen_t length_ = 0;                // Frequently accessed with data_p_
+  SEXP protect_ = R_NilValue;          // Less frequently accessed
+  bool is_altrep_ = false;             // Rarely accessed in hot paths
 
  public:
   typedef ptrdiff_t difference_type;
@@ -159,11 +173,9 @@ class r_vector {
     void fill_buf(R_xlen_t pos);
   };
 
-  using const_iterator = typename std::conditional<
-      traits::use_raw_pointer<T>::value,
-      const T*,
-      generic_const_iterator
-  >::type;
+  using const_iterator =
+      typename std::conditional<traits::use_raw_pointer<T>::value, const T*,
+                                generic_const_iterator>::type;
 
   const_iterator begin() const;
   const_iterator end() const;
@@ -178,6 +190,14 @@ class r_vector {
                              const r_string& name) const;
 
  private:
+#if !CPP4R_HAS_CXX17
+  // C++11/14 fallback helpers for begin/end
+  const_iterator begin_impl(std::true_type) const;
+  const_iterator begin_impl(std::false_type) const;
+  const_iterator end_impl(std::true_type) const;
+  const_iterator end_impl(std::false_type) const;
+#endif
+
   // Implemented in specialization
   static underlying_type get_elt(SEXP x, R_xlen_t i);
   // Implemented in specialization
@@ -200,6 +220,9 @@ namespace writable {
 
 template <typename T>
 using has_begin_fun = std::decay<decltype(*begin(std::declval<T>()))>;
+
+// Tag type for fast-path constructor (freshly allocated, non-ALTREP data)
+struct fresh_allocation_tag {};
 
 // Read/write access to new or copied r_vectors
 template <typename T>
@@ -225,18 +248,12 @@ class r_vector : public cpp4r::r_vector<T> {
  public:
   typedef ptrdiff_t difference_type;
   typedef size_t size_type;
-  
-  using reference = typename std::conditional<
-      traits::use_raw_pointer<T>::value,
-      T&,
-      proxy
-  >::type;
 
-  using value_type = typename std::conditional<
-      traits::use_raw_pointer<T>::value,
-      T,
-      proxy
-  >::type;
+  using reference =
+      typename std::conditional<traits::use_raw_pointer<T>::value, T&, proxy>::type;
+
+  using value_type =
+      typename std::conditional<traits::use_raw_pointer<T>::value, T, proxy>::type;
 
   typedef value_type* pointer;
 
@@ -250,6 +267,10 @@ class r_vector : public cpp4r::r_vector<T> {
   r_vector(const cpp4r::r_vector<T>& rhs);
   r_vector(std::initializer_list<T> il);
   explicit r_vector(std::initializer_list<named_arg> il);
+
+  // Fast-path constructor for freshly allocated data (non-ALTREP, owned)
+  // This bypasses type validation and ALTREP checks for maximum performance
+  r_vector(SEXP data, fresh_allocation_tag);
 
   explicit r_vector(const R_xlen_t size);
 
@@ -322,17 +343,26 @@ class r_vector : public cpp4r::r_vector<T> {
     generic_iterator operator+(R_xlen_t rhs);
   };
 
-  using iterator = typename std::conditional<
-      traits::use_raw_pointer<T>::value,
-      T*,
-      generic_iterator
-  >::type;
+  using iterator = typename std::conditional<traits::use_raw_pointer<T>::value, T*,
+                                             generic_iterator>::type;
 
   iterator insert(R_xlen_t pos, T value);
   iterator erase(R_xlen_t pos);
 
   iterator begin() const;
   iterator end() const;
+
+#if !CPP4R_HAS_CXX17
+  // C++11/14 fallback helpers
+  iterator begin_impl(std::true_type) const;
+  iterator begin_impl(std::false_type) const;
+  iterator end_impl(std::true_type) const;
+  iterator end_impl(std::false_type) const;
+  reference subscript_impl(const R_xlen_t pos, std::true_type) const;
+  reference subscript_impl(const R_xlen_t pos, std::false_type) const;
+  void named_arg_assign_elt(R_xlen_t i, underlying_type elt, std::true_type);
+  void named_arg_assign_elt(R_xlen_t i, underlying_type elt, std::false_type);
+#endif
 
   using cpp4r::r_vector<T>::cbegin;
   using cpp4r::r_vector<T>::cend;
@@ -405,6 +435,29 @@ class r_vector : public cpp4r::r_vector<T> {
    private:
     underlying_type get() const;
     void set(underlying_type x);
+
+#if !CPP4R_HAS_CXX17
+    // C++11/14 fallback helpers for templated operator=
+    template <typename U>
+    void proxy_assign_dispatch(const U& rhs, std::true_type,
+                               std::false_type);  // r_string
+    template <typename U>
+    void proxy_assign_dispatch(const U& rhs, std::false_type,
+                               std::true_type);  // r_complex
+    template <typename U>
+    void proxy_assign_dispatch(const U& rhs, std::false_type, std::false_type);  // other
+    template <typename U>
+    void proxy_assign_complex(const U& rhs, std::true_type,
+                              std::false_type);  // complex<double>
+    template <typename U>
+    void proxy_assign_complex(const U& rhs, std::true_type,
+                              std::true_type);  // complex<double> && arithmetic
+    template <typename U>
+    void proxy_assign_complex(const U& rhs, std::false_type,
+                              std::true_type);  // arithmetic
+    template <typename U>
+    void proxy_assign_complex(const U& rhs, std::false_type, std::false_type);  // other
+#endif
   };
 
  private:

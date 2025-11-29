@@ -466,7 +466,8 @@ context("r_vector-C++") {
     }
 
     // Using lvalues (i.e. copy assignable)
-    cpp4r::writable::integers::proxy x = foo[0];
+    // Note: For primitive types (int, double), reference is T& not proxy
+    cpp4r::writable::integers::reference x = foo[0];
     bar[4] = x;
 
     expect_true(bar[0] == 1);

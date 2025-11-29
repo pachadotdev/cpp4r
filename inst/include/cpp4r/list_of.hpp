@@ -43,8 +43,12 @@ class list_of : public writable::list {
     typename T::reference operator[](int pos) { return static_cast<T>(data_)[pos]; }
 #endif
     typename T::reference operator[](R_xlen_t pos) { return static_cast<T>(data_)[pos]; }
-    typename T::reference operator[](const char* pos) { return static_cast<T>(data_)[pos]; }
-    typename T::reference operator[](const std::string& pos) { return static_cast<T>(data_)[pos]; }
+    typename T::reference operator[](const char* pos) {
+      return static_cast<T>(data_)[pos];
+    }
+    typename T::reference operator[](const std::string& pos) {
+      return static_cast<T>(data_)[pos];
+    }
     proxy& operator=(const T& rhs) {
       data_ = rhs;
 

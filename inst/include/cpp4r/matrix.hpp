@@ -208,10 +208,12 @@ class matrix : public matrix_slices<S> {
       : matrix_slices<S>(rhs.nrow(), rhs.ncol()), vector_(std::move(rhs.vector_)) {}
 
   // Optimized constructor for writable matrices to minimize allocation overhead
+  // Uses fast-path r_vector constructor that bypasses type validation and ALTREP checks
   CPP4R_ALWAYS_INLINE matrix(int nrow, int ncol)
       : matrix_slices<S>(nrow, ncol),
-        vector_(Rf_allocMatrix(
-            detail::get_sexptype_v<typename V::scalar_type>::value, nrow, ncol)) {}
+        vector_(Rf_allocMatrix(detail::get_sexptype_v<typename V::scalar_type>::value,
+                               nrow, ncol),
+                writable::fresh_allocation_tag{}) {}
 
   using matrix_slices<S>::nrow;
   using matrix_slices<S>::ncol;
@@ -324,9 +326,11 @@ using integers_matrix = matrix<r_vector<int>, typename r_vector<int>::reference,
 template <typename S = by_column>
 using logicals_matrix = matrix<r_vector<r_bool>, typename r_vector<r_bool>::reference, S>;
 template <typename S = by_column>
-using strings_matrix = matrix<r_vector<r_string>, typename r_vector<r_string>::reference, S>;
+using strings_matrix =
+    matrix<r_vector<r_string>, typename r_vector<r_string>::reference, S>;
 template <typename S = by_column>
-using complexes_matrix = matrix<r_vector<r_complex>, typename r_vector<r_complex>::reference, S>;
+using complexes_matrix =
+    matrix<r_vector<r_complex>, typename r_vector<r_complex>::reference, S>;
 }  // namespace writable
 
 // Automatic coercion functions for matrices
