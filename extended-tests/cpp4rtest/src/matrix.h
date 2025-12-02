@@ -1,21 +1,24 @@
 [[cpp4r::register]] SEXP gibbs_cpp(int N, int thin) {
   cpp4r::writable::doubles_matrix<> mat(N, 2);
   double x = 0, y = 0;
+  GetRNGstate();
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < thin; j++) {
       x = Rf_rgamma(3., 1. / double(y * y + 4));
       y = Rf_rnorm(1. / (x + 1.), 1. / sqrt(2. * (x + 1.)));
       // REprintf("x: %f y: %f\n", x, y);
     }
-    mat[i][0] = x;
-    mat[i][1] = y;
+    mat(i, 0) = x;
+    mat(i, 1) = y;
   }
+  PutRNGstate();
   return mat;
 }
 
 [[cpp4r::register]] cpp4r::doubles_matrix<> gibbs_cpp2(int N, int thin) {
   cpp4r::writable::doubles_matrix<> mat(N, 2);
   double x = 0, y = 0;
+  GetRNGstate();
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < thin; j++) {
       x = Rf_rgamma(3., 1. / double(y * y + 4));
@@ -24,6 +27,7 @@
     mat(i, 0) = x;
     mat(i, 1) = y;
   }
+  PutRNGstate();
   return mat;
 }
 

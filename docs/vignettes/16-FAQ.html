@@ -692,6 +692,26 @@ cpp4r::doubles_matrix&lt;&gt; create_mat_no_rownames() {
   return out;
 }</code></pre>
 </div>
+<div id="how-do-i-use-the-same-seed-defined-in-r-for-random-number-generation-in-c" class="section level2">
+<h2>How do I use the same seed defined in R for random number generation
+in C++?</h2>
+<p>If you use <code>set.seed(42)</code> (or any other value) in R, you
+need to explicitly use <code>GetRNGstate()</code> and
+<code>PutRNGstate()</code> in your C++ code to synchronize the RNG state
+between R and C++. Otherwise, the result will not be replicable for not
+correctly using the Random Number Generator (RNG) state from R.</p>
+<pre class="cpp"><code>#include "cpp4r/doubles.hpp"
+#include "R.h"
+#include "Rmath.h"
+
+// single draw from standard normal using R's RNG (replicable result)
+[[cpp4r::register]] double using_rng_() {
+  GetRNGstate();
+  double x = Rf_rnorm(0, 1);
+  PutRNGstate();
+  return x;
+}</code></pre>
+</div>
 
 
 

@@ -8,5 +8,11 @@ SHLIB_OPENMP_CXXFLAGS=$(${R_HOME}/bin/R CMD config SHLIB_OPENMP_CXXFLAGS 2>/dev/
 BLAS_LIBS=$(${R_HOME}/bin/R CMD config BLAS_LIBS)
 LAPACK_LIBS=$(${R_HOME}/bin/R CMD config LAPACK_LIBS)
 
+# If CXX_STD is empty, default to CXX11 (minimum required by cpp4r)
+if [ -z "${CXX_STD:-}" ]; then
+    echo "configure: CXX_STD not set, defaulting to CXX11"
+    CXX_STD="CXX11"
+fi
+
 sed -e "s|@CXX_STD@|${CXX_STD}|g" \
     src/Makevars.in > src/Makevars

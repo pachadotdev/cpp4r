@@ -14,6 +14,54 @@ data_frame_ <- function() {
 	.Call(`_cpp4rtest_data_frame_`)
 }
 
+cpp4r_env_get_int_ <- function(env, name) {
+	.Call(`_cpp4rtest_cpp4r_env_get_int_`, env, name)
+}
+
+cpp4r_env_get_str_ <- function(env, name) {
+	.Call(`_cpp4rtest_cpp4r_env_get_str_`, env, name)
+}
+
+cpp4r_env_set_ <- function(env, name, value) {
+	invisible(.Call(`_cpp4rtest_cpp4r_env_set_`, env, name, value))
+}
+
+cpp4r_env_exists_ <- function(env, name) {
+	.Call(`_cpp4rtest_cpp4r_env_exists_`, env, name)
+}
+
+cpp4r_global_get_ <- function(name) {
+	.Call(`_cpp4rtest_cpp4r_global_get_`, name)
+}
+
+cpp4r_named_doubles_ <- function() {
+	.Call(`_cpp4rtest_cpp4r_named_doubles_`)
+}
+
+cpp4r_named_integers_ <- function() {
+	.Call(`_cpp4rtest_cpp4r_named_integers_`)
+}
+
+cpp4r_named_strings_ <- function() {
+	.Call(`_cpp4rtest_cpp4r_named_strings_`)
+}
+
+cpp4r_named_list_ <- function() {
+	.Call(`_cpp4rtest_cpp4r_named_list_`)
+}
+
+cpp4r_get_by_name_ <- function(x, name) {
+	.Call(`_cpp4rtest_cpp4r_get_by_name_`, x, name)
+}
+
+cpp4r_contains_name_ <- function(x, name) {
+	.Call(`_cpp4rtest_cpp4r_contains_name_`, x, name)
+}
+
+cpp4r_find_name_pos_ <- function(x, name) {
+	.Call(`_cpp4rtest_cpp4r_find_name_pos_`, x, name)
+}
+
 my_stop_n1fmt <- function(mystring) {
 	invisible(.Call(`_cpp4rtest_my_stop_n1fmt`, mystring))
 }
@@ -101,6 +149,42 @@ grow_cplx_ <- function(n) {
 #' @keywords internal
 cpp4r_insert_ <- function(num_sxp) {
 	.Call(`_cpp4rtest_cpp4r_insert_`, num_sxp)
+}
+
+cpp4r_list_of_doubles_ <- function() {
+	.Call(`_cpp4rtest_cpp4r_list_of_doubles_`)
+}
+
+cpp4r_list_of_integers_ <- function() {
+	.Call(`_cpp4rtest_cpp4r_list_of_integers_`)
+}
+
+cpp4r_list_of_strings_ <- function() {
+	.Call(`_cpp4rtest_cpp4r_list_of_strings_`)
+}
+
+cpp4r_list_of_named_ <- function() {
+	.Call(`_cpp4rtest_cpp4r_list_of_named_`)
+}
+
+cpp4r_make_complex_ <- function(real, imag) {
+	.Call(`_cpp4rtest_cpp4r_make_complex_`, real, imag)
+}
+
+cpp4r_complex_real_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_complex_real_`, x)
+}
+
+cpp4r_complex_imag_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_complex_imag_`, x)
+}
+
+cpp4r_complex_modulus_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_complex_modulus_`, x)
+}
+
+cpp4r_complex_add_ <- function(x, y) {
+	.Call(`_cpp4rtest_cpp4r_complex_add_`, x, y)
 }
 
 #' @title List functions
@@ -457,6 +541,74 @@ nullable_extptr_1 <- function() {
 
 nullable_extptr_2 <- function() {
 	.Call(`_cpp4rtest_nullable_extptr_2`)
+}
+
+cpp4r_add_int_vec_ <- function(x, value) {
+	.Call(`_cpp4rtest_cpp4r_add_int_vec_`, x, value)
+}
+
+cpp4r_as_integers_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_as_integers_`, x)
+}
+
+cpp4r_negate_logical_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_negate_logical_`, x)
+}
+
+cpp4r_logical_to_int_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_logical_to_int_`, x)
+}
+
+cpp4r_logical_to_dbl_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_logical_to_dbl_`, x)
+}
+
+cpp4r_iterator_sum_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_iterator_sum_`, x)
+}
+
+cpp4r_iterator_sum_int_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_iterator_sum_int_`, x)
+}
+
+cpp4r_iterator_find_ <- function(x, value) {
+	.Call(`_cpp4rtest_cpp4r_iterator_find_`, x, value)
+}
+
+cpp4r_iterator_count_ <- function(x, value) {
+	.Call(`_cpp4rtest_cpp4r_iterator_count_`, x, value)
+}
+
+cpp4r_iterator_min_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_iterator_min_`, x)
+}
+
+cpp4r_iterator_max_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_iterator_max_`, x)
+}
+
+cpp4r_iterator_double_values_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_iterator_double_values_`, x)
+}
+
+cpp4r_reverse_vector_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_reverse_vector_`, x)
+}
+
+cpp4r_iterator_at_ <- function(x, index) {
+	.Call(`_cpp4rtest_cpp4r_iterator_at_`, x, index)
+}
+
+cpp4r_iterator_distance_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_iterator_distance_`, x)
+}
+
+cpp4r_raw_copy_ <- function(x) {
+	.Call(`_cpp4rtest_cpp4r_raw_copy_`, x)
+}
+
+cpp4r_raw_xor_ <- function(x, mask) {
+	.Call(`_cpp4rtest_cpp4r_raw_xor_`, x, mask)
 }
 
 test_destruction_inner <- function() {

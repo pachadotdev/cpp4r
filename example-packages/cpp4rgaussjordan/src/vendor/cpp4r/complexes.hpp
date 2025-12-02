@@ -221,8 +221,7 @@ class r_vector<r_complex>::proxy {
 // New complexes_vector class for handling complex numbers in SEXP
 class complexes_vector {
  public:
-  explicit complexes_vector(SEXP x) noexcept
-      : data_(reinterpret_cast<Rcomplex*>(DATAPTR(x))), size_(Rf_length(x)) {}
+  explicit complexes_vector(SEXP x) noexcept : data_(COMPLEX(x)), size_(Rf_length(x)) {}
 
   std::complex<double> operator[](R_xlen_t i) const noexcept {
     return {data_[i].r, data_[i].i};

@@ -4,7 +4,7 @@
 #include <iterator>
 #include <string>  // for string
 
-#include "cpp4r/R.hpp"                // for SEXP, SEXPREC, R_xlen_t, INT...
+#include "cpp4r/R.hpp"                // for R’s C interface (e.g., for SEXP)
 #include "cpp4r/attribute_proxy.hpp"  // for attribute_proxy
 #include "cpp4r/cpp_version.hpp"      // for CPP4R feature detection
 #include "cpp4r/r_bool.hpp"           // for r_bool
@@ -317,6 +317,101 @@ template <typename S = by_column>
 using strings_matrix = matrix<r_vector<r_string>, r_string, S>;
 template <typename S = by_column>
 using complexes_matrix = matrix<r_vector<r_complex>, r_complex, S>;
+
+// Implicit coercion from integer/logical to double
+template <typename S = by_column>
+class numeric_matrix {
+ private:
+  r_vector<double> vector_;
+  int nrow_;
+  int ncol_;
+
+  // Convert integer SEXP to double r_vector
+  static r_vector<double> convert_integer(SEXP x, int nrow, int ncol) {
+    R_xlen_t size = static_cast<R_xlen_t>(nrow) * ncol;
+    SEXP result = PROTECT(Rf_allocMatrix(REALSXP, nrow, ncol));
+    const int* CPP4R_RESTRICT x_ptr = INTEGER(x);
+    double* CPP4R_RESTRICT ret_ptr = REAL(result);
+
+    for (R_xlen_t i = 0; i < size; ++i) {
+      int val = x_ptr[i];
+      ret_ptr[i] = CPP4R_LIKELY(val != NA_INTEGER) ? static_cast<double>(val) : NA_REAL;
+    }
+
+    // Preserve dimnames
+    SEXP dimnames = Rf_getAttrib(x, R_DimNamesSymbol);
+    if (CPP4R_UNLIKELY(dimnames != R_NilValue)) {
+      Rf_setAttrib(result, R_DimNamesSymbol, dimnames);
+    }
+
+    UNPROTECT(1);
+    return r_vector<double>(result);
+  }
+
+  // Convert logical SEXP to double r_vector
+  static r_vector<double> convert_logical(SEXP x, int nrow, int ncol) {
+    R_xlen_t size = static_cast<R_xlen_t>(nrow) * ncol;
+    SEXP result = PROTECT(Rf_allocMatrix(REALSXP, nrow, ncol));
+    const int* CPP4R_RESTRICT x_ptr = LOGICAL(x);
+    double* CPP4R_RESTRICT ret_ptr = REAL(result);
+
+    for (R_xlen_t i = 0; i < size; ++i) {
+      int val = x_ptr[i];
+      ret_ptr[i] = CPP4R_LIKELY(val != NA_LOGICAL) ? static_cast<double>(val) : NA_REAL;
+    }
+
+    // Preserve dimnames
+    SEXP dimnames = Rf_getAttrib(x, R_DimNamesSymbol);
+    if (CPP4R_UNLIKELY(dimnames != R_NilValue)) {
+      Rf_setAttrib(result, R_DimNamesSymbol, dimnames);
+    }
+
+    UNPROTECT(1);
+    return r_vector<double>(result);
+  }
+
+  // Coerce SEXP to double r_vector (zero-copy if already double)
+  static r_vector<double> coerce_to_double(SEXP x, int nrow, int ncol) {
+    SEXPTYPE type = detail::r_typeof(x);
+    if (type == REALSXP) {
+      return r_vector<double>(x);  // Zero-copy
+    } else if (type == INTSXP) {
+      return convert_integer(x, nrow, ncol);
+    } else if (type == LGLSXP) {
+      return convert_logical(x, nrow, ncol);
+    }
+    throw type_error(REALSXP, type);
+  }
+
+ public:
+  using underlying_type = double;
+
+  numeric_matrix(SEXP x)
+      : nrow_(Rf_nrows(x)),
+        ncol_(Rf_ncols(x)),
+        vector_(coerce_to_double(x, nrow_, ncol_)) {}
+
+  // Allow construction from doubles_matrix (zero-copy)
+  numeric_matrix(const doubles_matrix<S>& m)
+      : vector_(m.vector()), nrow_(m.nrow()), ncol_(m.ncol()) {}
+
+  CPP4R_ALWAYS_INLINE int nrow() const noexcept { return nrow_; }
+  CPP4R_ALWAYS_INLINE int ncol() const noexcept { return ncol_; }
+  R_xlen_t size() const { return vector_.size(); }
+  SEXP data() const { return vector_.data(); }
+  operator SEXP() const { return SEXP(vector_); }
+
+  // Convert to doubles_matrix for full matrix functionality
+  operator doubles_matrix<S>() const { return doubles_matrix<S>(vector_.data()); }
+
+  CPP4R_ALWAYS_INLINE double operator()(int row, int col) const {
+    return vector_[row + (col * nrow_)];
+  }
+
+  CPP4R_ALWAYS_INLINE const double* CPP4R_RESTRICT data_ptr() const noexcept {
+    return vector_.data_ptr();
+  }
+};
 
 namespace writable {
 template <typename S = by_column>

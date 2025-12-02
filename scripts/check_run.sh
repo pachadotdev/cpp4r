@@ -38,7 +38,15 @@ if [ -z "${TARBALL}" ]; then
 fi
 
 # Run R CMD check on the tarball and capture output. Skip PDF/manual to avoid TeX font issues.
-R CMD check --as-cran --no-manual "${TARBALL}" || true
+CXX_STD="${std}" R CMD check --as-cran --no-manual "${TARBALL}" || true
+
+# If there was an error, copy the install log to the results directory for inspection
+if [ -f "./cpp4rtest.Rcheck/00install.out" ]; then
+	cp "./cpp4rtest.Rcheck/00install.out" "./extended-tests-results/install-${std}-${compiler}.log"
+	echo "=== BEGIN 00install.out ==="
+	cat "./cpp4rtest.Rcheck/00install.out"
+	echo "=== END 00install.out ==="
+fi
 
 # Inspect log for ERRORs only. Allow WARNINGs and NOTEs.
 if grep -q "\bERROR\b" "${LOG}"; then

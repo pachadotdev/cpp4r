@@ -35,8 +35,18 @@ template <>
 inline typename r_vector<SEXP>::underlying_type const* r_vector<SEXP>::get_const_p(
     bool is_altrep, SEXP data) noexcept {
   // No `VECTOR_PTR_OR_NULL()`
-  return __builtin_expect(is_altrep, 0) ? nullptr
-                                        : static_cast<SEXP const*>(DATAPTR_RO(data));
+  if (is_altrep) {
+    return nullptr;
+  } else {
+#if defined(R_VERSION) && R_VERSION >= R_Version(4, 5, 0)
+    // R 4.5.0+ provides VECTOR_PTR_RO as part of the public API
+    return VECTOR_PTR_RO(data);
+#else
+    // For older R versions, return nullptr and rely on VECTOR_ELT for element access
+    // DATAPTR_RO is not part of the public API and causes CRAN check failures
+    return nullptr;
+#endif
+  }
 }
 
 /// Specialization for lists, where `x["oob"]` returns `R_NilValue`, like at the R level

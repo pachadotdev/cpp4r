@@ -6,7 +6,7 @@
 \alias{cpp4rtest-package}
 \title{cpp4rtest: A Test Suite and Benchmark Code for 'cpp4r'}
 \description{
-Provides a test suite and benchmarking code for the 'cpp4r' package.
+To check cpp4r correctness. The headers are vendored to check which lines of the C++ code are covered by the unit tests.
 }
 \author{
 \strong{Maintainer}: Mauricio Vargas Sepulveda \email{m.vargas.sepulveda@gmail.com} (\href{https://orcid.org/0000-0003-1017-7574}{ORCID})
