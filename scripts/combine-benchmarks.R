@@ -117,6 +117,8 @@ res <- res %>%
     arrange(test, cpp_standard, cpp_compiler) %>%
     select(test, everything())
 
+readr::write_csv(res, "./extended-tests-results/bench_summary.csv")
+
 res <- res %>%
     mutate(
         rel_cpp4r_cpp11 = signif(rel_time_cpp4r / rel_time_cpp11, 3),
