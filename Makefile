@@ -10,6 +10,8 @@ register:
 
 install:
 	@Rscript -e 'devtools::install("./")'
+	@Rscript -e 'cpp4r::unvendor("./extended-tests/cpp4r4rtest/src/vendor");
+		cpp4r::vendor("./extended-tests/cpp4r4rtest/src/vendor")'
 
 docs:
 	@Rscript -e 'devtools::document("./"); pkgsite::build_site("./")'

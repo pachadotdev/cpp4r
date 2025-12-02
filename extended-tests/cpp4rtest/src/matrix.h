@@ -122,9 +122,8 @@
 
 // Test function specifically for integer matrix coercion
 // This takes doubles_matrix<> but should accept integer matrices via implicit coercion
-[[cpp4r::register]] cpp4r::doubles_matrix<>
-matrix_add_coerce_test(const cpp4r::doubles_matrix<>& x,
-                       const cpp4r::doubles_matrix<>& y) {
+[[cpp4r::register]] cpp4r::doubles_matrix<> matrix_add_coerce_test(
+    const cpp4r::doubles_matrix<>& x, const cpp4r::doubles_matrix<>& y) {
   int nrow = x.nrow();
   int ncol = x.ncol();
 
@@ -140,9 +139,8 @@ matrix_add_coerce_test(const cpp4r::doubles_matrix<>& x,
 }
 
 // Test function for integer + double mixed coercion
-[[cpp4r::register]] cpp4r::doubles_matrix<>
-matrix_mixed_add(const cpp4r::doubles_matrix<>& int_mat,
-                 const cpp4r::doubles_matrix<>& dbl_mat) {
+[[cpp4r::register]] cpp4r::doubles_matrix<> matrix_mixed_add(
+    const cpp4r::doubles_matrix<>& int_mat, const cpp4r::doubles_matrix<>& dbl_mat) {
   int nrow = int_mat.nrow();
   int ncol = int_mat.ncol();
 

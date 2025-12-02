@@ -35,7 +35,9 @@ class r_string {
     return data_.data() == rhs.data_.data();
   }
   bool operator==(const SEXP rhs) const noexcept { return data_.data() == rhs; }
-  bool operator==(const char* rhs) const { return static_cast<std::string>(*this) == rhs; }
+  bool operator==(const char* rhs) const {
+    return static_cast<std::string>(*this) == rhs;
+  }
   bool operator==(const std::string& rhs) const {
     return static_cast<std::string>(*this) == rhs;
   }

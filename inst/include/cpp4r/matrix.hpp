@@ -161,7 +161,10 @@ class matrix : public matrix_slices<S> {
       using iterator_category = std::forward_iterator_tag;
 
       iterator(const slice& s, R_xlen_t pos) : slice_(s), pos_(pos) {}
-      iterator& operator++() { ++pos_; return *this; }
+      iterator& operator++() {
+        ++pos_;
+        return *this;
+      }
       bool operator==(const iterator& rhs) const {
         return pos_ == rhs.pos_ && slice_ == rhs.slice_;
       }
@@ -185,7 +188,10 @@ class matrix : public matrix_slices<S> {
     using iterator_category = std::forward_iterator_tag;
 
     slice_iterator(const matrix& parent, R_xlen_t pos) : parent_(parent), pos_(pos) {}
-    slice_iterator& operator++() { ++pos_; return *this; }
+    slice_iterator& operator++() {
+      ++pos_;
+      return *this;
+    }
     bool operator==(const slice_iterator& rhs) const {
       return pos_ == rhs.pos_ && parent_.data() == rhs.parent_.data();
     }
@@ -194,8 +200,7 @@ class matrix : public matrix_slices<S> {
   };
 
   matrix(SEXP data)
-      : matrix_slices<S>(data),
-        vector_(detail::coerce_matrix_sexp<scalar_type>(data)) {}
+      : matrix_slices<S>(data), vector_(detail::coerce_matrix_sexp<scalar_type>(data)) {}
 
   template <typename V2, typename T2, typename S2>
   matrix(const cpp4r::matrix<V2, T2, S2>& rhs)
@@ -284,9 +289,11 @@ using integers_matrix = matrix<r_vector<int>, typename r_vector<int>::reference,
 template <typename S = by_column>
 using logicals_matrix = matrix<r_vector<r_bool>, typename r_vector<r_bool>::reference, S>;
 template <typename S = by_column>
-using strings_matrix = matrix<r_vector<r_string>, typename r_vector<r_string>::reference, S>;
+using strings_matrix =
+    matrix<r_vector<r_string>, typename r_vector<r_string>::reference, S>;
 template <typename S = by_column>
-using complexes_matrix = matrix<r_vector<r_complex>, typename r_vector<r_complex>::reference, S>;
+using complexes_matrix =
+    matrix<r_vector<r_complex>, typename r_vector<r_complex>::reference, S>;
 }  // namespace writable
 
 }  // namespace cpp4r
