@@ -1,17 +1,12 @@
 #pragma once
 
-#include <algorithm>         // for min
-#include <array>             // for array
-#include <initializer_list>  // for initializer_list
+#include <initializer_list>
 
-#include "cpp4r/R.hpp"                // for R’s C interface (e.g., for SEXP)
-#include "cpp4r/attribute_proxy.hpp"  // for attribute_proxy
-#include "cpp4r/protect.hpp"          // for safe
-#include "cpp4r/r_bool.hpp"           // for r_bool
-#include "cpp4r/r_vector.hpp"         // for r_vector, r_vector<>::proxy
-#include "cpp4r/sexp.hpp"             // for sexp
-
-// Specializations for logicals
+#include "cpp4r/R.hpp"
+#include "cpp4r/protect.hpp"
+#include "cpp4r/r_bool.hpp"
+#include "cpp4r/r_vector.hpp"
+#include "cpp4r/sexp.hpp"
 
 namespace cpp4r {
 
@@ -23,7 +18,6 @@ inline SEXPTYPE r_vector<r_bool>::get_sexptype() {
 template <>
 inline typename r_vector<r_bool>::underlying_type r_vector<r_bool>::get_elt(SEXP x,
                                                                             R_xlen_t i) {
-  // NOPROTECT: likely too costly to unwind protect every elt
   return LOGICAL_ELT(x, i);
 }
 
@@ -42,7 +36,6 @@ inline typename r_vector<r_bool>::underlying_type const* r_vector<r_bool>::get_c
 template <>
 inline void r_vector<r_bool>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
                                          typename r_vector::underlying_type* buf) {
-  // NOPROTECT: likely too costly to unwind protect here
   LOGICAL_GET_REGION(x, i, n, buf);
 }
 
@@ -58,7 +51,6 @@ namespace writable {
 template <>
 inline void r_vector<r_bool>::set_elt(SEXP x, R_xlen_t i,
                                       typename r_vector::underlying_type value) {
-  // NOPROTECT: Likely too costly to unwind protect every set elt
   SET_LOGICAL_ELT(x, i, value);
 }
 

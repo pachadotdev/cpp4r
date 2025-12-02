@@ -1,13 +1,13 @@
 #pragma once
 
-#include <string>       // for string, basic_string, operator==
-#include <type_traits>  // for is_convertible, enable_if
+#include <string>
+#include <type_traits>
 
-#include "R_ext/Memory.h"     // for vmaxget, vmaxset
-#include "cpp4r/R.hpp"        // for R’s C interface (e.g., for SEXP)
-#include "cpp4r/as.hpp"       // for as_sexp
-#include "cpp4r/protect.hpp"  // for safe, protect, etc.
-#include "cpp4r/sexp.hpp"     // for sexp
+#include "R_ext/Memory.h"
+#include "cpp4r/R.hpp"
+#include "cpp4r/as.hpp"
+#include "cpp4r/protect.hpp"
+#include "cpp4r/sexp.hpp"
 
 namespace cpp4r {
 
@@ -21,27 +21,21 @@ class r_string {
 
   operator SEXP() const noexcept { return data_; }
   operator sexp() const noexcept { return data_; }
+
   operator std::string() const {
     std::string res;
     res.reserve(size());
-
     void* vmax = vmaxget();
     unwind_protect([&] { res.assign(Rf_translateCharUTF8(data_)); });
     vmaxset(vmax);
-
     return res;
   }
 
   bool operator==(const r_string& rhs) const noexcept {
     return data_.data() == rhs.data_.data();
   }
-
   bool operator==(const SEXP rhs) const noexcept { return data_.data() == rhs; }
-
-  bool operator==(const char* rhs) const {
-    return static_cast<std::string>(*this) == rhs;
-  }
-
+  bool operator==(const char* rhs) const { return static_cast<std::string>(*this) == rhs; }
   bool operator==(const std::string& rhs) const {
     return static_cast<std::string>(*this) == rhs;
   }
@@ -54,7 +48,6 @@ class r_string {
 
 inline SEXP as_sexp(std::initializer_list<r_string> il) {
   R_xlen_t size = il.size();
-
   sexp data;
   unwind_protect([&] {
     data = Rf_allocVector(STRSXP, size);
@@ -79,14 +72,12 @@ enable_if_r_string<T, SEXP> as_sexp(T from) {
   sexp res;
   unwind_protect([&] {
     res = Rf_allocVector(STRSXP, 1);
-
     if (str == NA_STRING) {
       SET_STRING_ELT(res, 0, str);
     } else {
       SET_STRING_ELT(res, 0, Rf_mkCharCE(Rf_translateCharUTF8(str), CE_UTF8));
     }
   });
-
   return res;
 }
 

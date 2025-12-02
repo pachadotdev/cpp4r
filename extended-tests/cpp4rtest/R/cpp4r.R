@@ -247,6 +247,14 @@ matrix_add <- function(x, y) {
 	.Call(`_cpp4rtest_matrix_add`, x, y)
 }
 
+matrix_add_coerce_test <- function(x, y) {
+	.Call(`_cpp4rtest_matrix_add_coerce_test`, x, y)
+}
+
+matrix_mixed_add <- function(int_mat, dbl_mat) {
+	.Call(`_cpp4rtest_matrix_mixed_add`, int_mat, dbl_mat)
+}
+
 #' @title Protect functions
 #' @rdname testing-protect
 #' @keywords internal

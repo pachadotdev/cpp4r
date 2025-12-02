@@ -1,25 +1,20 @@
 #pragma once
 
-#include <algorithm>         // for std::transform
-#include <complex>           // for std::complex
-#include <initializer_list>  // for std::initializer_list
+#include <complex>
+#include <initializer_list>
 
-#include "cpp4r/R.hpp"  // for SEXP, SEXPREC, Rf_allocVector, COMPLEX, COMPLEX_ELT, SET_COMPLEX_ELT
-#include "cpp4r/as.hpp"         // for as_sexp
-#include "cpp4r/protect.hpp"    // for safe
-#include "cpp4r/r_complex.hpp"  // for r_complex
-#include "cpp4r/r_vector.hpp"   // for r_vector, r_vector<>::proxy
-#include "cpp4r/sexp.hpp"       // for sexp
+#include "cpp4r/R.hpp"
+#include "cpp4r/as.hpp"
+#include "cpp4r/protect.hpp"
+#include "cpp4r/r_complex.hpp"
+#include "cpp4r/r_vector.hpp"
+#include "cpp4r/sexp.hpp"
 
-// Define SET_COMPLEX_ELT if not defined
-// for compatibility with older R versions, such as ubuntu 20.04 oldrel-4
 #ifndef SET_COMPLEX_ELT
 #define SET_COMPLEX_ELT(x, i, v) (COMPLEX(x)[i] = v)
 #endif
 
 namespace cpp4r {
-
-// Specializations for complex numbers
 
 template <>
 inline SEXPTYPE r_vector<r_complex>::get_sexptype() {
@@ -65,7 +60,6 @@ inline void r_vector<r_complex>::set_elt(
   COMPLEX(x)[i] = value;
 }
 
-// Comparison operator for proxy
 inline bool operator==(const r_vector<r_complex>::proxy& lhs, r_complex rhs) {
   return static_cast<r_complex>(lhs) == rhs;
 }
@@ -79,44 +73,34 @@ typedef r_vector<r_complex> complexes;
 }  // namespace writable
 
 inline complexes as_complexes(SEXP x) {
-  if (detail::r_typeof(x) == CPLXSXP) {
-    return complexes(x);
-  }
+  SEXPTYPE type = detail::r_typeof(x);
+  if (type == CPLXSXP) return complexes(x);
 
-  else if (detail::r_typeof(x) == INTSXP) {
-    r_vector<int> xn(x);
-    size_t len = xn.size();
+  if (type == INTSXP) {
+    R_xlen_t len = Rf_xlength(x);
     writable::complexes ret(len);
+    const int* CPP4R_RESTRICT src = INTEGER(x);
+    Rcomplex* CPP4R_RESTRICT dst = COMPLEX(ret.data());
 
-    const int* CPP4R_RESTRICT x_ptr = INTEGER(xn.data());
-    Rcomplex* CPP4R_RESTRICT ret_ptr = COMPLEX(ret.data());
-
-    for (size_t i = 0; i < len; ++i) {
-      int value = x_ptr[i];
-      if (value == NA_INTEGER) {
-        ret_ptr[i].r = NA_REAL;
-        ret_ptr[i].i = NA_REAL;
+    for (R_xlen_t i = 0; i < len; ++i) {
+      if (src[i] == NA_INTEGER) {
+        dst[i].r = NA_REAL;
+        dst[i].i = NA_REAL;
       } else {
-        ret_ptr[i].r = static_cast<double>(value);
-        ret_ptr[i].i = 0.0;
+        dst[i].r = static_cast<double>(src[i]);
+        dst[i].i = 0.0;
       }
     }
     return ret;
   }
 
-  throw type_error(CPLXSXP, detail::r_typeof(x));
+  throw type_error(CPLXSXP, type);
 }
 
-// No proxy redefinition here — use the generic proxy implementation from
-// r_vector_writable_impl.hpp
-
-// New complex_vector class for handling complex numbers in SEXP
 class complex_vector {
  public:
   explicit complex_vector(SEXP x) : data_(COMPLEX(x)), size_(Rf_length(x)) {}
-
   std::complex<double> operator[](R_xlen_t i) const { return {data_[i].r, data_[i].i}; }
-
   size_t size() const { return size_; }
 
  private:
@@ -124,7 +108,6 @@ class complex_vector {
   size_t size_;
 };
 
-// Template specialization for adding cpp4r::r_complex to std::complex<double>
 template <typename T>
 inline std::complex<T>& operator+=(std::complex<T>& lhs, const cpp4r::r_complex& rhs) {
   lhs.real(lhs.real() + rhs.real());
@@ -132,7 +115,6 @@ inline std::complex<T>& operator+=(std::complex<T>& lhs, const cpp4r::r_complex&
   return lhs;
 }
 
-// Add constructor for initializer_list for the writable r_vector specialization
 namespace writable {
 
 template <>
@@ -140,7 +122,6 @@ inline r_vector<r_complex>::r_vector(std::initializer_list<r_complex> il)
     : cpp4r::r_vector<r_complex>(safe[Rf_allocVector](CPLXSXP, il.size())),
       capacity_(il.size()) {
   auto it = il.begin();
-
   if (data_p_ != nullptr) {
     for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
       data_p_[i] = static_cast<underlying_type>(*it);
@@ -154,7 +135,6 @@ inline r_vector<r_complex>::r_vector(std::initializer_list<r_complex> il)
 
 }  // namespace writable
 
-// Comparison operators for r_vector<r_complex>
 template <>
 inline bool operator==(const r_vector<r_complex>& lhs,
                        const r_vector<r_complex>& rhs) noexcept {

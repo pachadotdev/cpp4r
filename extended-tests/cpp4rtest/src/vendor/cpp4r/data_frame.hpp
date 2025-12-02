@@ -1,37 +1,31 @@
 #pragma once
 
-#include <cstdlib>           // for abs
-#include <initializer_list>  // for initializer_list
-#include <string>            // for string, basic_string
-#include <utility>           // for move
+#include <cstdlib>
+#include <initializer_list>
+#include <string>
+#include <utility>
 
-#include "R_ext/Arith.h"              // for NA_INTEGER
-#include "cpp4r/R.hpp"                // for R’s C interface (e.g., for SEXP)
-#include "cpp4r/attribute_proxy.hpp"  // for attribute_proxy
-#include "cpp4r/list.hpp"             // for list, r_vector<>::r_vector, etc.
-#include "cpp4r/r_vector.hpp"         // for r_vector
+#include "R_ext/Arith.h"
+#include "cpp4r/R.hpp"
+#include "cpp4r/attribute_proxy.hpp"
+#include "cpp4r/list.hpp"
+#include "cpp4r/r_vector.hpp"
 
 namespace cpp4r {
 
 class named_arg;
 namespace writable {
 class data_frame;
-}  // namespace writable
+}
 
 class data_frame : public list {
   using list::list;
-
   friend class writable::data_frame;
 
-  /* we cannot use Rf_getAttrib because it has a special case for c(NA, -n) and creates
-   * the full vector */
   static SEXP get_attrib0(SEXP x, SEXP sym) noexcept {
     for (SEXP attr = ATTRIB(x); attr != R_NilValue; attr = CDR(attr)) {
-      if (TAG(attr) == sym) {
-        return CAR(attr);
-      }
+      if (TAG(attr) == sym) return CAR(attr);
     }
-
     return R_NilValue;
   }
 
@@ -39,32 +33,20 @@ class data_frame : public list {
     auto nms = get_attrib0(x, R_RowNamesSymbol);
     bool has_short_rownames =
         (Rf_isInteger(nms) && Rf_xlength(nms) == 2 && INTEGER(nms)[0] == NA_INTEGER);
-    if (has_short_rownames) {
-      return static_cast<R_xlen_t>(abs(INTEGER(nms)[1]));
-    }
-
-    if (!Rf_isNull(nms)) {
-      return Rf_xlength(nms);
-    }
-
-    if (Rf_xlength(x) == 0) {
-      return 0;
-    }
-
+    if (has_short_rownames) return static_cast<R_xlen_t>(abs(INTEGER(nms)[1]));
+    if (!Rf_isNull(nms)) return Rf_xlength(nms);
+    if (Rf_xlength(x) == 0) return 0;
     return Rf_xlength(VECTOR_ELT(x, 0));
   }
 
  public:
-  /* Adapted from
-   * https://github.com/wch/r-source/blob/f2a0dfab3e26fb42b8b296fcba40cbdbdbec767d/src/main/attrib.c#L198-L207
-   */
   R_xlen_t nrow() const noexcept { return calc_nrow(*this); }
   R_xlen_t ncol() const noexcept { return size(); }
 };
 
 namespace writable {
+
 class data_frame : public cpp4r::data_frame {
- private:
   writable::list set_data_frame_attributes(writable::list&& x) {
     return set_data_frame_attributes(std::move(x), calc_nrow(x));
   }
@@ -90,13 +72,10 @@ class data_frame : public cpp4r::data_frame {
   using cpp4r::data_frame::nrow;
 
   attribute_proxy<data_frame> attr(const char* name) const { return {*this, name}; }
-
   attribute_proxy<data_frame> attr(const std::string& name) const {
     return {*this, name.c_str()};
   }
-
   attribute_proxy<data_frame> attr(SEXP name) const { return {*this, name}; }
-
   attribute_proxy<data_frame> names() const { return {*this, R_NamesSymbol}; }
 };
 

@@ -1,11 +1,11 @@
 #pragma once
 
-#include <complex>  // for std::complex
+#include <complex>
 
-#include "cpp4r/R.hpp"        // for SEXP, SEXPREC, Rf_mkCharCE, Rf_translateCharUTF8
-#include "cpp4r/as.hpp"       // for as_sexp
-#include "cpp4r/protect.hpp"  // for unwind_protect, protect, protect::function
-#include "cpp4r/sexp.hpp"     // for sexp
+#include "cpp4r/R.hpp"
+#include "cpp4r/as.hpp"
+#include "cpp4r/protect.hpp"
+#include "cpp4r/sexp.hpp"
 
 namespace cpp4r {
 
@@ -15,27 +15,30 @@ class r_complex {
     COMPLEX(data_)[0].r = 0;
     COMPLEX(data_)[0].i = 0;
   }
+
   r_complex(SEXP data) : data_(data) {
     if (data_ == R_NilValue) {
       data_ = PROTECT(Rf_allocVector(CPLXSXP, 0));
       UNPROTECT(1);
     }
   }
+
   r_complex(double real, double imag) : data_(safe[Rf_allocVector](CPLXSXP, 1)) {
     COMPLEX(data_)[0].r = real;
     COMPLEX(data_)[0].i = imag;
   }
+
   r_complex(const std::complex<double>& data) : r_complex(data.real(), data.imag()) {}
   r_complex(const Rcomplex& data) : r_complex(data.r, data.i) {}
 
   operator SEXP() const noexcept { return data_; }
   operator sexp() const noexcept { return data_; }
+
   operator std::complex<double>() const noexcept {
-    if (data_ == R_NilValue || Rf_length(data_) == 0) {
-      return {NA_REAL, NA_REAL};
-    }
+    if (data_ == R_NilValue || Rf_length(data_) == 0) return {NA_REAL, NA_REAL};
     return {COMPLEX(data_)[0].r, COMPLEX(data_)[0].i};
   }
+
   operator Rcomplex() const noexcept {
     Rcomplex r;
     if (data_ == R_NilValue || Rf_length(data_) == 0) {
@@ -49,17 +52,14 @@ class r_complex {
   }
 
   double real() const noexcept {
-    if (data_ == R_NilValue || Rf_length(data_) == 0) {
-      return NA_REAL;
-    }
-    return COMPLEX(data_)[0].r;
+    return (data_ == R_NilValue || Rf_length(data_) == 0) ? NA_REAL : COMPLEX(data_)[0].r;
   }
+
   double imag() const noexcept {
-    if (data_ == R_NilValue || Rf_length(data_) == 0) {
-      return NA_REAL;
-    }
-    return COMPLEX(data_)[0].i;
+    return (data_ == R_NilValue || Rf_length(data_) == 0) ? NA_REAL : COMPLEX(data_)[0].i;
   }
+
+  bool is_na() const noexcept { return R_IsNA(real()) || R_IsNA(imag()); }
 
   bool operator==(const r_complex& rhs) const noexcept {
     return (is_na() && rhs.is_na()) || (real() == rhs.real() && imag() == rhs.imag());
@@ -91,27 +91,10 @@ class r_complex {
     return *this;
   }
 
-  friend r_complex operator+(r_complex lhs, const r_complex& rhs) {
-    lhs += rhs;
-    return lhs;
-  }
-
-  friend r_complex operator-(r_complex lhs, const r_complex& rhs) {
-    lhs -= rhs;
-    return lhs;
-  }
-
-  friend r_complex operator*(r_complex lhs, const r_complex& rhs) {
-    lhs *= rhs;
-    return lhs;
-  }
-
-  friend r_complex operator/(r_complex lhs, const r_complex& rhs) {
-    lhs /= rhs;
-    return lhs;
-  }
-
-  bool is_na() const noexcept { return R_IsNA(real()) || R_IsNA(imag()); }
+  friend r_complex operator+(r_complex lhs, const r_complex& rhs) { return lhs += rhs; }
+  friend r_complex operator-(r_complex lhs, const r_complex& rhs) { return lhs -= rhs; }
+  friend r_complex operator*(r_complex lhs, const r_complex& rhs) { return lhs *= rhs; }
+  friend r_complex operator/(r_complex lhs, const r_complex& rhs) { return lhs /= rhs; }
 
  private:
   sexp data_ = R_NilValue;
@@ -124,13 +107,11 @@ inline SEXP as_sexp(const r_complex& from) {
     COMPLEX(res)[0].r = from.real();
     COMPLEX(res)[0].i = from.imag();
   });
-
   return res;
 }
 
 inline SEXP as_sexp(std::initializer_list<r_complex> il) {
   R_xlen_t size = il.size();
-
   sexp data;
   unwind_protect([&] {
     data = Rf_allocVector(CPLXSXP, size);

@@ -1,15 +1,15 @@
 #pragma once
 
-#include <limits>  // for numeric_limits
+#include <limits>
 #include <ostream>
-#include <type_traits>  // for is_convertible, enable_if
+#include <type_traits>
 
-#include "R_ext/Boolean.h"    // for Rboolean
-#include "cpp4r/R.hpp"        // for R’s C interface (e.g., for SEXP)
-#include "cpp4r/as.hpp"       // for as_sexp
-#include "cpp4r/protect.hpp"  // for unwind_protect
+#include "R_ext/Boolean.h"
+#include "cpp4r/R.hpp"
+#include "cpp4r/as.hpp"
+#include "cpp4r/protect.hpp"
 #include "cpp4r/r_vector.hpp"
-#include "cpp4r/sexp.hpp"  // for sexp
+#include "cpp4r/sexp.hpp"
 
 namespace cpp4r {
 
@@ -40,14 +40,11 @@ class r_bool {
 
  private:
   static constexpr int na = std::numeric_limits<int>::min();
-
-  // C++11 constexpr must be single return statement
   static constexpr int from_int(int value) noexcept {
     return (value == static_cast<int>(FALSE)) ? FALSE
            : (value == static_cast<int>(na))  ? na
                                               : TRUE;
   }
-
   int value_ = na;
 };
 

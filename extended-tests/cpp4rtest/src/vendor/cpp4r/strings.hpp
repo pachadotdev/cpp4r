@@ -1,18 +1,16 @@
 #pragma once
 
-#include <initializer_list>  // for initializer_list
-#include <string>            // for string, basic_string
+#include <initializer_list>
+#include <string>
 
-#include "cpp4r/R.hpp"                // for R’s C interface (e.g., for SEXP)
-#include "cpp4r/as.hpp"               // for as_sexp
-#include "cpp4r/attribute_proxy.hpp"  // for attribute_proxy
-#include "cpp4r/named_arg.hpp"        // for named_arg
-#include "cpp4r/protect.hpp"          // for safe
-#include "cpp4r/r_string.hpp"         // for r_string
-#include "cpp4r/r_vector.hpp"         // for r_vector
-#include "cpp4r/sexp.hpp"             // for sexp
-
-// Specializations for strings
+#include "cpp4r/R.hpp"
+#include "cpp4r/as.hpp"
+#include "cpp4r/attribute_proxy.hpp"
+#include "cpp4r/named_arg.hpp"
+#include "cpp4r/protect.hpp"
+#include "cpp4r/r_string.hpp"
+#include "cpp4r/r_vector.hpp"
+#include "cpp4r/sexp.hpp"
 
 namespace cpp4r {
 
@@ -24,7 +22,6 @@ inline SEXPTYPE r_vector<r_string>::get_sexptype() {
 template <>
 inline typename r_vector<r_string>::underlying_type r_vector<r_string>::get_elt(
     SEXP x, R_xlen_t i) {
-  // NOPROTECT: likely too costly to unwind protect every elt
   return STRING_ELT(x, i);
 }
 
@@ -37,12 +34,7 @@ inline typename r_vector<r_string>::underlying_type* r_vector<r_string>::get_p(b
 template <>
 inline typename r_vector<r_string>::underlying_type const*
 r_vector<r_string>::get_const_p(bool is_altrep, SEXP data) {
-  // No `STRING_PTR_OR_NULL()`
-  if (is_altrep) {
-    return nullptr;
-  } else {
-    return STRING_PTR_RO(data);
-  }
+  return is_altrep ? nullptr : STRING_PTR_RO(data);
 }
 
 template <>
@@ -63,11 +55,9 @@ namespace writable {
 template <>
 inline void r_vector<r_string>::set_elt(
     SEXP x, R_xlen_t i, typename r_vector<r_string>::underlying_type value) {
-  // NOPROTECT: Likely too costly to unwind protect every set elt
   SET_STRING_ELT(x, i, value);
 }
 
-// Pacha: Optimized push_back for std::string (borrows from @traversc' push_back_fast)
 template <>
 template <typename U, typename std::enable_if<std::is_same<U, r_string>::value>::type*>
 inline void r_vector<r_string>::push_back(const std::string& value) {
@@ -108,32 +98,24 @@ inline SEXP alloc_if_charsxp(const SEXP data) {
 template <>
 inline r_vector<r_string>::r_vector(const SEXP& data)
     : cpp4r::r_vector<r_string>(alloc_or_copy(data)), capacity_(this->length_) {
-  if (detail::r_typeof(data) == CHARSXP) {
-    SET_STRING_ELT(this->data_, 0, data);
-  }
+  if (detail::r_typeof(data) == CHARSXP) SET_STRING_ELT(this->data_, 0, data);
 }
 
 template <>
 inline r_vector<r_string>::r_vector(SEXP&& data)
     : cpp4r::r_vector<r_string>(alloc_if_charsxp(data)), capacity_(this->length_) {
-  if (detail::r_typeof(data) == CHARSXP) {
-    SET_STRING_ELT(this->data_, 0, data);
-  }
+  if (detail::r_typeof(data) == CHARSXP) SET_STRING_ELT(this->data_, 0, data);
 }
 
-// Requires specialization to handle `NA_STRING` and UTF-8 translation
 template <>
 inline r_vector<r_string>::r_vector(std::initializer_list<r_string> il)
     : cpp4r::r_vector<r_string>(safe[Rf_allocVector](STRSXP, il.size())),
       capacity_(il.size()) {
   unwind_protect([&] {
     auto it = il.begin();
-
     for (R_xlen_t i = 0; i < this->capacity_; ++i, ++it) {
-      // i.e. to `SEXP`
       typename r_vector<r_string>::underlying_type elt =
           static_cast<typename r_vector<r_string>::underlying_type>(*it);
-
       if (elt == NA_STRING) {
         set_elt(this->data_, i, elt);
       } else {
