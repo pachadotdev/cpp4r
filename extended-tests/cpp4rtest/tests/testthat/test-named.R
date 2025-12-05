@@ -29,20 +29,20 @@ test_that("named list works", {
 
 test_that("access by name works", {
   x <- c(a = 1.0, b = 2.0, c = 3.0)
-  
+
   result_a <- cpp4r_get_by_name_(x, "a")
   expect_equal(result_a, 1.0)
-  
+
   result_b <- cpp4r_get_by_name_(x, "b")
   expect_equal(result_b, 2.0)
-  
+
   result_c <- cpp4r_get_by_name_(x, "c")
   expect_equal(result_c, 3.0)
 })
 
 test_that("contains name works", {
   x <- c(foo = 1.0, bar = 2.0)
-  
+
   expect_true(cpp4r_contains_name_(x, "foo"))
   expect_true(cpp4r_contains_name_(x, "bar"))
   expect_false(cpp4r_contains_name_(x, "baz"))
@@ -50,10 +50,10 @@ test_that("contains name works", {
 
 test_that("find by name works", {
   x <- c(alpha = 10.0, beta = 20.0, gamma = 30.0)
-  
+
   pos <- cpp4r_find_name_pos_(x, "beta")
-  expect_equal(pos, 2L)  # 1-indexed
-  
+  expect_equal(pos, 2L) # 1-indexed
+
   pos_not_found <- cpp4r_find_name_pos_(x, "delta")
   expect_equal(pos_not_found, -1L)
 })

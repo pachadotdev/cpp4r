@@ -1,167 +1,81 @@
 // using optimization hints for a fair and direct comparison between cpp11-cpp4r-Rcpp
 
 #include <cpp11.hpp>
+#include <cmath>
 #include <cstring>
 #include <vector>
 
 using namespace cpp11;
 
-[[cpp11::register]] doubles_matrix<> add_two_cpp11_(const doubles_matrix<>& a,
-                                                    const doubles_matrix<>& b) {
-  int nrow = a.nrow();
-  int ncol = a.ncol();
+inline bool rrc_(std::vector<int>& excluded, const double* XtX_ptr,
+                 size_t p, double tol) {
+  excluded.assign(p, 0);
 
-  // Create output matrix
-  writable::doubles_matrix<> Z(nrow, ncol);
+  if (p == 0) return true;
 
-  // Cache pointers for direct access
-  const double* __restrict__ a_ptr = REAL(a.data());
-  const double* __restrict__ b_ptr = REAL(b.data());
-  double* __restrict__ z_ptr = REAL(Z.data());
+  std::vector<double> R(p * p, 0.0);
+  double* R_ptr = R.data();
+  int* excluded_ptr = excluded.data();
 
-  // Vectorized operation on flattened data
-  int size = nrow * ncol;
-  for (int i = 0; i < size; ++i) {
-    z_ptr[i] = a_ptr[i] + b_ptr[i];
-  }
+  size_t n_excluded = 0;
 
-  return Z;
-}
+  for (size_t j = 0; j < p; ++j) {
+    double R_jj = XtX_ptr[j + j * p];
 
-[[cpp11::register]] doubles_matrix<> add_four_cpp11_(const doubles_matrix<>& a,
-                                                     const doubles_matrix<>& b,
-                                                     const doubles_matrix<>& c,
-                                                     const doubles_matrix<>& d) {
-  int nrow = a.nrow();
-  int ncol = a.ncol();
-
-  writable::doubles_matrix<> Z(nrow, ncol);
-
-  // Cache pointers
-  const double* __restrict__ a_ptr = REAL(a.data());
-  const double* __restrict__ b_ptr = REAL(b.data());
-  const double* __restrict__ c_ptr = REAL(c.data());
-  const double* __restrict__ d_ptr = REAL(d.data());
-  double* __restrict__ z_ptr = REAL(Z.data());
-
-  int size = nrow * ncol;
-  for (int i = 0; i < size; ++i) {
-    z_ptr[i] = a_ptr[i] + b_ptr[i] + c_ptr[i] + d_ptr[i];
-  }
-
-  return Z;
-}
-
-[[cpp11::register]] doubles_matrix<> multiply_four_cpp11_(const doubles_matrix<>& a,
-                                                          const doubles_matrix<>& b,
-                                                          const doubles_matrix<>& c,
-                                                          const doubles_matrix<>& d) {
-  int n = a.ncol();
-  int n5 = n / 5;
-  int n10 = n / 10;
-  int n15 = n / 15;
-  int n20 = n / 20;
-
-  // Cache pointers
-  const double* __restrict__ a_ptr = REAL(a.data());
-  const double* __restrict__ b_ptr = REAL(b.data());
-  const double* __restrict__ c_ptr = REAL(c.data());
-  const double* __restrict__ d_ptr = REAL(d.data());
-
-  // Step 1: A[1:n5, 1:n5] %*% B[1:n5, 1:n10]
-  writable::doubles_matrix<> temp1(n5, n10);
-  double* __restrict__ temp1_ptr = REAL(temp1.data());
-
-  for (int i = 0; i < n5; ++i) {
-    for (int j = 0; j < n10; ++j) {
-      double sum = 0.0;
-      for (int k = 0; k < n5; ++k) {
-        // A[i,k] where i,k < n5: a_ptr[i + k*n]
-        // B[k,j] where k < n5, j < n10: b_ptr[k + j*n]
-        sum += a_ptr[i + k * n] * b_ptr[k + j * n];
+    if (j > 0) {
+      const double* R_j_ptr = R_ptr + j * p;
+      for (size_t k = 0; k < j; ++k) {
+        if (excluded_ptr[k] == 0) {
+          double R_jk = R_j_ptr[k];
+          R_jj -= R_jk * R_jk;
+        }
       }
-      temp1_ptr[i + j * n5] = sum;
+    }
+
+    if (R_jj < tol) {
+      excluded_ptr[j] = 1;
+      n_excluded++;
+      continue;
+    }
+
+    R_jj = std::sqrt(R_jj);
+    R_ptr[j + j * p] = R_jj;
+    const double inv_R_jj = 1.0 / R_jj;
+
+    for (size_t col = j + 1; col < p; ++col) {
+      double R_j_col = XtX_ptr[j + col * p];
+
+      const double* R_col_ptr = R_ptr + col * p;
+      const double* R_j_ptr = R_ptr + j * p;
+
+      for (size_t k = 0; k < j; ++k) {
+        if (excluded_ptr[k] == 0) {
+          R_j_col -= R_j_ptr[k] * R_col_ptr[k];
+        }
+      }
+
+      R_ptr[j + col * p] = R_j_col * inv_R_jj;
     }
   }
 
-  // Step 2: temp1 %*% C[1:n10, 1:n15]
-  writable::doubles_matrix<> temp2(n5, n15);
-  double* __restrict__ temp2_ptr = REAL(temp2.data());
-
-  for (int i = 0; i < n5; ++i) {
-    for (int j = 0; j < n15; ++j) {
-      double sum = 0.0;
-      for (int k = 0; k < n10; ++k) {
-        // temp1[i,k]: temp1_ptr[i + k*n5]
-        // C[k,j] where k < n10, j < n15: c_ptr[k + j*n]
-        sum += temp1_ptr[i + k * n5] * c_ptr[k + j * n];
-      }
-      temp2_ptr[i + j * n5] = sum;
-    }
-  }
-
-  // Step 3: temp2 %*% D[1:n15, 1:n20]
-  writable::doubles_matrix<> Z(n5, n20);
-  double* __restrict__ z_ptr = REAL(Z.data());
-
-  for (int i = 0; i < n5; ++i) {
-    for (int j = 0; j < n20; ++j) {
-      double sum = 0.0;
-      for (int k = 0; k < n15; ++k) {
-        // temp2[i,k]: temp2_ptr[i + k*n5]
-        // D[k,j] where k < n15, j < n20: d_ptr[k + j*n]
-        sum += temp2_ptr[i + k * n5] * d_ptr[k + j * n];
-      }
-      z_ptr[i + j * n5] = sum;
-    }
-  }
-
-  return Z;
+  return n_excluded < p;
 }
 
-[[cpp11::register]] doubles_matrix<> submatrix_manipulation_cpp11_(
-    const doubles_matrix<>& a, const doubles_matrix<>& b) {
-  int nrow = b.nrow();
-  int ncol = b.ncol();
+[[cpp11::register]] list rrc_cpp11_(const doubles_matrix<>& xtx, double tol) {
+  size_t p = static_cast<size_t>(xtx.ncol());
+  const double* XtX_ptr = REAL(xtx.data());
 
-  writable::doubles_matrix<> Z(nrow, ncol);
+  std::vector<int> excluded;
+  bool success = rrc_(excluded, XtX_ptr, p, tol);
 
-  // Cache pointers
-  const double* __restrict__ a_ptr = REAL(a.data());
-  const double* __restrict__ b_ptr = REAL(b.data());
-  double* __restrict__ z_ptr = REAL(Z.data());
-
-  // Copy entire b matrix
-  std::memcpy(z_ptr, b_ptr, nrow * ncol * sizeof(double));
-
-  // Copy first row of a into last row of Z
-  // First row of a spans: a_ptr[0], a_ptr[nrow], a_ptr[2*nrow], ..., a_ptr[(ncol-1)*nrow]
-  // Last row of Z spans: z_ptr[nrow-1], z_ptr[nrow-1 + nrow], ..., z_ptr[nrow-1 +
-  // (ncol-1)*nrow]
-  for (int j = 0; j < ncol; ++j) {
-    z_ptr[(nrow - 1) + j * nrow] = a_ptr[0 + j * a.nrow()];
+  writable::integers excluded_r(static_cast<R_xlen_t>(p));
+  for (size_t i = 0; i < p; ++i) {
+    excluded_r[static_cast<R_xlen_t>(i)] = excluded[i];
   }
 
-  return Z;
-}
-
-[[cpp11::register]] double multi_operation_cpp11_(const doubles_matrix<>& a,
-                                                  const doubles_matrix<>& b,
-                                                  const doubles_matrix<>& c) {
-  int n = a.nrow();
-
-  // Cache pointers
-  const double* __restrict__ a_ptr = REAL(a.data());
-  const double* __restrict__ b_ptr = REAL(b.data());
-  const double* __restrict__ c_ptr = REAL(c.data());
-
-  // Compute: t(a_col) %*% solve(diag(b_diag)) %*% c_col
-  // This is equivalent to: sum(a[i,0] * (1/b[i,i]) * c[i,0]) for i in 0..n-1
-  double result = 0.0;
-  for (int i = 0; i < n; ++i) {
-    // a[i,0] is at a_ptr[i], b[i,i] is at b_ptr[i + i*n], c[i,0] is at c_ptr[i]
-    result += a_ptr[i] * (1.0 / b_ptr[i + i * n]) * c_ptr[i];
-  }
+  writable::list result;
+  result.push_back({"excluded"_nm = excluded_r});
+  result.push_back({"success"_nm = success});
 
   return result;
 }

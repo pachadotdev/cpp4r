@@ -54,7 +54,7 @@ unvendor <- function(path = NULL) {
 
   # Remove the info file if it exists
   unlink(info_file_path)
-  
+
   # If path does not contain any other files, remove the directory
   remaining_files <- list.files(path, all.files = TRUE, no.. = TRUE)
   if (length(remaining_files) == 0) {

@@ -6,7 +6,7 @@
 #' @export
 #' @examples plus_one(1)
 plus_one <- function(x) {
-	.Call(`_cpp4rvendor_plus_one`, x)
+  .Call(`_cpp4rvendor_plus_one`, x)
 }
 
 #' @title Plus 2.0 (C++)
@@ -15,5 +15,5 @@ plus_one <- function(x) {
 #' @export
 #' @examples plus_two(1.0)
 plus_two <- function(x) {
-	.Call(`_cpp4rvendor_plus_two`, x)
+  .Call(`_cpp4rvendor_plus_two`, x)
 }

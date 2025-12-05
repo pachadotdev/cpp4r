@@ -27,10 +27,10 @@ cat("\n" %in% "Checking for common redirect patterns...\n")
 desc_file <- "DESCRIPTION"
 if (file.exists(desc_file)) {
   desc_content <- readLines(desc_file)
-  
+
   # Look for URLs in DESCRIPTION
   url_lines <- grep("http", desc_content, value = TRUE)
-  
+
   if (length(url_lines) > 0) {
     cat("URLs found in DESCRIPTION:\n")
     for (line in url_lines) {
@@ -46,7 +46,7 @@ for (readme in readme_files) {
     cat(paste0("\nChecking ", readme, "...\n"))
     readme_content <- readLines(readme)
     url_lines <- grep("http", readme_content, value = TRUE)
-    
+
     if (length(url_lines) > 0) {
       cat("URLs found:\n")
       for (line in url_lines) {

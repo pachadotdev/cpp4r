@@ -6,14 +6,6 @@ for std in CXX23 CXX20 CXX17 CXX14 CXX11; do
     echo "==============================="
     echo "Benchmarking R code with $std standard and $compiler compiler"
 
-    # if results/bench_results_%s_%s.rds exists, skip this iteration
-    if [ -f "results/bench_results_${std}_${compiler}.rds" ]; then
-      echo "Results for std=$std compiler=$compiler already exist; skipping this iteration."
-      echo "==============================="
-      echo ""
-      continue
-    fi
-
     # Set USE_CLANG environment variable for this iteration
     if [ "$compiler" = "clang" ]; then
       export USE_CLANG=1

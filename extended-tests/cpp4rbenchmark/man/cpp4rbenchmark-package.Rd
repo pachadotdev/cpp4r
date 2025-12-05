@@ -6,15 +6,7 @@
 \alias{cpp4rbenchmark-package}
 \title{cpp4rbenchmark: Checking speed improvement/worsening with different C++ standards for cpp4r}
 \description{
-A benchmark package to test the speed of various C++ implementations using the cpp4r package. The benchmarks include operations such as cumulative sums, outer products, pairwise distances, grouped means, and bootstrap resampling.
-}
-\seealso{
-Useful links:
-\itemize{
-  \item \url{https://WEBSITE.COM}
-  \item Report bugs at \url{https://github.com/USERNAME/PKGNAME/issues}
-}
-
+Benchmark adapted from the official Armadillo documentation to test the speed of different C++ standards when using the cpp4r package. The idea is to check how compiling with GCC or Clang using C++11, C++14, C++17, C++20 or C++23 affects the speed of various linear algebra operations.
 }
 \author{
 \strong{Maintainer}: Mauricio Vargas Sepulveda \email{m.vargas.sepulveda@gmail.com} (\href{https://orcid.org/0000-0003-1017-7574}{ORCID}) [copyright holder]

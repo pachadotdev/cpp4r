@@ -27,8 +27,31 @@ for pkg in "${pkgs[@]}"; do
     # Clean DLL
     Rscript -e "devtools::clean_dll('./extended-tests/$pkg')" || true
     
+    # Register functions for packages that need it
+    if [ "$pkg" = "cpp4rbenchmark" ]; then
+      echo "Registering cpp4r functions for $pkg"
+      Rscript -e "cpp4r::register('./extended-tests/$pkg')" || {
+        echo "ERROR: Failed to register cpp4r functions for $pkg"
+        exit 1
+      }
+    elif [ "$pkg" = "cpp11benchmark" ]; then
+      echo "Registering cpp11 functions for $pkg"
+      Rscript -e "cpp11::cpp_register('./extended-tests/$pkg')" || {
+        echo "ERROR: Failed to register cpp11 functions for $pkg"
+        exit 1
+      }
+    elif [ "$pkg" = "Rcppbenchmark" ]; then
+      echo "Compiling Rcpp attributes for $pkg"
+      Rscript -e "Rcpp::compileAttributes('./extended-tests/$pkg')" || {
+        echo "ERROR: Failed to compile Rcpp attributes for $pkg"
+        exit 1
+      }
+    fi
+    
     # Document
-    Rscript -e "devtools::document('./extended-tests/$pkg')" || echo "Warning: Documentation failed for $pkg"
+    # intentional double document to avoid
+    # Warning: Objects listed as exports, but not present in namespace:
+    Rscript -e "devtools::document('./extended-tests/$pkg'); devtools::document('./extended-tests/$pkg')" || echo "Warning: Documentation failed for $pkg"
     
     # Install
     Rscript -e "devtools::install('./extended-tests/$pkg', upgrade = 'never')" || {

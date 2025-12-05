@@ -51,7 +51,7 @@ test_that("protect_many_preserve_ completes without error", {
 # release.h tests
 test_that("cpp4r_release_ completes without error", {
   # This creates and releases n sexp objects
- expect_no_error(cpp4r_release_(10L))
+  expect_no_error(cpp4r_release_(10L))
 })
 
 test_that("cpp4r_release_ handles larger allocations", {

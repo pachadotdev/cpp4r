@@ -11,9 +11,9 @@ test_that("remove_altrep works", {
 test_that("upper_bound works", {
   breaks <- c(1.0, 2.0, 3.0, 4.0, 5.0)
   # upper_bound returns 0-indexed position of first element > x
-  expect_equal(upper_bound(2.5, breaks), 2)  # position after 2.0
-  expect_equal(upper_bound(0.5, breaks), 0)  # before all elements
-  expect_equal(upper_bound(5.5, breaks), 5)  # after all elements
+  expect_equal(upper_bound(2.5, breaks), 2) # position after 2.0
+  expect_equal(upper_bound(0.5, breaks), 0) # before all elements
+  expect_equal(upper_bound(5.5, breaks), 5) # after all elements
 })
 
 test_that("findInterval2 works", {

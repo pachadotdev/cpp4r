@@ -43,15 +43,7 @@ for pkg in "${pkgs[@]}"; do
 	fi
 done
 
+export CPP_STD="${std}"
+export CPP_COMPILER="${compiler}"
+
 echo "Prepared."
-
-# Note: USE_CLANG should be set by the calling script (bench_loop.sh)
-# and will be read by Makevars during R CMD INSTALL
-
-# Embed cpp_std and cpp_compiler into central benchmark.R for reproducible output names
-if [ -f ./scripts/run-benchmark.R ]; then
-	# Replace the cpp_std assignment line with the full CXX token (e.g., CXX17)
-	sed -E -i "s/^[[:space:]]*cpp_std[[:space:]]*<-[[:space:]]*\".*\"/cpp_std <- \"${std}\"/" ./scripts/run-benchmark.R || true
-	# Replace the cpp_compiler assignment line
-	sed -E -i "s/^[[:space:]]*cpp_compiler[[:space:]]*<-[[:space:]]*\".*\"/cpp_compiler <- \"${compiler}\"/" ./scripts/run-benchmark.R || true
-fi

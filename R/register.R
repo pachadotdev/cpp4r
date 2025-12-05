@@ -223,17 +223,17 @@ generate_r_functions <- function(funs, package = "cpp4r", use_package = FALSE) {
   }
 
   funs$package_call <- package_call
-  
+
   # Extract default values and create parameter lists
   funs$param_info <- lapply(funs$args, function(args_df) {
     if (nrow(args_df) == 0) {
       return(list(params = "", args = "", checks = ""))
     }
-    
+
     # Parse default values from the type column (they appear after '=')
     param_names <- args_df$name
     param_types <- args_df$type
-    
+
     # Extract defaults (format: "type name = value" becomes "value")
     defaults <- vapply(param_types, function(t) {
       if (grepl("=", t)) {
@@ -242,12 +242,12 @@ generate_r_functions <- function(funs, package = "cpp4r", use_package = FALSE) {
         ""
       }
     }, character(1))
-    
+
     # Clean up types (remove default value parts)
     clean_types <- vapply(param_types, function(t) {
       trimws(sub("\\s*=.*$", "", t))
     }, character(1))
-    
+
     # Generate R function parameters with defaults
     params_with_defaults <- vapply(seq_along(param_names), function(i) {
       if (nzchar(defaults[i])) {
@@ -258,24 +258,24 @@ generate_r_functions <- function(funs, package = "cpp4r", use_package = FALSE) {
         param_names[i]
       }
     }, character(1))
-    
+
     # Generate type checking/coercion code
     checks <- vapply(seq_along(param_names), function(i) {
       generate_type_check(param_names[i], clean_types[i])
     }, character(1))
     checks <- checks[nzchar(checks)]
-    
+
     list(
       params = paste(params_with_defaults, collapse = ", "),
       args = paste(param_names, collapse = ", "),
       checks = if (length(checks) > 0) paste0("\t", checks, collapse = "\n") else ""
     )
   })
-  
+
   funs$list_params <- vapply(funs$param_info, function(x) x$params, character(1))
   funs$call_args <- vapply(funs$param_info, function(x) x$args, character(1))
   funs$type_checks <- vapply(funs$param_info, function(x) x$checks, character(1))
-  
+
   funs$params <- vcapply(funs$call_args, function(x) if (nzchar(x)) paste0(", ", x) else x)
   is_void <- funs$return_type == "void"
   funs$calls <- ifelse(is_void,
@@ -308,7 +308,7 @@ generate_r_functions <- function(funs, package = "cpp4r", use_package = FALSE) {
     } else {
       paste0("\n\t", calls, "\n")
     }
-    
+
     if (nzchar(roxygen_comment)) {
       glue::glue("{roxygen_comment}\n{name} <- function({list_params}) {{{body}}}")
     } else {
@@ -324,7 +324,7 @@ generate_r_functions <- function(funs, package = "cpp4r", use_package = FALSE) {
 # Helper function to convert C++ default values to R
 convert_cpp_default_to_r <- function(cpp_default) {
   cpp_default <- trimws(cpp_default)
-  
+
   # Handle common cases
   if (cpp_default == "true" || cpp_default == "TRUE") {
     return("TRUE")
@@ -342,7 +342,7 @@ convert_cpp_default_to_r <- function(cpp_default) {
   } else if (cpp_default == "NULL" || cpp_default == "nullptr") {
     return("NULL")
   }
-  
+
   # Default: keep as-is and hope for the best
   cpp_default
 }

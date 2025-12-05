@@ -6,7 +6,7 @@
 #' @export
 #' @examples plus_one(1)
 plus_one <- function(x) {
-	.Call(`_cpp4rexamples_plus_one`, x)
+  .Call(`_cpp4rexamples_plus_one`, x)
 }
 
 #' @title Plus 2.0 (C++)
@@ -15,7 +15,7 @@ plus_one <- function(x) {
 #' @export
 #' @examples plus_two(1.0)
 plus_two <- function(x) {
-	.Call(`_cpp4rexamples_plus_two`, x)
+  .Call(`_cpp4rexamples_plus_two`, x)
 }
 
 #' @title Sign of a number
@@ -28,7 +28,7 @@ plus_two <- function(x) {
 #' sign_cpp(0)
 #' @export
 sign_cpp <- function(x) {
-	.Call(`_cpp4rexamples_sign_cpp`, x)
+  .Call(`_cpp4rexamples_sign_cpp`, x)
 }
 
 #' @title Square Coordinates (C++)
@@ -37,7 +37,7 @@ sign_cpp <- function(x) {
 #' @examples square_coordinates(1:3)
 #' @export
 square_coordinates <- function(x) {
-	.Call(`_cpp4rexamples_square_coordinates`, x)
+  .Call(`_cpp4rexamples_square_coordinates`, x)
 }
 
 #' @title Alternative Square Coordinates (C++)
@@ -46,5 +46,5 @@ square_coordinates <- function(x) {
 #' @examples square_coordinates_2(1:3)
 #' @export
 square_coordinates_2 <- function(x) {
-	.Call(`_cpp4rexamples_square_coordinates_2`, x)
+  .Call(`_cpp4rexamples_square_coordinates_2`, x)
 }

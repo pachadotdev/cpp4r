@@ -16,9 +16,18 @@ rejection_bench <- map_df(
     cat("Target samples:", n_samples, "\n")
     d <- bench::mark(
       # "R" = { set.seed(123); cpp4rsampling::rejection_sampling(n_samples, mu = 0, sigma = 1, lower = -1.5, upper = 1.5) },
-      "cpp4r" = { set.seed(123); cpp4rsampling::rejection_sampling_cpp4r(n_samples, mu = 0, sigma = 1, lower = -1.5, upper = 1.5) },
-      "cpp11" = { set.seed(123); cpp11sampling::rejection_sampling_cpp11(n_samples, mu = 0, sigma = 1, lower = -1.5, upper = 1.5) },
-      "Rcpp" = { set.seed(123); Rcppsampling::rejection_sampling_Rcpp(n_samples, mu = 0, sigma = 1, lower = -1.5, upper = 1.5) },
+      "cpp4r" = {
+        set.seed(123)
+        cpp4rsampling::rejection_sampling_cpp4r(n_samples, mu = 0, sigma = 1, lower = -1.5, upper = 1.5)
+      },
+      "cpp11" = {
+        set.seed(123)
+        cpp11sampling::rejection_sampling_cpp11(n_samples, mu = 0, sigma = 1, lower = -1.5, upper = 1.5)
+      },
+      "Rcpp" = {
+        set.seed(123)
+        Rcppsampling::rejection_sampling_Rcpp(n_samples, mu = 0, sigma = 1, lower = -1.5, upper = 1.5)
+      },
       iterations = 10
     )
 

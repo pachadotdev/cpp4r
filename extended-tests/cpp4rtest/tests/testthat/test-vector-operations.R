@@ -11,7 +11,6 @@ test_that("cpp4r_insert_ works", {
 })
 
 test_that("cpp4r_insert_ with zero", {
-
   result <- cpp4r_insert_(0L)
   expect_length(result, 0)
 })

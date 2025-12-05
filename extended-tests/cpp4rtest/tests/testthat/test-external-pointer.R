@@ -1,6 +1,5 @@
 # Pacha: test that nullable external pointer is consistent (#312)
 test_that("nullable external pointer is consistent", {
-
   len <- 1e5
   set.seed(42)
   x <- rnorm(len)
