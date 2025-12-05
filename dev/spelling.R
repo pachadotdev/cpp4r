@@ -1,1 +1,0 @@
-spelling::update_wordlist()

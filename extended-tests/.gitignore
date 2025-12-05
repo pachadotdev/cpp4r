@@ -1,6 +1,0 @@
-*.o
-*.so
-*.dll
-cpp11benchmark/src/Makevars
-cpp4rbenchmark/src/Makevars
-Rcppbenchmark/src/Makevars
