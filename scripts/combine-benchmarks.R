@@ -54,11 +54,7 @@ res <- map_df(
   select(backend, cpp_standard, cpp_compiler, test, time) %>%
   mutate(
     test = case_when(
-      test == "add_two" ~ "Add two matrices",
-      test == "add_four" ~ "Add four matrices",
-      test == "multiply_four" ~ "Multiply four matrices",
-      test == "submatrix_manipulation" ~ "Submatrix manipulation",
-      test == "multi_operation" ~ "Multiple matrix operations",
+      test == "rrc" ~ "Rank-revealing Cholesky",
       TRUE ~ NA_character_
     ),
     backend = case_when(
