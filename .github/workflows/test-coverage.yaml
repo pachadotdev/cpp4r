@@ -42,15 +42,15 @@ jobs:
             "PKG_LIBS = $(SHLIB_OPENMP_CXXFLAGS) $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)",
             sep = "\n"
           )
-          writeLines(makevars_content, "./extended-tests/cpp4rtest/src/Makevars")
+          writeLines(makevars_content, "./cpp4rtest/src/Makevars")
           
-          pak::local_install("./extended-tests/cpp4rtest", dependencies = TRUE)
+          pak::local_install("./cpp4rtest", dependencies = TRUE)
         shell: Rscript {0}
 
       - name: Test coverage
         run: |
           coverage <- covr::package_coverage(
-            "./extended-tests/cpp4rtest",
+            "./cpp4rtest",
             type = "all",
             quiet = FALSE
           )
