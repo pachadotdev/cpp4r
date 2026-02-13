@@ -17,8 +17,5 @@
 ^doc$
 ^docs$
 ^example-packages$
-^extended-tests$
-^extended-tests-results$
-^scripts$
+^cpp4rtest$
 ^vignettes$
-^others$
