@@ -1,5 +1,5 @@
 Package: cpp4rtest
-Title: A Test Suite and Benchmark Code for 'cpp4r'
+Title: Testing 'cpp4r'
 Description: To check cpp4r correctness. The headers are vendored to check which lines of
     the C++ code are covered by the unit tests.
 Version: 0.1.0
@@ -13,14 +13,11 @@ Authors@R:
     )
 License: Apache License (>= 2)
 Encoding: UTF-8
+NeedsCompilation: yes
 LinkingTo: testthat
-Suggests:
-    covr,
-    testthat (>= 3.0.0),
-    pkgload,
-    xml2
+Suggests: testthat (>= 3.0.0)
+Depends: R(>= 3.5.0)
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Config/testthat/edition: 3
-NeedsCompilation: yes
