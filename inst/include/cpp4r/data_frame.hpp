@@ -22,15 +22,8 @@ class data_frame : public list {
   using list::list;
   friend class writable::data_frame;
 
-  static SEXP get_attrib0(SEXP x, SEXP sym) noexcept {
-    for (SEXP attr = ATTRIB(x); attr != R_NilValue; attr = CDR(attr)) {
-      if (TAG(attr) == sym) return CAR(attr);
-    }
-    return R_NilValue;
-  }
-
   static R_xlen_t calc_nrow(SEXP x) noexcept {
-    auto nms = get_attrib0(x, R_RowNamesSymbol);
+    auto nms = Rf_getAttrib(x, R_RowNamesSymbol);
     bool has_short_rownames =
         (Rf_isInteger(nms) && Rf_xlength(nms) == 2 && INTEGER(nms)[0] == NA_INTEGER);
     if (has_short_rownames) return static_cast<R_xlen_t>(abs(INTEGER(nms)[1]));
