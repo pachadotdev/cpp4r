@@ -34,6 +34,7 @@ jobs:
           
           # Use older ubuntu to maximise backward compatibility
           - {os: ubuntu-22.04,   r: 'devel', http-user-agent: 'release'}
+          - {os: ubuntu-22.04,   r: 'devel', http-user-agent: 'release', custom: 'no-legacy-nonapi'}
           - {os: ubuntu-22.04,   r: 'release', custom: 'no-cpp4rtest'}
           - {os: ubuntu-22.04,   r: 'oldrel-1'}
           - {os: ubuntu-22.04,   r: 'oldrel-2'}
@@ -69,6 +70,11 @@ jobs:
           extra-packages: any::rcmdcheck
           pak-version: devel
           needs: check
+
+      - name: Set NO_LEGACY_NONAPI flag
+        if: matrix.config.custom == 'no-legacy-nonapi'
+        run: |
+          sed -i 's/PKG_CPPFLAGS = /PKG_CPPFLAGS = -DNO_LEGACY_NONAPI /' cpp4rtest/src/Makevars.in
 
       - name: Install cpp4rtest
         if: matrix.config.custom != 'no-cpp4rtest'
