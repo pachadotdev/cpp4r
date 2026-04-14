@@ -1,0 +1,201 @@
+Loading required package: usethis
+Loading required package: usethis
+ℹ Updating cpp4rtest documentation
+ℹ Loading cpp4rtest
+ℹ Re-compiling cpp4rtest (debug build)
+── R CMD INSTALL ───────────────────────────────────────────────────────────────
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.1.0’
+** using staged installation
+** libs
+using C++ compiler: ‘g++ (GCC) 15.2.1 20260209’
+make[1]: Entering directory '/home/pacha/Documents/cpp4r/cpp4rtest/src'
+g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3 -UNDEBUG -Wall -pedantic -g -O0  -c cpp4r.cpp -o cpp4r.o
+g++ -std=gnu++17 -shared -L/usr/lib64/R/lib -Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-z,pack-relative-relocs -flto=auto -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/usr/lib64/R/lib -lR
+make[1]: Leaving directory '/home/pacha/Documents/cpp4r/cpp4rtest/src'
+installing to /tmp/RtmplZzbMN/devtools_install_d7ac24357201/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** checking absolute paths in shared objects and dynamic libraries
+* DONE (cpp4rtest)
+Loading required package: usethis
+Loading required package: usethis
+* using log directory ‘/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck’
+* using R version 4.5.3 (2026-03-11)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (GCC) 15.2.1 20260209
+    GNU Fortran (GCC) 15.2.1 20260209
+* running under: Manjaro Linux
+* using session charset: UTF-8
+* using options ‘--no-manual --as-cran’
+* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
+* this is package ‘cpp4rtest’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
+
+New submission
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cpp4rtest’ can be installed ... [122s/123s] OK
+* used C++ compiler: ‘g++ (GCC) 15.2.1 20260209’
+* checking installed package size ... INFO
+  installed size is 22.4Mb
+  sub-directories of 1Mb or more:
+    libs  22.3Mb
+* checking package directory ... OK
+* checking for future file timestamps ... NOTE
+unable to verify current time
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... WARNING
+Undocumented code objects:
+  ‘_cpp4rtest_assign_cpp4r_’ ‘_cpp4rtest_cpp4r_add_int_vec_’
+  ‘_cpp4rtest_cpp4r_add_vec_for_’ ‘_cpp4rtest_cpp4r_as_integers_’
+  ‘_cpp4rtest_cpp4r_complex_add_’ ‘_cpp4rtest_cpp4r_complex_imag_’
+  ‘_cpp4rtest_cpp4r_complex_modulus_’ ‘_cpp4rtest_cpp4r_complex_real_’
+  ‘_cpp4rtest_cpp4r_contains_name_’ ‘_cpp4rtest_cpp4r_env_exists_’
+  ‘_cpp4rtest_cpp4r_env_get_int_’ ‘_cpp4rtest_cpp4r_env_get_str_’
+  ‘_cpp4rtest_cpp4r_env_set_’ ‘_cpp4rtest_cpp4r_find_name_pos_’
+  ‘_cpp4rtest_cpp4r_get_by_name_’ ‘_cpp4rtest_cpp4r_global_get_’
+  ‘_cpp4rtest_cpp4r_insert_’ ‘_cpp4rtest_cpp4r_iterator_at_’
+  ‘_cpp4rtest_cpp4r_iterator_count_’
+  ‘_cpp4rtest_cpp4r_iterator_distance_’
+  ‘_cpp4rtest_cpp4r_iterator_double_values_’
+  ‘_cpp4rtest_cpp4r_iterator_find_’ ‘_cpp4rtest_cpp4r_iterator_max_’
+  ‘_cpp4rtest_cpp4r_iterator_min_’ ‘_cpp4rtest_cpp4r_iterator_sum_’
+  ‘_cpp4rtest_cpp4r_iterator_sum_int_’
+  ‘_cpp4rtest_cpp4r_list_of_doubles_’
+  ‘_cpp4rtest_cpp4r_list_of_integers_’
+  ‘_cpp4rtest_cpp4r_list_of_named_’ ‘_cpp4rtest_cpp4r_list_of_strings_’
+  ‘_cpp4rtest_cpp4r_logical_to_dbl_’ ‘_cpp4rtest_cpp4r_logical_to_int_’
+  ‘_cpp4rtest_cpp4r_make_complex_’ ‘_cpp4rtest_cpp4r_named_doubles_’
+  ‘_cpp4rtest_cpp4r_named_integers_’ ‘_cpp4rtest_cpp4r_named_list_’
+  ‘_cpp4rtest_cpp4r_named_list_c_style_’
+  ‘_cpp4rtest_cpp4r_named_list_push_back_’
+  ‘_cpp4rtest_cpp4r_named_strings_’ ‘_cpp4rtest_cpp4r_negate_logical_’
+  ‘_cpp4rtest_cpp4r_push_and_truncate_’ ‘_cpp4rtest_cpp4r_raw_copy_’
+  ‘_cpp4rtest_cpp4r_raw_xor_’ ‘_cpp4rtest_cpp4r_release_’
+  ‘_cpp4rtest_cpp4r_reverse_vector_’ ‘_cpp4rtest_cpp4r_safe_’
+  ‘_cpp4rtest_data_frame_’ ‘_cpp4rtest_grow_’ ‘_cpp4rtest_grow_cplx_’
+  ‘_cpp4rtest_grow_strings_cpp4r_’ ‘_cpp4rtest_grow_strings_manual_’
+  ‘_cpp4rtest_notroxcpp1_’ ‘_cpp4rtest_notroxcpp6_’
+  ‘_cpp4rtest_ordered_map_to_list_’ ‘_cpp4rtest_protect_many_’
+  ‘_cpp4rtest_protect_many_cpp4r_’ ‘_cpp4rtest_protect_many_preserve_’
+  ‘_cpp4rtest_protect_many_sexp_’ ‘_cpp4rtest_protect_one_’
+  ‘_cpp4rtest_protect_one_cpp4r_’ ‘_cpp4rtest_protect_one_preserve_’
+  ‘_cpp4rtest_protect_one_sexp_’ ‘_cpp4rtest_sum_cplx_accumulate_’
+  ‘_cpp4rtest_sum_cplx_for2_’ ‘_cpp4rtest_sum_cplx_for_’
+  ‘_cpp4rtest_sum_cplx_for_2_’ ‘_cpp4rtest_sum_cplx_for_3_’
+  ‘_cpp4rtest_sum_cplx_for_4_’ ‘_cpp4rtest_sum_cplx_for_5_’
+  ‘_cpp4rtest_sum_cplx_for_6_’ ‘_cpp4rtest_sum_cplx_foreach_’
+  ‘_cpp4rtest_sum_dbl_accumulate2_’ ‘_cpp4rtest_sum_dbl_accumulate_’
+  ‘_cpp4rtest_sum_dbl_for2_’ ‘_cpp4rtest_sum_dbl_for3_’
+  ‘_cpp4rtest_sum_dbl_for_’ ‘_cpp4rtest_sum_dbl_foreach2_’
+  ‘_cpp4rtest_sum_dbl_foreach_’ ‘_cpp4rtest_sum_int_accumulate_’
+  ‘_cpp4rtest_sum_int_for2_’ ‘_cpp4rtest_sum_int_for_’
+  ‘_cpp4rtest_sum_int_foreach_’ ‘_cpp4rtest_unordered_map_to_list_’
+  ‘cpp4r_add_int_vec_’ ‘cpp4r_as_integers_’ ‘cpp4r_complex_add_’
+  ‘cpp4r_complex_imag_’ ‘cpp4r_complex_modulus_’ ‘cpp4r_complex_real_’
+  ‘cpp4r_contains_name_’ ‘cpp4r_env_exists_’ ‘cpp4r_env_get_int_’
+  ‘cpp4r_env_get_str_’ ‘cpp4r_env_set_’ ‘cpp4r_find_name_pos_’
+  ‘cpp4r_get_by_name_’ ‘cpp4r_global_get_’ ‘cpp4r_iterator_at_’
+  ‘cpp4r_iterator_count_’ ‘cpp4r_iterator_distance_’
+  ‘cpp4r_iterator_double_values_’ ‘cpp4r_iterator_find_’
+  ‘cpp4r_iterator_max_’ ‘cpp4r_iterator_min_’ ‘cpp4r_iterator_sum_’
+  ‘cpp4r_iterator_sum_int_’ ‘cpp4r_list_of_doubles_’
+  ‘cpp4r_list_of_integers_’ ‘cpp4r_list_of_named_’
+  ‘cpp4r_list_of_strings_’ ‘cpp4r_logical_to_dbl_’
+  ‘cpp4r_logical_to_int_’ ‘cpp4r_make_complex_’ ‘cpp4r_named_doubles_’
+  ‘cpp4r_named_integers_’ ‘cpp4r_named_list_’ ‘cpp4r_named_strings_’
+  ‘cpp4r_negate_logical_’ ‘cpp4r_raw_copy_’ ‘cpp4r_raw_xor_’
+  ‘cpp4r_reverse_vector_’ ‘notroxcpp1_’ ‘notroxcpp6_’
+All user-level objects in a package should have documentation entries.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... WARNING
+Non-portable flags in variable 'PKG_CPPFLAGS':
+  -g -Wall -O2 -pedantic
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
+* checking pragmas in C/C++ headers and code ... OK
+* checking compilation flags used ... OK
+* checking compiled code ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ...
+  Running ‘testthat.R’
+ OK
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+
+Status: 2 WARNINGs, 2 NOTEs
+See
+  ‘/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck/00check.log’
+for details.
+
+=== BEGIN 00install.out ===
+Loading required package: usethis
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.1.0’
+** using staged installation
+** libs
+using C++ compiler: ‘g++ (GCC) 15.2.1 20260209’
+make[1]: Entering directory '/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck/00_pkg_src/cpp4rtest/src'
+g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3  -c cpp4r.cpp -o cpp4r.o
+g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3  -c main.cpp -o main.o
+g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3  -c test-runner.cpp -o test-runner.o
+g++ -std=gnu++17 -shared -L/usr/lib64/R/lib -Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-z,pack-relative-relocs -flto=auto -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/usr/lib64/R/lib -lR
+make[1]: Leaving directory '/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck/00_pkg_src/cpp4rtest/src'
+make[1]: Entering directory '/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck/00_pkg_src/cpp4rtest/src'
+make[1]: Leaving directory '/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck/00_pkg_src/cpp4rtest/src'
+installing to /home/pacha/Documents/cpp4r/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+=== END 00install.out ===
+R CMD check completed with no ERRORs. Warnings/Notes (if any) are allowed. See ./check-gcc-clang/check-CXX14-gcc.log for full output.
+Run complete.

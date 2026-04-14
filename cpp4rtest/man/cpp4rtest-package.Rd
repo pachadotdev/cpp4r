@@ -4,7 +4,7 @@
 \name{cpp4rtest-package}
 \alias{cpp4rtest}
 \alias{cpp4rtest-package}
-\title{cpp4rtest: A Test Suite and Benchmark Code for 'cpp4r'}
+\title{cpp4rtest: Testing 'cpp4r'}
 \description{
 To check cpp4r correctness. The headers are vendored to check which lines of the C++ code are covered by the unit tests.
 }

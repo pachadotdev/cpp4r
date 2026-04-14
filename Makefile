@@ -1,12 +1,8 @@
 clean:
-	@Rscript -e 'devtools::clean_dll("extended-tests/cpp4rtest");'
-	@Rscript -e 'devtools::clean_dll("extended-tests/cpp11benchmark")'
-	@Rscript -e 'devtools::clean_dll("extended-tests/cpp4rbenchmark")'
-	@Rscript -e 'devtools::clean_dll("extended-tests/Rcppbenchmark")'
+	@Rscript -e 'devtools::clean_dll("cpp4rtest");'
 
 install:
 	@Rscript -e 'devtools::install("./")'
-	@Rscript -e 'cpp4r::unvendor("./extended-tests/cpp4rtest/src/vendor"); cpp4r::vendor("./extended-tests/cpp4rtest/src/vendor")'
 
 docs:
 	@Rscript -e 'devtools::document("./"); pkgsite::build_site("./")'
@@ -20,8 +16,6 @@ check:
 	@echo "==============================="
 	@echo "Checking C++ code"
 	@$(MAKE) install
-	@rm -f extended-tests-results/*.log
-	@rm -f extended-tests-results/check-results.md
 	@export -p USE_CLANG; /bin/bash -euo pipefail -c './scripts/check_loop.sh'
 	@echo "==============================="
 	

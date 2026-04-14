@@ -67,8 +67,8 @@ class package {
     if (strcmp(name, "base") == 0) {
       return R_BaseEnv;
     }
-    sexp name_sexp = safe[Rf_install](name);
-    return safe[detail::r_env_get](R_NamespaceRegistry, name_sexp);
+    sexp name_sexp = safe[Rf_mkString](name);
+    return safe[R_FindNamespace](name_sexp);
   }
 
   // Either base env or in namespace registry, so no protection needed

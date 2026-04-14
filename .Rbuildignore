@@ -18,4 +18,6 @@
 ^docs$
 ^example-packages$
 ^cpp4rtest$
+^scripts$
 ^vignettes$
+^check-gcc-clang$
