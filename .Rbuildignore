@@ -21,3 +21,4 @@
 ^scripts$
 ^vignettes$
 ^check-gcc-clang$
+^check-r-devel$

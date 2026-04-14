@@ -9,7 +9,11 @@
 
 using namespace cpp4r;
 
-// Integer operations
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 writable::integers cpp4r_add_int_vec_(integers x, int value) {
   writable::integers result(x.size());
@@ -23,12 +27,21 @@ writable::integers cpp4r_add_int_vec_(integers x, int value) {
   return result;
 }
 
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 integers cpp4r_as_integers_(doubles x) {
   return as_integers(x);
 }
 
-// Logical operations
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 writable::logicals cpp4r_negate_logical_(logicals x) {
   writable::logicals result(x.size());
@@ -44,27 +57,51 @@ writable::logicals cpp4r_negate_logical_(logicals x) {
   return result;
 }
 
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 writable::integers cpp4r_logical_to_int_(logicals x) {
   return as_integers(x);
 }
 
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 writable::doubles cpp4r_logical_to_dbl_(logicals x) {
   return as_doubles(x);
 }
 
-// Iterator operations
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 double cpp4r_iterator_sum_(doubles x) {
   return std::accumulate(x.begin(), x.end(), 0.0);
 }
 
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 int cpp4r_iterator_sum_int_(integers x) {
   return std::accumulate(x.begin(), x.end(), 0);
 }
 
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 int cpp4r_iterator_find_(doubles x, double value) {
   auto it = std::find(x.begin(), x.end(), value);
@@ -74,23 +111,43 @@ int cpp4r_iterator_find_(doubles x, double value) {
   return static_cast<int>(std::distance(x.begin(), it)) + 1;  // 1-indexed
 }
 
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 int cpp4r_iterator_count_(doubles x, double value) {
   return static_cast<int>(std::count(x.begin(), x.end(), value));
 }
 
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 double cpp4r_iterator_min_(doubles x) {
   if (x.size() == 0) return NA_REAL;
   return *std::min_element(x.begin(), x.end());
 }
 
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 double cpp4r_iterator_max_(doubles x) {
   if (x.size() == 0) return NA_REAL;
   return *std::max_element(x.begin(), x.end());
 }
 
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 writable::doubles cpp4r_iterator_double_values_(doubles x) {
   writable::doubles result(x.size());
@@ -98,6 +155,11 @@ writable::doubles cpp4r_iterator_double_values_(doubles x) {
   return result;
 }
 
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 writable::doubles cpp4r_reverse_vector_(doubles x) {
   writable::doubles result(x.size());
@@ -109,18 +171,32 @@ writable::doubles cpp4r_reverse_vector_(doubles x) {
   return result;
 }
 
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 double cpp4r_iterator_at_(doubles x, int index) {
   auto it = x.begin() + index;
   return *it;
 }
 
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 int cpp4r_iterator_distance_(doubles x) {
   return static_cast<int>(std::distance(x.begin(), x.end()));
 }
 
-// Raw operations
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 writable::raws cpp4r_raw_copy_(raws x) {
   writable::raws result(x.size());
@@ -130,6 +206,11 @@ writable::raws cpp4r_raw_copy_(raws x) {
   return result;
 }
 
+/* roxygen
+@title Test helper functions
+@rdname testing-helpers
+@keywords internal
+*/
 [[cpp4r::register]]
 writable::raws cpp4r_raw_xor_(raws x, raws mask) {
   if (mask.size() != 1) {

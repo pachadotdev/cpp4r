@@ -1,11 +1,14 @@
 Dear CRAN Team:
 
-Per Prof. Dr. Luke Tierney's email, this version removes non-API methods
-having the next R release in mind.
+I had to patch v0.5.0 because GitHub actions logs were hiding a non-API method
+that went unnoticed.
 
-From the email, I understand that R 4.6.0 shall remove non-API function
-ATTRIB from the public R header files, and therefore this change anticipates
-the new version after testing with R-devel.
+This time I edited my local Makefile to:
+
+1. Build R-devel to /opt
+2. Test locally and export the full logs to a txt file
+
+This patch is fully compliant with R-devel 4.7.0 
 
 Best,
 MVS

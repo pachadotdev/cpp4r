@@ -6,7 +6,11 @@
 
 using namespace cpp4r;
 
-// list_of operations
+/* roxygen
+@title List and complex helper functions
+@rdname testing-list-complex
+@keywords internal
+*/
 [[cpp4r::register]]
 list_of<doubles> cpp4r_list_of_doubles_() {
   writable::list_of<writable::doubles> result(3);
@@ -22,6 +26,11 @@ list_of<doubles> cpp4r_list_of_doubles_() {
   return result;
 }
 
+/* roxygen
+@title List and complex helper functions
+@rdname testing-list-complex
+@keywords internal
+*/
 [[cpp4r::register]]
 list_of<integers> cpp4r_list_of_integers_() {
   writable::list_of<writable::integers> result(2);
@@ -35,6 +44,11 @@ list_of<integers> cpp4r_list_of_integers_() {
   return result;
 }
 
+/* roxygen
+@title List and complex helper functions
+@rdname testing-list-complex
+@keywords internal
+*/
 [[cpp4r::register]]
 list_of<strings> cpp4r_list_of_strings_() {
   writable::list_of<writable::strings> result(2);
@@ -48,6 +62,11 @@ list_of<strings> cpp4r_list_of_strings_() {
   return result;
 }
 
+/* roxygen
+@title List and complex helper functions
+@rdname testing-list-complex
+@keywords internal
+*/
 [[cpp4r::register]]
 writable::list cpp4r_list_of_named_() {
   using namespace cpp4r::literals;
@@ -58,7 +77,11 @@ writable::list cpp4r_list_of_named_() {
   return writable::list({"a"_nm = static_cast<SEXP>(v1), "b"_nm = static_cast<SEXP>(v2)});
 }
 
-// Complex number operations
+/* roxygen
+@title List and complex helper functions
+@rdname testing-list-complex
+@keywords internal
+*/
 [[cpp4r::register]]
 writable::complexes cpp4r_make_complex_(doubles real, doubles imag) {
   R_xlen_t n = real.size();
@@ -71,6 +94,11 @@ writable::complexes cpp4r_make_complex_(doubles real, doubles imag) {
   return result;
 }
 
+/* roxygen
+@title List and complex helper functions
+@rdname testing-list-complex
+@keywords internal
+*/
 [[cpp4r::register]]
 writable::doubles cpp4r_complex_real_(complexes x) {
   writable::doubles result(x.size());
@@ -80,6 +108,11 @@ writable::doubles cpp4r_complex_real_(complexes x) {
   return result;
 }
 
+/* roxygen
+@title List and complex helper functions
+@rdname testing-list-complex
+@keywords internal
+*/
 [[cpp4r::register]]
 writable::doubles cpp4r_complex_imag_(complexes x) {
   writable::doubles result(x.size());
@@ -89,6 +122,11 @@ writable::doubles cpp4r_complex_imag_(complexes x) {
   return result;
 }
 
+/* roxygen
+@title List and complex helper functions
+@rdname testing-list-complex
+@keywords internal
+*/
 [[cpp4r::register]]
 writable::doubles cpp4r_complex_modulus_(complexes x) {
   writable::doubles result(x.size());
@@ -100,6 +138,11 @@ writable::doubles cpp4r_complex_modulus_(complexes x) {
   return result;
 }
 
+/* roxygen
+@title List and complex helper functions
+@rdname testing-list-complex
+@keywords internal
+*/
 [[cpp4r::register]]
 writable::complexes cpp4r_complex_add_(complexes x, complexes y) {
   R_xlen_t n = x.size();

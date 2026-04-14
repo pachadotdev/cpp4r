@@ -80,3 +80,11 @@ clang_format=`which clang-format-18`
 
 format: $(shell find . -name '*.h') $(shell find . -name '*.hpp') $(shell find . -name '*.cpp')
 	@${clang_format} -i $?
+
+build-r-devel:
+	@echo "Building R-devel from source"
+	./scripts/build_r_devel.sh
+
+check-devel:
+	@echo "Checking with R-devel (CXX23, gcc)"
+	./scripts/check_r_devel.sh cxx23 gcc
