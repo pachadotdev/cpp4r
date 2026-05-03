@@ -8,7 +8,8 @@ This time I edited my local Makefile to:
 1. Build R-devel to /opt
 2. Test locally and export the full logs to a txt file
 
-This patch is fully compliant with R-devel 4.7.0 
+This patch is fully compliant with R-devel 4.7.0 downloaded from
+https://cran.r-project.org/src/base-prerelease/R-devel.tar.gz.
 
 Best,
 MVS

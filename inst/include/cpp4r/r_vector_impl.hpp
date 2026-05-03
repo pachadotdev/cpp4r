@@ -160,9 +160,19 @@ inline T r_vector<T>::operator[](const r_string& name) const {
   SEXP names = this->names();
   R_xlen_t size = Rf_xlength(names);
 
+  // Fast path: pointer-equality compare against the interned CHARSXP. This is
+  // O(1) per element when the name was constructed from an existing CHARSXP
+  // (e.g. from another R string vector) since CHARSXPs with identical content
+  // and encoding share storage in R's global string pool.
   for (R_xlen_t pos = 0; pos < size; ++pos) {
-    auto cur = Rf_translateCharUTF8(STRING_ELT(names, pos));
-    if (name == cur) {
+    if (name == STRING_ELT(names, pos)) {
+      return operator[](pos);
+    }
+  }
+
+  // Slow path: encodings or pool entries differ; translate and compare bytes.
+  for (R_xlen_t pos = 0; pos < size; ++pos) {
+    if (name == Rf_translateCharUTF8(STRING_ELT(names, pos))) {
       return operator[](pos);
     }
   }
@@ -201,9 +211,16 @@ inline bool r_vector<T>::contains(const r_string& name) const {
   SEXP names = this->names();
   R_xlen_t size = Rf_xlength(names);
 
+  // Fast path: CHARSXP pointer equality.
   for (R_xlen_t pos = 0; pos < size; ++pos) {
-    auto cur = Rf_translateCharUTF8(STRING_ELT(names, pos));
-    if (name == cur) {
+    if (name == STRING_ELT(names, pos)) {
+      return true;
+    }
+  }
+
+  // Slow path: translate and compare.
+  for (R_xlen_t pos = 0; pos < size; ++pos) {
+    if (name == Rf_translateCharUTF8(STRING_ELT(names, pos))) {
       return true;
     }
   }
@@ -270,23 +287,23 @@ CPP4R_COLD inline T r_vector<T>::get_oob() {
 
 template <typename T>
 inline SEXP r_vector<T>::valid_type(SEXP x) {
-  const SEXPTYPE type = get_sexptype();
+  const SEXPTYPE expected = get_sexptype();
 
 #if CPP4R_HAS_CXX20
-  // C++20: Use standard [[unlikely]] attribute for error paths
   if (x == nullptr) [[unlikely]] {
-    throw type_error(type, NILSXP);
+    throw type_error(expected, NILSXP);
   }
-  if (detail::r_typeof(x) != type) [[unlikely]] {
-    throw type_error(type, detail::r_typeof(x));
+  const SEXPTYPE actual = detail::r_typeof(x);
+  if (actual != expected) [[unlikely]] {
+    throw type_error(expected, actual);
   }
 #else
-  // C++11-17: Use __builtin_expect
   if (CPP4R_UNLIKELY(x == nullptr)) {
-    throw type_error(type, NILSXP);
+    throw type_error(expected, NILSXP);
   }
-  if (CPP4R_UNLIKELY(detail::r_typeof(x) != type)) {
-    throw type_error(type, detail::r_typeof(x));
+  const SEXPTYPE actual = detail::r_typeof(x);
+  if (CPP4R_UNLIKELY(actual != expected)) {
+    throw type_error(expected, actual);
   }
 #endif
 
@@ -392,14 +409,15 @@ template <typename T>
 CPP4R_ALWAYS_INLINE typename r_vector<T>::generic_const_iterator&
 r_vector<T>::generic_const_iterator::operator++() {
   ++pos_;
+  // `length_ > 0` is set by `fill_buf` only when the ALTREP region buffer is
+  // active. Reading the iterator-local field is cheaper than re-evaluating
+  // `use_buf(data_->is_altrep()) && data_->size() > BUF_THRESHOLD` per step.
 #if CPP4R_HAS_CXX20
-  // C++20: Use standard [[unlikely]] attribute (better understood by modern optimizers)
-  if (use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_) [[unlikely]] {
+  if (length_ > 0 && pos_ >= block_start_ + length_) [[unlikely]] {
     fill_buf(pos_);
   }
 #else
-  // C++11-17: Use __builtin_expect
-  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_)) {
+  if (CPP4R_UNLIKELY(length_ > 0 && pos_ >= block_start_ + length_)) {
     fill_buf(pos_);
   }
 #endif
@@ -410,10 +428,7 @@ template <typename T>
 inline typename r_vector<T>::generic_const_iterator&
 r_vector<T>::generic_const_iterator::operator--() {
   --pos_;
-  if (use_buf(data_->is_altrep()) &&
-      data_->size() >
-          static_cast<R_xlen_t>(r_vector<T>::generic_const_iterator::BUF_THRESHOLD) &&
-      pos_ > 0 && pos_ < block_start_) {
+  if (length_ > 0 && pos_ >= 0 && pos_ < block_start_) {
     fill_buf(std::max(0_xl, pos_ - static_cast<R_xlen_t>(
                                        r_vector<T>::generic_const_iterator::BUF_CAP)));
   }
@@ -424,7 +439,7 @@ template <typename T>
 inline typename r_vector<T>::generic_const_iterator&
 r_vector<T>::generic_const_iterator::operator+=(R_xlen_t i) {
   pos_ += i;
-  if (use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_) {
+  if (length_ > 0 && pos_ >= block_start_ + length_) {
     fill_buf(pos_);
   }
   return *this;
@@ -434,7 +449,7 @@ template <typename T>
 inline typename r_vector<T>::generic_const_iterator&
 r_vector<T>::generic_const_iterator::operator-=(R_xlen_t i) {
   pos_ -= i;
-  if (use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_) {
+  if (length_ > 0 && pos_ < block_start_) {
     fill_buf(std::max(0_xl, pos_ - static_cast<R_xlen_t>(
                                        r_vector<T>::generic_const_iterator::BUF_CAP)));
   }
@@ -473,9 +488,16 @@ inline typename r_vector<T>::const_iterator r_vector<T>::find(
   SEXP names = this->names();
   R_xlen_t size = Rf_xlength(names);
 
+  // Fast path: CHARSXP pointer equality.
   for (R_xlen_t pos = 0; pos < size; ++pos) {
-    auto cur = Rf_translateCharUTF8(STRING_ELT(names, pos));
-    if (name == cur) {
+    if (name == STRING_ELT(names, pos)) {
+      return begin() + pos;
+    }
+  }
+
+  // Slow path: translate and compare bytes.
+  for (R_xlen_t pos = 0; pos < size; ++pos) {
+    if (name == Rf_translateCharUTF8(STRING_ELT(names, pos))) {
       return begin() + pos;
     }
   }
@@ -507,31 +529,13 @@ inline typename r_vector<T>::const_iterator r_vector<T>::find_cached(
 
 template <typename T>
 CPP4R_ALWAYS_INLINE T r_vector<T>::generic_const_iterator::operator*() const {
-#if CPP4R_HAS_CXX20
-  // C++20: Use standard [[unlikely]] attribute
-  if (use_buf(data_->is_altrep()) &&
-      data_->size() >
-          static_cast<R_xlen_t>(r_vector<T>::generic_const_iterator::BUF_THRESHOLD))
-      [[unlikely]] {
-    // Use pre-loaded buffer for compatible ALTREP types
+  // `length_ > 0` is set by `fill_buf` only when the ALTREP region buffer is
+  // active. Avoid the expensive `use_buf(...) && size > THRESHOLD` chain on
+  // every dereference.
+  if (length_ > 0) {
     return static_cast<T>(buf_[pos_ - block_start_]);
-  } else {
-    // Otherwise pass through to normal retrieval method (common case)
-    return data_->operator[](pos_);
   }
-#else
-  // C++11-17: Use __builtin_expect
-  if (CPP4R_UNLIKELY(use_buf(data_->is_altrep()) &&
-                     data_->size() >
-                         static_cast<R_xlen_t>(
-                             r_vector<T>::generic_const_iterator::BUF_THRESHOLD))) {
-    // Use pre-loaded buffer for compatible ALTREP types
-    return static_cast<T>(buf_[pos_ - block_start_]);
-  } else {
-    // Otherwise pass through to normal retrieval method (common case)
-    return data_->operator[](pos_);
-  }
-#endif
+  return data_->operator[](pos_);
 }
 
 template <typename T>

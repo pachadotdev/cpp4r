@@ -30,13 +30,17 @@ inline typename r_vector<r_complex>::underlying_type r_vector<r_complex>::get_el
 template <>
 inline typename r_vector<r_complex>::underlying_type* r_vector<r_complex>::get_p(
     bool is_altrep, SEXP data) {
+  // cpp4r uses `const T*` as the const_iterator type for primitive vectors,
+  // so we must always return a contiguous, materialized pointer here.
+  (void)is_altrep;
   return COMPLEX(data);
 }
 
 template <>
 inline typename r_vector<r_complex>::underlying_type const*
 r_vector<r_complex>::get_const_p(bool is_altrep, SEXP data) {
-  return COMPLEX(data);
+  // No `COMPLEX_OR_NULL` exists in the R API; mirror the strings.hpp pattern.
+  return is_altrep ? nullptr : COMPLEX(data);
 }
 
 template <>

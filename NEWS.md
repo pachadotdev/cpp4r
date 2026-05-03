@@ -1,3 +1,7 @@
+# cpp4r 0.6.0
+
+* Adds fast paths that provide slight speed improvements (e.g., avoiding branching)
+
 # cpp4r 0.5.1
 
 * Luke Tierney pointed out a similar change as in v0.5.0 to add to function.hpp.

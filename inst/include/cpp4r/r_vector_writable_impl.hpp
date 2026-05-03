@@ -346,9 +346,17 @@ inline typename r_vector<T>::reference r_vector<T>::operator[](
   SEXP names = PROTECT(this->names());
   R_xlen_t size = Rf_xlength(names);
 
+  // Fast path: CHARSXP pointer equality.
   for (R_xlen_t pos = 0; pos < size; ++pos) {
-    auto cur = Rf_translateCharUTF8(STRING_ELT(names, pos));
-    if (name == cur) {
+    if (name == STRING_ELT(names, pos)) {
+      UNPROTECT(1);
+      return operator[](pos);
+    }
+  }
+
+  // Slow path: translate and compare.
+  for (R_xlen_t pos = 0; pos < size; ++pos) {
+    if (name == Rf_translateCharUTF8(STRING_ELT(names, pos))) {
       UNPROTECT(1);
       return operator[](pos);
     }
@@ -519,9 +527,17 @@ inline typename r_vector<T>::iterator r_vector<T>::find(const r_string& name) co
   SEXP names = PROTECT(this->names());
   R_xlen_t size = Rf_xlength(names);
 
+  // Fast path: CHARSXP pointer equality.
   for (R_xlen_t pos = 0; pos < size; ++pos) {
-    auto cur = Rf_translateCharUTF8(STRING_ELT(names, pos));
-    if (name == cur) {
+    if (name == STRING_ELT(names, pos)) {
+      UNPROTECT(1);
+      return begin() + pos;
+    }
+  }
+
+  // Slow path: translate and compare.
+  for (R_xlen_t pos = 0; pos < size; ++pos) {
+    if (name == Rf_translateCharUTF8(STRING_ELT(names, pos))) {
       UNPROTECT(1);
       return begin() + pos;
     }

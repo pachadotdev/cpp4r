@@ -27,13 +27,20 @@ inline typename r_vector<int>::underlying_type r_vector<int>::get_elt(SEXP x,
 template <>
 inline typename r_vector<int>::underlying_type* r_vector<int>::get_p(bool is_altrep,
                                                                      SEXP data) {
+  // Return nullptr for ALTREP so subscript falls through to INTEGER_ELT, which is
+  // dispatched by the ALTREP class without materializing the entire vector.
+  // cpp4r uses `const T*` as the const_iterator type for primitive vectors,
+  // so we must always return a contiguous, materialized pointer here. ALTREP
+  // is materialized by INTEGER(); the lazy fast path lives in `get_const_p`
+  // and in the chunked GET_REGION code in `as_integers`.
+  (void)is_altrep;
   return INTEGER(data);
 }
 
 template <>
 inline typename r_vector<int>::underlying_type const* r_vector<int>::get_const_p(
     bool is_altrep, SEXP data) {
-  return INTEGER(data);
+  return INTEGER_OR_NULL(data);
 }
 
 template <>
@@ -75,19 +82,65 @@ inline integers as_integers(SEXP x) {
 
   if (type == REALSXP) {
     R_xlen_t len = Rf_xlength(x);
-    const double* CPP4R_RESTRICT src = REAL(x);
-
-    // Validate all values are integer-like
-    for (R_xlen_t i = 0; i < len; ++i) {
-      if (!ISNA(src[i]) && !is_convertible_without_loss_to_integer(src[i])) {
-        throw std::runtime_error("All elements must be integer-like");
-      }
-    }
+    const int no_na = REAL_NO_NA(x);
+    const bool is_alt = ALTREP(x);
 
     writable::integers ret(len);
     int* CPP4R_RESTRICT dst = INTEGER(ret.data());
-    for (R_xlen_t i = 0; i < len; ++i) {
-      dst[i] = ISNA(src[i]) ? NA_INTEGER : static_cast<int>(src[i]);
+
+    if (!is_alt) {
+      const double* CPP4R_RESTRICT src = REAL(x);
+      // Validate all values are integer-like.
+      if (no_na) {
+        for (R_xlen_t i = 0; i < len; ++i) {
+          if (!is_convertible_without_loss_to_integer(src[i])) {
+            throw std::runtime_error("All elements must be integer-like");
+          }
+        }
+        for (R_xlen_t i = 0; i < len; ++i) {
+          dst[i] = static_cast<int>(src[i]);
+        }
+      } else {
+        for (R_xlen_t i = 0; i < len; ++i) {
+          if (!ISNA(src[i]) && !is_convertible_without_loss_to_integer(src[i])) {
+            throw std::runtime_error("All elements must be integer-like");
+          }
+        }
+        for (R_xlen_t i = 0; i < len; ++i) {
+          dst[i] = ISNA(src[i]) ? NA_INTEGER : static_cast<int>(src[i]);
+        }
+      }
+      return ret;
+    }
+
+    // ALTREP source: stream in stack-sized chunks via REAL_GET_REGION so the
+    // ALTREP class can serve runs without materializing the full vector.
+    constexpr R_xlen_t kChunk = 512;
+    double buf[kChunk];
+    R_xlen_t i = 0;
+    while (i < len) {
+      const R_xlen_t n = (len - i < kChunk) ? (len - i) : kChunk;
+      REAL_GET_REGION(x, i, n, buf);
+      if (no_na) {
+        for (R_xlen_t k = 0; k < n; ++k) {
+          if (!is_convertible_without_loss_to_integer(buf[k])) {
+            throw std::runtime_error("All elements must be integer-like");
+          }
+          dst[i + k] = static_cast<int>(buf[k]);
+        }
+      } else {
+        for (R_xlen_t k = 0; k < n; ++k) {
+          if (ISNA(buf[k])) {
+            dst[i + k] = NA_INTEGER;
+          } else {
+            if (!is_convertible_without_loss_to_integer(buf[k])) {
+              throw std::runtime_error("All elements must be integer-like");
+            }
+            dst[i + k] = static_cast<int>(buf[k]);
+          }
+        }
+      }
+      i += n;
     }
     return ret;
   }
@@ -95,11 +148,40 @@ inline integers as_integers(SEXP x) {
   if (type == LGLSXP) {
     R_xlen_t len = Rf_xlength(x);
     writable::integers ret(len);
-    const int* CPP4R_RESTRICT src = LOGICAL(x);
     int* CPP4R_RESTRICT dst = INTEGER(ret.data());
+    const int no_na = LOGICAL_NO_NA(x);
 
-    for (R_xlen_t i = 0; i < len; ++i) {
-      dst[i] = (src[i] == NA_LOGICAL) ? NA_INTEGER : src[i];
+    if (!ALTREP(x)) {
+      const int* CPP4R_RESTRICT src = LOGICAL(x);
+      if (no_na) {
+        for (R_xlen_t i = 0; i < len; ++i) {
+          dst[i] = src[i];
+        }
+      } else {
+        for (R_xlen_t i = 0; i < len; ++i) {
+          dst[i] = (src[i] == NA_LOGICAL) ? NA_INTEGER : src[i];
+        }
+      }
+      return ret;
+    }
+
+    // ALTREP logical source: stream via LOGICAL_GET_REGION.
+    constexpr R_xlen_t kChunk = 1024;
+    int buf[kChunk];
+    R_xlen_t i = 0;
+    while (i < len) {
+      const R_xlen_t n = (len - i < kChunk) ? (len - i) : kChunk;
+      LOGICAL_GET_REGION(x, i, n, buf);
+      if (no_na) {
+        for (R_xlen_t k = 0; k < n; ++k) {
+          dst[i + k] = buf[k];
+        }
+      } else {
+        for (R_xlen_t k = 0; k < n; ++k) {
+          dst[i + k] = (buf[k] == NA_LOGICAL) ? NA_INTEGER : buf[k];
+        }
+      }
+      i += n;
     }
     return ret;
   }

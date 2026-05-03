@@ -24,13 +24,18 @@ inline typename r_vector<r_bool>::underlying_type r_vector<r_bool>::get_elt(SEXP
 template <>
 inline typename r_vector<r_bool>::underlying_type* r_vector<r_bool>::get_p(bool is_altrep,
                                                                            SEXP data) {
+  // Return nullptr for ALTREP so subscript falls through to LOGICAL_ELT, which is
+  // dispatched by the ALTREP class without materializing the entire vector.
+  // cpp4r uses `const T*` as the const_iterator type for primitive vectors,
+  // so we must always return a contiguous, materialized pointer here.
+  (void)is_altrep;
   return LOGICAL(data);
 }
 
 template <>
 inline typename r_vector<r_bool>::underlying_type const* r_vector<r_bool>::get_const_p(
     bool is_altrep, SEXP data) {
-  return LOGICAL(data);
+  return LOGICAL_OR_NULL(data);
 }
 
 template <>

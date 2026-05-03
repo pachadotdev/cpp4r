@@ -27,13 +27,18 @@ inline typename r_vector<double>::underlying_type r_vector<double>::get_elt(SEXP
 template <>
 inline typename r_vector<double>::underlying_type* r_vector<double>::get_p(bool is_altrep,
                                                                            SEXP data) {
+  // cpp4r uses `const T*` as the const_iterator type for primitive vectors,
+  // so we must always return a contiguous, materialized pointer here. ALTREP
+  // is materialized by REAL(); the lazy fast path lives in `get_const_p` and
+  // in the chunked GET_REGION code in `as_doubles`/`as_integers`.
+  (void)is_altrep;
   return REAL(data);
 }
 
 template <>
 inline typename r_vector<double>::underlying_type const* r_vector<double>::get_const_p(
     bool is_altrep, SEXP data) {
-  return REAL(data);
+  return REAL_OR_NULL(data);
 }
 
 template <>
@@ -88,12 +93,55 @@ inline doubles as_doubles(SEXP x) {
   if (type == INTSXP || type == LGLSXP) {
     R_xlen_t len = Rf_xlength(x);
     writable::doubles ret(len);
-    const int* CPP4R_RESTRICT src = (type == INTSXP) ? INTEGER(x) : LOGICAL(x);
     double* CPP4R_RESTRICT dst = REAL(ret.data());
-    int na_val = (type == INTSXP) ? NA_INTEGER : NA_LOGICAL;
 
-    for (R_xlen_t i = 0; i < len; ++i) {
-      dst[i] = (src[i] == na_val) ? NA_REAL : static_cast<double>(src[i]);
+    const bool is_alt = ALTREP(x);
+    const int* CPP4R_RESTRICT src = nullptr;
+    if (!is_alt) {
+      src = (type == INTSXP) ? INTEGER(x) : LOGICAL(x);
+    }
+
+    // Fast path: when R guarantees no NAs we can do a branchless cast that
+    // auto-vectorizes (the per-element NA test otherwise inhibits SIMD).
+    const int no_na = (type == INTSXP) ? INTEGER_NO_NA(x) : LOGICAL_NO_NA(x);
+    const int na_val = (type == INTSXP) ? NA_INTEGER : NA_LOGICAL;
+
+    if (!is_alt) {
+      if (no_na) {
+        for (R_xlen_t i = 0; i < len; ++i) {
+          dst[i] = static_cast<double>(src[i]);
+        }
+      } else {
+        for (R_xlen_t i = 0; i < len; ++i) {
+          dst[i] = (src[i] == na_val) ? NA_REAL : static_cast<double>(src[i]);
+        }
+      }
+      return ret;
+    }
+
+    // ALTREP source: read in stack-sized chunks via *_GET_REGION so the ALTREP
+    // class can serve runs analytically (e.g. compact integer ranges) without
+    // materializing the whole vector.
+    constexpr R_xlen_t kChunk = 1024;
+    int buf[kChunk];
+    R_xlen_t i = 0;
+    while (i < len) {
+      const R_xlen_t n = (len - i < kChunk) ? (len - i) : kChunk;
+      if (type == INTSXP) {
+        INTEGER_GET_REGION(x, i, n, buf);
+      } else {
+        LOGICAL_GET_REGION(x, i, n, buf);
+      }
+      if (no_na) {
+        for (R_xlen_t k = 0; k < n; ++k) {
+          dst[i + k] = static_cast<double>(buf[k]);
+        }
+      } else {
+        for (R_xlen_t k = 0; k < n; ++k) {
+          dst[i + k] = (buf[k] == na_val) ? NA_REAL : static_cast<double>(buf[k]);
+        }
+      }
+      i += n;
     }
     return ret;
   }

@@ -23,8 +23,12 @@ class r_string {
   operator sexp() const noexcept { return data_; }
 
   operator std::string() const {
+    // `Rf_xlength(CHARSXP)` returns the byte length of the original string,
+    // not the (possibly different) UTF-8 length, so don't `reserve` based on
+    // it -- `assign` performs a single allocation sized correctly. The
+    // `vmaxget`/`vmaxset` pair is required because `Rf_translateCharUTF8`
+    // can use R's transient storage when re-encoding non-UTF-8 inputs.
     std::string res;
-    res.reserve(size());
     void* vmax = vmaxget();
     unwind_protect([&] { res.assign(Rf_translateCharUTF8(data_)); });
     vmaxset(vmax);

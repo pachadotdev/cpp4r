@@ -2,7 +2,7 @@ clean:
 	@Rscript -e 'devtools::clean_dll("cpp4rtest");'
 
 install:
-	@Rscript -e 'devtools::install("./")'
+	@Rscript -e 'devtools::install("./", upgrade = "never")'
 
 docs:
 	@Rscript -e 'devtools::document("./"); pkgsite::build_site("./")'
