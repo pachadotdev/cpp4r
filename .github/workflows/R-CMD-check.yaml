@@ -26,9 +26,9 @@ jobs:
         config:
           - {os: macos-latest,   r: 'release'}
 
-          - {os: windows-latest, r: 'release'}
+          - {os: windows-2022, r: 'release'}
           # use 4.1 to check with rtools40's older compiler
-          - {os: windows-latest, r: '4.1'}
+          - {os: windows-2022, r: '4.1'}
           
           # Use older ubuntu to maximise backward compatibility
           - {os: ubuntu-22.04,   r: 'devel', http-user-agent: 'release'}
@@ -44,7 +44,7 @@ jobs:
       TESTTHAT_PARALLEL: false
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: r-lib/actions/setup-pandoc@v2
 

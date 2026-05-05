@@ -10,4 +10,3 @@ cpp4rtest_0.1.0.tar.gz
 *.so
 *.dll
 scripts/R-devel
-dev/cpp11
