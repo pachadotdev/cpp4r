@@ -76,7 +76,7 @@ $(foreach std,$(STANDARDS),$(eval bench-$(std)-glang: bench-$(std)-clang))
 $(foreach comp,$(COMPILERS) glang,$(eval check-cxx21-$(comp): check-cxx11-$(comp)))
 $(foreach comp,$(COMPILERS) glang,$(eval bench-cxx21-$(comp): bench-cxx11-$(comp)))
 
-clang_format=`which clang-format-18`
+clang_format=`which clang-format-21`
 
 format: $(shell find . -name '*.h') $(shell find . -name '*.hpp') $(shell find . -name '*.cpp')
 	@${clang_format} -i $?
