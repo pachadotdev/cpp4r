@@ -55,6 +55,7 @@ using namespace cpp4r;
 #include "test-matrix_advanced.h"
 #include "test-named_arg.h"
 #include "test-nas.h"
+#include "test-pairlist.h"
 #include "test-protect-nested.h"
 #include "test-protect.h"
 #include "test-protect_advanced.h"
@@ -69,6 +70,7 @@ using namespace cpp4r;
 #include "test-string.h"
 #include "test-strings.h"
 #include "test-translate_names.h"
+#include "test-weak_ref.h"
 
 // C++ standard specific tests
 #include "test-cxx17.h"
