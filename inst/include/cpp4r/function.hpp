@@ -14,24 +14,73 @@
 
 namespace cpp4r {
 
+// Result of a try_call() — holds the value on success, or an error flag and
+// the R error message on failure.
+struct call_result {
+  sexp value;
+  bool error;
+
+  // Returns the R error message when error == true, nullptr otherwise.
+  // The buffer is owned by R and valid until the next R error.
+  const char* error_message() const noexcept { return error ? R_curErrorBuf() : nullptr; }
+
+  explicit operator bool() const noexcept { return !error; }
+};
+
 class function {
  public:
   function(SEXP data) : data_(data) {}
 
+  // Evaluate the function in R_GlobalEnv, throwing on error (via unwind_protect).
   template <typename... Args>
   sexp operator()(Args&&... args) const {
-    // Size of the arguments plus one for the function name itself
-    R_xlen_t num_args = sizeof...(args) + 1;
+    return eval_in(R_GlobalEnv, std::forward<Args>(args)...);
+  }
 
-    sexp call(safe[Rf_allocVector](LANGSXP, num_args));
+  // Evaluate the function in a specific environment, throwing on error.
+  template <typename... Args>
+  sexp call_in(SEXP env, Args&&... args) const {
+    return eval_in(env, std::forward<Args>(args)...);
+  }
 
-    construct_call(call, data_, std::forward<Args>(args)...);
+  // Evaluate the function silently via R_tryEvalSilent. Never throws.
+  // On error, result.error == true and result.error_message() returns the
+  // R error text; result.value == R_NilValue.
+  template <typename... Args>
+  call_result try_call(Args&&... args) const {
+    return try_eval_in(R_GlobalEnv, std::forward<Args>(args)...);
+  }
 
-    return safe[Rf_eval](call, R_GlobalEnv);
+  // Same as try_call() but evaluates in a specific environment.
+  template <typename... Args>
+  call_result try_call_in(SEXP env, Args&&... args) const {
+    return try_eval_in(env, std::forward<Args>(args)...);
   }
 
  private:
   sexp data_;
+
+  template <typename... Args>
+  sexp make_call(Args&&... args) const {
+    R_xlen_t num_args = sizeof...(args) + 1;
+    sexp call(safe[Rf_allocVector](LANGSXP, num_args));
+    construct_call(call, data_, std::forward<Args>(args)...);
+    return call;
+  }
+
+  template <typename... Args>
+  sexp eval_in(SEXP env, Args&&... args) const {
+    sexp call = make_call(std::forward<Args>(args)...);
+    return safe[Rf_eval](call, env);
+  }
+
+  template <typename... Args>
+  call_result try_eval_in(SEXP env, Args&&... args) const {
+    sexp call = make_call(std::forward<Args>(args)...);
+    int error_flag = 0;
+    SEXP result = R_tryEvalSilent(call, env, &error_flag);
+    return {sexp(error_flag ? R_NilValue : result), error_flag != 0};
+  }
 
   template <typename... Args>
   void construct_call(SEXP val, const named_arg& arg, Args&&... args) const {

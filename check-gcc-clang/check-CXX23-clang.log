@@ -12,24 +12,25 @@ using C++ compiler: ‘g++ (GCC) 15.2.1 20260209’
 make[1]: Entering directory '/home/pacha/Documents/cpp4r/cpp4rtest/src'
 make[1]: Leaving directory '/home/pacha/Documents/cpp4r/cpp4rtest/src'
 make[1]: Entering directory '/home/pacha/Documents/cpp4r/cpp4rtest/src'
-g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3 -UNDEBUG -Wall -pedantic -g -O0  -c cpp4r.cpp -o cpp4r.o
-g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3 -UNDEBUG -Wall -pedantic -g -O0  -c main.cpp -o main.o
-g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3 -UNDEBUG -Wall -pedantic -g -O0  -c test-runner.cpp -o test-runner.o
-g++ -std=gnu++17 -shared -L/usr/lib64/R/lib -Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-z,pack-relative-relocs -flto=auto -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/usr/lib64/R/lib -lR
+g++ -std=gnu++20 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3 -UNDEBUG -Wall -pedantic -g -O0  -c cpp4r.cpp -o cpp4r.o
+g++ -std=gnu++20 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3 -UNDEBUG -Wall -pedantic -g -O0  -c main.cpp -o main.o
+g++ -std=gnu++20 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3 -UNDEBUG -Wall -pedantic -g -O0  -c test-runner.cpp -o test-runner.o
+g++ -std=gnu++20 -shared -L/usr/lib64/R/lib -Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-z,pack-relative-relocs -flto=auto -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/usr/lib64/R/lib -lR
 make[1]: Leaving directory '/home/pacha/Documents/cpp4r/cpp4rtest/src'
-installing to /tmp/RtmpIF7fBJ/devtools_install_71612822f221/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+installing to /tmp/RtmpKsNzEz/devtools_install_331b97f3b7079/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 ** checking absolute paths in shared objects and dynamic libraries
 * DONE (cpp4rtest)
 Loading required package: usethis
 Loading required package: usethis
 * using log directory ‘/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck’
-* using R version 4.5.3 (2026-03-11)
+* using R version 4.6.0 (2026-04-24)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 15.2.1 20260209
     GNU Fortran (GCC) 15.2.1 20260209
 * running under: Manjaro Linux
 * using session charset: UTF-8
+* current time: 2026-05-06 00:27:56 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.1.0’
@@ -46,12 +47,12 @@ New submission
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [98s/98s] OK
+* checking whether package ‘cpp4rtest’ can be installed ... [135s/136s] OK
 * used C++ compiler: ‘g++ (GCC) 15.2.1 20260209’
 * checking installed package size ... INFO
-  installed size is 22.5Mb
+  installed size is 25.4Mb
   sub-directories of 1Mb or more:
-    libs  22.3Mb
+    libs  25.3Mb
 * checking package directory ... OK
 * checking for future file timestamps ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -167,10 +168,10 @@ Loading required package: usethis
 ** libs
 using C++ compiler: ‘g++ (GCC) 15.2.1 20260209’
 make[1]: Entering directory '/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck/00_pkg_src/cpp4rtest/src'
-g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3  -c cpp4r.cpp -o cpp4r.o
-g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3  -c main.cpp -o main.o
-g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3  -c test-runner.cpp -o test-runner.o
-g++ -std=gnu++17 -shared -L/usr/lib64/R/lib -Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-z,pack-relative-relocs -flto=auto -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/usr/lib64/R/lib -lR
+g++ -std=gnu++20 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3  -c cpp4r.cpp -o cpp4r.o
+g++ -std=gnu++20 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3  -c main.cpp -o main.o
+g++ -std=gnu++20 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3  -c test-runner.cpp -o test-runner.o
+g++ -std=gnu++20 -shared -L/usr/lib64/R/lib -Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-z,pack-relative-relocs -flto=auto -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/usr/lib64/R/lib -lR
 make[1]: Leaving directory '/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck/00_pkg_src/cpp4rtest/src'
 make[1]: Entering directory '/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck/00_pkg_src/cpp4rtest/src'
 make[1]: Leaving directory '/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck/00_pkg_src/cpp4rtest/src'

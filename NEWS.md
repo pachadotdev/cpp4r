@@ -1,6 +1,7 @@
 # cpp4r 0.6.0
 
 * Adds fast paths that provide slight speed improvements (e.g., avoiding branching)
+* Follows, to the best possible extent, the R's C API description from https://github.com/hadley/r-internals.
 
 # cpp4r 0.5.1
 

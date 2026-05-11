@@ -15,6 +15,7 @@
 #include "cpp4r/logicals.hpp"
 #include "cpp4r/matrix.hpp"
 #include "cpp4r/named_arg.hpp"
+#include "cpp4r/pairlist.hpp"
 #include "cpp4r/protect.hpp"
 #include "cpp4r/r_bool.hpp"
 #include "cpp4r/r_string.hpp"
@@ -22,3 +23,4 @@
 #include "cpp4r/raws.hpp"
 #include "cpp4r/sexp.hpp"
 #include "cpp4r/strings.hpp"
+#include "cpp4r/weak_ref.hpp"

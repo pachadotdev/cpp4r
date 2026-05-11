@@ -32,6 +32,21 @@ class environment {
  public:
   environment(SEXP env) : env_(env) {}
   environment(sexp env) : env_(env) {}
+
+  // Create a new environment (R >= 4.1.0).
+  // enclos: enclosing environment (parent).
+  // hash:   non-zero to enable hashing; recommended for environments with
+  //         many bindings.
+  // size:   initial hash table size hint (ignored when hash == 0).
+  static environment new_env(SEXP enclos = R_GlobalEnv, int hash = 1, int size = 29) {
+    return environment(safe[R_NewEnv](enclos, hash, size));
+  }
+
+  // Well-known environment singletons.
+  static environment global_env() noexcept { return environment(R_GlobalEnv); }
+  static environment base_env() noexcept { return environment(R_BaseEnv); }
+  static environment empty_env() noexcept { return environment(R_EmptyEnv); }
+
   proxy operator[](const SEXP name) const { return {env_, name}; }
   proxy operator[](const char* name) const { return operator[](safe[Rf_install](name)); }
   proxy operator[](const std::string& name) const { return operator[](name.c_str()); }
@@ -47,6 +62,21 @@ class environment {
   }
 
   void remove(const char* name) { remove(safe[Rf_install](name)); }
+
+  // Lock this environment, preventing new bindings from being added.
+  // If bindings is true, all existing bindings are also locked (read-only).
+  void lock(bool bindings = false) noexcept {
+    R_LockEnvironment(env_, bindings ? TRUE : FALSE);
+  }
+
+  bool is_locked() const noexcept { return R_EnvironmentIsLocked(env_) == TRUE; }
+
+  // List names of bindings in this environment (does not search enclosing
+  // envs). Returns a sorted STRSXP; wrap in cpp4r::strings() for iteration.
+  // Pass all_names = true to include names beginning with '.'.
+  sexp ls(bool all_names = false) const {
+    return safe[R_lsInternal3](env_, all_names ? TRUE : FALSE, TRUE);
+  }
 
   R_xlen_t size() const noexcept { return Rf_xlength(env_); }
 
