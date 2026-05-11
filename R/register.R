@@ -77,6 +77,24 @@ register <- function(path = NULL, quiet = !is_interactive(), extension = c(".cpp
 
   call_entries <- get_call_entries(path, funs$name, package)
 
+  fun_guards <- setNames(
+    mapply(get_preprocessor_guard, funs$file, funs$line, SIMPLIFY = FALSE),
+    funs$name
+  )
+  guarded_names <- names(fun_guards)[!vapply(fun_guards, is.null, logical(1))]
+  if (length(guarded_names) > 0) {
+    call_entries <- vapply(call_entries, function(line) {
+      matched <- guarded_names[vapply(guarded_names, function(nm) {
+        grepl(paste0("_", package, "_", nm), line, fixed = TRUE)
+      }, logical(1))]
+      if (length(matched) > 0) {
+        paste0(fun_guards[[matched[1]]], "\n", line, "\n#endif")
+      } else {
+        line
+      }
+    }, character(1), USE.NAMES = FALSE)
+  }
+
   cpp_function_registration <- glue::glue_data(funs, '    {{
     "_cpp4r_{name}", (DL_FUNC) &_{package}_{name}, {n_args}}}, ',
     n_args = viapply(funs$args, nrow)
@@ -175,6 +193,12 @@ generate_cpp_functions <- function(funs, package = "cpp4r") {
     }}
     '
   )
+
+  guards <- mapply(get_preprocessor_guard, funs$file, funs$line, SIMPLIFY = FALSE)
+  out <- mapply(function(code, guard) {
+    if (!is.null(guard)) paste0(guard, "\n", code, "\n#endif") else as.character(code)
+  }, out, guards, SIMPLIFY = TRUE)
+
   out <- glue::glue_collapse(out, sep = "\n")
   unclass(out)
 }
@@ -396,6 +420,27 @@ wrap_call <- function(name, return_type, args) {
   } else {
     unclass(glue::glue("  return cpp4r::as_sexp({call});"))
   }
+}
+
+get_preprocessor_guard <- function(file, line) {
+  if (!file.exists(file)) return(NULL)
+  lines <- readLines(file, warn = FALSE)
+  if (line > length(lines)) return(NULL)
+
+  depth <- 0
+  for (i in rev(seq_len(line - 1))) {
+    l <- trimws(lines[i])
+    if (grepl("^#\\s*endif\\b", l)) {
+      depth <- depth + 1
+    } else if (grepl("^#\\s*(ifndef|ifdef|if)\\b", l)) {
+      if (depth == 0) {
+        return(l)
+      }
+      depth <- depth - 1
+    }
+  }
+
+  NULL
 }
 
 get_call_entries <- function(path, names, package) {
