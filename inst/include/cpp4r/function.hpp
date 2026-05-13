@@ -31,6 +31,8 @@ class function {
  public:
   function(SEXP data) : data_(data) {}
 
+  operator SEXP() const noexcept { return data_; }
+
   // Evaluate the function in R_GlobalEnv, throwing on error (via unwind_protect).
   template <typename... Args>
   sexp operator()(Args&&... args) const {
