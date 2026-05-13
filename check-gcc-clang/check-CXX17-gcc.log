@@ -7,30 +7,67 @@ Loading required package: usethis
 * installing *source* package ‘cpp4rtest’ ...
 ** this is package ‘cpp4rtest’ version ‘0.1.0’
 ** using staged installation
+configure: CXX_STD not set, defaulting to CXX11
 ** libs
+specified C++17
 using C++ compiler: ‘g++ (GCC) 15.2.1 20260209’
+using C++17
 make[1]: Entering directory '/home/pacha/Documents/cpp4r/cpp4rtest/src'
-g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3 -UNDEBUG -Wall -pedantic -g -O0  -c cpp4r.cpp -o cpp4r.o
+make[1]: Leaving directory '/home/pacha/Documents/cpp4r/cpp4rtest/src'
+make[1]: Entering directory '/home/pacha/Documents/cpp4r/cpp4rtest/src'
+g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/testthat/include' -I/usr/local/include   -fopenmp -fpic  -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -g -ffile-prefix-map=/build/r/src=/usr/src/debug/r -flto=auto -ffat-lto-objects  -UNDEBUG -Wall -pedantic -g -O0  -c cpp4r.cpp -o cpp4r.o
+In file included from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h:727,
+                 from /usr/include/c++/15.2.1/bits/version.h:51,
+                 from /usr/include/c++/15.2.1/cstring:47,
+                 from /home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include/cpp4r/declarations.hpp:3,
+                 from cpp4r.cpp:5:
+/usr/include/features.h:451:4: warning: #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Wcpp]
+  451 | #  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
+      |    ^~~~~~~
+g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/testthat/include' -I/usr/local/include   -fopenmp -fpic  -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -g -ffile-prefix-map=/build/r/src=/usr/src/debug/r -flto=auto -ffat-lto-objects  -UNDEBUG -Wall -pedantic -g -O0  -c main.cpp -o main.o
+In file included from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h:727,
+                 from /usr/include/c++/15.2.1/cstdio:46,
+                 from /usr/include/R/Rinternals.h:34,
+                 from /home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include/cpp4r/R.hpp:20,
+                 from /home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include/cpp4r.hpp:3,
+                 from main.cpp:1:
+/usr/include/features.h:451:4: warning: #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Wcpp]
+  451 | #  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
+      |    ^~~~~~~
+g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/testthat/include' -I/usr/local/include   -fopenmp -fpic  -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -g -ffile-prefix-map=/build/r/src=/usr/src/debug/r -flto=auto -ffat-lto-objects  -UNDEBUG -Wall -pedantic -g -O0  -c test-runner.cpp -o test-runner.o
+In file included from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h:727,
+                 from /usr/include/c++/15.2.1/climits:46,
+                 from /home/pacha/R/x86_64-pc-linux-gnu-library/4.6/testthat/include/testthat/testthat.h:51,
+                 from /home/pacha/R/x86_64-pc-linux-gnu-library/4.6/testthat/include/testthat.h:1,
+                 from test-runner.h:8,
+                 from test-runner.cpp:6:
+/usr/include/features.h:451:4: warning: #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Wcpp]
+  451 | #  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
+      |    ^~~~~~~
 g++ -std=gnu++17 -shared -L/usr/lib64/R/lib -Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-z,pack-relative-relocs -flto=auto -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/usr/lib64/R/lib -lR
 make[1]: Leaving directory '/home/pacha/Documents/cpp4r/cpp4rtest/src'
-installing to /tmp/RtmpN3SVpx/devtools_install_94269f851df/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+installing to /tmp/RtmpfwXiUr/devtools_install_342bc2083246f/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 ** checking absolute paths in shared objects and dynamic libraries
 * DONE (cpp4rtest)
 Loading required package: usethis
 Loading required package: usethis
 * using log directory ‘/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck’
-* using R version 4.5.3 (2026-03-11)
+* using R version 4.6.0 (2026-04-24)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (GCC) 15.2.1 20260209
     GNU Fortran (GCC) 15.2.1 20260209
 * running under: Manjaro Linux
 * using session charset: UTF-8
+* current time: 2026-05-13 00:26:22 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.1.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [4s/10s] NOTE
+* checking CRAN incoming feasibility ... NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
@@ -42,12 +79,14 @@ New submission
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [108s/108s] OK
+* checking whether package ‘cpp4rtest’ can be installed ... [337s/158s] OK
 * used C++ compiler: ‘g++ (GCC) 15.2.1 20260209’
+* checking C++ specification ... INFO
+  specified C++17
 * checking installed package size ... INFO
-  installed size is 22.5Mb
+  installed size is 23.6Mb
   sub-directories of 1Mb or more:
-    libs  22.3Mb
+    libs  23.4Mb
 * checking package directory ... OK
 * checking for future file timestamps ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -139,7 +178,11 @@ Non-portable flags in variable 'PKG_CPPFLAGS':
 * checking use of PKG_*FLAGS in Makefiles ... OK
 * checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
 * checking pragmas in C/C++ headers and code ... OK
-* checking compilation flags used ... OK
+* checking compilation flags used ... NOTE
+Compilation used the following non-portable flag(s):
+  ‘-Werror=format-security’ ‘-Wformat’ ‘-Wp,-D_FORTIFY_SOURCE=3’
+  ‘-Wp,-D_GLIBCXX_ASSERTIONS’ ‘-march=x86-64’
+  ‘-mno-omit-leaf-frame-pointer’
 * checking compiled code ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
@@ -150,7 +193,7 @@ Non-portable flags in variable 'PKG_CPPFLAGS':
 * checking for detritus in the temp directory ... OK
 * DONE
 
-Status: 2 WARNINGs, 1 NOTE
+Status: 2 WARNINGs, 2 NOTEs
 See
   ‘/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck/00check.log’
 for details.
@@ -161,11 +204,13 @@ Loading required package: usethis
 ** this is package ‘cpp4rtest’ version ‘0.1.0’
 ** using staged installation
 ** libs
+specified C++17
 using C++ compiler: ‘g++ (GCC) 15.2.1 20260209’
+using C++17
 make[1]: Entering directory '/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck/00_pkg_src/cpp4rtest/src'
-g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3  -c cpp4r.cpp -o cpp4r.o
-g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3  -c main.cpp -o main.o
-g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.5/testthat/include' -I/usr/local/include   -fopenmp -fpic  -O3  -c test-runner.cpp -o test-runner.o
+g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/testthat/include' -I/usr/local/include   -fopenmp -fpic  -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -g -ffile-prefix-map=/build/r/src=/usr/src/debug/r -flto=auto -ffat-lto-objects   -c cpp4r.cpp -o cpp4r.o
+g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/testthat/include' -I/usr/local/include   -fopenmp -fpic  -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -g -ffile-prefix-map=/build/r/src=/usr/src/debug/r -flto=auto -ffat-lto-objects   -c main.cpp -o main.o
+g++ -std=gnu++17 -I"/usr/include/R/" -DNDEBUG -UDEBUG -g -Wall -O2 -pedantic -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/cpp4r/include' -I'/home/pacha/R/x86_64-pc-linux-gnu-library/4.6/testthat/include' -I/usr/local/include   -fopenmp -fpic  -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security         -fstack-clash-protection -fcf-protection         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -g -ffile-prefix-map=/build/r/src=/usr/src/debug/r -flto=auto -ffat-lto-objects   -c test-runner.cpp -o test-runner.o
 g++ -std=gnu++17 -shared -L/usr/lib64/R/lib -Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-z,pack-relative-relocs -flto=auto -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/usr/lib64/R/lib -lR
 make[1]: Leaving directory '/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck/00_pkg_src/cpp4rtest/src'
 make[1]: Entering directory '/home/pacha/Documents/cpp4r/cpp4rtest.Rcheck/00_pkg_src/cpp4rtest/src'
