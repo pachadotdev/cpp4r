@@ -29,9 +29,25 @@ struct call_result {
 
 class function {
  public:
+  // Default constructor: data_ is R_NilValue (via sexp's default constructor).
+  // Needed for storing a cpp4r::function as an uninitialized class member.
+  function() noexcept = default;
+
   function(SEXP data) : data_(data) {}
 
+  // Construct from a sexp, e.g. when a function was received as a generic sexp.
+  function(const sexp& data) : data_(data) {}
+  function(sexp&& data) : data_(std::move(data)) {}
+
+  // Copy/move: delegate to sexp's, which handle protect/unprotect correctly.
+  function(const function&) = default;
+  function(function&&) = default;
+  function& operator=(const function&) = default;
+  function& operator=(function&&) = default;
+
   operator SEXP() const noexcept { return data_; }
+  // Return the underlying sexp for interop with sexp-based APIs.
+  sexp data() const noexcept { return data_; }
 
   // Evaluate the function in R_GlobalEnv, throwing on error (via unwind_protect).
   template <typename... Args>
@@ -95,7 +111,7 @@ class function {
   // Construct the call recursively, each iteration adds an Arg to the pairlist.
   template <typename T, typename... Args>
   void construct_call(SEXP val, const T& arg, Args&&... args) const {
-    SETCAR(val, as_sexp(arg));
+    SETCAR(val, cpp4r::as_sexp(arg));
     val = CDR(val);
     construct_call(val, std::forward<Args>(args)...);
   }

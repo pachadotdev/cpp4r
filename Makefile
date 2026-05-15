@@ -15,7 +15,7 @@ bench:
 	@export -p USE_CLANG; /bin/bash -euo pipefail -c './scripts/bench_loop.sh'
 	@Rscript './scripts/combine-benchmarks.R'
 
-STANDARDS := cxx17 cxx20
+STANDARDS := cxx17 cxx20 cxx23
 COMPILERS := gcc clang
 
 ALL_CHECKS := $(foreach std,$(STANDARDS),$(foreach comp,$(COMPILERS),check-$(std)-$(comp)))

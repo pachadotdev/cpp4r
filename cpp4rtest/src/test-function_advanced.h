@@ -75,4 +75,96 @@ context("function-advanced-C++") {
 
     expect_true(res.error);
   }
+
+  // --- function vs sexp: "silly" side-by-side comparisons ---
+
+  test_that("function: default constructor gives R_NilValue, same as sexp") {
+    // sexp has had a default constructor forever; function now has one too
+    cpp4r::sexp s;
+    cpp4r::function f;
+    expect_true(static_cast<SEXP>(s) == R_NilValue);
+    expect_true(static_cast<SEXP>(f) == R_NilValue);
+  }
+
+  test_that("function: construct from sexp avoids per-call cast") {
+    // sexp approach: must re-wrap on every call
+    cpp4r::sexp func_as_sexp = cpp4r::package("base")["sum"];
+    double r1 = cpp4r::function{static_cast<SEXP>(func_as_sexp)}(
+        cpp4r::as_sexp({1., 2.}));
+
+    // function approach: construct once from sexp, call directly
+    cpp4r::function f(func_as_sexp);
+    double r2 = f(cpp4r::as_sexp({1., 2.}));
+
+    expect_true(r1 == r2);
+  }
+
+  test_that("function: data() round-trips back to sexp") {
+    auto sum = cpp4r::package("base")["sum"];
+    cpp4r::sexp s = sum.data();
+    cpp4r::function f(s);
+    double result = f(cpp4r::as_sexp({4., 5., 6.}));
+    expect_true(result == 15.);
+  }
+
+  test_that("function: copy works like sexp copy") {
+    auto f1 = cpp4r::package("base")["sum"];
+    cpp4r::function f2(f1);
+    double r1 = f1(cpp4r::as_sexp({1., 2.}));
+    double r2 = f2(cpp4r::as_sexp({1., 2.}));
+    expect_true(r1 == r2);
+  }
+
+  test_that("function: move leaves source as R_NilValue, like sexp") {
+    // sexp move semantics for reference
+    cpp4r::sexp s1 = cpp4r::package("base")["sum"];
+    cpp4r::sexp s2 = std::move(s1);
+    expect_true(static_cast<SEXP>(s1) == R_NilValue);
+
+    // function has the same semantics
+    cpp4r::function f1(cpp4r::package("base")["sum"]);
+    cpp4r::function f2(std::move(f1));
+    expect_true(static_cast<SEXP>(f1) == R_NilValue);
+    double result = f2(cpp4r::as_sexp({1., 2.}));
+    expect_true(result == 3.);
+  }
+
+  test_that("function: default-construct then assign (class member pattern)") {
+    // Previously you had to use sexp for this; now function works the same way
+    cpp4r::sexp s;
+    s = cpp4r::package("base")["sum"];
+    double r1 = cpp4r::function{static_cast<SEXP>(s)}(cpp4r::as_sexp({10., 20.}));
+
+    cpp4r::function f;
+    f = cpp4r::package("base")["sum"];
+    double r2 = f(cpp4r::as_sexp({10., 20.}));
+
+    expect_true(r1 == r2);
+    expect_true(r2 == 30.);
+  }
+
+  test_that("function: callback struct with function member vs sexp member") {
+    // cpp11 style: sexp member, must cast on every invocation
+    struct SexpCallback {
+      cpp4r::sexp func;
+      explicit SexpCallback(SEXP f) : func(f) {}
+      cpp4r::sexp invoke(cpp4r::sexp x) const {
+        return cpp4r::function{static_cast<SEXP>(func)}(x);
+      }
+    };
+
+    // cpp4r style: function member, store and call directly
+    struct FuncCallback {
+      cpp4r::function func;
+      explicit FuncCallback(SEXP f) : func(f) {}
+      cpp4r::sexp invoke(cpp4r::sexp x) const { return func(x); }
+    };
+
+    SEXP sum_sexp = cpp4r::package("base")["sum"];
+    cpp4r::sexp args = cpp4r::as_sexp({1., 2., 3.});
+    double r1 = SexpCallback(sum_sexp).invoke(args);
+    double r2 = FuncCallback(sum_sexp).invoke(args);
+    expect_true(r1 == r2);
+    expect_true(r1 == 6.);
+  }
 }

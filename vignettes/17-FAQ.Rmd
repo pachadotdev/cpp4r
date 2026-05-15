@@ -389,7 +389,10 @@ x
 
 ## Should I call "unwind_protect" manually?
 
-`cpp4r::unwind_protect()` is cpp4r's way of safely calling R's C API. In short, it allows you to run a function that might throw an R error, catch the `longjmp()` of that error, promote it to an exception that is thrown and caught by a try/catch that cpp4r sets up for you at `.Call()` time (which allows destructors to run), and finally tells R to continue unwinding the stack now that the C++ objects have had a chance to destruct as needed.
+`cpp4r::unwind_protect()` is cpp4r's way of safely calling R's C API. In short, it allows you to run a function that might throw
+an R error, catch the `longjmp()` of that error, promote it to an exception that is thrown and caught by a try/catch that cpp4r
+sets up for you at `.Call()` time (which allows destructors to run), and finally tells R to continue unwinding the stack now that
+the C++ objects have had a chance to destruct as needed.
 
 Since `cpp4r::unwind_protect()` takes an arbitrary function, you may be wondering if you should use it for your own custom needs.
 In general, this is advised against because this is an extremely advanced feature that is prone to subtle and hard to debug issues.
@@ -431,20 +434,24 @@ void test_destructor_bad() {
 test_destructor_ok()
 ```
 
-But if you happen to move `a` into the `unwind_protect()`, then it will not be destructed, and you will end up with a memory leak at best, and a much more sinister issue if your destructor is important:
+But if you happen to move `a` into the `unwind_protect()`, then it will not be destructed, and you will end up with a memory leak
+at best, and a much more sinister issue if your destructor is important:
 
 ```r
 test_destructor_bad()
 #> Error: oh no!
 ```
 
-In general, the only code that can be called within `unwind_protect()` is "pure" C code or C++ code that only uses POD (plain-old-data) types and no exceptions.
-If you mix complex C++ objects with R's C API within `unwind_protect()`, then any R errors will result in a jump that prevents your destructors from running.
+In general, the only code that can be called within `unwind_protect()` is "pure" C code or C++ code that only uses POD
+(plain-old-data) types and no exceptions.
+If you mix complex C++ objects with R's C API within `unwind_protect()`, then any R errors will result in a jump that prevents
+your destructors from running.
 
 ### Nested `unwind_protect()`
 
 Another issue that can arise has to do with *nested* calls to `unwind_protect()`.
-It is very hard (if not impossible) to end up with invalidly nested `unwind_protect()` calls when using the typical cpp4r API, but you can manually create a scenario like the following:
+It is very hard (if not impossible) to end up with invalidly nested `unwind_protect()` calls when using the typical cpp4r API, but
+you can manually create a scenario like the following:
 
 ```cpp
 #include <cpp4r.hpp>
@@ -465,9 +472,12 @@ If you were to run `test_nested()` from R, it would likely crash or hang your R 
 -   The outer `unwind_protect()` is called. It uses the C function `R_UnwindProtect()` to call its lambda function.
 -   The inner `unwind_protect()` is called. It again uses `R_UnwindProtect()`, this time to call `Rf_error()`.
 -   `Rf_error()` performs a `longjmp()` which is caught by the inner `unwind_protect()` and promoted to an exception.
--   That exception is thrown, but because the code is in the outer call to `R_UnwindProtect()` (a C function), it ends up throwing that exception *across* C stack frames. This is *undefined behavior*, which is known to have caused R to crash on certain platforms.
+-   That exception is thrown, but because the code is in the outer call to `R_UnwindProtect()` (a C function), it ends up throwing
+    that exception *across* C stack frames. This is *undefined behavior*, which is known to have caused R to crash on certain
+    platforms.
 
-You might think that you'd never do this, but the same scenario can also occur with a combination of 1 call to `unwind_protect()` combined with usage of the cpp4r API:
+You might think that you'd never do this, but the same scenario can also occur with a combination of 1 call to `unwind_protect()`
+combined with usage of the cpp4r API:
 
 ```cpp
 #include <cpp4r.hpp>
@@ -480,11 +490,14 @@ void test_hidden_nested() {
 }
 ```
 
-Because `cpp4r::stop()` (and most of the cpp4r API) uses `unwind_protect()` internally, this has indirectly ended up in a nested `unwind_protect()` scenario again.
+Because `cpp4r::stop()` (and most of the cpp4r API) uses `unwind_protect()` internally, this has indirectly ended up in a nested
+`unwind_protect()` scenario again.
 
-In general, if you must use `unwind_protect()` then you must be very careful not to use any of the cpp4r API inside of the `unwind_protect()` call.
+In general, if you must use `unwind_protect()` then you must be very careful not to use any of the cpp4r API inside of the
+`unwind_protect()` call.
 
-It is worth pointing out that calling out to an R function from cpp4r which then calls back into cpp4r is still safe, i.e. if the registered version of the imaginary `test_outer()` function below was called from R, then that would work:
+It is worth pointing out that calling out to an R function from cpp4r which then calls back into cpp4r is still safe, i.e. if the
+registered version of the imaginary `test_outer()` function below was called from R, then that would work:
 
 ```cpp
 #include <cpp4r.hpp>
@@ -501,7 +514,10 @@ void test_outer() {
 }
 ```
 
-This might seem unsafe because `cpp4r::package()` uses `unwind_protect()` to call the R function for `test_inner()`, which then goes back into C++ to call `cpp4r::stop()`, which itself uses `unwind_protect()`, so it seems like the code is in a nested scenario, but this scenario does actually work.
+This might seem unsafe because `cpp4r::package()` uses `unwind_protect()` to call the R function for `test_inner()`, which then
+goes back into C++ to call `cpp4r::stop()`, which itself uses `unwind_protect()`, so it seems like the code is in a nested
+scenario, but this scenario does actually work.
+
 It makes more sense if you analyze it one step at a time:
 
 -   Call the R function for `test_outer()`
@@ -511,22 +527,30 @@ It makes more sense if you analyze it one step at a time:
 -   Call the R function for `test_inner()`
 -   A try/catch is set up to catch unwind exceptions (*this is the key!*)
 -   The C++ function for `test_inner()` is called
--   `cpp4r::stop("oh no!")` is called, which uses `unwind_protect()` to call `Rf_error()`, causing a `longjmp()`, which is caught by that `unwind_protect()` and promoted to an exception.
--   That exception is thrown, but this time it is caught by the try/catch set up by `test_inner()` as it was entered from the R side. This prevents that exception from crossing the C++ -\> C boundary.
--   The try/catch calls `R_ContinueUnwind()`, which `longjmp()`s again, and now the `unwind_protect()` set up by `cpp4r::package()` catches that, and promotes it to an exception.
+-   `cpp4r::stop("oh no!")` is called, which uses `unwind_protect()` to call `Rf_error()`, causing a `longjmp()`, which is caught
+    by that `unwind_protect()` and promoted to an exception.
+-   That exception is thrown, but this time it is caught by the try/catch set up by `test_inner()` as it was entered from the R
+    side. This prevents that exception from crossing the C++ -\> C boundary.
+-   The try/catch calls `R_ContinueUnwind()`, which `longjmp()`s again, and now the `unwind_protect()` set up by
+    `cpp4r::package()` catches that, and promotes it to an exception.
 -   That exception is thrown and caught by the try/catch set up by `test_outer()`.
--   The try/catch calls `R_ContinueUnwind()`, which `longjmp()`s again, and at this point the `longjmp()` can safely proceed to force an R error.
+-   The try/catch calls `R_ContinueUnwind()`, which `longjmp()`s again, and at this point the `longjmp()` can safely proceed to
+    force an R error.
 
-If you have read the above bullet and still feel like you need to call `unwind_protect()`, then you should keep in mind the following when writing the function to unwind-protect:
+If you have read the above bullet and still feel like you need to call `unwind_protect()`, then you should keep in mind the
+following when writing the function to unwind-protect:
 
 -   You should not create any C++ objects that have destructors.
 -   You should not use any parts of the cpp4r API that may call `unwind_protect()`.
 -   You must be very careful not to call `unwind_protect()` in a nested manner.
 
-In other words, if you only use plain-old-data types, are careful to never throw exceptions, and only use R's C API, then you can use `unwind_protect()`.
+In other words, if you only use plain-old-data types, are careful to never throw exceptions, and only use R's C API, then you can
+use `unwind_protect()`.
 
 One place you may want to do this is when working with long character vectors.
-Unfortunately, due to the way cpp4r must protect the individual CHARSXP objects that make up a character vector, it can currently be quite slow to use the cpp4r API for this.
+Unfortunately, due to the way cpp4r must protect the individual CHARSXP objects that make up a character vector, it can currently
+be quite slow to use the cpp4r API for this.
+
 Consider this example of extracting out individual elements with `x[i]` vs using the native R API:
 
 ```cpp
@@ -659,4 +683,80 @@ state from R.
   PutRNGstate();
   return x;
 }
+```
+
+## How different is `cpp11::function` compared to `cpp4r::function`?
+
+In cpp11 there is no dedicated `cpp11::function` type. The idiomatic way to store a callable passed
+from R is to hold it as a `cpp11::sexp` and re-wrap it in a temporary `cpp11::function` on every call:
+
+```cpp
+// cpp11 style
+class MyCallback {
+public:
+  explicit MyCallback(SEXP f) : func(f) {}
+
+  cpp11::sexp invoke(cpp11::sexp x) const {
+    // must re-wrap into cpp11::function each time
+    return cpp11::function{static_cast<SEXP>(func)}(x);
+  }
+
+private:
+  cpp11::sexp func;  // stored as a generic sexp
+};
+```
+
+In cpp4r, `cpp4r::function` is a first-class type that can be stored directly as a class
+member, default-constructed, copied, and moved just like `cpp4r::sexp`. No re-wrapping is needed at
+the call site:
+
+```cpp
+// cpp4r style
+class MyCallback {
+public:
+  explicit MyCallback(SEXP f) : func(f) {}
+
+  cpp4r::sexp invoke(cpp4r::sexp x) const {
+    return func(x);  // call directly
+  }
+
+private:
+  cpp4r::function func;  // stored as a function
+};
+```
+
+The two approaches produce identical results, but `cpp4r::function` makes the intent
+explicit and removes the manual cast.
+
+`cpp4r::function` also supports the same copy/move semantics as `cpp4r::sexp`, so it is
+safe to use anywhere a `sexp` would be used:
+
+```cpp
+#include <cpp4r.hpp>
+
+[[cpp4r::register]]
+double apply_fn(SEXP f, double x) {
+  cpp4r::function fn(f);           // construct from SEXP
+  cpp4r::sexp result = fn(x);      // call directly
+  return cpp4r::as_cpp<double>(result);
+}
+```
+
+You can also default-construct a `cpp4r::function` and assign it later, which is useful
+when the function is not yet known at construction time:
+
+```cpp
+#include <cpp4r.hpp>
+
+class Deferred {
+public:
+  Deferred() = default;   // func is R_NilValue until set()
+
+  void set(SEXP f) { func = f; }
+
+  cpp4r::sexp invoke(cpp4r::sexp x) const { return func(x); }
+
+private:
+  cpp4r::function func;
+};
 ```

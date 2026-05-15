@@ -249,7 +249,9 @@ context("strings-C++") {
     cpp4r::writable::strings x(Rf_mkChar("foo"));
 
     x[0] = "bar";
-    x.at(0) = "bar";
+    expect_true(x[0] == "bar");
+    x.at(0) = "baz";
+    expect_true(x.at(0) == "baz");
   }
 
   test_that("strings::operator=() works with std:strings") {
