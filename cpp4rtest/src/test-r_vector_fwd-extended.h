@@ -784,9 +784,10 @@ context("r_vector_fwd-extended-C++") {
     cpp4r::writable::logicals x({TRUE, FALSE, TRUE, FALSE, TRUE});
 
     auto it = x.end();
-    auto it2 = it + (-2);  // This tests operator+ with negative
-    // Verify the iterator moved back
-    (void)it2;  // Suppress unused warning - just testing compilation
+    auto it2 = it + (-2);
+    // end() - 2 lands on index 3 (FALSE)
+    expect_true(*it2 == FALSE);
+    expect_true(std::distance(it2, x.end()) == 2);
   }
 
   // ============================================

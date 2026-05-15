@@ -540,8 +540,8 @@ void test_outer() {
 <code>test_inner()</code>, which then goes back into C++ to call
 <code>cpp4r::stop()</code>, which itself uses
 <code>unwind_protect()</code>, so it seems like the code is in a nested
-scenario, but this scenario does actually work. It makes more sense if
-you analyze it one step at a time:</p>
+scenario, but this scenario does actually work.</p>
+<p>It makes more sense if you analyze it one step at a time:</p>
 <ul><li>Call the R function for <code>test_outer()</code></li>
 <li>A try/catch is set up to catch unwind exceptions</li>
 <li>The C++ function for <code>test_outer()</code> is called</li>
@@ -582,9 +582,9 @@ never throw exceptions, and only use R’s C API, then you can use
 <p>One place you may want to do this is when working with long character
 vectors. Unfortunately, due to the way cpp4r must protect the individual
 CHARSXP objects that make up a character vector, it can currently be
-quite slow to use the cpp4r API for this. Consider this example of
-extracting out individual elements with <code>x[i]</code> vs using the
-native R API:</p>
+quite slow to use the cpp4r API for this.</p>
+<p>Consider this example of extracting out individual elements with
+<code>x[i]</code> vs using the native R API:</p>
 <pre class="cpp"><code>#include &lt;cpp4r.hpp&gt;
 
 [[cpp4r::register]]
@@ -710,6 +710,73 @@ correctly using the Random Number Generator (RNG) state from R.</p>
   PutRNGstate();
   return x;
 }</code></pre>
+</div>
+<div id="how-different-is-cpp11function-compared-to-cpp4rfunction" class="section level2">
+<h2>How different is <code>cpp11::function</code> compared to
+<code>cpp4r::function</code>?</h2>
+<p>In cpp11 there is no dedicated <code>cpp11::function</code> type. The
+idiomatic way to store a callable passed from R is to hold it as a
+<code>cpp11::sexp</code> and re-wrap it in a temporary
+<code>cpp11::function</code> on every call:</p>
+<pre class="cpp"><code>// cpp11 style
+class MyCallback {
+public:
+  explicit MyCallback(SEXP f) : func(f) {}
+
+  cpp11::sexp invoke(cpp11::sexp x) const {
+    // must re-wrap into cpp11::function each time
+    return cpp11::function{static_cast&lt;SEXP&gt;(func)}(x);
+  }
+
+private:
+  cpp11::sexp func;  // stored as a generic sexp
+};</code></pre>
+<p>In cpp4r, <code>cpp4r::function</code> is a first-class type that can
+be stored directly as a class member, default-constructed, copied, and
+moved just like <code>cpp4r::sexp</code>. No re-wrapping is needed at
+the call site:</p>
+<pre class="cpp"><code>// cpp4r style
+class MyCallback {
+public:
+  explicit MyCallback(SEXP f) : func(f) {}
+
+  cpp4r::sexp invoke(cpp4r::sexp x) const {
+    return func(x);  // call directly
+  }
+
+private:
+  cpp4r::function func;  // stored as a function
+};</code></pre>
+<p>The two approaches produce identical results, but
+<code>cpp4r::function</code> makes the intent explicit and removes the
+manual cast.</p>
+<p><code>cpp4r::function</code> also supports the same copy/move
+semantics as <code>cpp4r::sexp</code>, so it is safe to use anywhere a
+<code>sexp</code> would be used:</p>
+<pre class="cpp"><code>#include &lt;cpp4r.hpp&gt;
+
+[[cpp4r::register]]
+double apply_fn(SEXP f, double x) {
+  cpp4r::function fn(f);           // construct from SEXP
+  cpp4r::sexp result = fn(x);      // call directly
+  return cpp4r::as_cpp&lt;double&gt;(result);
+}</code></pre>
+<p>You can also default-construct a <code>cpp4r::function</code> and
+assign it later, which is useful when the function is not yet known at
+construction time:</p>
+<pre class="cpp"><code>#include &lt;cpp4r.hpp&gt;
+
+class Deferred {
+public:
+  Deferred() = default;   // func is R_NilValue until set()
+
+  void set(SEXP f) { func = f; }
+
+  cpp4r::sexp invoke(cpp4r::sexp x) const { return func(x); }
+
+private:
+  cpp4r::function func;
+};</code></pre>
 </div>
         </div>
         <footer><p id="last-updated">Loading...</p>

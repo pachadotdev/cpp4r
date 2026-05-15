@@ -2,6 +2,8 @@
 
 * Adds fast paths that provide slight speed improvements (e.g., avoiding branching)
 * Follows, to the best possible extent, the R's C API description from https://github.com/hadley/r-internals.
+* Slightly expanded `cpp4r::function`.
+* Fixed two empty tests.
 
 # cpp4r 0.5.1
 
