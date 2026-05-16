@@ -195,7 +195,17 @@ inline void r_vector<T>::named_arg_assign_elt(R_xlen_t i, underlying_type elt,
 // Optimized size constructor using fast-path allocation
 template <typename T>
 CPP4R_ALWAYS_INLINE r_vector<T>::r_vector(const R_xlen_t size)
-    : r_vector(safe[Rf_allocVector](get_sexptype(), size), fresh_allocation_tag{}) {}
+    : cpp4r::r_vector<T>() {
+  SEXP data = Rf_allocVector(get_sexptype(), size);
+  PROTECT(data);
+  capacity_ = size;
+  data_ = data;
+  protect_ = detail::store::insert(data);
+  UNPROTECT(1);
+  is_altrep_ = false;
+  data_p_ = get_p(false, data);
+  length_ = size;
+}
 
 template <typename T>
 template <typename Iter>
