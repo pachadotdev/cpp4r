@@ -33,12 +33,7 @@ std::string random_string() {
   return s;
 }
 
-/* roxygen
-@title Grow functions
-@rdname testing-grow-strings
-@keywords internal
-*/
-[[cpp4r::register]] cpp4r::strings grow_strings_cpp4r_(size_t n, int seed) {
+[[cpp4r::register]] cpp4r::strings grow_strings_(size_t n, int seed) {
   set_seed(seed);
   cpp4r::writable::strings x;
   for (size_t i = 0; i < n; ++i) {
@@ -47,11 +42,6 @@ std::string random_string() {
   return x;
 }
 
-/* roxygen
-@title Grow functions
-@rdname testing-grow-strings
-@keywords internal
-*/
 [[cpp4r::register]] SEXP grow_strings_manual_(size_t n, int seed) {
   set_seed(seed);
   SEXP data_ = PROTECT(Rf_allocVector(STRSXP, 0));
@@ -83,12 +73,7 @@ std::string random_string() {
   }
 }
 
-/* roxygen
-@title Grow functions
-@rdname testing-grow-strings
-@keywords internal
-*/
-[[cpp4r::register]] cpp4r::strings assign_cpp4r_(size_t n, int seed) {
+[[cpp4r::register]] cpp4r::strings assign_(size_t n, int seed) {
   set_seed(seed);
   cpp4r::writable::strings x(n);
   for (size_t i = 0; i < n; ++i) {

@@ -1,9 +1,4 @@
-/* roxygen
-@title List functions
-@rdname testing-list
-@keywords internal
-*/
-[[cpp4r::register]] list cpp4r_named_list_push_back_() {
+[[cpp4r::register]] list named_list_push_back_() {
   writable::list result;
 
   double one = 1.0, two = 2.0, three = 3.0;
@@ -32,12 +27,7 @@
   return result;
 }
 
-/* roxygen
-@title List functions
-@rdname testing-list
-@keywords internal
-*/
-[[cpp4r::register]] list cpp4r_named_list_c_style_() {
+[[cpp4r::register]] list named_list_c_style_() {
   writable::list result(10);  // Preallocate list of size 10
 
   double one = 1.0, two = 2.0, three = 3.0;
