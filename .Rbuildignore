@@ -20,5 +20,4 @@
 ^cpp4rtest$
 ^scripts$
 ^vignettes$
-^check-gcc-clang$
-^check-r-devel$
+^check-docker$

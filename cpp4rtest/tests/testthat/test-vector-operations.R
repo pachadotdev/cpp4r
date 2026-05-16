@@ -1,8 +1,8 @@
 # Tests for insert.h, truncate.h, grow.h functions
 
 # insert.h tests
-test_that("cpp4r_insert_ works", {
-  result <- cpp4r_insert_(5L)
+test_that("insert_ works", {
+  result <- insert_(5L)
   expect_length(result, 5)
 
   expect_type(result, "double")
@@ -10,14 +10,14 @@ test_that("cpp4r_insert_ works", {
   expect_equal(as.numeric(result), c(4, 3, 2, 1, 0))
 })
 
-test_that("cpp4r_insert_ with zero", {
-  result <- cpp4r_insert_(0L)
+test_that("insert_ with zero", {
+  result <- insert_(0L)
   expect_length(result, 0)
 })
 
 # truncate.h tests
-test_that("cpp4r_push_and_truncate_ works", {
-  result <- cpp4r_push_and_truncate_(5L)
+test_that("push_and_truncate_ works", {
+  result <- push_and_truncate_(5L)
   expect_length(result, 6)
   expect_type(result, "double")
   # Last element should be the pushed value (0)

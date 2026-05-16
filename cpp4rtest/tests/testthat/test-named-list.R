@@ -1,6 +1,6 @@
 test_that("creating named lists with push_back or C-style gives the same result", {
-  res1 <- cpp4r_named_list_push_back_()
-  res2 <- cpp4r_named_list_c_style_()
+  res1 <- named_list_push_back_()
+  res2 <- named_list_c_style_()
 
   expect_equal(res1, res2)
 

@@ -2,7 +2,7 @@ Package: cpp4rtest
 Title: Testing 'cpp4r'
 Description: To check cpp4r correctness. The headers are vendored to check which lines of
     the C++ code are covered by the unit tests.
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
     person(
         given = "Mauricio",

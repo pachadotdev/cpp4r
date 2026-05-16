@@ -89,8 +89,8 @@ context("function-advanced-C++") {
   test_that("function: construct from sexp avoids per-call cast") {
     // sexp approach: must re-wrap on every call
     cpp4r::sexp func_as_sexp = cpp4r::package("base")["sum"];
-    double r1 = cpp4r::function{static_cast<SEXP>(func_as_sexp)}(
-        cpp4r::as_sexp({1., 2.}));
+    double r1 =
+        cpp4r::function{static_cast<SEXP>(func_as_sexp)}(cpp4r::as_sexp({1., 2.}));
 
     // function approach: construct once from sexp, call directly
     cpp4r::function f(func_as_sexp);

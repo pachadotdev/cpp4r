@@ -20,13 +20,10 @@ BugReports: https://github.com/pachadotdev/cpp4r/issues
 Depends:
     R (>= 4.0.0)
 Imports: 
-    decor,
     desc,
     glue,
-    tibble,
     tools,
     utils,
-    vctrs,
     withr
 Suggests:
     mockery,

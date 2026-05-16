@@ -54,25 +54,25 @@ describe("get_call_entries", {
 describe("wrap_call", {
   it("works with void functions and no arguments", {
     expect_equal(
-      wrap_call("foo", "void", tibble::tibble(type = character(), name = character())),
+      wrap_call("foo", "void", list(type = character(), name = character())),
       "  foo();\n    return R_NilValue;"
     )
   })
   it("works with non-void functions and no arguments", {
     expect_equal(
-      wrap_call("foo", "bool", tibble::tibble(type = character(), name = character())),
+      wrap_call("foo", "bool", list(type = character(), name = character())),
       "  return cpp4r::as_sexp(foo());"
     )
   })
   it("works with void functions and some arguments", {
     expect_equal(
-      wrap_call("foo", "void", tibble::tibble(type = c("double", "int"), name = c("x", "y"))),
+      wrap_call("foo", "void", list(type = c("double", "int"), name = c("x", "y"))),
       "  foo(cpp4r::as_cpp<cpp4r::decay_t<double>>(x), cpp4r::as_cpp<cpp4r::decay_t<int>>(y));\n    return R_NilValue;"
     )
   })
   it("works with non-void functions and some arguments", {
     expect_equal(
-      wrap_call("foo", "bool", tibble::tibble(type = c("double", "int"), name = c("x", "y"))),
+      wrap_call("foo", "bool", list(type = c("double", "int"), name = c("x", "y"))),
       "  return cpp4r::as_sexp(foo(cpp4r::as_cpp<cpp4r::decay_t<double>>(x), cpp4r::as_cpp<cpp4r::decay_t<int>>(y)));"
     )
   })
@@ -81,50 +81,52 @@ describe("wrap_call", {
 describe("get_registered_functions", {
   it("returns an empty tibble given a non-existent file", {
     f <- tempfile()
-    decorations <- decor::cpp_decorations(files = f, is_attribute = TRUE)
+    decorations <- cpp_decorations(files = f, is_attribute = TRUE)
     res <- get_registered_functions(decorations, "cpp4r::register")
-    expect_equal(names(res), c("file", "line", "decoration", "params", "context", "name", "return_type", "args"))
-    expect_equal(NROW(res), 0)
+    expect_equal(names(res), c("file", "line", "decoration", "namespace", "params", "context", "name", "cpp_name", "return_type", "args"))
+    expect_equal(length(res$file), 0)
   })
 
   it("returns an empty tibble given a empty file", {
     f <- tempfile()
     file.create(f)
-    decorations <- decor::cpp_decorations(files = f, is_attribute = TRUE)
+    decorations <- cpp_decorations(files = f, is_attribute = TRUE)
     res <- get_registered_functions(decorations, "cpp4r::register")
-    expect_equal(names(res), c("file", "line", "decoration", "params", "context", "name", "return_type", "args"))
-    expect_equal(NROW(res), 0)
+    expect_equal(names(res), c("file", "line", "decoration", "namespace", "params", "context", "name", "cpp_name", "return_type", "args"))
+    expect_equal(length(res$file), 0)
   })
 
   it("works with a single registration", {
-    decorations <- decor::cpp_decorations(files = test_path("single.cpp"), is_attribute = TRUE)
+    decorations <- cpp_decorations(files = test_path("single.cpp"), is_attribute = TRUE)
     res <- get_registered_functions(decorations, "cpp4r::register")
-    expect_equal(names(res), c("file", "line", "decoration", "params", "context", "name", "return_type", "args"))
-    expect_equal(NROW(res), 1L)
+    expect_equal(names(res), c("file", "line", "decoration", "namespace", "params", "context", "name", "cpp_name", "return_type", "args"))
+    expect_equal(length(res$file), 1L)
     expect_equal(res$name, "foo")
+    expect_equal(res$cpp_name, "foo")
+    expect_equal(res$namespace, "")
     expect_equal(res$return_type, "int")
     expect_equal(names(res$args[[1]]), c("type", "name", "default"))
-    expect_equal(NROW(res$args[[1]]), 0)
+    expect_equal(length(res$args[[1]]$name), 0)
   })
 
   it("works with multiple registrations", {
-    decorations <- decor::cpp_decorations(files = test_path("multiple.cpp"), is_attribute = TRUE)
+    decorations <- cpp_decorations(files = test_path("multiple.cpp"), is_attribute = TRUE)
     res <- get_registered_functions(decorations, "cpp4r::register")
-    expect_equal(names(res), c("file", "line", "decoration", "params", "context", "name", "return_type", "args"))
-    expect_equal(NROW(res), 3L)
+    expect_equal(names(res), c("file", "line", "decoration", "namespace", "params", "context", "name", "cpp_name", "return_type", "args"))
+    expect_equal(length(res$file), 3L)
     expect_equal(res$name, c("foo", "bar", "baz"))
     expect_equal(res$return_type, c("int", "double", "bool"))
     expect_equal(names(res$args[[1]]), c("type", "name", "default"))
-    expect_equal(NROW(res$args[[1]]), 0)
+    expect_equal(length(res$args[[1]]$name), 0)
 
     expect_equal(names(res$args[[2]]), c("type", "name", "default"))
-    expect_equal(NROW(res$args[[2]]), 1)
+    expect_equal(length(res$args[[2]]$name), 1)
     expect_equal(res$args[[2]]$type, "bool")
     expect_equal(res$args[[2]]$name, "run")
     expect_equal(res$args[[2]]$default, NA_character_)
 
     expect_equal(names(res$args[[3]]), c("type", "name", "default"))
-    expect_equal(NROW(res$args[[3]]), 2)
+    expect_equal(length(res$args[[3]]$name), 2)
     expect_equal(res$args[[3]]$type, c("bool", "int"))
     expect_equal(res$args[[3]]$name, c("run", "value"))
     expect_equal(res$args[[3]]$default, c(NA_character_, "0"))
@@ -135,7 +137,7 @@ describe("generate_cpp_functions", {
   it("returns the empty string if there are no functions", {
     skip_if_not_installed("glue", "1.6.2.9000")
 
-    funs <- tibble::tibble(
+    funs <- list(
       file = character(),
       line = integer(),
       decoration = character(),
@@ -143,14 +145,14 @@ describe("generate_cpp_functions", {
       context = list(),
       name = character(),
       return_type = character(),
-      args = list(tibble::tibble(type = character(), name = character()))
+      args = list()
     )
 
     expect_equal(generate_cpp_functions(funs), "")
   })
 
   it("returns the wrapped function for a single void function with no arguments", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = "foo.cpp",
       line = 1L,
       decoration = "cpp4r",
@@ -158,7 +160,7 @@ describe("generate_cpp_functions", {
       context = list(NA_character_),
       name = "foo",
       return_type = "void",
-      args = list(tibble::tibble(type = character(), name = character()))
+      args = list(list(type = character(), name = character()))
     )
 
     expect_equal(
@@ -175,7 +177,7 @@ extern \"C\" SEXP _cpp4r_foo() {
   })
 
   it("returns the wrapped function for a single void function with no arguments and different package name", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = "foo.cpp",
       line = 1L,
       decoration = "cpp4r",
@@ -183,7 +185,7 @@ extern \"C\" SEXP _cpp4r_foo() {
       context = list(NA_character_),
       name = "foo",
       return_type = "void",
-      args = list(tibble::tibble(type = character(), name = character()))
+      args = list(list(type = character(), name = character()))
     )
 
     expect_equal(
@@ -201,7 +203,7 @@ extern \"C\" SEXP _mypkg_foo() {
 
 
   it("returns the wrapped function for a single function with no arguments", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = "foo.cpp",
       line = 1L,
       decoration = "cpp4r",
@@ -209,7 +211,7 @@ extern \"C\" SEXP _mypkg_foo() {
       context = list(NA_character_),
       name = "foo",
       return_type = "int",
-      args = list(tibble::tibble(type = character(), name = character()))
+      args = list(list(type = character(), name = character()))
     )
 
     expect_equal(
@@ -225,7 +227,7 @@ extern \"C\" SEXP _cpp4r_foo() {
   })
 
   it("returns the wrapped function for a single void function with arguments", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = "foo.cpp",
       line = 1L,
       decoration = "cpp4r",
@@ -233,7 +235,7 @@ extern \"C\" SEXP _cpp4r_foo() {
       context = list(NA_character_),
       name = "foo",
       return_type = "void",
-      args = list(tibble::tibble(type = "int", name = "bar"))
+      args = list(list(type = "int", name = "bar"))
     )
 
     expect_equal(
@@ -250,7 +252,7 @@ extern \"C\" SEXP _cpp4r_foo(SEXP bar) {
   })
 
   it("returns the wrapped function for a single function with arguments", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = "foo.cpp",
       line = 1L,
       decoration = "cpp4r",
@@ -258,7 +260,7 @@ extern \"C\" SEXP _cpp4r_foo(SEXP bar) {
       context = list(NA_character_),
       name = "foo",
       return_type = "int",
-      args = list(tibble::tibble(type = "int", name = "bar"))
+      args = list(list(type = "int", name = "bar"))
     )
 
     expect_equal(
@@ -274,7 +276,7 @@ extern \"C\" SEXP _cpp4r_foo(SEXP bar) {
   })
 
   it("returns the wrapped functions for multiple functions with arguments", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = c("foo.cpp", "bar.cpp"),
       line = c(1L, 3L),
       decoration = c("cpp4r", "cpp4r"),
@@ -283,8 +285,8 @@ extern \"C\" SEXP _cpp4r_foo(SEXP bar) {
       name = c("foo", "bar"),
       return_type = c("int", "bool"),
       args = list(
-        tibble::tibble(type = "int", name = "bar"),
-        tibble::tibble(type = "double", name = "baz")
+        list(type = "int", name = "bar"),
+        list(type = "double", name = "baz")
       )
     )
 
@@ -312,7 +314,7 @@ describe("generate_r_functions", {
   it("returns the empty string if there are no functions", {
     skip_if_not_installed("glue", "1.6.2.9000")
 
-    funs <- tibble::tibble(
+    funs <- list(
       file = character(),
       line = integer(),
       decoration = character(),
@@ -327,7 +329,7 @@ describe("generate_r_functions", {
   })
 
   it("returns the wrapped function for a single void function with no arguments", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = "foo.cpp",
       line = 1L,
       decoration = "cpp4r",
@@ -335,7 +337,7 @@ describe("generate_r_functions", {
       context = list(NA_character_),
       name = "foo",
       return_type = "void",
-      args = list(tibble::tibble(type = character(), name = character()))
+      args = list(list(type = character(), name = character()))
     )
 
     expect_equal(
@@ -347,7 +349,7 @@ describe("generate_r_functions", {
   })
 
   it("returns the wrapped function for a single void function with no arguments and use_package = TRUE", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = "foo.cpp",
       line = 1L,
       decoration = "cpp4r",
@@ -355,7 +357,7 @@ describe("generate_r_functions", {
       context = list(NA_character_),
       name = "foo",
       return_type = "void",
-      args = list(tibble::tibble(type = character(), name = character()))
+      args = list(list(type = character(), name = character()))
     )
 
     expect_equal(
@@ -367,7 +369,7 @@ describe("generate_r_functions", {
   })
 
   it("returns the wrapped function for a single void function with no arguments and different package name", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = "foo.cpp",
       line = 1L,
       decoration = "cpp4r",
@@ -375,7 +377,7 @@ describe("generate_r_functions", {
       context = list(NA_character_),
       name = "foo",
       return_type = "void",
-      args = list(tibble::tibble(type = character(), name = character()))
+      args = list(list(type = character(), name = character()))
     )
 
     expect_equal(
@@ -387,7 +389,7 @@ describe("generate_r_functions", {
   })
 
   it("returns the wrapped function for a single function with no arguments", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = "foo.cpp",
       line = 1L,
       decoration = "cpp4r",
@@ -395,7 +397,7 @@ describe("generate_r_functions", {
       context = list(NA_character_),
       name = "foo",
       return_type = "int",
-      args = list(tibble::tibble(type = character(), name = character()))
+      args = list(list(type = character(), name = character()))
     )
 
     expect_equal(
@@ -407,7 +409,7 @@ describe("generate_r_functions", {
   })
 
   it("returns the wrapped function for a single function with no arguments and use_package = TRUE", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = "foo.cpp",
       line = 1L,
       decoration = "cpp4r",
@@ -415,7 +417,7 @@ describe("generate_r_functions", {
       context = list(NA_character_),
       name = "foo",
       return_type = "int",
-      args = list(tibble::tibble(type = character(), name = character()))
+      args = list(list(type = character(), name = character()))
     )
 
     expect_equal(
@@ -427,7 +429,7 @@ describe("generate_r_functions", {
   })
 
   it("returns the wrapped function for a single void function with arguments", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = "foo.cpp",
       line = 1L,
       decoration = "cpp4r",
@@ -435,7 +437,7 @@ describe("generate_r_functions", {
       context = list(NA_character_),
       name = "foo",
       return_type = "void",
-      args = list(tibble::tibble(type = "int", name = "bar"))
+      args = list(list(type = "int", name = "bar"))
     )
 
     expect_equal(
@@ -447,7 +449,7 @@ describe("generate_r_functions", {
   })
 
   it("returns the wrapped function for a single function with arguments", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = "foo.cpp",
       line = 1L,
       decoration = "cpp4r",
@@ -455,7 +457,7 @@ describe("generate_r_functions", {
       context = list(NA_character_),
       name = "foo",
       return_type = "int",
-      args = list(tibble::tibble(type = "int", name = "bar"))
+      args = list(list(type = "int", name = "bar"))
     )
 
     expect_equal(
@@ -467,7 +469,7 @@ describe("generate_r_functions", {
   })
 
   it("returns the wrapped functions for multiple functions with arguments", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = c("foo.cpp", "bar.cpp"),
       line = c(1L, 3L),
       decoration = c("cpp4r", "cpp4r"),
@@ -476,8 +478,8 @@ describe("generate_r_functions", {
       name = c("foo", "bar"),
       return_type = c("int", "bool"),
       args = list(
-        tibble::tibble(type = "int", name = "bar"),
-        tibble::tibble(type = "double", name = "baz")
+        list(type = "int", name = "bar"),
+        list(type = "double", name = "baz")
       )
     )
 
@@ -499,7 +501,7 @@ describe("register", {
     f <- tempdir()
     expect_equal(register(f), character())
 
-    dir.create(f)
+    dir.create(f, showWarnings = FALSE)
     expect_equal(register(f), character())
   })
   it("works with a package that registers a single c++ function", {
@@ -643,7 +645,7 @@ describe("register", {
 
 describe("generate_init_functions", {
   it("returns an empty list if there no functions", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = character(),
       line = integer(),
       decoration = character(),
@@ -651,14 +653,14 @@ describe("generate_init_functions", {
       context = list(),
       name = character(),
       return_type = character(),
-      args = list(tibble::tibble(type = character(), name = character()))
+      args = list()
     )
 
     expect_equal(generate_init_functions(funs), list(declarations = "", calls = ""))
   })
 
   it("returns the declaration and call for a single init function", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = "foo.cpp",
       line = 1L,
       decoration = "cpp4r",
@@ -666,14 +668,14 @@ describe("generate_init_functions", {
       context = list(NA_character_),
       name = "foo",
       return_type = "void",
-      args = list(tibble::tibble(type = "DllInfo*", name = "dll"))
+      args = list(list(type = "DllInfo*", name = "dll"))
     )
 
     expect_equal(generate_init_functions(funs), list(declarations = "\nvoid foo(DllInfo* dll);\n", calls = "\n  foo(dll);"))
   })
 
   it("returns the declaration and call for a multiple init functions", {
-    funs <- tibble::tibble(
+    funs <- list(
       file = c("foo.cpp", "bar.cpp"),
       line = c(1L, 3L),
       decoration = c("cpp4r", "cpp4r"),
@@ -681,7 +683,7 @@ describe("generate_init_functions", {
       context = list(NA_character_, NA_character_),
       name = c("foo", "bar"),
       return_type = c("void", "void"),
-      args = list(tibble::tibble(type = "DllInfo*", name = "dll"), tibble::tibble(type = "DllInfo*", name = "dll"))
+      args = list(list(type = "DllInfo*", name = "dll"), list(type = "DllInfo*", name = "dll"))
     )
 
     expect_equal(generate_init_functions(funs), list(declarations = "\nvoid foo(DllInfo* dll);\nvoid bar(DllInfo* dll);\n", calls = "\n  foo(dll);\n  bar(dll);"))
