@@ -46,3 +46,8 @@ install:
 
 docs:
 	@Rscript -e 'devtools::document("./"); pkgsite::build_site("./")'
+
+clang_format=`which clang-format-21`
+
+format: $(shell find . -not -path './check-docker/*' -name '*.h') $(shell find . -not -path './check-docker/*' -name '*.hpp') $(shell find . -not -path './check-docker/*' -name '*.cpp')
+	@${clang_format} -i $?

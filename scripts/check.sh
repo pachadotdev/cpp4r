@@ -12,7 +12,7 @@ LOG_DIR="./check-docker"
 LOG="${LOG_DIR}/${IMAGE}.log"
 CHECK_DIR=$(mktemp -d)
 
-CACHE_DIR="./check-docker/cache/${IMAGE}"
+CACHE_DIR="$(pwd)/check-docker/cache/${IMAGE}"
 
 mkdir -p "$LOG_DIR"
 mkdir -p "$CACHE_DIR"
@@ -86,7 +86,18 @@ if (!requireNamespace('remotes', quietly = TRUE)) {
   install.packages('remotes', lib = Sys.getenv('R_LIBS_USER'))
 }
 
-if (!requireNamespace('testthat', quietly = TRUE)) {
+has_cpp23 <- tryCatch({
+  cxx23 <- tryCatch(
+    system("R CMD config CXX23", intern = TRUE, ignore.stderr = TRUE),
+    error = function(e) system("R CMD config CXX", intern = TRUE, ignore.stderr = TRUE)
+  )
+  system(paste(cxx23, "-std=gnu++23 -x c++ /dev/null -fsyntax-only"),
+         ignore.stdout = TRUE, ignore.stderr = TRUE) == 0
+}, error = function(e) FALSE)
+
+if (has_cpp23) {
+  remotes::install_github("pachadotdev/testthat", lib = Sys.getenv('R_LIBS_USER'), upgrade = 'never')
+} else if (!requireNamespace('testthat', quietly = TRUE)) {
   install.packages('testthat', lib = Sys.getenv('R_LIBS_USER'))
 }
 
@@ -141,6 +152,8 @@ docker run --rm \
 
     # Run minimal missing-package installer if present
     if [ -f /check/install_required.R ]; then Rscript /check/install_required.R || true; fi
+    # Always remove old cpp4r/cpp4rtest to force a fresh reinstall from the new tarballs
+    rm -rf /cache/R_libs/cpp4r /cache/R_libs/cpp4rtest
     R CMD INSTALL --library=/cache/R_libs /check/${CPP4R_FILE}
     R CMD INSTALL --library=/cache/R_libs /check/${CPP4RTEST_FILE}
     # Fall back to gnu++2b if the compiler does not support gnu++23
@@ -152,7 +165,7 @@ docker run --rm \
     cd /check
     export _R_CHECK_FORCE_SUGGESTS_=false
     R CMD check --as-cran --no-manual ${CPP4RTEST_FILE}
-  " 2>&1 | tee "${CHECK_DIR}/docker.log" || DOCKER_RC=$?
+  " 2>&1 | grep -v 'readelf: Warning:' | tee "${CHECK_DIR}/docker.log" || DOCKER_RC="${PIPESTATUS[0]}"
 
 cp "${CHECK_DIR}/docker.log" "$LOG"
 
