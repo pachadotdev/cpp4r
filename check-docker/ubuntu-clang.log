@@ -1,0 +1,3676 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+pkg-config is already the newest version (0.29.2-1ubuntu3).
+The following NEW packages will be installed:
+  libuv1 libuv1-dev
+0 upgraded, 2 newly installed, 0 to remove and 2 not upgraded.
+Need to get 223 kB of archives.
+After this operation, 906 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libuv1 amd64 1.43.0-1ubuntu0.1 [92.7 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libuv1-dev amd64 1.43.0-1ubuntu0.1 [130 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 223 kB in 0s (1945 kB/s)
+Selecting previously unselected package libuv1:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 27283 files and directories currently installed.)
+Preparing to unpack .../libuv1_1.43.0-1ubuntu0.1_amd64.deb ...
+Unpacking libuv1:amd64 (1.43.0-1ubuntu0.1) ...
+Selecting previously unselected package libuv1-dev:amd64.
+Preparing to unpack .../libuv1-dev_1.43.0-1ubuntu0.1_amd64.deb ...
+Unpacking libuv1-dev:amd64 (1.43.0-1ubuntu0.1) ...
+Setting up libuv1:amd64 (1.43.0-1ubuntu0.1) ...
+Setting up libuv1-dev:amd64 (1.43.0-1ubuntu0.1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.13) ...
+trying URL 'https://cloud.r-project.org/src/contrib/xml2_1.5.2.tar.gz'
+Content type 'application/x-gzip' length 154697 bytes (151 KB)
+==================================================
+downloaded 151 KB
+
+* installing *source* package ‘xml2’ ...
+** this is package ‘xml2’ version ‘1.5.2’
+** package ‘xml2’ successfully unpacked and MD5 sums checked
+** using staged installation
+Found pkg-config cflags and libs!
+Using PKG_CFLAGS=-I/usr/include/libxml2
+Using PKG_LIBS=-lxml2
+** libs
+using C compiler: ‘Ubuntu clang version 15.0.7’
+using C++ compiler: ‘Ubuntu clang version 15.0.7’
+clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2   -c connection.cpp -o connection.o
+clang-15 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c init.c -o init.o
+clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2   -c xml2_doc.cpp -o xml2_doc.o
+clang-15 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c xml2_init.c -o xml2_init.o
+clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2   -c xml2_namespace.cpp -o xml2_namespace.o
+clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2   -c xml2_node.cpp -o xml2_node.o
+clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2   -c xml2_output.cpp -o xml2_output.o
+clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2   -c xml2_schema.cpp -o xml2_schema.o
+clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2   -c xml2_url.cpp -o xml2_url.o
+clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2   -c xml2_xpath.cpp -o xml2_xpath.o
+clang++-15 -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o xml2.so connection.o init.o xml2_doc.o xml2_init.o xml2_namespace.o xml2_node.o xml2_output.o xml2_schema.o xml2_url.o xml2_xpath.o -lxml2 -L/opt/R/devel/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-xml2/00new/xml2/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Bogus end-of-siblings marker detected at offset 9f54 in .debug_info section
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Bogus end-of-siblings marker detected at offset 9f7e in .debug_info section
+readelf: Warning: Bogus end-of-siblings marker detected at offset 9f8c in .debug_info section
+readelf: Warning: Further warnings about bogus end-of-sibling markers suppressed
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: DIE at offset 0x1ab8a refers to abbreviation number 1556 which does not exist
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (xml2)
+
+The downloaded source packages are in
+	‘/tmp/RtmpTOfrSt/downloaded_packages’
+remotes::install_local(/check/cpp4r_0.6.0.tar.gz)
+── R CMD build ─────────────────────────────────────────────────────────────────
+* checking for file ‘/tmp/RtmpTOfrSt/remotesf73ee9df55/cpp4r/DESCRIPTION’ ... OK
+* preparing ‘cpp4r’:
+* checking DESCRIPTION meta-information ... OK
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+* building ‘cpp4r_0.6.0.tar.gz’
+
+Warning in i.p(...) :
+  'lib = "/cache/R_libs:/opt/R/devel/lib/R/library"' is not writable
+install_local failed: Failed to install 'cpp4r' from local:
+  unable to install packages
+remotes::install_local(/check/cpp4rtest_0.2.0.tar.gz)
+── R CMD build ─────────────────────────────────────────────────────────────────
+* checking for file ‘/tmp/RtmpTOfrSt/remotesf74cabb47e/cpp4rtest/DESCRIPTION’ ... OK
+* preparing ‘cpp4rtest’:
+* checking DESCRIPTION meta-information ... OK
+* cleaning src
+* running ‘cleanup’
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+* building ‘cpp4rtest_0.2.0.tar.gz’
+
+Warning in i.p(...) :
+  'lib = "/cache/R_libs:/opt/R/devel/lib/R/library"' is not writable
+install_local failed: Failed to install 'cpp4rtest' from local:
+  unable to install packages
+* installing *source* package ‘cpp4r’ ...
+** this is package ‘cpp4r’ version ‘0.6.0’
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4r)
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.2.0’
+** using staged installation
+** libs
+using C++ compiler: ‘Ubuntu clang version 15.0.7’
+clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
+clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
+clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c test-runner.cpp -o test-runner.o
+clang++-15 -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Bogus end-of-siblings marker detected at offset 871 in .debug_info section
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Bogus end-of-siblings marker detected at offset 87c in .debug_info section
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Bogus end-of-siblings marker detected at offset 887 in .debug_info section
+readelf: Warning: Further warnings about bogus end-of-sibling markers suppressed
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: DIE at offset 0x21cc0 refers to abbreviation number 4486 which does not exist
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+* using log directory ‘/check/cpp4rtest.Rcheck’
+* using R Under development (unstable) (2026-05-14 r90050)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+* running under: Ubuntu 22.04.5 LTS
+* using session charset: UTF-8
+* current time: 2026-05-16 14:05:55 UTC
+* using options ‘--no-manual --as-cran’
+* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
+* this is package ‘cpp4rtest’ version ‘0.2.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... [4s/7s] NOTE
+Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
+
+New submission
+
+Checking URLs failed with message:
+  there is no package called ‘curl’
+
+Checking DOIs failed with message:
+  there is no package called ‘curl’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for .dll and .exe files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cpp4rtest’ can be installed ... [76s/72s] OK
+* used C++ compiler: ‘Ubuntu clang version 15.0.7’
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... [1s/0s] OK
+* checking whether the package can be loaded with stated dependencies ... [1s/0s] OK
+* checking whether the package can be unloaded cleanly ... [1s/0s] OK
+* checking whether the namespace can be loaded with stated dependencies ... [1s/0s] OK
+* checking whether the namespace can be unloaded cleanly ... [1s/0s] OK
+* checking loading without being on the library search path ... [1s/0s] OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... [13s/4s] OK
+* checking Rd files ... [1s/0s] OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... WARNING
+Undocumented code objects:
+  ‘_cpp4rtest_add_int_vec_’ ‘_cpp4rtest_add_vec_for_’
+  ‘_cpp4rtest_as_integers_’ ‘_cpp4rtest_assign_’
+  ‘_cpp4rtest_complex_add_’ ‘_cpp4rtest_complex_imag_’
+  ‘_cpp4rtest_complex_modulus_’ ‘_cpp4rtest_complex_real_’
+  ‘_cpp4rtest_contains_name_’ ‘_cpp4rtest_data_frame_’
+  ‘_cpp4rtest_env_exists_’ ‘_cpp4rtest_env_get_int_’
+  ‘_cpp4rtest_env_get_str_’ ‘_cpp4rtest_env_set_’
+  ‘_cpp4rtest_find_name_pos_’ ‘_cpp4rtest_get_by_name_’
+  ‘_cpp4rtest_global_get_’ ‘_cpp4rtest_grow_’ ‘_cpp4rtest_grow_cplx_’
+  ‘_cpp4rtest_grow_strings_’ ‘_cpp4rtest_grow_strings_manual_’
+  ‘_cpp4rtest_insert_’ ‘_cpp4rtest_iterator_at_’
+  ‘_cpp4rtest_iterator_count_’ ‘_cpp4rtest_iterator_distance_’
+  ‘_cpp4rtest_iterator_double_values_’ ‘_cpp4rtest_iterator_find_’
+  ‘_cpp4rtest_iterator_max_’ ‘_cpp4rtest_iterator_min_’
+  ‘_cpp4rtest_iterator_sum_’ ‘_cpp4rtest_iterator_sum_int_’
+  ‘_cpp4rtest_list_of_doubles_’ ‘_cpp4rtest_list_of_integers_’
+  ‘_cpp4rtest_list_of_named_’ ‘_cpp4rtest_list_of_strings_’
+  ‘_cpp4rtest_logical_to_dbl_’ ‘_cpp4rtest_logical_to_int_’
+  ‘_cpp4rtest_make_complex_’ ‘_cpp4rtest_named_doubles_’
+  ‘_cpp4rtest_named_integers_’ ‘_cpp4rtest_named_list_’
+  ‘_cpp4rtest_named_list_c_style_’ ‘_cpp4rtest_named_list_push_back_’
+  ‘_cpp4rtest_named_strings_’ ‘_cpp4rtest_negate_logical_’
+  ‘_cpp4rtest_notroxcpp1_’ ‘_cpp4rtest_notroxcpp6_’
+  ‘_cpp4rtest_ordered_map_to_list_’ ‘_cpp4rtest_protect_many_’
+  ‘_cpp4rtest_protect_many_preserve_’ ‘_cpp4rtest_protect_many_rapi_’
+  ‘_cpp4rtest_protect_many_sexp_’ ‘_cpp4rtest_protect_one_’
+  ‘_cpp4rtest_protect_one_preserve_’ ‘_cpp4rtest_protect_one_rapi_’
+  ‘_cpp4rtest_protect_one_sexp_’ ‘_cpp4rtest_push_and_truncate_’
+  ‘_cpp4rtest_raw_copy_’ ‘_cpp4rtest_raw_xor_’ ‘_cpp4rtest_release_’
+  ‘_cpp4rtest_reverse_vector_’ ‘_cpp4rtest_safe_’
+  ‘_cpp4rtest_sum_cplx_accumulate_’ ‘_cpp4rtest_sum_cplx_for2_’
+  ‘_cpp4rtest_sum_cplx_for_’ ‘_cpp4rtest_sum_cplx_for_2_’
+  ‘_cpp4rtest_sum_cplx_for_3_’ ‘_cpp4rtest_sum_cplx_for_4_’
+  ‘_cpp4rtest_sum_cplx_for_5_’ ‘_cpp4rtest_sum_cplx_for_6_’
+  ‘_cpp4rtest_sum_cplx_foreach_’ ‘_cpp4rtest_sum_dbl_accumulate2_’
+  ‘_cpp4rtest_sum_dbl_accumulate_’ ‘_cpp4rtest_sum_dbl_for2_’
+  ‘_cpp4rtest_sum_dbl_for3_’ ‘_cpp4rtest_sum_dbl_for_’
+  ‘_cpp4rtest_sum_dbl_foreach2_’ ‘_cpp4rtest_sum_dbl_foreach_’
+  ‘_cpp4rtest_sum_int_accumulate_’ ‘_cpp4rtest_sum_int_for2_’
+  ‘_cpp4rtest_sum_int_for_’ ‘_cpp4rtest_sum_int_foreach_’
+  ‘_cpp4rtest_unordered_map_to_list_’ ‘add_int_vec_’ ‘add_vec_for_’
+  ‘as_integers_’ ‘assign_’ ‘complex_add_’ ‘complex_imag_’
+  ‘complex_modulus_’ ‘complex_real_’ ‘contains_name_’ ‘data_frame_’
+  ‘env_exists_’ ‘env_get_int_’ ‘env_get_str_’ ‘env_set_’
+  ‘find_name_pos_’ ‘get_by_name_’ ‘global_get_’ ‘grow_’ ‘grow_cplx_’
+  ‘grow_strings_’ ‘grow_strings_manual_’ ‘insert_’ ‘iterator_at_’
+  ‘iterator_count_’ ‘iterator_distance_’ ‘iterator_double_values_’
+  ‘iterator_find_’ ‘iterator_max_’ ‘iterator_min_’ ‘iterator_sum_’
+  ‘iterator_sum_int_’ ‘list_of_doubles_’ ‘list_of_integers_’
+  ‘list_of_named_’ ‘list_of_strings_’ ‘logical_to_dbl_’
+  ‘logical_to_int_’ ‘make_complex_’ ‘named_doubles_’ ‘named_integers_’
+  ‘named_list_’ ‘named_list_c_style_’ ‘named_list_push_back_’
+  ‘named_strings_’ ‘negate_logical_’ ‘notroxcpp1_’ ‘notroxcpp6_’
+  ‘ordered_map_to_list_’ ‘protect_many_’ ‘protect_many_preserve_’
+  ‘protect_many_rapi_’ ‘protect_many_sexp_’ ‘protect_one_’
+  ‘protect_one_preserve_’ ‘protect_one_rapi_’ ‘protect_one_sexp_’
+  ‘push_and_truncate_’ ‘raw_copy_’ ‘raw_xor_’ ‘release_’
+  ‘reverse_vector_’ ‘safe_’ ‘sum_cplx_accumulate_’ ‘sum_cplx_for2_’
+  ‘sum_cplx_for_’ ‘sum_cplx_for_2_’ ‘sum_cplx_for_3_’ ‘sum_cplx_for_4_’
+  ‘sum_cplx_for_5_’ ‘sum_cplx_for_6_’ ‘sum_cplx_foreach_’
+  ‘sum_dbl_accumulate2_’ ‘sum_dbl_accumulate_’ ‘sum_dbl_for2_’
+  ‘sum_dbl_for3_’ ‘sum_dbl_for_’ ‘sum_dbl_foreach2_’ ‘sum_dbl_foreach_’
+  ‘sum_int_accumulate_’ ‘sum_int_for2_’ ‘sum_int_for_’
+  ‘sum_int_foreach_’ ‘unordered_map_to_list_’
+All user-level objects in a package should have documentation entries.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
+* checking pragmas in C/C++ headers and code ... OK
+* checking compilation flags used ... OK
+* checking compiled code ... OK
+* checking examples ... [1s/1s] OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ...
+  Running ‘testthat.R’ [8s/8s]
+ [9s/8s] OK
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+
+Status: 1 WARNING, 1 NOTE
+See
+  ‘/check/cpp4rtest.Rcheck/00check.log’
+for details.
+
+=== 00install.out ===
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.2.0’
+** using staged installation
+** libs
+using C++ compiler: ‘Ubuntu clang version 15.0.7’
+clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
+clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
+clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c test-runner.cpp -o test-runner.o
+clang++-15 -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
+installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Bogus end-of-siblings marker detected at offset 871 in .debug_info section
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Bogus end-of-siblings marker detected at offset 87c in .debug_info section
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Bogus end-of-siblings marker detected at offset 887 in .debug_info section
+readelf: Warning: Further warnings about bogus end-of-sibling markers suppressed
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x22
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: Unrecognized form: 0x23
+readelf: Warning: DIE at offset 0x21cc0 refers to abbreviation number 4486 which does not exist
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+=== 00check.log ===
+* using log directory ‘/check/cpp4rtest.Rcheck’
+* using R Under development (unstable) (2026-05-14 r90050)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+* running under: Ubuntu 22.04.5 LTS
+* using session charset: UTF-8
+* current time: 2026-05-16 14:05:55 UTC
+* using options ‘--no-manual --as-cran’
+* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
+* this is package ‘cpp4rtest’ version ‘0.2.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... [4s/7s] NOTE
+Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
+
+New submission
+
+Checking URLs failed with message:
+  there is no package called ‘curl’
+
+Checking DOIs failed with message:
+  there is no package called ‘curl’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for .dll and .exe files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cpp4rtest’ can be installed ... [76s/72s] OK
+* used C++ compiler: ‘Ubuntu clang version 15.0.7’
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... [1s/0s] OK
+* checking whether the package can be loaded with stated dependencies ... [1s/0s] OK
+* checking whether the package can be unloaded cleanly ... [1s/0s] OK
+* checking whether the namespace can be loaded with stated dependencies ... [1s/0s] OK
+* checking whether the namespace can be unloaded cleanly ... [1s/0s] OK
+* checking loading without being on the library search path ... [1s/0s] OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... [13s/4s] OK
+* checking Rd files ... [1s/0s] OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... WARNING
+Undocumented code objects:
+  ‘_cpp4rtest_add_int_vec_’ ‘_cpp4rtest_add_vec_for_’
+  ‘_cpp4rtest_as_integers_’ ‘_cpp4rtest_assign_’
+  ‘_cpp4rtest_complex_add_’ ‘_cpp4rtest_complex_imag_’
+  ‘_cpp4rtest_complex_modulus_’ ‘_cpp4rtest_complex_real_’
+  ‘_cpp4rtest_contains_name_’ ‘_cpp4rtest_data_frame_’
+  ‘_cpp4rtest_env_exists_’ ‘_cpp4rtest_env_get_int_’
+  ‘_cpp4rtest_env_get_str_’ ‘_cpp4rtest_env_set_’
+  ‘_cpp4rtest_find_name_pos_’ ‘_cpp4rtest_get_by_name_’
+  ‘_cpp4rtest_global_get_’ ‘_cpp4rtest_grow_’ ‘_cpp4rtest_grow_cplx_’
+  ‘_cpp4rtest_grow_strings_’ ‘_cpp4rtest_grow_strings_manual_’
+  ‘_cpp4rtest_insert_’ ‘_cpp4rtest_iterator_at_’
+  ‘_cpp4rtest_iterator_count_’ ‘_cpp4rtest_iterator_distance_’
+  ‘_cpp4rtest_iterator_double_values_’ ‘_cpp4rtest_iterator_find_’
+  ‘_cpp4rtest_iterator_max_’ ‘_cpp4rtest_iterator_min_’
+  ‘_cpp4rtest_iterator_sum_’ ‘_cpp4rtest_iterator_sum_int_’
+  ‘_cpp4rtest_list_of_doubles_’ ‘_cpp4rtest_list_of_integers_’
+  ‘_cpp4rtest_list_of_named_’ ‘_cpp4rtest_list_of_strings_’
+  ‘_cpp4rtest_logical_to_dbl_’ ‘_cpp4rtest_logical_to_int_’
+  ‘_cpp4rtest_make_complex_’ ‘_cpp4rtest_named_doubles_’
+  ‘_cpp4rtest_named_integers_’ ‘_cpp4rtest_named_list_’
+  ‘_cpp4rtest_named_list_c_style_’ ‘_cpp4rtest_named_list_push_back_’
+  ‘_cpp4rtest_named_strings_’ ‘_cpp4rtest_negate_logical_’
+  ‘_cpp4rtest_notroxcpp1_’ ‘_cpp4rtest_notroxcpp6_’
+  ‘_cpp4rtest_ordered_map_to_list_’ ‘_cpp4rtest_protect_many_’
+  ‘_cpp4rtest_protect_many_preserve_’ ‘_cpp4rtest_protect_many_rapi_’
+  ‘_cpp4rtest_protect_many_sexp_’ ‘_cpp4rtest_protect_one_’
+  ‘_cpp4rtest_protect_one_preserve_’ ‘_cpp4rtest_protect_one_rapi_’
+  ‘_cpp4rtest_protect_one_sexp_’ ‘_cpp4rtest_push_and_truncate_’
+  ‘_cpp4rtest_raw_copy_’ ‘_cpp4rtest_raw_xor_’ ‘_cpp4rtest_release_’
+  ‘_cpp4rtest_reverse_vector_’ ‘_cpp4rtest_safe_’
+  ‘_cpp4rtest_sum_cplx_accumulate_’ ‘_cpp4rtest_sum_cplx_for2_’
+  ‘_cpp4rtest_sum_cplx_for_’ ‘_cpp4rtest_sum_cplx_for_2_’
+  ‘_cpp4rtest_sum_cplx_for_3_’ ‘_cpp4rtest_sum_cplx_for_4_’
+  ‘_cpp4rtest_sum_cplx_for_5_’ ‘_cpp4rtest_sum_cplx_for_6_’
+  ‘_cpp4rtest_sum_cplx_foreach_’ ‘_cpp4rtest_sum_dbl_accumulate2_’
+  ‘_cpp4rtest_sum_dbl_accumulate_’ ‘_cpp4rtest_sum_dbl_for2_’
+  ‘_cpp4rtest_sum_dbl_for3_’ ‘_cpp4rtest_sum_dbl_for_’
+  ‘_cpp4rtest_sum_dbl_foreach2_’ ‘_cpp4rtest_sum_dbl_foreach_’
+  ‘_cpp4rtest_sum_int_accumulate_’ ‘_cpp4rtest_sum_int_for2_’
+  ‘_cpp4rtest_sum_int_for_’ ‘_cpp4rtest_sum_int_foreach_’
+  ‘_cpp4rtest_unordered_map_to_list_’ ‘add_int_vec_’ ‘add_vec_for_’
+  ‘as_integers_’ ‘assign_’ ‘complex_add_’ ‘complex_imag_’
+  ‘complex_modulus_’ ‘complex_real_’ ‘contains_name_’ ‘data_frame_’
+  ‘env_exists_’ ‘env_get_int_’ ‘env_get_str_’ ‘env_set_’
+  ‘find_name_pos_’ ‘get_by_name_’ ‘global_get_’ ‘grow_’ ‘grow_cplx_’
+  ‘grow_strings_’ ‘grow_strings_manual_’ ‘insert_’ ‘iterator_at_’
+  ‘iterator_count_’ ‘iterator_distance_’ ‘iterator_double_values_’
+  ‘iterator_find_’ ‘iterator_max_’ ‘iterator_min_’ ‘iterator_sum_’
+  ‘iterator_sum_int_’ ‘list_of_doubles_’ ‘list_of_integers_’
+  ‘list_of_named_’ ‘list_of_strings_’ ‘logical_to_dbl_’
+  ‘logical_to_int_’ ‘make_complex_’ ‘named_doubles_’ ‘named_integers_’
+  ‘named_list_’ ‘named_list_c_style_’ ‘named_list_push_back_’
+  ‘named_strings_’ ‘negate_logical_’ ‘notroxcpp1_’ ‘notroxcpp6_’
+  ‘ordered_map_to_list_’ ‘protect_many_’ ‘protect_many_preserve_’
+  ‘protect_many_rapi_’ ‘protect_many_sexp_’ ‘protect_one_’
+  ‘protect_one_preserve_’ ‘protect_one_rapi_’ ‘protect_one_sexp_’
+  ‘push_and_truncate_’ ‘raw_copy_’ ‘raw_xor_’ ‘release_’
+  ‘reverse_vector_’ ‘safe_’ ‘sum_cplx_accumulate_’ ‘sum_cplx_for2_’
+  ‘sum_cplx_for_’ ‘sum_cplx_for_2_’ ‘sum_cplx_for_3_’ ‘sum_cplx_for_4_’
+  ‘sum_cplx_for_5_’ ‘sum_cplx_for_6_’ ‘sum_cplx_foreach_’
+  ‘sum_dbl_accumulate2_’ ‘sum_dbl_accumulate_’ ‘sum_dbl_for2_’
+  ‘sum_dbl_for3_’ ‘sum_dbl_for_’ ‘sum_dbl_foreach2_’ ‘sum_dbl_foreach_’
+  ‘sum_int_accumulate_’ ‘sum_int_for2_’ ‘sum_int_for_’
+  ‘sum_int_foreach_’ ‘unordered_map_to_list_’
+All user-level objects in a package should have documentation entries.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
+* checking pragmas in C/C++ headers and code ... OK
+* checking compilation flags used ... OK
+* checking compiled code ... OK
+* checking examples ... [1s/1s] OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... [9s/8s] OK
+  Running ‘testthat.R’ [8s/8s]
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: 1 WARNING, 1 NOTE

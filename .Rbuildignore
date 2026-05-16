@@ -22,3 +22,5 @@
 ^vignettes$
 ^check-gcc-clang$
 ^check-r-devel$
+^check-docker$
+^docker$
