@@ -70,7 +70,8 @@ cp "$CPP4RTEST_TARBALL" "$CHECK_DIR/"
 
 # Create a minimal R script that installs an explicit list of packages when run inside the container
 cat > "$CHECK_DIR/install_required.R" <<'R_EOF'
-.libPaths(c(Sys.getenv('R_LIBS_USER'), .libPaths()))
+user_lib <- strsplit(Sys.getenv('R_LIBS_USER'), ':')[[1]][1]
+.libPaths(c(user_lib, .libPaths()))
 repos_snapshot_env <- Sys.getenv('RSPM_SNAPSHOT', '')
 if (nzchar(repos_snapshot_env)) {
   if (grepl('^https?://', repos_snapshot_env)) {
@@ -83,7 +84,7 @@ if (nzchar(repos_snapshot_env)) {
 }
 
 if (!requireNamespace('remotes', quietly = TRUE)) {
-  install.packages('remotes', lib = Sys.getenv('R_LIBS_USER'))
+  install.packages('remotes', lib = user_lib)
 }
 
 has_cpp23 <- tryCatch({
@@ -96,13 +97,13 @@ has_cpp23 <- tryCatch({
 }, error = function(e) FALSE)
 
 if (has_cpp23) {
-  remotes::install_github("pachadotdev/testthat", lib = Sys.getenv('R_LIBS_USER'), upgrade = 'never')
+  remotes::install_github("pachadotdev/testthat", lib = user_lib, upgrade = 'never')
 } else if (!requireNamespace('testthat', quietly = TRUE)) {
-  install.packages('testthat', lib = Sys.getenv('R_LIBS_USER'))
+  install.packages('testthat', lib = user_lib)
 }
 
 if (!requireNamespace('xml2', quietly = TRUE)) {
-  install.packages('xml2', lib = Sys.getenv('R_LIBS_USER'))
+  install.packages('xml2', lib = user_lib)
 }
 
 # Install Depends/Imports/LinkingTo for each tarball (no Suggests)
@@ -110,7 +111,7 @@ pkgs <- list.files('/check', pattern = '\\.(tar\\.gz|tar|tgz)$', full.names = TR
 for (p in pkgs) {
   message('remotes::install_local(', p, ')')
   tryCatch(
-    remotes::install_local(p, dependencies = c('Depends','Imports','LinkingTo'), upgrade = 'never', lib = Sys.getenv('R_LIBS_USER')),
+    remotes::install_local(p, dependencies = c('Depends','Imports','LinkingTo'), upgrade = 'never', lib = user_lib),
     error = function(e) message('install_local failed: ', conditionMessage(e))
   )
 }
@@ -141,19 +142,19 @@ docker run --rm \
     if command -v apt-get >/dev/null 2>&1; then
       export DEBIAN_FRONTEND=noninteractive
       apt-get update -qq || true
-      apt-get install -y --no-install-recommends libuv1-dev pkg-config || true
+      apt-get install -y --no-install-recommends libuv1-dev libxml2-dev pkg-config || true
     elif command -v dnf >/dev/null 2>&1 || command -v yum >/dev/null 2>&1; then
       PKG_MGR=dnf
       if command -v yum >/dev/null 2>&1; then PKG_MGR=yum; fi
-      \$PKG_MGR -y install libuv-devel pkgconfig || true
+      \$PKG_MGR -y install libuv-devel libxml2-devel pkgconfig || true
     elif command -v zypper >/dev/null 2>&1; then
-      zypper --non-interactive install libuv pkg-config || true
+      zypper --non-interactive install libuv libxml2-devel pkg-config || true
     fi
 
     # Run minimal missing-package installer if present
     if [ -f /check/install_required.R ]; then Rscript /check/install_required.R || true; fi
-    # Always remove old cpp4r/cpp4rtest to force a fresh reinstall from the new tarballs
-    rm -rf /cache/R_libs/cpp4r /cache/R_libs/cpp4rtest
+    # Remove stale locks and old cpp4r/cpp4rtest before reinstalling
+    rm -rf /cache/R_libs/00LOCK-* /cache/R_libs/cpp4r /cache/R_libs/cpp4rtest
     R CMD INSTALL --library=/cache/R_libs /check/${CPP4R_FILE}
     R CMD INSTALL --library=/cache/R_libs /check/${CPP4RTEST_FILE}
     # Fall back to gnu++2b if the compiler does not support gnu++23

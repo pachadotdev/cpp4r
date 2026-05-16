@@ -25,8 +25,8 @@
   }
 }
 
-// Note: The internal protections here are actually uneeded, but it is a useful way to benchmark
-// them
+// Note: The internal protections here are actually uneeded, but it is a useful way to
+// benchmark them
 
 [[cpp4r::register]] void protect_many_rapi_(int n) {
   std::vector<SEXP> res;

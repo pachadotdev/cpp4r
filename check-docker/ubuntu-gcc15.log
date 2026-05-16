@@ -1,33 +1,36 @@
 Reading package lists...
 Building dependency tree...
 Reading state information...
-pkg-config is already the newest version (0.29.2-1ubuntu3).
-libxml2-dev is already the newest version (2.9.13+dfsg-1ubuntu0.11).
-libxml2-dev set to manually installed.
-The following additional packages will be installed:
-  libuv1
+pkg-config is already the newest version (1.8.1-2build1).
 The following NEW packages will be installed:
-  libuv1 libuv1-dev
-0 upgraded, 2 newly installed, 0 to remove and 2 not upgraded.
-Need to get 223 kB of archives.
-After this operation, 906 kB of additional disk space will be used.
-Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libuv1 amd64 1.43.0-1ubuntu0.1 [92.7 kB]
-Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libuv1-dev amd64 1.43.0-1ubuntu0.1 [130 kB]
+  libuv1-dev libuv1t64 libxml2-dev
+0 upgraded, 3 newly installed, 0 to remove and 3 not upgraded.
+Need to get 1015 kB of archives.
+After this operation, 4271 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1t64 amd64 1.48.0-1.1build1 [97.3 kB]
+Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1-dev amd64 1.48.0-1.1build1 [136 kB]
+Get:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxml2-dev amd64 2.9.14+dfsg-1.3ubuntu3.7 [782 kB]
 debconf: delaying package configuration, since apt-utils is not installed
-Fetched 223 kB in 0s (2321 kB/s)
-Selecting previously unselected package libuv1:amd64.
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 27283 files and directories currently installed.)
-Preparing to unpack .../libuv1_1.43.0-1ubuntu0.1_amd64.deb ...
-Unpacking libuv1:amd64 (1.43.0-1ubuntu0.1) ...
+Fetched 1015 kB in 0s (5441 kB/s)
+Selecting previously unselected package libuv1t64:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 25650 files and directories currently installed.)
+Preparing to unpack .../libuv1t64_1.48.0-1.1build1_amd64.deb ...
+Unpacking libuv1t64:amd64 (1.48.0-1.1build1) ...
 Selecting previously unselected package libuv1-dev:amd64.
-Preparing to unpack .../libuv1-dev_1.43.0-1ubuntu0.1_amd64.deb ...
-Unpacking libuv1-dev:amd64 (1.43.0-1ubuntu0.1) ...
-Setting up libuv1:amd64 (1.43.0-1ubuntu0.1) ...
-Setting up libuv1-dev:amd64 (1.43.0-1ubuntu0.1) ...
-Processing triggers for libc-bin (2.35-0ubuntu3.13) ...
+Preparing to unpack .../libuv1-dev_1.48.0-1.1build1_amd64.deb ...
+Unpacking libuv1-dev:amd64 (1.48.0-1.1build1) ...
+Selecting previously unselected package libxml2-dev:amd64.
+Preparing to unpack .../libxml2-dev_2.9.14+dfsg-1.3ubuntu3.7_amd64.deb ...
+Unpacking libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.7) ...
+Setting up libuv1t64:amd64 (1.48.0-1.1build1) ...
+Setting up libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.7) ...
+Setting up libuv1-dev:amd64 (1.48.0-1.1build1) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+Skipping install of 'testthat' from a github remote, the SHA1 (d355d128) has not changed since last install.
+  Use `force = TRUE` to force installation
 remotes::install_local(/check/cpp4r_0.6.0.tar.gz)
 ── R CMD build ─────────────────────────────────────────────────────────────────
-* checking for file ‘/tmp/Rtmpkk8iDK/remotesf72b285b5b/cpp4r/DESCRIPTION’ ... OK
+* checking for file ‘/tmp/RtmpiPkp7v/remotesfb65ab96e9/cpp4r/DESCRIPTION’ ... OK
 * preparing ‘cpp4r’:
 * checking DESCRIPTION meta-information ... OK
 * checking for LF line-endings in source and make files and shell scripts
@@ -50,7 +53,7 @@ remotes::install_local(/check/cpp4r_0.6.0.tar.gz)
 * DONE (cpp4r)
 remotes::install_local(/check/cpp4rtest_0.2.0.tar.gz)
 ── R CMD build ─────────────────────────────────────────────────────────────────
-* checking for file ‘/tmp/Rtmpkk8iDK/remotesf7786cef70/cpp4rtest/DESCRIPTION’ ... OK
+* checking for file ‘/tmp/RtmpiPkp7v/remotesfb6872d48d/cpp4rtest/DESCRIPTION’ ... OK
 * preparing ‘cpp4rtest’:
 * checking DESCRIPTION meta-information ... OK
 * cleaning src
@@ -63,11 +66,11 @@ remotes::install_local(/check/cpp4rtest_0.2.0.tar.gz)
 ** this is package ‘cpp4rtest’ version ‘0.2.0’
 ** using staged installation
 ** libs
-using C++ compiler: ‘Ubuntu clang version 15.0.7’
-clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
-clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
-clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c test-runner.cpp -o test-runner.o
-clang++-15 -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
+using C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
+g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
+g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
+g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c test-runner.cpp -o test-runner.o
+g++-15 -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
 installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 ** R
 ** byte-compile and prepare package for lazy loading
@@ -97,11 +100,11 @@ installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 ** this is package ‘cpp4rtest’ version ‘0.2.0’
 ** using staged installation
 ** libs
-using C++ compiler: ‘Ubuntu clang version 15.0.7’
-clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
-clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
-clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c test-runner.cpp -o test-runner.o
-clang++-15 -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
+using C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
+g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
+g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
+g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c test-runner.cpp -o test-runner.o
+g++-15 -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
 installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 ** R
 ** byte-compile and prepare package for lazy loading
@@ -114,19 +117,19 @@ installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 ** testing if installed package keeps a record of temporary installation path
 * DONE (cpp4rtest)
 * using log directory ‘/check/cpp4rtest.Rcheck’
-* using R Under development (unstable) (2026-05-14 r90050)
+* using R Under development (unstable) (2026-05-12 r90049)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
-* running under: Ubuntu 22.04.5 LTS
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+* running under: Ubuntu 24.04.4 LTS
 * using session charset: UTF-8
-* current time: 2026-05-16 20:19:46 UTC
+* current time: 2026-05-16 20:00:56 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.2.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [4s/6s] NOTE
+* checking CRAN incoming feasibility ... [4s/5s] NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
@@ -144,8 +147,8 @@ Checking DOIs failed with message:
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [80s/75s] OK
-* used C++ compiler: ‘Ubuntu clang version 15.0.7’
+* checking whether package ‘cpp4rtest’ can be installed ... [122s/118s] OK
+* used C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -156,7 +159,7 @@ Checking DOIs failed with message:
 * checking code files for non-ASCII characters ... OK
 * checking R files for syntax errors ... OK
 * checking whether the package can be loaded ... [1s/0s] OK
-* checking whether the package can be loaded with stated dependencies ... [0s/0s] OK
+* checking whether the package can be loaded with stated dependencies ... [1s/0s] OK
 * checking whether the package can be unloaded cleanly ... [1s/0s] OK
 * checking whether the namespace can be loaded with stated dependencies ... [1s/0s] OK
 * checking whether the namespace can be unloaded cleanly ... [1s/0s] OK
@@ -166,7 +169,7 @@ Checking DOIs failed with message:
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... [13s/4s] OK
+* checking R code for possible problems ... [13s/3s] OK
 * checking Rd files ... [1s/0s] OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
@@ -187,11 +190,11 @@ Checking DOIs failed with message:
 * checking pragmas in C/C++ headers and code ... OK
 * checking compilation flags used ... OK
 * checking compiled code ... OK
-* checking examples ... [1s/1s] OK
+* checking examples ... [1s/0s] OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ...
-  Running ‘testthat.R’ [6s/5s]
- [7s/5s] OK
+  Running ‘testthat.R’ [9s/8s]
+ [10s/8s] OK
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
@@ -206,11 +209,11 @@ for details.
 ** this is package ‘cpp4rtest’ version ‘0.2.0’
 ** using staged installation
 ** libs
-using C++ compiler: ‘Ubuntu clang version 15.0.7’
-clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
-clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
-clang++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c test-runner.cpp -o test-runner.o
-clang++-15 -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
+using C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
+g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
+g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
+g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c test-runner.cpp -o test-runner.o
+g++-15 -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
 installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 ** R
 ** byte-compile and prepare package for lazy loading
@@ -224,19 +227,19 @@ installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 * DONE (cpp4rtest)
 === 00check.log ===
 * using log directory ‘/check/cpp4rtest.Rcheck’
-* using R Under development (unstable) (2026-05-14 r90050)
+* using R Under development (unstable) (2026-05-12 r90049)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
-* running under: Ubuntu 22.04.5 LTS
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+* running under: Ubuntu 24.04.4 LTS
 * using session charset: UTF-8
-* current time: 2026-05-16 20:19:46 UTC
+* current time: 2026-05-16 20:00:56 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.2.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [4s/6s] NOTE
+* checking CRAN incoming feasibility ... [4s/5s] NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
@@ -254,8 +257,8 @@ Checking DOIs failed with message:
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [80s/75s] OK
-* used C++ compiler: ‘Ubuntu clang version 15.0.7’
+* checking whether package ‘cpp4rtest’ can be installed ... [122s/118s] OK
+* used C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -266,7 +269,7 @@ Checking DOIs failed with message:
 * checking code files for non-ASCII characters ... OK
 * checking R files for syntax errors ... OK
 * checking whether the package can be loaded ... [1s/0s] OK
-* checking whether the package can be loaded with stated dependencies ... [0s/0s] OK
+* checking whether the package can be loaded with stated dependencies ... [1s/0s] OK
 * checking whether the package can be unloaded cleanly ... [1s/0s] OK
 * checking whether the namespace can be loaded with stated dependencies ... [1s/0s] OK
 * checking whether the namespace can be unloaded cleanly ... [1s/0s] OK
@@ -276,7 +279,7 @@ Checking DOIs failed with message:
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... [13s/4s] OK
+* checking R code for possible problems ... [13s/3s] OK
 * checking Rd files ... [1s/0s] OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
@@ -297,10 +300,10 @@ Checking DOIs failed with message:
 * checking pragmas in C/C++ headers and code ... OK
 * checking compilation flags used ... OK
 * checking compiled code ... OK
-* checking examples ... [1s/1s] OK
+* checking examples ... [1s/0s] OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... [7s/5s] OK
-  Running ‘testthat.R’ [6s/5s]
+* checking tests ... [10s/8s] OK
+  Running ‘testthat.R’ [9s/8s]
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE

@@ -194,8 +194,7 @@ inline void r_vector<T>::named_arg_assign_elt(R_xlen_t i, underlying_type elt,
 
 // Optimized size constructor using fast-path allocation
 template <typename T>
-CPP4R_ALWAYS_INLINE r_vector<T>::r_vector(const R_xlen_t size)
-    : cpp4r::r_vector<T>() {
+CPP4R_ALWAYS_INLINE r_vector<T>::r_vector(const R_xlen_t size) : cpp4r::r_vector<T>() {
   SEXP data = Rf_allocVector(get_sexptype(), size);
   PROTECT(data);
   capacity_ = size;

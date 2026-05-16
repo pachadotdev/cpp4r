@@ -1,8 +1,6 @@
 
 .PHONY: check-cran check-cran-extra check-% clean install docs
 
-LOGDIR := extended-tests-results/logs
-
 # CRAN-like containers (pair: CRAN name : r-hub image)
 CRAN_PAIRS := \
 	r-devel-linux-x86_64-debian-clang:ubuntu-clang \
@@ -15,28 +13,24 @@ CRAN_EXTRA := atlas clang-asan clang-ubsan clang21 clang22 donttest \
 	gcc16 gcc-asan lto mkl nold nosuggests rchk valgrind
 
 check-cran:
-	@mkdir -p $(LOGDIR)
 	@chmod +x ./scripts/check.sh
 	@for pair in $(CRAN_PAIRS); do \
 		cran=$${pair%%:*}; rhub=$${pair##*:}; \
-		echo "=== checking $$cran (r-hub: $$rhub) ===" | tee -a $(LOGDIR)/check-$${rhub}.log; \
-		./scripts/check.sh $$rhub 2>&1 | sed -u 's/^/  /' | tee -a $(LOGDIR)/check-$${rhub}.log; \
+		echo "=== checking $$cran (r-hub: $$rhub) ==="; \
+		./scripts/check.sh $$rhub; \
 	done
 
 check-cran-extra:
-	@mkdir -p $(LOGDIR)
 	@chmod +x ./scripts/check.sh
 	@for rhub in $(CRAN_EXTRA); do \
-		echo "=== checking $$rhub ===" | tee -a $(LOGDIR)/check-$${rhub}.log; \
-		./scripts/check.sh $$rhub 2>&1 | sed -u 's/^/  /' | tee -a $(LOGDIR)/check-$${rhub}.log; \
+		echo "=== checking $$rhub ==="; \
+		./scripts/check.sh $$rhub; \
 	done
 
 # Individual check target, e.g. `make check-clang22`
 check-%:
-	@mkdir -p $(LOGDIR)
 	@chmod +x ./scripts/check.sh
-	@rhub=$*; echo "=== checking $$rhub ===" | tee -a $(LOGDIR)/check-$$rhub.log; \
-	./scripts/check.sh $$rhub 2>&1 | sed -u 's/^/  /' | tee -a $(LOGDIR)/check-$$rhub.log
+	@./scripts/check.sh $*
 
 clean:
 	@Rscript -e 'devtools::clean_dll("cpp4rtest");'
