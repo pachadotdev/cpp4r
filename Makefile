@@ -1,3 +1,43 @@
+
+.PHONY: check-cran check-cran-extra check-% clean install docs
+
+LOGDIR := extended-tests-results/logs
+
+# CRAN-like containers (pair: CRAN name : r-hub image)
+CRAN_PAIRS := \
+	r-devel-linux-x86_64-debian-clang:ubuntu-clang \
+ 	r-devel-linux-x86_64-debian-gcc:ubuntu-gcc15 \
+ 	r-patched-linux-x86_64:ubuntu-next \
+ 	r-release-linux-x86_64:ubuntu-release
+
+# Extra CRAN check images
+CRAN_EXTRA := atlas clang-asan clang-ubsan clang21 clang22 donttest \
+	gcc16 gcc-asan lto mkl nold nosuggests rchk valgrind
+
+check-cran:
+	@mkdir -p $(LOGDIR)
+	@chmod +x ./scripts/check.sh
+	@for pair in $(CRAN_PAIRS); do \
+		cran=$${pair%%:*}; rhub=$${pair##*:}; \
+		echo "=== checking $$cran (r-hub: $$rhub) ===" | tee -a $(LOGDIR)/check-$${rhub}.log; \
+		./scripts/check.sh $$rhub 2>&1 | sed -u 's/^/  /' | tee -a $(LOGDIR)/check-$${rhub}.log; \
+	done
+
+check-cran-extra:
+	@mkdir -p $(LOGDIR)
+	@chmod +x ./scripts/check.sh
+	@for rhub in $(CRAN_EXTRA); do \
+		echo "=== checking $$rhub ===" | tee -a $(LOGDIR)/check-$${rhub}.log; \
+		./scripts/check.sh $$rhub 2>&1 | sed -u 's/^/  /' | tee -a $(LOGDIR)/check-$${rhub}.log; \
+	done
+
+# Individual check target, e.g. `make check-clang22`
+check-%:
+	@mkdir -p $(LOGDIR)
+	@chmod +x ./scripts/check.sh
+	@rhub=$*; echo "=== checking $$rhub ===" | tee -a $(LOGDIR)/check-$$rhub.log; \
+	./scripts/check.sh $$rhub 2>&1 | sed -u 's/^/  /' | tee -a $(LOGDIR)/check-$$rhub.log
+
 clean:
 	@Rscript -e 'devtools::clean_dll("cpp4rtest");'
 
@@ -6,49 +46,3 @@ install:
 
 docs:
 	@Rscript -e 'devtools::document("./"); pkgsite::build_site("./")'
-	
-bench:
-	@rm -f extended-tests-results/*.rds
-	@rm -f extended-tests-results/bench_summary.md
-	@$(MAKE) clean
-	@$(MAKE) install
-	@export -p USE_CLANG; /bin/bash -euo pipefail -c './scripts/bench_loop.sh'
-	@Rscript './scripts/combine-benchmarks.R'
-
-STANDARDS := cxx17 cxx20 cxx23
-COMPILERS := gcc clang
-
-ALL_CHECKS := $(foreach std,$(STANDARDS),$(foreach comp,$(COMPILERS),check-$(std)-$(comp)))
-
-check: $(ALL_CHECKS)
-
-define run-check
-check-$(1)-$(2):
-	@echo "Checking C++ code with $(1) standard and $(2) compiler"
-	# @$$(MAKE) install
-	./scripts/check_prepare.sh "$(1)" "$(2)"; \
-	if ! ./scripts/check_run.sh "$(1)" "$(2)"; then \
-		echo "Check failed"; \
-		./scripts/check_restore.sh "$(1)" "$(2)"; \
-		exit 1; \
-	fi; \
-	./scripts/check_restore.sh "$(1)" "$(2)"
-endef
-
-clang_format=`which clang-format-21`
-
-format: $(shell find . -name '*.h') $(shell find . -name '*.hpp') $(shell find . -name '*.cpp')
-	@${clang_format} -i $?
-
-build-r-devel:
-	@echo "Building R-devel from source"
-	./scripts/build_r_devel.sh
-
-check-devel:
-	@echo "Checking with R-devel (CXX23, gcc)"
-	./scripts/check_r_devel.sh cxx23 gcc
-
-$(foreach std,$(STANDARDS),$(foreach comp,$(COMPILERS),$(eval $(call run-check,$(std),$(comp)))))
-$(foreach std,$(STANDARDS),$(foreach comp,$(COMPILERS),$(eval $(call run-bench,$(std),$(comp)))))
-$(foreach std,$(STANDARDS),$(eval check-$(std)-glang: check-$(std)-clang))
-$(foreach std,$(STANDARDS),$(eval bench-$(std)-glang: bench-$(std)-clang))
