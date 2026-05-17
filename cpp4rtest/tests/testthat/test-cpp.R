@@ -1,5 +1,7 @@
 # Run C++ unit tests
 test_that("C++ unit tests run without unexpected errors", {
+  skip_if_not_installed("xml2")
+
   # https://stackoverflow.com/a/79565018/3720258
   expect_warnings <- function(object, warnings, ...) {
     wrns <- testthat::capture_warnings({

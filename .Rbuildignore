@@ -18,6 +18,5 @@
 ^docs$
 ^example-packages$
 ^cpp4rtest$
-^scripts$
 ^vignettes$
 ^check-docker$

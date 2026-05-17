@@ -1,0 +1,1185 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+pkg-config is already the newest version (0.29.2-1ubuntu3).
+pkg-config set to manually installed.
+libxml2-dev is already the newest version (2.9.13+dfsg-1ubuntu0.11).
+libxml2-dev set to manually installed.
+The following additional packages will be installed:
+  libuv1
+The following NEW packages will be installed:
+  libuv1 libuv1-dev
+0 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+Need to get 223 kB of archives.
+After this operation, 906 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libuv1 amd64 1.43.0-1ubuntu0.1 [92.7 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libuv1-dev amd64 1.43.0-1ubuntu0.1 [130 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 223 kB in 0s (2,714 kB/s)
+Selecting previously unselected package libuv1:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 27763 files and directories currently installed.)
+Preparing to unpack .../libuv1_1.43.0-1ubuntu0.1_amd64.deb ...
+Unpacking libuv1:amd64 (1.43.0-1ubuntu0.1) ...
+Selecting previously unselected package libuv1-dev:amd64.
+Preparing to unpack .../libuv1-dev_1.43.0-1ubuntu0.1_amd64.deb ...
+Unpacking libuv1-dev:amd64 (1.43.0-1ubuntu0.1) ...
+Setting up libuv1:amd64 (1.43.0-1ubuntu0.1) ...
+Setting up libuv1-dev:amd64 (1.43.0-1ubuntu0.1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.13) ...
+trying URL 'https://cloud.r-project.org/src/contrib/remotes_2.5.0.tar.gz'
+Content type 'application/x-gzip' length 164496 bytes (160 KB)
+==================================================
+downloaded 160 KB
+
+* installing *source* package ‘remotes’ ...
+** this is package ‘remotes’ version ‘2.5.0’
+** package ‘remotes’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (remotes)
+
+The downloaded source packages are in
+	‘/tmp/RtmpxEacMD/downloaded_packages’
+also installing the dependencies ‘crayon’, ‘fs’, ‘glue’, ‘pkgbuild’, ‘rprojroot’, ‘diffobj’, ‘brio’, ‘callr’, ‘cli’, ‘desc’, ‘evaluate’, ‘jsonlite’, ‘lifecycle’, ‘magrittr’, ‘pkgload’, ‘praise’, ‘processx’, ‘ps’, ‘R6’, ‘rlang’, ‘waldo’, ‘withr’
+
+trying URL 'https://cloud.r-project.org/src/contrib/crayon_1.5.3.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/fs_2.1.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/glue_1.8.1.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/pkgbuild_1.4.8.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/rprojroot_2.1.1.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/diffobj_0.3.6.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/brio_1.1.5.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/callr_3.7.6.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/cli_3.6.6.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/desc_1.4.3.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/evaluate_1.0.5.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/jsonlite_2.0.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/lifecycle_1.0.5.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/magrittr_2.0.5.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/pkgload_1.5.2.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/praise_1.0.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/processx_3.9.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/ps_1.9.3.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/R6_2.6.1.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/rlang_1.2.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/waldo_0.6.2.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/withr_3.0.2.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/testthat_3.3.2.tar.gz'
+* installing *source* package ‘crayon’ ...
+** this is package ‘crayon’ version ‘1.5.3’
+** package ‘crayon’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (crayon)
+* installing *source* package ‘fs’ ...
+** this is package ‘fs’ version ‘2.1.0’
+** package ‘fs’ successfully unpacked and MD5 sums checked
+** using staged installation
+Found pkg-config cflags and libs!
+Using PKG_CFLAGS=
+Using PKG_LIBS=-luv -lpthread -ldl -lrt
+** libs
+using C++ compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c dir.cc -o dir.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c error.cc -o error.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c file.cc -o file.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c fs.cc -o fs.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c getmode.cc -o getmode.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c id.cc -o id.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c init.cc -o init.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c link.cc -o link.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c path.cc -o path.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c utils.cc -o utils.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c unix/getmode.cc -o unix/getmode.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I.   -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c bsd/setmode.c -o bsd/setmode.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I.   -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c bsd/strmode.c -o bsd/strmode.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I.   -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c bsd/reallocarray.c -o bsd/reallocarray.o
+clang++ -stdlib=libc++ -std=gnu++20 -shared -L/usr/local/lib -o fs.so dir.o error.o file.o fs.o getmode.o id.o init.o link.o path.o utils.o unix/getmode.o bsd/setmode.o bsd/strmode.o bsd/reallocarray.o -luv -lpthread -ldl -lrt
+installing to /cache/R_libs/00LOCK-fs/00new/fs/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (fs)
+* installing *source* package ‘glue’ ...
+** this is package ‘glue’ version ‘1.8.1’
+** package ‘glue’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c glue.c -o glue.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c init.c -o init.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c trim.c -o trim.o
+clang -shared -L/usr/local/lib -o glue.so glue.o init.o trim.o
+installing to /cache/R_libs/00LOCK-glue/00new/glue/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (glue)
+* installing *source* package ‘rprojroot’ ...
+** this is package ‘rprojroot’ version ‘2.1.1’
+** package ‘rprojroot’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (rprojroot)
+* installing *source* package ‘brio’ ...
+** this is package ‘brio’ version ‘1.1.5’
+** package ‘brio’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c brio.c -o brio.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c file_line_endings.c -o file_line_endings.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c init.c -o init.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c read_file.c -o read_file.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c read_file_raw.c -o read_file_raw.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c read_lines.c -o read_lines.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c write_file.c -o write_file.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c write_file_raw.c -o write_file_raw.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c write_lines.c -o write_lines.o
+clang -shared -L/usr/local/lib -o brio.so brio.o file_line_endings.o init.o read_file.o read_file_raw.o read_lines.o write_file.o write_file_raw.o write_lines.o
+installing to /cache/R_libs/00LOCK-brio/00new/brio/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (brio)
+* installing *source* package ‘cli’ ...
+** this is package ‘cli’ version ‘3.6.6’
+** package ‘cli’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c ansi.c -o ansi.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c cleancall.c -o cleancall.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c diff.c -o diff.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c errors.c -o errors.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c glue.c -o glue.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c init.c -o init.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c inst.c -o inst.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c keypress-unix.c -o keypress-unix.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c keypress-win.c -o keypress-win.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c keypress.c -o keypress.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c md5.c -o md5.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c progress-altrep.c -o progress-altrep.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c progress.c -o progress.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c sha1.c -o sha1.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c sha256.c -o sha256.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c thread.c -o thread.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c tty.c -o tty.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c utf8.c -o utf8.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c utils.c -o utils.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c vt.c -o vt.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c vtparse.c -o vtparse.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c vtparse_table.c -o vtparse_table.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c win-utf8.c -o win-utf8.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c winfiles.c -o winfiles.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c xxhash.c -o xxhash.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c xxhash2.c -o xxhash2.o
+clang -shared -L/usr/local/lib -o cli.so ansi.o cleancall.o diff.o errors.o glue.o init.o inst.o keypress-unix.o keypress-win.o keypress.o md5.o progress-altrep.o progress.o sha1.o sha256.o thread.o tty.o utf8.o utils.o vt.o vtparse.o vtparse_table.o win-utf8.o winfiles.o xxhash.o xxhash2.o -lpthread
+installing to /cache/R_libs/00LOCK-cli/00new/cli/libs
+** R
+** exec
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cli)
+* installing *source* package ‘evaluate’ ...
+** this is package ‘evaluate’ version ‘1.0.5’
+** package ‘evaluate’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (evaluate)
+* installing *source* package ‘jsonlite’ ...
+** this is package ‘jsonlite’ version ‘2.0.0’
+** package ‘jsonlite’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c base64.c -o base64.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c collapse_array.c -o collapse_array.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c collapse_object.c -o collapse_object.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c collapse_pretty.c -o collapse_pretty.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c escape_chars.c -o escape_chars.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c integer64_to_na.c -o integer64_to_na.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c is_datelist.c -o is_datelist.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c is_recordlist.c -o is_recordlist.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c is_scalarlist.c -o is_scalarlist.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c modp_numtoa.c -o modp_numtoa.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c null_to_na.c -o null_to_na.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c num_to_char.c -o num_to_char.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c parse.c -o parse.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c prettify.c -o prettify.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c push_parser.c -o push_parser.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c r-base64.c -o r-base64.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c register.c -o register.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c row_collapse.c -o row_collapse.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c transpose_list.c -o transpose_list.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c validate.c -o validate.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c yajl/yajl.c -o yajl/yajl.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c yajl/yajl_alloc.c -o yajl/yajl_alloc.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c yajl/yajl_buf.c -o yajl/yajl_buf.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c yajl/yajl_encode.c -o yajl/yajl_encode.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c yajl/yajl_gen.c -o yajl/yajl_gen.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c yajl/yajl_lex.c -o yajl/yajl_lex.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c yajl/yajl_parser.c -o yajl/yajl_parser.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fPIC  -Wall -g -O0 -fPIC  -c yajl/yajl_tree.c -o yajl/yajl_tree.o
+ar rcs yajl/libstatyajl.a yajl/yajl.o yajl/yajl_alloc.o yajl/yajl_buf.o yajl/yajl_encode.o yajl/yajl_gen.o yajl/yajl_lex.o yajl/yajl_parser.o yajl/yajl_tree.o
+clang -shared -L/usr/local/lib -o jsonlite.so base64.o collapse_array.o collapse_object.o collapse_pretty.o escape_chars.o integer64_to_na.o is_datelist.o is_recordlist.o is_scalarlist.o modp_numtoa.o null_to_na.o num_to_char.o parse.o prettify.o push_parser.o r-base64.o register.o row_collapse.o transpose_list.o validate.o -Lyajl -lstatyajl
+installing to /cache/R_libs/00LOCK-jsonlite/00new/jsonlite/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+in method for ‘asJSON’ with signature ‘"AsIs"’: no definition for class “AsIs”
+in method for ‘asJSON’ with signature ‘"ITime"’: no definition for class “ITime”
+in method for ‘asJSON’ with signature ‘"hms"’: no definition for class “hms”
+in method for ‘asJSON’ with signature ‘"json"’: no definition for class “json”
+in method for ‘asJSON’ with signature ‘"integer64"’: no definition for class “integer64”
+in method for ‘asJSON’ with signature ‘"pairlist"’: no definition for class “pairlist”
+in method for ‘asJSON’ with signature ‘"blob"’: no definition for class “blob”
+in method for ‘asJSON’ with signature ‘"scalar"’: no definition for class “scalar”
+in method for ‘asJSON’ with signature ‘"sf"’: no definition for class “sf”
+in method for ‘asJSON’ with signature ‘"sfc"’: no definition for class “sfc”
+in method for ‘asJSON’ with signature ‘"vctrs_vctr"’: no definition for class “vctrs_vctr”
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (jsonlite)
+* installing *source* package ‘magrittr’ ...
+** this is package ‘magrittr’ version ‘2.0.5’
+** package ‘magrittr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c pipe.c -o pipe.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c utils.c -o utils.o
+clang -shared -L/usr/local/lib -o magrittr.so pipe.o utils.o
+installing to /cache/R_libs/00LOCK-magrittr/00new/magrittr/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (magrittr)
+* installing *source* package ‘praise’ ...
+** this is package ‘praise’ version ‘1.0.0’
+** package ‘praise’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (praise)
+* installing *source* package ‘ps’ ...
+** this is package ‘ps’ version ‘1.9.3’
+** package ‘ps’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang -Wall -g -O0 -fPIC  -L/usr/local/lib -Wall px.c -o px
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c init.c -o init.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c api-common.c -o api-common.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c common.c -o common.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c extra.c -o extra.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c dummy.c -o dummy.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c error-codes.c -o error-codes.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c cleancall.c -o cleancall.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c posix.c -o posix.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c api-posix.c -o api-posix.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c linux.c -o linux.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c api-linux.c -o api-linux.o
+clang -shared -L/usr/local/lib -o ps.so init.o api-common.o common.o extra.o dummy.o error-codes.o cleancall.o posix.o api-posix.o linux.o api-linux.o
+installing via 'install.libs.R' to /cache/R_libs/00LOCK-ps/00new/ps
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (ps)
+* installing *source* package ‘R6’ ...
+** this is package ‘R6’ version ‘2.6.1’
+** package ‘R6’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (R6)
+* installing *source* package ‘rlang’ ...
+** this is package ‘rlang’ version ‘1.2.0’
+** package ‘rlang’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c capture.c -o capture.o
+touch internal.c
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c internal.c -o internal.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c rlang.c -o rlang.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c version.c -o version.o
+clang -shared -L/usr/local/lib -o rlang.so capture.o internal.o rlang.o version.o
+installing to /cache/R_libs/00LOCK-rlang/00new/rlang/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (rlang)
+* installing *source* package ‘withr’ ...
+** this is package ‘withr’ version ‘3.0.2’
+** package ‘withr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (withr)
+* installing *source* package ‘diffobj’ ...
+** this is package ‘diffobj’ version ‘0.3.6’
+** package ‘diffobj’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c diff.c -o diff.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c diffobj.c -o diffobj.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c init.c -o init.o
+clang -shared -L/usr/local/lib -o diffobj.so diff.o diffobj.o init.o
+installing to /cache/R_libs/00LOCK-diffobj/00new/diffobj/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (diffobj)
+* installing *source* package ‘desc’ ...
+** this is package ‘desc’ version ‘1.4.3’
+** package ‘desc’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (desc)
+* installing *source* package ‘lifecycle’ ...
+** this is package ‘lifecycle’ version ‘1.0.5’
+** package ‘lifecycle’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (lifecycle)
+* installing *source* package ‘processx’ ...
+** this is package ‘processx’ version ‘3.9.0’
+** package ‘processx’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang -Wall -g -O0 -fPIC  -L/usr/local/lib -Wall tools/px.c -o tools/px
+clang -Wall -g -O0 -fPIC  -L/usr/local/lib -I../inst/include -Wall tools/sock.c -o tools/sock
+clang -Wall -g -O0 -fPIC  -L/usr/local/lib supervisor/supervisor.c \
+      supervisor/utils.c -o supervisor/supervisor
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c base64.c -o base64.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c client.c -o client.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c errors.c -o errors.o
+clang -shared  -L/usr/local/lib -o client.so base64.o client.o errors.o  \
+	 
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c init.c -o init.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c poll.c -o poll.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c processx-connection.c -o processx-connection.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c processx-vector.c -o processx-vector.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c create-time.c -o create-time.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c unix/childlist.c -o unix/childlist.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c unix/connection.c -o unix/connection.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c unix/processx.c -o unix/processx.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c unix/sigchld.c -o unix/sigchld.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c unix/utils.c -o unix/utils.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c unix/named_pipe.c -o unix/named_pipe.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c cleancall.c -o cleancall.o
+clang -shared -L/usr/local/lib -o processx.so init.o poll.o errors.o processx-connection.o processx-vector.o create-time.o base64.o unix/childlist.o unix/connection.o unix/processx.o unix/sigchld.o unix/utils.o unix/named_pipe.o cleancall.o
+installing via 'install.libs.R' to /cache/R_libs/00LOCK-processx/00new/processx
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (processx)
+* installing *source* package ‘callr’ ...
+** this is package ‘callr’ version ‘3.7.6’
+** package ‘callr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+R6Class r_process: finalize() method is public, but it should be private as of R6 2.4.0. This code will continue to work, but in a future version of R6, finalize() will be required to be private.
+R6Class r_session: finalize() method is public, but it should be private as of R6 2.4.0. This code will continue to work, but in a future version of R6, finalize() will be required to be private.
+R6Class rcmd_process: finalize() method is public, but it should be private as of R6 2.4.0. This code will continue to work, but in a future version of R6, finalize() will be required to be private.
+R6Class rscript_process: finalize() method is public, but it should be private as of R6 2.4.0. This code will continue to work, but in a future version of R6, finalize() will be required to be private.
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (callr)
+* installing *source* package ‘waldo’ ...
+** this is package ‘waldo’ version ‘0.6.2’
+** package ‘waldo’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (waldo)
+* installing *source* package ‘pkgbuild’ ...
+** this is package ‘pkgbuild’ version ‘1.4.8’
+** package ‘pkgbuild’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (pkgbuild)
+* installing *source* package ‘pkgload’ ...
+** this is package ‘pkgload’ version ‘1.5.2’
+** package ‘pkgload’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (pkgload)
+* installing *source* package ‘testthat’ ...
+** this is package ‘testthat’ version ‘3.3.2’
+** package ‘testthat’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+using C++ compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include -DCOMPILING_TESTTHAT  -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c init.c -o init.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include -DCOMPILING_TESTTHAT  -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c test-catch.cpp -o test-catch.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include -DCOMPILING_TESTTHAT  -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c test-example.cpp -o test-example.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include -DCOMPILING_TESTTHAT  -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c test-runner.cpp -o test-runner.o
+clang++ -stdlib=libc++ -std=gnu++20 -shared -L/usr/local/lib -o testthat.so init.o test-catch.o test-example.o test-runner.o
+installing to /cache/R_libs/00LOCK-testthat/00new/testthat/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (testthat)
+
+The downloaded source packages are in
+	‘/tmp/RtmpxEacMD/downloaded_packages’
+trying URL 'https://cloud.r-project.org/src/contrib/xml2_1.5.2.tar.gz'
+Content type 'application/x-gzip' length 154697 bytes (151 KB)
+==================================================
+downloaded 151 KB
+
+* installing *source* package ‘xml2’ ...
+** this is package ‘xml2’ version ‘1.5.2’
+** package ‘xml2’ successfully unpacked and MD5 sums checked
+** using staged installation
+Found pkg-config cflags and libs!
+Using PKG_CFLAGS=-I/usr/include/libxml2
+Using PKG_LIBS=-lxml2
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+using C++ compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c connection.cpp -o connection.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c init.c -o init.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c xml2_doc.cpp -o xml2_doc.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c xml2_init.c -o xml2_init.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c xml2_namespace.cpp -o xml2_namespace.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c xml2_node.cpp -o xml2_node.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c xml2_output.cpp -o xml2_output.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c xml2_schema.cpp -o xml2_schema.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c xml2_url.cpp -o xml2_url.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c xml2_xpath.cpp -o xml2_xpath.o
+clang++ -stdlib=libc++ -std=gnu++20 -shared -L/usr/local/lib -o xml2.so connection.o init.o xml2_doc.o xml2_init.o xml2_namespace.o xml2_node.o xml2_output.o xml2_schema.o xml2_url.o xml2_xpath.o -lxml2
+installing to /cache/R_libs/00LOCK-xml2/00new/xml2/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (xml2)
+
+The downloaded source packages are in
+	‘/tmp/RtmpxEacMD/downloaded_packages’
+remotes::install_local(/check/cpp4r_0.6.0.tar.gz)
+── R CMD build ─────────────────────────────────────────────────────────────────
+* checking for file ‘/tmp/RtmpxEacMD/remotesf589aa900/cpp4r/DESCRIPTION’ ... OK
+* preparing ‘cpp4r’:
+* checking DESCRIPTION meta-information ... OK
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+* building ‘cpp4r_0.6.0.tar.gz’
+
+* installing *source* package ‘cpp4r’ ...
+** this is package ‘cpp4r’ version ‘0.6.0’
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4r)
+remotes::install_local(/check/cpp4rtest_0.2.0.tar.gz)
+Installing 6 packages: utf8, vctrs, pkgconfig, pillar, tibble, decor
+trying URL 'https://cloud.r-project.org/src/contrib/utf8_1.2.6.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/vctrs_0.7.3.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/pkgconfig_2.0.3.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/pillar_1.11.1.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/tibble_3.3.1.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/decor_1.0.2.tar.gz'
+* installing *source* package ‘utf8’ ...
+** this is package ‘utf8’ version ‘1.2.6’
+** package ‘utf8’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c as_utf8.c -o as_utf8.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c bytes.c -o bytes.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c context.c -o context.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c init.c -o init.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c render.c -o render.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c render_table.c -o render_table.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c string.c -o string.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c text.c -o text.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8_encode.c -o utf8_encode.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8_format.c -o utf8_format.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8_normalize.c -o utf8_normalize.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8_valid.c -o utf8_valid.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8_width.c -o utf8_width.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c util.c -o util.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8lite/src/array.c -o utf8lite/src/array.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8lite/src/char.c -o utf8lite/src/char.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8lite/src/encode.c -o utf8lite/src/encode.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8lite/src/error.c -o utf8lite/src/error.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8lite/src/escape.c -o utf8lite/src/escape.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8lite/src/graph.c -o utf8lite/src/graph.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8lite/src/graphscan.c -o utf8lite/src/graphscan.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8lite/src/normalize.c -o utf8lite/src/normalize.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8lite/src/render.c -o utf8lite/src/render.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8lite/src/text.c -o utf8lite/src/text.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8lite/src/textassign.c -o utf8lite/src/textassign.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8lite/src/textiter.c -o utf8lite/src/textiter.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fPIC  -Wall -g -O0 -fPIC  -c utf8lite/src/textmap.c -o utf8lite/src/textmap.o
+ar rcs libcutf8lite.a utf8lite/src/array.o utf8lite/src/char.o utf8lite/src/encode.o utf8lite/src/error.o utf8lite/src/escape.o utf8lite/src/graph.o utf8lite/src/graphscan.o utf8lite/src/normalize.o utf8lite/src/render.o utf8lite/src/text.o utf8lite/src/textassign.o utf8lite/src/textiter.o utf8lite/src/textmap.o
+clang -shared -L/usr/local/lib -o utf8.so as_utf8.o bytes.o context.o init.o render.o render_table.o string.o text.o utf8_encode.o utf8_format.o utf8_normalize.o utf8_valid.o utf8_width.o util.o -L. -lcutf8lite
+installing to /cache/R_libs/00LOCK-utf8/00new/utf8/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (utf8)
+* installing *source* package ‘vctrs’ ...
+** this is package ‘vctrs’ version ‘0.7.3’
+** package ‘vctrs’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c altrep-lazy-character.c -o altrep-lazy-character.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c altrep-rle.c -o altrep-rle.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c altrep.c -o altrep.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c arg-counter.c -o arg-counter.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c arg.c -o arg.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c assert.c -o assert.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c bind.c -o bind.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c c.c -o c.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c callables.c -o callables.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c case-when.c -o case-when.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c cast-bare.c -o cast-bare.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c cast-dispatch.c -o cast-dispatch.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c cast.c -o cast.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c compare.c -o compare.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c complete.c -o complete.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c conditions.c -o conditions.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c dictionary.c -o dictionary.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c dim.c -o dim.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c empty.c -o empty.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c encoding.c -o encoding.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c equal.c -o equal.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c expand.c -o expand.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c fields.c -o fields.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c fill.c -o fill.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c globals.c -o globals.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c group.c -o group.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c growable.c -o growable.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c hash.c -o hash.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c if-else.c -o if-else.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c init.c -o init.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c interval.c -o interval.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c list-combine.c -o list-combine.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c list-unchop.c -o list-unchop.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c match-joint.c -o match-joint.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c match.c -o match.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c missing.c -o missing.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c names.c -o names.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c order-collate.c -o order-collate.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c order-groups.c -o order-groups.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c order-sortedness.c -o order-sortedness.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c order.c -o order.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c parallel.c -o parallel.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c poly-op.c -o poly-op.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c proxy-restore.c -o proxy-restore.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c proxy.c -o proxy.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c ptype-common.c -o ptype-common.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c ptype.c -o ptype.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c ptype2-dispatch.c -o ptype2-dispatch.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c ptype2.c -o ptype2.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c rank.c -o rank.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c recode.c -o recode.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c rep.c -o rep.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c rlang-dev.c -o rlang-dev.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c rlang.c -o rlang.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c runs.c -o runs.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c set.c -o set.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c shape.c -o shape.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c size-common.c -o size-common.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c size.c -o size.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c slice-array.c -o slice-array.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c slice-assign-array.c -o slice-assign-array.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c slice-assign.c -o slice-assign.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c slice-chop.c -o slice-chop.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c slice-interleave.c -o slice-interleave.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c slice.c -o slice.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c split.c -o split.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c subscript-loc.c -o subscript-loc.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c subscript.c -o subscript.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c type-data-frame.c -o type-data-frame.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c type-date-time.c -o type-date-time.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c type-factor.c -o type-factor.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c type-info.c -o type-info.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c type-integer64.c -o type-integer64.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c type-tibble.c -o type-tibble.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c typeof2-s3.c -o typeof2-s3.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c typeof2.c -o typeof2.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c unspecified.c -o unspecified.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c utils-dispatch.c -o utils-dispatch.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c utils.c -o utils.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fPIC  -Wall -g -O0 -fPIC  -c version.c -o version.o
+clang -shared -L/usr/local/lib -o vctrs.so altrep-lazy-character.o altrep-rle.o altrep.o arg-counter.o arg.o assert.o bind.o c.o callables.o case-when.o cast-bare.o cast-dispatch.o cast.o compare.o complete.o conditions.o dictionary.o dim.o empty.o encoding.o equal.o expand.o fields.o fill.o globals.o group.o growable.o hash.o if-else.o init.o interval.o list-combine.o list-unchop.o match-joint.o match.o missing.o names.o order-collate.o order-groups.o order-sortedness.o order.o parallel.o poly-op.o proxy-restore.o proxy.o ptype-common.o ptype.o ptype2-dispatch.o ptype2.o rank.o recode.o rep.o rlang-dev.o rlang.o runs.o set.o shape.o size-common.o size.o slice-array.o slice-assign-array.o slice-assign.o slice-chop.o slice-interleave.o slice.o split.o subscript-loc.o subscript.o type-data-frame.o type-date-time.o type-factor.o type-info.o type-integer64.o type-tibble.o typeof2-s3.o typeof2.o unspecified.o utils-dispatch.o utils.o version.o
+installing to /cache/R_libs/00LOCK-vctrs/00new/vctrs/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (vctrs)
+* installing *source* package ‘pkgconfig’ ...
+** this is package ‘pkgconfig’ version ‘2.0.3’
+** package ‘pkgconfig’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (pkgconfig)
+* installing *source* package ‘pillar’ ...
+** this is package ‘pillar’ version ‘1.11.1’
+** package ‘pillar’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (pillar)
+* installing *source* package ‘tibble’ ...
+** this is package ‘tibble’ version ‘3.3.1’
+** package ‘tibble’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c attributes.c -o attributes.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c coerce.c -o coerce.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c init.c -o init.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c matrixToDataFrame.c -o matrixToDataFrame.o
+matrixToDataFrame.c:7:13: warning: unused function 'pairlist_shallow_copy' [-Wunused-function]
+static SEXP pairlist_shallow_copy(SEXP p) {
+            ^
+1 warning generated.
+clang -shared -L/usr/local/lib -o tibble.so attributes.o coerce.o init.o matrixToDataFrame.o
+installing to /cache/R_libs/00LOCK-tibble/00new/tibble/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (tibble)
+* installing *source* package ‘decor’ ...
+** this is package ‘decor’ version ‘1.0.2’
+** package ‘decor’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+using C++ compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c blank_comments.cpp -o blank_comments.o
+clang -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fPIC  -Wall -g -O0 -fPIC  -c init.c -o init.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c parse_cpp_function.cpp -o parse_cpp_function.o
+clang++ -stdlib=libc++ -std=gnu++20 -shared -L/usr/local/lib -o decor.so blank_comments.o init.o parse_cpp_function.o
+installing to /cache/R_libs/00LOCK-decor/00new/decor/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (decor)
+
+The downloaded source packages are in
+	‘/tmp/RtmpxEacMD/downloaded_packages’
+── R CMD build ─────────────────────────────────────────────────────────────────
+* checking for file ‘/tmp/RtmpxEacMD/remotesf540461cc/cpp4rtest/DESCRIPTION’ ... OK
+* preparing ‘cpp4rtest’:
+* checking DESCRIPTION meta-information ... OK
+* cleaning src
+* running ‘cleanup’
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+* building ‘cpp4rtest_0.2.0.tar.gz’
+
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.2.0’
+** using staged installation
+** libs
+using C++ compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c cpp4r.cpp -o cpp4r.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c main.cpp -o main.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c test-runner.cpp -o test-runner.o
+clang++ -stdlib=libc++ -std=gnu++20 -shared -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -L/opt/R/devel-rchk/lib/R/lib -lRlapack -L/opt/R/devel-rchk/lib/R/lib -lRblas -lgfortran -lm -lquadmath
+installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+* installing *source* package ‘cpp4r’ ...
+** this is package ‘cpp4r’ version ‘0.6.0’
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4r)
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.2.0’
+** using staged installation
+** libs
+using C++ compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c cpp4r.cpp -o cpp4r.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c main.cpp -o main.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c test-runner.cpp -o test-runner.o
+clang++ -stdlib=libc++ -std=gnu++20 -shared -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -L/opt/R/devel-rchk/lib/R/lib -lRlapack -L/opt/R/devel-rchk/lib/R/lib -lRblas -lgfortran -lm -lquadmath
+installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+* using log directory ‘/check/cpp4rtest.Rcheck’
+* using R Under development (unstable) (2026-05-15 r90061)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    Ubuntu clang version 14.0.0-1ubuntu1.1
+    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+* running under: Ubuntu 22.04.5 LTS
+* using session charset: UTF-8
+* current time: 2026-05-17 10:33:30 UTC
+* using options ‘--no-manual --as-cran’
+* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
+* this is package ‘cpp4rtest’ version ‘0.2.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... [8s/10s] NOTE
+Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
+
+New submission
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cpp4rtest’ can be installed ... [21s/21s] OK
+* used C++ compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+* checking installed package size ... INFO
+  installed size is 10.8Mb
+  sub-directories of 1Mb or more:
+    libs  10.7Mb
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... WARNING
+A complete check needs the 'checkbashisms' script.
+See section ‘Configure and cleanup’ in the ‘Writing R Extensions’
+manual.
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
+* checking pragmas in C/C++ headers and code ... OK
+* checking compilation flags used ... OK
+* checking compiled code ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ...
+  Running ‘testthat.R’ [10s/10s]
+ [11s/11s] OK
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+
+Status: 1 WARNING, 1 NOTE
+See
+  ‘/check/cpp4rtest.Rcheck/00check.log’
+for details.
+
+=== 00install.out ===
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.2.0’
+** using staged installation
+** libs
+using C++ compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c cpp4r.cpp -o cpp4r.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c main.cpp -o main.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c test-runner.cpp -o test-runner.o
+clang++ -stdlib=libc++ -std=gnu++20 -shared -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -L/opt/R/devel-rchk/lib/R/lib -lRlapack -L/opt/R/devel-rchk/lib/R/lib -lRblas -lgfortran -lm -lquadmath
+installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+=== 00check.log ===
+* using log directory ‘/check/cpp4rtest.Rcheck’
+* using R Under development (unstable) (2026-05-15 r90061)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    Ubuntu clang version 14.0.0-1ubuntu1.1
+    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+* running under: Ubuntu 22.04.5 LTS
+* using session charset: UTF-8
+* current time: 2026-05-17 10:33:30 UTC
+* using options ‘--no-manual --as-cran’
+* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
+* this is package ‘cpp4rtest’ version ‘0.2.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... [8s/10s] NOTE
+Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
+
+New submission
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cpp4rtest’ can be installed ... [21s/21s] OK
+* used C++ compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+* checking installed package size ... INFO
+  installed size is 10.8Mb
+  sub-directories of 1Mb or more:
+    libs  10.7Mb
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... WARNING
+A complete check needs the 'checkbashisms' script.
+See section ‘Configure and cleanup’ in the ‘Writing R Extensions’
+manual.
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
+* checking pragmas in C/C++ headers and code ... OK
+* checking compilation flags used ... OK
+* checking compiled code ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... [11s/11s] OK
+  Running ‘testthat.R’ [10s/10s]
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: 1 WARNING, 1 NOTE

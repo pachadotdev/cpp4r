@@ -13,24 +13,24 @@ CRAN_EXTRA := atlas clang-asan clang-ubsan clang21 clang22 donttest \
 	gcc16 gcc-asan lto mkl nold nosuggests rchk valgrind
 
 check-cran:
-	@chmod +x ./scripts/check.sh
+	@chmod +x ./check-docker/check.sh
 	@for pair in $(CRAN_PAIRS); do \
 		cran=$${pair%%:*}; rhub=$${pair##*:}; \
 		echo "=== checking $$cran (r-hub: $$rhub) ==="; \
-		./scripts/check.sh $$rhub; \
+		./check-docker/check.sh $$rhub; \
 	done
 
 check-cran-extra:
-	@chmod +x ./scripts/check.sh
+	@chmod +x ./check-docker/check.sh
 	@for rhub in $(CRAN_EXTRA); do \
 		echo "=== checking $$rhub ==="; \
-		./scripts/check.sh $$rhub; \
+		./check-docker/check.sh $$rhub; \
 	done
 
 # Individual check target, e.g. `make check-clang22`
 check-%:
-	@chmod +x ./scripts/check.sh
-	@./scripts/check.sh $*
+	@chmod +x ./check-docker/check.sh
+	@./check-docker/check.sh $*
 
 clean:
 	@Rscript -e 'devtools::clean_dll("cpp4rtest");'

@@ -1,0 +1,2469 @@
+Updating and loading repositories:
+ Fedora 42 - x86_64 - Updates           100% |  11.3 KiB/s |   5.7 KiB |  00m01s
+Repositories loaded.
+Package "pkgconf-pkg-config-2.3.0-2.fc42.x86_64" is already installed.
+
+Total size of inbound packages is 942 KiB. Need to download 942 KiB.
+After this operation, 5 MiB extra will be used (install 5 MiB, remove 0 B).
+Package        Arch   Version         Repository      Size
+Installing:
+ libuv-devel   x86_64 1:1.51.0-1.fc42 updates    192.5 KiB
+ libxml2-devel x86_64 2.12.10-1.fc42  fedora       3.4 MiB
+Installing dependencies:
+ libuv         x86_64 1:1.51.0-1.fc42 updates    570.2 KiB
+ libuv-static  x86_64 1:1.51.0-1.fc42 updates    427.9 KiB
+
+Transaction Summary:
+ Installing:         4 packages
+
+[1/4] libuv-devel-1:1.51.0-1.fc42.x86_6 100% | 245.2 KiB/s |  41.2 KiB |  00m00s
+[2/4] libuv-static-1:1.51.0-1.fc42.x86_ 100% | 524.2 KiB/s | 111.1 KiB |  00m00s
+[3/4] libuv-1:1.51.0-1.fc42.x86_64      100% |   1.0 MiB/s | 266.3 KiB |  00m00s
+[4/4] libxml2-devel-0:2.12.10-1.fc42.x8 100% |   3.1 MiB/s | 523.7 KiB |  00m00s
+--------------------------------------------------------------------------------
+[4/4] Total                             100% |   1.0 MiB/s | 942.4 KiB |  00m01s
+Running transaction
+[1/6] Verify package files              100% | 571.0   B/s |   4.0   B |  00m00s
+[2/6] Prepare transaction               100% |  27.0   B/s |   4.0   B |  00m00s
+[3/6] Installing libuv-1:1.51.0-1.fc42. 100% |  56.0 MiB/s | 573.0 KiB |  00m00s
+[4/6] Installing libuv-static-1:1.51.0- 100% |  69.7 MiB/s | 428.3 KiB |  00m00s
+[5/6] Installing libuv-devel-1:1.51.0-1 100% |  31.8 MiB/s | 195.4 KiB |  00m00s
+[6/6] Installing libxml2-devel-0:2.12.1 100% |   9.5 MiB/s |   3.4 MiB |  00m00s
+Complete!
+trying URL 'https://cloud.r-project.org/src/contrib/remotes_2.5.0.tar.gz'
+Content type 'application/x-gzip' length 164496 bytes (160 KB)
+==================================================
+downloaded 160 KB
+
+* installing *source* package ‘remotes’ ...
+** this is package ‘remotes’ version ‘2.5.0’
+** package ‘remotes’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘remotes’
+    finding HTML links ... done
+    available_packages                      html  
+    bioc_install_repos                      html  
+    download                                html  
+    download_version                        html  
+    git_credentials                         html  
+    github_refs                             html  
+    github_remote                           html  
+    gitlab_pat                              html  
+    install_bioc                            html  
+    install_bitbucket                       html  
+    install_cran                            html  
+    install_deps                            html  
+    install_dev                             html  
+    install_git                             html  
+    install_github                          html  
+    install_gitlab                          html  
+    install_local                           html  
+    install_remote                          html  
+    install_svn                             html  
+    install_url                             html  
+    install_version                         html  
+    package_deps                            html  
+    parse-git-repo                          html  
+    remotes-package                         html  
+    standardise_dep                         html  
+    system_requirements                     html  
+    update_packages                         html  
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (remotes)
+
+The downloaded source packages are in
+	‘/tmp/RtmptFAXMx/downloaded_packages’
+Downloading GitHub repo pachadotdev/testthat@HEAD
+Installing 22 packages: crayon, R6, ps, processx, desc, cli, callr, rlang, glue, diffobj, rprojroot, pkgbuild, lifecycle, fs, withr, waldo, praise, pkgload, magrittr, jsonlite, evaluate, brio
+trying URL 'https://cloud.r-project.org/src/contrib/crayon_1.5.3.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/R6_2.6.1.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/ps_1.9.3.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/processx_3.9.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/desc_1.4.3.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/cli_3.6.6.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/callr_3.7.6.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/rlang_1.2.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/glue_1.8.1.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/diffobj_0.3.6.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/rprojroot_2.1.1.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/pkgbuild_1.4.8.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/lifecycle_1.0.5.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/fs_2.1.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/withr_3.0.2.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/waldo_0.6.2.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/praise_1.0.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/pkgload_1.5.2.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/magrittr_2.0.5.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/jsonlite_2.0.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/evaluate_1.0.5.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/brio_1.1.5.tar.gz'
+* installing *source* package ‘crayon’ ...
+** this is package ‘crayon’ version ‘1.5.3’
+** package ‘crayon’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+    finding HTML links ...  converting help for package ‘crayon’
+ done
+    chr                                     html  
+    col_align                               html  
+    col_nchar                               html  
+    col_strsplit                            html  
+    col_substr                              html  
+    col_substring                           html  
+    combine_styles                          html  
+    concat                                  html  
+    crayon                                  html  
+    drop_style                              html  
+    has_color                               html  
+    has_style                               html  
+    hyperlink                               html  
+    make_style                              html  
+    num_ansi_colors                         html  
+    num_colors                              html  
+    show_ansi_colors                        html  
+    start.crayon                            html  
+    strip_style                             html  
+    style                                   html  
+    styles                                  html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (crayon)
+* installing *source* package ‘R6’ ...
+** this is package ‘R6’ version ‘2.6.1’
+** package ‘R6’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘R6’
+    finding HTML links ... done
+    R6-package                              html  
+    R6Class                                 html  
+    as.list.R6                              html  
+    is.R6                                   html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (R6)
+* installing *source* package ‘ps’ ...
+** this is package ‘ps’ version ‘1.9.3’
+** package ‘ps’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+gcc -g -O2 -Wall -pedantic -mtune=native  -L/usr/local/lib -Wall px.c -o px
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c init.c -o init.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c api-common.c -o api-common.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c common.c -o common.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c extra.c -o extra.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c dummy.c -o dummy.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c error-codes.c -o error-codes.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c cleancall.c -o cleancall.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c posix.c -o posix.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c api-posix.c -o api-posix.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c linux.c -o linux.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c api-linux.c -o api-linux.o
+gcc -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o ps.so init.o api-common.o common.o extra.o dummy.o error-codes.o cleancall.o posix.o api-posix.o linux.o api-linux.o -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing via 'install.libs.R' to /cache/R_libs/00LOCK-ps/00new/ps
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘ps’
+    finding HTML links ... done
+    CleanupReporter                         html  
+    errno                                   html  
+    ps-package                              html  
+    ps                                      html  
+    ps_apps                                 html  
+    ps_boot_time                            html  
+    ps_children                             html  
+    ps_cmdline                              html  
+    ps_connections                          html  
+    ps_cpu_count                            html  
+    ps_cpu_times                            html  
+    ps_create_time                          html  
+    ps_cwd                                  html  
+    ps_descent                              html  
+    ps_disk_io_counters                     html  
+    ps_disk_partitions                      html  
+    ps_disk_usage                           html  
+    ps_environ                              html  
+    ps_exe                                  html  
+    ps_fs_info                              html  
+    ps_fs_mount_point                       html  
+    ps_fs_stat                              html  
+    ps_get_cpu_affinity                     html  
+    ps_get_nice                             html  
+    ps_handle                               html  
+    ps_interrupt                            html  
+    ps_is_running                           html  
+    ps_kill                                 html  
+    ps_kill_tree                            html  
+    ps_loadavg                              html  
+    ps_memory_info                          html  
+    ps_name                                 html  
+    ps_num_fds                              html  
+    ps_num_threads                          html  
+    ps_open_files                           html  
+    ps_os_type                              html  
+    ps_pid                                  html  
+    ps_pids                                 html  
+    ps_ppid                                 html  
+    ps_resume                               html  
+    ps_send_signal                          html  
+    ps_shared_lib_users                     html  
+    ps_shared_libs                          html  
+    ps_status                               html  
+    ps_string                               html  
+    ps_suspend                              html  
+    ps_system_cpu_times                     html  
+    ps_system_memory                        html  
+    ps_system_swap                          html  
+    ps_terminal                             html  
+    ps_terminate                            html  
+    ps_tty_size                             html  
+    ps_uids                                 html  
+    ps_username                             html  
+    ps_users                                html  
+    ps_wait                                 html  
+    signals                                 html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (ps)
+* installing *source* package ‘cli’ ...
+** this is package ‘cli’ version ‘3.6.6’
+** package ‘cli’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c ansi.c -o ansi.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c cleancall.c -o cleancall.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c diff.c -o diff.o
+diff.c: In function ‘clic_diff_chr’:
+diff.c:104:3: warning: ‘sn’ may be used uninitialized [-Wmaybe-uninitialized]
+  104 |   SET_VECTOR_ELT(result, 0, allocVector(INTSXP, sn));
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+diff.c:85:7: note: ‘sn’ was declared here
+   85 |   int sn;
+      |       ^~
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c errors.c -o errors.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c glue.c -o glue.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c init.c -o init.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c inst.c -o inst.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c keypress-unix.c -o keypress-unix.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c keypress-win.c -o keypress-win.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c keypress.c -o keypress.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c md5.c -o md5.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c progress-altrep.c -o progress-altrep.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c progress.c -o progress.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c sha1.c -o sha1.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c sha256.c -o sha256.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c thread.c -o thread.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c tty.c -o tty.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8.c -o utf8.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utils.c -o utils.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c vt.c -o vt.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c vtparse.c -o vtparse.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c vtparse_table.c -o vtparse_table.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c win-utf8.c -o win-utf8.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c winfiles.c -o winfiles.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c xxhash.c -o xxhash.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c xxhash2.c -o xxhash2.o
+gcc -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o cli.so ansi.o cleancall.o diff.o errors.o glue.o init.o inst.o keypress-unix.o keypress-win.o keypress.o md5.o progress-altrep.o progress.o sha1.o sha256.o thread.o tty.o utf8.o utils.o vt.o vtparse.o vtparse_table.o win-utf8.o winfiles.o xxhash.o xxhash2.o -lpthread -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-cli/00new/cli/libs
+** R
+** exec
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘cli’
+    finding HTML links ... done
+    ansi-styles                             html  
+    ansi_align                              html  
+    ansi_collapse                           html  
+    ansi_columns                            html  
+    ansi_grep                               html  
+    ansi_has_any                            html  
+    ansi_hide_cursor                        html  
+    ansi_html                               html  
+    ansi_html_style                         html  
+    ansi_nchar                              html  
+    ansi_nzchar                             html  
+    ansi_palettes                           html  
+    ansi_regex                              html  
+    ansi_simplify                           html  
+    ansi_string                             html  
+    ansi_strip                              html  
+    ansi_strsplit                           html  
+    ansi_strtrim                            html  
+    ansi_strwrap                            html  
+    ansi_substr                             html  
+    ansi_substring                          html  
+    ansi_toupper                            html  
+    ansi_trimws                             html  
+    boxx                                    html  
+    builtin_theme                           html  
+    cat_line                                html  
+    cli-config                              html  
+    cli-package                             html  
+    cli                                     html  
+    cli_abort                               html  
+    cli_alert                               html  
+    cli_blockquote                          html  
+    cli_bullets                             html  
+    cli_bullets_raw                         html  
+    cli_code                                html  
+    cli_debug_doc                           html  
+    cli_div                                 html  
+    cli_dl                                  html  
+    cli_end                                 html  
+    cli_fmt                                 html  
+    cli_format                              html  
+    cli_format_method                       html  
+    cli_h1                                  html  
+    cli_li                                  html  
+    cli_list_themes                         html  
+    cli_ol                                  html  
+    cli_output_connection                   html  
+    cli_par                                 html  
+    cli_process_start                       html  
+    cli_progress_along                      html  
+    cli_progress_bar                        html  
+    cli_progress_builtin_handlers           html  
+    cli_progress_demo                       html  
+    cli_progress_message                    html  
+    cli_progress_output                     html  
+    cli_progress_step                       html  
+    cli_progress_styles                     html  
+    cli_rule                                html  
+    cli_sitrep                              html  
+    cli_status                              html  
+    cli_status_clear                        html  
+    cli_status_update                       html  
+    cli_text                                html  
+    cli_ul                                  html  
+    cli_vec                                 html  
+    cli_verbatim                            html  
+    code_highlight                          html  
+    code_theme_list                         html  
+    combine_ansi_styles                     html  
+    console_width                           html  
+    containers                              html  
+    demo_spinners                           html  
+    diff_chr                                html  
+    diff_str                                html  
+    faq                                     html  
+    format_error                            html  
+    format_inline                           html  
+    get_spinner                             html  
+    has_keypress_support                    html  
+    hash_animal                             html  
+    hash_emoji                              html  
+    hash_md5                                html  
+    hash_sha1                               html  
+    hash_sha256                             html  
+    hash_xxhash                             html  
+    inline-markup                           html  
+    is_ansi_tty                             html  
+    is_dynamic_tty                          html  
+    is_utf8_output                          html  
+    keypress                                html  
+    links                                   html  
+    list_spinners                           html  
+    make_ansi_style                         html  
+    make_spinner                            html  
+    match_selector                          html  
+    match_selector_node                     html  
+    num_ansi_colors                         html  
+    parse_selector                          html  
+    pluralization-helpers                   html  
+    pluralization                           html  
+    pluralize                               html  
+    pretty_print_code                       html  
+    progress-c                              html  
+    progress-utils                          html  
+    progress-variables                      html  
+    rule                                    html  
+    ruler                                   html  
+    simple_theme                            html  
+    spark_bar                               html  
+    spark_line                              html  
+    start_app                               html  
+    style_hyperlink                         html  
+    symbol                                  html  
+    test_that_cli                           html  
+    themes                                  html  
+    tree                                    html  
+    unicode-width-workaround                html  
+    utf8_graphemes                          html  
+    utf8_nchar                              html  
+    utf8_substr                             html  
+    vt_output                               html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cli)
+* installing *source* package ‘rlang’ ...
+** this is package ‘rlang’ version ‘1.2.0’
+** package ‘rlang’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c capture.c -o capture.o
+touch internal.c
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c internal.c -o internal.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c rlang.c -o rlang.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c version.c -o version.o
+gcc -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o rlang.so capture.o internal.o rlang.o version.o -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-rlang/00new/rlang/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘rlang’
+    finding HTML links ... done
+    UQ                                      html  
+    abort                                   html  
+    are_na                                  html  
+    arg_match                               html  
+    args_data_masking                       html  
+    args_dots_empty                         html  
+    args_dots_used                          html  
+    args_error_context                      html  
+    as_box                                  html  
+    as_closure                              html  
+    as_data_mask                            html  
+    as_environment                          html  
+    as_function                             html  
+    as_label                                html  
+    as_name                                 html  
+    as_string                               html  
+    as_utf8_character                       html  
+    bare-type-predicates                    html  
+    box                                     html  
+    bytes-class                             html  
+    call2                                   html  
+    call_args                               html  
+    call_fn                                 html  
+    call_inspect                            html  
+    call_match                              html  
+    call_modify                             html  
+    call_name                               html  
+    call_standardise                        html  
+    caller_arg                              html  
+    catch_cnd                               html  
+    check_data_frame                        html  
+    check_dots_empty                        html  
+    check_dots_empty0                       html  
+    check_dots_unnamed                      html  
+    check_dots_used                         html  
+    check_exclusive                         html  
+    check_required                          html  
+    check_type_number                       html  
+    check_type_scalar                       html  
+    child_env                               html  
+    chr_unserialise_unicode                 html  
+    cnd                                     html  
+    cnd_inherits                            html  
+    cnd_message                             html  
+    cnd_muffle                              html  
+    cnd_signal                              html  
+    cnd_type                                html  
+    defusing-advanced                       html  
+    dev-notes-dots                          html  
+    done                                    html  
+    dot-data                                html  
+    dots_n                                  html  
+    dots_splice                             html  
+    dots_values                             html  
+    duplicate                               html  
+    dyn-dots                                html  
+    embrace-operator                        html  
+    empty_env                               html  
+    englue                                  html  
+    enquo                                   html  
+    entrace                                 html  
+    env                                     html  
+    env_bind                                html  
+    env_binding_are_active                  html  
+    env_binding_lock                        html  
+    env_browse                              html  
+    env_bury                                html  
+    env_cache                               html  
+    env_clone                               html  
+    env_depth                               html  
+    env_get                                 html  
+    env_has                                 html  
+    env_inherits                            html  
+    env_is_user_facing                      html  
+    env_lock                                html  
+    env_name                                html  
+    env_names                               html  
+    env_parent                              html  
+    env_poke                                html  
+    env_print                               html  
+    env_unbind                              html  
+    env_unlock                              html  
+    eval_bare                               html  
+    eval_tidy                               html  
+    exec                                    html  
+    expr                                    html  
+    expr_interp                             html  
+    expr_label                              html  
+    expr_print                              html  
+    exprs_auto_name                         html  
+    f_rhs                                   html  
+    f_text                                  html  
+    faq-options                             html  
+    ffi_standalone_types_check              html  
+    flatten                                 html  
+    fn_body                                 html  
+    fn_env                                  html  
+    fn_fmls                                 html  
+    format_error_bullets                    html  
+    format_error_call                       html  
+    friendly_type                           html  
+    get_env                                 html  
+    global_entrace                          html  
+    global_handle                           html  
+    global_prompt_install                   html  
+    glue-operators                          html  
+    has_length                              html  
+    has_name                                html  
+    hash                                    html  
+    inherits_any                            html  
+    inject                                  html  
+    injection-operator                      html  
+    interrupt                               html  
+    invoke                                  html  
+    is_call                                 html  
+    is_callable                             html  
+    is_condition                            html  
+    is_copyable                             html  
+    is_dictionaryish                        html  
+    is_empty                                html  
+    is_environment                          html  
+    is_expression                           html  
+    is_formula                              html  
+    is_function                             html  
+    is_installed                            html  
+    is_integerish                           html  
+    is_interactive                          html  
+    is_lang                                 html  
+    is_named                                html  
+    is_namespace                            html  
+    is_pairlist                             html  
+    is_reference                            html  
+    is_symbol                               html  
+    is_true                                 html  
+    is_weakref                              html  
+    lang                                    html  
+    last_error                              html  
+    last_warnings                           html  
+    list2                                   html  
+    local_bindings                          html  
+    local_error_call                        html  
+    local_options                           html  
+    local_use_cli                           html  
+    missing                                 html  
+    missing_arg                             html  
+    names2                                  html  
+    names_inform_repair                     html  
+    new-vector                              html  
+    new_call                                html  
+    new_formula                             html  
+    new_function                            html  
+    new_node                                html  
+    new_quosure                             html  
+    new_quosures                            html  
+    new_weakref                             html  
+    ns_env                                  html  
+    ns_registry_env                         html  
+    obj_address                             html  
+    on_load                                 html  
+    op-get-attr                             html  
+    op-na-default                           html  
+    op-null-continuation                    html  
+    op-null-default                         html  
+    pairlist2                               html  
+    parse_expr                              html  
+    prim_name                               html  
+    qq_show                                 html  
+    quo_expr                                html  
+    quo_label                               html  
+    quo_squash                              html  
+    quosure-tools                           html  
+    raw_deparse_str                         html  
+    rep_along                               html  
+    return_from                             html  
+    rlang-package                           html  
+    rlang_backtrace_on_error                html  
+    rlang_error                             html  
+    rlib_trace_spec                         html  
+    scalar-type-predicates                  html  
+    scoped_env                              html  
+    scoped_interactive                      html  
+    search_envs                             html  
+    seq2                                    html  
+    set_attrs                               html  
+    set_expr                                html  
+    set_names                               html  
+    splice-operator                         html  
+    splice                                  html  
+    stack-deprecated                        html  
+    stack                                   html  
+    stop_input_type                         html  
+    string                                  html  
+    switch_type                             html  
+    sym                                     html  
+    topic-condition-customisation           html  
+    topic-condition-formatting              html  
+    topic-data-mask-ambiguity               html  
+    topic-data-mask-programming             html  
+    topic-data-mask                         html  
+    topic-defuse                            html  
+    topic-double-evaluation                 html  
+    topic-embrace-constants                 html  
+    topic-embrace-non-args                  html  
+    topic-error-call                        html  
+    topic-error-chaining                    html  
+    topic-inject-out-of-context             html  
+    topic-inject                            html  
+    topic-metaprogramming                   html  
+    topic-multiple-columns                  html  
+    topic-quosure                           html  
+    trace_back                              html  
+    try_fetch                               html  
+    type-predicates                         html  
+    type_of                                 html  
+    vec_poke_n                              html  
+    vector-coercion                         html  
+    vector-construction                     html  
+    with_env                                html  
+    with_handlers                           html  
+    wref_key                                html  
+    zap                                     html  
+    zap_srcref                              html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (rlang)
+* installing *source* package ‘glue’ ...
+** this is package ‘glue’ version ‘1.8.1’
+** package ‘glue’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c glue.c -o glue.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c init.c -o init.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c trim.c -o trim.o
+gcc -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o glue.so glue.o init.o trim.o -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-glue/00new/glue/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘glue’
+    finding HTML links ... done
+    as_glue                                 html  
+    glue-package                            html  
+    glue                                    html  
+    glue_col                                html  
+    glue_collapse                           html  
+    glue_safe                               html  
+    glue_sql                                html  
+    identity_transformer                    html  
+    quoting                                 html  
+    trim                                    html  
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (glue)
+* installing *source* package ‘rprojroot’ ...
+** this is package ‘rprojroot’ version ‘2.1.1’
+** package ‘rprojroot’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘rprojroot’
+    finding HTML links ... done
+    criteria                                html  
+    deprecated                              html  
+    find_root                               html  
+    find_root_file                          html  
+    root_criterion                          html  
+    rprojroot-package                       html  
+    thisfile                                html  
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (rprojroot)
+* installing *source* package ‘fs’ ...
+** this is package ‘fs’ version ‘2.1.0’
+** package ‘fs’ successfully unpacked and MD5 sums checked
+** using staged installation
+Found pkg-config cflags and libs!
+Using PKG_CFLAGS=
+Using PKG_LIBS=-luv -lpthread -ldl -lrt -lm
+** libs
+using C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c dir.cc -o dir.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c error.cc -o error.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c file.cc -o file.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c fs.cc -o fs.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c getmode.cc -o getmode.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c id.cc -o id.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c init.cc -o init.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c link.cc -o link.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c path.cc -o path.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c utils.cc -o utils.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I.   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c unix/getmode.cc -o unix/getmode.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I.   -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c bsd/setmode.c -o bsd/setmode.o
+bsd/setmode.c: In function ‘setmode’:
+bsd/setmode.c:159:37: warning: pointer ‘saveset’ may be used after ‘reallocarray’ [-Wuse-after-free]
+  159 |                 set = newset + (set - saveset);                         \
+      |                                     ^
+bsd/setmode.c:227:17: note: in expansion of macro ‘ADDCMD’
+  227 |                 ADDCMD('=', (STANDARD_BITS|S_ISTXT), perm, mask);
+      |                 ^~~~~~
+bsd/setmode.c:156:36: note: call to ‘reallocarray’ here
+  156 |                 newset = (BITCMD*) reallocarray(saveset, setlen, sizeof(BITCMD));       \
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bsd/setmode.c:227:17: note: in expansion of macro ‘ADDCMD’
+  227 |                 ADDCMD('=', (STANDARD_BITS|S_ISTXT), perm, mask);
+      |                 ^~~~~~
+bsd/setmode.c:159:37: warning: pointer ‘saveset’ may be used after ‘reallocarray’ [-Wuse-after-free]
+  159 |                 set = newset + (set - saveset);                         \
+      |                                     ^
+bsd/setmode.c:306:41: note: in expansion of macro ‘ADDCMD’
+  306 |                                         ADDCMD(op, who, perm, mask);
+      |                                         ^~~~~~
+bsd/setmode.c:156:36: note: call to ‘reallocarray’ here
+  156 |                 newset = (BITCMD*) reallocarray(saveset, setlen, sizeof(BITCMD));       \
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bsd/setmode.c:306:41: note: in expansion of macro ‘ADDCMD’
+  306 |                                         ADDCMD(op, who, perm, mask);
+      |                                         ^~~~~~
+bsd/setmode.c:159:37: warning: pointer ‘saveset’ may be used after ‘reallocarray’ [-Wuse-after-free]
+  159 |                 set = newset + (set - saveset);                         \
+      |                                     ^
+bsd/setmode.c:312:41: note: in expansion of macro ‘ADDCMD’
+  312 |                                         ADDCMD('X', who, permXbits, mask);
+      |                                         ^~~~~~
+bsd/setmode.c:156:36: note: call to ‘reallocarray’ here
+  156 |                 newset = (BITCMD*) reallocarray(saveset, setlen, sizeof(BITCMD));       \
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bsd/setmode.c:312:41: note: in expansion of macro ‘ADDCMD’
+  312 |                                         ADDCMD('X', who, permXbits, mask);
+      |                                         ^~~~~~
+bsd/setmode.c:159:37: warning: pointer ‘saveset’ may be used after ‘reallocarray’ [-Wuse-after-free]
+  159 |                 set = newset + (set - saveset);                         \
+      |                                     ^
+bsd/setmode.c:315:33: note: in expansion of macro ‘ADDCMD’
+  315 |                                 ADDCMD(*p, who, op, mask);
+      |                                 ^~~~~~
+bsd/setmode.c:156:36: note: call to ‘reallocarray’ here
+  156 |                 newset = (BITCMD*) reallocarray(saveset, setlen, sizeof(BITCMD));       \
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bsd/setmode.c:315:33: note: in expansion of macro ‘ADDCMD’
+  315 |                                 ADDCMD(*p, who, op, mask);
+      |                                 ^~~~~~
+bsd/setmode.c:159:37: warning: pointer ‘saveset’ may be used after ‘reallocarray’ [-Wuse-after-free]
+  159 |                 set = newset + (set - saveset);                         \
+      |                                     ^
+bsd/setmode.c:326:41: note: in expansion of macro ‘ADDCMD’
+  326 |                                         ADDCMD(op, who, perm, mask);
+      |                                         ^~~~~~
+bsd/setmode.c:156:36: note: call to ‘reallocarray’ here
+  156 |                 newset = (BITCMD*) reallocarray(saveset, setlen, sizeof(BITCMD));       \
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bsd/setmode.c:326:41: note: in expansion of macro ‘ADDCMD’
+  326 |                                         ADDCMD(op, who, perm, mask);
+      |                                         ^~~~~~
+bsd/setmode.c:159:37: warning: pointer ‘saveset’ may be used after ‘reallocarray’ [-Wuse-after-free]
+  159 |                 set = newset + (set - saveset);                         \
+      |                                     ^
+bsd/setmode.c:330:41: note: in expansion of macro ‘ADDCMD’
+  330 |                                         ADDCMD('X', who, permXbits, mask);
+      |                                         ^~~~~~
+bsd/setmode.c:156:36: note: call to ‘reallocarray’ here
+  156 |                 newset = (BITCMD*) reallocarray(saveset, setlen, sizeof(BITCMD));       \
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bsd/setmode.c:330:41: note: in expansion of macro ‘ADDCMD’
+  330 |                                         ADDCMD('X', who, permXbits, mask);
+      |                                         ^~~~~~
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I.   -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c bsd/strmode.c -o bsd/strmode.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I.   -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c bsd/reallocarray.c -o bsd/reallocarray.o
+g++ -std=gnu++20 -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o fs.so dir.o error.o file.o fs.o getmode.o id.o init.o link.o path.o utils.o unix/getmode.o bsd/setmode.o bsd/strmode.o bsd/reallocarray.o -luv -lpthread -ldl -lrt -lm -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-fs/00new/fs/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘fs’
+    finding HTML links ... done
+    copy                                    html  
+    create                                  html  
+    delete                                  html  
+    dir_ls                                  html  
+    dir_tree                                html  
+    file_access                             html  
+    file_chmod                              html  
+    file_chown                              html  
+    file_info                               html  
+    file_move                               html  
+    file_show                               html  
+    file_temp                               html  
+    file_touch                              html  
+    fs-package                              html  
+    fs_bytes                                html  
+    fs_path                                 html  
+    fs_perms                                html  
+    id                                      html  
+    is_absolute_path                        html  
+    is_dir_empty                            html  
+    is_file                                 html  
+    link_path                               html  
+    path                                    html  
+    path_expand                             html  
+    path_file                               html  
+    path_filter                             html  
+    path_math                               html  
+    path_package                            html  
+    path_sanitize                           html  
+    path_select_components                  html  
+    path_tidy                               html  
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (fs)
+* installing *source* package ‘withr’ ...
+** this is package ‘withr’ version ‘3.0.2’
+** package ‘withr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘withr’
+    finding HTML links ... done
+    defer                                   html  
+    devices                                 html  
+    global_defer                            html  
+    makevars_user                           html  
+    set_makevars                            html  
+    with_                                   html  
+    with_collate                            html  
+    with_connection                         html  
+    with_db_connection                      html  
+    with_dir                                html  
+    with_envvar                             html  
+    with_file                               html  
+    with_gctorture2                         html  
+    with_language                           html  
+    with_libpaths                           html  
+    with_locale                             html  
+    with_makevars                           html  
+    with_options                            html  
+    with_package                            html  
+    with_par                                html  
+    with_path                               html  
+    with_rng_version                        html  
+    with_seed                               html  
+    with_sink                               html  
+    with_temp_libpaths                      html  
+    with_tempfile                           html  
+    with_timezone                           html  
+    withr                                   html  
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (withr)
+* installing *source* package ‘praise’ ...
+** this is package ‘praise’ version ‘1.0.0’
+** package ‘praise’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘praise’
+    finding HTML links ... done
+    praise                                  html  
+    praise_parts                            html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (praise)
+* installing *source* package ‘magrittr’ ...
+** this is package ‘magrittr’ version ‘2.0.5’
+** package ‘magrittr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c pipe.c -o pipe.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utils.c -o utils.o
+gcc -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o magrittr.so pipe.o utils.o -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-magrittr/00new/magrittr/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+    finding HTML links ...  converting help for package ‘magrittr’
+ done
+    aliases                                 html  
+    compound                                html  
+    debug_fseq                              html  
+    debug_pipe                              html  
+    exposition                              html  
+    faq-pipe-gender                         html  
+    freduce                                 html  
+    fseq                                    html  
+    functions                               html  
+    magrittr-package                        html  
+    pipe-eager                              html  
+    pipe                                    html  
+    pipe_eager_lexical                      html  
+    print.fseq                              html  
+    tee                                     html  
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (magrittr)
+* installing *source* package ‘jsonlite’ ...
+** this is package ‘jsonlite’ version ‘2.0.0’
+** package ‘jsonlite’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c base64.c -o base64.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c collapse_array.c -o collapse_array.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c collapse_object.c -o collapse_object.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c collapse_pretty.c -o collapse_pretty.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c escape_chars.c -o escape_chars.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c integer64_to_na.c -o integer64_to_na.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c is_datelist.c -o is_datelist.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c is_recordlist.c -o is_recordlist.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c is_scalarlist.c -o is_scalarlist.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c modp_numtoa.c -o modp_numtoa.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c null_to_na.c -o null_to_na.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c num_to_char.c -o num_to_char.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c parse.c -o parse.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c prettify.c -o prettify.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c push_parser.c -o push_parser.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c r-base64.c -o r-base64.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c register.c -o register.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c row_collapse.c -o row_collapse.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c transpose_list.c -o transpose_list.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c validate.c -o validate.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c yajl/yajl.c -o yajl/yajl.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c yajl/yajl_alloc.c -o yajl/yajl_alloc.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c yajl/yajl_buf.c -o yajl/yajl_buf.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c yajl/yajl_encode.c -o yajl/yajl_encode.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c yajl/yajl_gen.c -o yajl/yajl_gen.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c yajl/yajl_lex.c -o yajl/yajl_lex.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c yajl/yajl_parser.c -o yajl/yajl_parser.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native  -c yajl/yajl_tree.c -o yajl/yajl_tree.o
+ar rcs yajl/libstatyajl.a yajl/yajl.o yajl/yajl_alloc.o yajl/yajl_buf.o yajl/yajl_encode.o yajl/yajl_gen.o yajl/yajl_lex.o yajl/yajl_parser.o yajl/yajl_tree.o
+gcc -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o jsonlite.so base64.o collapse_array.o collapse_object.o collapse_pretty.o escape_chars.o integer64_to_na.o is_datelist.o is_recordlist.o is_scalarlist.o modp_numtoa.o null_to_na.o num_to_char.o parse.o prettify.o push_parser.o r-base64.o register.o row_collapse.o transpose_list.o validate.o -Lyajl -lstatyajl -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-jsonlite/00new/jsonlite/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+in method for ‘asJSON’ with signature ‘"AsIs"’: no definition for class “AsIs”
+in method for ‘asJSON’ with signature ‘"ITime"’: no definition for class “ITime”
+in method for ‘asJSON’ with signature ‘"hms"’: no definition for class “hms”
+in method for ‘asJSON’ with signature ‘"json"’: no definition for class “json”
+in method for ‘asJSON’ with signature ‘"integer64"’: no definition for class “integer64”
+in method for ‘asJSON’ with signature ‘"pairlist"’: no definition for class “pairlist”
+in method for ‘asJSON’ with signature ‘"blob"’: no definition for class “blob”
+in method for ‘asJSON’ with signature ‘"scalar"’: no definition for class “scalar”
+in method for ‘asJSON’ with signature ‘"sf"’: no definition for class “sf”
+in method for ‘asJSON’ with signature ‘"sfc"’: no definition for class “sfc”
+in method for ‘asJSON’ with signature ‘"vctrs_vctr"’: no definition for class “vctrs_vctr”
+** help
+*** installing help indices
+  converting help for package ‘jsonlite’
+    finding HTML links ... done
+    base64                                  html  
+    flatten                                 html  
+    fromJSON                                html  
+    gzjson                                  html  
+    prettify                                html  
+    rbind_pages                             html  
+    read_json                               html  
+    serializeJSON                           html  
+    stream_in                               html  
+    unbox                                   html  
+    validate                                html  
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (jsonlite)
+* installing *source* package ‘evaluate’ ...
+** this is package ‘evaluate’ version ‘1.0.5’
+** package ‘evaluate’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘evaluate’
+    finding HTML links ... done
+    create_traceback                        html  
+    evaluate-package                        html  
+    evaluate                                html  
+    flush_console                           html  
+    inject_funs                             html  
+    is.message                              html  
+    line_prompt                             html  
+    local_reproducible_output               html  
+    new_output_handler                      html  
+    parse_all                               html  
+    replay                                  html  
+    set_hooks                               html  
+    trim_intermediate_plots                 html  
+    try_capture_stack                       html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (evaluate)
+* installing *source* package ‘brio’ ...
+** this is package ‘brio’ version ‘1.1.5’
+** package ‘brio’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c brio.c -o brio.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c file_line_endings.c -o file_line_endings.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c init.c -o init.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c read_file.c -o read_file.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c read_file_raw.c -o read_file_raw.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c read_lines.c -o read_lines.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c write_file.c -o write_file.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c write_file_raw.c -o write_file_raw.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c write_lines.c -o write_lines.o
+gcc -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o brio.so brio.o file_line_endings.o init.o read_file.o read_file_raw.o read_lines.o write_file.o write_file_raw.o write_lines.o -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-brio/00new/brio/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘brio’
+    finding HTML links ... done
+    brio-package                            html  
+    file_line_endings                       html  
+    readLines                               html  
+    read_file                               html  
+    read_lines                              html  
+    writeLines                              html  
+    write_file                              html  
+    write_file_raw                          html  
+    write_lines                             html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (brio)
+* installing *source* package ‘processx’ ...
+** this is package ‘processx’ version ‘3.9.0’
+** package ‘processx’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+gcc -g -O2 -Wall -pedantic -mtune=native  -L/usr/local/lib -Wall tools/px.c -o tools/px
+gcc -g -O2 -Wall -pedantic -mtune=native  -L/usr/local/lib -I../inst/include -Wall tools/sock.c -o tools/sock
+gcc -g -O2 -Wall -pedantic -mtune=native  -L/usr/local/lib supervisor/supervisor.c \
+      supervisor/utils.c -o supervisor/supervisor
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c base64.c -o base64.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c client.c -o client.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c errors.c -o errors.o
+gcc -shared -L"/opt/R/devel-valgrind/lib/R/lib" -L/usr/local/lib -o client.so base64.o client.o errors.o  \
+	 -L"/opt/R/devel-valgrind/lib/R/lib" -lR
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c init.c -o init.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c poll.c -o poll.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c processx-connection.c -o processx-connection.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c processx-vector.c -o processx-vector.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c create-time.c -o create-time.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c unix/childlist.c -o unix/childlist.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c unix/connection.c -o unix/connection.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c unix/processx.c -o unix/processx.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c unix/sigchld.c -o unix/sigchld.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c unix/utils.c -o unix/utils.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c unix/named_pipe.c -o unix/named_pipe.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c cleancall.c -o cleancall.o
+gcc -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o processx.so init.o poll.o errors.o processx-connection.o processx-vector.o create-time.o base64.o unix/childlist.o unix/connection.o unix/processx.o unix/sigchld.o unix/utils.o unix/named_pipe.o cleancall.o -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing via 'install.libs.R' to /cache/R_libs/00LOCK-processx/00new/processx
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘processx’
+    finding HTML links ... done
+    base64_decode                           html  
+    curl_fds                                html  
+    default_pty_options                     html  
+    pipeline                                html  
+    poll                                    html  
+    process                                 html  
+    process_initialize                      html  
+    processx-package                        html  
+    processx_connections                    html  
+    processx_fifos                          html  
+    processx_sockets                        html  
+    run                                     html  
+    supervisor_kill                         html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (processx)
+* installing *source* package ‘desc’ ...
+** this is package ‘desc’ version ‘1.4.3’
+** package ‘desc’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘desc’
+    finding HTML links ... done
+    check_encoding                          html  
+    check_field                             html  
+    cran_ascii_fields                       html  
+    cran_valid_fields                       html  
+    dep_types                               html  
+    desc-package                            html  
+    desc                                    html  
+    desc_add_author                         html  
+    desc_add_author_gh                      html  
+    desc_add_me                             html  
+    desc_add_orcid                          html  
+    desc_add_remotes                        html  
+    desc_add_role                           html  
+    desc_add_to_collate                     html  
+    desc_add_urls                           html  
+    desc_bump_version                       html  
+    desc_change_maintainer                  html  
+    desc_clear_remotes                      html  
+    desc_clear_urls                         html  
+    desc_coerce_authors_at_r                html  
+    desc_del                                html  
+    desc_del_author                         html  
+    desc_del_collate                        html  
+    desc_del_dep                            html  
+    desc_del_deps                           html  
+    desc_del_from_collate                   html  
+    desc_del_remotes                        html  
+    desc_del_role                           html  
+    desc_del_urls                           html  
+    desc_fields                             html  
+    desc_get                                html  
+    desc_get_author                         html  
+    desc_get_authors                        html  
+    desc_get_built                          html  
+    desc_get_collate                        html  
+    desc_get_deps                           html  
+    desc_get_field                          html  
+    desc_get_maintainer                     html  
+    desc_get_remotes                        html  
+    desc_get_urls                           html  
+    desc_get_version                        html  
+    desc_has_dep                            html  
+    desc_has_fields                         html  
+    desc_normalize                          html  
+    desc_print                              html  
+    desc_reformat_fields                    html  
+    desc_reorder_fields                     html  
+    desc_set                                html  
+    desc_set_authors                        html  
+    desc_set_collate                        html  
+    desc_set_dep                            html  
+    desc_set_deps                           html  
+    desc_set_remotes                        html  
+    desc_set_urls                           html  
+    desc_set_version                        html  
+    desc_to_latex                           html  
+    desc_validate                           html  
+    description                             html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (desc)
+* installing *source* package ‘diffobj’ ...
+** this is package ‘diffobj’ version ‘0.3.6’
+** package ‘diffobj’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c diff.c -o diff.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c diffobj.c -o diffobj.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c init.c -o init.o
+gcc -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o diffobj.so diff.o diffobj.o init.o -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-diffobj/00new/diffobj/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘diffobj’
+    finding HTML links ... done
+    AlignThreshold-class                    html  
+    Diff-class                              html  
+    Extract_PaletteOfStyles                 html  
+    Pager                                   html  
+    PaletteOfStyles-class                   html  
+    Rdiff_chr                               html  
+    Style                                   html  
+    StyleFuns                               html  
+    StyleSummary                            html  
+    StyleText                               html  
+    any-Diff-method                         html  
+    as.character-DiffSummary-method         html  
+    as.character-MyersMbaSes-method         html  
+    auto_context                            html  
+    console_lines                           html  
+    diffChr                                 html  
+    diffCsv                                 html  
+    diffDeparse                             html  
+    diffFile                                html  
+    diffObj                                 html  
+    diffPrint                               html  
+    diffStr                                 html  
+    diff_myers                              html  
+    diffobj-package                         html  
+    diffobj_s4method_doc                    html  
+    diffobj_set_def_opts                    html  
+    dimnames-PaletteOfStyles-method         html  
+    extract-Diff-method                     html  
+    finalizeHtml                            html  
+    gdo                                     html  
+    guides                                  html  
+    has_Rdiff                               html  
+    make_blocking                           html  
+    nchar_html                              html  
+    pager_is_less                           html  
+    par_frame                               html  
+    ses                                     html  
+    show-DiffSummary-method                 html  
+    show-PaletteOfStyles-method             html  
+    show-Style-method                       html  
+    strip_hz_control                        html  
+    summary-Diff-method                     html  
+    summary-MyersMbaSes-method              html  
+    summary-PaletteOfStyles-method          html  
+    tag_f                                   html  
+    trim                                    html  
+    view_or_browse                          html  
+    webfiles                                html  
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (diffobj)
+* installing *source* package ‘lifecycle’ ...
+** this is package ‘lifecycle’ version ‘1.0.5’
+** package ‘lifecycle’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘lifecycle’
+    finding HTML links ... done
+    badge                                   html  
+    deprecate_soft                          html  
+    deprecated-signallers                   html  
+    deprecated                              html  
+    expect_deprecated                       html  
+    last_lifecycle_warnings                 html  
+    lifecycle-package                       html  
+    lifecycle_linter                        html  
+    signal_stage                            html  
+    verbosity                               html  
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (lifecycle)
+* installing *source* package ‘callr’ ...
+** this is package ‘callr’ version ‘3.7.6’
+** package ‘callr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+R6Class r_process: finalize() method is public, but it should be private as of R6 2.4.0. This code will continue to work, but in a future version of R6, finalize() will be required to be private.
+R6Class r_session: finalize() method is public, but it should be private as of R6 2.4.0. This code will continue to work, but in a future version of R6, finalize() will be required to be private.
+R6Class rcmd_process: finalize() method is public, but it should be private as of R6 2.4.0. This code will continue to work, but in a future version of R6, finalize() will be required to be private.
+R6Class rscript_process: finalize() method is public, but it should be private as of R6 2.4.0. This code will continue to work, but in a future version of R6, finalize() will be required to be private.
+** help
+*** installing help indices
+  converting help for package ‘callr’
+    finding HTML links ... done
+    add_hook                                html  
+    callr-package                           html  
+    convert_and_check_my_args               html  
+    default_repos                           html  
+    get_result                              html  
+    new_callr_crash_error                   html  
+    r                                       html  
+    r_bg                                    html  
+    r_copycat                               html  
+    r_process                               html  
+    r_process_options                       html  
+    r_session                               html  
+    r_session_debug                         html  
+    r_session_options                       html  
+    r_vanilla                               html  
+    rcmd                                    html  
+    rcmd_bg                                 html  
+    rcmd_copycat                            html  
+    rcmd_process                            html  
+    rcmd_process_options                    html  
+    rcmd_safe_env                           html  
+    reexports                               html  
+    rscript                                 html  
+    rscript_process                         html  
+    rscript_process_options                 html  
+    supported_archs                         html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (callr)
+* installing *source* package ‘waldo’ ...
+** this is package ‘waldo’ version ‘0.6.2’
+** package ‘waldo’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘waldo’
+    finding HTML links ... done
+    compare                                 html  
+    compare_proxy                           html  
+    waldo-package                           html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (waldo)
+* installing *source* package ‘pkgbuild’ ...
+** this is package ‘pkgbuild’ version ‘1.4.8’
+** package ‘pkgbuild’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘pkgbuild’
+    finding HTML links ... done
+    build                                   html  
+    clean_dll                               html  
+    compile_dll                             html  
+    compiler_flags                          html  
+    has_build_tools                         html  
+    has_compiler                            html  
+    has_latex                               html  
+    has_rtools                              html  
+    needs_compile                           html  
+    pkg_has_src                             html  
+    pkg_links_to_rcpp                       html  
+    pkgbuild-package                        html  
+    pkgbuild_process                        html  
+    rcmd_build_tools                        html  
+    rtools_needed                           html  
+    with_debug                              html  
+    without_compiler                        html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (pkgbuild)
+* installing *source* package ‘pkgload’ ...
+** this is package ‘pkgload’ version ‘1.5.2’
+** package ‘pkgload’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘pkgload’
+    finding HTML links ... done
+    check_dep_version                       html  
+    check_suggested                         html  
+    dev_example                             html  
+    dev_help                                html  
+    dev_meta                                html  
+    has_tests                               html  
+    help                                    html  
+    imports_env                             html  
+    inst                                    html  
+    is_dev_package                          html  
+    load_all                                html  
+    load_code                               html  
+    load_data                               html  
+    load_dll                                html  
+    load_imports                            html  
+    ns_env                                  html  
+    package_file                            html  
+    packages                                html  
+    parse_deps                              html  
+    parse_ns_file                           html  
+    pkg_env                                 html  
+    pkgload-package                         html  
+    pkgtest                                 html  
+    run_pkg_hook                            html  
+    system.file                             html  
+    unload                                  html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (pkgload)
+
+The downloaded source packages are in
+	‘/tmp/RtmptFAXMx/downloaded_packages’
+── R CMD build ─────────────────────────────────────────────────────────────────
+* checking for file ‘/tmp/RtmptFAXMx/remotes161f3b64ac/pachadotdev-testthat-d355d12/DESCRIPTION’ ... OK
+* preparing ‘testthat’:
+* checking DESCRIPTION meta-information ... OK
+* cleaning src
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+* building ‘testthat_3.3.2.9000.tar.gz’
+
+* installing *source* package ‘testthat’ ...
+** this is package ‘testthat’ version ‘3.3.2.9000’
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+using C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include -DCOMPILING_TESTTHAT  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c init.c -o init.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include -DCOMPILING_TESTTHAT  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c test-catch.cpp -o test-catch.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include -DCOMPILING_TESTTHAT  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c test-example.cpp -o test-example.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include -DCOMPILING_TESTTHAT  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c test-runner.cpp -o test-runner.o
+g++ -std=gnu++20 -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o testthat.so init.o test-catch.o test-example.o test-runner.o -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-testthat/00new/testthat/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘testthat’
+    finding HTML links ... done
+    CheckReporter                           html  
+    DebugReporter                           html  
+    FailReporter                            html  
+    JunitReporter                           html  
+    ListReporter                            html  
+    LlmReporter                             html  
+    LocationReporter                        html  
+    MinimalReporter                         html  
+    MultiReporter                           html  
+    ProgressReporter                        html  
+    RStudioReporter                         html  
+    Reporter                                html  
+    SilentReporter                          html  
+    SlowReporter                            html  
+    StopReporter                            html  
+    SummaryReporter                         html  
+    TapReporter                             html  
+    TeamcityReporter                        html  
+    auto_test                               html  
+    capture_condition                       html  
+    capture_output                          html  
+    compare                                 html  
+    compare_state                           html  
+    comparison-expectations                 html  
+    context                                 html  
+    context_start_file                      html  
+    default_reporter                        html  
+    describe                                html  
+    dir_state                               html  
+    equality-expectations                   html  
+    evaluate_promise                        html  
+    expect                                  html  
+    expect_all_equal                        html  
+    expect_equivalent                       html  
+    expect_error                            html  
+    expect_invisible                        html  
+    expect_is                               html  
+    expect_known_output                     html  
+    expect_length                           html  
+    expect_less_than                        html  
+    expect_match                            html  
+    expect_named                            html  
+    expect_no_error                         html  
+    expect_no_success                       html  
+    expect_null                             html  
+    expect_output                           html  
+    expect_output_file                      html  
+    expect_reference                        html  
+    expect_setequal                         html  
+    expect_silent                           html  
+    expect_snapshot                         html  
+    expect_snapshot_file                    html  
+    expect_snapshot_output                  html  
+    expect_snapshot_value                   html  
+    expect_success                          html  
+    expect_that                             html  
+    expect_vector                           html  
+    expectation                             html  
+    extract_test                            html  
+    fail                                    html  
+    find_reporter                           html  
+    find_test_scripts                       html  
+    inheritance-expectations                html  
+    is_informative_error                    html  
+    is_testing                              html  
+    local_edition                           html  
+    local_mocked_bindings                   html  
+    local_mocked_r6_class                   html  
+    local_mocked_s3_method                  html  
+    local_snapshotter                       html  
+    local_test_context                      html  
+    local_test_directory                    html  
+    logical-expectations                    html  
+    make_expectation                        html  
+    mock_output_sequence                    html  
+    not                                     html  
+    oldskool                                html  
+    quasi_label                             html  
+    reexports                               html  
+    reporter-accessors                      html  
+    run_cpp_tests                           html  
+    set_max_fails                           html  
+    set_state_inspector                     html  
+    skip                                    html  
+    skip_on_travis                          html  
+    snapshot_accept                         html  
+    snapshot_download_gh                    html  
+    source_file                             html  
+    succeed                                 html  
+    takes_less_than                         html  
+    teardown                                html  
+    teardown_env                            html  
+    test_dir                                html  
+    test_env                                html  
+    test_examples                           html  
+    test_file                               html  
+    test_package                            html  
+    test_path                               html  
+    test_that                               html  
+    testthat-package                        html  
+    testthat_examples                       html  
+    testthat_results                        html  
+    testthat_tolerance                      html  
+    topic-name                              html  
+    try_again                               html  
+    use_catch                               html  
+    verify_output                           html  
+    watch                                   html  
+    with_mock                               html  
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (testthat)
+trying URL 'https://cloud.r-project.org/src/contrib/xml2_1.5.2.tar.gz'
+Content type 'application/x-gzip' length 154697 bytes (151 KB)
+==================================================
+downloaded 151 KB
+
+* installing *source* package ‘xml2’ ...
+** this is package ‘xml2’ version ‘1.5.2’
+** package ‘xml2’ successfully unpacked and MD5 sums checked
+** using staged installation
+Found pkg-config cflags and libs!
+Using PKG_CFLAGS=-I/usr/include/libxml2
+Using PKG_LIBS=-lxml2 -lz -llzma -lm
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+using C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native   -c connection.cpp -o connection.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c init.c -o init.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native   -c xml2_doc.cpp -o xml2_doc.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c xml2_init.c -o xml2_init.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native   -c xml2_namespace.cpp -o xml2_namespace.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native   -c xml2_node.cpp -o xml2_node.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native   -c xml2_output.cpp -o xml2_output.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native   -c xml2_schema.cpp -o xml2_schema.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native   -c xml2_url.cpp -o xml2_url.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I../inst/include -I/usr/include/libxml2 -DUCHAR_TYPE=wchar_t -DU_SHOW_CPLUSPLUS_API=0 -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native   -c xml2_xpath.cpp -o xml2_xpath.o
+g++ -std=gnu++20 -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o xml2.so connection.o init.o xml2_doc.o xml2_init.o xml2_namespace.o xml2_node.o xml2_output.o xml2_schema.o xml2_url.o xml2_xpath.o -lxml2 -lz -llzma -lm -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-xml2/00new/xml2/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘xml2’
+    finding HTML links ... done
+    as_list                                 html  
+    as_xml_document                         html  
+    download_xml                            html  
+    oldclass                                html  
+    read_xml                                html  
+    url_absolute                            html  
+    url_escape                              html  
+    url_parse                               html  
+    write_xml                               html  
+    xml2-package                            html  
+    xml2_example                            html  
+    xml_attr                                html  
+    xml_cdata                               html  
+    xml_children                            html  
+    xml_comment                             html  
+    xml_dtd                                 html  
+    xml_find_all                            html  
+    xml_missing                             html  
+    xml_name                                html  
+    xml_new_document                        html  
+    xml_ns                                  html  
+    xml_ns_strip                            html  
+    xml_path                                html  
+    xml_replace                             html  
+    xml_serialize                           html  
+    xml_set_namespace                       html  
+    xml_structure                           html  
+    xml_text                                html  
+    xml_type                                html  
+    xml_url                                 html  
+    xml_validate                            html  
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (xml2)
+
+The downloaded source packages are in
+	‘/tmp/RtmptFAXMx/downloaded_packages’
+remotes::install_local(/check/cpp4r_0.6.0.tar.gz)
+── R CMD build ─────────────────────────────────────────────────────────────────
+* checking for file ‘/tmp/RtmptFAXMx/remotes164abca5bd/cpp4r/DESCRIPTION’ ... OK
+* preparing ‘cpp4r’:
+* checking DESCRIPTION meta-information ... OK
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+* building ‘cpp4r_0.6.0.tar.gz’
+
+* installing *source* package ‘cpp4r’ ...
+** this is package ‘cpp4r’ version ‘0.6.0’
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘cpp4r’
+    finding HTML links ... done
+    cpp4r-package                           html  
+    pkg_template                            html  
+    register                                html  
+    unvendor                                html  
+    vendor                                  html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4r)
+remotes::install_local(/check/cpp4rtest_0.2.0.tar.gz)
+Installing 6 packages: utf8, vctrs, pkgconfig, pillar, tibble, decor
+trying URL 'https://cloud.r-project.org/src/contrib/utf8_1.2.6.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/vctrs_0.7.3.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/pkgconfig_2.0.3.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/pillar_1.11.1.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/tibble_3.3.1.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/decor_1.0.2.tar.gz'
+* installing *source* package ‘utf8’ ...
+** this is package ‘utf8’ version ‘1.2.6’
+** package ‘utf8’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c as_utf8.c -o as_utf8.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c bytes.c -o bytes.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c context.c -o context.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c init.c -o init.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c render.c -o render.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c render_table.c -o render_table.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c string.c -o string.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c text.c -o text.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8_encode.c -o utf8_encode.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8_format.c -o utf8_format.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8_normalize.c -o utf8_normalize.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8_valid.c -o utf8_valid.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8_width.c -o utf8_width.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c util.c -o util.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8lite/src/array.c -o utf8lite/src/array.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8lite/src/char.c -o utf8lite/src/char.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8lite/src/encode.c -o utf8lite/src/encode.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8lite/src/error.c -o utf8lite/src/error.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8lite/src/escape.c -o utf8lite/src/escape.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8lite/src/graph.c -o utf8lite/src/graph.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8lite/src/graphscan.c -o utf8lite/src/graphscan.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8lite/src/normalize.c -o utf8lite/src/normalize.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8lite/src/render.c -o utf8lite/src/render.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8lite/src/text.c -o utf8lite/src/text.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8lite/src/textassign.c -o utf8lite/src/textassign.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8lite/src/textiter.c -o utf8lite/src/textiter.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include   -Iutf8lite/src -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utf8lite/src/textmap.c -o utf8lite/src/textmap.o
+ar rcs libcutf8lite.a utf8lite/src/array.o utf8lite/src/char.o utf8lite/src/encode.o utf8lite/src/error.o utf8lite/src/escape.o utf8lite/src/graph.o utf8lite/src/graphscan.o utf8lite/src/normalize.o utf8lite/src/render.o utf8lite/src/text.o utf8lite/src/textassign.o utf8lite/src/textiter.o utf8lite/src/textmap.o
+gcc -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o utf8.so as_utf8.o bytes.o context.o init.o render.o render_table.o string.o text.o utf8_encode.o utf8_format.o utf8_normalize.o utf8_valid.o utf8_width.o util.o -L. -lcutf8lite -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-utf8/00new/utf8/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘utf8’
+    finding HTML links ... done
+    as_utf8                                 html  
+    output_utf8                             html  
+    utf8-package                            html  
+    utf8_encode                             html  
+    utf8_format                             html  
+    utf8_normalize                          html  
+    utf8_print                              html  
+    utf8_width                              html  
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (utf8)
+* installing *source* package ‘vctrs’ ...
+** this is package ‘vctrs’ version ‘0.7.3’
+** package ‘vctrs’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c altrep-lazy-character.c -o altrep-lazy-character.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c altrep-rle.c -o altrep-rle.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c altrep.c -o altrep.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c arg-counter.c -o arg-counter.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c arg.c -o arg.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c assert.c -o assert.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c bind.c -o bind.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c c.c -o c.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c callables.c -o callables.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c case-when.c -o case-when.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c cast-bare.c -o cast-bare.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c cast-dispatch.c -o cast-dispatch.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c cast.c -o cast.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c compare.c -o compare.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c complete.c -o complete.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c conditions.c -o conditions.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c dictionary.c -o dictionary.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c dim.c -o dim.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c empty.c -o empty.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c encoding.c -o encoding.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c equal.c -o equal.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c expand.c -o expand.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c fields.c -o fields.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c fill.c -o fill.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c globals.c -o globals.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c group.c -o group.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c growable.c -o growable.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c hash.c -o hash.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c if-else.c -o if-else.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c init.c -o init.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c interval.c -o interval.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c list-combine.c -o list-combine.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c list-unchop.c -o list-unchop.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c match-joint.c -o match-joint.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c match.c -o match.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c missing.c -o missing.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c names.c -o names.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c order-collate.c -o order-collate.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c order-groups.c -o order-groups.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c order-sortedness.c -o order-sortedness.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c order.c -o order.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c parallel.c -o parallel.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c poly-op.c -o poly-op.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c proxy-restore.c -o proxy-restore.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c proxy.c -o proxy.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c ptype-common.c -o ptype-common.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c ptype.c -o ptype.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c ptype2-dispatch.c -o ptype2-dispatch.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c ptype2.c -o ptype2.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c rank.c -o rank.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c recode.c -o recode.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c rep.c -o rep.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c rlang-dev.c -o rlang-dev.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c rlang.c -o rlang.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c runs.c -o runs.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c set.c -o set.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c shape.c -o shape.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c size-common.c -o size-common.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c size.c -o size.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c slice-array.c -o slice-array.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c slice-assign-array.c -o slice-assign-array.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c slice-assign.c -o slice-assign.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c slice-chop.c -o slice-chop.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c slice-interleave.c -o slice-interleave.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c slice.c -o slice.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c split.c -o split.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c subscript-loc.c -o subscript-loc.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c subscript.c -o subscript.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c type-data-frame.c -o type-data-frame.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c type-date-time.c -o type-date-time.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c type-factor.c -o type-factor.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c type-info.c -o type-info.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c type-integer64.c -o type-integer64.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c type-tibble.c -o type-tibble.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c typeof2-s3.c -o typeof2-s3.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c typeof2.c -o typeof2.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c unspecified.c -o unspecified.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utils-dispatch.c -o utils-dispatch.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c utils.c -o utils.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG -I./rlang  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native  -c version.c -o version.o
+gcc -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o vctrs.so altrep-lazy-character.o altrep-rle.o altrep.o arg-counter.o arg.o assert.o bind.o c.o callables.o case-when.o cast-bare.o cast-dispatch.o cast.o compare.o complete.o conditions.o dictionary.o dim.o empty.o encoding.o equal.o expand.o fields.o fill.o globals.o group.o growable.o hash.o if-else.o init.o interval.o list-combine.o list-unchop.o match-joint.o match.o missing.o names.o order-collate.o order-groups.o order-sortedness.o order.o parallel.o poly-op.o proxy-restore.o proxy.o ptype-common.o ptype.o ptype2-dispatch.o ptype2.o rank.o recode.o rep.o rlang-dev.o rlang.o runs.o set.o shape.o size-common.o size.o slice-array.o slice-assign-array.o slice-assign.o slice-chop.o slice-interleave.o slice.o split.o subscript-loc.o subscript.o type-data-frame.o type-date-time.o type-factor.o type-info.o type-integer64.o type-tibble.o typeof2-s3.o typeof2.o unspecified.o utils-dispatch.o utils.o version.o -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-vctrs/00new/vctrs/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘vctrs’
+    finding HTML links ... done
+    as-is                                   html  
+    data_frame                              html  
+    df_list                                 html  
+    df_ptype2                               html  
+    faq-compatibility-types                 html  
+    faq-error-incompatible-attributes       html  
+    faq-error-scalar-type                   html  
+    fields                                  html  
+    howto-faq-coercion-data-frame           html  
+    howto-faq-coercion                      html  
+    howto-faq-fix-scalar-type-error         html  
+    int64                                   html  
+    internal-faq-matches-algorithm          html  
+    internal-faq-ptype2-identity            html  
+    list-of-attributes                      html  
+    list_combine                            html  
+    list_drop_empty                         html  
+    list_of                                 html  
+    list_of_transpose                       html  
+    list_unchop                             html  
+    maybe_lossy_cast                        html  
+    missing                                 html  
+    name_spec                               html  
+    new_data_frame                          html  
+    new_date                                html  
+    new_factor                              html  
+    new_list_of                             html  
+    new_rcrd                                html  
+    new_vctr                                html  
+    obj_is_list                             html  
+    obj_print                               html  
+    op-empty-default                        html  
+    order-radix                             html  
+    parallel-operators                      html  
+    reference-faq-compatibility             html  
+    runs                                    html  
+    s3_register                             html  
+    table                                   html  
+    theory-faq-coercion                     html  
+    theory-faq-recycling                    html  
+    vctrs-conditions                        html  
+    vctrs-data-frame                        html  
+    vctrs-package                           html  
+    vctrs-unspecified                       html  
+    vec-case-and-replace                    html  
+    vec-recode-and-replace                  html  
+    vec-rep                                 html  
+    vec-set                                 html  
+    vec_arith                               html  
+    vec_as_index                            html  
+    vec_as_location                         html  
+    vec_as_names                            html  
+    vec_as_names_legacy                     html  
+    vec_as_subscript                        html  
+    vec_assert                              html  
+    vec_bind                                html  
+    vec_c                                   html  
+    vec_cast                                html  
+    vec_cbind_frame_ptype                   html  
+    vec_chop                                html  
+    vec_compare                             html  
+    vec_count                               html  
+    vec_data                                html  
+    vec_default_ptype2                      html  
+    vec_detect_complete                     html  
+    vec_duplicate                           html  
+    vec_empty                               html  
+    vec_equal                               html  
+    vec_equal_na                            html  
+    vec_expand_grid                         html  
+    vec_fill_missing                        html  
+    vec_group                               html  
+    vec_if_else                             html  
+    vec_init                                html  
+    vec_interleave                          html  
+    vec_is_list                             html  
+    vec_locate_matches                      html  
+    vec_locate_sorted_groups                html  
+    vec_match                               html  
+    vec_math                                html  
+    vec_names                               html  
+    vec_order                               html  
+    vec_proxy                               html  
+    vec_proxy_compare                       html  
+    vec_proxy_equal                         html  
+    vec_ptype                               html  
+    vec_ptype2                              html  
+    vec_ptype_full                          html  
+    vec_rank                                html  
+    vec_recycle                             html  
+    vec_repeat                              html  
+    vec_seq_along                           html  
+    vec_size                                html  
+    vec_slice                               html  
+    vec_split                               html  
+    vec_type                                html  
+    vec_unchop                              html  
+    vec_unique                              html  
+    vector-checks                           html  
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (vctrs)
+* installing *source* package ‘pkgconfig’ ...
+** this is package ‘pkgconfig’ version ‘2.0.3’
+** package ‘pkgconfig’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘pkgconfig’
+    finding HTML links ... done
+    get_config                              html  
+    pkgconfig-package                       html  
+    set_config                              html  
+    set_config_in                           html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (pkgconfig)
+* installing *source* package ‘pillar’ ...
+** this is package ‘pillar’ version ‘1.11.1’
+** package ‘pillar’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘pillar’
+    finding HTML links ... done
+    align                                   html  
+    char                                    html  
+    colonnade                               html  
+    ctl_new_pillar                          html  
+    ctl_new_pillar_list                     html  
+    deprecated                              html  
+    dim_desc                                html  
+    extra_cols                              html  
+    format_glimpse                          html  
+    format_tbl                              html  
+    format_type_sum                         html  
+    get_extent                              html  
+    glimpse                                 html  
+    new_ornament                            html  
+    new_pillar                              html  
+    new_pillar_component                    html  
+    new_pillar_shaft                        html  
+    new_pillar_title                        html  
+    new_pillar_type                         html  
+    new_tbl_format_setup                    html  
+    num                                     html  
+    pillar-package                          html  
+    pillar                                  html  
+    pillar_options                          html  
+    pillar_shaft                            html  
+    scale_x_num                             html  
+    squeeze                                 html  
+    style_subtle                            html  
+    tbl_format_body                         html  
+    tbl_format_footer                       html  
+    tbl_format_header                       html  
+    tbl_format_setup                        html  
+    tbl_nrow                                html  
+    tbl_sum                                 html  
+    type_sum                                html  *** copying figures
+
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (pillar)
+* installing *source* package ‘tibble’ ...
+** this is package ‘tibble’ version ‘3.3.1’
+** package ‘tibble’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c attributes.c -o attributes.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c coerce.c -o coerce.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c init.c -o init.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c matrixToDataFrame.c -o matrixToDataFrame.o
+matrixToDataFrame.c:7:13: warning: ‘pairlist_shallow_copy’ defined but not used [-Wunused-function]
+    7 | static SEXP pairlist_shallow_copy(SEXP p) {
+      |             ^~~~~~~~~~~~~~~~~~~~~
+gcc -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o tibble.so attributes.o coerce.o init.o matrixToDataFrame.o -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-tibble/00new/tibble/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘tibble’
+    finding HTML links ... done
+    add_column                              html  
+    add_row                                 html  
+    as_tibble                               html  
+    char                                    html  
+    deprecated                              html  
+    enframe                                 html  
+    formatting                              html  
+    frame_matrix                            html  
+    is.tibble                               html  
+    is_tibble                               html  
+    lst                                     html  
+    name-repair-superseded                  html  
+    name-repair                             html  
+    new_tibble                              html  
+    num                                     html  
+    reexports                               html  
+    rownames                                html  
+    subsetting                              html  
+    tbl_df-class                            html  
+    tibble-package                          html  
+    tibble                                  html  
+    tibble_options                          html  
+    tribble                                 html  
+    trunc_mat                               html  
+    view                                    html  
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (tibble)
+* installing *source* package ‘decor’ ...
+** this is package ‘decor’ version ‘1.0.2’
+** package ‘decor’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+using C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c blank_comments.cpp -o blank_comments.o
+gcc -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native  -c init.c -o init.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native   -c parse_cpp_function.cpp -o parse_cpp_function.o
+g++ -std=gnu++20 -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o decor.so blank_comments.o init.o parse_cpp_function.o -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-decor/00new/decor/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘decor’
+    finding HTML links ... done
+    cpp_decorations                         html  
+    cpp_files                               html  
+    parse_cpp_function                      html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (decor)
+
+The downloaded source packages are in
+	‘/tmp/RtmptFAXMx/downloaded_packages’
+── R CMD build ─────────────────────────────────────────────────────────────────
+* checking for file ‘/tmp/RtmptFAXMx/remotes161c63b1fa/cpp4rtest/DESCRIPTION’ ... OK
+* preparing ‘cpp4rtest’:
+* checking DESCRIPTION meta-information ... OK
+* cleaning src
+* running ‘cleanup’
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+* building ‘cpp4rtest_0.2.0.tar.gz’
+
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.2.0’
+** using staged installation
+** libs
+using C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2 -Wall -pedantic -mtune=native   -c cpp4r.cpp -o cpp4r.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2 -Wall -pedantic -mtune=native   -c main.cpp -o main.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2 -Wall -pedantic -mtune=native   -c test-runner.cpp -o test-runner.o
+g++ -std=gnu++20 -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -L/opt/R/devel-valgrind/lib/R/lib -lRlapack -L/opt/R/devel-valgrind/lib/R/lib -lRblas -lgfortran -lm -lquadmath -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘cpp4rtest’
+    finding HTML links ... done
+    cpp4rtest-package                       html  
+    notroxcpp1                              html  
+    notroxcpp6                              html  
+    roxcpp2                                 html  
+    roxcpp3                                 html  
+    roxcpp4                                 html  
+    roxcpp5                                 html  
+    roxcpp7                                 html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+* installing *source* package ‘cpp4r’ ...
+** this is package ‘cpp4r’ version ‘0.6.0’
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘cpp4r’
+    finding HTML links ... done
+    cpp4r-package                           html  
+    pkg_template                            html  
+    register                                html  
+    unvendor                                html  
+    vendor                                  html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4r)
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.2.0’
+** using staged installation
+** libs
+using C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2 -Wall -pedantic -mtune=native   -c cpp4r.cpp -o cpp4r.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2 -Wall -pedantic -mtune=native   -c main.cpp -o main.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2 -Wall -pedantic -mtune=native   -c test-runner.cpp -o test-runner.o
+g++ -std=gnu++20 -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -L/opt/R/devel-valgrind/lib/R/lib -lRlapack -L/opt/R/devel-valgrind/lib/R/lib -lRblas -lgfortran -lm -lquadmath -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘cpp4rtest’
+    finding HTML links ... done
+    cpp4rtest-package                       html  
+    notroxcpp1                              html  
+    notroxcpp6                              html  
+    roxcpp2                                 html  
+    roxcpp3                                 html  
+    roxcpp4                                 html  
+    roxcpp5                                 html  
+    roxcpp7                                 html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+* using log directory ‘/check/cpp4rtest.Rcheck’
+* using R Under development (unstable) (2026-05-14 r90050)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)
+    GNU Fortran (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)
+* running under: Fedora Linux 42 (Container Image)
+* using session charset: UTF-8
+* current time: 2026-05-17 10:48:01 UTC
+* using options ‘--no-manual --as-cran’
+* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
+* this is package ‘cpp4rtest’ version ‘0.2.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
+
+New submission
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for .dll and .exe files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cpp4rtest’ can be installed ... [118s/113s] OK
+* used C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+* checking installed package size ... INFO
+  installed size is 26.9Mb
+  sub-directories of 1Mb or more:
+    libs  26.8Mb
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
+* checking pragmas in C/C++ headers and code ... OK
+* checking compilation flags used ... OK
+* checking compiled code ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ...
+  Running ‘testthat.R’
+ OK
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+
+Status: 1 NOTE
+See
+  ‘/check/cpp4rtest.Rcheck/00check.log’
+for details.
+
+=== 00install.out ===
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.2.0’
+** using staged installation
+** libs
+using C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2 -Wall -pedantic -mtune=native   -c cpp4r.cpp -o cpp4r.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2 -Wall -pedantic -mtune=native   -c main.cpp -o main.o
+g++ -std=gnu++20 -I"/opt/R/devel-valgrind/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2 -Wall -pedantic -mtune=native   -c test-runner.cpp -o test-runner.o
+g++ -std=gnu++20 -shared -L/opt/R/devel-valgrind/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -L/opt/R/devel-valgrind/lib/R/lib -lRlapack -L/opt/R/devel-valgrind/lib/R/lib -lRblas -lgfortran -lm -lquadmath -L/opt/R/devel-valgrind/lib/R/lib -lR
+installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘cpp4rtest’
+    finding HTML links ... done
+    cpp4rtest-package                       html  
+    notroxcpp1                              html  
+    notroxcpp6                              html  
+    roxcpp2                                 html  
+    roxcpp3                                 html  
+    roxcpp4                                 html  
+    roxcpp5                                 html  
+    roxcpp7                                 html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+=== 00check.log ===
+* using log directory ‘/check/cpp4rtest.Rcheck’
+* using R Under development (unstable) (2026-05-14 r90050)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)
+    GNU Fortran (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)
+* running under: Fedora Linux 42 (Container Image)
+* using session charset: UTF-8
+* current time: 2026-05-17 10:48:01 UTC
+* using options ‘--no-manual --as-cran’
+* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
+* this is package ‘cpp4rtest’ version ‘0.2.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
+
+New submission
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for .dll and .exe files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cpp4rtest’ can be installed ... [118s/113s] OK
+* used C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+* checking installed package size ... INFO
+  installed size is 26.9Mb
+  sub-directories of 1Mb or more:
+    libs  26.8Mb
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
+* checking pragmas in C/C++ headers and code ... OK
+* checking compilation flags used ... OK
+* checking compiled code ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: 1 NOTE
