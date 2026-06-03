@@ -1,9 +1,16 @@
-glue_collapse_data <- function(data, ..., sep = ", ", last = "") {
-  res <- glue::glue_collapse(glue::glue_data(data, ...), sep = sep, last = last)
-  if (length(res) == 0) {
+collapse_data <- function(data, template, sep = ", ", last = "") {
+  n <- if (is.data.frame(data)) nrow(data) else length(data[[1L]])
+  if (is.null(n) || n == 0 || !nzchar(template)) {
     return("")
   }
-  unclass(res)
+  res <- vapply(seq_len(n), function(i) {
+    s <- template
+    for (nm in names(data)) {
+      s <- gsub(paste0("{", nm, "}"), as.character(data[[nm]][i]), s, fixed = TRUE)
+    }
+    s
+  }, character(1))
+  paste(res, collapse = sep)
 }
 
 `%||%` <- function(x, y) if (is.null(x)) y else x

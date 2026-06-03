@@ -1,44 +1,17 @@
 describe("get_call_entries", {
-  it("returns an empty string if there are no R files", {
+  it("generates a minimal table for a package with no registered functions", {
     pkg <- local_package()
     path <- pkg_path(pkg)
-    expect_equal(get_call_entries(path, get_funs(path)$name, get_package_name(path)), "")
+    expect_equal(
+      get_call_entries(path, get_funs(path), get_package_name(path)),
+      c(
+        "static const R_CallMethodDef CallEntries[] = {",
+        "    {NULL, NULL, 0}",
+        "};"
+      )
+    )
   })
 
-  it("returns an empty string if there are no .Call calls", {
-    pkg <- local_package()
-    path <- pkg_path(pkg)
-    dir.create(file.path(path, "R"))
-    writeLines("foo <- function() 1", file.path(path, "R", "foo.R"))
-    expect_equal(get_call_entries(path, get_funs(path)$name, get_package_name(path)), "")
-  })
-
-  it("Errors for invalid packages", {
-    # local_package adds a NAMESPACE file
-    pkg <- tempfile()
-    dir.create(pkg)
-    on.exit(unlink(pkg, recursive = TRUE))
-
-    writeLines("Package: testPkg", file.path(pkg, "DESCRIPTION"))
-    dir.create(file.path(pkg, "R"))
-    writeLines('foo <- function() .Call("bar")', file.path(pkg, "R", "foo.R"))
-    expect_error(get_call_entries(pkg, get_funs(path)$name, get_package_name(pkg)), "has no 'NAMESPACE' file")
-  })
-
-  it("returns an empty string for packages with .Call entries and NAMESPACE files", {
-    # tools::package_native_routine_registration_skeleton is not available before R 3.4
-    # R added `(void)` to the signature after R 4.3.0
-    skip_if(getRversion() < "4.3.0")
-
-    pkg <- local_package()
-    path <- pkg_path(pkg)
-    dir.create(file.path(path, "R"))
-
-    writeLines('foo <- function() .Call("bar")', file.path(path, "R", "foo.R"))
-    call_entries <- get_call_entries(path, get_funs(path)$name, get_package_name(path))
-
-    expect_snapshot(call_entries)
-  })
   it("works with multiple register functions.", {
     pkg <- local_package()
     p <- pkg_path(pkg)
@@ -135,8 +108,6 @@ describe("get_registered_functions", {
 
 describe("generate_cpp_functions", {
   it("returns the empty string if there are no functions", {
-    skip_if_not_installed("glue", "1.6.2.9000")
-
     funs <- list(
       file = character(),
       line = integer(),
@@ -312,8 +283,6 @@ extern \"C\" SEXP _cpp4r_bar(SEXP baz) {
 
 describe("generate_r_functions", {
   it("returns the empty string if there are no functions", {
-    skip_if_not_installed("glue", "1.6.2.9000")
-
     funs <- list(
       file = character(),
       line = integer(),

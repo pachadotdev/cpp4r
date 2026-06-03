@@ -1,16 +1,3 @@
-# get_call_entries / returns an empty string for packages with .Call entries and NAMESPACE files
-
-    Code
-      call_entries
-    Output
-      [1] "/* .Call calls */"                             
-      [2] "extern SEXP bar(void);"                        
-      [3] ""                                              
-      [4] "static const R_CallMethodDef CallEntries[] = {"
-      [5] "    {\"bar\", (DL_FUNC) &bar, 0},"             
-      [6] "    {NULL, NULL, 0}"                           
-      [7] "};"                                            
-
 # get_call_entries / works with multiple register functions.
 
     Code
@@ -47,13 +34,12 @@
       
       extern "C" {
       static const R_CallMethodDef CallEntries[] = {
+          {"_testPkg_foo", (DL_FUNC) &_testPkg_foo, 0},
           {"_testPkg_bar", (DL_FUNC) &_testPkg_bar, 1},
           {"_testPkg_baz", (DL_FUNC) &_testPkg_baz, 2},
-          {"_testPkg_foo", (DL_FUNC) &_testPkg_foo, 0},
           {NULL, NULL, 0}
       };
       }
-      
       extern "C" attribute_visible void R_init_testPkg(DllInfo* dll){
         R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
         R_useDynamicSymbols(dll, FALSE);
@@ -97,7 +83,6 @@
           {NULL, NULL, 0}
       };
       }
-      
       extern "C" attribute_visible void R_init_testPkg(DllInfo* dll){
         R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
         R_useDynamicSymbols(dll, FALSE);

@@ -1,7 +1,7 @@
 local_package <- function() {
   dir <- tempfile()
   dir.create(dir)
-  withr::defer(unlink(dir, recursive = TRUE), parent.frame())
+  do.call("on.exit", list(bquote(unlink(.(dir), recursive = TRUE)), TRUE), envir = parent.frame())
 
   writeLines("Package: testPkg", file.path(dir, "DESCRIPTION"))
   writeLines("useDynLib(testPkg, .registration = TRUE)", file.path(dir, "NAMESPACE"))
@@ -19,10 +19,6 @@ get_funs <- function(path) {
 
 get_package_name <- function(path) {
   desc::desc_get("Package", file = file.path(path, "DESCRIPTION"))
-}
-
-glue_str <- function(...) {
-  glue::as_glue(unlist(list(...)))
 }
 
 read_file <- function(x) {
