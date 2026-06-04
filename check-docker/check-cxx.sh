@@ -70,6 +70,7 @@ for std in $STANDARDS; do
 user_lib <- strsplit(Sys.getenv('R_LIBS_USER'), ':')[[1]][1]
 .libPaths(c(user_lib, .libPaths()))
 repos_snapshot_env <- Sys.getenv('RSPM_SNAPSHOT', '')
+
 if (nzchar(repos_snapshot_env)) {
   if (grepl('^https?://', repos_snapshot_env)) {
     options(repos = c(CRAN = repos_snapshot_env))
@@ -79,28 +80,21 @@ if (nzchar(repos_snapshot_env)) {
 } else {
   options(repos = c(CRAN = 'https://cloud.r-project.org'))
 }
+
 if (!requireNamespace('remotes', quietly = TRUE)) {
   install.packages('remotes', lib = user_lib)
 }
-has_cpp23 <- tryCatch({
-  cxx23 <- tryCatch(
-    system("R CMD config CXX23", intern = TRUE, ignore.stderr = TRUE),
-    error = function(e) system("R CMD config CXX", intern = TRUE, ignore.stderr = TRUE)
-  )
-  system(paste(cxx23, "-std=gnu++23 -x c++ /dev/null -fsyntax-only"),
-         ignore.stdout = TRUE, ignore.stderr = TRUE) == 0
-}, error = function(e) FALSE)
-if (has_cpp23) {
-  remotes::install_github("pachadotdev/testthat", lib = user_lib, upgrade = 'never')
-} else if (!requireNamespace('testthat', quietly = TRUE)) {
-  install.packages('testthat', lib = user_lib)
-}
+
+install.packages('tinytest', lib = user_lib)
+
 if (!requireNamespace('curl', quietly = TRUE)) {
   install.packages('curl', lib = user_lib)
 }
+
 if (!requireNamespace('xml2', quietly = TRUE)) {
   install.packages('xml2', lib = user_lib)
 }
+
 if (!requireNamespace('rlang', quietly = TRUE)) {
   install.packages('rlang', lib = user_lib)
 }

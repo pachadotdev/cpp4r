@@ -1,0 +1,20 @@
+# Tests for ordered and unordered map to list
+
+local({
+  set.seed(42L)
+  x <- rnorm(10L)
+  xprime <- c(x, x[1])
+
+  om <- ordered_map_to_list_(x)
+  tinytest::expect_equal(typeof(om), "list")
+
+  om_doubles <- as.double(names(om))
+  tinytest::expect_equal(om_doubles, sort(om_doubles))
+
+  omprime <- ordered_map_to_list_(xprime)
+  tinytest::expect_equal(unlist(unique(omprime)), 1:2)
+
+  um <- unordered_map_to_list_(xprime)
+  tinytest::expect_equal(typeof(um), "list")
+  tinytest::expect_equal(unlist(unique(um)), 1:2)
+})
