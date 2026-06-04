@@ -296,7 +296,6 @@ enable_if_integral<T, SEXP> as_sexp(const Container& from) {
 
   auto it = from.begin();
   int* data_p = INTEGER(data);
-  CPP4R_VECTORIZE
   for (R_xlen_t i = 0; i < size; ++i, ++it) {
     data_p[i] = *it;
   }
@@ -316,7 +315,6 @@ enable_if_floating_point<T, SEXP> as_sexp(const Container& from) {
 
   auto it = from.begin();
   double* data_p = REAL(data);
-  CPP4R_VECTORIZE
   for (R_xlen_t i = 0; i < size; ++i, ++it) {
     data_p[i] = *it;
   }
@@ -336,7 +334,6 @@ enable_if_bool<T, SEXP> as_sexp(const Container& from) {
 
   auto it = from.begin();
   int* data_p = LOGICAL(data);
-  CPP4R_VECTORIZE
   for (R_xlen_t i = 0; i < size; ++i, ++it) {
     data_p[i] = *it;
   }

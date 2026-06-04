@@ -100,19 +100,16 @@ template <typename T>
 inline r_vector<T>::r_vector(std::initializer_list<T> il)
     : cpp4r::r_vector<T>(safe[Rf_allocVector](get_sexptype(), il.size())),
       capacity_(il.size()) {
-  auto it = il.begin();
+  const T* ptr = il.begin();
 
   if (data_p_ != nullptr) {
-    // initializer_list stores elements contiguously; the compiler can vectorize
-    // this simple assignment loop for primitive types (double, int, Rcomplex).
-    CPP4R_VECTORIZE
-    for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
-      data_p_[i] = static_cast<underlying_type>(*it);
+    for (R_xlen_t i = 0; i < capacity_; ++i) {
+      data_p_[i] = static_cast<underlying_type>(ptr[i]);
     }
   } else {
     // Handles both the ALTREP and VECSXP cases
-    for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
-      set_elt(data_, i, static_cast<underlying_type>(*it));
+    for (R_xlen_t i = 0; i < capacity_; ++i) {
+      set_elt(data_, i, static_cast<underlying_type>(ptr[i]));
     }
   }
 }
