@@ -133,8 +133,8 @@ R_EOF
         zypper --non-interactive install libuv libxml2-devel pkg-config gcc-fortran libcurl-devel || true
       fi
 
-      # Install system deps (testthat, xml2, …) before writing ~/.R/Makevars so
-      # that packages with C++ code (diffobj, …) compile with the image's default
+      # Install system deps (xml2, etc) before writing ~/.R/Makevars so
+      # that packages with C++ code (diffobj, etc) compile with the image's default
       # standard instead of the one under test.
       if [ -f /check/install_required.R ]; then Rscript /check/install_required.R || true; fi
 

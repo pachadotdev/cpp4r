@@ -1,0 +1,714 @@
+Updating and loading repositories:
+ Fedora 42 - x86_64                     100% |  23.5 KiB/s |  20.2 KiB |  00m01s
+ Fedora 42 - x86_64 - Updates           100% |  24.5 KiB/s |  18.3 KiB |  00m01s
+ Fedora 42 openh264 (From Cisco) - x86_ 100% |  11.6 KiB/s | 986.0   B |  00m00s
+Repositories loaded.
+Package "pkgconf-pkg-config-2.3.0-2.fc42.x86_64" is already installed.
+
+Package        Arch   Version         Repository      Size
+Installing:
+ libuv-devel   x86_64 1:1.51.0-1.fc42 updates    192.5 KiB
+ libxml2-devel x86_64 2.12.10-1.fc42  fedora       3.4 MiB
+Installing dependencies:
+ libuv         x86_64 1:1.51.0-1.fc42 updates    570.2 KiB
+ libuv-static  x86_64 1:1.51.0-1.fc42 updates    427.9 KiB
+
+Transaction Summary:
+ Installing:         4 packages
+
+Total size of inbound packages is 942 KiB. Need to download 942 KiB.
+After this operation, 5 MiB extra will be used (install 5 MiB, remove 0 B).
+[1/4] libuv-devel-1:1.51.0-1.fc42.x86_6 100% | 134.2 KiB/s |  41.2 KiB |  00m00s
+[2/4] libuv-static-1:1.51.0-1.fc42.x86_ 100% | 285.7 KiB/s | 111.1 KiB |  00m00s
+[3/4] libuv-1:1.51.0-1.fc42.x86_64      100% | 632.6 KiB/s | 266.3 KiB |  00m00s
+[4/4] libxml2-devel-0:2.12.10-1.fc42.x8 100% |   1.8 MiB/s | 523.7 KiB |  00m00s
+--------------------------------------------------------------------------------
+[4/4] Total                             100% |   1.6 MiB/s | 942.4 KiB |  00m01s
+Running transaction
+[1/6] Verify package files              100% | 571.0   B/s |   4.0   B |  00m00s
+[2/6] Prepare transaction               100% |  18.0   B/s |   4.0   B |  00m00s
+[3/6] Installing libuv-1:1.51.0-1.fc42. 100% |  28.0 MiB/s | 573.0 KiB |  00m00s
+[4/6] Installing libuv-static-1:1.51.0- 100% |  52.3 MiB/s | 428.3 KiB |  00m00s
+[5/6] Installing libuv-devel-1:1.51.0-1 100% |  19.1 MiB/s | 195.4 KiB |  00m00s
+[6/6] Installing libxml2-devel-0:2.12.1 100% |   3.4 MiB/s |   3.4 MiB |  00m01s
+Complete!
+trying URL 'https://cloud.r-project.org/src/contrib/tinytest_1.4.3.tar.gz'
+Content type 'application/x-gzip' length 595901 bytes (581 KB)
+==================================================
+downloaded 581 KB
+
+* installing *source* package ‘tinytest’ ...
+** this is package ‘tinytest’ version ‘1.4.3’
+** package ‘tinytest’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘tinytest’
+    finding HTML links ... done
+    at_home                                 html  
+    build_install_test                      html  
+    exit_file                               html  
+    expect_equal                            html  
+    expect_equal_to_reference               html  
+    expect_length                           html  
+    expect_match                            html  
+    get_call_wd                             html  
+    ignore                                  html  
+    print.tinytest                          html  
+    puppy                                   html  
+    register_tinytest_extension             html  
+    report_side_effects                     html  
+    run_test_dir                            html  
+    run_test_file                           html  
+    setup_tinytest                          html  
+    test_package                            html  
+    tinytest                                html  
+    tinytests                               html  
+    using                                   html  
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (tinytest)
+
+The downloaded source packages are in
+	‘/tmp/RtmpzSQdcC/downloaded_packages’
+remotes::install_local(/check/cpp4r_0.7.0.tar.gz)
+── R CMD build ─────────────────────────────────────────────────────────────────
+* checking for file ‘/tmp/RtmpzSQdcC/remotes1716168f5e/cpp4r/DESCRIPTION’ ... OK
+* preparing ‘cpp4r’:
+* checking DESCRIPTION meta-information ... OK
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+* building ‘cpp4r_0.7.0.tar.gz’
+
+* installing *source* package ‘cpp4r’ ...
+** this is package ‘cpp4r’ version ‘0.7.0’
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘cpp4r’
+    finding HTML links ... done
+    cpp4r-package                           html  
+    pkg_template                            html  
+    register                                html  
+    unvendor                                html  
+    vendor                                  html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4r)
+remotes::install_local(/check/cpp4rtest_0.3.0.tar.gz)
+── R CMD build ─────────────────────────────────────────────────────────────────
+* checking for file ‘/tmp/RtmpzSQdcC/remotes177671d7cb/cpp4rtest/DESCRIPTION’ ... OK
+* preparing ‘cpp4rtest’:
+* checking DESCRIPTION meta-information ... OK
+* cleaning src
+* running ‘cleanup’
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+* building ‘cpp4rtest_0.3.0.tar.gz’
+
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.3.0’
+** using staged installation
+** libs
+using C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
+g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
+g++ -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -fopenmp -lflexiblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘cpp4rtest’
+    finding HTML links ... done
+    add_int_vec_                            html  
+    add_vec_for_                            html  
+    as_integers_                            html  
+    assign_                                 html  
+    col_sums_                               html  
+    complex_add_                            html  
+    complex_imag_                           html  
+    complex_modulus_                        html  
+    complex_real_                           html  
+    contains_name_                          html  
+    cpp4rtest-package                       html  
+    data_frame_                             html  
+    env_exists_                             html  
+    env_get_int_                            html  
+    env_get_str_                            html  
+    env_set_                                html  
+    findInterval2                           html  
+    findInterval2_5                         html  
+    findInterval3                           html  
+    find_name_pos_                          html  
+    get_by_name_                            html  
+    gibbs_cpp2_                             html  
+    gibbs_cpp_                              html  
+    global_get_                             html  
+    grow_                                   html  
+    grow_cplx_                              html  
+    grow_strings_                           html  
+    grow_strings_manual_                    html  
+    insert_                                 html  
+    iterator_at_                            html  
+    iterator_count_                         html  
+    iterator_distance_                      html  
+    iterator_double_values_                 html  
+    iterator_find_                          html  
+    iterator_max_                           html  
+    iterator_min_                           html  
+    iterator_sum_                           html  
+    iterator_sum_int_                       html  
+    list_of_doubles_                        html  
+    list_of_integers_                       html  
+    list_of_named_                          html  
+    list_of_strings_                        html  
+    logical_to_dbl_                         html  
+    logical_to_int_                         html  
+    make_complex_                           html  
+    mat_mat_copy_dimnames_                  html  
+    mat_mat_create_dimnames_                html  
+    mat_sexp_copy_dimnames_                 html  
+    matrix_add_                             html  
+    matrix_add_coerce_test_                 html  
+    matrix_mixed_add_                       html  
+    my_message_n1_                          html  
+    my_message_n2_                          html  
+    my_stop_n1_                             html  
+    my_stop_n2_                             html  
+    my_warning_n1_                          html  
+    my_warning_n2_                          html  
+    named_doubles_                          html  
+    named_integers_                         html  
+    named_list_                             html  
+    named_list_c_style_                     html  
+    named_list_push_back_                   html  
+    named_strings_                          html  
+    negate_logical_                         html  
+    nullable_extptr_1                       html  
+    nullable_extptr_2                       html  
+    ordered_map_to_list_                    html  
+    pairlist_rejects_vec_                   html  
+    pairlist_size_                          html  
+    pairlist_to_list_                       html  
+    protect_many_                           html  
+    protect_many_preserve_                  html  
+    protect_many_rapi_                      html  
+    protect_many_sexp_                      html  
+    protect_one_                            html  
+    protect_one_preserve_                   html  
+    protect_one_rapi_                       html  
+    protect_one_sexp_                       html  
+    push_and_truncate_                      html  
+    raw_copy_                               html  
+    raw_xor_                                html  
+    release_                                html  
+    remove_altrep                           html  
+    reverse_vector_                         html  
+    row_sums_                               html  
+    safe_                                   html  
+    sexp_list_init_                         html  
+    sexp_scalar_list_init_                  html  
+    sum_cplx_accumulate_                    html  
+    sum_cplx_complexes_out_                 html  
+    sum_cplx_foreach_                       html  
+    sum_cplx_r_complex_out_                 html  
+    sum_cplx_sexp_complexes_out_            html  
+    sum_cplx_sexp_protect_std_out_          html  
+    sum_cplx_sexp_sexp_out_                 html  
+    sum_cplx_sexp_std_out_                  html  
+    sum_cplx_typed_std_out_                 html  
+    sum_dbl_accumulate_                     html  
+    sum_dbl_for_                            html  
+    sum_dbl_foreach_                        html  
+    sum_dbl_sexp_accumulate_                html  
+    sum_dbl_sexp_for_                       html  
+    sum_dbl_sexp_foreach_                   html  
+    sum_dbl_sexp_writable_for_              html  
+    sum_int_accumulate_                     html  
+    sum_int_for_                            html  
+    sum_int_foreach_                        html  
+    sum_int_sexp_for_                       html  
+    unordered_map_to_list_                  html  
+    upper_bound                             html  
+    weak_ref_make_alive_                    html  
+    weak_ref_nil_not_alive_                 html  
+    weak_ref_rejects_vec_                   html  
+    weak_ref_typeof_                        html  
+    weak_ref_value_                         html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+* installing *source* package ‘cpp4r’ ...
+** this is package ‘cpp4r’ version ‘0.7.0’
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘cpp4r’
+    finding HTML links ... done
+    cpp4r-package                           html  
+    pkg_template                            html  
+    register                                html  
+    unvendor                                html  
+    vendor                                  html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4r)
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.3.0’
+** using staged installation
+** libs
+using C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
+g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
+g++ -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -fopenmp -lflexiblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘cpp4rtest’
+    finding HTML links ... done
+    add_int_vec_                            html  
+    add_vec_for_                            html  
+    as_integers_                            html  
+    assign_                                 html  
+    col_sums_                               html  
+    complex_add_                            html  
+    complex_imag_                           html  
+    complex_modulus_                        html  
+    complex_real_                           html  
+    contains_name_                          html  
+    cpp4rtest-package                       html  
+    data_frame_                             html  
+    env_exists_                             html  
+    env_get_int_                            html  
+    env_get_str_                            html  
+    env_set_                                html  
+    findInterval2                           html  
+    findInterval2_5                         html  
+    findInterval3                           html  
+    find_name_pos_                          html  
+    get_by_name_                            html  
+    gibbs_cpp2_                             html  
+    gibbs_cpp_                              html  
+    global_get_                             html  
+    grow_                                   html  
+    grow_cplx_                              html  
+    grow_strings_                           html  
+    grow_strings_manual_                    html  
+    insert_                                 html  
+    iterator_at_                            html  
+    iterator_count_                         html  
+    iterator_distance_                      html  
+    iterator_double_values_                 html  
+    iterator_find_                          html  
+    iterator_max_                           html  
+    iterator_min_                           html  
+    iterator_sum_                           html  
+    iterator_sum_int_                       html  
+    list_of_doubles_                        html  
+    list_of_integers_                       html  
+    list_of_named_                          html  
+    list_of_strings_                        html  
+    logical_to_dbl_                         html  
+    logical_to_int_                         html  
+    make_complex_                           html  
+    mat_mat_copy_dimnames_                  html  
+    mat_mat_create_dimnames_                html  
+    mat_sexp_copy_dimnames_                 html  
+    matrix_add_                             html  
+    matrix_add_coerce_test_                 html  
+    matrix_mixed_add_                       html  
+    my_message_n1_                          html  
+    my_message_n2_                          html  
+    my_stop_n1_                             html  
+    my_stop_n2_                             html  
+    my_warning_n1_                          html  
+    my_warning_n2_                          html  
+    named_doubles_                          html  
+    named_integers_                         html  
+    named_list_                             html  
+    named_list_c_style_                     html  
+    named_list_push_back_                   html  
+    named_strings_                          html  
+    negate_logical_                         html  
+    nullable_extptr_1                       html  
+    nullable_extptr_2                       html  
+    ordered_map_to_list_                    html  
+    pairlist_rejects_vec_                   html  
+    pairlist_size_                          html  
+    pairlist_to_list_                       html  
+    protect_many_                           html  
+    protect_many_preserve_                  html  
+    protect_many_rapi_                      html  
+    protect_many_sexp_                      html  
+    protect_one_                            html  
+    protect_one_preserve_                   html  
+    protect_one_rapi_                       html  
+    protect_one_sexp_                       html  
+    push_and_truncate_                      html  
+    raw_copy_                               html  
+    raw_xor_                                html  
+    release_                                html  
+    remove_altrep                           html  
+    reverse_vector_                         html  
+    row_sums_                               html  
+    safe_                                   html  
+    sexp_list_init_                         html  
+    sexp_scalar_list_init_                  html  
+    sum_cplx_accumulate_                    html  
+    sum_cplx_complexes_out_                 html  
+    sum_cplx_foreach_                       html  
+    sum_cplx_r_complex_out_                 html  
+    sum_cplx_sexp_complexes_out_            html  
+    sum_cplx_sexp_protect_std_out_          html  
+    sum_cplx_sexp_sexp_out_                 html  
+    sum_cplx_sexp_std_out_                  html  
+    sum_cplx_typed_std_out_                 html  
+    sum_dbl_accumulate_                     html  
+    sum_dbl_for_                            html  
+    sum_dbl_foreach_                        html  
+    sum_dbl_sexp_accumulate_                html  
+    sum_dbl_sexp_for_                       html  
+    sum_dbl_sexp_foreach_                   html  
+    sum_dbl_sexp_writable_for_              html  
+    sum_int_accumulate_                     html  
+    sum_int_for_                            html  
+    sum_int_foreach_                        html  
+    sum_int_sexp_for_                       html  
+    unordered_map_to_list_                  html  
+    upper_bound                             html  
+    weak_ref_make_alive_                    html  
+    weak_ref_nil_not_alive_                 html  
+    weak_ref_rejects_vec_                   html  
+    weak_ref_typeof_                        html  
+    weak_ref_value_                         html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+* using log directory ‘/check/cpp4rtest.Rcheck’
+* using R Under development (unstable) (2026-05-15 r90061)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)
+    GNU Fortran (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)
+* running under: Fedora Linux 42 (Container Image)
+* using session charset: UTF-8
+* current time: 2026-06-04 18:32:11 UTC
+* using options ‘--no-manual --as-cran’
+* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
+* this is package ‘cpp4rtest’ version ‘0.3.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
+
+New submission
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cpp4rtest’ can be installed ... [14s/14s] OK
+* used C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
+* checking pragmas in C/C++ headers and code ... OK
+* checking compilation flags used ... OK
+* checking compiled code ... OK
+* checking examples ... NONE
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ...
+  Running ‘tinytest.R’
+ OK
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+
+Status: 1 NOTE
+See
+  ‘/check/cpp4rtest.Rcheck/00check.log’
+for details.
+
+=== 00install.out ===
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.3.0’
+** using staged installation
+** libs
+using C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
+g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
+g++ -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -fopenmp -lflexiblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
+installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘cpp4rtest’
+    finding HTML links ... done
+    add_int_vec_                            html  
+    add_vec_for_                            html  
+    as_integers_                            html  
+    assign_                                 html  
+    col_sums_                               html  
+    complex_add_                            html  
+    complex_imag_                           html  
+    complex_modulus_                        html  
+    complex_real_                           html  
+    contains_name_                          html  
+    cpp4rtest-package                       html  
+    data_frame_                             html  
+    env_exists_                             html  
+    env_get_int_                            html  
+    env_get_str_                            html  
+    env_set_                                html  
+    findInterval2                           html  
+    findInterval2_5                         html  
+    findInterval3                           html  
+    find_name_pos_                          html  
+    get_by_name_                            html  
+    gibbs_cpp2_                             html  
+    gibbs_cpp_                              html  
+    global_get_                             html  
+    grow_                                   html  
+    grow_cplx_                              html  
+    grow_strings_                           html  
+    grow_strings_manual_                    html  
+    insert_                                 html  
+    iterator_at_                            html  
+    iterator_count_                         html  
+    iterator_distance_                      html  
+    iterator_double_values_                 html  
+    iterator_find_                          html  
+    iterator_max_                           html  
+    iterator_min_                           html  
+    iterator_sum_                           html  
+    iterator_sum_int_                       html  
+    list_of_doubles_                        html  
+    list_of_integers_                       html  
+    list_of_named_                          html  
+    list_of_strings_                        html  
+    logical_to_dbl_                         html  
+    logical_to_int_                         html  
+    make_complex_                           html  
+    mat_mat_copy_dimnames_                  html  
+    mat_mat_create_dimnames_                html  
+    mat_sexp_copy_dimnames_                 html  
+    matrix_add_                             html  
+    matrix_add_coerce_test_                 html  
+    matrix_mixed_add_                       html  
+    my_message_n1_                          html  
+    my_message_n2_                          html  
+    my_stop_n1_                             html  
+    my_stop_n2_                             html  
+    my_warning_n1_                          html  
+    my_warning_n2_                          html  
+    named_doubles_                          html  
+    named_integers_                         html  
+    named_list_                             html  
+    named_list_c_style_                     html  
+    named_list_push_back_                   html  
+    named_strings_                          html  
+    negate_logical_                         html  
+    nullable_extptr_1                       html  
+    nullable_extptr_2                       html  
+    ordered_map_to_list_                    html  
+    pairlist_rejects_vec_                   html  
+    pairlist_size_                          html  
+    pairlist_to_list_                       html  
+    protect_many_                           html  
+    protect_many_preserve_                  html  
+    protect_many_rapi_                      html  
+    protect_many_sexp_                      html  
+    protect_one_                            html  
+    protect_one_preserve_                   html  
+    protect_one_rapi_                       html  
+    protect_one_sexp_                       html  
+    push_and_truncate_                      html  
+    raw_copy_                               html  
+    raw_xor_                                html  
+    release_                                html  
+    remove_altrep                           html  
+    reverse_vector_                         html  
+    row_sums_                               html  
+    safe_                                   html  
+    sexp_list_init_                         html  
+    sexp_scalar_list_init_                  html  
+    sum_cplx_accumulate_                    html  
+    sum_cplx_complexes_out_                 html  
+    sum_cplx_foreach_                       html  
+    sum_cplx_r_complex_out_                 html  
+    sum_cplx_sexp_complexes_out_            html  
+    sum_cplx_sexp_protect_std_out_          html  
+    sum_cplx_sexp_sexp_out_                 html  
+    sum_cplx_sexp_std_out_                  html  
+    sum_cplx_typed_std_out_                 html  
+    sum_dbl_accumulate_                     html  
+    sum_dbl_for_                            html  
+    sum_dbl_foreach_                        html  
+    sum_dbl_sexp_accumulate_                html  
+    sum_dbl_sexp_for_                       html  
+    sum_dbl_sexp_foreach_                   html  
+    sum_dbl_sexp_writable_for_              html  
+    sum_int_accumulate_                     html  
+    sum_int_for_                            html  
+    sum_int_foreach_                        html  
+    sum_int_sexp_for_                       html  
+    unordered_map_to_list_                  html  
+    upper_bound                             html  
+    weak_ref_make_alive_                    html  
+    weak_ref_nil_not_alive_                 html  
+    weak_ref_rejects_vec_                   html  
+    weak_ref_typeof_                        html  
+    weak_ref_value_                         html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+=== 00check.log ===
+* using log directory ‘/check/cpp4rtest.Rcheck’
+* using R Under development (unstable) (2026-05-15 r90061)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)
+    GNU Fortran (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)
+* running under: Fedora Linux 42 (Container Image)
+* using session charset: UTF-8
+* current time: 2026-06-04 18:32:11 UTC
+* using options ‘--no-manual --as-cran’
+* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
+* this is package ‘cpp4rtest’ version ‘0.3.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
+
+New submission
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cpp4rtest’ can be installed ... [14s/14s] OK
+* used C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
+* checking pragmas in C/C++ headers and code ... OK
+* checking compilation flags used ... OK
+* checking compiled code ... OK
+* checking examples ... NONE
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘tinytest.R’
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: 1 NOTE

@@ -129,7 +129,7 @@ docker run --rm \
     if command -v apt-get >/dev/null 2>&1; then
       export DEBIAN_FRONTEND=noninteractive
       apt-get update -qq || true
-      apt-get install -y --no-install-recommends libuv1-dev libxml2-dev pkg-config || true
+      apt-get install -y --no-install-recommends libuv1-dev libxml2-dev pkg-config devscripts || true
     elif command -v dnf >/dev/null 2>&1 || command -v yum >/dev/null 2>&1; then
       PKG_MGR=dnf
       if command -v yum >/dev/null 2>&1; then PKG_MGR=yum; fi
