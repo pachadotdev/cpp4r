@@ -2,8 +2,13 @@
 
 #include <string>  // for string, basic_string
 
-#include "cpp4r/R.hpp"     // for R_xlen_t, SEXP, SEXPREC, LONG_VECTOR_SUPPORT
-#include "cpp4r/list.hpp"  // for list
+#include "cpp4r/R.hpp"            // for R_xlen_t, SEXP, SEXPREC, LONG_VECTOR_SUPPORT
+#include "cpp4r/cpp_version.hpp"  // for CPP4R_HAS_CXX17
+#include "cpp4r/list.hpp"         // for list
+
+#if CPP4R_HAS_CXX17
+#include <string_view>
+#endif
 
 namespace cpp4r {
 
@@ -21,6 +26,11 @@ class list_of : public list {
   T operator[](const char* pos) const { return list::operator[](pos); }
 
   T operator[](const std::string& pos) const { return list::operator[](pos.c_str()); }
+
+#if CPP4R_HAS_CXX17
+  // C++17+: accept string_view directly, avoiding a temporary std::string
+  T operator[](std::string_view pos) const { return list::operator[](r_string(pos)); }
+#endif
 };
 
 namespace writable {
@@ -49,6 +59,12 @@ class list_of : public writable::list {
     typename T::reference operator[](const std::string& pos) {
       return static_cast<T>(data_)[pos];
     }
+#if CPP4R_HAS_CXX17
+    // C++17+: accept string_view directly, avoiding a temporary std::string
+    typename T::reference operator[](std::string_view pos) {
+      return static_cast<T>(data_)[r_string(pos)];
+    }
+#endif
     proxy& operator=(const T& rhs) {
       data_ = rhs;
 
@@ -69,6 +85,12 @@ class list_of : public writable::list {
   proxy operator[](const std::string& pos) {
     return writable::list::operator[](pos.c_str());
   }
+#if CPP4R_HAS_CXX17
+  // C++17+: accept string_view directly, avoiding a temporary std::string
+  proxy operator[](std::string_view pos) {
+    return {writable::list::operator[](r_string(pos))};
+  }
+#endif
 };
 }  // namespace writable
 

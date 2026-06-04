@@ -89,8 +89,8 @@ struct matrix_dims {
  public:
   matrix_dims(SEXP data) : nrow_(Rf_nrows(data)), ncol_(Rf_ncols(data)) {}
   matrix_dims(int nrow, int ncol) : nrow_(nrow), ncol_(ncol) {}
-  CPP4R_ALWAYS_INLINE int nrow() const noexcept { return nrow_; }
-  CPP4R_ALWAYS_INLINE int ncol() const noexcept { return ncol_; }
+  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE int nrow() const noexcept { return nrow_; }
+  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE int ncol() const noexcept { return ncol_; }
 };
 
 struct matrix_slice {};
@@ -230,9 +230,17 @@ class matrix : public matrix_slices<S> {
   attribute_proxy<V> attr(const char* name) { return {vector_, name}; }
   attribute_proxy<V> attr(const std::string& name) { return {vector_, name.c_str()}; }
   attribute_proxy<V> attr(SEXP name) { return {vector_, name}; }
+#if CPP4R_HAS_CXX17
+  // C++17+: accept string_view directly, avoiding a temporary std::string
+  attribute_proxy<V> attr(std::string_view name) { return {vector_, name}; }
+#endif
   void attr(const char* name, SEXP value) { vector_.attr(name) = value; }
   void attr(const std::string& name, SEXP value) { vector_.attr(name) = value; }
   void attr(SEXP name, SEXP value) { vector_.attr(name) = value; }
+#if CPP4R_HAS_CXX17
+  // C++17+: accept string_view for the two-argument setter as well
+  void attr(std::string_view name, SEXP value) { vector_.attr(name) = value; }
+#endif
 
   template <typename Name>
   void attr(Name name, std::initializer_list<SEXP> value) {
@@ -245,12 +253,14 @@ class matrix : public matrix_slices<S> {
 
   r_vector<r_string> names() const { return r_vector<r_string>(vector_.names()); }
 
-  CPP4R_ALWAYS_INLINE const underlying_type* CPP4R_RESTRICT data_ptr() const noexcept {
+  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE const underlying_type*
+  data_ptr() const noexcept {
     return vector_.data_ptr();
   }
 
   template <typename V2 = V>
-  CPP4R_ALWAYS_INLINE underlying_type* CPP4R_RESTRICT data_ptr_writable() noexcept {
+  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE underlying_type*
+  data_ptr_writable() noexcept {
     return vector_.data_ptr_writable();
   }
 

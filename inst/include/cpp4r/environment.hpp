@@ -2,6 +2,11 @@
 
 #include <string>  // for string, basic_string
 
+// C++17+: std::string_view for zero-cost string argument passing
+#if CPP4R_HAS_CXX17
+#include <string_view>
+#endif
+
 #include "cpp4r/R.hpp"        // for R’s C interface (e.g., for SEXP)
 #include "cpp4r/as.hpp"       // for as_sexp
 #include "cpp4r/protect.hpp"  // for safe, protect, etc.
@@ -50,10 +55,23 @@ class environment {
   proxy operator[](const SEXP name) const { return {env_, name}; }
   proxy operator[](const char* name) const { return operator[](safe[Rf_install](name)); }
   proxy operator[](const std::string& name) const { return operator[](name.c_str()); }
+#if CPP4R_HAS_CXX17
+  // C++17+: accept string_view directly, avoiding a caller-side std::string construction
+  proxy operator[](std::string_view name) const {
+    std::string s(name);
+    return operator[](s.c_str());
+  }
+#endif
 
   bool exists(SEXP name) const { return safe[detail::r_env_has](env_, name); }
   bool exists(const char* name) const { return exists(safe[Rf_install](name)); }
   bool exists(const std::string& name) const { return exists(name.c_str()); }
+#if CPP4R_HAS_CXX17
+  bool exists(std::string_view name) const {
+    std::string s(name);
+    return exists(s.c_str());
+  }
+#endif
 
   void remove(SEXP name) {
     PROTECT(name);

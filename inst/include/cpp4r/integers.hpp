@@ -40,6 +40,7 @@ inline typename r_vector<int>::underlying_type* r_vector<int>::get_p(bool is_alt
 template <>
 inline typename r_vector<int>::underlying_type const* r_vector<int>::get_const_p(
     bool is_altrep, SEXP data) {
+  (void)is_altrep;
   return INTEGER_OR_NULL(data);
 }
 
@@ -87,6 +88,10 @@ inline integers as_integers(SEXP x) {
 
     writable::integers ret(len);
     int* CPP4R_RESTRICT dst = INTEGER(ret.data());
+    // R's allocator guarantees alignment; hint to compiler for SIMD.
+    dst = CPP4R_ASSUME_ALIGNED(dst, 4);
+    CPP4R_ASSUME(len >= 0);
+    CPP4R_ASSUME(dst != nullptr);
 
     if (!is_alt) {
       const double* CPP4R_RESTRICT src = REAL(x);
@@ -97,6 +102,7 @@ inline integers as_integers(SEXP x) {
             throw std::runtime_error("All elements must be integer-like");
           }
         }
+        CPP4R_VECTORIZE
         for (R_xlen_t i = 0; i < len; ++i) {
           dst[i] = static_cast<int>(src[i]);
         }
@@ -126,6 +132,9 @@ inline integers as_integers(SEXP x) {
           if (!is_convertible_without_loss_to_integer(buf[k])) {
             throw std::runtime_error("All elements must be integer-like");
           }
+        }
+        CPP4R_VECTORIZE
+        for (R_xlen_t k = 0; k < n; ++k) {
           dst[i + k] = static_cast<int>(buf[k]);
         }
       } else {
@@ -149,11 +158,15 @@ inline integers as_integers(SEXP x) {
     R_xlen_t len = Rf_xlength(x);
     writable::integers ret(len);
     int* CPP4R_RESTRICT dst = INTEGER(ret.data());
+    dst = CPP4R_ASSUME_ALIGNED(dst, 4);
+    CPP4R_ASSUME(len >= 0);
+    CPP4R_ASSUME(dst != nullptr);
     const int no_na = LOGICAL_NO_NA(x);
 
     if (!ALTREP(x)) {
       const int* CPP4R_RESTRICT src = LOGICAL(x);
       if (no_na) {
+        CPP4R_VECTORIZE
         for (R_xlen_t i = 0; i < len; ++i) {
           dst[i] = src[i];
         }
@@ -173,6 +186,7 @@ inline integers as_integers(SEXP x) {
       const R_xlen_t n = (len - i < kChunk) ? (len - i) : kChunk;
       LOGICAL_GET_REGION(x, i, n, buf);
       if (no_na) {
+        CPP4R_VECTORIZE
         for (R_xlen_t k = 0; k < n; ++k) {
           dst[i + k] = buf[k];
         }

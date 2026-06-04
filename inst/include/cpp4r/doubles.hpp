@@ -38,6 +38,7 @@ inline typename r_vector<double>::underlying_type* r_vector<double>::get_p(bool 
 template <>
 inline typename r_vector<double>::underlying_type const* r_vector<double>::get_const_p(
     bool is_altrep, SEXP data) {
+  (void)is_altrep;
   return REAL_OR_NULL(data);
 }
 
@@ -67,18 +68,18 @@ typedef r_vector<double> doubles;
 }  // namespace writable
 
 template <>
-inline const double* CPP4R_RESTRICT r_vector<double>::data_ptr() const noexcept {
+inline const double* r_vector<double>::data_ptr() const noexcept {
   return data_p_;
 }
 
 namespace writable {
 template <>
-inline double* CPP4R_RESTRICT r_vector<double>::data_ptr_writable() noexcept {
+inline double* r_vector<double>::data_ptr_writable() noexcept {
   return data_p_;
 }
 
 template <>
-inline const double* CPP4R_RESTRICT r_vector<double>::data_ptr() const noexcept {
+inline const double* r_vector<double>::data_ptr() const noexcept {
   return data_p_;
 }
 }  // namespace writable
@@ -94,11 +95,17 @@ inline doubles as_doubles(SEXP x) {
     R_xlen_t len = Rf_xlength(x);
     writable::doubles ret(len);
     double* CPP4R_RESTRICT dst = REAL(ret.data());
+    // R's allocator guarantees alignment; communicate this to the compiler
+    // so it can emit aligned SIMD loads/stores on the destination.
+    dst = CPP4R_ASSUME_ALIGNED(dst, 8);
+    CPP4R_ASSUME(len >= 0);
+    CPP4R_ASSUME(dst != nullptr);
 
     const bool is_alt = ALTREP(x);
     const int* CPP4R_RESTRICT src = nullptr;
     if (!is_alt) {
       src = (type == INTSXP) ? INTEGER(x) : LOGICAL(x);
+      src = CPP4R_ASSUME_ALIGNED(src, 4);
     }
 
     // Fast path: when R guarantees no NAs we can do a branchless cast that
@@ -108,6 +115,7 @@ inline doubles as_doubles(SEXP x) {
 
     if (!is_alt) {
       if (no_na) {
+        CPP4R_VECTORIZE
         for (R_xlen_t i = 0; i < len; ++i) {
           dst[i] = static_cast<double>(src[i]);
         }
@@ -133,6 +141,7 @@ inline doubles as_doubles(SEXP x) {
         LOGICAL_GET_REGION(x, i, n, buf);
       }
       if (no_na) {
+        CPP4R_VECTORIZE
         for (R_xlen_t k = 0; k < n; ++k) {
           dst[i + k] = static_cast<double>(buf[k]);
         }

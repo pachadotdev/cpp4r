@@ -35,6 +35,7 @@ inline typename r_vector<r_bool>::underlying_type* r_vector<r_bool>::get_p(bool 
 template <>
 inline typename r_vector<r_bool>::underlying_type const* r_vector<r_bool>::get_const_p(
     bool is_altrep, SEXP data) {
+  (void)is_altrep;
   return LOGICAL_OR_NULL(data);
 }
 

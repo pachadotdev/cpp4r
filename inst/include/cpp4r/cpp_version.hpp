@@ -152,7 +152,7 @@
 // CPP4R_ASSUME_ALIGNED: hint to compiler about pointer alignment
 // Useful for SIMD optimization when working with R vector data
 #if defined(__GNUC__) || defined(__clang__)
-#define CPP4R_ASSUME_ALIGNED(ptr, alignment) __builtin_assume_aligned(ptr, alignment)
+#define CPP4R_ASSUME_ALIGNED(ptr, alignment) static_cast<decltype(ptr)>(__builtin_assume_aligned(ptr, alignment))
 #else
 #define CPP4R_ASSUME_ALIGNED(ptr, alignment) (ptr)
 #endif

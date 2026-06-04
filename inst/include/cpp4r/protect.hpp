@@ -4,12 +4,20 @@
 #include <exception>  // for exception
 #include <stdexcept>  // for std::runtime_error
 #include <string>     // for string, basic_string
-#include <tuple>      // for tuple, make_tuple
+#include <tuple>      // for tuple, make_tuple, std::apply (C++17)
+
+// C++14+: std::index_sequence and std::make_index_sequence
+#if CPP4R_HAS_CXX14
+#include <utility>  // for std::index_sequence, std::make_index_sequence
+#endif
 
 // NB: cpp4r/R.hpp must precede R_ext/Error.h to ensure R_NO_REMAP is defined
 #include "cpp4r/R.hpp"            // for R’s C interface (e.g., for SEXP)
 #include "cpp4r/cpp_version.hpp"  // for CPP4R_ALWAYS_INLINE, CPP4R_LIKELY, etc.
-
+// C++17+: std::string_view for zero-allocation string argument passing
+#if CPP4R_HAS_CXX17
+#include <string_view>
+#endif
 #include "R_ext/Boolean.h"  // for Rboolean
 #include "R_ext/Error.h"    // for Rf_error, Rf_warning
 #include "R_ext/Print.h"    // for REprintf
@@ -86,6 +94,8 @@ unwind_protect(Fun&& code) {
 
 namespace detail {
 
+// C++11: custom index_sequence / make_index_sequence (added to <utility> in C++14)
+#if !CPP4R_HAS_CXX14
 template <size_t...>
 struct index_sequence {
   using type = index_sequence;
@@ -103,7 +113,14 @@ struct make_index_sequence
 
 template <>
 struct make_index_sequence<0> : index_sequence<> {};
+#else
+// C++14+: use the standard library
+using std::index_sequence;
+using std::make_index_sequence;
+#endif
 
+// C++11/14: custom apply() (std::apply not available until C++17 in <tuple>)
+#if !CPP4R_HAS_CXX17
 template <typename F, typename... Aref, size_t... I>
 decltype(std::declval<F&&>()(std::declval<Aref>()...)) apply(
     F&& f, std::tuple<Aref...>&& a, const index_sequence<I...>&) {
@@ -122,11 +139,17 @@ template <typename F>
 decltype(std::declval<F&&>()()) apply(F&& f, std::tuple<>&&) {
   return std::forward<F>(f)();
 }
+#endif
 
 template <typename F, typename... Aref>
 struct closure {
   decltype(std::declval<F*>()(std::declval<Aref>()...)) operator()() && {
+#if CPP4R_HAS_CXX17
+    // C++17+: std::apply from <tuple>; function pointer is directly callable
+    return std::apply(ptr_, std::move(arefs_));
+#else
     return apply(ptr_, std::move(arefs_));
+#endif
   }
   F* ptr_;
   std::tuple<Aref...> arefs_;
@@ -198,6 +221,21 @@ template <typename... Args>
 void warning(const std::string& fmt, Args... args) {
   safe[Rf_warningcall](R_NilValue, fmt.c_str(), args...);
 }
+
+#if CPP4R_HAS_CXX17
+// C++17+: accept string_view directly, avoiding a temporary std::string
+template <typename... Args>
+void stop [[noreturn]] (std::string_view fmt, Args... args) {
+  std::string s(fmt);
+  safe.noreturn(Rf_errorcall)(R_NilValue, s.c_str(), args...);
+}
+
+template <typename... Args>
+void warning(std::string_view fmt, Args... args) {
+  std::string s(fmt);
+  safe[Rf_warningcall](R_NilValue, s.c_str(), args...);
+}
+#endif
 
 namespace detail {
 

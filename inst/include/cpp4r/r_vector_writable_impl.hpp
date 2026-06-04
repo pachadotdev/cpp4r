@@ -40,7 +40,7 @@ CPP4R_ALWAYS_INLINE r_vector<T>::r_vector(SEXP data, fresh_allocation_tag)
 }
 
 template <typename T>
-inline r_vector<T>::r_vector(const r_vector& rhs) {
+inline r_vector<T>::r_vector(const r_vector& rhs) : cpp4r::r_vector<T>() {
   // We don't want to just pass through to the read-only constructor because we'd
   // have to convert to `SEXP` first, which could truncate, and then we'd still have
   // to shallow duplicate after that to really ensure we have a duplicate, which can
@@ -69,20 +69,27 @@ inline r_vector<T>::r_vector(r_vector&& rhs) {
   //
   // This ends up looking very similar to the equivalent read-only constructor from a
   // read-only `r_vector&& rhs`, with the addition of moving the capacity.
+#if CPP4R_HAS_CXX14
+  data_ = std::exchange(rhs.data_, R_NilValue);
+  protect_ = std::exchange(rhs.protect_, R_NilValue);
+  is_altrep_ = std::exchange(rhs.is_altrep_, false);
+  data_p_ = std::exchange(rhs.data_p_, nullptr);
+  length_ = std::exchange(rhs.length_, R_xlen_t(0));
+  capacity_ = std::exchange(rhs.capacity_, R_xlen_t(0));
+#else
   data_ = rhs.data_;
-  protect_ = rhs.protect_;
-  is_altrep_ = rhs.is_altrep_;
-  data_p_ = rhs.data_p_;
-  length_ = rhs.length_;
-  capacity_ = rhs.capacity_;
-
-  // Important for `rhs.protect_`, extra check for everything else
   rhs.data_ = R_NilValue;
+  protect_ = rhs.protect_;
   rhs.protect_ = R_NilValue;
+  is_altrep_ = rhs.is_altrep_;
   rhs.is_altrep_ = false;
+  data_p_ = rhs.data_p_;
   rhs.data_p_ = nullptr;
+  length_ = rhs.length_;
   rhs.length_ = 0;
+  capacity_ = rhs.capacity_;
   rhs.capacity_ = 0;
+#endif
 }
 
 template <typename T>
@@ -96,6 +103,9 @@ inline r_vector<T>::r_vector(std::initializer_list<T> il)
   auto it = il.begin();
 
   if (data_p_ != nullptr) {
+    // initializer_list stores elements contiguously; the compiler can vectorize
+    // this simple assignment loop for primitive types (double, int, Rcomplex).
+    CPP4R_VECTORIZE
     for (R_xlen_t i = 0; i < capacity_; ++i, ++it) {
       data_p_[i] = static_cast<underlying_type>(*it);
     }
@@ -402,7 +412,13 @@ inline typename r_vector<T>::reference r_vector<T>::at(const r_string& name) con
 
 template <typename T>
 inline void r_vector<T>::push_back(T value) {
-  while (length_ >= capacity_) {
+#if CPP4R_HAS_CXX20
+  // C++20+: [[unlikely]] attribute on the growth path so the compiler can
+  // optimise the common (non-growing) path as the hot branch
+  while (length_ >= capacity_) [[unlikely]] {
+#else
+  while (CPP4R_UNLIKELY(length_ >= capacity_)) {
+#endif
     reserve(capacity_ == 0 ? 1 : capacity_ *= 2);
   }
 
@@ -584,6 +600,14 @@ inline attribute_proxy<r_vector<T>> r_vector<T>::attr(const std::string& name) c
   return attribute_proxy<r_vector<T>>(*this, name.c_str());
 }
 
+#if CPP4R_HAS_CXX17
+// C++17+: accept string_view directly, avoiding a temporary std::string
+template <typename T>
+inline attribute_proxy<r_vector<T>> r_vector<T>::attr(std::string_view name) const {
+  return attribute_proxy<r_vector<T>>(*this, name);
+}
+#endif
+
 template <typename T>
 inline attribute_proxy<r_vector<T>> r_vector<T>::attr(SEXP name) const {
   return attribute_proxy<r_vector<T>>(*this, name);
@@ -626,8 +650,7 @@ inline typename r_vector<T>::proxy& r_vector<T>::proxy::operator=(const U& rhs) 
     SEXP char_sexp = Rf_mkCharCE(Rf_translateCharUTF8(s), CE_UTF8);
     set(char_sexp);
   } else if constexpr (std::is_same<T, cpp4r::r_complex>::value) {
-    if constexpr (std::is_same<typename std::decay<U>::type,
-                               std::complex<double>>::value) {
+    if constexpr (std::is_same<decay_t<U>, std::complex<double>>::value) {
       Rcomplex c;
       c.r = rhs.real();
       c.i = rhs.imag();
@@ -781,23 +804,43 @@ inline r_vector<T>::proxy::operator T() const {
 }
 
 template <typename T>
-inline typename r_vector<T>::underlying_type r_vector<T>::proxy::get() const {
-  if (p_ != nullptr) {
+CPP4R_ALWAYS_INLINE typename r_vector<T>::underlying_type r_vector<T>::proxy::get()
+    const {
+#if CPP4R_HAS_CXX20
+  if (p_ != nullptr) [[likely]] {
     return *p_;
   } else {
     // Handles ALTREP, VECSXP, and STRSXP cases
     return r_vector::get_elt(data_, index_);
   }
+#else
+  if (CPP4R_LIKELY(p_ != nullptr)) {
+    return *p_;
+  } else {
+    // Handles ALTREP, VECSXP, and STRSXP cases
+    return r_vector::get_elt(data_, index_);
+  }
+#endif
 }
 
 template <typename T>
-inline void r_vector<T>::proxy::set(typename r_vector<T>::underlying_type x) {
-  if (p_ != nullptr) {
+CPP4R_ALWAYS_INLINE void r_vector<T>::proxy::set(
+    typename r_vector<T>::underlying_type x) {
+#if CPP4R_HAS_CXX20
+  if (p_ != nullptr) [[likely]] {
     *p_ = x;
   } else {
     // Handles ALTREP, VECSXP, and STRSXP cases
     set_elt(data_, index_, x);
   }
+#else
+  if (CPP4R_LIKELY(p_ != nullptr)) {
+    *p_ = x;
+  } else {
+    // Handles ALTREP, VECSXP, and STRSXP cases
+    set_elt(data_, index_, x);
+  }
+#endif
 }
 
 template <typename T>
@@ -808,9 +851,18 @@ template <typename T>
 inline typename r_vector<T>::generic_iterator&
 r_vector<T>::generic_iterator::operator++() {
   ++pos_;
-  if (use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_) {
+  // Use `length_ > 0` (a cheap field read) rather than `use_buf(data_->is_altrep())`
+  // (a virtual-style call) — same semantics since fill_buf only sets length_ > 0
+  // when buffering is active. Matches the optimization already in the const version.
+#if CPP4R_HAS_CXX20
+  if (length_ > 0 && pos_ >= block_start_ + length_) [[unlikely]] {
     fill_buf(pos_);
   }
+#else
+  if (CPP4R_UNLIKELY(length_ > 0 && pos_ >= block_start_ + length_)) {
+    fill_buf(pos_);
+  }
+#endif
   return *this;
 }
 
@@ -831,9 +883,15 @@ template <typename T>
 inline typename r_vector<T>::generic_iterator& r_vector<T>::generic_iterator::operator+=(
     R_xlen_t rhs) {
   pos_ += rhs;
-  if (use_buf(data_->is_altrep()) && pos_ >= block_start_ + length_) {
+#if CPP4R_HAS_CXX20
+  if (length_ > 0 && pos_ >= block_start_ + length_) [[unlikely]] {
     fill_buf(pos_);
   }
+#else
+  if (CPP4R_UNLIKELY(length_ > 0 && pos_ >= block_start_ + length_)) {
+    fill_buf(pos_);
+  }
+#endif
   return *this;
 }
 

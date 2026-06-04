@@ -11,16 +11,30 @@
 #include <unordered_map>  // for std::unordered_map
 #include <vector>         // for std::vector
 
+// C++17+: std::string_view for zero-allocation string argument passing
+#if CPP4R_HAS_CXX17
+#include <string_view>
+#endif
+
 #include "cpp4r/R.hpp"        // for SEXP, SEXPREC, Rf_xlength, R_xlen_t
 #include "cpp4r/protect.hpp"  // for stop, protect, safe, protect::function
 
 namespace cpp4r {
 
+// C++14+: use the standard aliases; C++11: polyfill them
+#if CPP4R_HAS_CXX14
+template <bool C, typename R = void>
+using enable_if_t = std::enable_if_t<C, R>;
+
+template <typename T>
+using decay_t = std::decay_t<T>;
+#else
 template <bool C, typename R = void>
 using enable_if_t = typename std::enable_if<C, R>::type;
 
 template <typename T>
 using decay_t = typename std::decay<T>::type;
+#endif
 
 template <typename T>
 struct is_smart_ptr : std::false_type {};
@@ -57,8 +71,7 @@ using enable_if_integral =
                 R>;
 
 template <typename T, typename R = void>
-using enable_if_floating_point =
-    typename std::enable_if<std::is_floating_point<T>::value, R>::type;
+using enable_if_floating_point = enable_if_t<std::is_floating_point<T>::value, R>;
 
 template <typename E, typename R = void>
 using enable_if_enum = enable_if_t<std::is_enum<E>::value, R>;
@@ -264,6 +277,16 @@ enable_if_std_string<T, SEXP> as_sexp(const T& from) {
   return as_sexp(from.c_str());
 }
 
+#if CPP4R_HAS_CXX17
+// C++17+: string_view overload avoids constructing a temporary std::string
+inline SEXP as_sexp(std::string_view from) {
+  return unwind_protect([&] {
+    return Rf_ScalarString(
+        Rf_mkCharLenCE(from.data(), static_cast<int>(from.size()), CE_UTF8));
+  });
+}
+#endif
+
 template <typename Container, typename T = typename Container::value_type,
           typename = disable_if_convertible_to_sexp<Container>,
           typename = enable_if_t<!is_std_complex<Container>::value>>
@@ -273,6 +296,7 @@ enable_if_integral<T, SEXP> as_sexp(const Container& from) {
 
   auto it = from.begin();
   int* data_p = INTEGER(data);
+  CPP4R_VECTORIZE
   for (R_xlen_t i = 0; i < size; ++i, ++it) {
     data_p[i] = *it;
   }
@@ -292,6 +316,7 @@ enable_if_floating_point<T, SEXP> as_sexp(const Container& from) {
 
   auto it = from.begin();
   double* data_p = REAL(data);
+  CPP4R_VECTORIZE
   for (R_xlen_t i = 0; i < size; ++i, ++it) {
     data_p[i] = *it;
   }
@@ -311,6 +336,7 @@ enable_if_bool<T, SEXP> as_sexp(const Container& from) {
 
   auto it = from.begin();
   int* data_p = LOGICAL(data);
+  CPP4R_VECTORIZE
   for (R_xlen_t i = 0; i < size; ++i, ++it) {
     data_p[i] = *it;
   }
@@ -375,11 +401,21 @@ inline SEXP as_sexp(const std::map<std::string, SEXP>& map) {
   SEXP result = PROTECT(Rf_allocVector(VECSXP, size));
   SEXP names = PROTECT(Rf_allocVector(STRSXP, size));
 
+#if CPP4R_HAS_CXX17
+  // C++17+: structured bindings eliminate the explicit iterator variable
+  R_xlen_t i = 0;
+  for (auto& [key, val] : map) {
+    SET_VECTOR_ELT(result, i, val);
+    SET_STRING_ELT(names, i, Rf_mkCharCE(key.c_str(), CE_UTF8));
+    ++i;
+  }
+#else
   auto it = map.begin();
   for (R_xlen_t i = 0; i < size; ++i, ++it) {
     SET_VECTOR_ELT(result, i, it->second);
     SET_STRING_ELT(names, i, Rf_mkCharCE(it->first.c_str(), CE_UTF8));
   }
+#endif
 
   Rf_setAttrib(result, R_NamesSymbol, names);
   UNPROTECT(2);
@@ -392,11 +428,20 @@ inline SEXP as_sexp(const std::map<double, int>& map) {
   SEXP result = PROTECT(Rf_allocVector(VECSXP, size));
   SEXP names = PROTECT(Rf_allocVector(REALSXP, size));
 
+#if CPP4R_HAS_CXX17
+  R_xlen_t i = 0;
+  for (auto& [key, val] : map) {
+    SET_VECTOR_ELT(result, i, Rf_ScalarInteger(val));
+    REAL(names)[i] = key;
+    ++i;
+  }
+#else
   auto it = map.begin();
   for (R_xlen_t i = 0; i < size; ++i, ++it) {
     SET_VECTOR_ELT(result, i, Rf_ScalarInteger(it->second));
     REAL(names)[i] = it->first;
   }
+#endif
 
   Rf_setAttrib(result, R_NamesSymbol, names);
   UNPROTECT(2);
@@ -409,11 +454,20 @@ inline SEXP as_sexp(const std::unordered_map<std::string, SEXP>& map) {
   SEXP result = PROTECT(Rf_allocVector(VECSXP, size));
   SEXP names = PROTECT(Rf_allocVector(STRSXP, size));
 
+#if CPP4R_HAS_CXX17
+  R_xlen_t i = 0;
+  for (auto& [key, val] : map) {
+    SET_VECTOR_ELT(result, i, val);
+    SET_STRING_ELT(names, i, Rf_mkCharCE(key.c_str(), CE_UTF8));
+    ++i;
+  }
+#else
   auto it = map.begin();
   for (R_xlen_t i = 0; i < size; ++i, ++it) {
     SET_VECTOR_ELT(result, i, it->second);
     SET_STRING_ELT(names, i, Rf_mkCharCE(it->first.c_str(), CE_UTF8));
   }
+#endif
 
   Rf_setAttrib(result, R_NamesSymbol, names);
   UNPROTECT(2);
@@ -426,11 +480,20 @@ inline SEXP as_sexp(const std::unordered_map<double, int>& map) {
   SEXP result = PROTECT(Rf_allocVector(VECSXP, size));
   SEXP names = PROTECT(Rf_allocVector(REALSXP, size));
 
+#if CPP4R_HAS_CXX17
+  R_xlen_t i = 0;
+  for (auto& [key, val] : map) {
+    SET_VECTOR_ELT(result, i, Rf_ScalarInteger(val));
+    REAL(names)[i] = key;
+    ++i;
+  }
+#else
   auto it = map.begin();
   for (R_xlen_t i = 0; i < size; ++i, ++it) {
     SET_VECTOR_ELT(result, i, Rf_ScalarInteger(it->second));
     REAL(names)[i] = it->first;
   }
+#endif
 
   Rf_setAttrib(result, R_NamesSymbol, names);
   UNPROTECT(2);

@@ -103,24 +103,29 @@ class r_vector {
   T at(const size_type pos) const;
   T at(const r_string& name) const;
 
-  bool contains(const r_string& name) const;
-  bool is_altrep() const;
-  bool named() const;
-  R_xlen_t size() const;
-  bool empty() const;
-  SEXP data() const;
+  CPP4R_NODISCARD bool contains(const r_string& name) const;
+  CPP4R_NODISCARD bool is_altrep() const;
+  CPP4R_NODISCARD bool named() const;
+  CPP4R_NODISCARD R_xlen_t size() const;
+  CPP4R_NODISCARD bool empty() const;
+  CPP4R_NODISCARD SEXP data() const;
 
   // Fast-path pointer accessor to avoid REAL(data()) overhead in tight loops
   // Returns nullptr for ALTREP or writable vectors - use data_p_ field for those cases
-  CPP4R_ALWAYS_INLINE const underlying_type* CPP4R_RESTRICT data_ptr() const noexcept {
+  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE const underlying_type*
+  data_ptr() const noexcept {
     return data_p_;
   }
 
-  const sexp attr(const char* name) const;
-  const sexp attr(const std::string& name) const;
-  const sexp attr(SEXP name) const;
+  CPP4R_NODISCARD const sexp attr(const char* name) const;
+  CPP4R_NODISCARD const sexp attr(const std::string& name) const;
+  CPP4R_NODISCARD const sexp attr(SEXP name) const;
+#if CPP4R_HAS_CXX17
+  // C++17+: accept string_view directly, avoiding a temporary std::string
+  CPP4R_NODISCARD const sexp attr(std::string_view name) const;
+#endif
 
-  r_vector<r_string> names() const;
+  CPP4R_NODISCARD r_vector<r_string> names() const;
 
   class generic_const_iterator {
     // Iterator references:
@@ -181,13 +186,13 @@ class r_vector {
   const_iterator end() const;
   const_iterator cbegin() const;
   const_iterator cend() const;
-  const_iterator find(const r_string& name) const;
+  CPP4R_NODISCARD const_iterator find(const r_string& name) const;
   // Overload: use a pre-translated names cache for faster lookups (opt-in)
-  const_iterator find(const std::vector<std::string>& names_cache,
-                      const r_string& name) const;
+  CPP4R_NODISCARD const_iterator find(const std::vector<std::string>& names_cache,
+                                      const r_string& name) const;
   // Fast-path find using a pre-translated names vector (opt-in).
-  const_iterator find_cached(const std::vector<std::string>& names_cache,
-                             const r_string& name) const;
+  CPP4R_NODISCARD const_iterator find_cached(const std::vector<std::string>& names_cache,
+                                             const r_string& name) const;
 
  private:
 #if !CPP4R_HAS_CXX17
@@ -303,6 +308,12 @@ class r_vector : public cpp4r::r_vector<T> {
   template <typename U = T,
             typename std::enable_if<std::is_same<U, r_string>::value>::type* = nullptr>
   void push_back(const std::string& value);  // Pacha: r_string only (#406)
+#if CPP4R_HAS_CXX17
+  // C++17+: push_back directly from a string_view, avoiding a temporary std::string
+  template <typename U = T,
+            typename std::enable_if<std::is_same<U, r_string>::value>::type* = nullptr>
+  void push_back(std::string_view value);
+#endif
   void push_back(const named_arg& value);
   void pop_back();
 
@@ -370,20 +381,23 @@ class r_vector : public cpp4r::r_vector<T> {
 
   // Fast-path pointer accessor for writable vectors
   // Returns nullptr for ALTREP vectors
-  CPP4R_ALWAYS_INLINE underlying_type* CPP4R_RESTRICT data_ptr_writable() noexcept {
+  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE underlying_type*
+  data_ptr_writable() noexcept {
     return data_p_;
   }
 
-  CPP4R_ALWAYS_INLINE const underlying_type* CPP4R_RESTRICT data_ptr() const noexcept {
+  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE const underlying_type*
+  data_ptr() const noexcept {
     return data_p_;
   }
 
-  iterator find(const r_string& name) const;
+  CPP4R_NODISCARD iterator find(const r_string& name) const;
   // Overload: use a pre-translated names cache for faster lookups (opt-in)
-  iterator find(const std::vector<std::string>& names_cache, const r_string& name) const;
+  CPP4R_NODISCARD iterator find(const std::vector<std::string>& names_cache,
+                                const r_string& name) const;
   // Fast-path find using a pre-translated names vector (opt-in).
-  iterator find_cached(const std::vector<std::string>& names_cache,
-                       const r_string& name) const;
+  CPP4R_NODISCARD iterator find_cached(const std::vector<std::string>& names_cache,
+                                       const r_string& name) const;
 
   // Get the value at position without returning a proxy
   // This is useful when you need the actual value (e.g., for C-style printf functions)
@@ -394,11 +408,15 @@ class r_vector : public cpp4r::r_vector<T> {
   T value(const R_xlen_t pos) const;
   T value(const size_type pos) const;
 
-  attribute_proxy<r_vector<T>> attr(const char* name) const;
-  attribute_proxy<r_vector<T>> attr(const std::string& name) const;
-  attribute_proxy<r_vector<T>> attr(SEXP name) const;
+  CPP4R_NODISCARD attribute_proxy<r_vector<T>> attr(const char* name) const;
+  CPP4R_NODISCARD attribute_proxy<r_vector<T>> attr(const std::string& name) const;
+  CPP4R_NODISCARD attribute_proxy<r_vector<T>> attr(SEXP name) const;
+#if CPP4R_HAS_CXX17
+  // C++17+: accept string_view directly, avoiding a temporary std::string
+  CPP4R_NODISCARD attribute_proxy<r_vector<T>> attr(std::string_view name) const;
+#endif
 
-  attribute_proxy<r_vector<T>> names() const;
+  CPP4R_NODISCARD attribute_proxy<r_vector<T>> names() const;
 
   // Implemented in specialization
   static void set_elt(SEXP x, R_xlen_t i, underlying_type value);
@@ -412,6 +430,8 @@ class r_vector : public cpp4r::r_vector<T> {
 
    public:
     proxy(SEXP data, const R_xlen_t index, underlying_type* const p, bool is_altrep);
+
+    proxy(const proxy&) = default;
 
     proxy& operator=(const proxy& rhs);
 

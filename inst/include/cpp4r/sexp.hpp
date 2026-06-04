@@ -24,10 +24,9 @@ class sexp {
 
   // Templated constructor for types with operator SEXP()
   // This resolves ambiguity in C++14 between sexp(SEXP) and copy/move constructors
-  template <typename T, typename = typename std::enable_if<
-                            !std::is_same<typename std::decay<T>::type, sexp>::value &&
-                            !std::is_same<typename std::decay<T>::type, SEXP>::value &&
-                            std::is_convertible<T, SEXP>::value>::type>
+  template <typename T, typename = enable_if_t<!std::is_same<decay_t<T>, sexp>::value &&
+                                               !std::is_same<decay_t<T>, SEXP>::value &&
+                                               std::is_convertible<T, SEXP>::value>>
   sexp(T&& value) {
 #if CPP4R_HAS_CXX17
     data_ = static_cast<SEXP>(std::forward<T>(value));
@@ -64,24 +63,31 @@ class sexp {
 
   ~sexp() { detail::store::release(preserve_token_); }
 
-  attribute_proxy<sexp> attr(const char* name) const {
+  CPP4R_NODISCARD attribute_proxy<sexp> attr(const char* name) const {
     return attribute_proxy<sexp>(*this, name);
   }
 
-  attribute_proxy<sexp> attr(const std::string& name) const {
+  CPP4R_NODISCARD attribute_proxy<sexp> attr(const std::string& name) const {
     return attribute_proxy<sexp>(*this, name.c_str());
   }
 
-  attribute_proxy<sexp> attr(SEXP name) const {
+#if CPP4R_HAS_CXX17
+  // C++17+: accept string_view directly, avoiding a temporary std::string
+  CPP4R_NODISCARD attribute_proxy<sexp> attr(std::string_view name) const {
+    return attribute_proxy<sexp>(*this, name);
+  }
+#endif
+
+  CPP4R_NODISCARD attribute_proxy<sexp> attr(SEXP name) const {
     return attribute_proxy<sexp>(*this, name);
   }
 
-  attribute_proxy<sexp> names() const {
+  CPP4R_NODISCARD attribute_proxy<sexp> names() const {
     return attribute_proxy<sexp>(*this, R_NamesSymbol);
   }
 
-  operator SEXP() const noexcept { return data_; }
-  SEXP data() const noexcept { return data_; }
+  CPP4R_ALWAYS_INLINE operator SEXP() const noexcept { return data_; }
+  CPP4R_ALWAYS_INLINE SEXP data() const noexcept { return data_; }
 
   /// DEPRECATED: Do not use this, it will be removed soon.
   operator double() const { return REAL_ELT(data_, 0); }

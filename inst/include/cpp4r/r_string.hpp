@@ -3,6 +3,11 @@
 #include <string>
 #include <type_traits>
 
+// C++17+: std::string_view for zero-cost string argument passing
+#if CPP4R_HAS_CXX17
+#include <string_view>
+#endif
+
 #include "R_ext/Memory.h"
 #include "cpp4r/R.hpp"
 #include "cpp4r/as.hpp"
@@ -19,8 +24,15 @@ class r_string {
   r_string(const std::string& data)
       : data_(safe[Rf_mkCharLenCE](data.c_str(), data.size(), CE_UTF8)) {}
 
-  operator SEXP() const noexcept { return data_; }
-  operator sexp() const noexcept { return data_; }
+#if CPP4R_HAS_CXX17
+  // C++17+: construct directly from a string_view, avoiding a temporary std::string
+  r_string(std::string_view data)
+      : data_(safe[Rf_mkCharLenCE](data.data(), static_cast<int>(data.size()), CE_UTF8)) {
+  }
+#endif
+
+  CPP4R_ALWAYS_INLINE operator SEXP() const noexcept { return data_; }
+  CPP4R_ALWAYS_INLINE operator sexp() const noexcept { return data_; }
 
   operator std::string() const {
     // `Rf_xlength(CHARSXP)` returns the byte length of the original string,
@@ -40,13 +52,37 @@ class r_string {
   }
   bool operator==(const SEXP rhs) const noexcept { return data_.data() == rhs; }
   bool operator==(const char* rhs) const {
+#if CPP4R_HAS_CXX17
+    void* vmax = vmaxget();
+    const bool result = (std::string_view(Rf_translateCharUTF8(data_)) == rhs);
+    vmaxset(vmax);
+    return result;
+#else
     return static_cast<std::string>(*this) == rhs;
+#endif
   }
   bool operator==(const std::string& rhs) const {
+#if CPP4R_HAS_CXX17
+    void* vmax = vmaxget();
+    const bool result = (std::string_view(Rf_translateCharUTF8(data_)) == rhs);
+    vmaxset(vmax);
+    return result;
+#else
     return static_cast<std::string>(*this) == rhs;
+#endif
   }
 
-  R_xlen_t size() const noexcept { return Rf_xlength(data_); }
+#if CPP4R_HAS_CXX17
+  // C++17+: compare against a string_view without allocating a temporary std::string
+  bool operator==(std::string_view rhs) const {
+    void* vmax = vmaxget();
+    const bool result = (std::string_view(Rf_translateCharUTF8(data_)) == rhs);
+    vmaxset(vmax);
+    return result;
+  }
+#endif
+
+  CPP4R_NODISCARD R_xlen_t size() const noexcept { return Rf_xlength(data_); }
 
  private:
   sexp data_ = R_NilValue;

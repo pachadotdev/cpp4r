@@ -48,18 +48,24 @@ inline r_vector<T>::r_vector(const r_vector& x) {
 // releasing the object that we now own.
 template <typename T>
 inline r_vector<T>::r_vector(r_vector&& x) {
+#if CPP4R_HAS_CXX14
+  data_ = std::exchange(x.data_, R_NilValue);
+  protect_ = std::exchange(x.protect_, R_NilValue);
+  is_altrep_ = std::exchange(x.is_altrep_, false);
+  data_p_ = std::exchange(x.data_p_, nullptr);
+  length_ = std::exchange(x.length_, R_xlen_t(0));
+#else
   data_ = x.data_;
-  protect_ = x.protect_;
-  is_altrep_ = x.is_altrep_;
-  data_p_ = x.data_p_;
-  length_ = x.length_;
-
-  // Important for `x.protect_`, extra check for everything else
   x.data_ = R_NilValue;
+  protect_ = x.protect_;
   x.protect_ = R_NilValue;
+  is_altrep_ = x.is_altrep_;
   x.is_altrep_ = false;
+  data_p_ = x.data_p_;
   x.data_p_ = nullptr;
+  length_ = x.length_;
   x.length_ = 0;
+#endif
 }
 
 // `x` here is writable, meaning the underlying `SEXP` could have more `capacity` than
@@ -101,18 +107,24 @@ inline r_vector<T>& r_vector<T>::operator=(r_vector&& rhs) {
   // Release existing object that we protect
   detail::store::release(protect_);
 
+#if CPP4R_HAS_CXX14
+  data_ = std::exchange(rhs.data_, R_NilValue);
+  protect_ = std::exchange(rhs.protect_, R_NilValue);
+  is_altrep_ = std::exchange(rhs.is_altrep_, false);
+  data_p_ = std::exchange(rhs.data_p_, nullptr);
+  length_ = std::exchange(rhs.length_, R_xlen_t(0));
+#else
   data_ = rhs.data_;
-  protect_ = rhs.protect_;
-  is_altrep_ = rhs.is_altrep_;
-  data_p_ = rhs.data_p_;
-  length_ = rhs.length_;
-
-  // Important for `rhs.protect_`, extra check for everything else
   rhs.data_ = R_NilValue;
+  protect_ = rhs.protect_;
   rhs.protect_ = R_NilValue;
+  is_altrep_ = rhs.is_altrep_;
   rhs.is_altrep_ = false;
+  data_p_ = rhs.data_p_;
   rhs.data_p_ = nullptr;
+  length_ = rhs.length_;
   rhs.length_ = 0;
+#endif
 
   return *this;
 }
@@ -264,6 +276,14 @@ template <typename T>
 inline const sexp r_vector<T>::attr(const std::string& name) const {
   return SEXP(attribute_proxy<r_vector<T>>(*this, name.c_str()));
 }
+
+#if CPP4R_HAS_CXX17
+// C++17+: accept string_view directly, avoiding a temporary std::string
+template <typename T>
+inline const sexp r_vector<T>::attr(std::string_view name) const {
+  return SEXP(attribute_proxy<r_vector<T>>(*this, name));
+}
+#endif
 
 template <typename T>
 inline const sexp r_vector<T>::attr(SEXP name) const {
@@ -428,10 +448,17 @@ template <typename T>
 inline typename r_vector<T>::generic_const_iterator&
 r_vector<T>::generic_const_iterator::operator--() {
   --pos_;
-  if (length_ > 0 && pos_ >= 0 && pos_ < block_start_) {
+#if CPP4R_HAS_CXX20
+  if (length_ > 0 && pos_ >= 0 && pos_ < block_start_) [[unlikely]] {
     fill_buf(std::max(0_xl, pos_ - static_cast<R_xlen_t>(
                                        r_vector<T>::generic_const_iterator::BUF_CAP)));
   }
+#else
+  if (CPP4R_UNLIKELY(length_ > 0 && pos_ >= 0 && pos_ < block_start_)) {
+    fill_buf(std::max(0_xl, pos_ - static_cast<R_xlen_t>(
+                                       r_vector<T>::generic_const_iterator::BUF_CAP)));
+  }
+#endif
   return *this;
 }
 
@@ -439,9 +466,15 @@ template <typename T>
 inline typename r_vector<T>::generic_const_iterator&
 r_vector<T>::generic_const_iterator::operator+=(R_xlen_t i) {
   pos_ += i;
-  if (length_ > 0 && pos_ >= block_start_ + length_) {
+#if CPP4R_HAS_CXX20
+  if (length_ > 0 && pos_ >= block_start_ + length_) [[unlikely]] {
     fill_buf(pos_);
   }
+#else
+  if (CPP4R_UNLIKELY(length_ > 0 && pos_ >= block_start_ + length_)) {
+    fill_buf(pos_);
+  }
+#endif
   return *this;
 }
 
@@ -449,10 +482,17 @@ template <typename T>
 inline typename r_vector<T>::generic_const_iterator&
 r_vector<T>::generic_const_iterator::operator-=(R_xlen_t i) {
   pos_ -= i;
-  if (length_ > 0 && pos_ < block_start_) {
+#if CPP4R_HAS_CXX20
+  if (length_ > 0 && pos_ < block_start_) [[unlikely]] {
     fill_buf(std::max(0_xl, pos_ - static_cast<R_xlen_t>(
                                        r_vector<T>::generic_const_iterator::BUF_CAP)));
   }
+#else
+  if (CPP4R_UNLIKELY(length_ > 0 && pos_ < block_start_)) {
+    fill_buf(std::max(0_xl, pos_ - static_cast<R_xlen_t>(
+                                       r_vector<T>::generic_const_iterator::BUF_CAP)));
+  }
+#endif
   return *this;
 }
 
@@ -519,12 +559,28 @@ inline typename r_vector<T>::const_iterator r_vector<T>::find(
 template <typename T>
 inline typename r_vector<T>::const_iterator r_vector<T>::find_cached(
     const std::vector<std::string>& names_cache, const r_string& name) const {
+#if CPP4R_HAS_CXX17
+  // Use Rf_translateCharUTF8 + std::string_view for zero-allocation comparison
+  // instead of heap-allocating a std::string on every call.
+  void* vmax = vmaxget();
+  const std::string_view name_sv(Rf_translateCharUTF8(static_cast<SEXP>(name)));
   for (R_xlen_t pos = 0; pos < static_cast<R_xlen_t>(names_cache.size()); ++pos) {
-    if (names_cache[pos] == static_cast<std::string>(name)) {
+    if (names_cache[pos] == name_sv) {
+      vmaxset(vmax);
+      return begin() + pos;
+    }
+  }
+  vmaxset(vmax);
+  return end();
+#else
+  const std::string name_str = static_cast<std::string>(name);
+  for (R_xlen_t pos = 0; pos < static_cast<R_xlen_t>(names_cache.size()); ++pos) {
+    if (names_cache[pos] == name_str) {
       return begin() + pos;
     }
   }
   return end();
+#endif
 }
 
 template <typename T>
@@ -532,9 +588,15 @@ CPP4R_ALWAYS_INLINE T r_vector<T>::generic_const_iterator::operator*() const {
   // `length_ > 0` is set by `fill_buf` only when the ALTREP region buffer is
   // active. Avoid the expensive `use_buf(...) && size > THRESHOLD` chain on
   // every dereference.
-  if (length_ > 0) {
+#if CPP4R_HAS_CXX20
+  if (length_ > 0) [[likely]] {
     return static_cast<T>(buf_[pos_ - block_start_]);
   }
+#else
+  if (CPP4R_LIKELY(length_ > 0)) {
+    return static_cast<T>(buf_[pos_ - block_start_]);
+  }
+#endif
   return data_->operator[](pos_);
 }
 

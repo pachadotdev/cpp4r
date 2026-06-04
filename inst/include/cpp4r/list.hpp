@@ -46,11 +46,16 @@ inline SEXP r_vector<SEXP>::get_oob() {
 template <>
 inline void r_vector<SEXP>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
                                        typename r_vector::underlying_type* buf) {
+  (void)x;
+  (void)i;
+  (void)n;
+  (void)buf;
   cpp4r::stop("Unreachable!");
 }
 
 template <>
 inline bool r_vector<SEXP>::const_iterator::use_buf(bool is_altrep) {
+  (void)is_altrep;
   return false;
 }
 

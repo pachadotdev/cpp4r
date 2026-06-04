@@ -117,17 +117,27 @@ class function {
   }
 
   // Base case, just return
-  void construct_call(SEXP val) const {}
+  void construct_call(SEXP /*val*/) const {}
 };
 
 class package {
  public:
   package(const char* name) : data_(get_namespace(name)) {}
   package(const std::string& name) : data_(get_namespace(name.c_str())) {}
+#if CPP4R_HAS_CXX17
+  // C++17+: accept string_view directly, avoiding a temporary std::string
+  package(std::string_view name) : data_(get_namespace(std::string(name).c_str())) {}
+#endif
   function operator[](const char* name) {
     return safe[Rf_findFun](safe[Rf_install](name), data_);
   }
   function operator[](const std::string& name) { return operator[](name.c_str()); }
+#if CPP4R_HAS_CXX17
+  // C++17+: accept string_view directly, avoiding a temporary std::string
+  function operator[](std::string_view name) {
+    return operator[](std::string(name).c_str());
+  }
+#endif
 
  private:
   static SEXP get_namespace(const char* name) {
@@ -195,5 +205,10 @@ template <typename... Args>
 void message(const std::string& fmt_arg, Args... args) {
   message(fmt_arg.c_str(), args...);
 }
+
+#if CPP4R_HAS_CXX17
+// C++17+: accept string_view directly, avoiding a temporary std::string
+inline void message(std::string_view fmt_arg) { message(std::string(fmt_arg).c_str()); }
+#endif
 
 }  // namespace cpp4r

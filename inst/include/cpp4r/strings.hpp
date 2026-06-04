@@ -40,11 +40,16 @@ r_vector<r_string>::get_const_p(bool is_altrep, SEXP data) {
 template <>
 inline void r_vector<r_string>::get_region(SEXP x, R_xlen_t i, R_xlen_t n,
                                            typename r_vector::underlying_type* buf) {
+  (void)x;
+  (void)i;
+  (void)n;
+  (void)buf;
   cpp4r::stop("Unreachable!");
 }
 
 template <>
 inline bool r_vector<r_string>::const_iterator::use_buf(bool is_altrep) {
+  (void)is_altrep;
   return false;
 }
 
@@ -61,13 +66,35 @@ inline void r_vector<r_string>::set_elt(
 template <>
 template <typename U, typename std::enable_if<std::is_same<U, r_string>::value>::type*>
 inline void r_vector<r_string>::push_back(const std::string& value) {
-  while (this->length_ >= this->capacity_) {
+#if CPP4R_HAS_CXX20
+  while (this->length_ >= this->capacity_) [[unlikely]] {
+#else
+  while (CPP4R_UNLIKELY(this->length_ >= this->capacity_)) {
+#endif
     this->reserve(this->capacity_ == 0 ? 1 : this->capacity_ * 2);
   }
   set_elt(this->data_, this->length_,
           Rf_mkCharLenCE(value.c_str(), value.size(), CE_UTF8));
   ++this->length_;
 }
+
+#if CPP4R_HAS_CXX17
+// C++17+: push_back from string_view avoids constructing a temporary std::string
+template <>
+template <typename U, typename std::enable_if<std::is_same<U, r_string>::value>::type*>
+inline void r_vector<r_string>::push_back(std::string_view value) {
+#if CPP4R_HAS_CXX20
+  while (this->length_ >= this->capacity_) [[unlikely]] {
+#else
+  while (CPP4R_UNLIKELY(this->length_ >= this->capacity_)) {
+#endif
+    this->reserve(this->capacity_ == 0 ? 1 : this->capacity_ * 2);
+  }
+  set_elt(this->data_, this->length_,
+          Rf_mkCharLenCE(value.data(), static_cast<int>(value.size()), CE_UTF8));
+  ++this->length_;
+}
+#endif
 
 inline bool operator==(const r_vector<r_string>::proxy& lhs, r_string rhs) {
   return static_cast<r_string>(lhs).operator==(static_cast<std::string>(rhs).c_str());

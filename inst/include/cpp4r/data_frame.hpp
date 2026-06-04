@@ -33,8 +33,8 @@ class data_frame : public list {
   }
 
  public:
-  R_xlen_t nrow() const noexcept { return calc_nrow(*this); }
-  R_xlen_t ncol() const noexcept { return size(); }
+  CPP4R_NODISCARD R_xlen_t nrow() const noexcept { return calc_nrow(*this); }
+  CPP4R_NODISCARD R_xlen_t ncol() const noexcept { return size(); }
 };
 
 namespace writable {
@@ -64,12 +64,24 @@ class data_frame : public cpp4r::data_frame {
   using cpp4r::data_frame::ncol;
   using cpp4r::data_frame::nrow;
 
-  attribute_proxy<data_frame> attr(const char* name) const { return {*this, name}; }
-  attribute_proxy<data_frame> attr(const std::string& name) const {
+  CPP4R_NODISCARD attribute_proxy<data_frame> attr(const char* name) const {
+    return {*this, name};
+  }
+  CPP4R_NODISCARD attribute_proxy<data_frame> attr(const std::string& name) const {
     return {*this, name.c_str()};
   }
-  attribute_proxy<data_frame> attr(SEXP name) const { return {*this, name}; }
-  attribute_proxy<data_frame> names() const { return {*this, R_NamesSymbol}; }
+  CPP4R_NODISCARD attribute_proxy<data_frame> attr(SEXP name) const {
+    return {*this, name};
+  }
+#if CPP4R_HAS_CXX17
+  // C++17+: accept string_view directly, avoiding a temporary std::string
+  CPP4R_NODISCARD attribute_proxy<data_frame> attr(std::string_view name) const {
+    return {*this, name};
+  }
+#endif
+  CPP4R_NODISCARD attribute_proxy<data_frame> names() const {
+    return {*this, R_NamesSymbol};
+  }
 };
 
 }  // namespace writable
