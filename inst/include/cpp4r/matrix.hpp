@@ -253,14 +253,12 @@ class matrix : public matrix_slices<S> {
 
   r_vector<r_string> names() const { return r_vector<r_string>(vector_.names()); }
 
-  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE const underlying_type*
-  data_ptr() const noexcept {
+  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE const underlying_type* data_ptr() const noexcept {
     return vector_.data_ptr();
   }
 
   template <typename V2 = V>
-  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE underlying_type*
-  data_ptr_writable() noexcept {
+  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE underlying_type* data_ptr_writable() noexcept {
     return vector_.data_ptr_writable();
   }
 

@@ -112,8 +112,7 @@ class r_vector {
 
   // Fast-path pointer accessor to avoid REAL(data()) overhead in tight loops
   // Returns nullptr for ALTREP or writable vectors - use data_p_ field for those cases
-  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE const underlying_type*
-  data_ptr() const noexcept {
+  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE const underlying_type* data_ptr() const noexcept {
     return data_p_;
   }
 
@@ -381,13 +380,11 @@ class r_vector : public cpp4r::r_vector<T> {
 
   // Fast-path pointer accessor for writable vectors
   // Returns nullptr for ALTREP vectors
-  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE underlying_type*
-  data_ptr_writable() noexcept {
+  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE underlying_type* data_ptr_writable() noexcept {
     return data_p_;
   }
 
-  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE const underlying_type*
-  data_ptr() const noexcept {
+  CPP4R_NODISCARD CPP4R_ALWAYS_INLINE const underlying_type* data_ptr() const noexcept {
     return data_p_;
   }
 
