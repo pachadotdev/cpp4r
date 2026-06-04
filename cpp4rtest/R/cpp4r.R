@@ -228,6 +228,18 @@ matrix_mixed_add <- function(int_mat, dbl_mat) {
 	.Call(`_cpp4rtest_matrix_mixed_add`, int_mat, dbl_mat)
 }
 
+pairlist_size_ <- function(pl) {
+	.Call(`_cpp4rtest_pairlist_size_`, pl)
+}
+
+pairlist_to_list_ <- function(pl) {
+	.Call(`_cpp4rtest_pairlist_to_list_`, pl)
+}
+
+pairlist_rejects_vec_ <- function() {
+	invisible(.Call(`_cpp4rtest_pairlist_rejects_vec_`))
+}
+
 protect_one_rapi_ <- function(x, n) {
 	invisible(.Call(`_cpp4rtest_protect_one_rapi_`, x, n))
 }
@@ -325,6 +337,14 @@ safe_ <- function(x_sxp) {
 	.Call(`_cpp4rtest_safe_`, x_sxp)
 }
 
+sexp_list_init_ <- function() {
+	.Call(`_cpp4rtest_sexp_list_init_`)
+}
+
+sexp_scalar_list_init_ <- function() {
+	.Call(`_cpp4rtest_sexp_scalar_list_init_`)
+}
+
 grow_strings_ <- function(n, seed) {
 	.Call(`_cpp4rtest_grow_strings_`, n, seed)
 }
@@ -417,14 +437,6 @@ sum_int_accumulate_ <- function(x) {
 	.Call(`_cpp4rtest_sum_int_accumulate_`, x)
 }
 
-nullable_extptr_1 <- function() {
-	.Call(`_cpp4rtest_nullable_extptr_1`)
-}
-
-nullable_extptr_2 <- function() {
-	.Call(`_cpp4rtest_nullable_extptr_2`)
-}
-
 add_int_vec_ <- function(x, value) {
 	.Call(`_cpp4rtest_add_int_vec_`, x, value)
 }
@@ -493,14 +505,26 @@ raw_xor_ <- function(x, mask) {
 	.Call(`_cpp4rtest_raw_xor_`, x, mask)
 }
 
-test_destruction_inner <- function() {
-	invisible(.Call(`_cpp4rtest_test_destruction_inner`))
-}
-
-test_destruction_outer <- function() {
-	invisible(.Call(`_cpp4rtest_test_destruction_outer`))
-}
-
 push_and_truncate_ <- function(size_sexp) {
 	.Call(`_cpp4rtest_push_and_truncate_`, size_sexp)
+}
+
+weak_ref_make_alive_ <- function(key, val) {
+	.Call(`_cpp4rtest_weak_ref_make_alive_`, key, val)
+}
+
+weak_ref_value_ <- function(key, val) {
+	.Call(`_cpp4rtest_weak_ref_value_`, key, val)
+}
+
+weak_ref_typeof_ <- function(key, val) {
+	.Call(`_cpp4rtest_weak_ref_typeof_`, key, val)
+}
+
+weak_ref_nil_not_alive_ <- function() {
+	.Call(`_cpp4rtest_weak_ref_nil_not_alive_`)
+}
+
+weak_ref_rejects_vec_ <- function() {
+	invisible(.Call(`_cpp4rtest_weak_ref_rejects_vec_`))
 }

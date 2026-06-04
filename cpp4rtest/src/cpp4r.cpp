@@ -417,6 +417,28 @@ extern "C" SEXP _cpp4rtest_matrix_mixed_add(SEXP int_mat, SEXP dbl_mat) {
     return cpp4r::as_sexp(matrix_mixed_add(cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(int_mat), cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(dbl_mat)));
   END_CPP4R
 }
+// pairlist_helpers.h
+int pairlist_size_(SEXP pl);
+extern "C" SEXP _cpp4rtest_pairlist_size_(SEXP pl) {
+  BEGIN_CPP4R
+    return cpp4r::as_sexp(pairlist_size_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(pl)));
+  END_CPP4R
+}
+// pairlist_helpers.h
+list pairlist_to_list_(SEXP pl);
+extern "C" SEXP _cpp4rtest_pairlist_to_list_(SEXP pl) {
+  BEGIN_CPP4R
+    return cpp4r::as_sexp(pairlist_to_list_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(pl)));
+  END_CPP4R
+}
+// pairlist_helpers.h
+void pairlist_rejects_vec_();
+extern "C" SEXP _cpp4rtest_pairlist_rejects_vec_() {
+  BEGIN_CPP4R
+    pairlist_rejects_vec_();
+    return R_NilValue;
+  END_CPP4R
+}
 // protect.h
 void protect_one_rapi_(SEXP x, int n);
 extern "C" SEXP _cpp4rtest_protect_one_rapi_(SEXP x, SEXP n) {
@@ -543,6 +565,20 @@ SEXP safe_(SEXP x_sxp);
 extern "C" SEXP _cpp4rtest_safe_(SEXP x_sxp) {
   BEGIN_CPP4R
     return cpp4r::as_sexp(safe_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
+  END_CPP4R
+}
+// sexp_helpers.h
+list sexp_list_init_();
+extern "C" SEXP _cpp4rtest_sexp_list_init_() {
+  BEGIN_CPP4R
+    return cpp4r::as_sexp(sexp_list_init_());
+  END_CPP4R
+}
+// sexp_helpers.h
+list sexp_scalar_list_init_();
+extern "C" SEXP _cpp4rtest_sexp_scalar_list_init_() {
+  BEGIN_CPP4R
+    return cpp4r::as_sexp(sexp_scalar_list_init_());
   END_CPP4R
 }
 // strings.h
@@ -706,20 +742,6 @@ extern "C" SEXP _cpp4rtest_sum_int_accumulate_(SEXP x) {
     return cpp4r::as_sexp(sum_int_accumulate_(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::integers>>(x)));
   END_CPP4R
 }
-// test-external_pointer.h
-cpp4r::external_pointer<int> nullable_extptr_1();
-extern "C" SEXP _cpp4rtest_nullable_extptr_1() {
-  BEGIN_CPP4R
-    return cpp4r::as_sexp(nullable_extptr_1());
-  END_CPP4R
-}
-// test-external_pointer.h
-cpp4r::external_pointer<int> nullable_extptr_2();
-extern "C" SEXP _cpp4rtest_nullable_extptr_2() {
-  BEGIN_CPP4R
-    return cpp4r::as_sexp(nullable_extptr_2());
-  END_CPP4R
-}
 // test-helpers.h
 writable::integers add_int_vec_(integers x, int value);
 extern "C" SEXP _cpp4rtest_add_int_vec_(SEXP x, SEXP value) {
@@ -839,22 +861,6 @@ extern "C" SEXP _cpp4rtest_raw_xor_(SEXP x, SEXP mask) {
     return cpp4r::as_sexp(raw_xor_(cpp4r::as_cpp<cpp4r::decay_t<raws>>(x), cpp4r::as_cpp<cpp4r::decay_t<raws>>(mask)));
   END_CPP4R
 }
-// test-protect-nested.h
-void test_destruction_inner();
-extern "C" SEXP _cpp4rtest_test_destruction_inner() {
-  BEGIN_CPP4R
-    test_destruction_inner();
-    return R_NilValue;
-  END_CPP4R
-}
-// test-protect-nested.h
-void test_destruction_outer();
-extern "C" SEXP _cpp4rtest_test_destruction_outer() {
-  BEGIN_CPP4R
-    test_destruction_outer();
-    return R_NilValue;
-  END_CPP4R
-}
 // truncate.h
 SEXP push_and_truncate_(SEXP size_sexp);
 extern "C" SEXP _cpp4rtest_push_and_truncate_(SEXP size_sexp) {
@@ -862,8 +868,42 @@ extern "C" SEXP _cpp4rtest_push_and_truncate_(SEXP size_sexp) {
     return cpp4r::as_sexp(push_and_truncate_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(size_sexp)));
   END_CPP4R
 }
-
-extern "C" SEXP run_testthat_tests(SEXP);
+// weak_ref_helpers.h
+bool weak_ref_make_alive_(SEXP key, SEXP val);
+extern "C" SEXP _cpp4rtest_weak_ref_make_alive_(SEXP key, SEXP val) {
+  BEGIN_CPP4R
+    return cpp4r::as_sexp(weak_ref_make_alive_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(key), cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(val)));
+  END_CPP4R
+}
+// weak_ref_helpers.h
+SEXP weak_ref_value_(SEXP key, SEXP val);
+extern "C" SEXP _cpp4rtest_weak_ref_value_(SEXP key, SEXP val) {
+  BEGIN_CPP4R
+    return cpp4r::as_sexp(weak_ref_value_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(key), cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(val)));
+  END_CPP4R
+}
+// weak_ref_helpers.h
+int weak_ref_typeof_(SEXP key, SEXP val);
+extern "C" SEXP _cpp4rtest_weak_ref_typeof_(SEXP key, SEXP val) {
+  BEGIN_CPP4R
+    return cpp4r::as_sexp(weak_ref_typeof_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(key), cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(val)));
+  END_CPP4R
+}
+// weak_ref_helpers.h
+bool weak_ref_nil_not_alive_();
+extern "C" SEXP _cpp4rtest_weak_ref_nil_not_alive_() {
+  BEGIN_CPP4R
+    return cpp4r::as_sexp(weak_ref_nil_not_alive_());
+  END_CPP4R
+}
+// weak_ref_helpers.h
+void weak_ref_rejects_vec_();
+extern "C" SEXP _cpp4rtest_weak_ref_rejects_vec_() {
+  BEGIN_CPP4R
+    weak_ref_rejects_vec_();
+    return R_NilValue;
+  END_CPP4R
+}
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
@@ -924,6 +964,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_cpp4rtest_matrix_add", (DL_FUNC) &_cpp4rtest_matrix_add, 2},
     {"_cpp4rtest_matrix_add_coerce_test", (DL_FUNC) &_cpp4rtest_matrix_add_coerce_test, 2},
     {"_cpp4rtest_matrix_mixed_add", (DL_FUNC) &_cpp4rtest_matrix_mixed_add, 2},
+    {"_cpp4rtest_pairlist_size_", (DL_FUNC) &_cpp4rtest_pairlist_size_, 1},
+    {"_cpp4rtest_pairlist_to_list_", (DL_FUNC) &_cpp4rtest_pairlist_to_list_, 1},
+    {"_cpp4rtest_pairlist_rejects_vec_", (DL_FUNC) &_cpp4rtest_pairlist_rejects_vec_, 0},
     {"_cpp4rtest_protect_one_rapi_", (DL_FUNC) &_cpp4rtest_protect_one_rapi_, 2},
     {"_cpp4rtest_protect_one_sexp_", (DL_FUNC) &_cpp4rtest_protect_one_sexp_, 2},
     {"_cpp4rtest_protect_one_", (DL_FUNC) &_cpp4rtest_protect_one_, 2},
@@ -941,6 +984,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_cpp4rtest_notroxcpp6_", (DL_FUNC) &_cpp4rtest_notroxcpp6_, 1},
     {"_cpp4rtest_roxcpp7", (DL_FUNC) &_cpp4rtest_roxcpp7, 1},
     {"_cpp4rtest_safe_", (DL_FUNC) &_cpp4rtest_safe_, 1},
+    {"_cpp4rtest_sexp_list_init_", (DL_FUNC) &_cpp4rtest_sexp_list_init_, 0},
+    {"_cpp4rtest_sexp_scalar_list_init_", (DL_FUNC) &_cpp4rtest_sexp_scalar_list_init_, 0},
     {"_cpp4rtest_grow_strings_", (DL_FUNC) &_cpp4rtest_grow_strings_, 2},
     {"_cpp4rtest_grow_strings_manual_", (DL_FUNC) &_cpp4rtest_grow_strings_manual_, 2},
     {"_cpp4rtest_assign_", (DL_FUNC) &_cpp4rtest_assign_, 2},
@@ -964,8 +1009,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_cpp4rtest_sum_int_for2_", (DL_FUNC) &_cpp4rtest_sum_int_for2_, 1},
     {"_cpp4rtest_sum_int_foreach_", (DL_FUNC) &_cpp4rtest_sum_int_foreach_, 1},
     {"_cpp4rtest_sum_int_accumulate_", (DL_FUNC) &_cpp4rtest_sum_int_accumulate_, 1},
-    {"_cpp4rtest_nullable_extptr_1", (DL_FUNC) &_cpp4rtest_nullable_extptr_1, 0},
-    {"_cpp4rtest_nullable_extptr_2", (DL_FUNC) &_cpp4rtest_nullable_extptr_2, 0},
     {"_cpp4rtest_add_int_vec_", (DL_FUNC) &_cpp4rtest_add_int_vec_, 2},
     {"_cpp4rtest_as_integers_", (DL_FUNC) &_cpp4rtest_as_integers_, 1},
     {"_cpp4rtest_negate_logical_", (DL_FUNC) &_cpp4rtest_negate_logical_, 1},
@@ -983,10 +1026,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_cpp4rtest_iterator_distance_", (DL_FUNC) &_cpp4rtest_iterator_distance_, 1},
     {"_cpp4rtest_raw_copy_", (DL_FUNC) &_cpp4rtest_raw_copy_, 1},
     {"_cpp4rtest_raw_xor_", (DL_FUNC) &_cpp4rtest_raw_xor_, 2},
-    {"_cpp4rtest_test_destruction_inner", (DL_FUNC) &_cpp4rtest_test_destruction_inner, 0},
-    {"_cpp4rtest_test_destruction_outer", (DL_FUNC) &_cpp4rtest_test_destruction_outer, 0},
     {"_cpp4rtest_push_and_truncate_", (DL_FUNC) &_cpp4rtest_push_and_truncate_, 1},
-    {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 1},
+    {"_cpp4rtest_weak_ref_make_alive_", (DL_FUNC) &_cpp4rtest_weak_ref_make_alive_, 2},
+    {"_cpp4rtest_weak_ref_value_", (DL_FUNC) &_cpp4rtest_weak_ref_value_, 2},
+    {"_cpp4rtest_weak_ref_typeof_", (DL_FUNC) &_cpp4rtest_weak_ref_typeof_, 2},
+    {"_cpp4rtest_weak_ref_nil_not_alive_", (DL_FUNC) &_cpp4rtest_weak_ref_nil_not_alive_, 0},
+    {"_cpp4rtest_weak_ref_rejects_vec_", (DL_FUNC) &_cpp4rtest_weak_ref_rejects_vec_, 0},
     {NULL, NULL, 0}
 };
 }
