@@ -1,4 +1,5 @@
 # Tests for register-related functions
+# This tests the package template function indirectly
 
 source(system.file("tinytest", "helper.R", package = "cpp4r"))
 
@@ -115,12 +116,20 @@ local({
 # --- generate_cpp_functions ---
 
 local({
-  funs <- list(
-    file = character(), line = integer(), decoration = character(),
-    params = list(), context = list(), name = character(),
-    return_type = character(), args = list()
-  )
-  expect_equal(cpp4r:::generate_cpp_functions(funs), "")
+  tmp <- tempfile()
+  on.exit(unlink(tmp, recursive = TRUE))
+  dir.create(tmp)
+  writeLines("Package: mypkg", file.path(tmp, "DESCRIPTION"))
+  writeLines("useDynLib(mypkg, .registration = TRUE)", file.path(tmp, "NAMESPACE"))
+  tmpl_src <- system.file("extdata/pkgtemplate/src", package = "cpp4r")
+  file.copy(tmpl_src, tmp, recursive = TRUE)
+  register(tmp)
+  cpp_content <- paste(readLines(file.path(tmp, "src", "cpp4r.cpp")), collapse = "\n")
+  expect_true(grepl("_mypkg_plus_one", cpp_content, fixed = TRUE))
+  expect_true(grepl("_mypkg_plus_two", cpp_content, fixed = TRUE))
+  r_content <- paste(readLines(file.path(tmp, "R", "cpp4r.R")), collapse = "\n")
+  expect_true(grepl("plus_one", r_content, fixed = TRUE))
+  expect_true(grepl("plus_two", r_content, fixed = TRUE))
 })
 
 local({

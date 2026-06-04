@@ -190,6 +190,7 @@ generate_cpp_functions <- function(funs, package = "cpp4r") {
     funs$cpp_name <- funs$name
   }
   funs <- funs[cols]
+
   funs$real_params <- vcapply(funs$args, collapse_data, "{type} {name}")
   funs$sexp_params <- vcapply(funs$args, collapse_data, "SEXP {name}")
   funs$calls <- mapply(wrap_call, funs$cpp_name, funs$return_type, funs$args, SIMPLIFY = TRUE)
