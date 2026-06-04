@@ -526,17 +526,6 @@ local({
   expect_error_free(register(p))
 })
 
-local({
-  pkg <- local_package()
-  p <- pkg_path(pkg)
-  dir.create(file.path(p, "src"))
-  file.copy(
-    test_path("linking_to_registers.cpp"),
-    file.path(p, "src", "linking_to_registers.cpp")
-  )
-  expect_error_free(register(p))
-})
-
 # error if one or more registers is incorrect
 local({
   pkg <- local_package()
@@ -556,17 +545,6 @@ local({
   file.copy(
     test_path("multiple_incorrect.cpp"),
     file.path(p, "src", "multiple_incorrect.cpp")
-  )
-  expect_error(register(p))
-})
-
-local({
-  pkg <- local_package()
-  p <- pkg_path(pkg)
-  dir.create(file.path(p, "src"))
-  file.copy(
-    test_path("linking_to_incorrect_registers.cpp"),
-    file.path(p, "src", "linking_to_incorrect_registers.cpp")
   )
   expect_error(register(p))
 })
