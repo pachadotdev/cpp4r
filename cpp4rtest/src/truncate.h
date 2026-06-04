@@ -1,3 +1,9 @@
+/* roxygen
+@title Push and Truncate Doubles
+@description Test suite
+@param size_sexp initial size of the vector to grow and truncate
+@export
+*/
 [[cpp4r::register]] SEXP push_and_truncate_(SEXP size_sexp) {
   R_xlen_t size = INTEGER(size_sexp)[0];
 

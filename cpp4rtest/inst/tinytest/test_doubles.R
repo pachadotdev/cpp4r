@@ -6,10 +6,10 @@ local({
   x <- rnorm(len)
   sum_base <- sum(x)
 
-  tinytest::expect_equal(sum_dbl_for_(x), sum_base)
-  tinytest::expect_equal(sum_dbl_foreach_(x), sum_base)
-  tinytest::expect_equal(sum_dbl_accumulate_(x), sum_base)
-  tinytest::expect_equal(sum_dbl_for2_(x), sum_base)
+  expect_equal(sum_dbl_for_(x), sum_base)
+  expect_equal(sum_dbl_foreach_(x), sum_base)
+  expect_equal(sum_dbl_accumulate_(x), sum_base)
+  expect_equal(sum_dbl_sexp_for_(x), sum_base)
 })
 
 local({
@@ -17,13 +17,13 @@ local({
   x <- as.double(seq_len(len))
   sum_base <- sum(x)
 
-  tinytest::expect_equal(sum_dbl_for_(x), sum_base)
-  tinytest::expect_equal(sum_dbl_foreach_(x), sum_base)
-  tinytest::expect_equal(sum_dbl_accumulate_(x), sum_base)
-  tinytest::expect_equal(sum_dbl_for2_(x), sum_base)
+  expect_equal(sum_dbl_for_(x), sum_base)
+  expect_equal(sum_dbl_foreach_(x), sum_base)
+  expect_equal(sum_dbl_accumulate_(x), sum_base)
+  expect_equal(sum_dbl_sexp_for_(x), sum_base)
 })
 
 local({
   len <- 1e5L
-  tinytest::expect_equal(grow_(len), as.numeric(seq(0, len - 1)))
+  expect_equal(grow_(len), as.numeric(seq(0, len - 1)))
 })

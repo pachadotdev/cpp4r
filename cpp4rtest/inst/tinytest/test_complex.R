@@ -6,16 +6,16 @@ local({
   x <- complex(real = rnorm(len), imaginary = rnorm(len))
   sum_base <- sum(x)
 
-  tinytest::expect_equal(sum_cplx_for_(x), sum_base)
-  tinytest::expect_equal(sum_cplx_for_2_(x), sum_base)
-  tinytest::expect_equal(sum_cplx_for_3_(x), sum_base)
-  tinytest::expect_equal(sum_cplx_for_4_(x), sum_base)
-  tinytest::expect_equal(sum_cplx_for_5_(x), sum_base)
-  tinytest::expect_equal(sum_cplx_for_6_(x), sum_base)
+  expect_equal(sum_cplx_r_complex_out_(x), sum_base)
+  expect_equal(sum_cplx_complexes_out_(x), sum_base)
+  expect_equal(sum_cplx_typed_std_out_(x), sum_base)
+  expect_equal(sum_cplx_sexp_std_out_(x), sum_base)
+  expect_equal(sum_cplx_sexp_sexp_out_(x), sum_base)
+  expect_equal(sum_cplx_sexp_complexes_out_(x), sum_base)
 
-  tinytest::expect_equal(sum_cplx_foreach_(x), sum_base)
-  tinytest::expect_equal(sum_cplx_accumulate_(x), sum_base)
-  tinytest::expect_equal(sum_cplx_for2_(x), sum_base)
+  expect_equal(sum_cplx_foreach_(x), sum_base)
+  expect_equal(sum_cplx_accumulate_(x), sum_base)
+  expect_equal(sum_cplx_sexp_protect_std_out_(x), sum_base)
 })
 
 local({
@@ -24,15 +24,15 @@ local({
   x <- seq_complex(len)
   sum_base <- sum(x)
 
-  tinytest::expect_equal(sum_cplx_for_(x), sum_base)
-  tinytest::expect_equal(sum_cplx_foreach_(x), sum_base)
-  tinytest::expect_equal(sum_cplx_accumulate_(x), sum_base)
-  tinytest::expect_equal(sum_cplx_for2_(x), sum_base)
+  expect_equal(sum_cplx_r_complex_out_(x), sum_base)
+  expect_equal(sum_cplx_foreach_(x), sum_base)
+  expect_equal(sum_cplx_accumulate_(x), sum_base)
+  expect_equal(sum_cplx_sexp_protect_std_out_(x), sum_base)
 })
 
 local({
   len <- 1e5L
-  tinytest::expect_equal(grow_cplx_(len), complex(
+  expect_equal(grow_cplx_(len), complex(
     real = as.numeric(seq(0, len - 1)),
     imaginary = as.numeric(seq(0, len - 1))
   ))

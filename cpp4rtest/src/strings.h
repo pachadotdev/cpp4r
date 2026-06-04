@@ -33,6 +33,13 @@ std::string random_string() {
   return s;
 }
 
+/* roxygen
+@title Grow Strings
+@description Test suite
+@param n number of strings to grow
+@param seed seed for random string generation
+@export
+*/
 [[cpp4r::register]] cpp4r::strings grow_strings_(size_t n, int seed) {
   set_seed(seed);
   cpp4r::writable::strings x;
@@ -42,6 +49,13 @@ std::string random_string() {
   return x;
 }
 
+/* roxygen
+@title Grow Strings Manually
+@description Test suite
+@param n number of strings to grow
+@param seed seed for random string generation
+@export
+*/
 [[cpp4r::register]] SEXP grow_strings_manual_(size_t n, int seed) {
   set_seed(seed);
   SEXP data_ = PROTECT(Rf_allocVector(STRSXP, 0));
@@ -73,6 +87,13 @@ std::string random_string() {
   }
 }
 
+/* roxygen
+@title Assign Strings
+@description Test suite
+@param n number of strings to assign
+@param seed seed for random string generation
+@export
+*/
 [[cpp4r::register]] cpp4r::strings assign_(size_t n, int seed) {
   set_seed(seed);
   cpp4r::writable::strings x(n);

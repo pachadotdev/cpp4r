@@ -1,3 +1,8 @@
+/* roxygen
+@title Create a Data Frame on 'C++' Side (SEXP in, SEXP out)
+@description Test suite
+@export
+*/
 [[cpp4r::register]] SEXP data_frame_() {
   using namespace cpp4r::literals;
   cpp4r::writable::list out({

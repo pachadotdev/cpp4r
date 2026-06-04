@@ -1,3 +1,9 @@
+/* roxygen
+@title Remove ALTREP from Vector on 'C++' Side
+@description Test suite
+@param x vector to process
+@export
+*/
 [[cpp4r::register]] SEXP remove_altrep(SEXP x) {
   SEXP out = PROTECT(Rf_allocVector(REALSXP, Rf_xlength(x)));
   memcpy(REAL(out), REAL(x), Rf_xlength(x));
@@ -6,11 +12,25 @@
   return out;
 }
 
+/* roxygen
+@title Find Interval for a Single Value on 'C++' Side (typed in, double out)
+@description Test suite
+@param x single value to find interval for
+@param breaks vector of break points
+@export
+*/
 [[cpp4r::register]] double upper_bound(doubles x, doubles breaks) {
   auto pos = std::upper_bound(breaks.begin(), breaks.end(), x[0]);
   return std::distance(breaks.begin(), pos);
 }
 
+/* roxygen
+@title Find Interval for Multiple Values on 'C++' Side
+@description Test suite
+@param x vector of values to find intervals for
+@param breaks vector of break points
+@export
+*/
 [[cpp4r::register]] integers findInterval2(doubles x, doubles breaks) {
   writable::integers out(x.size());
   auto out_it = out.begin();
@@ -22,6 +42,14 @@
   }
   return out;
 }
+
+/* roxygen
+@title Find Interval for Multiple Values on 'C++' Side (optimized)
+@description Test suite
+@param x vector of values to find intervals for
+@param breaks vector of break points
+@export
+*/
 [[cpp4r::register]] integers findInterval2_5(doubles x, doubles breaks) {
   writable::integers out(x.size());
   auto out_it = out.begin();
@@ -37,6 +65,13 @@
 }
 
 // This version avoids the overhead of the cpp4r iterator types
+/* roxygen
+@title Find Interval for Multiple Values on 'C++' Side (optimized, raw pointers)
+@description Test suite
+@param x vector of values to find intervals for
+@param breaks vector of break points
+@export
+*/
 [[cpp4r::register]] integers findInterval3(doubles x, doubles breaks) {
   writable::integers out(x.size());
   auto out_it = out.begin();

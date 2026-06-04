@@ -4,28 +4,28 @@ local({
   real <- c(1.0, 2.0, 3.0)
   imag <- c(4.0, 5.0, 6.0)
   result <- make_complex_(real, imag)
-  tinytest::expect_equal(typeof(result), "complex")
-  tinytest::expect_equal(length(result), 3)
-  tinytest::expect_equal(Re(result), real)
-  tinytest::expect_equal(Im(result), imag)
+  expect_equal(typeof(result), "complex")
+  expect_equal(length(result), 3)
+  expect_equal(Re(result), real)
+  expect_equal(Im(result), imag)
 })
 
 local({
   x <- complex(real = c(1, 2, 3), imaginary = c(4, 5, 6))
   result <- complex_real_(x)
-  tinytest::expect_equal(as.numeric(result), c(1, 2, 3))
+  expect_equal(as.numeric(result), c(1, 2, 3))
 })
 
 local({
   x <- complex(real = c(1, 2, 3), imaginary = c(4, 5, 6))
   result <- complex_imag_(x)
-  tinytest::expect_equal(as.numeric(result), c(4, 5, 6))
+  expect_equal(as.numeric(result), c(4, 5, 6))
 })
 
 local({
   x <- complex(real = c(3, 0), imaginary = c(4, 5))
   result <- complex_modulus_(x)
-  tinytest::expect_equal(as.numeric(result), c(5, 5))
+  expect_equal(as.numeric(result), c(5, 5))
 })
 
 local({
@@ -33,12 +33,12 @@ local({
   y <- complex(real = c(5, 6), imaginary = c(7, 8))
   result <- complex_add_(x, y)
   expected <- x + y
-  tinytest::expect_equal(Re(result), Re(expected))
-  tinytest::expect_equal(Im(result), Im(expected))
+  expect_equal(Re(result), Re(expected))
+  expect_equal(Im(result), Im(expected))
 })
 
 local({
   x <- complex(0)
   result <- complex_real_(x)
-  tinytest::expect_equal(length(result), 0)
+  expect_equal(length(result), 0)
 })

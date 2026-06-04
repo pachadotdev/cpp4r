@@ -450,7 +450,8 @@ local({
   p <- pkg_path(pkg)
   dir.create(file.path(p, "src"))
   writeLines("int foo(int x) { return x; }", file.path(p, "src", "foo.cpp"))
-  expect_error_free(register(p))
+  result <- tryCatch(register(p), error = function(e) e)
+  expect_false(inherits(result, "error"))
 })
 
 # accepts .cc extension
@@ -515,7 +516,8 @@ local({
   p <- pkg_path(pkg)
   dir.create(file.path(p, "src"))
   file.copy(test_path("single.cpp"), file.path(p, "src", "single.cpp"))
-  expect_error_free(register(p))
+  result <- tryCatch(register(p), error = function(e) e)
+  expect_false(inherits(result, "error"))
 })
 
 local({
@@ -523,7 +525,8 @@ local({
   p <- pkg_path(pkg)
   dir.create(file.path(p, "src"))
   file.copy(test_path("multiple.cpp"), file.path(p, "src", "multiple.cpp"))
-  expect_error_free(register(p))
+  result <- tryCatch(register(p), error = function(e) e)
+  expect_false(inherits(result, "error"))
 })
 
 # error if one or more registers is incorrect

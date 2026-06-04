@@ -3,7 +3,8 @@
 * I re-added some conditionals to use newer C++ features when the compiler supports them. These
   can add a small speed gain in some cases.
 * The codebase default is C++11, with compile time newer standards detection to use newer features and optimizations.
-* Adds a check for all supported C++ standards in R >= 4.0.0 (>= CXX17)
+* Adds a check for all supported C++ standards in R >= 4.0.0 (>= CXX17).
+* Replaces 'testthat' with 'tinytest' after I detected an incompatibility with C++23.
 
 # cpp4r 0.6.0
 

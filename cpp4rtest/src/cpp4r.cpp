@@ -105,99 +105,65 @@ extern "C" SEXP _cpp4rtest_find_name_pos_(SEXP x, SEXP name) {
   END_CPP4R
 }
 // errors.h
-void my_stop_n1fmt(std::string mystring);
-extern "C" SEXP _cpp4rtest_my_stop_n1fmt(SEXP mystring) {
+void my_stop_n1_(std::string mystring);
+extern "C" SEXP _cpp4rtest_my_stop_n1_(SEXP mystring) {
   BEGIN_CPP4R
-    my_stop_n1fmt(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring));
+    my_stop_n1_(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring));
     return R_NilValue;
   END_CPP4R
 }
 // errors.h
-void my_stop_n2fmt(std::string mystring, std::string myarg);
-extern "C" SEXP _cpp4rtest_my_stop_n2fmt(SEXP mystring, SEXP myarg) {
+void my_stop_n2_(std::string mystring, std::string myarg);
+extern "C" SEXP _cpp4rtest_my_stop_n2_(SEXP mystring, SEXP myarg) {
   BEGIN_CPP4R
-    my_stop_n2fmt(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring), cpp4r::as_cpp<cpp4r::decay_t<std::string>>(myarg));
+    my_stop_n2_(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring), cpp4r::as_cpp<cpp4r::decay_t<std::string>>(myarg));
     return R_NilValue;
   END_CPP4R
 }
 // errors.h
-void my_warning_n1fmt(std::string mystring);
-extern "C" SEXP _cpp4rtest_my_warning_n1fmt(SEXP mystring) {
+void my_warning_n1_(std::string mystring);
+extern "C" SEXP _cpp4rtest_my_warning_n1_(SEXP mystring) {
   BEGIN_CPP4R
-    my_warning_n1fmt(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring));
+    my_warning_n1_(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring));
     return R_NilValue;
   END_CPP4R
 }
 // errors.h
-void my_warning_n2fmt(std::string mystring, std::string myarg);
-extern "C" SEXP _cpp4rtest_my_warning_n2fmt(SEXP mystring, SEXP myarg) {
+void my_warning_n2_(std::string mystring, std::string myarg);
+extern "C" SEXP _cpp4rtest_my_warning_n2_(SEXP mystring, SEXP myarg) {
   BEGIN_CPP4R
-    my_warning_n2fmt(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring), cpp4r::as_cpp<cpp4r::decay_t<std::string>>(myarg));
+    my_warning_n2_(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring), cpp4r::as_cpp<cpp4r::decay_t<std::string>>(myarg));
     return R_NilValue;
   END_CPP4R
 }
 // errors.h
-void my_message_n1fmt(std::string mystring);
-extern "C" SEXP _cpp4rtest_my_message_n1fmt(SEXP mystring) {
+void my_message_n1_(std::string mystring);
+extern "C" SEXP _cpp4rtest_my_message_n1_(SEXP mystring) {
   BEGIN_CPP4R
-    my_message_n1fmt(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring));
+    my_message_n1_(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring));
     return R_NilValue;
   END_CPP4R
 }
 // errors.h
-void my_message_n2fmt(std::string mystring, std::string myarg);
-extern "C" SEXP _cpp4rtest_my_message_n2fmt(SEXP mystring, SEXP myarg) {
+void my_message_n2_(std::string mystring, std::string myarg);
+extern "C" SEXP _cpp4rtest_my_message_n2_(SEXP mystring, SEXP myarg) {
   BEGIN_CPP4R
-    my_message_n2fmt(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring), cpp4r::as_cpp<cpp4r::decay_t<std::string>>(myarg));
+    my_message_n2_(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring), cpp4r::as_cpp<cpp4r::decay_t<std::string>>(myarg));
     return R_NilValue;
   END_CPP4R
 }
-// errors_fmt.h
-void my_stop(std::string mystring, int myarg);
-extern "C" SEXP _cpp4rtest_my_stop(SEXP mystring, SEXP myarg) {
+// external-pointers.h
+cpp4r::external_pointer<int> nullable_extptr_1();
+extern "C" SEXP _cpp4rtest_nullable_extptr_1() {
   BEGIN_CPP4R
-    my_stop(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring), cpp4r::as_cpp<cpp4r::decay_t<int>>(myarg));
-    return R_NilValue;
+    return cpp4r::as_sexp(nullable_extptr_1());
   END_CPP4R
 }
-// errors_fmt.h
-void my_stop_n1(std::string mystring);
-extern "C" SEXP _cpp4rtest_my_stop_n1(SEXP mystring) {
+// external-pointers.h
+cpp4r::external_pointer<int> nullable_extptr_2();
+extern "C" SEXP _cpp4rtest_nullable_extptr_2() {
   BEGIN_CPP4R
-    my_stop_n1(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring));
-    return R_NilValue;
-  END_CPP4R
-}
-// errors_fmt.h
-void my_warning(std::string mystring, std::string myarg);
-extern "C" SEXP _cpp4rtest_my_warning(SEXP mystring, SEXP myarg) {
-  BEGIN_CPP4R
-    my_warning(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring), cpp4r::as_cpp<cpp4r::decay_t<std::string>>(myarg));
-    return R_NilValue;
-  END_CPP4R
-}
-// errors_fmt.h
-void my_warning_n1(std::string mystring);
-extern "C" SEXP _cpp4rtest_my_warning_n1(SEXP mystring) {
-  BEGIN_CPP4R
-    my_warning_n1(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring));
-    return R_NilValue;
-  END_CPP4R
-}
-// errors_fmt.h
-void my_message(std::string mystring, std::string myarg);
-extern "C" SEXP _cpp4rtest_my_message(SEXP mystring, SEXP myarg) {
-  BEGIN_CPP4R
-    my_message(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring), cpp4r::as_cpp<cpp4r::decay_t<std::string>>(myarg));
-    return R_NilValue;
-  END_CPP4R
-}
-// errors_fmt.h
-void my_message_n1(std::string mystring);
-extern "C" SEXP _cpp4rtest_my_message_n1(SEXP mystring) {
-  BEGIN_CPP4R
-    my_message_n1(cpp4r::as_cpp<cpp4r::decay_t<std::string>>(mystring));
-    return R_NilValue;
+    return cpp4r::as_sexp(nullable_extptr_2());
   END_CPP4R
 }
 // find-intervals.h
@@ -348,73 +314,73 @@ extern "C" SEXP _cpp4rtest_unordered_map_to_list_(SEXP x) {
   END_CPP4R
 }
 // matrix.h
-SEXP gibbs_cpp(int N, int thin);
-extern "C" SEXP _cpp4rtest_gibbs_cpp(SEXP N, SEXP thin) {
+SEXP gibbs_cpp_(int N, int thin);
+extern "C" SEXP _cpp4rtest_gibbs_cpp_(SEXP N, SEXP thin) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(gibbs_cpp(cpp4r::as_cpp<cpp4r::decay_t<int>>(N), cpp4r::as_cpp<cpp4r::decay_t<int>>(thin)));
+    return cpp4r::as_sexp(gibbs_cpp_(cpp4r::as_cpp<cpp4r::decay_t<int>>(N), cpp4r::as_cpp<cpp4r::decay_t<int>>(thin)));
   END_CPP4R
 }
 // matrix.h
-cpp4r::doubles_matrix<> gibbs_cpp2(int N, int thin);
-extern "C" SEXP _cpp4rtest_gibbs_cpp2(SEXP N, SEXP thin) {
+cpp4r::doubles_matrix<> gibbs_cpp2_(int N, int thin);
+extern "C" SEXP _cpp4rtest_gibbs_cpp2_(SEXP N, SEXP thin) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(gibbs_cpp2(cpp4r::as_cpp<cpp4r::decay_t<int>>(N), cpp4r::as_cpp<cpp4r::decay_t<int>>(thin)));
+    return cpp4r::as_sexp(gibbs_cpp2_(cpp4r::as_cpp<cpp4r::decay_t<int>>(N), cpp4r::as_cpp<cpp4r::decay_t<int>>(thin)));
   END_CPP4R
 }
 // matrix.h
-cpp4r::doubles row_sums(cpp4r::doubles_matrix<cpp4r::by_row> x);
-extern "C" SEXP _cpp4rtest_row_sums(SEXP x) {
+cpp4r::doubles row_sums_(cpp4r::doubles_matrix<cpp4r::by_row> x);
+extern "C" SEXP _cpp4rtest_row_sums_(SEXP x) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(row_sums(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::doubles_matrix<cpp4r::by_row>>>(x)));
+    return cpp4r::as_sexp(row_sums_(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::doubles_matrix<cpp4r::by_row>>>(x)));
   END_CPP4R
 }
 // matrix.h
-cpp4r::doubles_matrix<> mat_mat_copy_dimnames(cpp4r::doubles_matrix<> x);
-extern "C" SEXP _cpp4rtest_mat_mat_copy_dimnames(SEXP x) {
+cpp4r::doubles_matrix<> mat_mat_copy_dimnames_(cpp4r::doubles_matrix<> x);
+extern "C" SEXP _cpp4rtest_mat_mat_copy_dimnames_(SEXP x) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(mat_mat_copy_dimnames(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::doubles_matrix<>>>(x)));
+    return cpp4r::as_sexp(mat_mat_copy_dimnames_(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::doubles_matrix<>>>(x)));
   END_CPP4R
 }
 // matrix.h
-SEXP mat_sexp_copy_dimnames(cpp4r::doubles_matrix<> x);
-extern "C" SEXP _cpp4rtest_mat_sexp_copy_dimnames(SEXP x) {
+SEXP mat_sexp_copy_dimnames_(cpp4r::doubles_matrix<> x);
+extern "C" SEXP _cpp4rtest_mat_sexp_copy_dimnames_(SEXP x) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(mat_sexp_copy_dimnames(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::doubles_matrix<>>>(x)));
+    return cpp4r::as_sexp(mat_sexp_copy_dimnames_(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::doubles_matrix<>>>(x)));
   END_CPP4R
 }
 // matrix.h
-cpp4r::doubles_matrix<> mat_mat_create_dimnames();
-extern "C" SEXP _cpp4rtest_mat_mat_create_dimnames() {
+cpp4r::doubles_matrix<> mat_mat_create_dimnames_();
+extern "C" SEXP _cpp4rtest_mat_mat_create_dimnames_() {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(mat_mat_create_dimnames());
+    return cpp4r::as_sexp(mat_mat_create_dimnames_());
   END_CPP4R
 }
 // matrix.h
-cpp4r::doubles col_sums(cpp4r::doubles_matrix<cpp4r::by_column> x);
-extern "C" SEXP _cpp4rtest_col_sums(SEXP x) {
+cpp4r::doubles col_sums_(cpp4r::doubles_matrix<cpp4r::by_column> x);
+extern "C" SEXP _cpp4rtest_col_sums_(SEXP x) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(col_sums(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::doubles_matrix<cpp4r::by_column>>>(x)));
+    return cpp4r::as_sexp(col_sums_(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::doubles_matrix<cpp4r::by_column>>>(x)));
   END_CPP4R
 }
 // matrix.h
-cpp4r::doubles_matrix<> matrix_add(const cpp4r::doubles_matrix<>& x, const cpp4r::doubles_matrix<>& y);
-extern "C" SEXP _cpp4rtest_matrix_add(SEXP x, SEXP y) {
+cpp4r::doubles_matrix<> matrix_add_(const cpp4r::doubles_matrix<>& x, const cpp4r::doubles_matrix<>& y);
+extern "C" SEXP _cpp4rtest_matrix_add_(SEXP x, SEXP y) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(matrix_add(cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(x), cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(y)));
+    return cpp4r::as_sexp(matrix_add_(cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(x), cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(y)));
   END_CPP4R
 }
 // matrix.h
-cpp4r::doubles_matrix<> matrix_add_coerce_test(const cpp4r::doubles_matrix<>& x, const cpp4r::doubles_matrix<>& y);
-extern "C" SEXP _cpp4rtest_matrix_add_coerce_test(SEXP x, SEXP y) {
+cpp4r::doubles_matrix<> matrix_add_coerce_test_(const cpp4r::doubles_matrix<>& x, const cpp4r::doubles_matrix<>& y);
+extern "C" SEXP _cpp4rtest_matrix_add_coerce_test_(SEXP x, SEXP y) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(matrix_add_coerce_test(cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(x), cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(y)));
+    return cpp4r::as_sexp(matrix_add_coerce_test_(cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(x), cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(y)));
   END_CPP4R
 }
 // matrix.h
-cpp4r::doubles_matrix<> matrix_mixed_add(const cpp4r::doubles_matrix<>& int_mat, const cpp4r::doubles_matrix<>& dbl_mat);
-extern "C" SEXP _cpp4rtest_matrix_mixed_add(SEXP int_mat, SEXP dbl_mat) {
+cpp4r::doubles_matrix<> matrix_mixed_add_(const cpp4r::doubles_matrix<>& int_mat, const cpp4r::doubles_matrix<>& dbl_mat);
+extern "C" SEXP _cpp4rtest_matrix_mixed_add_(SEXP int_mat, SEXP dbl_mat) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(matrix_mixed_add(cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(int_mat), cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(dbl_mat)));
+    return cpp4r::as_sexp(matrix_mixed_add_(cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(int_mat), cpp4r::as_cpp<cpp4r::decay_t<const cpp4r::doubles_matrix<>&>>(dbl_mat)));
   END_CPP4R
 }
 // pairlist_helpers.h
@@ -511,55 +477,6 @@ extern "C" SEXP _cpp4rtest_release_(SEXP n) {
     return R_NilValue;
   END_CPP4R
 }
-// roxygen1.h
-double notroxcpp1_(double x);
-extern "C" SEXP _cpp4rtest_notroxcpp1_(SEXP x) {
-  BEGIN_CPP4R
-    return cpp4r::as_sexp(notroxcpp1_(cpp4r::as_cpp<cpp4r::decay_t<double>>(x)));
-  END_CPP4R
-}
-// roxygen1.h
-double roxcpp2(double x);
-extern "C" SEXP _cpp4rtest_roxcpp2(SEXP x) {
-  BEGIN_CPP4R
-    return cpp4r::as_sexp(roxcpp2(cpp4r::as_cpp<cpp4r::decay_t<double>>(x)));
-  END_CPP4R
-}
-// roxygen2.h
-double roxcpp3(double x);
-extern "C" SEXP _cpp4rtest_roxcpp3(SEXP x) {
-  BEGIN_CPP4R
-    return cpp4r::as_sexp(roxcpp3(cpp4r::as_cpp<cpp4r::decay_t<double>>(x)));
-  END_CPP4R
-}
-// roxygen2.h
-double roxcpp4(double x);
-extern "C" SEXP _cpp4rtest_roxcpp4(SEXP x) {
-  BEGIN_CPP4R
-    return cpp4r::as_sexp(roxcpp4(cpp4r::as_cpp<cpp4r::decay_t<double>>(x)));
-  END_CPP4R
-}
-// roxygen3.h
-double roxcpp5(double x);
-extern "C" SEXP _cpp4rtest_roxcpp5(SEXP x) {
-  BEGIN_CPP4R
-    return cpp4r::as_sexp(roxcpp5(cpp4r::as_cpp<cpp4r::decay_t<double>>(x)));
-  END_CPP4R
-}
-// roxygen3.h
-double notroxcpp6_(double x);
-extern "C" SEXP _cpp4rtest_notroxcpp6_(SEXP x) {
-  BEGIN_CPP4R
-    return cpp4r::as_sexp(notroxcpp6_(cpp4r::as_cpp<cpp4r::decay_t<double>>(x)));
-  END_CPP4R
-}
-// roxygen3.h
-double roxcpp7(double x);
-extern "C" SEXP _cpp4rtest_roxcpp7(SEXP x) {
-  BEGIN_CPP4R
-    return cpp4r::as_sexp(roxcpp7(cpp4r::as_cpp<cpp4r::decay_t<double>>(x)));
-  END_CPP4R
-}
 // safe.h
 SEXP safe_(SEXP x_sxp);
 extern "C" SEXP _cpp4rtest_safe_(SEXP x_sxp) {
@@ -610,17 +527,17 @@ extern "C" SEXP _cpp4rtest_sum_dbl_for_(SEXP x) {
   END_CPP4R
 }
 // sum.h
-double sum_dbl_for2_(SEXP x_sxp);
-extern "C" SEXP _cpp4rtest_sum_dbl_for2_(SEXP x_sxp) {
+double sum_dbl_sexp_for_(SEXP x_sxp);
+extern "C" SEXP _cpp4rtest_sum_dbl_sexp_for_(SEXP x_sxp) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(sum_dbl_for2_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
+    return cpp4r::as_sexp(sum_dbl_sexp_for_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
   END_CPP4R
 }
 // sum.h
-double sum_dbl_for3_(SEXP x_sxp);
-extern "C" SEXP _cpp4rtest_sum_dbl_for3_(SEXP x_sxp) {
+double sum_dbl_sexp_writable_for_(SEXP x_sxp);
+extern "C" SEXP _cpp4rtest_sum_dbl_sexp_writable_for_(SEXP x_sxp) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(sum_dbl_for3_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
+    return cpp4r::as_sexp(sum_dbl_sexp_writable_for_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
   END_CPP4R
 }
 // sum.h
@@ -631,10 +548,10 @@ extern "C" SEXP _cpp4rtest_sum_dbl_foreach_(SEXP x) {
   END_CPP4R
 }
 // sum.h
-double sum_dbl_foreach2_(SEXP x_sxp);
-extern "C" SEXP _cpp4rtest_sum_dbl_foreach2_(SEXP x_sxp) {
+double sum_dbl_sexp_foreach_(SEXP x_sxp);
+extern "C" SEXP _cpp4rtest_sum_dbl_sexp_foreach_(SEXP x_sxp) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(sum_dbl_foreach2_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
+    return cpp4r::as_sexp(sum_dbl_sexp_foreach_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
   END_CPP4R
 }
 // sum.h
@@ -645,73 +562,73 @@ extern "C" SEXP _cpp4rtest_sum_dbl_accumulate_(SEXP x) {
   END_CPP4R
 }
 // sum.h
-double sum_dbl_accumulate2_(SEXP x_sxp);
-extern "C" SEXP _cpp4rtest_sum_dbl_accumulate2_(SEXP x_sxp) {
+double sum_dbl_sexp_accumulate_(SEXP x_sxp);
+extern "C" SEXP _cpp4rtest_sum_dbl_sexp_accumulate_(SEXP x_sxp) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(sum_dbl_accumulate2_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
+    return cpp4r::as_sexp(sum_dbl_sexp_accumulate_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
   END_CPP4R
 }
-// sum.h
-cpp4r::r_complex sum_cplx_for_(cpp4r::complexes x);
-extern "C" SEXP _cpp4rtest_sum_cplx_for_(SEXP x) {
+// sum_cplx.h
+cpp4r::r_complex sum_cplx_r_complex_out_(cpp4r::complexes x);
+extern "C" SEXP _cpp4rtest_sum_cplx_r_complex_out_(SEXP x) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(sum_cplx_for_(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::complexes>>(x)));
+    return cpp4r::as_sexp(sum_cplx_r_complex_out_(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::complexes>>(x)));
   END_CPP4R
 }
-// sum.h
-cpp4r::complexes sum_cplx_for_2_(cpp4r::complexes x);
-extern "C" SEXP _cpp4rtest_sum_cplx_for_2_(SEXP x) {
+// sum_cplx.h
+cpp4r::complexes sum_cplx_complexes_out_(cpp4r::complexes x);
+extern "C" SEXP _cpp4rtest_sum_cplx_complexes_out_(SEXP x) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(sum_cplx_for_2_(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::complexes>>(x)));
+    return cpp4r::as_sexp(sum_cplx_complexes_out_(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::complexes>>(x)));
   END_CPP4R
 }
-// sum.h
-std::complex<double> sum_cplx_for_3_(cpp4r::complexes x_sxp);
-extern "C" SEXP _cpp4rtest_sum_cplx_for_3_(SEXP x_sxp) {
+// sum_cplx.h
+std::complex<double> sum_cplx_typed_std_out_(cpp4r::complexes x_sxp);
+extern "C" SEXP _cpp4rtest_sum_cplx_typed_std_out_(SEXP x_sxp) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(sum_cplx_for_3_(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::complexes>>(x_sxp)));
+    return cpp4r::as_sexp(sum_cplx_typed_std_out_(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::complexes>>(x_sxp)));
   END_CPP4R
 }
-// sum.h
-std::complex<double> sum_cplx_for_4_(SEXP x_sxp);
-extern "C" SEXP _cpp4rtest_sum_cplx_for_4_(SEXP x_sxp) {
+// sum_cplx.h
+std::complex<double> sum_cplx_sexp_std_out_(SEXP x_sxp);
+extern "C" SEXP _cpp4rtest_sum_cplx_sexp_std_out_(SEXP x_sxp) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(sum_cplx_for_4_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
+    return cpp4r::as_sexp(sum_cplx_sexp_std_out_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
   END_CPP4R
 }
-// sum.h
-SEXP sum_cplx_for_5_(SEXP x_sxp);
-extern "C" SEXP _cpp4rtest_sum_cplx_for_5_(SEXP x_sxp) {
+// sum_cplx.h
+SEXP sum_cplx_sexp_sexp_out_(SEXP x_sxp);
+extern "C" SEXP _cpp4rtest_sum_cplx_sexp_sexp_out_(SEXP x_sxp) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(sum_cplx_for_5_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
+    return cpp4r::as_sexp(sum_cplx_sexp_sexp_out_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
   END_CPP4R
 }
-// sum.h
-cpp4r::complexes sum_cplx_for_6_(SEXP x_sxp);
-extern "C" SEXP _cpp4rtest_sum_cplx_for_6_(SEXP x_sxp) {
+// sum_cplx.h
+cpp4r::complexes sum_cplx_sexp_complexes_out_(SEXP x_sxp);
+extern "C" SEXP _cpp4rtest_sum_cplx_sexp_complexes_out_(SEXP x_sxp) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(sum_cplx_for_6_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
+    return cpp4r::as_sexp(sum_cplx_sexp_complexes_out_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
   END_CPP4R
 }
-// sum.h
+// sum_cplx.h
 std::complex<double> sum_cplx_foreach_(cpp4r::complexes x);
 extern "C" SEXP _cpp4rtest_sum_cplx_foreach_(SEXP x) {
   BEGIN_CPP4R
     return cpp4r::as_sexp(sum_cplx_foreach_(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::complexes>>(x)));
   END_CPP4R
 }
-// sum.h
+// sum_cplx.h
 std::complex<double> sum_cplx_accumulate_(cpp4r::complexes x);
 extern "C" SEXP _cpp4rtest_sum_cplx_accumulate_(SEXP x) {
   BEGIN_CPP4R
     return cpp4r::as_sexp(sum_cplx_accumulate_(cpp4r::as_cpp<cpp4r::decay_t<cpp4r::complexes>>(x)));
   END_CPP4R
 }
-// sum.h
-std::complex<double> sum_cplx_for2_(SEXP x_sxp);
-extern "C" SEXP _cpp4rtest_sum_cplx_for2_(SEXP x_sxp) {
+// sum_cplx.h
+std::complex<double> sum_cplx_sexp_protect_std_out_(SEXP x_sxp);
+extern "C" SEXP _cpp4rtest_sum_cplx_sexp_protect_std_out_(SEXP x_sxp) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(sum_cplx_for2_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
+    return cpp4r::as_sexp(sum_cplx_sexp_protect_std_out_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
   END_CPP4R
 }
 // sum_int.h
@@ -722,10 +639,10 @@ extern "C" SEXP _cpp4rtest_sum_int_for_(SEXP x) {
   END_CPP4R
 }
 // sum_int.h
-double sum_int_for2_(SEXP x_);
-extern "C" SEXP _cpp4rtest_sum_int_for2_(SEXP x_) {
+double sum_int_sexp_for_(SEXP x_sxp);
+extern "C" SEXP _cpp4rtest_sum_int_sexp_for_(SEXP x_sxp) {
   BEGIN_CPP4R
-    return cpp4r::as_sexp(sum_int_for2_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_)));
+    return cpp4r::as_sexp(sum_int_sexp_for_(cpp4r::as_cpp<cpp4r::decay_t<SEXP>>(x_sxp)));
   END_CPP4R
 }
 // sum_int.h
@@ -921,18 +838,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"_cpp4rtest_get_by_name_", (DL_FUNC) &_cpp4rtest_get_by_name_, 2},
     {"_cpp4rtest_contains_name_", (DL_FUNC) &_cpp4rtest_contains_name_, 2},
     {"_cpp4rtest_find_name_pos_", (DL_FUNC) &_cpp4rtest_find_name_pos_, 2},
-    {"_cpp4rtest_my_stop_n1fmt", (DL_FUNC) &_cpp4rtest_my_stop_n1fmt, 1},
-    {"_cpp4rtest_my_stop_n2fmt", (DL_FUNC) &_cpp4rtest_my_stop_n2fmt, 2},
-    {"_cpp4rtest_my_warning_n1fmt", (DL_FUNC) &_cpp4rtest_my_warning_n1fmt, 1},
-    {"_cpp4rtest_my_warning_n2fmt", (DL_FUNC) &_cpp4rtest_my_warning_n2fmt, 2},
-    {"_cpp4rtest_my_message_n1fmt", (DL_FUNC) &_cpp4rtest_my_message_n1fmt, 1},
-    {"_cpp4rtest_my_message_n2fmt", (DL_FUNC) &_cpp4rtest_my_message_n2fmt, 2},
-    {"_cpp4rtest_my_stop", (DL_FUNC) &_cpp4rtest_my_stop, 2},
-    {"_cpp4rtest_my_stop_n1", (DL_FUNC) &_cpp4rtest_my_stop_n1, 1},
-    {"_cpp4rtest_my_warning", (DL_FUNC) &_cpp4rtest_my_warning, 2},
-    {"_cpp4rtest_my_warning_n1", (DL_FUNC) &_cpp4rtest_my_warning_n1, 1},
-    {"_cpp4rtest_my_message", (DL_FUNC) &_cpp4rtest_my_message, 2},
-    {"_cpp4rtest_my_message_n1", (DL_FUNC) &_cpp4rtest_my_message_n1, 1},
+    {"_cpp4rtest_my_stop_n1_", (DL_FUNC) &_cpp4rtest_my_stop_n1_, 1},
+    {"_cpp4rtest_my_stop_n2_", (DL_FUNC) &_cpp4rtest_my_stop_n2_, 2},
+    {"_cpp4rtest_my_warning_n1_", (DL_FUNC) &_cpp4rtest_my_warning_n1_, 1},
+    {"_cpp4rtest_my_warning_n2_", (DL_FUNC) &_cpp4rtest_my_warning_n2_, 2},
+    {"_cpp4rtest_my_message_n1_", (DL_FUNC) &_cpp4rtest_my_message_n1_, 1},
+    {"_cpp4rtest_my_message_n2_", (DL_FUNC) &_cpp4rtest_my_message_n2_, 2},
+    {"_cpp4rtest_nullable_extptr_1", (DL_FUNC) &_cpp4rtest_nullable_extptr_1, 0},
+    {"_cpp4rtest_nullable_extptr_2", (DL_FUNC) &_cpp4rtest_nullable_extptr_2, 0},
     {"_cpp4rtest_remove_altrep", (DL_FUNC) &_cpp4rtest_remove_altrep, 1},
     {"_cpp4rtest_upper_bound", (DL_FUNC) &_cpp4rtest_upper_bound, 2},
     {"_cpp4rtest_findInterval2", (DL_FUNC) &_cpp4rtest_findInterval2, 2},
@@ -954,16 +867,16 @@ static const R_CallMethodDef CallEntries[] = {
     {"_cpp4rtest_named_list_c_style_", (DL_FUNC) &_cpp4rtest_named_list_c_style_, 0},
     {"_cpp4rtest_ordered_map_to_list_", (DL_FUNC) &_cpp4rtest_ordered_map_to_list_, 1},
     {"_cpp4rtest_unordered_map_to_list_", (DL_FUNC) &_cpp4rtest_unordered_map_to_list_, 1},
-    {"_cpp4rtest_gibbs_cpp", (DL_FUNC) &_cpp4rtest_gibbs_cpp, 2},
-    {"_cpp4rtest_gibbs_cpp2", (DL_FUNC) &_cpp4rtest_gibbs_cpp2, 2},
-    {"_cpp4rtest_row_sums", (DL_FUNC) &_cpp4rtest_row_sums, 1},
-    {"_cpp4rtest_mat_mat_copy_dimnames", (DL_FUNC) &_cpp4rtest_mat_mat_copy_dimnames, 1},
-    {"_cpp4rtest_mat_sexp_copy_dimnames", (DL_FUNC) &_cpp4rtest_mat_sexp_copy_dimnames, 1},
-    {"_cpp4rtest_mat_mat_create_dimnames", (DL_FUNC) &_cpp4rtest_mat_mat_create_dimnames, 0},
-    {"_cpp4rtest_col_sums", (DL_FUNC) &_cpp4rtest_col_sums, 1},
-    {"_cpp4rtest_matrix_add", (DL_FUNC) &_cpp4rtest_matrix_add, 2},
-    {"_cpp4rtest_matrix_add_coerce_test", (DL_FUNC) &_cpp4rtest_matrix_add_coerce_test, 2},
-    {"_cpp4rtest_matrix_mixed_add", (DL_FUNC) &_cpp4rtest_matrix_mixed_add, 2},
+    {"_cpp4rtest_gibbs_cpp_", (DL_FUNC) &_cpp4rtest_gibbs_cpp_, 2},
+    {"_cpp4rtest_gibbs_cpp2_", (DL_FUNC) &_cpp4rtest_gibbs_cpp2_, 2},
+    {"_cpp4rtest_row_sums_", (DL_FUNC) &_cpp4rtest_row_sums_, 1},
+    {"_cpp4rtest_mat_mat_copy_dimnames_", (DL_FUNC) &_cpp4rtest_mat_mat_copy_dimnames_, 1},
+    {"_cpp4rtest_mat_sexp_copy_dimnames_", (DL_FUNC) &_cpp4rtest_mat_sexp_copy_dimnames_, 1},
+    {"_cpp4rtest_mat_mat_create_dimnames_", (DL_FUNC) &_cpp4rtest_mat_mat_create_dimnames_, 0},
+    {"_cpp4rtest_col_sums_", (DL_FUNC) &_cpp4rtest_col_sums_, 1},
+    {"_cpp4rtest_matrix_add_", (DL_FUNC) &_cpp4rtest_matrix_add_, 2},
+    {"_cpp4rtest_matrix_add_coerce_test_", (DL_FUNC) &_cpp4rtest_matrix_add_coerce_test_, 2},
+    {"_cpp4rtest_matrix_mixed_add_", (DL_FUNC) &_cpp4rtest_matrix_mixed_add_, 2},
     {"_cpp4rtest_pairlist_size_", (DL_FUNC) &_cpp4rtest_pairlist_size_, 1},
     {"_cpp4rtest_pairlist_to_list_", (DL_FUNC) &_cpp4rtest_pairlist_to_list_, 1},
     {"_cpp4rtest_pairlist_rejects_vec_", (DL_FUNC) &_cpp4rtest_pairlist_rejects_vec_, 0},
@@ -976,13 +889,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_cpp4rtest_protect_many_sexp_", (DL_FUNC) &_cpp4rtest_protect_many_sexp_, 1},
     {"_cpp4rtest_protect_many_preserve_", (DL_FUNC) &_cpp4rtest_protect_many_preserve_, 1},
     {"_cpp4rtest_release_", (DL_FUNC) &_cpp4rtest_release_, 1},
-    {"_cpp4rtest_notroxcpp1_", (DL_FUNC) &_cpp4rtest_notroxcpp1_, 1},
-    {"_cpp4rtest_roxcpp2", (DL_FUNC) &_cpp4rtest_roxcpp2, 1},
-    {"_cpp4rtest_roxcpp3", (DL_FUNC) &_cpp4rtest_roxcpp3, 1},
-    {"_cpp4rtest_roxcpp4", (DL_FUNC) &_cpp4rtest_roxcpp4, 1},
-    {"_cpp4rtest_roxcpp5", (DL_FUNC) &_cpp4rtest_roxcpp5, 1},
-    {"_cpp4rtest_notroxcpp6_", (DL_FUNC) &_cpp4rtest_notroxcpp6_, 1},
-    {"_cpp4rtest_roxcpp7", (DL_FUNC) &_cpp4rtest_roxcpp7, 1},
     {"_cpp4rtest_safe_", (DL_FUNC) &_cpp4rtest_safe_, 1},
     {"_cpp4rtest_sexp_list_init_", (DL_FUNC) &_cpp4rtest_sexp_list_init_, 0},
     {"_cpp4rtest_sexp_scalar_list_init_", (DL_FUNC) &_cpp4rtest_sexp_scalar_list_init_, 0},
@@ -990,23 +896,23 @@ static const R_CallMethodDef CallEntries[] = {
     {"_cpp4rtest_grow_strings_manual_", (DL_FUNC) &_cpp4rtest_grow_strings_manual_, 2},
     {"_cpp4rtest_assign_", (DL_FUNC) &_cpp4rtest_assign_, 2},
     {"_cpp4rtest_sum_dbl_for_", (DL_FUNC) &_cpp4rtest_sum_dbl_for_, 1},
-    {"_cpp4rtest_sum_dbl_for2_", (DL_FUNC) &_cpp4rtest_sum_dbl_for2_, 1},
-    {"_cpp4rtest_sum_dbl_for3_", (DL_FUNC) &_cpp4rtest_sum_dbl_for3_, 1},
+    {"_cpp4rtest_sum_dbl_sexp_for_", (DL_FUNC) &_cpp4rtest_sum_dbl_sexp_for_, 1},
+    {"_cpp4rtest_sum_dbl_sexp_writable_for_", (DL_FUNC) &_cpp4rtest_sum_dbl_sexp_writable_for_, 1},
     {"_cpp4rtest_sum_dbl_foreach_", (DL_FUNC) &_cpp4rtest_sum_dbl_foreach_, 1},
-    {"_cpp4rtest_sum_dbl_foreach2_", (DL_FUNC) &_cpp4rtest_sum_dbl_foreach2_, 1},
+    {"_cpp4rtest_sum_dbl_sexp_foreach_", (DL_FUNC) &_cpp4rtest_sum_dbl_sexp_foreach_, 1},
     {"_cpp4rtest_sum_dbl_accumulate_", (DL_FUNC) &_cpp4rtest_sum_dbl_accumulate_, 1},
-    {"_cpp4rtest_sum_dbl_accumulate2_", (DL_FUNC) &_cpp4rtest_sum_dbl_accumulate2_, 1},
-    {"_cpp4rtest_sum_cplx_for_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_, 1},
-    {"_cpp4rtest_sum_cplx_for_2_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_2_, 1},
-    {"_cpp4rtest_sum_cplx_for_3_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_3_, 1},
-    {"_cpp4rtest_sum_cplx_for_4_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_4_, 1},
-    {"_cpp4rtest_sum_cplx_for_5_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_5_, 1},
-    {"_cpp4rtest_sum_cplx_for_6_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_6_, 1},
+    {"_cpp4rtest_sum_dbl_sexp_accumulate_", (DL_FUNC) &_cpp4rtest_sum_dbl_sexp_accumulate_, 1},
+    {"_cpp4rtest_sum_cplx_r_complex_out_", (DL_FUNC) &_cpp4rtest_sum_cplx_r_complex_out_, 1},
+    {"_cpp4rtest_sum_cplx_complexes_out_", (DL_FUNC) &_cpp4rtest_sum_cplx_complexes_out_, 1},
+    {"_cpp4rtest_sum_cplx_typed_std_out_", (DL_FUNC) &_cpp4rtest_sum_cplx_typed_std_out_, 1},
+    {"_cpp4rtest_sum_cplx_sexp_std_out_", (DL_FUNC) &_cpp4rtest_sum_cplx_sexp_std_out_, 1},
+    {"_cpp4rtest_sum_cplx_sexp_sexp_out_", (DL_FUNC) &_cpp4rtest_sum_cplx_sexp_sexp_out_, 1},
+    {"_cpp4rtest_sum_cplx_sexp_complexes_out_", (DL_FUNC) &_cpp4rtest_sum_cplx_sexp_complexes_out_, 1},
     {"_cpp4rtest_sum_cplx_foreach_", (DL_FUNC) &_cpp4rtest_sum_cplx_foreach_, 1},
     {"_cpp4rtest_sum_cplx_accumulate_", (DL_FUNC) &_cpp4rtest_sum_cplx_accumulate_, 1},
-    {"_cpp4rtest_sum_cplx_for2_", (DL_FUNC) &_cpp4rtest_sum_cplx_for2_, 1},
+    {"_cpp4rtest_sum_cplx_sexp_protect_std_out_", (DL_FUNC) &_cpp4rtest_sum_cplx_sexp_protect_std_out_, 1},
     {"_cpp4rtest_sum_int_for_", (DL_FUNC) &_cpp4rtest_sum_int_for_, 1},
-    {"_cpp4rtest_sum_int_for2_", (DL_FUNC) &_cpp4rtest_sum_int_for2_, 1},
+    {"_cpp4rtest_sum_int_sexp_for_", (DL_FUNC) &_cpp4rtest_sum_int_sexp_for_, 1},
     {"_cpp4rtest_sum_int_foreach_", (DL_FUNC) &_cpp4rtest_sum_int_foreach_, 1},
     {"_cpp4rtest_sum_int_accumulate_", (DL_FUNC) &_cpp4rtest_sum_int_accumulate_, 1},
     {"_cpp4rtest_add_int_vec_", (DL_FUNC) &_cpp4rtest_add_int_vec_, 2},

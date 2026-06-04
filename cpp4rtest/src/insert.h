@@ -1,3 +1,9 @@
+/* roxygen
+@title Insert Doubles
+@description Test suite
+@param num_sxp number of doubles to insert
+@export
+*/
 [[cpp4r::register]] SEXP insert_(SEXP num_sxp) {
   R_xlen_t num = INTEGER(num_sxp)[0];
 

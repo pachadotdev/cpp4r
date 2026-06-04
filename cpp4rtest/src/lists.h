@@ -1,3 +1,8 @@
+/* roxygen
+@title Create Named List by Pushing Back Elements
+@description Test suite
+@export
+*/
 [[cpp4r::register]] list named_list_push_back_() {
   writable::list result;
 
@@ -27,6 +32,11 @@
   return result;
 }
 
+/* roxygen
+@title Create Named List by C-Style Assignment
+@description Test suite
+@export
+*/
 [[cpp4r::register]] list named_list_c_style_() {
   writable::list result(10);  // Preallocate list of size 10
 

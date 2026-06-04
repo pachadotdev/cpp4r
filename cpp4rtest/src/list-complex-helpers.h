@@ -6,8 +6,12 @@
 
 using namespace cpp4r;
 
-[[cpp4r::register]]
-list_of<doubles> list_of_doubles_() {
+/* roxygen
+@title Create List of Doubles
+@description Test suite
+@export
+*/
+[[cpp4r::register]] list_of<doubles> list_of_doubles_() {
   writable::list_of<writable::doubles> result(3);
 
   writable::doubles v1({1.0, 2.0});
@@ -21,8 +25,12 @@ list_of<doubles> list_of_doubles_() {
   return result;
 }
 
-[[cpp4r::register]]
-list_of<integers> list_of_integers_() {
+/* roxygen
+@title Create List of Integers
+@description Test suite
+@export
+*/
+[[cpp4r::register]] list_of<integers> list_of_integers_() {
   writable::list_of<writable::integers> result(2);
 
   writable::integers v1({1, 2, 3});
@@ -34,8 +42,12 @@ list_of<integers> list_of_integers_() {
   return result;
 }
 
-[[cpp4r::register]]
-list_of<strings> list_of_strings_() {
+/* roxygen
+@title Create List of Strings
+@description Test suite
+@export
+*/
+[[cpp4r::register]] list_of<strings> list_of_strings_() {
   writable::list_of<writable::strings> result(2);
 
   writable::strings v1({"hello", "world"});
@@ -47,8 +59,12 @@ list_of<strings> list_of_strings_() {
   return result;
 }
 
-[[cpp4r::register]]
-writable::list list_of_named_() {
+/* roxygen
+@title Create Named List
+@description Test suite
+@export
+*/
+[[cpp4r::register]] writable::list list_of_named_() {
   using namespace cpp4r::literals;
 
   writable::doubles v1({1.0, 2.0});
@@ -57,6 +73,13 @@ writable::list list_of_named_() {
   return writable::list({"a"_nm = static_cast<SEXP>(v1), "b"_nm = static_cast<SEXP>(v2)});
 }
 
+/* roxygen
+@title Create Complex Numbers on 'C++' Side (typed in, r_complex out)
+@description Test suite
+@param real vector of real parts
+@param imag vector of imaginary parts
+@export
+*/
 [[cpp4r::register]]
 writable::complexes make_complex_(doubles real, doubles imag) {
   R_xlen_t n = real.size();
@@ -69,6 +92,12 @@ writable::complexes make_complex_(doubles real, doubles imag) {
   return result;
 }
 
+/* roxygen
+@title Extract Real Part of Complex Numbers on 'C++' Side (typed in, r_complex out)
+@description Test suite
+@param x vector of complex numbers
+@export
+*/
 [[cpp4r::register]] writable::doubles complex_real_(complexes x) {
   writable::doubles result(x.size());
   for (R_xlen_t i = 0; i < x.size(); ++i) {
@@ -77,6 +106,12 @@ writable::complexes make_complex_(doubles real, doubles imag) {
   return result;
 }
 
+/* roxygen
+@title Extract Imaginary Part of Complex Numbers on 'C++' Side (typed in, r_complex out)
+@description Test suite
+@param x vector of complex numbers
+@export
+*/
 [[cpp4r::register]] writable::doubles complex_imag_(complexes x) {
   writable::doubles result(x.size());
   for (R_xlen_t i = 0; i < x.size(); ++i) {
@@ -85,6 +120,12 @@ writable::complexes make_complex_(doubles real, doubles imag) {
   return result;
 }
 
+/* roxygen
+@title Compute Modulus of Complex Numbers on 'C++' Side (typed in, r_complex out)
+@description Test suite
+@param x vector of complex numbers
+@export
+*/
 [[cpp4r::register]] writable::doubles complex_modulus_(complexes x) {
   writable::doubles result(x.size());
   for (R_xlen_t i = 0; i < x.size(); ++i) {
@@ -95,6 +136,13 @@ writable::complexes make_complex_(doubles real, doubles imag) {
   return result;
 }
 
+/* roxygen
+@title Add Complex Vectors on 'C++' Side (typed in, complexes out)
+@description Test suite
+@param x vector of complex numbers
+@param y vector of complex numbers
+@export
+*/
 [[cpp4r::register]]
 writable::complexes complex_add_(complexes x, complexes y) {
   R_xlen_t n = x.size();

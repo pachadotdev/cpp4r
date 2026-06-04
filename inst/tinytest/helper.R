@@ -28,11 +28,6 @@ read_file <- function(x) {
   readChar(x, file.size(x))
 }
 
-expect_error_free <- function(expr, ...) {
-  result <- tryCatch(expr, error = function(e) e)
-  tinytest::expect_false(inherits(result, "error"))
-}
-
 test_path <- function(name) {
   system.file("tinytest", name, package = "cpp4r")
 }

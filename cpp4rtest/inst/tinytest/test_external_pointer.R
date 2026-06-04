@@ -5,6 +5,6 @@ local({
   set.seed(42)
   x <- rnorm(len)
 
-  tinytest::expect_equal(nullable_extptr_1(), NULL)
-  tinytest::expect_equal(nullable_extptr_2(), NULL)
+  expect_equal(nullable_extptr_1(), NULL)
+  expect_equal(nullable_extptr_2(), NULL)
 })

@@ -11,7 +11,7 @@ using namespace cpp4r;
 #include "add.h"
 #include "data_frame.h"
 #include "errors.h"
-#include "errors_fmt.h"
+#include "external-pointers.h"
 #include "find-intervals.h"
 #include "grow.h"
 #include "insert.h"
@@ -20,12 +20,10 @@ using namespace cpp4r;
 #include "matrix.h"
 #include "protect.h"
 #include "release.h"
-#include "roxygen1.h"
-#include "roxygen2.h"
-#include "roxygen3.h"
 #include "safe.h"
 #include "strings.h"
 #include "sum.h"
+#include "sum_cplx.h"
 #include "sum_int.h"
 #include "truncate.h"
 
@@ -35,6 +33,6 @@ using namespace cpp4r;
 #include "test-helpers.h"
 
 // Helper headers for R-side tinytest coverage
+#include "pairlist_helpers.h"
 #include "sexp_helpers.h"
 #include "weak_ref_helpers.h"
-#include "pairlist_helpers.h"

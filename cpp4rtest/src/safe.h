@@ -1,3 +1,9 @@
+/* roxygen
+@title Safe Execution of R Code
+@description Test suite
+@param x_sxp object to process
+@export
+*/
 [[cpp4r::register]] SEXP safe_(SEXP x_sxp) {
   SEXP err = R_NilValue;
   const size_t ERROR_SIZE = 2048;

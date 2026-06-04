@@ -1,3 +1,9 @@
+/* roxygen
+@title Grow a Vector on 'C++' Side (SEXP in, SEXP out)
+@description Test suite
+@param n length of the vector to grow
+@export
+*/
 [[cpp4r::register]] cpp4r::writable::doubles grow_(R_xlen_t n) {
   cpp4r::writable::doubles x;
   R_xlen_t i = 0;
@@ -8,6 +14,12 @@
   return x;
 }
 
+/* roxygen
+@title Grow a Complex Vector on 'C++' Side (SEXP in, SEXP out)
+@description Test suite
+@param n length of the vector to grow
+@export
+*/
 [[cpp4r::register]] cpp4r::writable::complexes grow_cplx_(R_xlen_t n) {
   cpp4r::writable::complexes x;
   R_xlen_t i = 0;
