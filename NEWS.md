@@ -1,3 +1,10 @@
+# cpp4r 0.7.0
+
+* I re-added some conditionals to use newer C++ features when the compiler supports them. These
+  can add a small speed gain in some cases.
+* The codebase default is C++11, with compile time newer standards detection to use newer features and optimizations.
+* Adds a check for all supported C++ standards in R >= 4.0.0 (>= CXX17)
+
 # cpp4r 0.6.0
 
 * `register()` now captures the C++ namespace of decorated functions and emits fully-qualified declarations and calls, so functions defined inside a `namespace { ... }` block (or written as `ns::fun`) can be registered without further setup.

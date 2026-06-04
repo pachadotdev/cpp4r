@@ -1,5 +1,5 @@
 
-.PHONY: check-cran check-cran-extra check-% clean install docs
+.PHONY: check-cran check-cran-extra check-cxx check-% clean install docs
 
 # CRAN-like containers (pair: CRAN name : r-hub image)
 CRAN_PAIRS := \
@@ -26,6 +26,10 @@ check-cran-extra:
 		echo "=== checking $$rhub ==="; \
 		./check-docker/check.sh $$rhub; \
 	done
+
+check-cxx:
+	@chmod +x ./check-docker/check-cxx.sh
+	@./check-docker/check-cxx.sh
 
 # Individual check target, e.g. `make check-clang22`
 check-%:

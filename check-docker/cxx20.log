@@ -1,0 +1,877 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+pkg-config is already the newest version (1.8.1-2build1).
+gfortran is already the newest version (4:13.2.0-7ubuntu1).
+gfortran set to manually installed.
+The following additional packages will be installed:
+  libuv1t64
+Suggested packages:
+  libcurl4-doc libidn-dev libkrb5-dev libldap2-dev librtmp-dev libssh2-1-dev
+  libssl-dev
+The following NEW packages will be installed:
+  libcurl4-openssl-dev libuv1-dev libuv1t64 libxml2-dev
+0 upgraded, 4 newly installed, 0 to remove and 9 not upgraded.
+Need to get 1,461 kB of archives.
+After this operation, 6,234 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1t64 amd64 1.48.0-1.1build1 [97.3 kB]
+Get:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl4-openssl-dev amd64 8.5.0-2ubuntu10.9 [446 kB]
+Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1-dev amd64 1.48.0-1.1build1 [136 kB]
+Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxml2-dev amd64 2.9.14+dfsg-1.3ubuntu3.7 [782 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 1,461 kB in 0s (6,386 kB/s)
+Selecting previously unselected package libuv1t64:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 19926 files and directories currently installed.)
+Preparing to unpack .../libuv1t64_1.48.0-1.1build1_amd64.deb ...
+Unpacking libuv1t64:amd64 (1.48.0-1.1build1) ...
+Selecting previously unselected package libcurl4-openssl-dev:amd64.
+Preparing to unpack .../libcurl4-openssl-dev_8.5.0-2ubuntu10.9_amd64.deb ...
+Unpacking libcurl4-openssl-dev:amd64 (8.5.0-2ubuntu10.9) ...
+Selecting previously unselected package libuv1-dev:amd64.
+Preparing to unpack .../libuv1-dev_1.48.0-1.1build1_amd64.deb ...
+Unpacking libuv1-dev:amd64 (1.48.0-1.1build1) ...
+Selecting previously unselected package libxml2-dev:amd64.
+Preparing to unpack .../libxml2-dev_2.9.14+dfsg-1.3ubuntu3.7_amd64.deb ...
+Unpacking libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.7) ...
+Setting up libuv1t64:amd64 (1.48.0-1.1build1) ...
+Setting up libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.7) ...
+Setting up libcurl4-openssl-dev:amd64 (8.5.0-2ubuntu10.9) ...
+Setting up libuv1-dev:amd64 (1.48.0-1.1build1) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+Skipping install of 'testthat' from a github remote, the SHA1 (d355d128) has not changed since last install.
+  Use `force = TRUE` to force installation
+* installing *source* package ‘cpp4r’ ...
+** this is package ‘cpp4r’ version ‘0.6.0’
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4r)
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.2.0’
+** using non-staged installation
+** libs
+using C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+g++ -std=c++20 -pedantic-errors -Wall -Wextra -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
+cpp4r.cpp:870:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  870 |     {"_cpp4rtest_add_vec_for_", (DL_FUNC) &_cpp4rtest_add_vec_for_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:872:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  872 |     {"_cpp4rtest_env_get_int_", (DL_FUNC) &_cpp4rtest_env_get_int_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:873:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  873 |     {"_cpp4rtest_env_get_str_", (DL_FUNC) &_cpp4rtest_env_get_str_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:874:29: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  874 |     {"_cpp4rtest_env_set_", (DL_FUNC) &_cpp4rtest_env_set_, 3},
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:875:32: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  875 |     {"_cpp4rtest_env_exists_", (DL_FUNC) &_cpp4rtest_env_exists_, 2},
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:876:32: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  876 |     {"_cpp4rtest_global_get_", (DL_FUNC) &_cpp4rtest_global_get_, 1},
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:881:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  881 |     {"_cpp4rtest_get_by_name_", (DL_FUNC) &_cpp4rtest_get_by_name_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:882:35: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  882 |     {"_cpp4rtest_contains_name_", (DL_FUNC) &_cpp4rtest_contains_name_, 2},
+      |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:883:35: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  883 |     {"_cpp4rtest_find_name_pos_", (DL_FUNC) &_cpp4rtest_find_name_pos_, 2},
+      |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:884:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  884 |     {"_cpp4rtest_my_stop_n1fmt", (DL_FUNC) &_cpp4rtest_my_stop_n1fmt, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:885:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  885 |     {"_cpp4rtest_my_stop_n2fmt", (DL_FUNC) &_cpp4rtest_my_stop_n2fmt, 2},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:886:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  886 |     {"_cpp4rtest_my_warning_n1fmt", (DL_FUNC) &_cpp4rtest_my_warning_n1fmt, 1},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:887:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  887 |     {"_cpp4rtest_my_warning_n2fmt", (DL_FUNC) &_cpp4rtest_my_warning_n2fmt, 2},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:888:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  888 |     {"_cpp4rtest_my_message_n1fmt", (DL_FUNC) &_cpp4rtest_my_message_n1fmt, 1},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:889:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  889 |     {"_cpp4rtest_my_message_n2fmt", (DL_FUNC) &_cpp4rtest_my_message_n2fmt, 2},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:890:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  890 |     {"_cpp4rtest_my_stop", (DL_FUNC) &_cpp4rtest_my_stop, 2},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:891:31: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  891 |     {"_cpp4rtest_my_stop_n1", (DL_FUNC) &_cpp4rtest_my_stop_n1, 1},
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:892:31: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  892 |     {"_cpp4rtest_my_warning", (DL_FUNC) &_cpp4rtest_my_warning, 2},
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:893:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  893 |     {"_cpp4rtest_my_warning_n1", (DL_FUNC) &_cpp4rtest_my_warning_n1, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:894:31: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  894 |     {"_cpp4rtest_my_message", (DL_FUNC) &_cpp4rtest_my_message, 2},
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:895:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  895 |     {"_cpp4rtest_my_message_n1", (DL_FUNC) &_cpp4rtest_my_message_n1, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:896:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  896 |     {"_cpp4rtest_remove_altrep", (DL_FUNC) &_cpp4rtest_remove_altrep, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:897:32: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  897 |     {"_cpp4rtest_upper_bound", (DL_FUNC) &_cpp4rtest_upper_bound, 2},
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:898:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  898 |     {"_cpp4rtest_findInterval2", (DL_FUNC) &_cpp4rtest_findInterval2, 2},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:899:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  899 |     {"_cpp4rtest_findInterval2_5", (DL_FUNC) &_cpp4rtest_findInterval2_5, 2},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:900:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  900 |     {"_cpp4rtest_findInterval3", (DL_FUNC) &_cpp4rtest_findInterval3, 2},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:901:26: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  901 |     {"_cpp4rtest_grow_", (DL_FUNC) &_cpp4rtest_grow_, 1},
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:902:31: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  902 |     {"_cpp4rtest_grow_cplx_", (DL_FUNC) &_cpp4rtest_grow_cplx_, 1},
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:903:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  903 |     {"_cpp4rtest_insert_", (DL_FUNC) &_cpp4rtest_insert_, 1},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:908:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  908 |     {"_cpp4rtest_make_complex_", (DL_FUNC) &_cpp4rtest_make_complex_, 2},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:909:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  909 |     {"_cpp4rtest_complex_real_", (DL_FUNC) &_cpp4rtest_complex_real_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:910:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  910 |     {"_cpp4rtest_complex_imag_", (DL_FUNC) &_cpp4rtest_complex_imag_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:911:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  911 |     {"_cpp4rtest_complex_modulus_", (DL_FUNC) &_cpp4rtest_complex_modulus_, 1},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:912:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  912 |     {"_cpp4rtest_complex_add_", (DL_FUNC) &_cpp4rtest_complex_add_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:915:41: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  915 |     {"_cpp4rtest_ordered_map_to_list_", (DL_FUNC) &_cpp4rtest_ordered_map_to_list_, 1},
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:916:43: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  916 |     {"_cpp4rtest_unordered_map_to_list_", (DL_FUNC) &_cpp4rtest_unordered_map_to_list_, 1},
+      |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:917:30: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  917 |     {"_cpp4rtest_gibbs_cpp", (DL_FUNC) &_cpp4rtest_gibbs_cpp, 2},
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:918:31: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  918 |     {"_cpp4rtest_gibbs_cpp2", (DL_FUNC) &_cpp4rtest_gibbs_cpp2, 2},
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:919:29: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  919 |     {"_cpp4rtest_row_sums", (DL_FUNC) &_cpp4rtest_row_sums, 1},
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:920:42: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  920 |     {"_cpp4rtest_mat_mat_copy_dimnames", (DL_FUNC) &_cpp4rtest_mat_mat_copy_dimnames, 1},
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:921:43: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  921 |     {"_cpp4rtest_mat_sexp_copy_dimnames", (DL_FUNC) &_cpp4rtest_mat_sexp_copy_dimnames, 1},
+      |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:923:29: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  923 |     {"_cpp4rtest_col_sums", (DL_FUNC) &_cpp4rtest_col_sums, 1},
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:924:31: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  924 |     {"_cpp4rtest_matrix_add", (DL_FUNC) &_cpp4rtest_matrix_add, 2},
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:925:43: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  925 |     {"_cpp4rtest_matrix_add_coerce_test", (DL_FUNC) &_cpp4rtest_matrix_add_coerce_test, 2},
+      |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:926:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  926 |     {"_cpp4rtest_matrix_mixed_add", (DL_FUNC) &_cpp4rtest_matrix_mixed_add, 2},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:927:38: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  927 |     {"_cpp4rtest_protect_one_rapi_", (DL_FUNC) &_cpp4rtest_protect_one_rapi_, 2},
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:928:38: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  928 |     {"_cpp4rtest_protect_one_sexp_", (DL_FUNC) &_cpp4rtest_protect_one_sexp_, 2},
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:929:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  929 |     {"_cpp4rtest_protect_one_", (DL_FUNC) &_cpp4rtest_protect_one_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:930:42: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  930 |     {"_cpp4rtest_protect_one_preserve_", (DL_FUNC) &_cpp4rtest_protect_one_preserve_, 2},
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:931:39: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  931 |     {"_cpp4rtest_protect_many_rapi_", (DL_FUNC) &_cpp4rtest_protect_many_rapi_, 1},
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:932:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  932 |     {"_cpp4rtest_protect_many_", (DL_FUNC) &_cpp4rtest_protect_many_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:933:39: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  933 |     {"_cpp4rtest_protect_many_sexp_", (DL_FUNC) &_cpp4rtest_protect_many_sexp_, 1},
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:934:43: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  934 |     {"_cpp4rtest_protect_many_preserve_", (DL_FUNC) &_cpp4rtest_protect_many_preserve_, 1},
+      |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:935:29: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  935 |     {"_cpp4rtest_release_", (DL_FUNC) &_cpp4rtest_release_, 1},
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:936:32: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  936 |     {"_cpp4rtest_notroxcpp1_", (DL_FUNC) &_cpp4rtest_notroxcpp1_, 1},
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:937:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  937 |     {"_cpp4rtest_roxcpp2", (DL_FUNC) &_cpp4rtest_roxcpp2, 1},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:938:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  938 |     {"_cpp4rtest_roxcpp3", (DL_FUNC) &_cpp4rtest_roxcpp3, 1},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:939:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  939 |     {"_cpp4rtest_roxcpp4", (DL_FUNC) &_cpp4rtest_roxcpp4, 1},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:940:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  940 |     {"_cpp4rtest_roxcpp5", (DL_FUNC) &_cpp4rtest_roxcpp5, 1},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:941:32: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  941 |     {"_cpp4rtest_notroxcpp6_", (DL_FUNC) &_cpp4rtest_notroxcpp6_, 1},
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:942:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  942 |     {"_cpp4rtest_roxcpp7", (DL_FUNC) &_cpp4rtest_roxcpp7, 1},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:943:26: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  943 |     {"_cpp4rtest_safe_", (DL_FUNC) &_cpp4rtest_safe_, 1},
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:944:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  944 |     {"_cpp4rtest_grow_strings_", (DL_FUNC) &_cpp4rtest_grow_strings_, 2},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:945:41: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  945 |     {"_cpp4rtest_grow_strings_manual_", (DL_FUNC) &_cpp4rtest_grow_strings_manual_, 2},
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:946:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  946 |     {"_cpp4rtest_assign_", (DL_FUNC) &_cpp4rtest_assign_, 2},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:947:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  947 |     {"_cpp4rtest_sum_dbl_for_", (DL_FUNC) &_cpp4rtest_sum_dbl_for_, 1},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:948:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  948 |     {"_cpp4rtest_sum_dbl_for2_", (DL_FUNC) &_cpp4rtest_sum_dbl_for2_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:949:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  949 |     {"_cpp4rtest_sum_dbl_for3_", (DL_FUNC) &_cpp4rtest_sum_dbl_for3_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:950:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  950 |     {"_cpp4rtest_sum_dbl_foreach_", (DL_FUNC) &_cpp4rtest_sum_dbl_foreach_, 1},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:951:38: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  951 |     {"_cpp4rtest_sum_dbl_foreach2_", (DL_FUNC) &_cpp4rtest_sum_dbl_foreach2_, 1},
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:952:40: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  952 |     {"_cpp4rtest_sum_dbl_accumulate_", (DL_FUNC) &_cpp4rtest_sum_dbl_accumulate_, 1},
+      |                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:953:41: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  953 |     {"_cpp4rtest_sum_dbl_accumulate2_", (DL_FUNC) &_cpp4rtest_sum_dbl_accumulate2_, 1},
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:954:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  954 |     {"_cpp4rtest_sum_cplx_for_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:955:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  955 |     {"_cpp4rtest_sum_cplx_for_2_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_2_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:956:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  956 |     {"_cpp4rtest_sum_cplx_for_3_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_3_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:957:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  957 |     {"_cpp4rtest_sum_cplx_for_4_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_4_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:958:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  958 |     {"_cpp4rtest_sum_cplx_for_5_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_5_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:959:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  959 |     {"_cpp4rtest_sum_cplx_for_6_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_6_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:960:38: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  960 |     {"_cpp4rtest_sum_cplx_foreach_", (DL_FUNC) &_cpp4rtest_sum_cplx_foreach_, 1},
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:961:41: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  961 |     {"_cpp4rtest_sum_cplx_accumulate_", (DL_FUNC) &_cpp4rtest_sum_cplx_accumulate_, 1},
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:962:35: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  962 |     {"_cpp4rtest_sum_cplx_for2_", (DL_FUNC) &_cpp4rtest_sum_cplx_for2_, 1},
+      |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:963:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  963 |     {"_cpp4rtest_sum_int_for_", (DL_FUNC) &_cpp4rtest_sum_int_for_, 1},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:964:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  964 |     {"_cpp4rtest_sum_int_for2_", (DL_FUNC) &_cpp4rtest_sum_int_for2_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:965:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  965 |     {"_cpp4rtest_sum_int_foreach_", (DL_FUNC) &_cpp4rtest_sum_int_foreach_, 1},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:966:40: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  966 |     {"_cpp4rtest_sum_int_accumulate_", (DL_FUNC) &_cpp4rtest_sum_int_accumulate_, 1},
+      |                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:969:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  969 |     {"_cpp4rtest_add_int_vec_", (DL_FUNC) &_cpp4rtest_add_int_vec_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:970:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  970 |     {"_cpp4rtest_as_integers_", (DL_FUNC) &_cpp4rtest_as_integers_, 1},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:971:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  971 |     {"_cpp4rtest_negate_logical_", (DL_FUNC) &_cpp4rtest_negate_logical_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:972:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  972 |     {"_cpp4rtest_logical_to_int_", (DL_FUNC) &_cpp4rtest_logical_to_int_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:973:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  973 |     {"_cpp4rtest_logical_to_dbl_", (DL_FUNC) &_cpp4rtest_logical_to_dbl_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:974:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  974 |     {"_cpp4rtest_iterator_sum_", (DL_FUNC) &_cpp4rtest_iterator_sum_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:975:38: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  975 |     {"_cpp4rtest_iterator_sum_int_", (DL_FUNC) &_cpp4rtest_iterator_sum_int_, 1},
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:976:35: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  976 |     {"_cpp4rtest_iterator_find_", (DL_FUNC) &_cpp4rtest_iterator_find_, 2},
+      |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:977:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  977 |     {"_cpp4rtest_iterator_count_", (DL_FUNC) &_cpp4rtest_iterator_count_, 2},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:978:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  978 |     {"_cpp4rtest_iterator_min_", (DL_FUNC) &_cpp4rtest_iterator_min_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:979:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  979 |     {"_cpp4rtest_iterator_max_", (DL_FUNC) &_cpp4rtest_iterator_max_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:980:44: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  980 |     {"_cpp4rtest_iterator_double_values_", (DL_FUNC) &_cpp4rtest_iterator_double_values_, 1},
+      |                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:981:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  981 |     {"_cpp4rtest_reverse_vector_", (DL_FUNC) &_cpp4rtest_reverse_vector_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:982:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  982 |     {"_cpp4rtest_iterator_at_", (DL_FUNC) &_cpp4rtest_iterator_at_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:983:39: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  983 |     {"_cpp4rtest_iterator_distance_", (DL_FUNC) &_cpp4rtest_iterator_distance_, 1},
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:984:30: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  984 |     {"_cpp4rtest_raw_copy_", (DL_FUNC) &_cpp4rtest_raw_copy_, 1},
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:985:29: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  985 |     {"_cpp4rtest_raw_xor_", (DL_FUNC) &_cpp4rtest_raw_xor_, 2},
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:988:39: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  988 |     {"_cpp4rtest_push_and_truncate_", (DL_FUNC) &_cpp4rtest_push_and_truncate_, 1},
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:989:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  989 |     {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 1},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+g++ -std=c++20 -pedantic-errors -Wall -Wextra -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
+g++ -std=c++20 -pedantic-errors -Wall -Wextra -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c test-runner.cpp -o test-runner.o
+g++ -std=c++20 -pedantic-errors -Wall -Wextra -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/4.6.0/lib/R/lib -lR
+installing to /cache/R_libs/cpp4rtest/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (cpp4rtest)
+* using log directory ‘/check/cpp4rtest.Rcheck’
+* using R version 4.6.0 (2026-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+* running under: Ubuntu 24.04.4 LTS
+* using session charset: UTF-8
+* current time: 2026-06-04 08:55:57 UTC
+* using options ‘--no-manual --as-cran’
+* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
+* this is package ‘cpp4rtest’ version ‘0.2.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... [4s/6s] NOTE
+Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
+
+New submission
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for .dll and .exe files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cpp4rtest’ can be installed ... [141s/137s] OK
+* used C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... [1s/0s] OK
+* checking whether the package can be loaded with stated dependencies ... [1s/0s] OK
+* checking whether the package can be unloaded cleanly ... [1s/0s] OK
+* checking whether the namespace can be loaded with stated dependencies ... [1s/0s] OK
+* checking whether the namespace can be unloaded cleanly ... [1s/0s] OK
+* checking loading without being on the library search path ... [1s/0s] OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... [13s/4s] OK
+* checking Rd files ... [1s/0s] OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
+* checking pragmas in C/C++ headers and code ... OK
+* checking compilation flags used ... OK
+* checking compiled code ... OK
+* checking examples ... [1s/1s] OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ...
+  Running ‘testthat.R’ [11s/11s]
+ [12s/11s] OK
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+
+Status: 1 NOTE
+See
+  ‘/check/cpp4rtest.Rcheck/00check.log’
+for details.
+
+=== 00install.out ===
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.2.0’
+** using staged installation
+** libs
+using C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+g++ -std=c++20 -pedantic-errors -Wall -Wextra -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
+cpp4r.cpp:870:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  870 |     {"_cpp4rtest_add_vec_for_", (DL_FUNC) &_cpp4rtest_add_vec_for_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:872:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  872 |     {"_cpp4rtest_env_get_int_", (DL_FUNC) &_cpp4rtest_env_get_int_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:873:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  873 |     {"_cpp4rtest_env_get_str_", (DL_FUNC) &_cpp4rtest_env_get_str_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:874:29: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  874 |     {"_cpp4rtest_env_set_", (DL_FUNC) &_cpp4rtest_env_set_, 3},
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:875:32: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  875 |     {"_cpp4rtest_env_exists_", (DL_FUNC) &_cpp4rtest_env_exists_, 2},
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:876:32: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  876 |     {"_cpp4rtest_global_get_", (DL_FUNC) &_cpp4rtest_global_get_, 1},
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:881:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  881 |     {"_cpp4rtest_get_by_name_", (DL_FUNC) &_cpp4rtest_get_by_name_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:882:35: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  882 |     {"_cpp4rtest_contains_name_", (DL_FUNC) &_cpp4rtest_contains_name_, 2},
+      |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:883:35: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  883 |     {"_cpp4rtest_find_name_pos_", (DL_FUNC) &_cpp4rtest_find_name_pos_, 2},
+      |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:884:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  884 |     {"_cpp4rtest_my_stop_n1fmt", (DL_FUNC) &_cpp4rtest_my_stop_n1fmt, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:885:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  885 |     {"_cpp4rtest_my_stop_n2fmt", (DL_FUNC) &_cpp4rtest_my_stop_n2fmt, 2},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:886:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  886 |     {"_cpp4rtest_my_warning_n1fmt", (DL_FUNC) &_cpp4rtest_my_warning_n1fmt, 1},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:887:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  887 |     {"_cpp4rtest_my_warning_n2fmt", (DL_FUNC) &_cpp4rtest_my_warning_n2fmt, 2},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:888:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  888 |     {"_cpp4rtest_my_message_n1fmt", (DL_FUNC) &_cpp4rtest_my_message_n1fmt, 1},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:889:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  889 |     {"_cpp4rtest_my_message_n2fmt", (DL_FUNC) &_cpp4rtest_my_message_n2fmt, 2},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:890:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  890 |     {"_cpp4rtest_my_stop", (DL_FUNC) &_cpp4rtest_my_stop, 2},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:891:31: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  891 |     {"_cpp4rtest_my_stop_n1", (DL_FUNC) &_cpp4rtest_my_stop_n1, 1},
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:892:31: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  892 |     {"_cpp4rtest_my_warning", (DL_FUNC) &_cpp4rtest_my_warning, 2},
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:893:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  893 |     {"_cpp4rtest_my_warning_n1", (DL_FUNC) &_cpp4rtest_my_warning_n1, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:894:31: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  894 |     {"_cpp4rtest_my_message", (DL_FUNC) &_cpp4rtest_my_message, 2},
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:895:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  895 |     {"_cpp4rtest_my_message_n1", (DL_FUNC) &_cpp4rtest_my_message_n1, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:896:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  896 |     {"_cpp4rtest_remove_altrep", (DL_FUNC) &_cpp4rtest_remove_altrep, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:897:32: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  897 |     {"_cpp4rtest_upper_bound", (DL_FUNC) &_cpp4rtest_upper_bound, 2},
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:898:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  898 |     {"_cpp4rtest_findInterval2", (DL_FUNC) &_cpp4rtest_findInterval2, 2},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:899:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  899 |     {"_cpp4rtest_findInterval2_5", (DL_FUNC) &_cpp4rtest_findInterval2_5, 2},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:900:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  900 |     {"_cpp4rtest_findInterval3", (DL_FUNC) &_cpp4rtest_findInterval3, 2},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:901:26: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  901 |     {"_cpp4rtest_grow_", (DL_FUNC) &_cpp4rtest_grow_, 1},
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:902:31: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  902 |     {"_cpp4rtest_grow_cplx_", (DL_FUNC) &_cpp4rtest_grow_cplx_, 1},
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:903:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  903 |     {"_cpp4rtest_insert_", (DL_FUNC) &_cpp4rtest_insert_, 1},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:908:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  908 |     {"_cpp4rtest_make_complex_", (DL_FUNC) &_cpp4rtest_make_complex_, 2},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:909:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  909 |     {"_cpp4rtest_complex_real_", (DL_FUNC) &_cpp4rtest_complex_real_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:910:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  910 |     {"_cpp4rtest_complex_imag_", (DL_FUNC) &_cpp4rtest_complex_imag_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:911:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  911 |     {"_cpp4rtest_complex_modulus_", (DL_FUNC) &_cpp4rtest_complex_modulus_, 1},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:912:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  912 |     {"_cpp4rtest_complex_add_", (DL_FUNC) &_cpp4rtest_complex_add_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:915:41: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  915 |     {"_cpp4rtest_ordered_map_to_list_", (DL_FUNC) &_cpp4rtest_ordered_map_to_list_, 1},
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:916:43: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  916 |     {"_cpp4rtest_unordered_map_to_list_", (DL_FUNC) &_cpp4rtest_unordered_map_to_list_, 1},
+      |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:917:30: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  917 |     {"_cpp4rtest_gibbs_cpp", (DL_FUNC) &_cpp4rtest_gibbs_cpp, 2},
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:918:31: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  918 |     {"_cpp4rtest_gibbs_cpp2", (DL_FUNC) &_cpp4rtest_gibbs_cpp2, 2},
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:919:29: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  919 |     {"_cpp4rtest_row_sums", (DL_FUNC) &_cpp4rtest_row_sums, 1},
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:920:42: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  920 |     {"_cpp4rtest_mat_mat_copy_dimnames", (DL_FUNC) &_cpp4rtest_mat_mat_copy_dimnames, 1},
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:921:43: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  921 |     {"_cpp4rtest_mat_sexp_copy_dimnames", (DL_FUNC) &_cpp4rtest_mat_sexp_copy_dimnames, 1},
+      |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:923:29: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  923 |     {"_cpp4rtest_col_sums", (DL_FUNC) &_cpp4rtest_col_sums, 1},
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:924:31: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  924 |     {"_cpp4rtest_matrix_add", (DL_FUNC) &_cpp4rtest_matrix_add, 2},
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:925:43: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  925 |     {"_cpp4rtest_matrix_add_coerce_test", (DL_FUNC) &_cpp4rtest_matrix_add_coerce_test, 2},
+      |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:926:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  926 |     {"_cpp4rtest_matrix_mixed_add", (DL_FUNC) &_cpp4rtest_matrix_mixed_add, 2},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:927:38: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  927 |     {"_cpp4rtest_protect_one_rapi_", (DL_FUNC) &_cpp4rtest_protect_one_rapi_, 2},
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:928:38: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  928 |     {"_cpp4rtest_protect_one_sexp_", (DL_FUNC) &_cpp4rtest_protect_one_sexp_, 2},
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:929:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  929 |     {"_cpp4rtest_protect_one_", (DL_FUNC) &_cpp4rtest_protect_one_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:930:42: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  930 |     {"_cpp4rtest_protect_one_preserve_", (DL_FUNC) &_cpp4rtest_protect_one_preserve_, 2},
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:931:39: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  931 |     {"_cpp4rtest_protect_many_rapi_", (DL_FUNC) &_cpp4rtest_protect_many_rapi_, 1},
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:932:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  932 |     {"_cpp4rtest_protect_many_", (DL_FUNC) &_cpp4rtest_protect_many_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:933:39: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  933 |     {"_cpp4rtest_protect_many_sexp_", (DL_FUNC) &_cpp4rtest_protect_many_sexp_, 1},
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:934:43: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  934 |     {"_cpp4rtest_protect_many_preserve_", (DL_FUNC) &_cpp4rtest_protect_many_preserve_, 1},
+      |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:935:29: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  935 |     {"_cpp4rtest_release_", (DL_FUNC) &_cpp4rtest_release_, 1},
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:936:32: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  936 |     {"_cpp4rtest_notroxcpp1_", (DL_FUNC) &_cpp4rtest_notroxcpp1_, 1},
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:937:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  937 |     {"_cpp4rtest_roxcpp2", (DL_FUNC) &_cpp4rtest_roxcpp2, 1},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:938:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  938 |     {"_cpp4rtest_roxcpp3", (DL_FUNC) &_cpp4rtest_roxcpp3, 1},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:939:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  939 |     {"_cpp4rtest_roxcpp4", (DL_FUNC) &_cpp4rtest_roxcpp4, 1},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:940:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  940 |     {"_cpp4rtest_roxcpp5", (DL_FUNC) &_cpp4rtest_roxcpp5, 1},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:941:32: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  941 |     {"_cpp4rtest_notroxcpp6_", (DL_FUNC) &_cpp4rtest_notroxcpp6_, 1},
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:942:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  942 |     {"_cpp4rtest_roxcpp7", (DL_FUNC) &_cpp4rtest_roxcpp7, 1},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:943:26: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  943 |     {"_cpp4rtest_safe_", (DL_FUNC) &_cpp4rtest_safe_, 1},
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:944:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  944 |     {"_cpp4rtest_grow_strings_", (DL_FUNC) &_cpp4rtest_grow_strings_, 2},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:945:41: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  945 |     {"_cpp4rtest_grow_strings_manual_", (DL_FUNC) &_cpp4rtest_grow_strings_manual_, 2},
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:946:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  946 |     {"_cpp4rtest_assign_", (DL_FUNC) &_cpp4rtest_assign_, 2},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:947:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  947 |     {"_cpp4rtest_sum_dbl_for_", (DL_FUNC) &_cpp4rtest_sum_dbl_for_, 1},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:948:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  948 |     {"_cpp4rtest_sum_dbl_for2_", (DL_FUNC) &_cpp4rtest_sum_dbl_for2_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:949:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  949 |     {"_cpp4rtest_sum_dbl_for3_", (DL_FUNC) &_cpp4rtest_sum_dbl_for3_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:950:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  950 |     {"_cpp4rtest_sum_dbl_foreach_", (DL_FUNC) &_cpp4rtest_sum_dbl_foreach_, 1},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:951:38: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  951 |     {"_cpp4rtest_sum_dbl_foreach2_", (DL_FUNC) &_cpp4rtest_sum_dbl_foreach2_, 1},
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:952:40: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  952 |     {"_cpp4rtest_sum_dbl_accumulate_", (DL_FUNC) &_cpp4rtest_sum_dbl_accumulate_, 1},
+      |                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:953:41: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  953 |     {"_cpp4rtest_sum_dbl_accumulate2_", (DL_FUNC) &_cpp4rtest_sum_dbl_accumulate2_, 1},
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:954:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  954 |     {"_cpp4rtest_sum_cplx_for_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:955:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  955 |     {"_cpp4rtest_sum_cplx_for_2_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_2_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:956:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  956 |     {"_cpp4rtest_sum_cplx_for_3_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_3_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:957:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  957 |     {"_cpp4rtest_sum_cplx_for_4_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_4_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:958:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  958 |     {"_cpp4rtest_sum_cplx_for_5_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_5_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:959:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  959 |     {"_cpp4rtest_sum_cplx_for_6_", (DL_FUNC) &_cpp4rtest_sum_cplx_for_6_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:960:38: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  960 |     {"_cpp4rtest_sum_cplx_foreach_", (DL_FUNC) &_cpp4rtest_sum_cplx_foreach_, 1},
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:961:41: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  961 |     {"_cpp4rtest_sum_cplx_accumulate_", (DL_FUNC) &_cpp4rtest_sum_cplx_accumulate_, 1},
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:962:35: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  962 |     {"_cpp4rtest_sum_cplx_for2_", (DL_FUNC) &_cpp4rtest_sum_cplx_for2_, 1},
+      |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:963:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  963 |     {"_cpp4rtest_sum_int_for_", (DL_FUNC) &_cpp4rtest_sum_int_for_, 1},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:964:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  964 |     {"_cpp4rtest_sum_int_for2_", (DL_FUNC) &_cpp4rtest_sum_int_for2_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:965:37: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  965 |     {"_cpp4rtest_sum_int_foreach_", (DL_FUNC) &_cpp4rtest_sum_int_foreach_, 1},
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:966:40: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  966 |     {"_cpp4rtest_sum_int_accumulate_", (DL_FUNC) &_cpp4rtest_sum_int_accumulate_, 1},
+      |                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:969:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  969 |     {"_cpp4rtest_add_int_vec_", (DL_FUNC) &_cpp4rtest_add_int_vec_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:970:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  970 |     {"_cpp4rtest_as_integers_", (DL_FUNC) &_cpp4rtest_as_integers_, 1},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:971:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  971 |     {"_cpp4rtest_negate_logical_", (DL_FUNC) &_cpp4rtest_negate_logical_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:972:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  972 |     {"_cpp4rtest_logical_to_int_", (DL_FUNC) &_cpp4rtest_logical_to_int_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:973:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  973 |     {"_cpp4rtest_logical_to_dbl_", (DL_FUNC) &_cpp4rtest_logical_to_dbl_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:974:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  974 |     {"_cpp4rtest_iterator_sum_", (DL_FUNC) &_cpp4rtest_iterator_sum_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:975:38: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  975 |     {"_cpp4rtest_iterator_sum_int_", (DL_FUNC) &_cpp4rtest_iterator_sum_int_, 1},
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:976:35: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  976 |     {"_cpp4rtest_iterator_find_", (DL_FUNC) &_cpp4rtest_iterator_find_, 2},
+      |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:977:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  977 |     {"_cpp4rtest_iterator_count_", (DL_FUNC) &_cpp4rtest_iterator_count_, 2},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:978:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  978 |     {"_cpp4rtest_iterator_min_", (DL_FUNC) &_cpp4rtest_iterator_min_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:979:34: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  979 |     {"_cpp4rtest_iterator_max_", (DL_FUNC) &_cpp4rtest_iterator_max_, 1},
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:980:44: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  980 |     {"_cpp4rtest_iterator_double_values_", (DL_FUNC) &_cpp4rtest_iterator_double_values_, 1},
+      |                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:981:36: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  981 |     {"_cpp4rtest_reverse_vector_", (DL_FUNC) &_cpp4rtest_reverse_vector_, 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:982:33: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  982 |     {"_cpp4rtest_iterator_at_", (DL_FUNC) &_cpp4rtest_iterator_at_, 2},
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:983:39: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  983 |     {"_cpp4rtest_iterator_distance_", (DL_FUNC) &_cpp4rtest_iterator_distance_, 1},
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:984:30: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  984 |     {"_cpp4rtest_raw_copy_", (DL_FUNC) &_cpp4rtest_raw_copy_, 1},
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:985:29: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  985 |     {"_cpp4rtest_raw_xor_", (DL_FUNC) &_cpp4rtest_raw_xor_, 2},
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:988:39: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  988 |     {"_cpp4rtest_push_and_truncate_", (DL_FUNC) &_cpp4rtest_push_and_truncate_, 1},
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpp4r.cpp:989:28: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+  989 |     {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 1},
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+g++ -std=c++20 -pedantic-errors -Wall -Wextra -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
+g++ -std=c++20 -pedantic-errors -Wall -Wextra -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG  -I'/cache/R_libs/cpp4r/include' -I'/cache/R_libs/testthat/include' -I/usr/local/include   -fopenmp -fpic  -g -O2   -c test-runner.cpp -o test-runner.o
+g++ -std=c++20 -pedantic-errors -Wall -Wextra -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o test-runner.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/4.6.0/lib/R/lib -lR
+installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+=== 00check.log ===
+* using log directory ‘/check/cpp4rtest.Rcheck’
+* using R version 4.6.0 (2026-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+* running under: Ubuntu 24.04.4 LTS
+* using session charset: UTF-8
+* current time: 2026-06-04 08:55:57 UTC
+* using options ‘--no-manual --as-cran’
+* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
+* this is package ‘cpp4rtest’ version ‘0.2.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... [4s/6s] NOTE
+Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
+
+New submission
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for .dll and .exe files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cpp4rtest’ can be installed ... [141s/137s] OK
+* used C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... [1s/0s] OK
+* checking whether the package can be loaded with stated dependencies ... [1s/0s] OK
+* checking whether the package can be unloaded cleanly ... [1s/0s] OK
+* checking whether the namespace can be loaded with stated dependencies ... [1s/0s] OK
+* checking whether the namespace can be unloaded cleanly ... [1s/0s] OK
+* checking loading without being on the library search path ... [1s/0s] OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... [13s/4s] OK
+* checking Rd files ... [1s/0s] OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
+* checking pragmas in C/C++ headers and code ... OK
+* checking compilation flags used ... OK
+* checking compiled code ... OK
+* checking examples ... [1s/1s] OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... [12s/11s] OK
+  Running ‘testthat.R’ [11s/11s]
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: 1 NOTE

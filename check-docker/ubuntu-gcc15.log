@@ -4,14 +4,14 @@ Reading state information...
 pkg-config is already the newest version (1.8.1-2build1).
 The following NEW packages will be installed:
   libuv1-dev libuv1t64 libxml2-dev
-0 upgraded, 3 newly installed, 0 to remove and 3 not upgraded.
+0 upgraded, 3 newly installed, 0 to remove and 10 not upgraded.
 Need to get 1015 kB of archives.
 After this operation, 4271 kB of additional disk space will be used.
 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1t64 amd64 1.48.0-1.1build1 [97.3 kB]
 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1-dev amd64 1.48.0-1.1build1 [136 kB]
 Get:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxml2-dev amd64 2.9.14+dfsg-1.3ubuntu3.7 [782 kB]
 debconf: delaying package configuration, since apt-utils is not installed
-Fetched 1015 kB in 0s (5441 kB/s)
+Fetched 1015 kB in 0s (6167 kB/s)
 Selecting previously unselected package libuv1t64:amd64.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 25650 files and directories currently installed.)
 Preparing to unpack .../libuv1t64_1.48.0-1.1build1_amd64.deb ...
@@ -30,7 +30,7 @@ Skipping install of 'testthat' from a github remote, the SHA1 (d355d128) has not
   Use `force = TRUE` to force installation
 remotes::install_local(/check/cpp4r_0.6.0.tar.gz)
 ── R CMD build ─────────────────────────────────────────────────────────────────
-* checking for file ‘/tmp/RtmpiPkp7v/remotesfb65ab96e9/cpp4r/DESCRIPTION’ ... OK
+* checking for file ‘/tmp/RtmpTezREi/remotesfb68754cba/cpp4r/DESCRIPTION’ ... OK
 * preparing ‘cpp4r’:
 * checking DESCRIPTION meta-information ... OK
 * checking for LF line-endings in source and make files and shell scripts
@@ -53,7 +53,7 @@ remotes::install_local(/check/cpp4r_0.6.0.tar.gz)
 * DONE (cpp4r)
 remotes::install_local(/check/cpp4rtest_0.2.0.tar.gz)
 ── R CMD build ─────────────────────────────────────────────────────────────────
-* checking for file ‘/tmp/RtmpiPkp7v/remotesfb6872d48d/cpp4rtest/DESCRIPTION’ ... OK
+* checking for file ‘/tmp/RtmpTezREi/remotesfb2950221c/cpp4rtest/DESCRIPTION’ ... OK
 * preparing ‘cpp4rtest’:
 * checking DESCRIPTION meta-information ... OK
 * cleaning src
@@ -124,7 +124,7 @@ installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
 * running under: Ubuntu 24.04.4 LTS
 * using session charset: UTF-8
-* current time: 2026-05-16 20:00:56 UTC
+* current time: 2026-06-04 10:37:41 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.2.0’
@@ -147,7 +147,7 @@ Checking DOIs failed with message:
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [122s/118s] OK
+* checking whether package ‘cpp4rtest’ can be installed ... [111s/107s] OK
 * used C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
@@ -169,7 +169,7 @@ Checking DOIs failed with message:
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... [13s/3s] OK
+* checking R code for possible problems ... [13s/4s] OK
 * checking Rd files ... [1s/0s] OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
@@ -190,11 +190,11 @@ Checking DOIs failed with message:
 * checking pragmas in C/C++ headers and code ... OK
 * checking compilation flags used ... OK
 * checking compiled code ... OK
-* checking examples ... [1s/0s] OK
+* checking examples ... [1s/1s] OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ...
-  Running ‘testthat.R’ [9s/8s]
- [10s/8s] OK
+  Running ‘testthat.R’ [11s/11s]
+ [12s/11s] OK
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
@@ -234,7 +234,7 @@ installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
 * running under: Ubuntu 24.04.4 LTS
 * using session charset: UTF-8
-* current time: 2026-05-16 20:00:56 UTC
+* current time: 2026-06-04 10:37:41 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.2.0’
@@ -257,7 +257,7 @@ Checking DOIs failed with message:
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [122s/118s] OK
+* checking whether package ‘cpp4rtest’ can be installed ... [111s/107s] OK
 * used C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
@@ -279,7 +279,7 @@ Checking DOIs failed with message:
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... [13s/3s] OK
+* checking R code for possible problems ... [13s/4s] OK
 * checking Rd files ... [1s/0s] OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
@@ -300,10 +300,10 @@ Checking DOIs failed with message:
 * checking pragmas in C/C++ headers and code ... OK
 * checking compilation flags used ... OK
 * checking compiled code ... OK
-* checking examples ... [1s/0s] OK
+* checking examples ... [1s/1s] OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... [10s/8s] OK
-  Running ‘testthat.R’ [9s/8s]
+* checking tests ... [12s/11s] OK
+  Running ‘testthat.R’ [11s/11s]
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
