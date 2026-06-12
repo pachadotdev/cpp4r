@@ -1,0 +1,4 @@
+^\.here$
+^LICENSE\.md$
+^src/Makevars$
+^\.covrignore$

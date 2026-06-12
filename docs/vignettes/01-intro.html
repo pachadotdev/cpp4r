@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>01 - Introduction • cpp4r</title><link rel="stylesheet" href="../menu.css"><link rel="stylesheet" href="../content.css"><!-- MathJax Configuration --><script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        packages: {'[+]': ['ams', 'newcommand', 'configmacros']}
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process'
+      }
+    };
+  </script><script id="MathJax-script" async src="../js/tex-svg.js"></script></head><body>
+<div class="main-container">
+<div id="menu">
+  <div>
+    <img src="../man/figures/logo.svg" align="center" height="139" alt="cpp4r logo"></div>
+
+  <div class="search-container">
+    <input type="text" id="search-box" placeholder="Search..."></div>
+
+  <div class="search-container">
+    <button id="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">Toggle theme</button>
+    <button id="font-decrease" title="Decrease font size" aria-label="Decrease font size">A-</button>
+    <button id="font-increase" title="Increase font size" aria-label="Increase font size">A+</button>
+  </div>
+
+  <div class="submenu">
+    <label style="border-bottom: 0;"><a style="padding-left: 0;" href="../index.html">Home 🏠</a></label>
+  </div>
+
+  <div class="submenu">
+    <label>On this page</label>
+    <a href="#motivation" class="toc-level-2">Motivation</a>
+    <a href="#differences-between-r-s-c-api-and-cpp4r" class="toc-level-2">Differences between R’s C API and cpp4r</a>
+    <a href="#memory-protection" class="toc-level-3">Memory protection</a>
+    <a href="#creating-vectors" class="toc-level-3">Creating vectors</a>
+    <a href="#type-checking-and-coercion" class="toc-level-3">Type checking and coercion</a>
+    <a href="#strings" class="toc-level-3">Strings</a>
+    <a href="#missing-values-na" class="toc-level-3">Missing values (NA)</a>
+    <a href="#error-handling" class="toc-level-3">Error handling</a>
+    <a href="#lists" class="toc-level-3">Lists</a>
+    <a href="#calling-r-functions-from-c" class="toc-level-3">Calling R functions from C++</a>
+    <a href="#environments" class="toc-level-3">Environments</a>
+    <a href="#external-pointers" class="toc-level-3">External pointers</a>
+    <a href="#matrices" class="toc-level-3">Matrices</a>
+    <a href="#summary" class="toc-level-3">Summary</a>
+    <a href="#references" class="toc-level-2">References</a>
+  </div>
+
+</div>
+<div id="content">
+<div class="content-wrapper">
+        <div class="content-main">
+          <h1>01 - Introduction</h1>
+
+
+
+<div id="motivation" class="section level2">
+<h2 id="motivation">Motivation</h2>
+<p><em>For an extended review of the topics discussed in this vignette,
+please refer to the pre-print <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5583590">cpp4r:
+A Header-Only C++ and R Interface</a>.</em></p>
+<p>cpp4r is an R package that provides C++11 bindings to R, enabling the
+use of C++ code in R packages. It is a fork of the cpp11 package <span class="citation">(Vaughan, Hester, and François 2025)</span> aiming to
+provide additional features and improvements while maintaining
+compatibility with the original cpp11 API.</p>
+<p>The R programming language is an open-source version of the S
+programming language dating back to the 1970s, and even today its
+internals use C and FORTRAN routines for some tasks <span class="citation">(Chambers 2006)</span>. This design decision is not
+arbitrary: C and FORTRAN, while not particularly easy to use, are highly
+efficient for computationally intensive tasks. Even after optimizing R
+code through vectorization and avoiding unnecessary object copying,
+bottlenecks may persist and require compiled language solutions.</p>
+<p>For certain applications, such as fitting regression models with a
+large number of fixed effects <span class="citation">(Yotov et al.
+2017)</span>, computational efficiency can be an issue for any
+interpreted language, not just R which is in the interpreted languages
+family. Other examples of interpreted languages are Python, JavaScript
+and proprietary languages such as MATLAB, Maple, and Wolfram.</p>
+<p>C++ is a compiled language (as C and FORTRAN) that offers particular
+advantages for addressing common R performance bottlenecks,
+including:</p>
+<ul><li>Loops that cannot be easily vectorized due to dependencies between
+iterations</li>
+<li>Recursive functions or problems requiring many function calls</li>
+<li>Data structures and algorithms not natively available in R (e.g., R
+does not let the end-user use pointers and pass-by-reference
+semantics)</li>
+<li>Problems requiring fine-tuning memory management</li>
+</ul><p>C++, like any compiled language, offers additional computational
+efficiency, but it involves setup effort that can be considerable in
+terms of time and configuring the required software stack to compile
+code and create an executable. R, like other interpreted languages, does
+not require creating executable files; it can execute instructions line
+by line, offering greater portability and the ability to introduce small
+changes to the code without the need to recompile.</p>
+<p>Compiled languages do not reduce time complexity, and a direct
+rewrite of R code in C++ can reduce runtime because C++ typically
+executes each operation faster. In practical terms, a double loop in R
+can be as inefficient as a double for loop in C++, with the difference
+that C++ typically takes less time per operation. For some problems it
+is possible to derive reduced forms or new algorithms that require a
+different set of instructions to obtain the same result; an example of
+this is <span class="citation">Vargas Sepulveda (2025)</span>, which
+discusses an alternative formulation to compute Kendall’s correlation
+coefficient with time complexity <span class="math inline">\(O(n
+\log(n))\)</span> instead of <span class="math inline">\(O(n^2)\)</span>
+using the traditional algorithm.</p>
+<p>Additionally, C++ offers more flexible data structures and allows the
+direct creation of operator overloads and friend functions that provide
+flexibility to work with a wide range of data formats <span class="citation">(Emara 2024)</span>, even ‘esoteric’ binary formats
+lacking documentation <span class="citation">(Sepúlveda and Barkai
+2025)</span>. While it is possible to write R functions using C, for
+simplicity it is often more convenient to use C++, as it is a superset
+of C and supports object-oriented programming rather than purely
+functional programming <span class="citation">(Emara 2024)</span>. This
+facilitates working with matrices, complex numbers, and other data
+structures such as cubes and fields <span class="citation">(Sanderson
+and Curtin 2016)</span>. Choosing C++ over FORTRAN is also often a
+matter of simplicity.</p>
+<p>C++ bindings for R date back to the early 2000s. The cxx package
+<span class="citation">(Hornik 2001)</span>, released in 2000 and now
+discontinued, provided an early prototype of C++ bindings. Rcpp <span class="citation">(Eddelbuettel and Francois 2011)</span>, first
+published to CRAN in 2008, is the mainstream solution and used by over
+3,000 packages as of 2025.</p>
+<p>cpp11 <span class="citation">(Vaughan, Hester, and François
+2025)</span> was released in 2023 as a complete reimplementation of C++
+bindings to R, with different design trade-offs compared to Rcpp aiming
+to provide:</p>
+<ul><li>Enforced copy-on-write semantics consistent with R’s behavior</li>
+<li>Improved safety when interfacing with R’s C API</li>
+<li>Native support for ALTREP objects</li>
+<li>UTF-8 string handling throughout</li>
+<li>Modern C++11 features and idioms</li>
+<li>Simplified implementation compared to Rcpp</li>
+<li>Faster compilation with reduced memory requirements</li>
+<li>Completely header-only design to avoid Application Binary Interface
+(ABI) compatibility issues</li>
+</ul><p>However, cpp11 lacks some Rcpp features that explain its widespread
+adoption, including:</p>
+<ul><li>Syntactic sugar (e.g., helper functions that allow for a more
+concise or convenient way to express common patterns)</li>
+<li>Modules (e.g., helpers to export C++ functions and/or classes to R
+more easily)</li>
+<li>Attributes (e.g., decorators to expose C++ functions to R with
+minimal boilerplate code)</li>
+</ul><p>While using cpp11 for my thesis project, I identified several
+enhancements that could benefit the R community and improve the
+library’s usability. These enhancements include:</p>
+<ul><li>Support for converting C++ maps to R lists</li>
+<li>Roxygen documentation support directly in C++ code</li>
+<li>Proper handling of matrix attributes</li>
+<li>Support for nullable external pointers</li>
+<li>Immediate availability of values added via
+<code>push_back()</code></li>
+<li>Bidirectional copy of complex number types</li>
+<li>Flexibility in type conversions</li>
+<li>Various performance optimizations</li>
+<li>Specialized codebase to benefit from newer C++ standards (e.g., if
+C++20 is available, compiling a package will use C++20 features instead
+of being limited to C++11)</li>
+</ul><p>After discussing these proposed enhancements with the cpp11
+maintainers, it became clear that the development priorities and
+timelines would not accommodate these features in the near term. This
+led to the creation of cpp4r, a fork of cpp11 that incorporates these
+additional features while maintaining compatibility with the original
+cpp11 API. This means that cpp4r can serve as a drop-in replacement for
+cpp11 in any case, allowing users to benefit from the enhancements
+without significant code changes. The converse, replacing cpp4r with
+cpp11, requires adjustments due to the additional features in cpp4r.</p>
+<p>cpp4r extends cpp11’s container support by enabling seamless
+conversion between C++ standard library containers and R objects. This
+includes support for <code>std::map</code> and
+<code>std::unordered_map</code> containers, which are automatically
+converted to named R lists.</p>
+<p>cpp4r provides roxygen support directly in C++ code, allowing
+developers to document their C++ functions using familiar roxygen2
+syntax. This integration streamlines the documentation workflow for
+packages that expose C++ functions to R.</p>
+<p>Unlike cpp11, cpp4r properly handles matrix attributes, including
+<code>dimnames</code>, ensuring that matrix operations preserve metadata
+when copying data between R and C++.</p>
+<p>cpp4r offers more flexible type conversion functions. For example,
+<code>as_integers()</code> and <code>as_doubles()</code> accept logical
+inputs, providing greater flexibility in handling diverse input types
+compared to the more restrictive cpp11 implementations.</p>
+<p>Several internal optimizations improve performance over cpp11,
+particularly in vector operations and memory management. These
+optimizations maintain the safety guarantees of cpp11 while improving
+execution speed.</p>
+<p>cpp4r provides full bidirectional copying of complex numbers,
+enabling seamless transfer of complex vectors and matrices between R and
+C++ code. In contrast, cpp11 does not support this functionality.</p>
+<p>cpp4r maintains cpp11’s core design principles while extending
+functionality:</p>
+<ul><li>Copy-on-Write Semantics: Like cpp11, cpp4r enforces copy-on-write
+semantics that match R’s behavior, preventing unexpected modifications
+to input data.</li>
+<li>Safety First: cpp4r incorporates comprehensive safety mechanisms
+when interfacing with R’s C API, using <code>unwind_protect()</code> and
+exception handling to prevent resource leaks.</li>
+<li>Modern C++ Features: The implementation leverages C++11 features
+including move semantics, type traits, variadic templates, and
+user-defined literals.</li>
+<li>Header-Only Design: As a completely header-only library, cpp4r
+avoids ABI compatibility issues that can arise with libraries containing
+compiled components.</li>
+</ul><p>cpp4r offers vendoring capabilities, which means copying the
+dependency code directly into your project’s source tree. This approach,
+borrowed from the Go programming language, includes the dependencies’
+headers with the source code <span class="citation">(The Go Authors
+2024)</span>. This ensures the dependency code remains fixed and stable
+until explicitly updated. Since cpp4r is a header-only library, you can
+copy all headers by running <code>cpp4r::vendor_cpp4r()</code> when
+needed.</p>
+<p>Vendoring has both advantages and drawbacks. The main advantage is
+that disruptive changes to the cpp4r project cannot break your existing
+code. The drawbacks include slightly larger package size and isolation
+from bugfixes and new features until you explicitly update the vendored
+headers. Most packages should not vendor the cpp4r dependency, except
+for projects designed to run in restricted environments where internet
+access is limited or unavailable for security reasons (e.g.,
+high-performance computing clusters).</p>
+<p>cpp4r is designed as a drop-in replacement for cpp11, using identical
+syntax and API patterns. Existing cpp11 code can typically be migrated
+to cpp4r with minimal changes, primarily involving header includes and
+namespace references.</p>
+</div>
+<div id="differences-between-rs-c-api-and-cpp4r" class="section level2">
+<h2 id="differences-between-r-s-c-api-and-cpp4r">Differences between R’s C API and cpp4r</h2>
+<p>R’s C API (Rapi for short) is a low-level interface that lets C and
+C++ code create, inspect, and manipulate R objects. It is powerful, but
+it requires the developer to manage many details manually: protecting
+objects from the garbage collector, unprotecting them in the right
+order, encoding strings correctly, checking types, and handling errors
+through <code>longjmp</code>/<code>setjmp</code> rather than ordinary
+C++ exceptions. cpp4r wraps this API with idiomatic C++ abstractions so
+that each of these concerns is handled automatically.</p>
+<p>The following examples shows side-by-side comparisons of common tasks
+using raw Rapi versus cpp4r. Every cpp4r code snippet shown here is
+exercised by the test suite in <code>cpp4rtest/src/</code>. The rest of
+the vignettes expand on these examples and provide more details on how
+cpp4r simplifies C++ programming for R packages.</p>
+<div id="memory-protection" class="section level3">
+<h3 id="memory-protection">Memory protection</h3>
+<p>The single most error-prone aspect of Rapi programming is the
+protection stack. Every newly allocated <code>SEXP</code> must be
+explicitly protected against garbage collection with
+<code>PROTECT()</code>, and every <code>PROTECT()</code> call must be
+matched by an <code>UNPROTECT()</code> call before the function returns.
+Counting protects is fragile: adding a branch or an early return can
+easily leave the stack unbalanced, causing the infamous <em>“stack
+imbalance in .Call”</em> warning or, worse, a silent segfault.</p>
+<p>cpp4r’s <code>writable</code> vector types protect themselves on
+construction and automatically unprotect on destruction via RAII, so
+there is nothing to count. The <code>[[cpp4r::register]]</code>
+attribute also handles the <code>.Call</code> boilerplate, including
+wrapping the return value in an appropriate <code>SEXP</code>.</p>
+<p>Example: Summing a sequence of numbers with Rapi versus cpp4r.</p>
+<pre class="cpp"><code>SEXP rapi_sum(SEXP x_sxp) {
+  int n = Rf_length(x_sxp);
+  SEXP out = PROTECT(Rf_allocVector(REALSXP, 1));  // must PROTECT
+  double total = 0;
+  double* x = REAL(x_sxp);
+  for (int i = 0; i &lt; n; ++i) total += x[i];
+  REAL(out)[0] = total;
+  UNPROTECT(1);  // must count manually
+  return out;
+}</code></pre>
+<pre class="cpp"><code>[[cpp4r::register]] double cpp4r_sum(cpp4r::doubles x) {
+  double total = 0;
+  for (double v : x) total += v;
+  return total;
+}</code></pre>
+</div>
+<div id="creating-vectors" class="section level3">
+<h3 id="creating-vectors">Creating vectors</h3>
+<p>Rapi requires calling <code>Rf_allocVector()</code> with the correct
+<code>SEXPTYPE</code> constant, then protecting the result before any
+further allocation can happen.</p>
+<pre class="cpp"><code>SEXP rapi_make_ints() {
+  SEXP out = PROTECT(Rf_allocVector(INTSXP, 3));
+  INTEGER(out)[0] = 1;
+  INTEGER(out)[1] = 2;
+  INTEGER(out)[2] = 3;
+  UNPROTECT(1);
+  return out;
+}</code></pre>
+<p>cpp4r provides typed <code>writable</code> classes with familiar
+container semantics.</p>
+<pre class="cpp"><code>[[cpp4r::register]] cpp4r::writable::integers cpp4r_make_ints() {
+  cpp4r::writable::integers out;
+  out.push_back(1);
+  out.push_back(2);
+  out.push_back(3);
+  return out;
+}</code></pre>
+<p>Or with a brace-enclosed initializer list:</p>
+<pre class="cpp"><code>[[cpp4r::register]] cpp4r::writable::integers cpp4r_make_ints() {
+  return {1, 2, 3};
+}</code></pre>
+<p>The same pattern applies to <code>doubles</code>,
+<code>logicals</code>, <code>strings</code>, and <code>raws</code>.</p>
+</div>
+<div id="type-checking-and-coercion" class="section level3">
+<h3 id="type-checking-and-coercion">Type checking and coercion</h3>
+<p>Rapi lets you pass any <code>SEXP</code> anywhere. Checking that the
+caller supplied the right type is your responsibility.</p>
+<pre class="cpp"><code>SEXP rapi_add_one(SEXP x_sxp) {
+  if (TYPEOF(x_sxp) != REALSXP) Rf_error("x must be a double vector");
+  int n = Rf_length(x_sxp);
+  SEXP out = PROTECT(Rf_allocVector(REALSXP, n));
+  double* x = REAL(x_sxp);
+  double* o = REAL(out);
+  for (int i = 0; i &lt; n; ++i) o[i] = x[i] + 1;
+  UNPROTECT(1);
+  return out;
+}</code></pre>
+<p>cpp4r constructors throw an informative error automatically when the
+type does not match.</p>
+<pre class="cpp"><code>[[cpp4r::register]] cpp4r::writable::doubles cpp4r_add_one(cpp4r::doubles x) {
+  cpp4r::writable::doubles out(x.size());
+  for (R_xlen_t i = 0; i &lt; x.size(); ++i) out[i] = x[i] + 1;
+  return out;
+}</code></pre>
+<p>For explicit coercion between compatible types, cpp4r provides
+<code>as_doubles()</code>, <code>as_integers()</code>, etc., which also
+check for loss of precision.</p>
+<pre class="cpp"><code>cpp4r::writable::doubles y;
+y.push_back(10.00);
+cpp4r::writable::integers i(cpp4r::as_integers(y));  // ok: 10.00 -&gt; 10
+
+cpp4r::writable::doubles x;
+x.push_back(10.01);
+cpp4r::as_integers(x);  // throws: 10.01 is not representable as int</code></pre>
+</div>
+<div id="strings" class="section level3">
+<h3 id="strings">Strings</h3>
+<p>Strings are among the trickiest types in Rapi. A character vector
+(<code>STRSXP</code>) is an array of <code>CHARSXP</code> pointers, each
+of which carries its own encoding. You must call
+<code>SET_STRING_ELT()</code> to set elements (not a plain array
+assignment), and you must use <code>CHAR()</code> or
+<code>Rf_translateCharUTF8()</code> to read them back.</p>
+<p>cpp4r exposes <code>r_string</code> and <code>strings</code> with
+<code>std::string</code>-like comparison and iteration, and
+<code>SET_STRING_ELT</code>/<code>STRING_ELT</code> are hidden behind
+ordinary subscript operators.</p>
+<p>Example: Print a greeting for each name in a character vector with
+Rapi versus cpp4r.</p>
+<pre class="cpp"><code>SEXP rapi_greet(SEXP names_sxp) {
+  int n = Rf_length(names_sxp);
+  SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
+  for (int i = 0; i &lt; n; ++i) {
+    const char* name = Rf_translateCharUTF8(STRING_ELT(names_sxp, i));
+    char buf[256];
+    snprintf(buf, sizeof(buf), "Hello, %s!", name);
+    SET_STRING_ELT(out, i, Rf_mkCharCE(buf, CE_UTF8));
+  }
+  UNPROTECT(1);
+  return out;
+}</code></pre>
+<pre class="cpp"><code>[[cpp4r::register]]
+cpp4r::writable::strings cpp4r_greet(cpp4r::strings names) {
+  cpp4r::writable::strings out(names.size());
+  for (R_xlen_t i = 0; i &lt; names.size(); ++i) {
+    out[i] = "Hello, " + std::string(names[i]) + "!";
+  }
+  return out;
+}</code></pre>
+<p>String construction and comparison work without encoding
+bookkeeping:</p>
+<pre class="cpp"><code>cpp4r::writable::strings x;
+x.push_back("a");
+x.push_back("b");
+// x[0] == "a" works directly</code></pre>
+</div>
+<div id="missing-values-na" class="section level3">
+<h3 id="missing-values-na">Missing values (NA)</h3>
+<p>Each vector type in R has its own sentinel for missing values
+(<code>NA_INTEGER</code>, <code>NA_REAL</code>, <code>NA_LOGICAL</code>,
+<code>NA_STRING</code>, <code>NA_COMPLEX</code>). In Rapi you test for
+them differently per type, which is easy to get wrong.</p>
+<pre class="cpp"><code>// doubles: use ISNA() or ISNAN()
+if (ISNA(REAL(x)[i])) { ... }
+// integers: compare to NA_INTEGER directly
+if (INTEGER(x)[i] == NA_INTEGER) { ... }
+// strings: compare to NA_STRING
+if (STRING_ELT(x, i) == NA_STRING) { ... }</code></pre>
+<p>cpp4r provides a uniform <code>cpp4r::is_na()</code> template and
+<code>cpp4r::na&lt;T&gt;()</code> constructor.</p>
+<pre class="cpp"><code>// Works the same way for all vector element types
+if (cpp4r::is_na(x[i])) { ... }
+
+// Create typed NAs
+int    int_na  = cpp4r::na&lt;int&gt;(); // == NA_INTEGER
+double dbl_na  = cpp4r::na&lt;double&gt;(); // ISNA() == true
+cpp4r::r_bool  bool_na = cpp4r::na&lt;cpp4r::r_bool&gt;(); // == NA_LOGICAL
+cpp4r::r_string str_na = cpp4r::na&lt;cpp4r::r_string&gt;(); // == NA_STRING</code></pre>
+</div>
+<div id="error-handling" class="section level3">
+<h3 id="error-handling">Error handling</h3>
+<p><code>Rf_error()</code> in Rapi works by calling
+<code>longjmp()</code>, which unwinds the C stack without invoking C++
+destructors. This means any RAII cleanup — including destructors of
+<code>std::vector</code>, <code>std::string</code>, file handles, etc. —
+is silently skipped when an R error occurs inside your code.</p>
+<pre class="cpp"><code>SEXP rapi_bad(SEXP x_sxp) {
+  std::vector&lt;double&gt; tmp(1000); // destructor will NOT run on R error
+  // ...
+  Rf_error("something went wrong"); // longjmp — tmp leaks
+  return R_NilValue;
+}</code></pre>
+<p>cpp4r’s <code>cpp4r::stop()</code> and
+<code>cpp4r::unwind_protect()</code> use R’s unwind API to translate R
+errors into C++ exceptions, so destructors run correctly.</p>
+<pre class="cpp"><code>[[cpp4r::register]] void cpp4r_safe_example(cpp4r::doubles x) {
+  std::vector&lt;double&gt; tmp(x.size());  // destructor WILL run
+  // ...
+  cpp4r::stop("something went wrong"); // throws unwind_exception; tmp cleaned up
+}</code></pre>
+<p><code>cpp4r::safe[]</code> is a convenience wrapper for calling Rapi
+functions that may throw R errors from within protected contexts:</p>
+<pre class="cpp"><code>SEXP out = cpp4r::safe[Rf_allocVector](REALSXP, 1);
+// If Rf_allocVector triggers an R error, it is caught and re-thrown as
+// a C++ exception rather than longjmp-ing past your destructors.</code></pre>
+</div>
+<div id="lists" class="section level3">
+<h3 id="lists">Lists</h3>
+<p>Building a named list with Rapi requires multiple
+<code>PROTECT</code> calls, manual name assignment via a character
+vector, and careful indexing.</p>
+<p>cpp4r uses named-argument literals and brace initializers.</p>
+<p>Example: Create a list with Rapi versus cpp4r.</p>
+<pre class="cpp"><code>SEXP rapi_make_list() {
+  SEXP out   = PROTECT(Rf_allocVector(VECSXP, 2));
+  SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
+
+  SET_STRING_ELT(names, 0, Rf_mkChar("x"));
+  SET_STRING_ELT(names, 1, Rf_mkChar("y"));
+
+  SEXP x = PROTECT(Rf_allocVector(REALSXP, 1));
+  REAL(x)[0] = 1.0;
+  SET_VECTOR_ELT(out, 0, x);
+
+  SEXP y = PROTECT(Rf_allocVector(INTSXP, 2));
+  INTEGER(y)[0] = 3;
+  INTEGER(y)[1] = 4;
+  SET_VECTOR_ELT(out, 1, y);
+
+  Rf_setAttrib(out, R_NamesSymbol, names);
+
+  UNPROTECT(4);
+  return out;
+}</code></pre>
+<pre class="cpp"><code>[[cpp4r::register]] cpp4r::writable::list cpp4r_make_list() {
+  using namespace cpp4r::literals;
+  return {
+    "x"_nm = {1.0},
+    "y"_nm = {3, 4},
+  };
+}</code></pre>
+<p>Pushing elements onto an existing list is equally
+straightforward:</p>
+<pre class="cpp"><code>cpp4r::writable::list x;
+x.push_back(cpp4r::writable::doubles({1.}));
+x.push_back(cpp4r::writable::integers({3, 4, 5}));
+x.push_back(cpp4r::writable::strings({"foo", "bar"}));</code></pre>
+</div>
+<div id="calling-r-functions-from-c" class="section level3">
+<h3 id="calling-r-functions-from-c">Calling R functions from C++</h3>
+<p>Calling an R function from Rapi requires finding it in the right
+environment, building a pairlist of arguments, evaluating a language
+object, and protecting intermediates throughout.</p>
+<p>cpp4r uses <code>cpp4r::package()</code> to look up exported
+functions, which can then be called with ordinary C++ function-call
+syntax.</p>
+<p>Example: Call <code>median(x, na.rm = TRUE)</code> from Rapi versus
+cpp4r.</p>
+<pre class="cpp"><code>SEXP rapi_call_median(SEXP x_sxp) {
+  SEXP fn   = PROTECT(Rf_findFun(Rf_install("median"),
+                                 R_FindNamespace(Rf_mkString("stats"))));
+  SEXP args = PROTECT(Rf_lang3(fn, x_sxp, Rf_ScalarLogical(1)));
+  int err = 0;
+  SEXP out = PROTECT(R_tryEval(args, R_GlobalEnv, &amp;err));
+  if (err) Rf_error("median() failed");
+  UNPROTECT(3);
+  return out;
+}</code></pre>
+<pre class="cpp"><code>[[cpp4r::register]] double cpp4r_call_median(cpp4r::doubles x) {
+  auto median = cpp4r::package("stats")["median"];
+  return median(x, true);  // na.rm = true
+}</code></pre>
+<p>Named arguments work with the <code>_nm</code> literal:</p>
+<pre class="cpp"><code>using namespace cpp4r::literals;
+double res = median("x"_nm = x, "na.rm"_nm = true);</code></pre>
+</div>
+<div id="environments" class="section level3">
+<h3 id="environments">Environments</h3>
+<p>Reading and writing variables in an R environment with Rapi requires
+converting names to <code>SYMSXP</code>s with
+<code>Rf_install()</code>.</p>
+<p>cpp4r wraps environments with subscript operators.</p>
+<p>Example: Set and get a variable in an environment with Rapi versus
+cpp4r.</p>
+<pre class="cpp"><code>void rapi_set_env(SEXP env_sxp, const char* name, double value) {
+  SEXP sym = Rf_install(name);
+  SEXP val = PROTECT(Rf_ScalarReal(value));
+  Rf_defineVar(sym, val, env_sxp);
+  UNPROTECT(1);
+}
+
+double rapi_get_env(SEXP env_sxp, const char* name) {
+  SEXP sym = Rf_install(name);
+  SEXP val = Rf_findVarInFrame(env_sxp, sym);
+  if (val == R_UnboundValue) Rf_error("'%s' not found", name);
+  return REAL(val)[0];
+}</code></pre>
+<pre class="cpp"><code>[[cpp4r::register]] void cpp4r_env_roundtrip(SEXP env_sxp) {
+  cpp4r::environment env(env_sxp);
+  env["foo"] = 1;                              // set
+  int v = cpp4r::as_cpp&lt;int&gt;(env["foo"]);      // get -&gt; 1
+  env.remove("foo");
+}</code></pre>
+</div>
+<div id="external-pointers" class="section level3">
+<h3 id="external-pointers">External pointers</h3>
+<p>Wrapping a C++ object as an R external pointer with Rapi requires
+writing a custom finalizer function, registering it, and carefully
+managing the pointer lifetime.</p>
+<p>cpp4r provides a templated <code>external_pointer&lt;T&gt;</code>
+that owns the pointer and runs the deleter automatically when the R
+object is garbage collected.</p>
+<p>Example: Create an external pointer to a
+<code>std::vector&lt;int&gt;</code> with Rapi versus cpp4r.</p>
+<pre class="cpp"><code>static void my_finalizer(SEXP ptr_sxp) {
+  if (R_ExternalPtrAddr(ptr_sxp)) {
+    delete static_cast&lt;std::vector&lt;int&gt;*&gt;(R_ExternalPtrAddr(ptr_sxp));
+    R_ClearExternalPtr(ptr_sxp);
+  }
+}
+
+SEXP rapi_make_extptr() {
+  std::vector&lt;int&gt;* v = new std::vector&lt;int&gt;{1, 2};
+  SEXP ptr = PROTECT(R_MakeExternalPtr(v, R_NilValue, R_NilValue));
+  R_RegisterCFinalizerEx(ptr, my_finalizer, TRUE);
+  UNPROTECT(1);
+  return ptr;
+}</code></pre>
+<pre class="cpp"><code>[[cpp4r::register]]
+cpp4r::external_pointer&lt;std::vector&lt;int&gt;&gt; cpp4r_make_extptr() {
+  auto* v = new std::vector&lt;int&gt;{1, 2};
+  return cpp4r::external_pointer&lt;std::vector&lt;int&gt;&gt;(v);
+}</code></pre>
+<p>Custom deleters are supported as a non-type template parameter:</p>
+<pre class="cpp"><code>void my_deleter(int* p) { delete p; }
+
+cpp4r::external_pointer&lt;int, my_deleter&gt; ptr(new int(42));
+ptr.reset();  // deleter called here</code></pre>
+</div>
+<div id="matrices" class="section level3">
+<h3 id="matrices">Matrices</h3>
+<p>Rapi has no matrix type distinct from vectors; a matrix is a vector
+with a <code>dim</code> attribute. Setting and reading <code>dim</code>
+must be done manually.</p>
+<p>cpp4r provides <code>doubles_matrix&lt;by_row&gt;</code> and
+<code>doubles_matrix&lt;by_column&gt;</code> that expose rows or columns
+as slices and keep <code>nrow()</code> / <code>ncol()</code> in sync
+with the <code>dim</code> attribute automatically.</p>
+<p>Example: Create a matrix with Rapi versus cpp4r.</p>
+<pre class="cpp"><code>SEXP rapi_make_matrix(int nrow, int ncol) {
+  SEXP out = PROTECT(Rf_allocMatrix(REALSXP, nrow, ncol));
+  // Column-major: element [i, j] is at index i + nrow * j
+  for (int j = 0; j &lt; ncol; ++j)
+    for (int i = 0; i &lt; nrow; ++i)
+      REAL(out)[i + nrow * j] = (double)(i * ncol + j);
+  UNPROTECT(1);
+  return out;
+}</code></pre>
+<pre class="cpp"><code>[[cpp4r::register]]
+cpp4r::writable::doubles_matrix&lt;cpp4r::by_row&gt; cpp4r_make_matrix() {
+  cpp4r::writable::doubles_matrix&lt;cpp4r::by_row&gt; out(5, 2);
+  // out.nrow() == 5, out.ncol() == 2
+  for (R_xlen_t i = 0; i &lt; out.nrow(); ++i)
+    for (R_xlen_t j = 0; j &lt; out.ncol(); ++j)
+      out(i, j) = static_cast&lt;double&gt;(i * out.ncol() + j);
+  return out;
+}</code></pre>
+<p>Row or column slices can be iterated directly:</p>
+<pre class="cpp"><code>cpp4r::doubles_matrix&lt;cpp4r::by_row&gt; m(sexp);
+auto row0 = m[0];  // a slice of the first row</code></pre>
+</div>
+<div id="summary" class="section level3">
+<h3 id="summary">Summary</h3>
+<p>The table below summarises the main improvements cpp4r provides over
+direct Rapi use.</p>
+<table><colgroup><col width="15%"><col width="44%"><col width="40%"></colgroup><thead><tr class="header"><th>Topic</th>
+<th>Rapi</th>
+<th>cpp4r</th>
+</tr></thead><tbody><tr class="odd"><td>Memory protection</td>
+<td>Manual <code>PROTECT</code>/<code>UNPROTECT</code>, must count</td>
+<td>Automatic via RAII</td>
+</tr><tr class="even"><td>Type checking</td>
+<td>Manual <code>TYPEOF()</code> guard</td>
+<td>Constructor throws on mismatch</td>
+</tr><tr class="odd"><td>Coercion</td>
+<td><code>Rf_coerceVector()</code>, no precision check</td>
+<td><code>as_doubles()</code> / <code>as_integers()</code> with
+precision check</td>
+</tr><tr class="even"><td>String elements</td>
+<td><code>SET_STRING_ELT</code> / <code>CHAR()</code> / encoding
+flags</td>
+<td>Subscript operators, <code>std::string</code> interop</td>
+</tr><tr class="odd"><td>Missing values</td>
+<td>Different sentinel per type</td>
+<td>Uniform <code>is_na()</code> / <code>na&lt;T&gt;()</code></td>
+</tr><tr class="even"><td>Error signalling</td>
+<td><code>longjmp</code>, skips C++ destructors</td>
+<td><code>cpp4r::stop()</code> throws, destructors run</td>
+</tr><tr class="odd"><td>Lists</td>
+<td>Manual <code>SET_VECTOR_ELT</code> + names vector</td>
+<td><code>push_back()</code>, <code>_nm</code> literals, brace
+initializers</td>
+</tr><tr class="even"><td>Calling R functions</td>
+<td>Pairlist + <code>Rf_eval</code></td>
+<td><code>cpp4r::package("pkg")["fn"](args...)</code></td>
+</tr><tr class="odd"><td>Environments</td>
+<td><code>Rf_install()</code> + <code>Rf_defineVar()</code></td>
+<td>Subscript operators on <code>cpp4r::environment</code></td>
+</tr><tr class="even"><td>External pointers</td>
+<td>Custom finalizer + <code>R_RegisterCFinalizerEx</code></td>
+<td><code>external_pointer&lt;T&gt;</code>, automatic deletion</td>
+</tr><tr class="odd"><td>Matrices</td>
+<td>Raw vector + manual <code>dim</code> attribute</td>
+<td><code>doubles_matrix&lt;by_row/by_column&gt;</code></td>
+</tr></tbody></table></div>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2 id="references" class="unnumbered">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-chambers06" class="csl-entry">
+Chambers, John. 2006. <span>“A <span>History</span> of <span>S</span>
+and <span>R</span> (with Some Questions for the Future).”</span> Vienna,
+Austria. <a href="https://www.r-project.org/conferences/useR-2006/Presentations/index.html">https://www.r-project.org/conferences/useR-2006/Presentations/index.html</a>.
+</div>
+<div id="ref-eddelbuettel11" class="csl-entry">
+Eddelbuettel, Dirk, and Romain Francois. 2011. <span>“Rcpp:
+<span>Seamless</span> <span>R</span> and <span>C++</span>
+<span>Integration</span>.”</span> <em>Journal of Statistical
+Software</em> 40 (April): 1–18. <a href="https://doi.org/10.18637/jss.v040.i08">https://doi.org/10.18637/jss.v040.i08</a>.
+</div>
+<div id="ref-emara24" class="csl-entry">
+Emara, Salma. 2024. <span>“Khufu:
+<span>Object</span>-<span>Oriented</span> <span>Programming</span> Using
+<span>C</span>++.”</span> <a href="https://learningcpp.org/cover.html">https://learningcpp.org/cover.html</a>.
+</div>
+<div id="ref-hornik01" class="csl-entry">
+Hornik, Kurt. 2001. <span>“Cxx: <span>C</span>++ Test.”</span> <a href="https://cran.r-project.org/src/contrib/Archive/cxx/">https://cran.r-project.org/src/contrib/Archive/cxx/</a>.
+</div>
+<div id="ref-sanderson16" class="csl-entry">
+Sanderson, Conrad, and Ryan Curtin. 2016. <span>“Armadillo: A
+Template-Based <span>C</span>++ Library for Linear Algebra.”</span>
+<em>Journal of Open Source Software</em> 1 (2): 26. <a href="https://doi.org/10.21105/joss.00026">https://doi.org/10.21105/joss.00026</a>.
+</div>
+<div id="ref-vargassepulvedaredatam25" class="csl-entry">
+Sepúlveda, Mauricio Vargas, and Lital Barkai. 2025. <span>“The
+<span>REDATAM</span> Format and Its Challenges for Data Access and
+Information Creation in Public Policy.”</span> <em>Data &amp;
+Policy</em> 7 (January): e18. <a href="https://doi.org/10.1017/dap.2025.4">https://doi.org/10.1017/dap.2025.4</a>.
+</div>
+<div id="ref-go24" class="csl-entry">
+The Go Authors. 2024. <span>“Go <span>Modules</span>
+<span>Reference</span>.”</span> <a href="https://go.dev/ref/mod">https://go.dev/ref/mod</a>.
+</div>
+<div id="ref-vargassepulvedakendallknight25" class="csl-entry">
+Vargas Sepulveda, Mauricio. 2025. <span>“Kendallknight: <span>An</span>
+<span>R</span> Package for Efficient Implementation of
+<span>Kendall</span>’s Correlation Coefficient Computation.”</span>
+<em>PLOS ONE</em> 20 (6): e0326090. <a href="https://doi.org/10.1371/journal.pone.0326090">https://doi.org/10.1371/journal.pone.0326090</a>.
+</div>
+<div id="ref-cpp1125" class="csl-entry">
+Vaughan, Davis, Jim Hester, and Romain François. 2025. <em>‘Cpp11‘: A
+<span>C++</span>11 Interface for <span>R</span>’s c Interface</em>. <a href="https://CRAN.R-project.org/package=cpp11">https://CRAN.R-project.org/package=cpp11</a>.
+</div>
+<div id="ref-yotov17" class="csl-entry">
+Yotov, Yoto V., Roberta Piermartini, José-Antonio Monteiro, and Mario
+Larch. 2017. <em>An <span>Advanced</span> <span>Guide</span> to
+<span>Trade</span> <span>Policy</span> <span>Analysis</span>:
+<span>The</span> <span>Structural</span> <span>Gravity</span>
+<span>Model</span></em>. United Nations. <a href="https://doi.org/10.18356/57a768e5-en">https://doi.org/10.18356/57a768e5-en</a>.
+</div>
+</div>
+</div>
+        </div>
+        <footer><p id="last-updated">Loading...</p>
+</footer><script src="../js/footer.js"></script><script src="../js/theme.js"></script><script src="../js/search.js"></script><script src="../js/fontsize.js"></script></div>
+</div>
+</div>
+</body></html>
+

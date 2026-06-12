@@ -1,0 +1,16 @@
+README.html
+.Rproj.user
+.Rhistory
+.clangd
+.vscode
+.cache
+others
+cpp4rtest_0.1.0.tar.gz
+*.o
+*.so
+*.dll
+scripts/R-devel
+check-docker/cache/
+check-docker/rchk-packages/
+check-docker/*.Rcheck/
+*.tar.gz
