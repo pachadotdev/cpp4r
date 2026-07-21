@@ -1,15 +1,29 @@
+# cpp4r 1.1.0
+
+* Slight changes to internal constructors ('SEXP' and function) to follow the same style as
+  'cpp11'.
+
+# cpp4r 1.0.0
+
+* Full detailed documentation.
+* Added over 400 units tests to cover different usual cases and corner cases.
+* Tested via Docker on all CRAN supported Linux platforms with additional Mac/Windows testing
+  via GitHub Actions.
+
 # cpp4r 0.7.0
 
 * I re-added some conditionals to use newer C++ features when the compiler supports them. These
   can add a small speed gain in some cases.
-* The codebase default is C++11, with compile time newer standards detection to use newer features and optimizations.
+* The codebase default is C++11, with compile time newer standards detection to use newer features
+  and optimizations.
 * Adds a check for all supported C++ standards in R >= 4.0.0 (>= CXX17).
 * Replaces 'testthat' with 'tinytest' after I detected an incompatibility with C++23.
 
 # cpp4r 0.6.0
 
 * `register()` now captures the C++ namespace of decorated functions and emits fully-qualified declarations and calls, so functions defined inside a `namespace { ... }` block (or written as `ns::fun`) can be registered without further setup.
-* Removed the run-time dependency on the `decor`, `tibble`, and `vctrs` packages; the small subset of helpers that `register()` relies on is now bundled internally and uses base `data.frame`.
+* Removed the run-time dependency on the `decor`, `tibble`, and `vctrs` packages; the small subset
+  of helpers that `register()` relies on is now bundled internally and uses base `data.frame`.
 * Adds fast paths that provide slight speed improvements (e.g., avoiding branching)
 * Follows, to the best possible extent, the R's C API description from https://github.com/hadley/r-internals.
 * Slightly expanded `cpp4r::function`.
@@ -26,7 +40,8 @@
 # cpp4r 0.4.0
 
 * Clearer documentation about the C++ workflow (i.e., how to use anticonf to specify a C++ standard)
-* Allows for default values like `my_fun(int x = 100)` to call `my_fun()` with the same result as `my_fun(100L)` from R
+* Allows for default values like `my_fun(int x = 100)` to call `my_fun()` with the same result as
+  `my_fun(100L)` from R
 
 # cpp4r 0.3.1
 

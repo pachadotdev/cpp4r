@@ -74,18 +74,32 @@
 
 
 
+<div id="cpp4r-1.1.0" class="section level1">
+<h1>cpp4r 1.1.0</h1>
+<ul><li>Slight changes to internal constructors (‘SEXP’ and function) to follow the same style as
+‘cpp11’.</li>
+</ul></div>
+<div id="cpp4r-1.0.0" class="section level1">
+<h1>cpp4r 1.0.0</h1>
+<ul><li>Full detailed documentation.</li>
+<li>Added over 400 units tests to cover different usual cases and corner cases.</li>
+<li>Tested via Docker on all CRAN supported Linux platforms with additional Mac/Windows testing
+via GitHub Actions.</li>
+</ul></div>
 <div id="cpp4r-0.7.0" class="section level1">
 <h1>cpp4r 0.7.0</h1>
 <ul><li>I re-added some conditionals to use newer C++ features when the compiler supports them. These
 can add a small speed gain in some cases.</li>
-<li>The codebase default is C++11, with compile time newer standards detection to use newer features and optimizations.</li>
+<li>The codebase default is C++11, with compile time newer standards detection to use newer features
+and optimizations.</li>
 <li>Adds a check for all supported C++ standards in R &gt;= 4.0.0 (&gt;= CXX17).</li>
 <li>Replaces ‘testthat’ with ‘tinytest’ after I detected an incompatibility with C++23.</li>
 </ul></div>
 <div id="cpp4r-0.6.0" class="section level1">
 <h1>cpp4r 0.6.0</h1>
 <ul><li><code>register()</code> now captures the C++ namespace of decorated functions and emits fully-qualified declarations and calls, so functions defined inside a <code>namespace { ... }</code> block (or written as <code>ns::fun</code>) can be registered without further setup.</li>
-<li>Removed the run-time dependency on the <code>decor</code>, <code>tibble</code>, and <code>vctrs</code> packages; the small subset of helpers that <code>register()</code> relies on is now bundled internally and uses base <code>data.frame</code>.</li>
+<li>Removed the run-time dependency on the <code>decor</code>, <code>tibble</code>, and <code>vctrs</code> packages; the small subset
+of helpers that <code>register()</code> relies on is now bundled internally and uses base <code>data.frame</code>.</li>
 <li>Adds fast paths that provide slight speed improvements (e.g., avoiding branching)</li>
 <li>Follows, to the best possible extent, the R’s C API description from <a href="https://github.com/hadley/r-internals" class="uri">https://github.com/hadley/r-internals</a>.</li>
 <li>Slightly expanded <code>cpp4r::function</code>.</li>
@@ -102,7 +116,8 @@ can add a small speed gain in some cases.</li>
 <div id="cpp4r-0.4.0" class="section level1">
 <h1>cpp4r 0.4.0</h1>
 <ul><li>Clearer documentation about the C++ workflow (i.e., how to use anticonf to specify a C++ standard)</li>
-<li>Allows for default values like <code>my_fun(int x = 100)</code> to call <code>my_fun()</code> with the same result as <code>my_fun(100L)</code> from R</li>
+<li>Allows for default values like <code>my_fun(int x = 100)</code> to call <code>my_fun()</code> with the same result as
+<code>my_fun(100L)</code> from R</li>
 </ul></div>
 <div id="cpp4r-0.3.1" class="section level1">
 <h1>cpp4r 0.3.1</h1>

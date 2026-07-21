@@ -74,42 +74,49 @@
 
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="cpp4r" class="section level1">
-<h1>cpp4r</h1>
+<div id="cpp4r-header-only-c-and-r-interface" class="section level1">
+<h1>cpp4r: Header-Only ‘C++’ and ‘R’ Interface</h1>
 <!-- badges: start -->
-<p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a>
-<a href="https://github.com/pachadotdev/cpp4r/actions/workflows/R-CMD-check.yaml"><img src="https://github.com/pachadotdev/cpp4r/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a>
-<a href="https://CRAN.R-project.org/package=cpp4r"><img src="https://www.r-pkg.org/badges/version/cpp4r" alt="CRAN status"></a>
-<a href="https://github.com/pachadotdev/cpp4r/actions/workflows/test-coverage.yaml"><img src="https://raw.githubusercontent.com/pachadotdev/cpp4r/coverage/badges/coverage.svg" alt="Test coverage"></a>
-<a href="https://buymeacoffee.com/pacha"><img src="https://raw.githubusercontent.com/pachadotdev/buymeacoffee-badges/main/bmc-yellow.svg" alt="BuyMeACoffee"></a>
-<!-- badges: end --></p>
-<p>cpp4r helps you to interact with R objects using C++ code. It is a fork
-of the <a href="https://cran.r-project.org/package=cpp11">cpp11</a> package with
-identical syntax and similar goals.</p>
-<p>⚠️Important⚠️: cpp4r was created to ease writing functions in your own
-packages and does not offer on-the-fly compilation for code snippets.</p>
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a> <a href="https://github.com/pachadotdev/cpp4r/actions/workflows/R-CMD-check.yaml"><img src="https://github.com/pachadotdev/cpp4r/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a> <a href="https://CRAN.R-project.org/package=cpp4r"><img src="https://www.r-pkg.org/badges/version/cpp4r" alt="CRAN status"></a> <a href="https://github.com/pachadotdev/cpp4r/actions/workflows/test-coverage.yaml"><img src="https://raw.githubusercontent.com/pachadotdev/cpp4r/coverage/badges/coverage.svg" alt="Test coverage"></a> <a href="https://buymeacoffee.com/pacha"><img src="https://raw.githubusercontent.com/pachadotdev/buymeacoffee-badges/main/bmc-yellow.svg" alt="BuyMeACoffee"></a> <!-- badges: end --></p>
+<p>cpp4r helps you to interact with R objects using C++ code. It is a
+fork of the <a href="https://cran.r-project.org/package=cpp11">cpp11</a>
+package with identical syntax and similar goals.</p>
+<p>⚠️Important⚠️: cpp4r was created to ease writing functions in your
+own packages and does not offer on-the-fly compilation for code
+snippets.</p>
 <p>cpp4r can be used as a replacement for cpp11 in existing or new
 packages. Think of cpp11 and cpp4r as MySQL and MariaDB: they are almost
 identical, but cpp4r has some extra features.</p>
+<p>cpp4r requires at least C++11. It is compatible with C++14, C++17,
+C++20, C++23 as well. The headers are written in a way that is
+compatible with all of these standards and newer C++ features are used
+if the compiler supports them withC C++11 as a base.</p>
 <p>After discussing some <a href="https://github.com/pachadotdev/cpp11/pulls/pachadotdev">pull
-requests</a> with
-Hadley Wickham from Posit, it was mentioned that I should create my own
-fork to add the following features:</p>
-<ul class="task-list"><li><label><input type="checkbox" checked>Convert ordered and unordered C++ maps to R lists.</label></li>
-<li><label><input type="checkbox" checked>Roxygen support on C++ side.</label></li>
-<li><label><input type="checkbox" checked>Allow <code>dimnames</code> attribute with matrices on C++ side.</label></li>
-<li><label><input type="checkbox" checked>Support nullable <code>external_ptr&lt;&gt;</code>.</label></li>
-<li><label><input type="checkbox" checked>Use values added to a vector with <code>push_back()</code> immediately.</label></li>
-<li><label><input type="checkbox" checked>Support bidirectional passing of complex numbers/vectors.</label></li>
-<li><label><input type="checkbox" checked>Provide flexibility with data types (e.g., cpp4r’s <code>as_integers()</code>
-and <code>as_doubles()</code> accept logical inputs while cpp11’s do not).</label></li>
-<li><label><input type="checkbox" checked>Some internal optimizations for better speed (e.g.,
-<a href="https://github.com/r-lib/cpp11/pull/463" class="uri">https://github.com/r-lib/cpp11/pull/463</a> and
-<a href="https://github.com/r-lib/cpp11/pull/430" class="uri">https://github.com/r-lib/cpp11/pull/430</a>).</label></li>
+requests</a> with Hadley Wickham from Posit, it was mentioned that I
+should create my own fork to add the following features:</p>
+<ul class="task-list"><li><label><input type="checkbox" checked>Convert ordered and
+unordered C++ maps to R lists.</label></li>
+<li><label><input type="checkbox" checked>Roxygen support on C++
+side.</label></li>
+<li><label><input type="checkbox" checked>Allow
+<code>dimnames</code> attribute with matrices on C++ side.</label></li>
+<li><label><input type="checkbox" checked>Support nullable
+<code>external_ptr&lt;&gt;</code>.</label></li>
+<li><label><input type="checkbox" checked>Use values added to a
+vector with <code>push_back()</code> immediately.</label></li>
+<li><label><input type="checkbox" checked>Support bidirectional
+passing of complex numbers/vectors.</label></li>
+<li><label><input type="checkbox" checked>Provide flexibility with
+data types (e.g., cpp4r’s <code>as_integers()</code> and
+<code>as_doubles()</code> accept logical inputs while cpp11’s do
+not).</label></li>
+<li><label><input type="checkbox" checked>Some internal
+optimizations for better speed (e.g., <a href="https://github.com/r-lib/cpp11/pull/463" class="uri">https://github.com/r-lib/cpp11/pull/463</a> and <a href="https://github.com/r-lib/cpp11/pull/430" class="uri">https://github.com/r-lib/cpp11/pull/430</a>).</label></li>
 </ul><div id="getting-started" class="section level2">
 <h2>Getting started</h2>
-<p>Check the <a href="https://cpp4r.org/">documentation</a> to get started using cpp4r
-in your scripts, particularly if you are new to C++ programming.</p>
+<p>Check the <a href="https://cpp4r.org/">documentation</a> to get
+started using cpp4r in your scripts, particularly if you are new to C++
+programming.</p>
 <p>You can install cpp4r from CRAN:</p>
 <pre class="r"><code>install.packages("cpp4r", repos = "https://cloud.r-project.org")</code></pre>
 <p>Or the development version from GitHub:</p>
@@ -118,12 +125,15 @@ remotes::install_github("pachadotdev/cpp4r")</code></pre>
 </div>
 <div id="using-cpp4r-in-a-package" class="section level2">
 <h2>Using cpp4r in a package</h2>
-<p>Create a new package with <code>cpp4r::pkg_template("~/path/to/mypkg")</code> and
-then edit the generated files.</p>
-<p>To add cpp4r to an existing package, put your C++ files in the <code>src/</code>
-directory and add the following to your DESCRIPTION file:</p>
+<p>Create a new package with
+<code>cpp4r::pkg_template("~/path/to/mypkg")</code> and then edit the
+generated files.</p>
+<p>To add cpp4r to an existing package, put your C++ files in the
+<code>src/</code> directory and add the following to your DESCRIPTION
+file:</p>
 <pre><code>LinkingTo: cpp4r</code></pre>
-<p>Then add a roxygen header, for example, to <code>R/mypkg-package.R</code>:</p>
+<p>Then add a roxygen header, for example, to
+<code>R/mypkg-package.R</code>:</p>
 <pre class="r"><code>#' @useDynLib mypkg, .registration = TRUE
 #' @keywords internal
 "_PACKAGE"</code></pre>
@@ -138,31 +148,29 @@ packages without fear of compile-time and run-time mismatches.</p>
 <p>You can <a href="https://cpp4r.org/articles/01-motivations.html">vendor</a> the
 current installed version of cpp4r headers into your package with
 <code>cpp4r::vendor()</code>.</p>
-<p>The
-<a href="https://github.com/pachadotdev/cpp4r/tree/main/cpp4rtest">cpp4rvendor</a>
+<p>The <a href="https://github.com/pachadotdev/cpp4r/tree/main/cpp4rtest">cpp4rvendor</a>
 package shows an example of vendoring cpp4r headers.</p>
-<p>Vendoring ensures the headers will remain unchanged until you explicitly
-update them. The advantage is that your package will not break if there
-are breaking changes in future versions of cpp4r. The disadvantage is
-that you will not get bug fixes and new features unless you update the
-vendored headers.</p>
+<p>Vendoring ensures the headers will remain unchanged until you
+explicitly update them. The advantage is that your package will not
+break if there are breaking changes in future versions of cpp4r. The
+disadvantage is that you will not get bug fixes and new features unless
+you update the vendored headers.</p>
 </div>
 <div id="getting-help" class="section level2">
 <h2>Getting help</h2>
-<p>Please open an issue or email me. I will do my best to respond before 48
-hours.</p>
+<p>Please open an issue or email me. I will do my best to respond before
+48 hours.</p>
 </div>
 <div id="contributing" class="section level2">
 <h2>Contributing</h2>
 <p>Contributions are welcome! Please see the <a href="https://cpp4r.org/articles/15-internals.html">internals
-vignette</a> for details
-about design choices and coding style.</p>
+vignette</a> for details about design choices and coding style.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2>Code of Conduct</h2>
-<p>Please note that the cpp4r project is released with a <a href="https://cpp4r.org/CODE_OF_CONDUCT.html">Contributor Code
-of Conduct</a>. By contributing to
-this project, you agree to abide by its terms.</p>
+<p>Please note that the cpp4r project is released with a <a href="https://cpp4r.org/CODE_OF_CONDUCT.html">Contributor Code of
+Conduct</a>. By contributing to this project, you agree to abide by its
+terms.</p>
 </div>
 </div>
         </div>
