@@ -4,6 +4,7 @@ source(system.file("tinytest", "helper.R", package = "cpp4r"))
 
 # vendor errors if cpp4r is already vendored
 local({
+  if (!requireNamespace("desc")) { return(NULL) }
   pkg <- local_package()
   vendor(pkg_path(pkg))
   expect_error(
@@ -14,6 +15,7 @@ local({
 
 # vendor to non-default directory
 local({
+  if (!requireNamespace("desc")) { return(NULL) }
   pkg <- local_package()
   p <- paste(pkg_path(pkg), "inst", "include", sep = "/")
   vendor(p)
@@ -25,6 +27,7 @@ local({
 
 # unvendor without errors
 local({
+  if (!requireNamespace("desc")) { return(NULL) }
   pkg <- local_package()
   p <- paste(pkg_path(pkg), "inst", "include", sep = "/")
   vendor(p)

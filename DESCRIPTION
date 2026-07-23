@@ -17,7 +17,7 @@ Authors@R: c( person("Mauricio", "Vargas Sepulveda", ,
     "m.vargas.sepulveda@gmail.com", role = c("aut", "cre"), comment = c(ORCID =
     "0000-0003-1017-7574")), person(, "Posit Software, PBC", role = "aut",
     comment = "Original cpp11 package") )
-Suggests: roxygen2, tinytest
+Suggests: roxygen2, tinytest, desc
 License: Apache License (>= 2)
 URL: https://cpp4r.org, https://github.com/pachadotdev/cpp4r
 BugReports: https://github.com/pachadotdev/cpp4r/issues
