@@ -6,9 +6,9 @@ source(system.file("tinytest", "helper.R", package = "cpp4r"))
 local({
   if (!requireNamespace("desc")) { return(NULL) }
   pkg <- local_package()
-  vendor(pkg_path(pkg))
+  vendor(pkg)
   expect_error(
-    vendor(pkg_path(pkg)),
+    vendor(pkg),
     pattern = "already exists"
   )
 })
@@ -17,7 +17,7 @@ local({
 local({
   if (!requireNamespace("desc")) { return(NULL) }
   pkg <- local_package()
-  p <- paste(pkg_path(pkg), "inst", "include", sep = "/")
+  p <- paste(pkg, "inst", "include", sep = "/")
   vendor(p)
   expect_true(dir.exists(file.path(p, "cpp4r")))
   expect_true(file.exists(file.path(p, "cpp4r.hpp")))
@@ -29,7 +29,7 @@ local({
 local({
   if (!requireNamespace("desc")) { return(NULL) }
   pkg <- local_package()
-  p <- paste(pkg_path(pkg), "inst", "include", sep = "/")
+  p <- paste(pkg, "inst", "include", sep = "/")
   vendor(p)
   expect_true(dir.exists(file.path(p, "cpp4r")))
   expect_true(file.exists(file.path(p, "cpp4r.hpp")))

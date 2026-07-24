@@ -8,11 +8,7 @@ local_package <- function() {
   )
   writeLines("Package: testPkg", file.path(dir, "DESCRIPTION"))
   writeLines("useDynLib(testPkg, .registration = TRUE)", file.path(dir, "NAMESPACE"))
-  desc::desc(dir)
-}
-
-pkg_path <- function(pkg) {
-  dirname(pkg$.__enclos_env__$private$path)
+  dir
 }
 
 get_funs <- function(path) {
@@ -21,7 +17,7 @@ get_funs <- function(path) {
 }
 
 get_package_name <- function(path) {
-  desc::desc_get("Package", file = file.path(path, "DESCRIPTION"))
+  read.dcf(file.path(path, "DESCRIPTION"), fields = "Package")[1, 1]
 }
 
 read_file <- function(x) {

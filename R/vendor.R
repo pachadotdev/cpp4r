@@ -3,14 +3,12 @@
 #' @description Vendoring is the act of making your own copy of the 3rd party packages your
 #' project is using. It is often used in the go language community.
 #'
-#' This function vendors cpp4r into your package by copying the cpp4r
-#' headers into the `inst/include` folder of your package and adding
-#' 'cpp4r version: XYZ' to the top of the files, where XYZ is the version of
-#' cpp4r currently installed on your machine.
+#' This function vendors cpp4r into your package by copying the cpp4r headers into the
+#' `inst/include` folder of your package and adding 'cpp4r version: XYZ' to the top of the files,
+#' where XYZ is the version of cpp4r currently installed on your machine.
 #'
-#' **Note**: vendoring places the responsibility of updating the code on
-#' **you**. Bugfixes and new features in cpp4r will not be available for your
-#' code until you run `cpp_vendor()` again.
+#' Vendoring places the responsibility of updating the code on you. Bugfixes and new features in
+#' cpp4r will not be available for your code until you run \code{cpp_vendor()} again.
 #'
 #' @param path The directory with the vendored headers. It is recommended to use `"./src/vendor"`.
 #' The default is `NULL`.

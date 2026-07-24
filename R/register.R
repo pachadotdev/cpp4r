@@ -1,11 +1,10 @@
 #' @title Generates wrappers for registered C++ functions
 #'
-#' @description Functions decorated with `[[cpp4r::register]]` in files ending in `.cc`,
-#' `.cpp`, `.h` or `.hpp` will be wrapped in generated code and registered to
-#' be called from R.
-#'
-#' Note registered functions will not be *exported* from your package unless
-#' you also add a `@export` roxygen2 directive for them.
+#' @description Functions decorated with \code{[[cpp4r::register]]} in files
+#'  ending in '.cc', '.cpp', '.h' or '.hpp' will be wrapped in generated code
+#'  and registered to be called from R. Decorating a function only makes it
+#'  callable via '.Call()'; it does not export or document it. See the
+#'  "Package skeleton" vignette for how to export a registered function.
 #'
 #' @param path The path to the package root directory. The default is `NULL`,
 #' @param quiet If `TRUE` suppresses output from this function
