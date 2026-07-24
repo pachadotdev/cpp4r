@@ -1,9 +1,5 @@
-#' @keywords internal
-"_PACKAGE"
-
-# The following block is used by usethis to automatically manage
-# roxygen namespace tags. Modify with care!
-## usethis namespace: start
+#' @title Testing 'cpp4r'
+#' @description To check cpp4r correctness. The headers are vendored to check
+#'  which lines ofthe C++ code are covered by the unit tests.
 #' @useDynLib cpp4rtest, .registration = TRUE
-## usethis namespace: end
-NULL
+"_PACKAGE"

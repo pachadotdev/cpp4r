@@ -8,7 +8,7 @@ source(system.file("tinytest", "helper.R", package = "cpp4r"))
 # minimal table for no registered functions
 local({
   pkg <- local_package()
-  path <- pkg_path(pkg)
+  path <- pkg
   expect_equal(
     cpp4r:::get_call_entries(path, get_funs(path), get_package_name(path)),
     c(
@@ -22,7 +22,7 @@ local({
 # works with multiple register functions
 local({
   pkg <- local_package()
-  p <- pkg_path(pkg)
+  p <- pkg
   dir.create(file.path(p, "src"))
   file.copy(test_path("multiple.cpp"), file.path(p, "src", "multiple.cpp"))
   cpp4r::register(p)
@@ -350,7 +350,7 @@ local({
 local({
   exit_if_not(getRversion() >= "3.4")
   pkg <- local_package()
-  p <- pkg_path(pkg)
+  p <- pkg
   dir.create(file.path(p, "src"))
   file.copy(test_path("single.cpp"), file.path(p, "src", "single.cpp"))
   cpp4r::register(p)
@@ -368,7 +368,7 @@ local({
 # can be run without messages
 local({
   pkg <- local_package()
-  p <- pkg_path(pkg)
+  p <- pkg
   dir.create(file.path(p, "src"))
   file.copy(test_path("single.cpp"), file.path(p, "src", "single.cpp"))
   expect_silent(cpp4r::register(p, quiet = TRUE))
@@ -377,7 +377,7 @@ local({
 # can be run with messages
 local({
   pkg <- local_package()
-  p <- pkg_path(pkg)
+  p <- pkg
   dir.create(file.path(p, "src"))
   file.copy(test_path("single.cpp"), file.path(p, "src", "single.cpp"))
   msgs <- character(0)
@@ -394,7 +394,7 @@ local({
 # includes pkg_types.h if in src
 local({
   pkg <- local_package()
-  p <- pkg_path(pkg)
+  p <- pkg
   dir.create(file.path(p, "src"))
   file.copy(test_path("single.cpp"), file.path(p, "src", "single.cpp"))
   writeLines("#include <sstream>", file.path(p, "src", "testPkg_types.h"))
@@ -409,7 +409,7 @@ local({
 # includes pkg_types.hpp if in src
 local({
   pkg <- local_package()
-  p <- pkg_path(pkg)
+  p <- pkg
   dir.create(file.path(p, "src"))
   file.copy(test_path("single.cpp"), file.path(p, "src", "single.cpp"))
   writeLines("#include <sstream>", file.path(p, "src", "testPkg_types.hpp"))
@@ -424,7 +424,7 @@ local({
 # includes pkg_types.h if in inst/include
 local({
   pkg <- local_package()
-  p <- pkg_path(pkg)
+  p <- pkg
   dir.create(file.path(p, "src"))
   file.copy(test_path("single.cpp"), file.path(p, "src", "single.cpp"))
   dir.create(file.path(p, "inst", "include"), recursive = TRUE)
@@ -440,7 +440,7 @@ local({
 # includes pkg_types.hpp if in inst/include
 local({
   pkg <- local_package()
-  p <- pkg_path(pkg)
+  p <- pkg
   dir.create(file.path(p, "src"))
   file.copy(test_path("single.cpp"), file.path(p, "src", "single.cpp"))
   dir.create(file.path(p, "inst", "include"), recursive = TRUE)
@@ -456,7 +456,7 @@ local({
 # does not error if no files have registered functions
 local({
   pkg <- local_package()
-  p <- pkg_path(pkg)
+  p <- pkg
   dir.create(file.path(p, "src"))
   writeLines("int foo(int x) { return x; }", file.path(p, "src", "foo.cpp"))
   result <- tryCatch(register(p), error = function(e) e)
@@ -466,7 +466,7 @@ local({
 # accepts .cc extension
 local({
   pkg <- local_package()
-  p <- pkg_path(pkg)
+  p <- pkg
   dir.create(file.path(p, "src"))
   file.copy(test_path("single.cpp"), file.path(p, "src", "single.cc"))
   register(p, extension = ".cc")
@@ -522,7 +522,7 @@ local({
 # no error if all registers are correct
 local({
   pkg <- local_package()
-  p <- pkg_path(pkg)
+  p <- pkg
   dir.create(file.path(p, "src"))
   file.copy(test_path("single.cpp"), file.path(p, "src", "single.cpp"))
   result <- tryCatch(register(p), error = function(e) e)
@@ -531,7 +531,7 @@ local({
 
 local({
   pkg <- local_package()
-  p <- pkg_path(pkg)
+  p <- pkg
   dir.create(file.path(p, "src"))
   file.copy(test_path("multiple.cpp"), file.path(p, "src", "multiple.cpp"))
   result <- tryCatch(register(p), error = function(e) e)
@@ -541,7 +541,7 @@ local({
 # error if one or more registers is incorrect
 local({
   pkg <- local_package()
-  p <- pkg_path(pkg)
+  p <- pkg
   dir.create(file.path(p, "src"))
   file.copy(
     test_path("single_incorrect.cpp"),
@@ -552,7 +552,7 @@ local({
 
 local({
   pkg <- local_package()
-  p <- pkg_path(pkg)
+  p <- pkg
   dir.create(file.path(p, "src"))
   file.copy(
     test_path("multiple_incorrect.cpp"),

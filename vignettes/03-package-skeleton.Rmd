@@ -19,9 +19,7 @@ This vignette and the next use the following R packages:
 
 ```r
 library(cpp4r)
-library(devtools)
-library(bench)
-library(usethis)
+library(tinydev)
 ```
 
 ## Creating a Dummy Package
@@ -71,11 +69,30 @@ standalone C++ program.
 Unlike cpp11, cpp4r can document the C++ functions using roxygen2 comments. The comments must be placed before the
 `[[cpp4r::register]]` attribute.
 
+## Exporting a Registered Function
+
+Decorating a function with `[[cpp4r::register]]` only makes it callable via `.Call()` from R; it does not export or
+document it. For example, this alone leaves `sum` undocumented and unexported:
+
+```cpp
+[[cpp4r::register]] int sum(int a, int b) { return a + b; }
+```
+
+There are two ways to export a registered function:
+
+- Add a `/* roxygen ... */` comment block, including an `@export` tag, directly before the decorated function in the
+  `C++` file, as shown above for `plus_one()`. `register()` copies it verbatim onto the generated R wrapper, so
+  running `roxygen2::document()` afterwards will export the wrapper and document it as usual.
+- Give the `C++` function a name you don't want exposed directly (e.g. `sum_`), then write your own R wrapper that
+  calls it and add a normal `#'` roxygen2 comment block with `@export` above that wrapper instead.
+
+Either way, `register()` and `[[cpp4r::register]]` alone never modify `NAMESPACE`; running `tinydev::pkg_document(".")`
+(or hand-editing `NAMESPACE`) is what actually exports the function.
+
 With cpp11, you would need to write a separate wrapper, like this:
 
 ```cpp
-[[cpp4r::register]]
-int plus_one_(int x) {
+[[cpp11::register]] int plus_one_(int x) {
   return x + 1;
 }
 ```
@@ -88,6 +105,21 @@ int plus_one_(int x) {
 #' @examples plus_one(1)
 plus_one <- function(x) {
   plus_one_(x)
+}
+```
+
+With cpp4r you can type:
+
+```cpp
+/* roxygen
+@title Plus 1 (C++)
+@param x integer
+@description It adds 1 to an integer value.
+@export
+@examples plus_one(1)
+*/
+[[cpp4r::register]] int plus_one(int x) {
+  return x + 1;
 }
 ```
 
@@ -108,8 +140,8 @@ To use the C++ function, you can register and document it by running:
 
 ```r
 cpp4r::register()
-devtools::document()
-devtools::load_all()
+tinydev::pkg_document(".")
+tinydev::pkg_load(".")
 ```
 
 Which should print:
@@ -117,12 +149,6 @@ Which should print:
 ```r
 > plus_one(1)
 [1] 2
-```
-
-For development and live testing, you should use the `load_all()`:
-
-```r
-load_all()
 ```
 
 Try `plus_two(1)` and `plus_two(1.0)`. Why does 1 and 1.0 matter in C++?
@@ -169,8 +195,8 @@ To document and install the package as an R library, you can run the following f
 
 ```r
 cpp4r::register()
-devtools::document()
-devtools::install()
+tinydev::pkg_document(".")
+tinydev::pkg_install(".")
 ```
 
 Afterward, you can access the functions by loading the package with `library(cpp4rexamples)`.
@@ -182,21 +208,17 @@ Each time you need to make changes to the C++ code, you can run `load_all()` aga
 It is good practice to include a license for your code. For example, you can use the Apache license by running:
 
 ```r
-usethis::use_apache_license()
+tinydev::license_apache(".")
 ```
 
-Additionally, it is recommended to use `use_build_ignore()` to ignore files that are unnecessary for package installation. For example, to ignore the `docs` folder, you can run:
-
-```r
-usethis::use_build_ignore("docs")
-```
-
-Your `.Rbuildignore` file can include the following lines, which you can edit manually to exclude specific files and directories:
+You also need to ignore files that are unnecessary for package installation. For example, to ignore the `docs` folder, add
+`^docs$` to `.Rbuildignore`. Your `.Rbuildignore` file can include the following lines, which you can edit manually to exclude
+specific files and directories:
 
 ```
 ^\.vscode$
-^LICENSE\.md$
-^cpp4rexamples\.Rproj$
+^LICENSE\.txt$
+`^docs$`
 ```
 
 ## References
