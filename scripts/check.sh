@@ -290,9 +290,9 @@ docker run --rm \
         devscripts pkg-config gfortran libcurl4-openssl-dev ${EXTRA_APT_PKGS} || true
     elif command -v dnf >/dev/null 2>&1 || command -v yum >/dev/null 2>&1; then
       PKG_MGR=\$(command -v dnf 2>/dev/null || echo yum)
-      \$PKG_MGR -y install libuv-devel libxml2-devel pkgconfig gcc-gfortran libcurl-devel ${EXTRA_DNF_PKGS} || true
+      \$PKG_MGR -y install pkgconfig gcc-gfortran libcurl-devel ${EXTRA_DNF_PKGS} || true
     elif command -v zypper >/dev/null 2>&1; then
-      zypper --non-interactive install libuv libxml2-devel pkg-config gcc-fortran libcurl-devel ${EXTRA_ZYPPER_PKGS} || true
+      zypper --non-interactive install pkg-config gcc-fortran libcurl-devel ${EXTRA_ZYPPER_PKGS} || true
     fi
 
     # Install system deps (xml2, etc) and R package deps before writing
