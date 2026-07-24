@@ -1,6 +1,9 @@
 clean:
 	@Rscript -e 'tinydev::pkg_clean(".");'
 
+document:
+	@Rscript -e 'tinydev::pkg_document(".");'
+
 install:
 	@Rscript -e 'tinydev::pkg_install(".");'
 
@@ -43,6 +46,10 @@ check-cxx%-clang:
 # make check-cran-<image>, e.g. check-cran-gcc16, check-cran-rocky8:
 # full CRAN-style check via Docker using <image>'s default toolchain.
 check-cran-%:
+	@chmod +x ./scripts/check.sh
+	@./scripts/check.sh $*
+
+check-cran-extra-%:
 	@chmod +x ./scripts/check.sh
 	@./scripts/check.sh $*
 

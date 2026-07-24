@@ -1,14 +1,12 @@
 Updating and loading repositories:
- Fedora 44 - x86_64 - Updates           100% |  10.0 KiB/s |   7.5 KiB |  00m01s
- Fedora 44 openh264 (From Cisco) - x86_ 100% |   1.7 KiB/s | 986.0   B |  00m01s
- Fedora 44 - x86_64                     100% | 166.1 KiB/s |  18.8 KiB |  00m00s
+ Fedora 44 - x86_64 - Updates           100% |  46.8 KiB/s |  16.7 KiB |  00m00s
+ Fedora 44 openh264 (From Cisco) - x86_ 100% |   5.3 KiB/s | 986.0   B |  00m00s
+ Fedora 44 - x86_64                     100% | 145.0 KiB/s |  19.4 KiB |  00m00s
 Repositories loaded.
 Package "pkgconf-pkg-config-2.5.1-1.fc44.x86_64" is already installed.
 Package "gcc-gfortran-16.1.1-1.fc44.x86_64" is already installed.
 Package "libcurl-devel-8.18.0-6.fc44.x86_64" is already installed.
 
-Total size of inbound packages is 1 MiB. Need to download 1 MiB.
-After this operation, 6 MiB extra will be used (install 6 MiB, remove 0 B).
 Package        Arch   Version          Repository      Size
 Installing:
  libuv-devel   x86_64 1:1.52.1-2.fc44  updates    195.3 KiB
@@ -20,19 +18,21 @@ Installing dependencies:
 Transaction Summary:
  Installing:         4 packages
 
+Total size of inbound packages is 1 MiB. Need to download 1 MiB.
+After this operation, 6 MiB extra will be used (install 6 MiB, remove 0 B).
 [1/4] libuv-devel-1:1.52.1-2.fc44.x86_6 100% | 503.6 KiB/s |  40.8 KiB |  00m00s
-[2/4] libuv-1:1.52.1-2.fc44.x86_64      100% |   2.1 MiB/s | 274.0 KiB |  00m00s
-[3/4] libxml2-devel-0:2.12.10-6.fc44.x8 100% |   2.7 MiB/s | 523.6 KiB |  00m00s
-[4/4] libuv-static-1:1.52.1-2.fc44.x86_ 100% |   1.0 MiB/s | 508.1 KiB |  00m00s
+[2/4] libuv-1:1.52.1-2.fc44.x86_64      100% |   1.7 MiB/s | 274.0 KiB |  00m00s
+[3/4] libuv-static-1:1.52.1-2.fc44.x86_ 100% |   2.5 MiB/s | 508.1 KiB |  00m00s
+[4/4] libxml2-devel-0:2.12.10-6.fc44.x8 100% |   2.9 MiB/s | 523.6 KiB |  00m00s
 --------------------------------------------------------------------------------
-[4/4] Total                             100% |   2.7 MiB/s |   1.3 MiB |  00m00s
+[4/4] Total                             100% |   5.0 MiB/s |   1.3 MiB |  00m00s
 Running transaction
-[1/6] Verify package files              100% | 210.0   B/s |   4.0   B |  00m00s
+[1/6] Verify package files              100% | 222.0   B/s |   4.0   B |  00m00s
 [2/6] Prepare transaction               100% |  21.0   B/s |   4.0   B |  00m00s
-[3/6] Installing libuv-1:1.52.1-2.fc44. 100% |  34.2 MiB/s | 595.9 KiB |  00m00s
-[4/6] Installing libuv-devel-1:1.52.1-2 100% |  16.1 MiB/s | 198.3 KiB |  00m00s
+[3/6] Installing libuv-1:1.52.1-2.fc44. 100% |  32.3 MiB/s | 595.9 KiB |  00m00s
+[4/6] Installing libuv-devel-1:1.52.1-2 100% |  19.4 MiB/s | 198.3 KiB |  00m00s
 [5/6] Installing libuv-static-1:1.52.1- 100% |  80.1 MiB/s |   2.2 MiB |  00m00s
-[6/6] Installing libxml2-devel-0:2.12.1 100% |   5.1 MiB/s |   3.4 MiB |  00m01s
+[6/6] Installing libxml2-devel-0:2.12.1 100% |   5.0 MiB/s |   3.4 MiB |  00m01s
 Complete!
 Installing declared dependencies: tinytest
 trying URL 'https://cloud.r-project.org/src/contrib/tinytest_1.4.3.tar.gz'
@@ -49,8 +49,8 @@ downloaded 581 KB
 ** byte-compile and prepare package for lazy loading
 ** help
 *** installing help indices
-  converting help for package ‘tinytest’
-    finding HTML links ... done
+    finding HTML links ...  converting help for package ‘tinytest’
+ done
     at_home                                 html  
     build_install_test                      html  
     exit_file                               html  
@@ -70,8 +70,8 @@ downloaded 581 KB
     test_package                            html  
     tinytest                                html  
     tinytests                               html  
-    using                                   html  
-** building package indices
+    using                                   html  ** building package indices
+
 ** installing vignettes
 ** testing if installed package can be loaded from temporary location
 ** testing if installed package can be loaded from final location
@@ -79,7 +79,7 @@ downloaded 581 KB
 * DONE (tinytest)
 
 The downloaded source packages are in
-	‘/tmp/RtmpSrK8nG/downloaded_packages’
+	‘/tmp/RtmpihtgJE/downloaded_packages’
 * installing *source* package ‘cpp4r’ ...
 ** this is package ‘cpp4r’ version ‘1.1.0’
 ** using staged installation
@@ -246,7 +246,7 @@ installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)
 * running under: Fedora Linux 44 (Container Image)
 * using session charset: UTF-8
-* current time: 2026-07-24 12:06:09 UTC
+* current time: 2026-07-24 14:56:52 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
@@ -263,7 +263,7 @@ New submission
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [25s/21s] OK
+* checking whether package ‘cpp4rtest’ can be installed ... [23s/19s] OK
 * used C++ compiler: ‘g++ (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
@@ -467,7 +467,7 @@ installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)
 * running under: Fedora Linux 44 (Container Image)
 * using session charset: UTF-8
-* current time: 2026-07-24 12:06:09 UTC
+* current time: 2026-07-24 14:56:52 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
@@ -484,7 +484,7 @@ New submission
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [25s/21s] OK
+* checking whether package ‘cpp4rtest’ can be installed ... [23s/19s] OK
 * used C++ compiler: ‘g++ (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
