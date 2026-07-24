@@ -1,0 +1,300 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+gfortran is already the newest version (4:11.2.0-1ubuntu1).
+gfortran set to manually installed.
+pkg-config is already the newest version (0.29.2-1ubuntu3).
+pkg-config set to manually installed.
+The following additional packages will be installed:
+  curl libcurl4 libuv1 libxml2
+Suggested packages:
+  libcurl4-doc libidn11-dev libkrb5-dev libldap2-dev librtmp-dev libssh2-1-dev
+  libssl-dev
+The following NEW packages will be installed:
+  libcurl4-openssl-dev libuv1 libuv1-dev
+The following packages will be upgraded:
+  curl libcurl4 libxml2 libxml2-dev
+4 upgraded, 3 newly installed, 0 to remove and 43 not upgraded.
+Need to get 2,664 kB of archives.
+After this operation, 2,607 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libxml2-dev amd64 2.9.13+dfsg-1ubuntu0.12 [805 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libxml2 amd64 2.9.13+dfsg-1ubuntu0.12 [765 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libuv1 amd64 1.43.0-1ubuntu0.1 [92.7 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 curl amd64 7.81.0-1ubuntu1.25 [194 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libcurl4 amd64 7.81.0-1ubuntu1.25 [291 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libcurl4-openssl-dev amd64 7.81.0-1ubuntu1.25 [387 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libuv1-dev amd64 1.43.0-1ubuntu0.1 [130 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 2,664 kB in 0s (7,803 kB/s)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 27763 files and directories currently installed.)
+Preparing to unpack .../0-libxml2-dev_2.9.13+dfsg-1ubuntu0.12_amd64.deb ...
+Unpacking libxml2-dev:amd64 (2.9.13+dfsg-1ubuntu0.12) over (2.9.13+dfsg-1ubuntu0.11) ...
+Preparing to unpack .../1-libxml2_2.9.13+dfsg-1ubuntu0.12_amd64.deb ...
+Unpacking libxml2:amd64 (2.9.13+dfsg-1ubuntu0.12) over (2.9.13+dfsg-1ubuntu0.11) ...
+Selecting previously unselected package libuv1:amd64.
+Preparing to unpack .../2-libuv1_1.43.0-1ubuntu0.1_amd64.deb ...
+Unpacking libuv1:amd64 (1.43.0-1ubuntu0.1) ...
+Preparing to unpack .../3-curl_7.81.0-1ubuntu1.25_amd64.deb ...
+Unpacking curl (7.81.0-1ubuntu1.25) over (7.81.0-1ubuntu1.24) ...
+Preparing to unpack .../4-libcurl4_7.81.0-1ubuntu1.25_amd64.deb ...
+Unpacking libcurl4:amd64 (7.81.0-1ubuntu1.25) over (7.81.0-1ubuntu1.24) ...
+Selecting previously unselected package libcurl4-openssl-dev:amd64.
+Preparing to unpack .../5-libcurl4-openssl-dev_7.81.0-1ubuntu1.25_amd64.deb ...
+Unpacking libcurl4-openssl-dev:amd64 (7.81.0-1ubuntu1.25) ...
+Selecting previously unselected package libuv1-dev:amd64.
+Preparing to unpack .../6-libuv1-dev_1.43.0-1ubuntu0.1_amd64.deb ...
+Unpacking libuv1-dev:amd64 (1.43.0-1ubuntu0.1) ...
+Setting up libuv1:amd64 (1.43.0-1ubuntu0.1) ...
+Setting up libcurl4:amd64 (7.81.0-1ubuntu1.25) ...
+Setting up curl (7.81.0-1ubuntu1.25) ...
+Setting up libxml2:amd64 (2.9.13+dfsg-1ubuntu0.12) ...
+Setting up libuv1-dev:amd64 (1.43.0-1ubuntu0.1) ...
+Setting up libxml2-dev:amd64 (2.9.13+dfsg-1ubuntu0.12) ...
+Setting up libcurl4-openssl-dev:amd64 (7.81.0-1ubuntu1.25) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.13) ...
+Installing declared dependencies: tinytest
+trying URL 'https://cloud.r-project.org/src/contrib/tinytest_1.4.3.tar.gz'
+Content type 'application/x-gzip' length 595901 bytes (581 KB)
+==================================================
+downloaded 581 KB
+
+* installing *source* package ‘tinytest’ ...
+** this is package ‘tinytest’ version ‘1.4.3’
+** package ‘tinytest’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (tinytest)
+
+The downloaded source packages are in
+	‘/tmp/Rtmp0acNRK/downloaded_packages’
+* installing *source* package ‘cpp4r’ ...
+** this is package ‘cpp4r’ version ‘1.1.0’
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4r)
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.3.0’
+** using staged installation
+** libs
+using C++ compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c cpp4r.cpp -o cpp4r.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c main.cpp -o main.o
+clang++ -stdlib=libc++ -std=gnu++20 -shared -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -L/opt/R/devel-rchk/lib/R/lib -lRlapack -L/opt/R/devel-rchk/lib/R/lib -lRblas -lgfortran -lm -lquadmath
+installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+* using log directory ‘/check/cpp4rtest.Rcheck’
+* using R Under development (unstable) (2026-05-15 r90061)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    Ubuntu clang version 14.0.0-1ubuntu1.1
+    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+* running under: Ubuntu 22.04.5 LTS
+* using session charset: UTF-8
+* current time: 2026-07-24 12:17:08 UTC
+* using options ‘--no-manual --as-cran’
+* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
+* this is package ‘cpp4rtest’ version ‘0.3.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... [9s/11s] NOTE
+Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
+
+New submission
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cpp4rtest’ can be installed ... [12s/12s] OK
+* used C++ compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... WARNING
+A complete check needs the 'checkbashisms' script.
+See section ‘Configure and cleanup’ in the ‘Writing R Extensions’
+manual.
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
+* checking pragmas in C/C++ headers and code ... OK
+* checking compilation flags used ... OK
+* checking compiled code ... OK
+* checking examples ... NONE
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ...
+  Running ‘tinytest.R’
+ OK
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+
+Status: 1 WARNING, 1 NOTE
+See
+  ‘/check/cpp4rtest.Rcheck/00check.log’
+for details.
+
+=== 00install.out ===
+* installing *source* package ‘cpp4rtest’ ...
+** this is package ‘cpp4rtest’ version ‘0.3.0’
+** using staged installation
+** libs
+using C++ compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c cpp4r.cpp -o cpp4r.o
+clang++ -stdlib=libc++ -std=gnu++20 -I"/opt/R/devel-rchk/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include    -fpic  -Wall -g -O0 -fPIC -I/usr/include/libcxxabi   -c main.cpp -o main.o
+clang++ -stdlib=libc++ -std=gnu++20 -shared -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -L/opt/R/devel-rchk/lib/R/lib -lRlapack -L/opt/R/devel-rchk/lib/R/lib -lRblas -lgfortran -lm -lquadmath
+installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp4rtest)
+=== 00check.log ===
+* using log directory ‘/check/cpp4rtest.Rcheck’
+* using R Under development (unstable) (2026-05-15 r90061)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    Ubuntu clang version 14.0.0-1ubuntu1.1
+    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+* running under: Ubuntu 22.04.5 LTS
+* using session charset: UTF-8
+* current time: 2026-07-24 12:17:08 UTC
+* using options ‘--no-manual --as-cran’
+* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
+* this is package ‘cpp4rtest’ version ‘0.3.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... [9s/11s] NOTE
+Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
+
+New submission
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cpp4rtest’ can be installed ... [12s/12s] OK
+* used C++ compiler: ‘Ubuntu clang version 14.0.0-1ubuntu1.1’
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... WARNING
+A complete check needs the 'checkbashisms' script.
+See section ‘Configure and cleanup’ in the ‘Writing R Extensions’
+manual.
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
+* checking pragmas in C/C++ headers and code ... OK
+* checking compilation flags used ... OK
+* checking compiled code ... OK
+* checking examples ... NONE
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘tinytest.R’
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: 1 WARNING, 1 NOTE

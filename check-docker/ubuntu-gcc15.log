@@ -13,9 +13,9 @@ The following NEW packages will be installed:
   libcurl4-openssl-dev libuv1-dev libuv1t64 libxml2-dev
 The following packages will be upgraded:
   curl libcurl3t64-gnutls libcurl4t64 libxml2
-4 upgraded, 4 newly installed, 0 to remove and 42 not upgraded.
-Need to get 3,128 kB of archives.
-After this operation, 6,233 kB of additional disk space will be used.
+4 upgraded, 4 newly installed, 0 to remove and 58 not upgraded.
+Need to get 3128 kB of archives.
+After this operation, 6233 kB of additional disk space will be used.
 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxml2 amd64 2.9.14+dfsg-1.3ubuntu3.8 [764 kB]
 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1t64 amd64 1.48.0-1.1build1 [97.3 kB]
 Get:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 curl amd64 8.5.0-2ubuntu10.11 [226 kB]
@@ -25,8 +25,8 @@ Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl4-openssl
 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1-dev amd64 1.48.0-1.1build1 [136 kB]
 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxml2-dev amd64 2.9.14+dfsg-1.3ubuntu3.8 [782 kB]
 debconf: delaying package configuration, since apt-utils is not installed
-Fetched 3,128 kB in 0s (7,958 kB/s)
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 19926 files and directories currently installed.)
+Fetched 3128 kB in 1s (6191 kB/s)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 25650 files and directories currently installed.)
 Preparing to unpack .../0-libxml2_2.9.14+dfsg-1.3ubuntu3.8_amd64.deb ...
 Unpacking libxml2:amd64 (2.9.14+dfsg-1.3ubuntu3.8) over (2.9.14+dfsg-1.3ubuntu3.7) ...
 Selecting previously unselected package libuv1t64:amd64.
@@ -56,6 +56,30 @@ Setting up libxml2:amd64 (2.9.14+dfsg-1.3ubuntu3.8) ...
 Setting up libuv1-dev:amd64 (1.48.0-1.1build1) ...
 Setting up libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.8) ...
 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+Installing declared dependencies: tinytest
+trying URL 'https://cloud.r-project.org/src/contrib/tinytest_1.4.3.tar.gz'
+Content type 'application/x-gzip' length 595901 bytes (581 KB)
+==================================================
+downloaded 581 KB
+
+* installing *source* package ‘tinytest’ ...
+** this is package ‘tinytest’ version ‘1.4.3’
+** package ‘tinytest’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (tinytest)
+
+The downloaded source packages are in
+	‘/tmp/RtmprIfZ77/downloaded_packages’
 * installing *source* package ‘cpp4r’ ...
 ** this is package ‘cpp4r’ version ‘1.1.0’
 ** using staged installation
@@ -74,10 +98,10 @@ Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
 ** this is package ‘cpp4rtest’ version ‘0.3.0’
 ** using staged installation
 ** libs
-using C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
-g++ -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
-g++ -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
-g++ -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/4.6.0/lib/R/lib -lR
+using C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
+g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
+g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
+g++-15 -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
 installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 ** R
 ** inst
@@ -91,19 +115,19 @@ installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 ** testing if installed package keeps a record of temporary installation path
 * DONE (cpp4rtest)
 * using log directory ‘/check/cpp4rtest.Rcheck’
-* using R version 4.6.0 (2026-04-24)
+* using R Under development (unstable) (2026-05-12 r90049)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
 * running under: Ubuntu 24.04.4 LTS
 * using session charset: UTF-8
-* current time: 2026-07-24 11:39:25 UTC
+* current time: 2026-07-24 11:49:09 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [4s/5s] NOTE
+* checking CRAN incoming feasibility ... [4s/6s] NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
@@ -121,8 +145,8 @@ Checking DOIs failed with message:
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [18s/13s] OK
-* used C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+* checking whether package ‘cpp4rtest’ can be installed ... [21s/16s] OK
+* used C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -143,8 +167,8 @@ Checking DOIs failed with message:
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... [13s/4s] OK
-* checking Rd files ... [1s/0s] OK
+* checking R code for possible problems ... [12s/4s] OK
+* checking Rd files ... [1s/1s] OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
 * checking Rd cross-references ... OK
@@ -183,10 +207,10 @@ for details.
 ** this is package ‘cpp4rtest’ version ‘0.3.0’
 ** using staged installation
 ** libs
-using C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
-g++ -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
-g++ -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
-g++ -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/4.6.0/lib/R/lib -lR
+using C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
+g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
+g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
+g++-15 -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
 installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 ** R
 ** inst
@@ -201,19 +225,19 @@ installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 * DONE (cpp4rtest)
 === 00check.log ===
 * using log directory ‘/check/cpp4rtest.Rcheck’
-* using R version 4.6.0 (2026-04-24)
+* using R Under development (unstable) (2026-05-12 r90049)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
 * running under: Ubuntu 24.04.4 LTS
 * using session charset: UTF-8
-* current time: 2026-07-24 11:39:25 UTC
+* current time: 2026-07-24 11:49:09 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [4s/5s] NOTE
+* checking CRAN incoming feasibility ... [4s/6s] NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
@@ -231,8 +255,8 @@ Checking DOIs failed with message:
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [18s/13s] OK
-* used C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+* checking whether package ‘cpp4rtest’ can be installed ... [21s/16s] OK
+* used C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -253,8 +277,8 @@ Checking DOIs failed with message:
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... [13s/4s] OK
-* checking Rd files ... [1s/0s] OK
+* checking R code for possible problems ... [12s/4s] OK
+* checking Rd files ... [1s/1s] OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
 * checking Rd cross-references ... OK
