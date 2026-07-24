@@ -33,11 +33,11 @@ class function {
   // Needed for storing a cpp4r::function as an uninitialized class member.
   function() noexcept = default;
 
+  // Construct from anything implicitly convertible to SEXP (e.g. SEXP itself, sexp,
+  // or environment::proxy). Deliberately kept to a single constructor: adding
+  // overloads for `const sexp&`/`sexp&&` would make calls ambiguous for types like
+  // `environment::proxy` that offer both `operator SEXP()` and `operator sexp()`.
   function(SEXP data) : data_(data) {}
-
-  // Construct from a sexp, e.g. when a function was received as a generic sexp.
-  function(const sexp& data) : data_(data) {}
-  function(sexp&& data) : data_(std::move(data)) {}
 
   // Copy/move: delegate to sexp's, which handle protect/unprotect correctly.
   function(const function&) = default;

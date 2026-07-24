@@ -112,6 +112,18 @@ CPP4R_TARBALL_FILE=$(mktemp)
 CPP4RTEST_TARBALL_FILE=$(mktemp)
 trap 'rm -rf "$CHECK_DIR" "$CPP4R_TARBALL_FILE" "$CPP4RTEST_TARBALL_FILE"' EXIT
 
+# Re-vendor cpp4rtest/src/vendor/cpp4r from the current dev source before
+# every check, so header-only edits (e.g. to inst/include/cpp4r/*.hpp) are
+# actually exercised instead of silently checking whatever committed vendor
+# copy happens to be sitting in cpp4rtest/src/vendor (which otherwise goes
+# stale the moment a header changes without a manual re-vendor). vendor()
+# copies from the *installed* cpp4r (via system.file), so plain
+# `cpp4r::vendor()` would still copy stale bits if cpp4r itself hasn't been
+# reinstalled; pkgload::load_all() shims system.file()/`::` to resolve to
+# this live source tree instead, so vendor() picks up in-progress edits.
+rm -rf ./cpp4rtest/src/vendor
+Rscript -e "pkgload::load_all('.'); cpp4r::vendor('./cpp4rtest/src/vendor')" >>"$BUILD_LOG" 2>&1
+
 Rscript -e 'cpp4r::register("./cpp4rtest")' >>"$BUILD_LOG" 2>&1
 Rscript -e 'tinydev::pkg_document("./cpp4rtest")' >>"$BUILD_LOG" 2>&1
 Rscript -e "writeLines(tinydev::pkg_build('.'), '${CPP4R_TARBALL_FILE}')" >>"$BUILD_LOG" 2>&1
@@ -137,7 +149,6 @@ cat > "$CHECK_DIR/install_required.R" <<'R_EOF'
 user_lib <- strsplit(Sys.getenv('R_LIBS_USER'), ':')[[1]][1]
 .libPaths(c(user_lib, .libPaths()))
 options(repos = c(CRAN = 'https://cloud.r-project.org'))
-
 
 deps_from_tarball <- function(tarfile, own_names) {
   td <- tempfile()
@@ -276,7 +287,7 @@ docker run --rm \
       export DEBIAN_FRONTEND=noninteractive
       apt-get update -qq || true
       apt-get install -y --no-install-recommends \
-        libuv1-dev libxml2-dev pkg-config gfortran libcurl4-openssl-dev ${EXTRA_APT_PKGS} || true
+        devscripts pkg-config gfortran libcurl4-openssl-dev ${EXTRA_APT_PKGS} || true
     elif command -v dnf >/dev/null 2>&1 || command -v yum >/dev/null 2>&1; then
       PKG_MGR=\$(command -v dnf 2>/dev/null || echo yum)
       \$PKG_MGR -y install libuv-devel libxml2-devel pkgconfig gcc-gfortran libcurl-devel ${EXTRA_DNF_PKGS} || true

@@ -270,7 +270,7 @@ class r_vector : public cpp4r::r_vector<T> {
   r_vector(r_vector&& rhs);
   r_vector(const cpp4r::r_vector<T>& rhs);
   r_vector(std::initializer_list<T> il);
-  explicit r_vector(std::initializer_list<named_arg> il);
+  r_vector(std::initializer_list<named_arg> il);
 
   // Fast-path constructor for freshly allocated data (non-ALTREP, owned)
   // This bypasses type validation and ALTREP checks for maximum performance

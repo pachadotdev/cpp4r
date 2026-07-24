@@ -1,12 +1,14 @@
 Updating and loading repositories:
- Fedora 42 - x86_64                     100% |   2.8 KiB/s |   3.4 KiB |  00m01s
- Fedora 42 openh264 (From Cisco) - x86_ 100% |   1.0 KiB/s | 986.0   B |  00m01s
- Fedora 42 - x86_64 - Updates           100% |   6.8 KiB/s |   3.4 KiB |  00m00s
+ Fedora 42 - x86_64                     100% |   5.7 KiB/s |   3.4 KiB |  00m01s
+ Fedora 42 - x86_64 - Updates           100% |   8.5 KiB/s |   3.4 KiB |  00m00s
+ Fedora 42 openh264 (From Cisco) - x86_ 100% |   9.6 KiB/s | 986.0   B |  00m00s
 Repositories loaded.
 Package "pkgconf-pkg-config-2.3.0-2.fc42.x86_64" is already installed.
 Package "gcc-gfortran-15.2.1-7.fc42.x86_64" is already installed.
 Package "libcurl-devel-8.11.1-8.fc42.x86_64" is already installed.
 
+Total size of inbound packages is 942 KiB. Need to download 942 KiB.
+After this operation, 5 MiB extra will be used (install 5 MiB, remove 0 B).
 Package        Arch   Version         Repository      Size
 Installing:
  libuv-devel   x86_64 1:1.51.0-1.fc42 updates    192.5 KiB
@@ -18,21 +20,19 @@ Installing dependencies:
 Transaction Summary:
  Installing:         4 packages
 
-Total size of inbound packages is 942 KiB. Need to download 942 KiB.
-After this operation, 5 MiB extra will be used (install 5 MiB, remove 0 B).
-[1/4] libuv-devel-1:1.51.0-1.fc42.x86_6 100% | 144.6 KiB/s |  41.2 KiB |  00m00s
-[2/4] libuv-static-1:1.51.0-1.fc42.x86_ 100% | 366.8 KiB/s | 111.1 KiB |  00m00s
-[3/4] libuv-1:1.51.0-1.fc42.x86_64      100% | 758.8 KiB/s | 266.3 KiB |  00m00s
-[4/4] libxml2-devel-0:2.12.10-1.fc42.x8 100% |   1.9 MiB/s | 523.7 KiB |  00m00s
+[1/4] libuv-devel-1:1.51.0-1.fc42.x86_6 100% | 159.7 KiB/s |  41.2 KiB |  00m00s
+[2/4] libuv-static-1:1.51.0-1.fc42.x86_ 100% | 357.3 KiB/s | 111.1 KiB |  00m00s
+[3/4] libuv-1:1.51.0-1.fc42.x86_64      100% | 763.1 KiB/s | 266.3 KiB |  00m00s
+[4/4] libxml2-devel-0:2.12.10-1.fc42.x8 100% |   2.2 MiB/s | 523.7 KiB |  00m00s
 --------------------------------------------------------------------------------
-[4/4] Total                             100% |   1.7 MiB/s | 942.4 KiB |  00m01s
+[4/4] Total                             100% |   1.9 MiB/s | 942.4 KiB |  00m00s
 Running transaction
-[1/6] Verify package files              100% | 500.0   B/s |   4.0   B |  00m00s
-[2/6] Prepare transaction               100% |  18.0   B/s |   4.0   B |  00m00s
-[3/6] Installing libuv-1:1.51.0-1.fc42. 100% |  31.1 MiB/s | 573.0 KiB |  00m00s
+[1/6] Verify package files              100% | 444.0   B/s |   4.0   B |  00m00s
+[2/6] Prepare transaction               100% |  17.0   B/s |   4.0   B |  00m00s
+[3/6] Installing libuv-1:1.51.0-1.fc42. 100% |  23.3 MiB/s | 573.0 KiB |  00m00s
 [4/6] Installing libuv-static-1:1.51.0- 100% |  46.5 MiB/s | 428.3 KiB |  00m00s
-[5/6] Installing libuv-devel-1:1.51.0-1 100% |  17.3 MiB/s | 195.4 KiB |  00m00s
-[6/6] Installing libxml2-devel-0:2.12.1 100% |   6.2 MiB/s |   3.4 MiB |  00m01s
+[5/6] Installing libuv-devel-1:1.51.0-1 100% |  11.9 MiB/s | 195.4 KiB |  00m00s
+[6/6] Installing libxml2-devel-0:2.12.1 100% |   6.4 MiB/s |   3.4 MiB |  00m01s
 Complete!
 Installing declared dependencies: tinytest
 trying URL 'https://cloud.r-project.org/src/contrib/tinytest_1.4.3.tar.gz'
@@ -79,7 +79,7 @@ downloaded 581 KB
 * DONE (tinytest)
 
 The downloaded source packages are in
-	‘/tmp/RtmpRQaDr2/downloaded_packages’
+	‘/tmp/RtmppBzgk3/downloaded_packages’
 * installing *source* package ‘cpp4r’ ...
 ** this is package ‘cpp4r’ version ‘1.1.0’
 ** using staged installation
@@ -88,15 +88,15 @@ The downloaded source packages are in
 ** byte-compile and prepare package for lazy loading
 ** help
 *** installing help indices
-    finding HTML links ...  converting help for package ‘cpp4r’
- done
+  converting help for package ‘cpp4r’
+    finding HTML links ... done
     cpp4r-package                           html  
     pkg_template                            html  
     register                                html  
     unvendor                                html  
-    vendor                                  html  *** copying figures
+    vendor                                  html  
+*** copying figures
 ** building package indices
-
 ** testing if installed package can be loaded from temporary location
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
@@ -246,7 +246,7 @@ installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)
 * running under: Fedora Linux 42 (Container Image)
 * using session charset: UTF-8
-* current time: 2026-07-24 12:15:29 UTC
+* current time: 2026-07-24 15:06:13 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
@@ -468,7 +468,7 @@ installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)
 * running under: Fedora Linux 42 (Container Image)
 * using session charset: UTF-8
-* current time: 2026-07-24 12:15:29 UTC
+* current time: 2026-07-24 15:06:13 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
