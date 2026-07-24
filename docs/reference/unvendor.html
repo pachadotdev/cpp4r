@@ -90,8 +90,8 @@ automatically finding the vendored headers.
 
 <table role="presentation"><tr><td><code id="path">path</code></td>
 <td>
-The directory with the vendored headers. It is recommended to use <code>"./src/vendor"</code>.
-The default is <code>NULL</code>.
+The directory with the vendored headers. It is recommended to use '"./src/vendor"'.
+The default is 'NULL'.
 </td></tr></table><h3>Value</h3>
 
 <p>The path to the unvendored code (invisibly).
@@ -101,7 +101,7 @@ The default is <code>NULL</code>.
 <h3>Examples</h3>
 
 <pre><code class="language-R"># create a new directory
-dir &lt;- paste0(tempdir(), "/", gsub("\\s+|[[:punct:]]", "", Sys.time()))
+dir &lt;- paste0(tempdir(), "/", gsub("\s+|[[:punct:]]", "", Sys.time()))
 dir.create(dir, recursive = TRUE)
 
 # vendor the cpp4r headers into the directory

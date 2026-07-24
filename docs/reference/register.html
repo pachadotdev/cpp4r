@@ -75,12 +75,11 @@
 
 <h3>Description</h3>
 
-<p>Functions decorated with <code style="white-space: pre;">⁠[[cpp4r::register]]⁠</code> in files ending in <code>.cc</code>,
-<code>.cpp</code>, <code>.h</code> or <code>.hpp</code> will be wrapped in generated code and registered to
-be called from R.
-</p>
-<p>Note registered functions will not be <em>exported</em> from your package unless
-you also add a <code style="white-space: pre;">⁠@export⁠</code> roxygen2 directive for them.
+<p>Functions decorated with <code>[[cpp4r::register]]</code> in files
+ending in '.cc', '.cpp', '.h' or '.hpp' will be wrapped in generated code
+and registered to be called from R. Decorating a function only makes it
+callable via '.Call()'; it does not export or document it. See the
+"Package skeleton" vignette for how to export a registered function.
 </p>
 
 
@@ -94,14 +93,14 @@ you also add a <code style="white-space: pre;">⁠@export⁠</code> roxygen2 dir
 
 <table role="presentation"><tr><td><code id="path">path</code></td>
 <td>
-The path to the package root directory. The default is <code>NULL</code>,
+The path to the package root directory. The default is 'NULL',
 </td></tr><tr><td><code id="quiet">quiet</code></td>
 <td>
-If <code>TRUE</code> suppresses output from this function
+If 'TRUE' suppresses output from this function
 </td></tr><tr><td><code id="extension">extension</code></td>
 <td>
 The file extension to use for the generated src/cpp4r file.
-<code>.cpp</code> by default, but <code>.cc</code> is also supported.
+'.cpp' by default, but '.cc' is also supported.
 </td></tr></table><h3>Value</h3>
 
 <p>The paths to the generated R and C++ source files (in that order).

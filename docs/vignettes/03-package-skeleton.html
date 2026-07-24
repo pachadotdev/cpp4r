@@ -37,6 +37,7 @@
     <a href="#loading-the-required-r-packages" class="toc-level-2">Loading the Required R Packages</a>
     <a href="#creating-a-dummy-package" class="toc-level-2">Creating a Dummy Package</a>
     <a href="#print-a-number" class="toc-level-2">Print a Number</a>
+    <a href="#exporting-a-registered-function" class="toc-level-2">Exporting a Registered Function</a>
     <a href="#number-s-sign" class="toc-level-2">Number’s Sign</a>
     <a href="#installing-the-package" class="toc-level-2">Installing the Package</a>
     <a href="#good-practice" class="toc-level-2">Good Practice</a>
@@ -57,9 +58,7 @@ al. (2024)</span>.</p>
 <h2 id="loading-the-required-r-packages">Loading the Required R Packages</h2>
 <p>This vignette and the next use the following R packages:</p>
 <pre class="r"><code>library(cpp4r)
-library(devtools)
-library(bench)
-library(usethis)</code></pre>
+library(tinydev)</code></pre>
 </div>
 <div id="creating-a-dummy-package" class="section level2">
 <h2 id="creating-a-dummy-package">Creating a Dummy Package</h2>
@@ -102,10 +101,33 @@ standalone C++ program.</p>
 <p>Unlike cpp11, cpp4r can document the C++ functions using roxygen2
 comments. The comments must be placed before the
 <code>[[cpp4r::register]]</code> attribute.</p>
+</div>
+<div id="exporting-a-registered-function" class="section level2">
+<h2 id="exporting-a-registered-function">Exporting a Registered Function</h2>
+<p>Decorating a function with <code>[[cpp4r::register]]</code> only
+makes it callable via <code>.Call()</code> from R; it does not export or
+document it. For example, this alone leaves <code>sum</code>
+undocumented and unexported:</p>
+<pre class="cpp"><code>[[cpp4r::register]] int sum(int a, int b) { return a + b; }</code></pre>
+<p>There are two ways to export a registered function:</p>
+<ul><li>Add a <code>/* roxygen ... */</code> comment block, including an
+<code>@export</code> tag, directly before the decorated function in the
+<code>C++</code> file, as shown above for <code>plus_one()</code>.
+<code>register()</code> copies it verbatim onto the generated R wrapper,
+so running <code>roxygen2::document()</code> afterwards will export the
+wrapper and document it as usual.</li>
+<li>Give the <code>C++</code> function a name you don’t want exposed
+directly (e.g. <code>sum_</code>), then write your own R wrapper that
+calls it and add a normal <code>#'</code> roxygen2 comment block with
+<code>@export</code> above that wrapper instead.</li>
+</ul><p>Either way, <code>register()</code> and
+<code>[[cpp4r::register]]</code> alone never modify
+<code>NAMESPACE</code>; running <code>tinydev::pkg_document(".")</code>
+(or hand-editing <code>NAMESPACE</code>) is what actually exports the
+function.</p>
 <p>With cpp11, you would need to write a separate wrapper, like
 this:</p>
-<pre class="cpp"><code>[[cpp4r::register]]
-int plus_one_(int x) {
+<pre class="cpp"><code>[[cpp11::register]] int plus_one_(int x) {
   return x + 1;
 }</code></pre>
 <pre class="r"><code>#' @title Plus 1 (C++)
@@ -115,6 +137,17 @@ int plus_one_(int x) {
 #' @examples plus_one(1)
 plus_one &lt;- function(x) {
   plus_one_(x)
+}</code></pre>
+<p>With cpp4r you can type:</p>
+<pre class="cpp"><code>/* roxygen
+@title Plus 1 (C++)
+@param x integer
+@description It adds 1 to an integer value.
+@export
+@examples plus_one(1)
+*/
+[[cpp4r::register]] int plus_one(int x) {
+  return x + 1;
 }</code></pre>
 <p>The R version of the previous function is as follows:</p>
 <pre class="r"><code>#' Plus one (R)
@@ -128,14 +161,11 @@ plus_one_r &lt;- function(x) {
 <p>To use the C++ function, you can register and document it by
 running:</p>
 <pre class="r"><code>cpp4r::register()
-devtools::document()
-devtools::load_all()</code></pre>
+tinydev::pkg_document(".")
+tinydev::pkg_load(".")</code></pre>
 <p>Which should print:</p>
 <pre class="r"><code>&gt; plus_one(1)
 [1] 2</code></pre>
-<p>For development and live testing, you should use the
-<code>load_all()</code>:</p>
-<pre class="r"><code>load_all()</code></pre>
 <p>Try <code>plus_two(1)</code> and <code>plus_two(1.0)</code>. Why does
 1 and 1.0 matter in C++?</p>
 </div>
@@ -171,8 +201,8 @@ devtools::load_all()</code></pre>
 <p>To document and install the package as an R library, you can run the
 following functions:</p>
 <pre class="r"><code>cpp4r::register()
-devtools::document()
-devtools::install()</code></pre>
+tinydev::pkg_document(".")
+tinydev::pkg_install(".")</code></pre>
 <p>Afterward, you can access the functions by loading the package with
 <code>library(cpp4rexamples)</code>.</p>
 <p>Each time you need to make changes to the C++ code, you can run
@@ -183,18 +213,15 @@ package.</p>
 <h2 id="good-practice">Good Practice</h2>
 <p>It is good practice to include a license for your code. For example,
 you can use the Apache license by running:</p>
-<pre class="r"><code>usethis::use_apache_license()</code></pre>
-<p>Additionally, it is recommended to use
-<code>use_build_ignore()</code> to ignore files that are unnecessary for
-package installation. For example, to ignore the <code>docs</code>
-folder, you can run:</p>
-<pre class="r"><code>usethis::use_build_ignore("docs")</code></pre>
-<p>Your <code>.Rbuildignore</code> file can include the following lines,
-which you can edit manually to exclude specific files and
-directories:</p>
+<pre class="r"><code>tinydev::license_apache(".")</code></pre>
+<p>You also need to ignore files that are unnecessary for package
+installation. For example, to ignore the <code>docs</code> folder, add
+<code>^docs$</code> to <code>.Rbuildignore</code>. Your
+<code>.Rbuildignore</code> file can include the following lines, which
+you can edit manually to exclude specific files and directories:</p>
 <pre><code>^\.vscode$
-^LICENSE\.md$
-^cpp4rexamples\.Rproj$</code></pre>
+^LICENSE\.txt$
+`^docs$`</code></pre>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2 id="references" class="unnumbered">References</h2>
