@@ -1,61 +1,81 @@
 Reading package lists...
 Building dependency tree...
 Reading state information...
-pkg-config is already the newest version (1.8.1-2build1).
-gfortran is already the newest version (4:13.2.0-7ubuntu1).
+gfortran is already the newest version (4:11.2.0-1ubuntu1).
 gfortran set to manually installed.
+pkg-config is already the newest version (0.29.2-1ubuntu3).
 The following additional packages will be installed:
-  curl libcurl3t64-gnutls libcurl4t64 libuv1t64 libxml2
+  curl libcurl4 libuv1 libxml2
 Suggested packages:
-  libcurl4-doc libidn-dev libkrb5-dev libldap2-dev librtmp-dev libssh2-1-dev
+  libcurl4-doc libidn11-dev libkrb5-dev libldap2-dev librtmp-dev libssh2-1-dev
   libssl-dev
 The following NEW packages will be installed:
-  libcurl4-openssl-dev libuv1-dev libuv1t64 libxml2-dev
+  libcurl4-openssl-dev libuv1 libuv1-dev libxml2-dev
 The following packages will be upgraded:
-  curl libcurl3t64-gnutls libcurl4t64 libxml2
-4 upgraded, 4 newly installed, 0 to remove and 42 not upgraded.
-Need to get 3,128 kB of archives.
-After this operation, 6,233 kB of additional disk space will be used.
-Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxml2 amd64 2.9.14+dfsg-1.3ubuntu3.8 [764 kB]
-Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1t64 amd64 1.48.0-1.1build1 [97.3 kB]
-Get:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 curl amd64 8.5.0-2ubuntu10.11 [226 kB]
-Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl4t64 amd64 8.5.0-2ubuntu10.11 [342 kB]
-Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl3t64-gnutls amd64 8.5.0-2ubuntu10.11 [334 kB]
-Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl4-openssl-dev amd64 8.5.0-2ubuntu10.11 [446 kB]
-Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1-dev amd64 1.48.0-1.1build1 [136 kB]
-Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxml2-dev amd64 2.9.14+dfsg-1.3ubuntu3.8 [782 kB]
+  curl libcurl4 libxml2
+3 upgraded, 4 newly installed, 0 to remove and 38 not upgraded.
+Need to get 2,664 kB of archives.
+After this operation, 6,026 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libxml2 amd64 2.9.13+dfsg-1ubuntu0.12 [765 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libuv1 amd64 1.43.0-1ubuntu0.1 [92.7 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 curl amd64 7.81.0-1ubuntu1.25 [194 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libcurl4 amd64 7.81.0-1ubuntu1.25 [291 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libcurl4-openssl-dev amd64 7.81.0-1ubuntu1.25 [387 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libuv1-dev amd64 1.43.0-1ubuntu0.1 [130 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libxml2-dev amd64 2.9.13+dfsg-1ubuntu0.12 [805 kB]
 debconf: delaying package configuration, since apt-utils is not installed
-Fetched 3,128 kB in 0s (7,958 kB/s)
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 19926 files and directories currently installed.)
-Preparing to unpack .../0-libxml2_2.9.14+dfsg-1.3ubuntu3.8_amd64.deb ...
-Unpacking libxml2:amd64 (2.9.14+dfsg-1.3ubuntu3.8) over (2.9.14+dfsg-1.3ubuntu3.7) ...
-Selecting previously unselected package libuv1t64:amd64.
-Preparing to unpack .../1-libuv1t64_1.48.0-1.1build1_amd64.deb ...
-Unpacking libuv1t64:amd64 (1.48.0-1.1build1) ...
-Preparing to unpack .../2-curl_8.5.0-2ubuntu10.11_amd64.deb ...
-Unpacking curl (8.5.0-2ubuntu10.11) over (8.5.0-2ubuntu10.9) ...
-Preparing to unpack .../3-libcurl4t64_8.5.0-2ubuntu10.11_amd64.deb ...
-Unpacking libcurl4t64:amd64 (8.5.0-2ubuntu10.11) over (8.5.0-2ubuntu10.9) ...
-Preparing to unpack .../4-libcurl3t64-gnutls_8.5.0-2ubuntu10.11_amd64.deb ...
-Unpacking libcurl3t64-gnutls:amd64 (8.5.0-2ubuntu10.11) over (8.5.0-2ubuntu10.9) ...
+Fetched 2,664 kB in 1s (2,609 kB/s)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20998 files and directories currently installed.)
+Preparing to unpack .../0-libxml2_2.9.13+dfsg-1ubuntu0.12_amd64.deb ...
+Unpacking libxml2:amd64 (2.9.13+dfsg-1ubuntu0.12) over (2.9.13+dfsg-1ubuntu0.11) ...
+Selecting previously unselected package libuv1:amd64.
+Preparing to unpack .../1-libuv1_1.43.0-1ubuntu0.1_amd64.deb ...
+Unpacking libuv1:amd64 (1.43.0-1ubuntu0.1) ...
+Preparing to unpack .../2-curl_7.81.0-1ubuntu1.25_amd64.deb ...
+Unpacking curl (7.81.0-1ubuntu1.25) over (7.81.0-1ubuntu1.24) ...
+Preparing to unpack .../3-libcurl4_7.81.0-1ubuntu1.25_amd64.deb ...
+Unpacking libcurl4:amd64 (7.81.0-1ubuntu1.25) over (7.81.0-1ubuntu1.24) ...
 Selecting previously unselected package libcurl4-openssl-dev:amd64.
-Preparing to unpack .../5-libcurl4-openssl-dev_8.5.0-2ubuntu10.11_amd64.deb ...
-Unpacking libcurl4-openssl-dev:amd64 (8.5.0-2ubuntu10.11) ...
+Preparing to unpack .../4-libcurl4-openssl-dev_7.81.0-1ubuntu1.25_amd64.deb ...
+Unpacking libcurl4-openssl-dev:amd64 (7.81.0-1ubuntu1.25) ...
 Selecting previously unselected package libuv1-dev:amd64.
-Preparing to unpack .../6-libuv1-dev_1.48.0-1.1build1_amd64.deb ...
-Unpacking libuv1-dev:amd64 (1.48.0-1.1build1) ...
+Preparing to unpack .../5-libuv1-dev_1.43.0-1ubuntu0.1_amd64.deb ...
+Unpacking libuv1-dev:amd64 (1.43.0-1ubuntu0.1) ...
 Selecting previously unselected package libxml2-dev:amd64.
-Preparing to unpack .../7-libxml2-dev_2.9.14+dfsg-1.3ubuntu3.8_amd64.deb ...
-Unpacking libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.8) ...
-Setting up libcurl4t64:amd64 (8.5.0-2ubuntu10.11) ...
-Setting up libuv1t64:amd64 (1.48.0-1.1build1) ...
-Setting up libcurl3t64-gnutls:amd64 (8.5.0-2ubuntu10.11) ...
-Setting up libcurl4-openssl-dev:amd64 (8.5.0-2ubuntu10.11) ...
-Setting up curl (8.5.0-2ubuntu10.11) ...
-Setting up libxml2:amd64 (2.9.14+dfsg-1.3ubuntu3.8) ...
-Setting up libuv1-dev:amd64 (1.48.0-1.1build1) ...
-Setting up libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.8) ...
-Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+Preparing to unpack .../6-libxml2-dev_2.9.13+dfsg-1ubuntu0.12_amd64.deb ...
+Unpacking libxml2-dev:amd64 (2.9.13+dfsg-1ubuntu0.12) ...
+Setting up libuv1:amd64 (1.43.0-1ubuntu0.1) ...
+Setting up libcurl4:amd64 (7.81.0-1ubuntu1.25) ...
+Setting up curl (7.81.0-1ubuntu1.25) ...
+Setting up libxml2:amd64 (2.9.13+dfsg-1ubuntu0.12) ...
+Setting up libuv1-dev:amd64 (1.43.0-1ubuntu0.1) ...
+Setting up libxml2-dev:amd64 (2.9.13+dfsg-1ubuntu0.12) ...
+Setting up libcurl4-openssl-dev:amd64 (7.81.0-1ubuntu1.25) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.13) ...
+Installing declared dependencies: tinytest
+trying URL 'https://cloud.r-project.org/src/contrib/tinytest_1.4.3.tar.gz'
+Content type 'application/x-gzip' length 595901 bytes (581 KB)
+==================================================
+downloaded 581 KB
+
+* installing *source* package ‘tinytest’ ...
+** this is package ‘tinytest’ version ‘1.4.3’
+** package ‘tinytest’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (tinytest)
+
+The downloaded source packages are in
+	‘/tmp/Rtmpngflmz/downloaded_packages’
 * installing *source* package ‘cpp4r’ ...
 ** this is package ‘cpp4r’ version ‘1.1.0’
 ** using staged installation
@@ -74,10 +94,10 @@ Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
 ** this is package ‘cpp4rtest’ version ‘0.3.0’
 ** using staged installation
 ** libs
-using C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
-g++ -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
-g++ -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
-g++ -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/4.6.0/lib/R/lib -lR
+using C++ compiler: ‘g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0’
+g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
+g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
+g++ -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
 installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 ** R
 ** inst
@@ -91,28 +111,22 @@ installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 ** testing if installed package keeps a record of temporary installation path
 * DONE (cpp4rtest)
 * using log directory ‘/check/cpp4rtest.Rcheck’
-* using R version 4.6.0 (2026-04-24)
+* using R Under development (unstable) (2026-05-14 r90050)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
-    gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
-    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
-* running under: Ubuntu 24.04.4 LTS
+    gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+* running under: Ubuntu 22.04.5 LTS
 * using session charset: UTF-8
-* current time: 2026-07-24 11:39:25 UTC
+* current time: 2026-07-24 12:04:41 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [4s/5s] NOTE
+* checking CRAN incoming feasibility ... NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
-
-Checking URLs failed with message:
-  there is no package called ‘curl’
-
-Checking DOIs failed with message:
-  there is no package called ‘curl’
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -121,8 +135,9 @@ Checking DOIs failed with message:
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [18s/13s] OK
-* used C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+* checking whether package ‘cpp4rtest’ can be installed ... [19s/16s] OK
+* used C++ compiler: ‘g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0’
+* checking installed package size ... OK
 * checking package directory ... OK
 * checking for future file timestamps ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -132,19 +147,19 @@ Checking DOIs failed with message:
 * checking package subdirectories ... OK
 * checking code files for non-ASCII characters ... OK
 * checking R files for syntax errors ... OK
-* checking whether the package can be loaded ... [1s/0s] OK
-* checking whether the package can be loaded with stated dependencies ... [1s/0s] OK
-* checking whether the package can be unloaded cleanly ... [1s/0s] OK
-* checking whether the namespace can be loaded with stated dependencies ... [1s/0s] OK
-* checking whether the namespace can be unloaded cleanly ... [1s/0s] OK
-* checking loading without being on the library search path ... [1s/0s] OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
 * checking use of S3 registration ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... [13s/4s] OK
-* checking Rd files ... [1s/0s] OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
 * checking Rd cross-references ... OK
@@ -167,10 +182,11 @@ Checking DOIs failed with message:
 * checking examples ... NONE
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ...
-  Running ‘tinytest.R’ [2s/1s]
- [3s/1s] OK
+  Running ‘tinytest.R’
+ OK
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
+* checking for new files in some other directories ... OK
 * DONE
 
 Status: 1 NOTE
@@ -183,10 +199,10 @@ for details.
 ** this is package ‘cpp4rtest’ version ‘0.3.0’
 ** using staged installation
 ** libs
-using C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
-g++ -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
-g++ -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
-g++ -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/4.6.0/lib/R/lib -lR
+using C++ compiler: ‘g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0’
+g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
+g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
+g++ -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/devel/lib/R/lib -lR
 installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 ** R
 ** inst
@@ -201,28 +217,22 @@ installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
 * DONE (cpp4rtest)
 === 00check.log ===
 * using log directory ‘/check/cpp4rtest.Rcheck’
-* using R version 4.6.0 (2026-04-24)
+* using R Under development (unstable) (2026-05-14 r90050)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
-    gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
-    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
-* running under: Ubuntu 24.04.4 LTS
+    gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+* running under: Ubuntu 22.04.5 LTS
 * using session charset: UTF-8
-* current time: 2026-07-24 11:39:25 UTC
+* current time: 2026-07-24 12:04:41 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [4s/5s] NOTE
+* checking CRAN incoming feasibility ... NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
-
-Checking URLs failed with message:
-  there is no package called ‘curl’
-
-Checking DOIs failed with message:
-  there is no package called ‘curl’
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -231,8 +241,9 @@ Checking DOIs failed with message:
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [18s/13s] OK
-* used C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+* checking whether package ‘cpp4rtest’ can be installed ... [19s/16s] OK
+* used C++ compiler: ‘g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0’
+* checking installed package size ... OK
 * checking package directory ... OK
 * checking for future file timestamps ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -242,19 +253,19 @@ Checking DOIs failed with message:
 * checking package subdirectories ... OK
 * checking code files for non-ASCII characters ... OK
 * checking R files for syntax errors ... OK
-* checking whether the package can be loaded ... [1s/0s] OK
-* checking whether the package can be loaded with stated dependencies ... [1s/0s] OK
-* checking whether the package can be unloaded cleanly ... [1s/0s] OK
-* checking whether the namespace can be loaded with stated dependencies ... [1s/0s] OK
-* checking whether the namespace can be unloaded cleanly ... [1s/0s] OK
-* checking loading without being on the library search path ... [1s/0s] OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
 * checking use of S3 registration ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... [13s/4s] OK
-* checking Rd files ... [1s/0s] OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
 * checking Rd cross-references ... OK
@@ -276,9 +287,10 @@ Checking DOIs failed with message:
 * checking compiled code ... OK
 * checking examples ... NONE
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... [3s/1s] OK
-  Running ‘tinytest.R’ [2s/1s]
+* checking tests ... OK
+  Running ‘tinytest.R’
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
+* checking for new files in some other directories ... OK
 * DONE
 Status: 1 NOTE
