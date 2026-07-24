@@ -136,16 +136,8 @@ cp "$CPP4RTEST_TARBALL" "$CHECK_DIR/"
 cat > "$CHECK_DIR/install_required.R" <<'R_EOF'
 user_lib <- strsplit(Sys.getenv('R_LIBS_USER'), ':')[[1]][1]
 .libPaths(c(user_lib, .libPaths()))
-repos_snapshot_env <- Sys.getenv('RSPM_SNAPSHOT', '')
-if (nzchar(repos_snapshot_env)) {
-  if (grepl('^https?://', repos_snapshot_env)) {
-    options(repos = c(CRAN = repos_snapshot_env))
-  } else {
-    options(repos = c(CRAN = paste0('https://packagemanager.rstudio.com/cran/', repos_snapshot_env)))
-  }
-} else {
-  options(repos = c(CRAN = 'https://cloud.r-project.org'))
-}
+options(repos = c(CRAN = 'https://cloud.r-project.org'))
+
 
 deps_from_tarball <- function(tarfile, own_names) {
   td <- tempfile()
