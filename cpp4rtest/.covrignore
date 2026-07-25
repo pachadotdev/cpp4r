@@ -21,9 +21,6 @@ src/matrix.h
 src/pairlist_helpers.h
 src/protect.h
 src/release.h
-src/roxygen1.h
-src/roxygen2.h
-src/roxygen3.h
 src/safe.h
 src/sexp_helpers.h
 src/strings.h

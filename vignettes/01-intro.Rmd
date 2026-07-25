@@ -117,7 +117,7 @@ objects. This includes support for `std::map` and `std::unordered_map` container
 named R lists.
 
 cpp4r provides roxygen support directly in C++ code, allowing developers to document their C++ functions using familiar
-roxygen2 syntax. This integration streamlines the documentation workflow for packages that expose C++ functions to R.
+Roxygen syntax. This integration streamlines the documentation workflow for packages that expose C++ functions to R.
 
 Unlike cpp11, cpp4r properly handles matrix attributes, including `dimnames`, ensuring that matrix operations preserve
 metadata when copying data between R and C++.

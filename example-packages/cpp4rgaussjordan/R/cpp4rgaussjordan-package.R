@@ -1,5 +1,8 @@
+#' @title A Naive Implementation of the Gauss-Jordan Algorithm
+#' @description Just to demonstrate the vendoring capabilities of the 'cpp4r'
+#'  package. This is a very simple implementation to show code syntax.
 #' @useDynLib cpp4rgaussjordan, .registration = TRUE
-NULL
+"_PACKAGE"
 
 #' Invert (some) square matrices
 #' @export

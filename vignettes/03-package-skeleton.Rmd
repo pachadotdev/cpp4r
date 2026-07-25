@@ -66,7 +66,7 @@ otherwise you can end up with a single large cpp file containing thousands of li
 maintain. With R packages, there is no need to create a `main()` function in C++, which is the entry point of a
 standalone C++ program.
 
-Unlike cpp11, cpp4r can document the C++ functions using roxygen2 comments. The comments must be placed before the
+Unlike cpp11, cpp4r can document the C++ functions using Roxygen comments. The comments must be placed before the
 `[[cpp4r::register]]` attribute.
 
 ## Exporting a Registered Function
@@ -82,9 +82,9 @@ There are two ways to export a registered function:
 
 - Add a `/* roxygen ... */` comment block, including an `@export` tag, directly before the decorated function in the
   `C++` file, as shown above for `plus_one()`. `register()` copies it verbatim onto the generated R wrapper, so
-  running `roxygen2::document()` afterwards will export the wrapper and document it as usual.
+  running `tinydev::pkg_document()` afterwards will export the wrapper and document it as usual.
 - Give the `C++` function a name you don't want exposed directly (e.g. `sum_`), then write your own R wrapper that
-  calls it and add a normal `#'` roxygen2 comment block with `@export` above that wrapper instead.
+  calls it and add a normal `#'` Roxygen comment block with `@export` above that wrapper instead.
 
 Either way, `register()` and `[[cpp4r::register]]` alone never modify `NAMESPACE`; running `tinydev::pkg_document(".")`
 (or hand-editing `NAMESPACE`) is what actually exports the function.

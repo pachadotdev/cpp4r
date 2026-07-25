@@ -6,6 +6,6 @@
 ^\.github$
 ^\.vscode$
 ^dev$
-^LICENSE\.md$
 ^README$
 ^README\.Rmd$
+^LICENSE\.txt$

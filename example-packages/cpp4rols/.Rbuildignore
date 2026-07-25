@@ -6,3 +6,4 @@
 ^\.gitignore$
 ^\.vscode$
 ^\.Rhistory$
+^LICENSE\.txt$
