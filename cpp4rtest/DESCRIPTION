@@ -17,5 +17,3 @@ NeedsCompilation: yes
 Suggests: tinytest
 Depends: R(>= 3.5.0)
 LazyData: true
-Roxygen: list(markdown = TRUE)
-Config/roxygen2/version: 8.0.0

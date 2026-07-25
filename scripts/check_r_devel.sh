@@ -41,7 +41,7 @@ export R_ENVIRON_USER=""
 # Install required packages in R-devel if not present
 echo "Checking/installing required packages in R-devel..."
 "${RSCRIPT_DEVEL}" --vanilla -e '
-  pkgs <- c("tinydev", "tinytest", "roxygen2", "cpp4r")
+  pkgs <- c("tinydev", "tinytest", "tinyroxygen", "cpp4r")
   missing <- pkgs[!sapply(pkgs, requireNamespace, quietly = TRUE)]
   if (length(missing) > 0) {
     install.packages(missing, repos = "https://cloud.r-project.org")

@@ -95,9 +95,9 @@ fi
 
 echo "Building package tarballs..."
 
-# tinydev::pkg_build()/devtools::build()/pkg_document() call
-# roxygen2::roxygenise(), which for packages with compiled code triggers a
-# full (often colorized, ANSI escape-laden) "R CMD INSTALL" *on the host*
+# devtools::build()/pkg_document() call roxygen2::roxygenise(), which for
+# packages with compiled code triggers a full (often colorized, ANSI
+# escape-laden) "R CMD INSTALL" *on the host*
 # (using the host's own default compiler/CXX_STD, unrelated to the
 # std/compiler this script is about to test inside Docker) to load the DLL.
 # That output goes to stdout, so capturing the tarball path via
@@ -244,12 +244,7 @@ if [ "$COMPILER" = "clang" ]; then
 fi
 
 # cpp4rtest/configure regenerates src/Makevars from Makevars.in, honoring
-# this env var for CXX_STD (defaulting to CXX23 when unset/empty). Without
-# this, cpp4rtesttest's Makevars always declared "CXX_STD = CXX23" regardless
-# of which standard MAKEVARS_STEP was actually pinning CXX23STD (etc.) to,
-# which is why R's own install log printed the confusing "specified/using
-# C++23" even during a cxx17/cxx20 check. Pinning CXX_STD to match keeps
-# that message accurate.
+# this env var for CXX_STD (defaulting to CXX23 when unset/empty).
 CPP4RTEST_CXX_STD=""
 if [ -n "$STD" ]; then
   CPP4RTEST_CXX_STD=$(echo "$STD" | tr '[:lower:]' '[:upper:]')
@@ -299,6 +294,13 @@ docker run --rm \
     # ~/.R/Makevars so packages with C++ code (diffobj, etc) compile with the
     # image's default standard instead of the one under test.
     if [ -f /check/install_required.R ]; then Rscript /check/install_required.R || true; fi
+    
+    # --as-cran's 'checking CRAN incoming feasibility' step uses the 'curl'
+    # R package to verify URLs/DOIs in the docs. It isn't a dependency of
+    # any of our packages; without it, URL/DOI verification errors out
+    # (rather than just flagging a bad link), which escalates that check from an
+    # informational NOTE to a WARNING.
+    Rscript -e \"if (!requireNamespace('curl', quietly = TRUE)) install.packages('curl', lib = Sys.getenv('R_LIBS_USER'))\" || true
 ${MAKEVARS_STEP}
     # Remove stale locks and old cpp4r/cpp4rtest before reinstalling
     rm -rf /cache/R_libs/00LOCK-* /cache/R_libs/cpp4r /cache/R_libs/cpp4rtest
@@ -325,4 +327,3 @@ echo "Check complete. Log: $LOG"
 echo "==============================="
 
 exit $DOCKER_RC
-

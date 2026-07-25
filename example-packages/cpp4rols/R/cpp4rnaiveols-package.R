@@ -1,5 +1,10 @@
+#' @title Obtain the OLS Estimator With a Naive Computation
+#' @description How to use 'cpp4r' and obtain the OLS estimator in the most naive way. There is a
+#'  good explanation about why R's lm() function uses a QR decomposition instead of directly
+#'  computing (X'X)-1(X'Y) as I did here. See
+#'  \url{http://madrury.github.io/jekyll/update/statistics/2016/07/20/lm-in-R.html}.
 #' @useDynLib cpp4rols, .registration = TRUE
-NULL
+"_PACKAGE"
 
 #' Naive OLS estimator
 #' @export

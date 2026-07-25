@@ -1,6 +1,6 @@
 Package: cpp4rvendor
 Type: Package
-Title: To test vendored buils
+Title: To Test Vendored Builds
 Version: 0.1.0
 Authors@R: 
     person(
@@ -15,9 +15,9 @@ Suggests:
     rmarkdown
 Depends: R(>= 4.0.0)
 Description: Testing the builds with vendored cpp4r headers. The idea is to
-    ensure that the functions correctly link to the vendored cpp4r code and not to
-    any installed version of cpp4r.
-License: Apache License (>= 2)
+    ensure that the functions correctly link to the vendored cpp4r code and not
+    to any installed version of cpp4r.
+License: Apache License 2.0
 BugReports: https://github.com/USERNAME/PKGNAME/issues
 URL: https://WEBSITE.COM
 RoxygenNote: 7.3.2

@@ -2,4 +2,5 @@
 ^\.Rproj\.user$
 ^\.vscode$
 ^LICENSE\.md$
-build-and-test.r
+^build-and-test\.r$
+^LICENSE\.txt$
