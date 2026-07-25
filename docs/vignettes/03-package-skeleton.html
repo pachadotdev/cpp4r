@@ -98,7 +98,7 @@ with a single large cpp file containing thousands of lines of code that
 will be harder to maintain. With R packages, there is no need to create
 a <code>main()</code> function in C++, which is the entry point of a
 standalone C++ program.</p>
-<p>Unlike cpp11, cpp4r can document the C++ functions using roxygen2
+<p>Unlike cpp11, cpp4r can document the C++ functions using Roxygen
 comments. The comments must be placed before the
 <code>[[cpp4r::register]]</code> attribute.</p>
 </div>
@@ -114,11 +114,11 @@ undocumented and unexported:</p>
 <code>@export</code> tag, directly before the decorated function in the
 <code>C++</code> file, as shown above for <code>plus_one()</code>.
 <code>register()</code> copies it verbatim onto the generated R wrapper,
-so running <code>roxygen2::document()</code> afterwards will export the
-wrapper and document it as usual.</li>
+so running <code>tinydev::pkg_document()</code> afterwards will export
+the wrapper and document it as usual.</li>
 <li>Give the <code>C++</code> function a name you don’t want exposed
 directly (e.g. <code>sum_</code>), then write your own R wrapper that
-calls it and add a normal <code>#'</code> roxygen2 comment block with
+calls it and add a normal <code>#'</code> Roxygen comment block with
 <code>@export</code> above that wrapper instead.</li>
 </ul><p>Either way, <code>register()</code> and
 <code>[[cpp4r::register]]</code> alone never modify

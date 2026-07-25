@@ -20,3 +20,4 @@
 ^cpp4rtest$
 ^vignettes$
 ^check-docker$
+^scripts$
