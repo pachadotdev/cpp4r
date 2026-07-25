@@ -17,8 +17,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  R-CMD-check:
+  gate:
     environment: ${{ github.event_name == 'pull_request' && 'ci-approval' || 'ci-auto' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Environment gate passed"
+
+  R-CMD-check:
+    needs: gate
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }}) ${{ matrix.config.custom }}
