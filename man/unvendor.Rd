@@ -23,7 +23,7 @@ automatically finding the vendored headers.
 
 \examples{
 # create a new directory
-dir <- paste0(tempdir(), "/", gsub("\\s+|[[:punct:]]", "", Sys.time()))
+dir <- paste0(tempdir(), "/", gsub("\\\\s+|[[:punct:]]", "", Sys.time()))
 dir.create(dir, recursive = TRUE)
 
 # vendor the cpp4r headers into the directory

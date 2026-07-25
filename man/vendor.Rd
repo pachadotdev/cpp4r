@@ -30,7 +30,7 @@ cpp4r will not be available for your code until you run \code{cpp_vendor()} agai
 
 \examples{
 # create a new directory
-dir <- paste0(tempdir(), "/", gsub("\\s+|[[:punct:]]", "", Sys.time()))
+dir <- paste0(tempdir(), "/", gsub("\\\\s+|[[:punct:]]", "", Sys.time()))
 dir.create(dir, recursive = TRUE, showWarnings = FALSE)
 
 # vendor the cpp4r headers into the directory
