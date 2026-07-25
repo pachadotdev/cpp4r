@@ -14,7 +14,7 @@ concurrency:
 jobs:
   format:
     runs-on: ubuntu-latest
-    environment: ci-approval
+    environment: ${{ github.event_name == 'pull_request' && 'ci-approval' || '' }}
     permissions:
       contents: write
     steps:
