@@ -276,13 +276,6 @@ docker run --rm \
     # take effect), producing a '#warning' on every compile. Clearing it
     # restores normal -O2 optimized builds inside the container.
     unset DEB_BUILD_OPTIONS
-    # litedown (and possibly other dev-only deps) isn't on CRAN yet, so any
-    # automatic install of missing dependencies inside this container (e.g.
-    # R CMD check's own install of missing Suggests, or the ad-hoc 'curl'
-    # install below) needs a fallback repo. Writing to Rprofile.site rather
-    # than a single script's options(repos = ...) makes the setting global:
-    # it's sourced by every R/Rscript process started in this container from
-    # here on, not just the one process that calls options() itself.
     RHOME=\$(R RHOME)
     mkdir -p \"\$RHOME/etc\"
     cat >> \"\$RHOME/etc/Rprofile.site\" <<'RPROFILE_EOF'
@@ -306,7 +299,7 @@ RPROFILE_EOF
     # ~/.R/Makevars so packages with C++ code (diffobj, etc) compile with the
     # image's default standard instead of the one under test.
     if [ -f /check/install_required.R ]; then Rscript /check/install_required.R || true; fi
-    
+
     # --as-cran's 'checking CRAN incoming feasibility' step uses the 'curl'
     # R package to verify URLs/DOIs in the docs. It isn't a dependency of
     # any of our packages; without it, URL/DOI verification errors out
