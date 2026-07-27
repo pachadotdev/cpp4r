@@ -73,11 +73,6 @@ cpp4r::function?</a>
 
 
 
-<pre class="r"><code>knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#&gt;"
-)
-library(cpp4r)</code></pre>
 <p>Below are some Frequently Asked Questions about cpp4r. If you have a
 question that you think would fit well here please <a href="https://github.com/pachadotdev/cpp4r/issues/new/choose">open an
 issue</a>.</p>
@@ -246,7 +241,7 @@ is_named(c(x = "foo"))</code></pre>
 <div id="how-do-i-return-a-cpp4rwritablelogicals-object-with-only-a-false-value" class="section level2">
 <h2 id="how-do-i-return-a-cpp4r-writable-logicals-object-with-only-a-false-value">How do I return a “cpp4r::writable::logicals” object with only a
 “FALSE” value?</h2>
-<p>You need to use <a href="https://en.cppreference.com/w/cpp/language/list_initialization.html">list
+<p>You need to use <a href="https://en.cppreference.com/cpp/language/list_initialization">list
 initialization</a> with <code>{}</code> to create the object.</p>
 <pre class="cpp"><code>#include &lt;cpp4r.hpp&gt;
 

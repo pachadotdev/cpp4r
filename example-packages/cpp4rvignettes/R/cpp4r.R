@@ -64,3 +64,11 @@ cumsum_cpp <- function(x) {
 cumprod_cpp <- function(x) {
 	.Call(`_cpp4rvignettes_cumprod_cpp`, x)
 }
+
+#' @title Cumulative Product
+#' @description Returns a vector of doubles containing the minimum and maximum of a vector of doubles.
+#' @param x doubles (numeric) vector.
+#' @export
+range_cpp <- function(x) {
+	.Call(`_cpp4rvignettes_range_cpp`, x)
+}

@@ -43,23 +43,23 @@
 
   <div class="submenu">
     <label>Vignettes</label>
-    <a href="../vignettes/01-intro.html">01 - Introduction</a>
-    <a href="../vignettes/02-setup.html">02 - Setup</a>
-    <a href="../vignettes/03-package-skeleton.html">03 - Package Skeleton</a>
-    <a href="../vignettes/04-read-only.html">04 - Read-only versus Writable R Objects</a>
-    <a href="../vignettes/05-logical-functions.html">05 - Logical Functions</a>
-    <a href="../vignettes/06-rolling-functions.html">06 - Rolling Functions</a>
-    <a href="../vignettes/07-statistical-functions.html">07 - Statistical Functions</a>
-    <a href="../vignettes/08-logical-functions-2.html">08 - Logical Functions with Missing Values</a>
-    <a href="../vignettes/09-rolling-functions-2.html">09 - Rolling Functions with Missing Values</a>
-    <a href="../vignettes/10-statistical-functions-2.html">10 - Statistical Functions with Missing Values</a>
-    <a href="../vignettes/11-debugging.html">11 - Debugging R Packages</a>
-    <a href="../vignettes/12-external-pointers.html">12 - External Pointers</a>
-    <a href="../vignettes/13-compiler-optimization.html">13 - Compiler Optimizations</a>
-    <a href="../vignettes/14-linear-algebra.html">14 - Linear Algebra</a>
-    <a href="../vignettes/15-internals.html">15 - Internals</a>
-    <a href="../vignettes/16-worked-examples.html">16 - Worked Examples</a>
-    <a href="../vignettes/17-FAQ.html">17 - FAQs</a>
+    <a href="../vignettes/v01-intro.html">01 - Introduction</a>
+    <a href="../vignettes/v02-setup.html">02 - Setup</a>
+    <a href="../vignettes/v03-package-skeleton.html">03 - Package Skeleton</a>
+    <a href="../vignettes/v04-read-only.html">04 - Read-only versus Writable R Objects</a>
+    <a href="../vignettes/v05-logical-functions.html">05 - Logical Functions</a>
+    <a href="../vignettes/v06-rolling-functions.html">06 - Rolling Functions</a>
+    <a href="../vignettes/v07-statistical-functions.html">07 - Statistical Functions</a>
+    <a href="../vignettes/v08-logical-functions-2.html">08 - Logical Functions with Missing Values</a>
+    <a href="../vignettes/v09-rolling-functions-2.html">09 - Rolling Functions with Missing Values</a>
+    <a href="../vignettes/v10-statistical-functions-2.html">10 - Statistical Functions with Missing Values</a>
+    <a href="../vignettes/v11-debugging.html">11 - Debugging R Packages</a>
+    <a href="../vignettes/v12-external-pointers.html">12 - External Pointers</a>
+    <a href="../vignettes/v13-compiler-optimization.html">13 - Compiler Optimizations</a>
+    <a href="../vignettes/v14-linear-algebra.html">14 - Linear Algebra</a>
+    <a href="../vignettes/v15-internals.html">15 - Internals</a>
+    <a href="../vignettes/v16-worked-examples.html">16 - Worked Examples</a>
+    <a href="../vignettes/v17-FAQ.html">17 - FAQs</a>
   </div>
 
   <div class="submenu">
@@ -101,7 +101,7 @@ The default is 'NULL'.
 <h3>Examples</h3>
 
 <pre><code class="language-R"># create a new directory
-dir &lt;- paste0(tempdir(), "/", gsub("\s+|[[:punct:]]", "", Sys.time()))
+dir &lt;- paste0(tempdir(), "/", gsub("\\s+|[[:punct:]]", "", Sys.time()))
 dir.create(dir, recursive = TRUE)
 
 # vendor the cpp4r headers into the directory

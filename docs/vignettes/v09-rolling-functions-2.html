@@ -98,19 +98,8 @@ doubles cumsum2_cpp(doubles x, bool na_rm = false) {
 
   return out;
 }</code></pre>
-<p>To test the functions, you can run the following benchmark code in
-the R console:</p>
-<pre class="r"><code>set.seed(123) # for reproducibility
-x &lt;- rpois(1e6, lambda = 2) # 1,000,000 elements
-
-cumsum(c(1, NA, 2, 4))
-cumsum2_cpp(c(1, NA, 2, 4))
-cumsum2_cpp(c(1, NA, 2, 4), na_rm = TRUE)
-
-mark(
-  cumsum(x),
-  cumsum2_cpp(x)
-)</code></pre>
+<p>Benchmark the functions as in the “Logical Functions” and “Rolling
+Functions” vignettes.</p>
 </div>
 <div id="cumulative-product" class="section level2">
 <h2 id="cumulative-product">Cumulative product</h2>
@@ -153,16 +142,8 @@ doubles cumprod2_cpp(doubles x, bool na_rm = false) {
 
   return out;
 }</code></pre>
-<p>To test the functions, you can run the following benchmark code in
-the R console:</p>
-<pre class="r"><code>cumprod(c(1, NA, 2, 4))
-cumprod2_cpp(c(1, NA, 2, 4))
-cumprod2_cpp(c(1, NA, 2, 4), na_rm = TRUE)
-
-mark(
-  cumprod(x),
-  cumprod2_cpp(x)
-)</code></pre>
+<p>Benchmark the functions as in the “Logical Functions” and “Rolling
+Functions” vignettes.</p>
 </div>
 <div id="cumulative-minimum" class="section level2">
 <h2 id="cumulative-minimum">Cumulative minimum</h2>
@@ -201,16 +182,8 @@ cummin_cpp(doubles x, bool na_rm = false) {
 
   return out;
 }</code></pre>
-<p>To test the function, you can run the following benchmark code in the
-R console:</p>
-<pre class="r"><code>cummin(c(1, NA, 2, 4))
-cummin_cpp(c(1, NA, 2, 4))
-cummin_cpp(c(1, NA, 2, 4), na_rm = TRUE)
-
-mark(
-  cummin(x),
-  cummin_cpp(x)
-)</code></pre>
+<p>Benchmark the functions as in the “Logical Functions” and “Rolling
+Functions” vignettes.</p>
 </div>
 <div id="cumulative-maximum" class="section level2">
 <h2 id="cumulative-maximum">Cumulative maximum</h2>
@@ -249,16 +222,8 @@ doubles cummax_cpp(doubles x, bool na_rm = false) {
 
   return out;
 }</code></pre>
-<p>To test the functions, you can run the following benchmark code in
-the R console:</p>
-<pre class="r"><code>cummax(c(1, NA, 2, 4))
-cummax_cpp(c(1, NA, 2, 4))
-cummax_cpp(c(1, NA, 2, 4), na_rm = TRUE)
-
-mark(
-  cummax(x),
-  cummax_cpp(x)
-)</code></pre>
+<p>Benchmark the functions as in the “Logical Functions” and “Rolling
+Functions” vignettes.</p>
 </div>
         </div>
         <footer><p id="last-updated">Loading...</p>

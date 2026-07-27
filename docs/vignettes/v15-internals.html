@@ -60,21 +60,18 @@
 <pre class="r"><code>install.packages("remotes")
 remotes::install_deps(dependencies = TRUE)</code></pre>
 <p>You can load the package in an interactive R session</p>
-<pre class="r"><code>devtools::load_all()</code></pre>
+<pre class="r"><code>tinydev::pkg_load()</code></pre>
 <p>Or run the cpp4r tests with</p>
-<pre class="r"><code>devtools::test()</code></pre>
-<p>There are more extensive tests in the <code>cpp4rtest</code>
-directory. Generally when developing the C++ headers, you can run R with
-your working directory in the <code>cpp4rtest</code> directory and use
+<pre class="r"><code>tinytest::pkg_test()</code></pre>
+<p>There are exhaustive tests in the <code>cpp4rtest</code> directory.
+Generally when developing the C++ headers, you can run R with your
+working directory in the <code>cpp4rtest</code> directory and use
 <code>devtools::test()</code> to run the cpp4rtests.</p>
 <p>If you change the cpp4r headers, you will need to install the new
 version of cpp4r and then clean and recompile the cpp4rtest package:</p>
 <pre class="r"><code># Assuming that your working directory is `cpp4rtest/`
-devtools::clean_dll()
-devtools::load_all()</code></pre>
-<p>To calculate code coverage of the cpp4r package run the following
-from the <code>cpp4r</code> root directory.</p>
-<pre class="r"><code>covr::report(cpp4r_coverage())</code></pre>
+tinydev::pkg_clean()
+tinydev::pkg_load()</code></pre>
 </div>
 <div id="code-formatting" class="section level2">
 <h2 id="code-formatting">Code formatting</h2>
@@ -92,11 +89,11 @@ project. If your system does not have <code>clang-format</code> version
 lives in <a href="https://github.com/pachadotdev/cpp4r/tree/main/inst/include">inst/include</a>.
 R code used to register functions and for
 <code>cpp4r::cpp_source()</code> is in <a href="https://github.com/pachadotdev/cpp4r/tree/main/R">R/</a>. Tests
-for <em>only</em> the code in <code>R/</code> is in <a href="https://github.com/pachadotdev/cpp4r/tree/main/tests/testthat">tests/testthat/</a>.
+for <em>only</em> the code in <code>R/</code> is in <a href="https://github.com/pachadotdev/cpp4r/tree/main/inst/tinytest">inst/tinytest</a>.
 The rest of the code is in a separate <a href="https://github.com/pachadotdev/cpp4r/tree/main/cpp4rtest">cpp4rtest/</a>
 package included in the source tree. Inside <a href="https://github.com/pachadotdev/cpp4r/tree/main/cpp4rtest/src">cpp4rtest/src</a>
 the files that start with <code>test-</code> are C++ tests using the <a href="https://testthat.r-lib.org/reference/use_catch.html">Catch</a>
-support in testthat. In addition there are some regular R tests in <a href="https://github.com/pachadotdev/cpp4r/tree/main/cpp4rtest/tests/testthat">cpp4rtest/tests/testthat/</a>.</p>
+support in testthat. In addition there are some regular R tests in <a href="https://github.com/pachadotdev/cpp4r/tree/main/cpp4rtest/inst/tinytest">cpp4rtest/inst/tinytest/</a>.</p>
 </div>
 <div id="naming-conventions" class="section level2">
 <h2 id="naming-conventions">Naming conventions</h2>
@@ -135,15 +132,14 @@ template function that takes a SEXP and creates a C++ object from it</p>
 extensive use of <a href="https://en.wikipedia.org/wiki/Template_metaprogramming">template
 metaprogramming</a>. In particular the <a href="https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error">substitution
 failure is not an error (SFINAE)</a> technique is used to control
-overloading of the functions. If you could use C++20, a lot of this code
-would be made simpler with <a href="https://en.cppreference.com/w/cpp/language/constraints.html">Concepts</a>,
-but alas.</p>
+overloading of the functions. If you use C++20, a lot of this code would
+be made simpler with <a href="https://en.cppreference.com/cpp/language/constraints">Concepts</a>.</p>
 <p>The most common C++ types are included in the test suite and should
 work without issues, as more exotic types are used in real projects
 additional issues may arise.</p>
 <p>Some useful links on SFINAE</p>
-<ul><li><a href="https://www.fluentcpp.com/2018/05/15/make-sfinae-pretty-1-what-value-sfinae-brings-to-code/" class="uri">https://www.fluentcpp.com/2018/05/15/make-sfinae-pretty-1-what-value-sfinae-brings-to-code/</a>,
-<a href="https://www.fluentcpp.com/2018/05/18/make-sfinae-pretty-2-hidden-beauty-sfinae/" class="uri">https://www.fluentcpp.com/2018/05/18/make-sfinae-pretty-2-hidden-beauty-sfinae/</a></li>
+<ul><li><a href="https://www.fluentcpp.com/2018/05/15/make-sfinae-pretty-1-what-value-sfinae-brings-to-code/" class="uri">https://www.fluentcpp.com/2018/05/15/make-sfinae-pretty-1-what-value-sfinae-brings-to-code/</a></li>
+<li><a href="https://www.fluentcpp.com/2018/05/18/make-sfinae-pretty-2-hidden-beauty-sfinae/" class="uri">https://www.fluentcpp.com/2018/05/18/make-sfinae-pretty-2-hidden-beauty-sfinae/</a></li>
 </ul></div>
 <div id="protection" class="section level2">
 <h2 id="protection">Protection</h2>

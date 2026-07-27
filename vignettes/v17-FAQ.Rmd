@@ -15,14 +15,6 @@ editor:
 bibliography: ["references.bib"]
 ---
 
-```r
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-library(cpp4r)
-```
-
 Below are some Frequently Asked Questions about cpp4r. If you have a question that you think would fit well here please
 [open an issue](https://github.com/pachadotdev/cpp4r/issues/new/choose).
 
@@ -205,7 +197,7 @@ is_named(c(x = "foo"))
 
 ## How do I return a "cpp4r::writable::logicals" object with only a "FALSE" value?
 
-You need to use [list initialization](https://en.cppreference.com/w/cpp/language/list_initialization.html) with `{}` to create the object.
+You need to use [list initialization](https://en.cppreference.com/cpp/language/list_initialization) with `{}` to create the object.
 
 ```cpp
 #include <cpp4r.hpp>

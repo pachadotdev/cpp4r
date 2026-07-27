@@ -15,20 +15,13 @@ editor:
 bibliography: ["references.bib"]
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
-
 ## Initial setup and dev workflow
 
 The development repository for cpp4r is <https://github.com/pachadotdev/cpp4r>.
 
 First install any dependencies needed for development.
 
-``` r
+```r
 install.packages("remotes")
 remotes::install_deps(dependencies = TRUE)
 ```
@@ -36,30 +29,24 @@ remotes::install_deps(dependencies = TRUE)
 You can load the package in an interactive R session
 
 ``` r
-devtools::load_all()
+tinydev::pkg_load()
 ```
 
 Or run the cpp4r tests with
 
 ``` r
-devtools::test()
+tinytest::pkg_test()
 ```
 
-There are more extensive tests in the `cpp4rtest` directory.
+There are exhaustive tests in the `cpp4rtest` directory.
 Generally when developing the C++ headers, you can run R with your working directory in the `cpp4rtest` directory and use `devtools::test()` to run the cpp4rtests.
 
 If you change the cpp4r headers, you will need to install the new version of cpp4r and then clean and recompile the cpp4rtest package:
 
 ``` r
 # Assuming that your working directory is `cpp4rtest/`
-devtools::clean_dll()
-devtools::load_all()
-```
-
-To calculate code coverage of the cpp4r package run the following from the `cpp4r` root directory.
-
-``` r
-covr::report(cpp4r_coverage())
+tinydev::pkg_clean()
+tinydev::pkg_load()
 ```
 
 ## Code formatting
@@ -75,19 +62,19 @@ Alternatively many IDEs support automatically running `clang-format` every time 
 
 cpp4r is a header only library, so all source code exposed to users lives in [inst/include](https://github.com/pachadotdev/cpp4r/tree/main/inst/include).
 R code used to register functions and for `cpp4r::cpp_source()` is in [R/](https://github.com/pachadotdev/cpp4r/tree/main/R).
-Tests for *only* the code in `R/` is in [tests/testthat/](https://github.com/pachadotdev/cpp4r/tree/main/tests/testthat).
+Tests for *only* the code in `R/` is in [inst/tinytest](https://github.com/pachadotdev/cpp4r/tree/main/inst/tinytest).
 The rest of the code is in a separate [cpp4rtest/](https://github.com/pachadotdev/cpp4r/tree/main/cpp4rtest) package included in the source tree.
 Inside [cpp4rtest/src](https://github.com/pachadotdev/cpp4r/tree/main/cpp4rtest/src) the files that start with `test-` are C++ tests using the [Catch](https://testthat.r-lib.org/reference/use_catch.html) support in testthat.
-In addition there are some regular R tests in [cpp4rtest/tests/testthat/](https://github.com/pachadotdev/cpp4r/tree/main/cpp4rtest/tests/testthat).
+In addition there are some regular R tests in [cpp4rtest/inst/tinytest/](https://github.com/pachadotdev/cpp4r/tree/main/cpp4rtest/inst/tinytest).
 
 ## Naming conventions
 
--   All header files are named with a `.hpp` extension.
--   All source files are named with a `.cpp` extension.
--   Public header files should be put in `inst/include/cpp4r`
--   Read only r_vector classes and free functions should be put in the `cpp4r` namespace.
--   Writable r_vector class should be put in the `cpp4r::writable` namespace.
--   Private classes and functions should be put in the `cpp4r::internal` namespace.
+-  All header files are named with a `.hpp` extension.
+-  All source files are named with a `.cpp` extension.
+-  Public header files should be put in `inst/include/cpp4r`
+-  Read only r_vector classes and free functions should be put in the `cpp4r` namespace.
+-  Writable r_vector class should be put in the `cpp4r::writable` namespace.
+-  Private classes and functions should be put in the `cpp4r::internal` namespace.
 
 ## Vector classes
 
@@ -110,13 +97,14 @@ The various methods for both functions are defined in [cpp4r/as.hpp](https://git
 
 This is definitely the most complex part of the cpp4r code, with extensive use of [template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming).
 In particular the [substitution failure is not an error (SFINAE)](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error) technique is used to control overloading of the functions.
-If you could use C++20, a lot of this code would be made simpler with [Concepts](https://en.cppreference.com/w/cpp/language/constraints.html), but alas.
+If you use C++20, a lot of this code would be made simpler with [Concepts](https://en.cppreference.com/cpp/language/constraints).
 
 The most common C++ types are included in the test suite and should work without issues, as more exotic types are used in real projects additional issues may arise.
 
 Some useful links on SFINAE
 
--   https://www.fluentcpp.com/2018/05/15/make-sfinae-pretty-1-what-value-sfinae-brings-to-code/, https://www.fluentcpp.com/2018/05/18/make-sfinae-pretty-2-hidden-beauty-sfinae/
+- https://www.fluentcpp.com/2018/05/15/make-sfinae-pretty-1-what-value-sfinae-brings-to-code/
+- https://www.fluentcpp.com/2018/05/18/make-sfinae-pretty-2-hidden-beauty-sfinae/
 
 ## Protection
 

@@ -24,10 +24,6 @@ bibliography: ["references.bib"]
 
 The following function expands the previous `any_cpp()` function to handle missing values.
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(eval = FALSE)
-```
-
 ```cpp
 [[cpp4r::register]]
 bool any2_cpp(logicals x, bool na_rm = false) {
@@ -54,22 +50,7 @@ bool any2_cpp(logicals x, bool na_rm = false) {
 }
 ```
 
-To test the functions, you can run the following benchmark code in the R console:
-
-```{r functions-bench2}
-set.seed(123) # for reproducibility
-x <- rpois(1e6, lambda = 2) # 1,000,000 elements
-y <- ifelse(x > 2, TRUE, FALSE)
-
-any(c(TRUE, NA, FALSE))
-any2_cpp(c(TRUE, NA, FALSE))
-any2_cpp(c(TRUE, NA, FALSE), na_rm = TRUE)
-
-mark(
-  any(y),
-  any2_cpp(y)
-)
-```
+Benchmark the functions as in the "Logical Functions" and "Rolling Functions" vignettes.
 
 ## Which elements in a vector are 'true'?
 
@@ -102,18 +83,7 @@ integers which2_cpp(logicals x, bool na_rm = false) {
 }
 ```
 
-To test the functions, you can run the following benchmark code in the R console:
-
-```{r functions-which-bench}
-which(c(TRUE, NA, FALSE, TRUE))
-which2_cpp(c(TRUE, NA, FALSE, TRUE))
-which2_cpp(c(TRUE, NA, FALSE, TRUE), na_rm = TRUE)
-
-mark(
-  which(y[1:1000]),
-  which2_cpp(y[1:1000])
-)
-```
+Benchmark the functions as in the "Logical Functions" and "Rolling Functions" vignettes.
 
 ## Are all values in a vector 'true'?
 
@@ -193,32 +163,4 @@ bool all2_cpp_3(logicals x, bool na_rm = false) {
 }
 ```
 
-To test the functions, you can run the following tests and benchmark code in the R console:
-
-```{r functions-all-correctness}
-set.seed(123) # for reproducibility
-x <- rpois(1e6, lambda = 2) # 1,000,000 elements
-
-all(c(TRUE, NA, TRUE))
-all2_cpp_1(c(TRUE, NA, TRUE))
-all2_cpp_1(c(TRUE, NA, TRUE), na_rm = TRUE)
-
-all(c(FALSE, NA, TRUE))
-all2_cpp_1(c(FALSE, NA, TRUE))
-all2_cpp_1(c(FALSE, NA, TRUE), na_rm = TRUE)
-
-# also test the TRUE-only case
-all(x >= 0)
-all2_cpp_1(x >= 0)
-all2_cpp_2(x >= 0)
-all2_cpp_3(x >= 0)
-```
-
-```{r functions-all-benchmark}
-mark(
-  all(x > 2),
-  all2_cpp_1(x > 2),
-  all2_cpp_2(x > 2),
-  all2_cpp_3(x > 2)
-)
-```
+Benchmark the functions as in the "Logical Functions" and "Rolling Functions" vignettes.

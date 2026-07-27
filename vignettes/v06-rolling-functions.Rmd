@@ -25,10 +25,6 @@ bibliography: ["references.bib"]
 
 Base R provides the `cumsum()` function to compute the cumulative sum of a vector:
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(eval = FALSE)
-```
-
 ```r
 cumsum(1:5)
 ```
@@ -71,7 +67,7 @@ cumsum_r <- function(x) {
 Add and document the functions, update the package as in the previous vignettes, and
 then compare the functions speed with:
 
-```{r cumsum-bench}
+```r
 # install.packages("microbenchmark")
 library(microbenchmark)
 library(mypkg)
@@ -151,12 +147,25 @@ microbenchmark(
 )
 ```
 
+```r
+Unit: milliseconds
+           expr   min    lq  mean median    uq    max neval cld
+     cumprod(x)  2.50  2.66  3.19   2.79  3.04   6.08   100  a 
+ cumprod_cpp(x)  2.24  2.45  2.88   2.55  2.71   6.99   100  a 
+   cumprod_r(x) 79.70 83.30 93.70  93.50 99.60 125.00   100  b
+```
+
 ## Range of values
 
 A simple example of the `range()` function in R is:
 
-```{r range}
+```r
 range(x)
+```
+
+```r
+> range(x)
+[1]  0 13
 ```
 
 One possible C++ function to implement this is:
@@ -184,57 +193,49 @@ Write its R equivalent.
 
 To verify the functions, you can run the following tests and benchmark code in the R console:
 
-```{r range-test, fig.height=7}
-# install.packages("purrr")
-# install.packages("dplyr")
-# install.packages("ggplot2")
-# install.packages("patchwork")
-library(purrr)
-library(dplyr)
-library(ggplot2)
-library(patchwork)
+```r
+set.seed(123) # for reproducibility
+x <- rnorm(10)
 
 range(x)
 range_cpp(x)
-# range_r(x)
 
-# create random vectors
-set.seed(123) # for reproducibility
 bigx <- list(
-  as.double(rpois(2e6, lambda = 2)),
-  as.double(rpois(4e6, lambda = 2)),
-  as.double(rpois(8e6, lambda = 2)),
-  as.double(rpois(16e6, lambda = 2)),
-  as.double(rpois(32e6, lambda = 2)),
-  as.double(rpois(64e6, lambda = 2))
+  rpois(2e6, lambda = 2),
+  rpois(4e6, lambda = 2),
+  rpois(8e6, lambda = 2)
 )
 
-results <- map(
+bigx <- lapply(bigx, as.double)
+
+lapply(
   bigx,
-  ~ mark(
-    range(.x),
-    range_cpp(.x)
-    # range_r(.x)
-  ) %>%
-    mutate(n = length(.x))
+  function(x) {
+    m <- summary(microbenchmark(range(x), range_cpp(x)))
+
+    data.frame(
+      expr = m[, 1], nobs = length(x), median = signif(m[, 5], 3),
+      unit = attr(m, "unit")
+    )
+  }
 )
+```
 
-d <- results %>%
-  bind_rows() %>%
-  unnest(c(time, mem_alloc, gc, n)) %>%
-  select(expression, time, mem_alloc, gc, n)
+```r
+[[1]]
+          expr    nobs median         unit
+1     range(x) 2000000  17.70 milliseconds
+2 range_cpp(x) 2000000   5.42 milliseconds
 
-g1 <- ggplot(d, aes(x = n, y = time, color = expression)) +
-  geom_jitter(width = 0.01, height = 0.01) +
-  scale_color_viridis_d() +
-  theme_minimal()
+[[2]]
+          expr    nobs median         unit
+1     range(x) 4000000   36.1 milliseconds
+2 range_cpp(x) 4000000   11.0 milliseconds
 
-g2 <- ggplot(d, aes(x = n, y = mem_alloc, color = expression)) +
-  geom_jitter(width = 0.01, height = 0.01) +
-  scale_color_viridis_d() +
-  theme_minimal()
-
-g1 / g2
+[[3]]
+          expr    nobs median         unit
+1     range(x) 8000000   76.9 milliseconds
+2 range_cpp(x) 8000000   22.0 milliseconds
 ```
 
 ## References

@@ -21,7 +21,7 @@ License: Apache License (>= 2)
 URL: https://cpp4r.org, https://github.com/pachadotdev/cpp4r
 BugReports: https://github.com/pachadotdev/cpp4r/issues
 Depends: R (>= 4.0.0)
-Suggests: tinytest, litedown
+Suggests: tinytest, rbibutils, litedown
 Encoding: UTF-8
 VignetteBuilder: litedown
  

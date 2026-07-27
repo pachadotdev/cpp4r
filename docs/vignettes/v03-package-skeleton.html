@@ -63,24 +63,23 @@ library(tinydev)</code></pre>
 <div id="creating-a-dummy-package" class="section level2">
 <h2 id="creating-a-dummy-package">Creating a Dummy Package</h2>
 <p>You can create a new package in RStudio (or VSCode) by running:</p>
-<pre class="r"><code>pkg_template("~/github/cpp4r/cpp4rexamples")</code></pre>
+<pre class="r"><code>pkg_template("~/mypkg")</code></pre>
 <p>This command will create a new folder containing the
-<code>cpp4rexamples</code> package. Afterward, you can run
-<code>use_cpp4r()</code> to add the necessary code to the package.</p>
+<code>mypkg</code> package.</p>
 </div>
 <div id="print-a-number" class="section level2">
 <h2 id="print-a-number">Print a Number</h2>
 <p>The <code>pkg_template()</code> function automatically creates
-<code>./cpp4rexamples/R/cpp4rexamples-package.R</code> with the
-following content:</p>
-<pre class="r"><code>#' @useDynLib cpp4rexamples, .registration = TRUE
-#' @keywords internal
+<code>./mypkg/R/mypkg-package.R</code> with the following content:</p>
+<pre class="r"><code>#' @title Package Title
+#' @description Some description. CRAN asks for at least one paragraph with two full sentences. Like this.
+#' @useDynLib mypkg, .registration = TRUE
 "_PACKAGE"</code></pre>
-<p>It also creates <code>./cpp4rexamples/src/main.cpp</code>. The rest
-of <code>src/</code> aims to provide an organization to keep the code
+<p>It also creates <code>./mypkg/src/main.cpp</code>. The rest of
+<code>src/</code> aims to provide an organization to keep the code
 organized into different files according to their purpose.</p>
-<p>Give a look at <code>./cpp4rexamples/src/01_plus_one.h</code>, which
-contains the following C++ code:</p>
+<p>Give a look at <code>./mypkg/src/01_plus_one.h</code>, which contains
+the following C++ code:</p>
 <pre class="cpp"><code>/* roxygen
 @title Plus 1 (C++)
 @param x integer
@@ -204,7 +203,7 @@ following functions:</p>
 tinydev::pkg_document(".")
 tinydev::pkg_install(".")</code></pre>
 <p>Afterward, you can access the functions by loading the package with
-<code>library(cpp4rexamples)</code>.</p>
+<code>library(mypkg)</code>.</p>
 <p>Each time you need to make changes to the C++ code, you can run
 <code>load_all()</code> again to test and then reinstall the
 package.</p>

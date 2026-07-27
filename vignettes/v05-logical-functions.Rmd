@@ -27,10 +27,6 @@ bibliography: ["references.bib"]
 Base R's `any()` function returns `TRUE` if there is at least one `TRUE` element in a vector, and `FALSE` otherwise.
 Below is one possible C++ implementation:
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(eval = FALSE)
-```
-
 ```cpp
 [[cpp4r::register]]
 bool any_cpp(logicals x) {

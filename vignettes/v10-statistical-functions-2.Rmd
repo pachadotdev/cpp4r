@@ -24,10 +24,6 @@ bibliography: ["references.bib"]
 
 The following function expands the previous `sum_cpp()` function to handle missing values.
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(eval = FALSE)
-```
-
 ```cpp
 [[cpp4r::register]]
 double sum2_cpp(doubles x, bool na_rm = false) {
@@ -44,25 +40,7 @@ double sum2_cpp(doubles x, bool na_rm = false) {
 }
 ```
 
-
-To test the functions, you can run the following benchmark code in the R console:
-
-```{r sum-test}
-set.seed(123) # for reproducibility
-x <- runif(1e3) # 1,000 elements
-x[sample(1:1e3, 1e2)] <- NA # randomly insert NA values
-
-sum(x, na.rm = FALSE)
-sum2_cpp(x, na_rm = FALSE)
-
-sum(x, na.rm = TRUE)
-sum2_cpp(x, na_rm = TRUE)
-
-mark(
-  sum(x, na.rm = TRUE),
-  sum2_cpp(x, na_rm = TRUE)
-)
-```
+Benchmark the functions as in the "Logical Functions" and "Rolling Functions" vignettes.
 
 ## Arithmetic mean
 
@@ -99,20 +77,7 @@ double mean2_cpp(doubles x, bool na_rm = false) {
 }
 ```
 
-To test the functions, you can run the following benchmark code in the R console:
-
-```{r mean-bench}
-mean(x)
-mean2_cpp(x)
-
-mean(x, na.rm = TRUE)
-mean2_cpp(x, na_rm = TRUE)
-
-mark(
-  mean(x, na.rm = TRUE),
-  mean2_cpp(x, na_rm = TRUE)
-)
-```
+Benchmark the functions as in the "Logical Functions" and "Rolling Functions" vignettes.
 
 ## Variance
 
@@ -143,20 +108,7 @@ double var2_cpp(doubles x, bool na_rm = false) {
 }
 ```
 
-To test the functions, you can run the following benchmark code in the R console:
-
-```{r var-bench}
-var(x)
-var2_cpp(x)
-
-var(x, na.rm = TRUE)
-var2_cpp(x, na_rm = TRUE)
-
-mark(
-  var(x, na.rm = TRUE),
-  var2_cpp(x, na_rm = TRUE)
-)
-```
+Benchmark the functions as in the "Logical Functions" and "Rolling Functions" vignettes.
 
 ## Root Mean Square Error (RMSE)
 
@@ -186,27 +138,4 @@ double rmse2_cpp(doubles x, double x0, bool na_rm = false) {
 }
 ```
 
-To test the functions, you can run the following benchmark code in the R console:
-
-```{r functions-bench}
-# create a list with 100 normal distributions with mean 0 and 1,000 elements each
-set.seed(123)
-x <- list()
-for (i in 1:1e3) {
-  x[[i]] <- rnorm(1e3)
-}
-
-# compute the mean of each distribution
-x <- sapply(x, mean)
-
-# insert NA values at random
-x[sample(1:1e3, 1e2)] <- NA
-
-rmse2_cpp(x, 0)
-rmse2_cpp(x, 0, na_rm = TRUE)
-
-mark(
-  sqrt(mean((x - 0)^2, na.rm = TRUE)),
-  rmse2_cpp(x, 0, na_rm = TRUE)
-)
-```
+Benchmark the functions as in the "Logical Functions" and "Rolling Functions" vignettes.

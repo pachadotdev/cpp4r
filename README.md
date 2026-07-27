@@ -106,7 +106,7 @@ hours.
 ## Contributing
 
 Contributions are welcome! Please see the [internals
-vignette](https://cpp4r.org/articles/15-internals.html) for details
+vignette](https://cpp4r.org/articles/v15-internals.html) for details
 about design choices and coding style.
 
 ## Code of Conduct

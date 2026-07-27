@@ -4,24 +4,6 @@
 
 #include "cpp4r/declarations.hpp"
 #include <R_ext/Visibility.h>
-#include <cstring>
-
-namespace {
-// R_CallMethodDef requires a DL_FUNC (void (*)()), which necessarily
-// differs from the real signature of each registered function. A direct
-// cast between incompatible function pointer types triggers
-// -Wcast-function-type, and CRAN's checks disallow suppressing that with
-// compiler pragmas. Reinterpret the pointer by copying its bytes instead:
-// this never casts between function pointer types (memcpy's arguments are
-// ordinary object pointers to the local function-pointer variables), so it
-// is warning-free and portable across the platforms R supports.
-template <typename Fn> DL_FUNC cpp4r_to_dl_func(Fn fn) {
-  static_assert(sizeof(DL_FUNC) == sizeof(Fn), "function pointer size mismatch");
-  DL_FUNC out;
-  std::memcpy(&out, &fn, sizeof(out));
-  return out;
-}
-} // namespace
 
 // 05-logical-functions.h
 bool any_cpp(logicals x);
@@ -79,17 +61,25 @@ extern "C" SEXP _cpp4rvignettes_cumprod_cpp(SEXP x) {
     return cpp4r::as_sexp(cumprod_cpp(cpp4r::as_cpp<cpp4r::decay_t<doubles>>(x)));
   END_CPP4R
 }
+// 06-rolling-functions.h
+doubles range_cpp(doubles x);
+extern "C" SEXP _cpp4rvignettes_range_cpp(SEXP x) {
+  BEGIN_CPP4R
+    return cpp4r::as_sexp(range_cpp(cpp4r::as_cpp<cpp4r::decay_t<doubles>>(x)));
+  END_CPP4R
+}
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
-    {"_cpp4rvignettes_any_cpp", cpp4r_to_dl_func(&_cpp4rvignettes_any_cpp), 1},
-    {"_cpp4rvignettes_which_cpp", cpp4r_to_dl_func(&_cpp4rvignettes_which_cpp), 1},
-    {"_cpp4rvignettes_all_cpp_1", cpp4r_to_dl_func(&_cpp4rvignettes_all_cpp_1), 1},
-    {"_cpp4rvignettes_all_cpp_2", cpp4r_to_dl_func(&_cpp4rvignettes_all_cpp_2), 1},
-    {"_cpp4rvignettes_all_cpp_3", cpp4r_to_dl_func(&_cpp4rvignettes_all_cpp_3), 1},
-    {"_cpp4rvignettes_all_cpp_4", cpp4r_to_dl_func(&_cpp4rvignettes_all_cpp_4), 1},
-    {"_cpp4rvignettes_cumsum_cpp", cpp4r_to_dl_func(&_cpp4rvignettes_cumsum_cpp), 1},
-    {"_cpp4rvignettes_cumprod_cpp", cpp4r_to_dl_func(&_cpp4rvignettes_cumprod_cpp), 1},
+    {"_cpp4rvignettes_any_cpp", (DL_FUNC) &_cpp4rvignettes_any_cpp, 1},
+    {"_cpp4rvignettes_which_cpp", (DL_FUNC) &_cpp4rvignettes_which_cpp, 1},
+    {"_cpp4rvignettes_all_cpp_1", (DL_FUNC) &_cpp4rvignettes_all_cpp_1, 1},
+    {"_cpp4rvignettes_all_cpp_2", (DL_FUNC) &_cpp4rvignettes_all_cpp_2, 1},
+    {"_cpp4rvignettes_all_cpp_3", (DL_FUNC) &_cpp4rvignettes_all_cpp_3, 1},
+    {"_cpp4rvignettes_all_cpp_4", (DL_FUNC) &_cpp4rvignettes_all_cpp_4, 1},
+    {"_cpp4rvignettes_cumsum_cpp", (DL_FUNC) &_cpp4rvignettes_cumsum_cpp, 1},
+    {"_cpp4rvignettes_cumprod_cpp", (DL_FUNC) &_cpp4rvignettes_cumprod_cpp, 1},
+    {"_cpp4rvignettes_range_cpp", (DL_FUNC) &_cpp4rvignettes_range_cpp, 1},
     {NULL, NULL, 0}
 };
 }

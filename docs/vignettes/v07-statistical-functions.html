@@ -87,25 +87,8 @@ double sum_cpp(doubles x) {
   }
   total
 }</code></pre>
-<p>Document the functions and update the package as in the previous
-vignettes.</p>
-<p>To test the functions, you can run the following benchmark code in
-the R console:</p>
-<pre class="r"><code># install.packages("bench")
-library(bench)
-
-set.seed(123) # for reproducibility
-x &lt;- runif(1e3) # 1,000,000 elements
-
-sum(x)
-sum_cpp(x)
-sum_r(x)
-
-mark(
-  sum(x),
-  sum_cpp(x),
-  sum_r(x)
-)</code></pre>
+<p>Benchmark the functions as in the “Logical Functions” and “Rolling
+Functions” vignettes.</p>
 </div>
 <div id="arithmetic-mean" class="section level2">
 <h2 id="arithmetic-mean">Arithmetic mean</h2>
@@ -130,19 +113,8 @@ double mean_cpp(doubles x) {
 <pre class="r"><code>mean_r &lt;- function(x) {
   sum_r(x) / length(x)
 }</code></pre>
-<p>Document the functions and update the package as in the previous
-vignettes.</p>
-<p>To test the functions, you can run the following benchmark code in
-the R console:</p>
-<pre class="r"><code>mean(x)
-mean_cpp(x)
-mean_r(x)
-
-mark(
-  mean(x),
-  mean_cpp(x),
-  mean_r(x)
-)</code></pre>
+<p>Benchmark the functions as in the “Logical Functions” and “Rolling
+Functions” vignettes.</p>
 </div>
 <div id="variance" class="section level2">
 <h2 id="variance">Variance</h2>
@@ -169,19 +141,8 @@ double var_cpp(doubles x) {
 <pre class="r"><code>var_r &lt;- function(x) {
   mean_r((x - mean_r(x))^2)
 }</code></pre>
-<p>Document the functions and update the package as in the previous
-vignettes.</p>
-<p>To test the functions, you can run the following benchmark code in
-the R console:</p>
-<pre class="r"><code>var(x)
-var_cpp(x)
-var_r(x)
-
-mark(
-  var(x),
-  var_cpp(x),
-  var_r(x)
-)</code></pre>
+<p>Benchmark the functions as in the “Logical Functions” and “Rolling
+Functions” vignettes.</p>
 </div>
 <div id="root-mean-square-error-rmse" class="section level2">
 <h2 id="root-mean-square-error-rmse">Root Mean Square Error (RMSE)</h2>
@@ -211,27 +172,8 @@ double rmse_cpp(doubles x, double x0) {
 rmse_r &lt;- function(x, x0) {
   sqrt(sum((x - x0)^2) / length(x))
 }</code></pre>
-<p>Document the functions and update the package as in the previous
-vignettes.</p>
-<p>To test the functions, you can run the following benchmark code in
-the R console:</p>
-<pre class="r"><code># create a list with 100 normal distributions with mean 0 and 1 million elements
-set.seed(123)
-x &lt;- list()
-for (i in 1:1e3) {
-  x[[i]] &lt;- rnorm(1e3)
-}
-
-# compute the mean of each distribution
-x &lt;- sapply(x, mean)
-
-rmse_cpp(x, 0)
-rmse_r(x, 0)
-
-mark(
-  rmse_cpp(x, 0),
-  rmse_r(x, 0)
-)</code></pre>
+<p>Benchmark the functions as in the “Logical Functions” and “Rolling
+Functions” vignettes.</p>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2 id="references" class="unnumbered">References</h2>

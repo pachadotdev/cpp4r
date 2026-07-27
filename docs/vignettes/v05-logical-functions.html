@@ -58,6 +58,8 @@ for handling <code>NA</code> values are covered in a separate
 vignette.</li>
 <li>R already provides efficient versions of the functions covered here.
 This is just to illustrate how to use C++ code.</li>
+<li>The benchmarks show that some of these C++ implementations are
+slower than base R.</li>
 </ul></div>
 <div id="is-any-value-in-a-vector-true" class="section level2">
 <h2 id="is-any-value-in-a-vector-true">Is any value in a vector ‘true’?</h2>
@@ -89,8 +91,9 @@ bool any_cpp(logicals x) {
 }</code></pre>
 <p>Add and document the functions, update the package as in the previous
 vignettes, and then compare the functions speed with:</p>
-<pre class="r"><code># install.packages("bench")
-library(bench)
+<pre class="r"><code># install.packages("microbenchmark")
+library(microbenchmark)
+library(mypkg)
 
 set.seed(123) # for reproducibility
 x &lt;- rpois(1e6, lambda = 2) # 1,000,000 elements
@@ -100,11 +103,16 @@ any(y)
 any_cpp(y)
 any_r(y)
 
-mark(
+microbenchmark(
   any(y),
   any_cpp(y),
   any_r(y)
 )</code></pre>
+<pre class="r"><code>Unit: nanoseconds
+       expr min  lq mean median  uq   max neval cld
+     any(y) 212 232  294    245 257  4320   100   a
+ any_cpp(y) 810 833 1090    859 887 22900   100   a
+   any_r(y) 746 822 1510    867 912 63300   100   a</code></pre>
 </div>
 <div id="which-elements-in-a-vector-are-true" class="section level2">
 <h2 id="which-elements-in-a-vector-are-true">Which elements in a vector are ‘true’?</h2>
@@ -155,11 +163,16 @@ the R console:</p>
 which_cpp(y[1:100])
 which_r(y[1:100])
 
-mark(
+microbenchmark(
   which(y[1:1000]),
   which_cpp(y[1:1000]),
   which_r(y[1:1000])
 )</code></pre>
+<pre class="r"><code>Unit: microseconds
+                 expr    min     lq   mean median     uq   max neval cld
+     which(y[1:1000])   6.30   7.08   8.27   7.75   8.86  20.2   100  a
+ which_cpp(y[1:1000])   8.52   9.93  11.90  10.90  12.00  72.1   100  a
+   which_r(y[1:1000]) 302.00 323.00 348.00 345.00 361.00 439.0   100  b</code></pre>
 </div>
 <div id="are-all-values-in-a-vector-true" class="section level2">
 <h2 id="are-all-values-in-a-vector-true">Are all values in a vector ‘true’?</h2>
@@ -218,13 +231,20 @@ all_cpp_1(x &gt;= 0)
 all_cpp_2(x &gt;= 0)
 all_cpp_3(x &gt;= 0)
 all_cpp_4(x &gt;= 0)</code></pre>
-<pre class="r"><code>mark(
+<pre class="r"><code>microbenchmark(
   all(x &gt; 2),
   all_cpp_1(x &gt; 2),
   all_cpp_2(x &gt; 2),
   all_cpp_3(x &gt; 2),
   all_cpp_4(x &gt; 2)
 )</code></pre>
+<pre class="r"><code>Unit: milliseconds
+             expr  min   lq mean median   uq  max neval cld
+       all(x &gt; 2) 2.20 3.08 3.29   3.18 3.33 5.70   100   a
+ all_cpp_1(x &gt; 2) 2.24 3.14 3.38   3.23 3.35 5.57   100   a
+ all_cpp_2(x &gt; 2) 2.33 3.09 3.28   3.20 3.35 5.79   100   a
+ all_cpp_3(x &gt; 2) 2.22 3.13 3.41   3.25 3.39 5.91   100   a
+ all_cpp_4(x &gt; 2) 2.33 3.13 3.37   3.23 3.40 5.72   100   a</code></pre>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 id="references" class="unnumbered">References</h1>

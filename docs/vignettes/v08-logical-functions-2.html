@@ -83,20 +83,8 @@ bool any2_cpp(logicals x, bool na_rm = false) {
 
   return false;
 }</code></pre>
-<p>To test the functions, you can run the following benchmark code in
-the R console:</p>
-<pre class="r"><code>set.seed(123) # for reproducibility
-x &lt;- rpois(1e6, lambda = 2) # 1,000,000 elements
-y &lt;- ifelse(x &gt; 2, TRUE, FALSE)
-
-any(c(TRUE, NA, FALSE))
-any2_cpp(c(TRUE, NA, FALSE))
-any2_cpp(c(TRUE, NA, FALSE), na_rm = TRUE)
-
-mark(
-  any(y),
-  any2_cpp(y)
-)</code></pre>
+<p>Benchmark the functions as in the “Logical Functions” and “Rolling
+Functions” vignettes.</p>
 </div>
 <div id="which-elements-in-a-vector-are-true" class="section level2">
 <h2 id="which-elements-in-a-vector-are-true">Which elements in a vector are ‘true’?</h2>
@@ -126,16 +114,8 @@ integers which2_cpp(logicals x, bool na_rm = false) {
     return res;
   }
 }</code></pre>
-<p>To test the functions, you can run the following benchmark code in
-the R console:</p>
-<pre class="r"><code>which(c(TRUE, NA, FALSE, TRUE))
-which2_cpp(c(TRUE, NA, FALSE, TRUE))
-which2_cpp(c(TRUE, NA, FALSE, TRUE), na_rm = TRUE)
-
-mark(
-  which(y[1:1000]),
-  which2_cpp(y[1:1000])
-)</code></pre>
+<p>Benchmark the functions as in the “Logical Functions” and “Rolling
+Functions” vignettes.</p>
 </div>
 <div id="are-all-values-in-a-vector-true" class="section level2">
 <h2 id="are-all-values-in-a-vector-true">Are all values in a vector ‘true’?</h2>
@@ -208,30 +188,8 @@ bool all2_cpp_3(logicals x, bool na_rm = false) {
 
   return true;
 }</code></pre>
-<p>To test the functions, you can run the following tests and benchmark
-code in the R console:</p>
-<pre class="r"><code>set.seed(123) # for reproducibility
-x &lt;- rpois(1e6, lambda = 2) # 1,000,000 elements
-
-all(c(TRUE, NA, TRUE))
-all2_cpp_1(c(TRUE, NA, TRUE))
-all2_cpp_1(c(TRUE, NA, TRUE), na_rm = TRUE)
-
-all(c(FALSE, NA, TRUE))
-all2_cpp_1(c(FALSE, NA, TRUE))
-all2_cpp_1(c(FALSE, NA, TRUE), na_rm = TRUE)
-
-# also test the TRUE-only case
-all(x &gt;= 0)
-all2_cpp_1(x &gt;= 0)
-all2_cpp_2(x &gt;= 0)
-all2_cpp_3(x &gt;= 0)</code></pre>
-<pre class="r"><code>mark(
-  all(x &gt; 2),
-  all2_cpp_1(x &gt; 2),
-  all2_cpp_2(x &gt; 2),
-  all2_cpp_3(x &gt; 2)
-)</code></pre>
+<p>Benchmark the functions as in the “Logical Functions” and “Rolling
+Functions” vignettes.</p>
 </div>
         </div>
         <footer><p id="last-updated">Loading...</p>

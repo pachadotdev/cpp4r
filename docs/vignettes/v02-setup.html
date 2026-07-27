@@ -91,16 +91,18 @@ cannot find -lc++abi: No such file or directory</code></pre>
 </div>
 <div id="r-setup" class="section level2">
 <h2 id="r-setup">R Setup</h2>
-<p>You can install the R packages <code>bench</code>,
-<code>cpp4r</code>, <code>devtools</code> and <code>usethis</code> with
-the following command:</p>
-<pre class="r"><code>install.packages(c("bench", "cpp4r", "devtools", "usethis"))</code></pre>
+<p>You can install the R packages <code>cpp4r</code>,
+<code>tinydev</code> and <code>microbenchmark</code> with the following
+command:</p>
+<pre class="r"><code>install.packages(c("cpp4r", "tinydev", "microbenchmark"))</code></pre>
 <p>To verify that R can compile C++ code, you can run
-<code>pkgbuild::check_build_tools(debug = TRUE)</code>, which will
-return an output similar to:</p>
-<pre class="r"><code>Trying to compile a simple C file
-Running /usr/lib64/R/bin/R CMD SHLIB foo.c
-using C compiler: ‘gcc (GCC) 15.2.1 20250813’</code></pre>
+<code>tinydev::check_cpp_compiler()</code>, which will return an output
+similar to:</p>
+<pre class="r"><code>using C++ compiler: ‘g++ (GCC) 16.1.1 20260430’
+g++ -std=gnu++20 -I"/usr/include/R/" -DNDEBUG   -I/usr/local/include    -fpic  -Wall -O3 -pedantic  -c check_cpp_compiler.cpp -o check_cpp_compiler.o
+g++ -std=gnu++20 -shared -L/usr/lib64/R/lib -Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-z,pack-relative-relocs -flto=auto -o check_cpp_compiler.so check_cpp_compiler.o -L/usr/lib64/R/lib -lR
+using C++ compiler: ‘g++ (GCC) 16.1.1 20260430’
+add(2, 3) = 5</code></pre>
 </div>
         </div>
         <footer><p id="last-updated">Loading...</p>

@@ -32,10 +32,6 @@ $$
 
 The following C++ function calculates the sum of a vector's elements:
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(eval = FALSE)
-```
-
 ```cpp
 [[cpp4r::register]]
 double sum_cpp(doubles x) {
@@ -60,27 +56,7 @@ sum_r <- function(x) {
 }
 ```
 
-Document the functions and update the package as in the previous vignettes.
-
-To test the functions, you can run the following benchmark code in the R console:
-
-```{r sum-test}
-# install.packages("bench")
-library(bench)
-
-set.seed(123) # for reproducibility
-x <- runif(1e3) # 1,000,000 elements
-
-sum(x)
-sum_cpp(x)
-sum_r(x)
-
-mark(
-  sum(x),
-  sum_cpp(x),
-  sum_r(x)
-)
-```
+Benchmark the functions as in the "Logical Functions" and "Rolling Functions" vignettes.
 
 ## Arithmetic mean
 
@@ -113,21 +89,7 @@ mean_r <- function(x) {
 }
 ```
 
-Document the functions and update the package as in the previous vignettes.
-
-To test the functions, you can run the following benchmark code in the R console:
-
-```{r mean-bench}
-mean(x)
-mean_cpp(x)
-mean_r(x)
-
-mark(
-  mean(x),
-  mean_cpp(x),
-  mean_r(x)
-)
-```
+Benchmark the functions as in the "Logical Functions" and "Rolling Functions" vignettes.
 
 ## Variance
 
@@ -161,21 +123,7 @@ var_r <- function(x) {
 }
 ```
 
-Document the functions and update the package as in the previous vignettes.
-
-To test the functions, you can run the following benchmark code in the R console:
-
-```{r var-bench}
-var(x)
-var_cpp(x)
-var_r(x)
-
-mark(
-  var(x),
-  var_cpp(x),
-  var_r(x)
-)
-```
+Benchmark the functions as in the "Logical Functions" and "Rolling Functions" vignettes.
 
 ## Root Mean Square Error (RMSE)
 
@@ -213,28 +161,6 @@ rmse_r <- function(x, x0) {
 }
 ```
 
-Document the functions and update the package as in the previous vignettes.
-
-To test the functions, you can run the following benchmark code in the R console:
-
-```{r functions-bench}
-# create a list with 100 normal distributions with mean 0 and 1 million elements
-set.seed(123)
-x <- list()
-for (i in 1:1e3) {
-  x[[i]] <- rnorm(1e3)
-}
-
-# compute the mean of each distribution
-x <- sapply(x, mean)
-
-rmse_cpp(x, 0)
-rmse_r(x, 0)
-
-mark(
-  rmse_cpp(x, 0),
-  rmse_r(x, 0)
-)
-```
+Benchmark the functions as in the "Logical Functions" and "Rolling Functions" vignettes.
 
 ## References

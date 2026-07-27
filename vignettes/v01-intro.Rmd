@@ -15,13 +15,6 @@ editor:
 bibliography: ["references.bib"]
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
-
 ## Motivation
 
 *For an extended review of the topics discussed in this vignette, please refer to the pre-print
