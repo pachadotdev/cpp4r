@@ -1,9 +1,13 @@
 ---
 title: "03 - Package Skeleton"
-output: rmarkdown::html_vignette
+output:
+  litedown::html_format:
+    options:
+      toc: true
+      number_sections: true
 vignette: >
   %\VignetteIndexEntry{03 - Package Skeleton}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{litedown::vignette}
   %\VignetteEncoding{UTF-8}
 editor:
   markdown:
@@ -27,25 +31,26 @@ library(tinydev)
 You can create a new package in RStudio (or VSCode) by running:
 
 ```r
-pkg_template("~/github/cpp4r/cpp4rexamples")
+pkg_template("~/mypkg")
 ```
 
-This command will create a new folder containing the `cpp4rexamples` package. Afterward, you can run `use_cpp4r()` to add the necessary code to the package.
+This command will create a new folder containing the `mypkg` package.
 
 ## Print a Number
 
-The `pkg_template()` function automatically creates `./cpp4rexamples/R/cpp4rexamples-package.R` with the following content:
+The `pkg_template()` function automatically creates `./mypkg/R/mypkg-package.R` with the following content:
 
 ```r
-#' @useDynLib cpp4rexamples, .registration = TRUE
-#' @keywords internal
+#' @title Package Title
+#' @description Some description. CRAN asks for at least one paragraph with two full sentences. Like this.
+#' @useDynLib mypkg, .registration = TRUE
 "_PACKAGE"
 ```
 
-It also creates `./cpp4rexamples/src/main.cpp`. The rest of `src/` aims to provide an organization to keep the code
+It also creates `./mypkg/src/main.cpp`. The rest of `src/` aims to provide an organization to keep the code
 organized into different files according to their purpose.
 
-Give a look at `./cpp4rexamples/src/01_plus_one.h`, which contains the following C++ code:
+Give a look at `./mypkg/src/01_plus_one.h`, which contains the following C++ code:
 
 ```cpp
 /* roxygen
@@ -199,7 +204,7 @@ tinydev::pkg_document(".")
 tinydev::pkg_install(".")
 ```
 
-Afterward, you can access the functions by loading the package with `library(cpp4rexamples)`.
+Afterward, you can access the functions by loading the package with `library(mypkg)`.
 
 Each time you need to make changes to the C++ code, you can run `load_all()` again to test and then reinstall the package.
 

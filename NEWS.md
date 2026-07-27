@@ -1,3 +1,10 @@
+# cpp4r 1.2.0
+
+* Reduced second order dependencies. I dropped all suggested packages that install a long list
+  of non-essential dependencies, including 'rmarkdown'. For simple vignettes, I do not need
+  that 'rmarkdown' installs 'sass', 'bslib' and other packages to work with extended 'CSS' and
+  other web technologies.
+
 # cpp4r 1.1.0
 
 * Slight changes to internal constructors ('SEXP' and function) to follow the same style as

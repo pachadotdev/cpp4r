@@ -12,14 +12,16 @@ Description: Provides a header only, 'C++' interface to 'R' with enhancements
     bidirectional copy of complex number types, flexibility in type
     conversions, use of nullable pointers, and various performance
     optimizations.
-Version: 1.1.0
-Authors@R: c( person("Mauricio", "Vargas Sepulveda", ,
+Version: 1.2.0
+Authors@R: c(person("Mauricio", "Vargas Sepulveda", ,
     "m.vargas.sepulveda@gmail.com", role = c("aut", "cre"), comment = c(ORCID =
     "0000-0003-1017-7574")), person(, "Posit Software, PBC", role = "aut",
-    comment = "Original cpp11 package") )
-Suggests: tinytest
+    comment = "Original cpp11 package"))
 License: Apache License (>= 2)
 URL: https://cpp4r.org, https://github.com/pachadotdev/cpp4r
 BugReports: https://github.com/pachadotdev/cpp4r/issues
 Depends: R (>= 4.0.0)
+Suggests: tinytest, litedown
 Encoding: UTF-8
+VignetteBuilder: litedown
+ 

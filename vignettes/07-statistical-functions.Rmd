@@ -1,9 +1,13 @@
 ---
 title: "07 - Statistical Functions"
-output: rmarkdown::html_vignette
+output:
+  litedown::html_format:
+    options:
+      toc: true
+      number_sections: true
 vignette: >
   %\VignetteIndexEntry{07 - Statistical Functions}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{litedown::vignette}
   %\VignetteEncoding{UTF-8}
 editor:
   markdown:

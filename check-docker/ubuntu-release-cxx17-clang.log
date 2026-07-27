@@ -172,7 +172,7 @@ Get:89 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12t6
 Get:90 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 libomp-18-dev amd64 1:18.1.3-1ubuntu1 [968 kB]
 Get:91 http://archive.ubuntu.com/ubuntu noble/universe amd64 libomp-dev amd64 1:18.0-59~exp2 [5,366 B]
 debconf: delaying package configuration, since apt-utils is not installed
-Fetched 81.4 MB in 9s (8,904 kB/s)
+Fetched 81.4 MB in 23s (3,546 kB/s)
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 19926 files and directories currently installed.)
 Preparing to unpack .../dpkg_1.22.6ubuntu6.6_amd64.deb ...
 Unpacking dpkg (1.22.6ubuntu6.6) over (1.22.6ubuntu6.5) ...
@@ -535,12 +535,396 @@ Setting up libwww-perl (6.76-1ubuntu0.1) ...
 Setting up devscripts (2.23.7ubuntu0.2) ...
 Setting up liblwp-protocol-https-perl (6.13-1) ...
 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
-Installing declared dependencies: tinytest
-trying URL 'https://cloud.r-project.org/src/contrib/tinytest_1.4.3.tar.gz'
-Content type 'application/x-gzip' length 595901 bytes (581 KB)
-==================================================
-downloaded 581 KB
+Installing declared dependencies: tinytest, knitr, rmarkdown
+also installing the dependencies ‘cli’, ‘fs’, ‘R6’, ‘rappdirs’, ‘base64enc’, ‘cachem’, ‘fastmap’, ‘lifecycle’, ‘memoise’, ‘mime’, ‘rlang’, ‘sass’, ‘digest’, ‘evaluate’, ‘highr’, ‘xfun’, ‘yaml’, ‘bslib’, ‘fontawesome’, ‘htmltools’, ‘jquerylib’, ‘jsonlite’, ‘tinytex’
 
+trying URL 'https://cloud.r-project.org/src/contrib/cli_3.6.6.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/fs_2.1.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/R6_2.6.1.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/rappdirs_0.3.4.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/base64enc_0.1-6.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/cachem_1.1.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/fastmap_1.2.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/lifecycle_1.0.5.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/memoise_2.0.1.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/mime_0.13.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/rlang_1.3.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/sass_0.4.10.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/digest_0.6.39.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/evaluate_1.0.5.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/highr_0.12.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/xfun_0.60.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/yaml_2.3.12.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/bslib_0.11.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/fontawesome_0.5.3.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/htmltools_0.5.9.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/jquerylib_0.1.4.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/jsonlite_2.0.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/tinytex_0.60.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/tinytest_1.4.3.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/knitr_1.51.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/rmarkdown_2.31.tar.gz'
+* installing *source* package ‘cli’ ...
+** this is package ‘cli’ version ‘3.6.6’
+** package ‘cli’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c ansi.c -o ansi.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cleancall.c -o cleancall.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c diff.c -o diff.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c errors.c -o errors.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c glue.c -o glue.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c init.c -o init.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c inst.c -o inst.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c keypress-unix.c -o keypress-unix.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c keypress-win.c -o keypress-win.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c keypress.c -o keypress.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c md5.c -o md5.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c progress-altrep.c -o progress-altrep.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c progress.c -o progress.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c sha1.c -o sha1.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c sha256.c -o sha256.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c thread.c -o thread.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c tty.c -o tty.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c utf8.c -o utf8.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c utils.c -o utils.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c vt.c -o vt.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c vtparse.c -o vtparse.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c vtparse_table.c -o vtparse_table.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c win-utf8.c -o win-utf8.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c winfiles.c -o winfiles.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c xxhash.c -o xxhash.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c xxhash2.c -o xxhash2.o
+gcc -std=gnu2x -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o cli.so ansi.o cleancall.o diff.o errors.o glue.o init.o inst.o keypress-unix.o keypress-win.o keypress.o md5.o progress-altrep.o progress.o sha1.o sha256.o thread.o tty.o utf8.o utils.o vt.o vtparse.o vtparse_table.o win-utf8.o winfiles.o xxhash.o xxhash2.o -lpthread -L/opt/R/4.6.0/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-cli/00new/cli/libs
+** R
+** exec
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cli)
+* installing *source* package ‘fs’ ...
+** this is package ‘fs’ version ‘2.1.0’
+** package ‘fs’ successfully unpacked and MD5 sums checked
+** using staged installation
+Package libuv was not found in the pkg-config search path.
+Perhaps you should add the directory containing `libuv.pc'
+to the PKG_CONFIG_PATH environment variable
+Package 'libuv', required by 'virtual:world', not found
+Using PKG_CFLAGS=
+Using PKG_LIBS=-luv
+--------------------------- [CONFIGURE] --------------------------------
+Configuration failed because libuv was not found. Try installing:
+ * deb: libuv1-dev (Debian, Ubuntu, etc)
+ * rpm: libuv-devel (Fedora, EPEL)
+ * brew: libuv (OSX)
+Alternatively set environment variable USE_BUNDLED_LIBUV=1 to build a static
+version of libuv that is included with this package.
+-------------------------- [ERROR MESSAGE] ---------------------------
+<stdin>:1:10: fatal error: uv.h: No such file or directory
+compilation terminated.
+--------------------------------------------------------------------
+ERROR: configuration failed for package ‘fs’
+* removing ‘/cache/R_libs/fs’
+* installing *source* package ‘R6’ ...
+** this is package ‘R6’ version ‘2.6.1’
+** package ‘R6’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (R6)
+* installing *source* package ‘rappdirs’ ...
+** this is package ‘rappdirs’ version ‘0.3.4’
+** package ‘rappdirs’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c win-path.c -o win-path.o
+gcc -std=gnu2x -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o rappdirs.so init.o win-path.o -L/opt/R/4.6.0/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-rappdirs/00new/rappdirs/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (rappdirs)
+* installing *source* package ‘base64enc’ ...
+** this is package ‘base64enc’ version ‘0.1-6’
+** package ‘base64enc’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c base64.c -o base64.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c dummy.c -o dummy.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c uriencode.c -o uriencode.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c utf8.c -o utf8.o
+gcc -std=gnu2x -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o base64enc.so base64.o dummy.o uriencode.o utf8.o -L/opt/R/4.6.0/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-base64enc/00new/base64enc/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (base64enc)
+* installing *source* package ‘fastmap’ ...
+** this is package ‘fastmap’ version ‘1.2.0’
+** package ‘fastmap’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+using C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+g++ -std=gnu++20 -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Ilib/  -I/usr/local/include   -DR_NO_REMAP -fpic  -g -O2   -c fastmap.cpp -o fastmap.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Ilib/  -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
+g++ -std=gnu++20 -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o fastmap.so fastmap.o init.o -L/opt/R/4.6.0/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-fastmap/00new/fastmap/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (fastmap)
+* installing *source* package ‘mime’ ...
+** this is package ‘mime’ version ‘0.13’
+** package ‘mime’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c rawmatch.c -o rawmatch.o
+gcc -std=gnu2x -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o mime.so init.o rawmatch.o -L/opt/R/4.6.0/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-mime/00new/mime/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (mime)
+* installing *source* package ‘rlang’ ...
+** this is package ‘rlang’ version ‘1.3.0’
+** package ‘rlang’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c capture.c -o capture.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c internal.c -o internal.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c rlang.c -o rlang.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c version.c -o version.o
+gcc -std=gnu2x -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o rlang.so capture.o internal.o rlang.o version.o -L/opt/R/4.6.0/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-rlang/00new/rlang/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (rlang)
+* installing *source* package ‘digest’ ...
+** this is package ‘digest’ version ‘0.6.39’
+** package ‘digest’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+using C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+g++ -std=gnu++20 -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2   -c SpookyV2.cpp -o SpookyV2.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c aes.c -o aes.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c blake3.c -o blake3.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c blake3_dispatch.c -o blake3_dispatch.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c blake3_portable.c -o blake3_portable.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c crc32.c -o crc32.o
+g++ -std=gnu++20 -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2   -c crc32c.cpp -o crc32c.o
+g++ -std=gnu++20 -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2   -c crc32c_portable.cpp -o crc32c_portable.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c digest.c -o digest.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c digest2int.c -o digest2int.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c md5.c -o md5.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c pmurhash.c -o pmurhash.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c raes.c -o raes.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c sha1.c -o sha1.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c sha2.c -o sha2.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c sha256.c -o sha256.o
+g++ -std=gnu++20 -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2   -c spooky_serialize.cpp -o spooky_serialize.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c xxhash.c -o xxhash.o
+g++ -std=gnu++20 -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o digest.so SpookyV2.o aes.o blake3.o blake3_dispatch.o blake3_portable.o crc32.o crc32c.o crc32c_portable.o digest.o digest2int.o init.o md5.o pmurhash.o raes.o sha1.o sha2.o sha256.o spooky_serialize.o xxhash.o -L/opt/R/4.6.0/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-digest/00new/digest/libs
+** R
+** demo
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (digest)
+* installing *source* package ‘evaluate’ ...
+** this is package ‘evaluate’ version ‘1.0.5’
+** package ‘evaluate’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (evaluate)
+* installing *source* package ‘xfun’ ...
+** this is package ‘xfun’ version ‘0.60’
+** package ‘xfun’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c base64.c -o base64.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c rand_lcg.c -o rand_lcg.o
+gcc -std=gnu2x -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o xfun.so base64.o init.o rand_lcg.o -L/opt/R/4.6.0/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-xfun/00new/xfun/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (xfun)
+* installing *source* package ‘yaml’ ...
+** this is package ‘yaml’ version ‘2.3.12’
+** package ‘yaml’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c api.c -o api.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c dumper.c -o dumper.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c emitter.c -o emitter.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c implicit.c -o implicit.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c loader.c -o loader.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c parser.c -o parser.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c r_emit.c -o r_emit.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c r_ext.c -o r_ext.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c r_parse.c -o r_parse.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c reader.c -o reader.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c scanner.c -o scanner.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c writer.c -o writer.o
+gcc -std=gnu2x -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o yaml.so api.o dumper.o emitter.o implicit.o loader.o parser.o r_emit.o r_ext.o r_parse.o reader.o scanner.o writer.o -L/opt/R/4.6.0/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-yaml/00new/yaml/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (yaml)
+* installing *source* package ‘jsonlite’ ...
+** this is package ‘jsonlite’ version ‘2.0.0’
+** package ‘jsonlite’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c base64.c -o base64.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c collapse_array.c -o collapse_array.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c collapse_object.c -o collapse_object.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c collapse_pretty.c -o collapse_pretty.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c escape_chars.c -o escape_chars.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c integer64_to_na.c -o integer64_to_na.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c is_datelist.c -o is_datelist.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c is_recordlist.c -o is_recordlist.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c is_scalarlist.c -o is_scalarlist.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c modp_numtoa.c -o modp_numtoa.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c null_to_na.c -o null_to_na.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c num_to_char.c -o num_to_char.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c parse.c -o parse.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c prettify.c -o prettify.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c push_parser.c -o push_parser.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c r-base64.c -o r-base64.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c register.c -o register.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c row_collapse.c -o row_collapse.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c transpose_list.c -o transpose_list.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c validate.c -o validate.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl.c -o yajl/yajl.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_alloc.c -o yajl/yajl_alloc.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_buf.c -o yajl/yajl_buf.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_encode.c -o yajl/yajl_encode.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_gen.c -o yajl/yajl_gen.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_lex.c -o yajl/yajl_lex.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_parser.c -o yajl/yajl_parser.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_tree.c -o yajl/yajl_tree.o
+ar rcs yajl/libstatyajl.a yajl/yajl.o yajl/yajl_alloc.o yajl/yajl_buf.o yajl/yajl_encode.o yajl/yajl_gen.o yajl/yajl_lex.o yajl/yajl_parser.o yajl/yajl_tree.o
+gcc -std=gnu2x -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o jsonlite.so base64.o collapse_array.o collapse_object.o collapse_pretty.o escape_chars.o integer64_to_na.o is_datelist.o is_recordlist.o is_scalarlist.o modp_numtoa.o null_to_na.o num_to_char.o parse.o prettify.o push_parser.o r-base64.o register.o row_collapse.o transpose_list.o validate.o -Lyajl -lstatyajl -L/opt/R/4.6.0/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-jsonlite/00new/jsonlite/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+in method for ‘asJSON’ with signature ‘"AsIs"’: no definition for class “AsIs”
+in method for ‘asJSON’ with signature ‘"ITime"’: no definition for class “ITime”
+in method for ‘asJSON’ with signature ‘"hms"’: no definition for class “hms”
+in method for ‘asJSON’ with signature ‘"json"’: no definition for class “json”
+in method for ‘asJSON’ with signature ‘"integer64"’: no definition for class “integer64”
+in method for ‘asJSON’ with signature ‘"pairlist"’: no definition for class “pairlist”
+in method for ‘asJSON’ with signature ‘"blob"’: no definition for class “blob”
+in method for ‘asJSON’ with signature ‘"scalar"’: no definition for class “scalar”
+in method for ‘asJSON’ with signature ‘"sf"’: no definition for class “sf”
+in method for ‘asJSON’ with signature ‘"sfc"’: no definition for class “sfc”
+in method for ‘asJSON’ with signature ‘"vctrs_vctr"’: no definition for class “vctrs_vctr”
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (jsonlite)
 * installing *source* package ‘tinytest’ ...
 ** this is package ‘tinytest’ version ‘1.4.3’
 ** package ‘tinytest’ successfully unpacked and MD5 sums checked
@@ -556,9 +940,185 @@ downloaded 581 KB
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
 * DONE (tinytest)
+* installing *source* package ‘cachem’ ...
+** this is package ‘cachem’ version ‘1.1.0’
+** package ‘cachem’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c cache.c -o cache.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
+gcc -std=gnu2x -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o cachem.so cache.o init.o -L/opt/R/4.6.0/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-cachem/00new/cachem/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cachem)
+* installing *source* package ‘lifecycle’ ...
+** this is package ‘lifecycle’ version ‘1.0.5’
+** package ‘lifecycle’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (lifecycle)
+* installing *source* package ‘highr’ ...
+** this is package ‘highr’ version ‘0.12’
+** package ‘highr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (highr)
+* installing *source* package ‘htmltools’ ...
+** this is package ‘htmltools’ version ‘0.5.9’
+** package ‘htmltools’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
+gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c template.c -o template.o
+gcc -std=gnu2x -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o htmltools.so init.o template.o -L/opt/R/4.6.0/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-htmltools/00new/htmltools/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (htmltools)
+* installing *source* package ‘tinytex’ ...
+** this is package ‘tinytex’ version ‘0.60’
+** package ‘tinytex’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (tinytex)
+* installing *source* package ‘memoise’ ...
+** this is package ‘memoise’ version ‘2.0.1’
+** package ‘memoise’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (memoise)
+ERROR: dependency ‘fs’ is not available for package ‘sass’
+Perhaps try a variation of:
+install.packages('fs')
+* removing ‘/cache/R_libs/sass’
+* installing *source* package ‘fontawesome’ ...
+** this is package ‘fontawesome’ version ‘0.5.3’
+** package ‘fontawesome’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (fontawesome)
+* installing *source* package ‘jquerylib’ ...
+** this is package ‘jquerylib’ version ‘0.1.4’
+** package ‘jquerylib’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (jquerylib)
+* installing *source* package ‘knitr’ ...
+** this is package ‘knitr’ version ‘1.51’
+** package ‘knitr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (knitr)
+ERROR: dependency ‘sass’ is not available for package ‘bslib’
+Perhaps try a variation of:
+install.packages('sass')
+* removing ‘/cache/R_libs/bslib’
+ERROR: dependency ‘bslib’ is not available for package ‘rmarkdown’
+Perhaps try a variation of:
+install.packages('bslib')
+* removing ‘/cache/R_libs/rmarkdown’
 
 The downloaded source packages are in
-	‘/tmp/Rtmp3J7pqy/downloaded_packages’
+	‘/tmp/RtmpYIh5xX/downloaded_packages’
+Warning messages:
+1: In install.packages(pkgs, lib = user_lib) :
+  installation of package ‘fs’ had non-zero exit status
+2: In install.packages(pkgs, lib = user_lib) :
+  installation of package ‘sass’ had non-zero exit status
+3: In install.packages(pkgs, lib = user_lib) :
+  installation of package ‘bslib’ had non-zero exit status
+4: In install.packages(pkgs, lib = user_lib) :
+  installation of package ‘rmarkdown’ had non-zero exit status
+trying URL 'https://packagemanager.posit.co/cran/__linux__/noble/latest/src/contrib/curl_7.1.0.tar.gz'
+Content type 'binary/octet-stream' length 776708 bytes (758 KB)
+==================================================
+downloaded 758 KB
+
+* installing *binary* package ‘curl’ ...
+* package ‘curl’ successfully unpacked and SHA256 sums checked
+* DONE (curl)
+
+The downloaded source packages are in
+	‘/tmp/RtmppphEwi/downloaded_packages’
 * installing *source* package ‘cpp4r’ ...
 ** this is package ‘cpp4r’ version ‘1.1.0’
 ** using staged installation
@@ -601,21 +1161,15 @@ installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
 * running under: Ubuntu 24.04.4 LTS
 * using session charset: UTF-8
-* current time: 2026-07-24 15:15:19 UTC
+* current time: 2026-07-26 19:08:37 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [4s/5s] NOTE
+* checking CRAN incoming feasibility ... [4s/7s] NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
-
-Checking URLs failed with message:
-  there is no package called ‘curl’
-
-Checking DOIs failed with message:
-  there is no package called ‘curl’
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -711,21 +1265,15 @@ installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
 * running under: Ubuntu 24.04.4 LTS
 * using session charset: UTF-8
-* current time: 2026-07-24 15:15:19 UTC
+* current time: 2026-07-26 19:08:37 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [4s/5s] NOTE
+* checking CRAN incoming feasibility ... [4s/7s] NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
-
-Checking URLs failed with message:
-  there is no package called ‘curl’
-
-Checking DOIs failed with message:
-  there is no package called ‘curl’
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK

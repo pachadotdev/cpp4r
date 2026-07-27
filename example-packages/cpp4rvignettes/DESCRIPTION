@@ -1,0 +1,17 @@
+Package: cpp4rvignettes
+Type: Package
+Title: Examples Used in the Vignettes
+Version: 0.1
+Authors@R: person("Mauricio", "Vargas Sepulveda", ,
+    "m.vargas.sepulveda@gmail.com", role = c("aut", "cre"), comment = c(ORCID =
+    "0000-0003-1017-7574"))
+Depends: R(>= 4.0.0)
+Suggests: tinytest
+Description: Covers different examples using 'R' and 'C++' code. The functions provided here
+    serve as examples and are used to run benchmarks.
+License: Apache License 2.0
+BugReports: https://github.com/pachadotdev/cpp4r/issues
+URL: https://github.com/pachadotdev/cpp4r
+Encoding: UTF-8
+NeedsCompilation: yes
+LinkingTo: cpp4r

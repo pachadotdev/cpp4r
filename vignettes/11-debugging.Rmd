@@ -1,9 +1,13 @@
 ---
 title: "11 - Debugging R Packages"
-output: rmarkdown::html_vignette
+output:
+  litedown::html_format:
+    options:
+      toc: true
+      number_sections: true
 vignette: >
   %\VignetteIndexEntry{11 - Debugging R Packages}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{litedown::vignette}
   %\VignetteEncoding{UTF-8}
 editor:
   markdown:

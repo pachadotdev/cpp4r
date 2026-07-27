@@ -109,24 +109,7 @@ register <- function(path = NULL, quiet = !is_interactive(), extension = c(".cpp
     "// clang-format off\n\n",
     extra_includes, "\n",
     '#include "cpp4r/declarations.hpp"\n',
-    "#include <R_ext/Visibility.h>\n",
-    "#include <cstring>\n\n",
-    "namespace {\n",
-    "// R_CallMethodDef requires a DL_FUNC (void (*)()), which necessarily\n",
-    "// differs from the real signature of each registered function. A direct\n",
-    "// cast between incompatible function pointer types triggers\n",
-    "// -Wcast-function-type, and CRAN's checks disallow suppressing that with\n",
-    "// compiler pragmas. Reinterpret the pointer by copying its bytes instead:\n",
-    "// this never casts between function pointer types (memcpy's arguments are\n",
-    "// ordinary object pointers to the local function-pointer variables), so it\n",
-    "// is warning-free and portable across the platforms R supports.\n",
-    "template <typename Fn> DL_FUNC cpp4r_to_dl_func(Fn fn) {\n",
-    "  static_assert(sizeof(DL_FUNC) == sizeof(Fn), \"function pointer size mismatch\");\n",
-    "  DL_FUNC out;\n",
-    "  std::memcpy(&out, &fn, sizeof(out));\n",
-    "  return out;\n",
-    "}\n",
-    "} // namespace\n\n",
+    "#include <R_ext/Visibility.h>\n\n",
     cpp_functions_definitions, "\n\n",
     'extern "C" {\n',
     paste(call_entries, collapse = "\n"), "\n",
@@ -477,7 +460,7 @@ get_call_entries <- function(path, funs, package, fun_guards = list()) {
 
   entries <- as.character(mapply(function(nm, n) {
     s <- paste0("_", package, "_", nm)
-    line <- sprintf('    {"%s", cpp4r_to_dl_func(&%s), %d},', s, s, n)
+    line <- sprintf('    {"%s", (DL_FUNC) &%s, %d},', s, s, n)
     guard <- fun_guards[[nm]]
     if (!is.null(guard)) paste0(guard, "\n", line, "\n#endif") else line
   }, funs$name, n_args, SIMPLIFY = TRUE, USE.NAMES = FALSE))

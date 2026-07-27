@@ -1,9 +1,13 @@
 ---
 title: "02 - Setup"
-output: rmarkdown::html_vignette
+output:
+  litedown::html_format:
+    options:
+      toc: true
+      number_sections: true
 vignette: >
   %\VignetteIndexEntry{02 - Setup}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{litedown::vignette}
   %\VignetteEncoding{UTF-8}
 editor:
   markdown:
@@ -68,16 +72,18 @@ cannot find -lc++abi: No such file or directory
 
 ## R Setup
 
-You can install the R packages `bench`, `cpp4r`, `devtools` and `usethis` with the following command:
+You can install the R packages `cpp4r`, `tinydev` and `microbenchmark` with the following command:
 
 ```r
-install.packages(c("bench", "cpp4r", "devtools", "usethis"))
+install.packages(c("cpp4r", "tinydev", "microbenchmark"))
 ```
 
-To verify that R can compile C++ code, you can run `pkgbuild::check_build_tools(debug = TRUE)`, which will return an output similar to:
+To verify that R can compile C++ code, you can run `tinydev::check_cpp_compiler()`, which will return an output similar to:
 
 ```r
-Trying to compile a simple C file
-Running /usr/lib64/R/bin/R CMD SHLIB foo.c
-using C compiler: ‘gcc (GCC) 15.2.1 20250813’
+using C++ compiler: ‘g++ (GCC) 16.1.1 20260430’
+g++ -std=gnu++20 -I"/usr/include/R/" -DNDEBUG   -I/usr/local/include    -fpic  -Wall -O3 -pedantic  -c check_cpp_compiler.cpp -o check_cpp_compiler.o
+g++ -std=gnu++20 -shared -L/usr/lib64/R/lib -Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-z,pack-relative-relocs -flto=auto -o check_cpp_compiler.so check_cpp_compiler.o -L/usr/lib64/R/lib -lR
+using C++ compiler: ‘g++ (GCC) 16.1.1 20260430’
+add(2, 3) = 5
 ```

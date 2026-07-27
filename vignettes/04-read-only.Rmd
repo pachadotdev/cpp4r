@@ -1,9 +1,13 @@
 ---
 title: "04 - Read-only versus Writable R Objects"
-output: rmarkdown::html_vignette
+output:
+  litedown::html_format:
+    options:
+      toc: true
+      number_sections: true
 vignette: >
   %\VignetteIndexEntry{04 - Read-only versus Writable R Objects}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{litedown::vignette}
   %\VignetteEncoding{UTF-8}
 editor:
   markdown:

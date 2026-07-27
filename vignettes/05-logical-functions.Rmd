@@ -1,9 +1,13 @@
 ---
 title: "05 - Logical Functions"
-output: rmarkdown::html_vignette
+output:
+  litedown::html_format:
+    options:
+      toc: true
+      number_sections: true
 vignette: >
   %\VignetteIndexEntry{05 - Logical Functions}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{litedown::vignette}
   %\VignetteEncoding{UTF-8}
 editor:
   markdown:
@@ -16,6 +20,7 @@ bibliography: ["references.bib"]
 * These examples were adapted from @vaughan24.
 * These functions ignore `NA` values for now. Adjustments for handling `NA` values are covered in a separate vignette.
 * R already provides efficient versions of the functions covered here. This is just to illustrate how to use C++ code.
+* The benchmarks show that some of these C++ implementations are slower than base R.
 
 ## Is any value in a vector 'true'?
 
@@ -58,9 +63,10 @@ any_r <- function(x) {
 Add and document the functions, update the package as in the previous vignettes, and
 then compare the functions speed with:
 
-```{r functions-bench2}
-# install.packages("bench")
-library(bench)
+```r
+# install.packages("microbenchmark")
+library(microbenchmark)
+library(mypkg)
 
 set.seed(123) # for reproducibility
 x <- rpois(1e6, lambda = 2) # 1,000,000 elements
@@ -70,11 +76,19 @@ any(y)
 any_cpp(y)
 any_r(y)
 
-mark(
+microbenchmark(
   any(y),
   any_cpp(y),
   any_r(y)
 )
+```
+
+```r
+Unit: nanoseconds
+       expr min  lq mean median  uq   max neval cld
+     any(y) 212 232  294    245 257  4320   100   a
+ any_cpp(y) 810 833 1090    859 887 22900   100   a
+   any_r(y) 746 822 1510    867 912 63300   100   a
 ```
 
 ## Which elements in a vector are 'true'?
@@ -128,16 +142,24 @@ which_r <- function(x) {
 
 To test the functions, you can run the following benchmark code in the R console:
 
-```{r functions-which-bench}
+```r
 which(y[1:100])
 which_cpp(y[1:100])
 which_r(y[1:100])
 
-mark(
+microbenchmark(
   which(y[1:1000]),
   which_cpp(y[1:1000]),
   which_r(y[1:1000])
 )
+```
+
+```r
+Unit: microseconds
+                 expr    min     lq   mean median     uq   max neval cld
+     which(y[1:1000])   6.30   7.08   8.27   7.75   8.86  20.2   100  a 
+ which_cpp(y[1:1000])   8.52   9.93  11.90  10.90  12.00  72.1   100  a 
+   which_r(y[1:1000]) 302.00 323.00 348.00 345.00 361.00 439.0   100  b
 ```
 
 ## Are all values in a vector 'true'?
@@ -188,7 +210,7 @@ all_cpp_4(logicals x) {
 
 To test the functions, you can run the following tests and benchmark code in the R console:
 
-```{r functions-all-correctness}
+```r
 set.seed(123) # for reproducibility
 x <- rpois(1e6, lambda = 2) # 1,000,000 elements
 
@@ -206,14 +228,24 @@ all_cpp_3(x >= 0)
 all_cpp_4(x >= 0)
 ```
 
-```{r functions-all-benchmark}
-mark(
+```r
+microbenchmark(
   all(x > 2),
   all_cpp_1(x > 2),
   all_cpp_2(x > 2),
   all_cpp_3(x > 2),
   all_cpp_4(x > 2)
 )
+```
+
+```r
+Unit: milliseconds
+             expr  min   lq mean median   uq  max neval cld
+       all(x > 2) 2.20 3.08 3.29   3.18 3.33 5.70   100   a
+ all_cpp_1(x > 2) 2.24 3.14 3.38   3.23 3.35 5.57   100   a
+ all_cpp_2(x > 2) 2.33 3.09 3.28   3.20 3.35 5.79   100   a
+ all_cpp_3(x > 2) 2.22 3.13 3.41   3.25 3.39 5.91   100   a
+ all_cpp_4(x > 2) 2.33 3.13 3.37   3.23 3.40 5.72   100   a
 ```
 
 # References

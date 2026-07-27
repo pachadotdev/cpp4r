@@ -1,10 +1,14 @@
 ---
 title: "16 - Worked Examples"
-output: rmarkdown::html_vignette
+output:
+  litedown::html_format:
+    options:
+      toc: true
+      number_sections: true
 vignette: >
   %\VignetteIndexEntry{16 - Worked Examples}
+  %\VignetteEngine{litedown::vignette}
   %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::rmarkdown}
 editor:
   markdown:
     wrap: sentence

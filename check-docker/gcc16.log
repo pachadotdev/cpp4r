@@ -1,45 +1,949 @@
 Updating and loading repositories:
- Fedora 44 - x86_64 - Updates           100% |  46.8 KiB/s |  16.7 KiB |  00m00s
- Fedora 44 openh264 (From Cisco) - x86_ 100% |   5.3 KiB/s | 986.0   B |  00m00s
- Fedora 44 - x86_64                     100% | 145.0 KiB/s |  19.4 KiB |  00m00s
+ Fedora 44 - x86_64 - Updates           100% |   7.0 KiB/s |  17.5 KiB |  00m02s
+ Fedora 44 openh264 (From Cisco) - x86_ 100% | 553.0   B/s | 986.0   B |  00m02s
+ Fedora 44 - x86_64                     100% |  21.1 KiB/s |  35.3 KiB |  00m02s
+>>> Curl error (56): Failure when receiving data from the peer for https://mirrors.fedoraproject.org/metalink?repo=fedora-44&arch=x86_64 [Recv failure: Connection reset by peer] - https://mirrors.fedoraproject.org/metalink?repo=fedora-44&arch=x86_64
 Repositories loaded.
 Package "pkgconf-pkg-config-2.5.1-1.fc44.x86_64" is already installed.
 Package "gcc-gfortran-16.1.1-1.fc44.x86_64" is already installed.
 Package "libcurl-devel-8.18.0-6.fc44.x86_64" is already installed.
 
-Package        Arch   Version          Repository      Size
-Installing:
- libuv-devel   x86_64 1:1.52.1-2.fc44  updates    195.3 KiB
- libxml2-devel x86_64 0:2.12.10-6.fc44 fedora       3.4 MiB
-Installing dependencies:
- libuv         x86_64 1:1.52.1-2.fc44  updates    593.1 KiB
- libuv-static  x86_64 1:1.52.1-2.fc44  updates      2.2 MiB
+Nothing to do.
+Installing declared dependencies: tinytest, knitr, rmarkdown
+also installing the dependencies ‘cli’, ‘fs’, ‘R6’, ‘rappdirs’, ‘base64enc’, ‘cachem’, ‘fastmap’, ‘lifecycle’, ‘memoise’, ‘mime’, ‘rlang’, ‘sass’, ‘digest’, ‘evaluate’, ‘highr’, ‘xfun’, ‘yaml’, ‘bslib’, ‘fontawesome’, ‘htmltools’, ‘jquerylib’, ‘jsonlite’, ‘tinytex’
 
-Transaction Summary:
- Installing:         4 packages
-
-Total size of inbound packages is 1 MiB. Need to download 1 MiB.
-After this operation, 6 MiB extra will be used (install 6 MiB, remove 0 B).
-[1/4] libuv-devel-1:1.52.1-2.fc44.x86_6 100% | 503.6 KiB/s |  40.8 KiB |  00m00s
-[2/4] libuv-1:1.52.1-2.fc44.x86_64      100% |   1.7 MiB/s | 274.0 KiB |  00m00s
-[3/4] libuv-static-1:1.52.1-2.fc44.x86_ 100% |   2.5 MiB/s | 508.1 KiB |  00m00s
-[4/4] libxml2-devel-0:2.12.10-6.fc44.x8 100% |   2.9 MiB/s | 523.6 KiB |  00m00s
---------------------------------------------------------------------------------
-[4/4] Total                             100% |   5.0 MiB/s |   1.3 MiB |  00m00s
-Running transaction
-[1/6] Verify package files              100% | 222.0   B/s |   4.0   B |  00m00s
-[2/6] Prepare transaction               100% |  21.0   B/s |   4.0   B |  00m00s
-[3/6] Installing libuv-1:1.52.1-2.fc44. 100% |  32.3 MiB/s | 595.9 KiB |  00m00s
-[4/6] Installing libuv-devel-1:1.52.1-2 100% |  19.4 MiB/s | 198.3 KiB |  00m00s
-[5/6] Installing libuv-static-1:1.52.1- 100% |  80.1 MiB/s |   2.2 MiB |  00m00s
-[6/6] Installing libxml2-devel-0:2.12.1 100% |   5.0 MiB/s |   3.4 MiB |  00m01s
-Complete!
-Installing declared dependencies: tinytest
+trying URL 'https://cloud.r-project.org/src/contrib/cli_3.6.6.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/fs_2.1.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/R6_2.6.1.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/rappdirs_0.3.4.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/base64enc_0.1-6.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/cachem_1.1.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/fastmap_1.2.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/lifecycle_1.0.5.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/memoise_2.0.1.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/mime_0.13.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/rlang_1.3.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/sass_0.4.10.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/digest_0.6.39.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/evaluate_1.0.5.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/highr_0.12.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/xfun_0.60.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/yaml_2.3.12.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/bslib_0.11.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/fontawesome_0.5.3.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/htmltools_0.5.9.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/jquerylib_0.1.4.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/jsonlite_2.0.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/tinytex_0.60.tar.gz'
 trying URL 'https://cloud.r-project.org/src/contrib/tinytest_1.4.3.tar.gz'
-Content type 'application/x-gzip' length 595901 bytes (581 KB)
-==================================================
-downloaded 581 KB
-
+trying URL 'https://cloud.r-project.org/src/contrib/knitr_1.51.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/rmarkdown_2.31.tar.gz'
+* installing *source* package ‘cli’ ...
+** this is package ‘cli’ version ‘3.6.6’
+** package ‘cli’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c ansi.c -o ansi.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c cleancall.c -o cleancall.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c diff.c -o diff.o
+diff.c: In function ‘clic_diff_chr’:
+diff.c:104:3: warning: ‘sn’ may be used uninitialized [-Wmaybe-uninitialized]
+  104 |   SET_VECTOR_ELT(result, 0, allocVector(INTSXP, sn));
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+diff.c:85:7: note: ‘sn’ was declared here
+   85 |   int sn;
+      |       ^~
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c errors.c -o errors.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c glue.c -o glue.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c init.c -o init.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c inst.c -o inst.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c keypress-unix.c -o keypress-unix.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c keypress-win.c -o keypress-win.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c keypress.c -o keypress.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c md5.c -o md5.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c progress-altrep.c -o progress-altrep.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c progress.c -o progress.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c sha1.c -o sha1.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c sha256.c -o sha256.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c thread.c -o thread.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c tty.c -o tty.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c utf8.c -o utf8.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c utils.c -o utils.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c vt.c -o vt.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c vtparse.c -o vtparse.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c vtparse_table.c -o vtparse_table.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c win-utf8.c -o win-utf8.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c winfiles.c -o winfiles.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c xxhash.c -o xxhash.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c xxhash2.c -o xxhash2.o
+gcc -shared -L/opt/R/devel-gcc16/lib/R/lib -L/usr/local/lib -o cli.so ansi.o cleancall.o diff.o errors.o glue.o init.o inst.o keypress-unix.o keypress-win.o keypress.o md5.o progress-altrep.o progress.o sha1.o sha256.o thread.o tty.o utf8.o utils.o vt.o vtparse.o vtparse_table.o win-utf8.o winfiles.o xxhash.o xxhash2.o -lpthread -L/opt/R/devel-gcc16/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-cli/00new/cli/libs
+** R
+** exec
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘cli’
+    finding HTML links ... done
+    ansi-styles                             html  
+    ansi_align                              html  
+    ansi_collapse                           html  
+    ansi_columns                            html  
+    ansi_grep                               html  
+    ansi_has_any                            html  
+    ansi_hide_cursor                        html  
+    ansi_html                               html  
+    ansi_html_style                         html  
+    ansi_nchar                              html  
+    ansi_nzchar                             html  
+    ansi_palettes                           html  
+    ansi_regex                              html  
+    ansi_simplify                           html  
+    ansi_string                             html  
+    ansi_strip                              html  
+    ansi_strsplit                           html  
+    ansi_strtrim                            html  
+    ansi_strwrap                            html  
+    ansi_substr                             html  
+    ansi_substring                          html  
+    ansi_toupper                            html  
+    ansi_trimws                             html  
+    boxx                                    html  
+    builtin_theme                           html  
+    cat_line                                html  
+    cli-config                              html  
+    cli-package                             html  
+    cli                                     html  
+    cli_abort                               html  
+    cli_alert                               html  
+    cli_blockquote                          html  
+    cli_bullets                             html  
+    cli_bullets_raw                         html  
+    cli_code                                html  
+    cli_debug_doc                           html  
+    cli_div                                 html  
+    cli_dl                                  html  
+    cli_end                                 html  
+    cli_fmt                                 html  
+    cli_format                              html  
+    cli_format_method                       html  
+    cli_h1                                  html  
+    cli_li                                  html  
+    cli_list_themes                         html  
+    cli_ol                                  html  
+    cli_output_connection                   html  
+    cli_par                                 html  
+    cli_process_start                       html  
+    cli_progress_along                      html  
+    cli_progress_bar                        html  
+    cli_progress_builtin_handlers           html  
+    cli_progress_demo                       html  
+    cli_progress_message                    html  
+    cli_progress_output                     html  
+    cli_progress_step                       html  
+    cli_progress_styles                     html  
+    cli_rule                                html  
+    cli_sitrep                              html  
+    cli_status                              html  
+    cli_status_clear                        html  
+    cli_status_update                       html  
+    cli_text                                html  
+    cli_ul                                  html  
+    cli_vec                                 html  
+    cli_verbatim                            html  
+    code_highlight                          html  
+    code_theme_list                         html  
+    combine_ansi_styles                     html  
+    console_width                           html  
+    containers                              html  
+    demo_spinners                           html  
+    diff_chr                                html  
+    diff_str                                html  
+    faq                                     html  
+    format_error                            html  
+    format_inline                           html  
+    get_spinner                             html  
+    has_keypress_support                    html  
+    hash_animal                             html  
+    hash_emoji                              html  
+    hash_md5                                html  
+    hash_sha1                               html  
+    hash_sha256                             html  
+    hash_xxhash                             html  
+    inline-markup                           html  
+    is_ansi_tty                             html  
+    is_dynamic_tty                          html  
+    is_utf8_output                          html  
+    keypress                                html  
+    links                                   html  
+    list_spinners                           html  
+    make_ansi_style                         html  
+    make_spinner                            html  
+    match_selector                          html  
+    match_selector_node                     html  
+    num_ansi_colors                         html  
+    parse_selector                          html  
+    pluralization-helpers                   html  
+    pluralization                           html  
+    pluralize                               html  
+    pretty_print_code                       html  
+    progress-c                              html  
+    progress-utils                          html  
+    progress-variables                      html  
+    rule                                    html  
+    ruler                                   html  
+    simple_theme                            html  
+    spark_bar                               html  
+    spark_line                              html  
+    start_app                               html  
+    style_hyperlink                         html  
+    symbol                                  html  
+    test_that_cli                           html  
+    themes                                  html  
+    tree                                    html  
+    unicode-width-workaround                html  
+    utf8_graphemes                          html  
+    utf8_nchar                              html  
+    utf8_substr                             html  
+    vt_output                               html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cli)
+* installing *source* package ‘fs’ ...
+** this is package ‘fs’ version ‘2.1.0’
+** package ‘fs’ successfully unpacked and MD5 sums checked
+** using staged installation
+Package libuv was not found in the pkg-config search path.
+Perhaps you should add the directory containing `libuv.pc'
+to the PKG_CONFIG_PATH environment variable
+Package 'libuv' not found
+Using PKG_CFLAGS=
+Using PKG_LIBS=-luv
+--------------------------- [CONFIGURE] --------------------------------
+Configuration failed because libuv was not found. Try installing:
+ * deb: libuv1-dev (Debian, Ubuntu, etc)
+ * rpm: libuv-devel (Fedora, EPEL)
+ * brew: libuv (OSX)
+Alternatively set environment variable USE_BUNDLED_LIBUV=1 to build a static
+version of libuv that is included with this package.
+-------------------------- [ERROR MESSAGE] ---------------------------
+<stdin>:1:10: fatal error: uv.h: No such file or directory
+compilation terminated.
+--------------------------------------------------------------------
+ERROR: configuration failed for package ‘fs’
+* removing ‘/cache/R_libs/fs’
+* installing *source* package ‘R6’ ...
+** this is package ‘R6’ version ‘2.6.1’
+** package ‘R6’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘R6’
+    finding HTML links ... done
+    R6-package                              html  
+    R6Class                                 html  
+    as.list.R6                              html  
+    is.R6                                   html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (R6)
+* installing *source* package ‘rappdirs’ ...
+** this is package ‘rappdirs’ version ‘0.3.4’
+** package ‘rappdirs’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c init.c -o init.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c win-path.c -o win-path.o
+gcc -shared -L/opt/R/devel-gcc16/lib/R/lib -L/usr/local/lib -o rappdirs.so init.o win-path.o -L/opt/R/devel-gcc16/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-rappdirs/00new/rappdirs/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+    finding HTML links ...  converting help for package ‘rappdirs’
+ done
+    app_dir                                 html  
+    rappdirs-package                        html  
+    site_data_dir                           html  
+    user_cache_dir                          html  
+    user_data_dir                           html  
+    user_log_dir                            html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (rappdirs)
+* installing *source* package ‘base64enc’ ...
+** this is package ‘base64enc’ version ‘0.1-6’
+** package ‘base64enc’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c base64.c -o base64.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c dummy.c -o dummy.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c uriencode.c -o uriencode.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c utf8.c -o utf8.o
+gcc -shared -L/opt/R/devel-gcc16/lib/R/lib -L/usr/local/lib -o base64enc.so base64.o dummy.o uriencode.o utf8.o -L/opt/R/devel-gcc16/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-base64enc/00new/base64enc/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘base64enc’
+    finding HTML links ... done
+    base64                                  html  
+    checkUTF8                               html  
+    dataURI                                 html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (base64enc)
+* installing *source* package ‘fastmap’ ...
+** this is package ‘fastmap’ version ‘1.2.0’
+** package ‘fastmap’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
+using C++ compiler: ‘g++ (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
+g++ -std=gnu++20 -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Ilib/  -I/usr/local/include   -DR_NO_REMAP -fpic  -g -O2 -Wall -pedantic -mtune=native -Wno-ignored-attributes -Wno-parentheses -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection   -c fastmap.cpp -o fastmap.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Ilib/  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c init.c -o init.o
+g++ -std=gnu++20 -shared -L/opt/R/devel-gcc16/lib/R/lib -L/usr/local/lib -o fastmap.so fastmap.o init.o -L/opt/R/devel-gcc16/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-fastmap/00new/fastmap/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+    finding HTML links ...  converting help for package ‘fastmap’
+ done
+    fastmap                                 html  
+    fastqueue                               html  
+    faststack                               html  
+    key_missing                             html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (fastmap)
+* installing *source* package ‘mime’ ...
+** this is package ‘mime’ version ‘0.13’
+** package ‘mime’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c init.c -o init.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c rawmatch.c -o rawmatch.o
+gcc -shared -L/opt/R/devel-gcc16/lib/R/lib -L/usr/local/lib -o mime.so init.o rawmatch.o -L/opt/R/devel-gcc16/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-mime/00new/mime/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘mime’
+    finding HTML links ... done
+    guess_type                              html  
+    mimemap                                 html  
+    parse_multipart                         html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (mime)
+* installing *source* package ‘rlang’ ...
+** this is package ‘rlang’ version ‘1.3.0’
+** package ‘rlang’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c capture.c -o capture.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c internal.c -o internal.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c rlang.c -o rlang.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c version.c -o version.o
+gcc -shared -L/opt/R/devel-gcc16/lib/R/lib -L/usr/local/lib -o rlang.so capture.o internal.o rlang.o version.o -L/opt/R/devel-gcc16/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-rlang/00new/rlang/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘rlang’
+    finding HTML links ... done
+    UQ                                      html  
+    abort                                   html  
+    are_na                                  html  
+    arg_match                               html  
+    args_data_masking                       html  
+    args_dots_empty                         html  
+    args_dots_used                          html  
+    args_error_context                      html  
+    as_box                                  html  
+    as_closure                              html  
+    as_data_mask                            html  
+    as_environment                          html  
+    as_function                             html  
+    as_label                                html  
+    as_name                                 html  
+    as_string                               html  
+    as_utf8_character                       html  
+    bare-type-predicates                    html  
+    box                                     html  
+    bytes-class                             html  
+    call2                                   html  
+    call_args                               html  
+    call_fn                                 html  
+    call_inspect                            html  
+    call_match                              html  
+    call_modify                             html  
+    call_name                               html  
+    call_standardise                        html  
+    caller_arg                              html  
+    catch_cnd                               html  
+    check_data_frame                        html  
+    check_dots_empty                        html  
+    check_dots_empty0                       html  
+    check_dots_unnamed                      html  
+    check_dots_used                         html  
+    check_exclusive                         html  
+    check_required                          html  
+    check_type_number                       html  
+    check_type_scalar                       html  
+    child_env                               html  
+    chr_unserialise_unicode                 html  
+    cnd                                     html  
+    cnd_inherits                            html  
+    cnd_message                             html  
+    cnd_muffle                              html  
+    cnd_signal                              html  
+    cnd_type                                html  
+    defusing-advanced                       html  
+    dev-notes-dots                          html  
+    done                                    html  
+    dot-data                                html  
+    dots_n                                  html  
+    dots_splice                             html  
+    dots_values                             html  
+    duplicate                               html  
+    dyn-dots                                html  
+    embrace-operator                        html  
+    empty_env                               html  
+    englue                                  html  
+    enquo                                   html  
+    entrace                                 html  
+    env                                     html  
+    env_bind                                html  
+    env_binding_are_active                  html  
+    env_binding_lock                        html  
+    env_browse                              html  
+    env_bury                                html  
+    env_cache                               html  
+    env_clone                               html  
+    env_depth                               html  
+    env_get                                 html  
+    env_has                                 html  
+    env_inherits                            html  
+    env_is_user_facing                      html  
+    env_lock                                html  
+    env_name                                html  
+    env_names                               html  
+    env_parent                              html  
+    env_poke                                html  
+    env_print                               html  
+    env_unbind                              html  
+    env_unlock                              html  
+    eval_bare                               html  
+    eval_tidy                               html  
+    exec                                    html  
+    expr                                    html  
+    expr_interp                             html  
+    expr_label                              html  
+    expr_print                              html  
+    exprs_auto_name                         html  
+    f_rhs                                   html  
+    f_text                                  html  
+    faq-options                             html  
+    ffi_standalone_types_check              html  
+    flatten                                 html  
+    fn_body                                 html  
+    fn_env                                  html  
+    fn_fmls                                 html  
+    format_error_bullets                    html  
+    format_error_call                       html  
+    friendly_type                           html  
+    get_env                                 html  
+    global_entrace                          html  
+    global_handle                           html  
+    global_prompt_install                   html  
+    glue-operators                          html  
+    has_length                              html  
+    has_name                                html  
+    hash                                    html  
+    inherits_any                            html  
+    inject                                  html  
+    injection-operator                      html  
+    interrupt                               html  
+    invoke                                  html  
+    is_call                                 html  
+    is_callable                             html  
+    is_condition                            html  
+    is_copyable                             html  
+    is_dictionaryish                        html  
+    is_empty                                html  
+    is_environment                          html  
+    is_expression                           html  
+    is_formula                              html  
+    is_function                             html  
+    is_installed                            html  
+    is_integerish                           html  
+    is_interactive                          html  
+    is_lang                                 html  
+    is_named                                html  
+    is_namespace                            html  
+    is_pairlist                             html  
+    is_reference                            html  
+    is_symbol                               html  
+    is_true                                 html  
+    is_weakref                              html  
+    lang                                    html  
+    last_error                              html  
+    last_warnings                           html  
+    list2                                   html  
+    local_bindings                          html  
+    local_error_call                        html  
+    local_options                           html  
+    local_use_cli                           html  
+    missing                                 html  
+    missing_arg                             html  
+    names2                                  html  
+    names_inform_repair                     html  
+    new-vector                              html  
+    new_call                                html  
+    new_formula                             html  
+    new_function                            html  
+    new_node                                html  
+    new_quosure                             html  
+    new_quosures                            html  
+    new_weakref                             html  
+    ns_env                                  html  
+    ns_registry_env                         html  
+    obj_address                             html  
+    on_load                                 html  
+    op-get-attr                             html  
+    op-na-default                           html  
+    op-null-continuation                    html  
+    op-null-default                         html  
+    pairlist2                               html  
+    parse_expr                              html  
+    prim_name                               html  
+    qq_show                                 html  
+    quo_expr                                html  
+    quo_label                               html  
+    quo_squash                              html  
+    quosure-tools                           html  
+    raw_deparse_str                         html  
+    rep_along                               html  
+    return_from                             html  
+    rlang-package                           html  
+    rlang_backtrace_on_error                html  
+    rlang_error                             html  
+    rlib_trace_spec                         html  
+    scalar-type-predicates                  html  
+    scoped_env                              html  
+    scoped_interactive                      html  
+    search_envs                             html  
+    seq2                                    html  
+    set_attrs                               html  
+    set_expr                                html  
+    set_names                               html  
+    splice-operator                         html  
+    splice                                  html  
+    stack-deprecated                        html  
+    stack                                   html  
+    stop_input_type                         html  
+    string                                  html  
+    switch_type                             html  
+    sym                                     html  
+    topic-condition-customisation           html  
+    topic-condition-formatting              html  
+    topic-data-mask-ambiguity               html  
+    topic-data-mask-programming             html  
+    topic-data-mask                         html  
+    topic-defuse                            html  
+    topic-double-evaluation                 html  
+    topic-embrace-constants                 html  
+    topic-embrace-non-args                  html  
+    topic-error-call                        html  
+    topic-error-chaining                    html  
+    topic-inject-out-of-context             html  
+    topic-inject                            html  
+    topic-metaprogramming                   html  
+    topic-multiple-columns                  html  
+    topic-quosure                           html  
+    trace_back                              html  
+    try_fetch                               html  
+    type-predicates                         html  
+    type_of                                 html  
+    vec_poke_n                              html  
+    vector-coercion                         html  
+    vector-construction                     html  
+    with_env                                html  
+    with_handlers                           html  
+    wref_key                                html  
+    zap                                     html  
+    zap_srcref                              html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (rlang)
+* installing *source* package ‘digest’ ...
+** this is package ‘digest’ version ‘0.6.39’
+** package ‘digest’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
+using C++ compiler: ‘g++ (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
+g++ -std=gnu++20 -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Wno-ignored-attributes -Wno-parentheses -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection   -c SpookyV2.cpp -o SpookyV2.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c aes.c -o aes.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c blake3.c -o blake3.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c blake3_dispatch.c -o blake3_dispatch.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c blake3_portable.c -o blake3_portable.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c crc32.c -o crc32.o
+g++ -std=gnu++20 -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Wno-ignored-attributes -Wno-parentheses -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection   -c crc32c.cpp -o crc32c.o
+g++ -std=gnu++20 -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Wno-ignored-attributes -Wno-parentheses -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection   -c crc32c_portable.cpp -o crc32c_portable.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c digest.c -o digest.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c digest2int.c -o digest2int.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c init.c -o init.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c md5.c -o md5.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c pmurhash.c -o pmurhash.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c raes.c -o raes.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c sha1.c -o sha1.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c sha2.c -o sha2.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c sha256.c -o sha256.o
+g++ -std=gnu++20 -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Wno-ignored-attributes -Wno-parentheses -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection   -c spooky_serialize.cpp -o spooky_serialize.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c xxhash.c -o xxhash.o
+g++ -std=gnu++20 -shared -L/opt/R/devel-gcc16/lib/R/lib -L/usr/local/lib -o digest.so SpookyV2.o aes.o blake3.o blake3_dispatch.o blake3_portable.o crc32.o crc32c.o crc32c_portable.o digest.o digest2int.o init.o md5.o pmurhash.o raes.o sha1.o sha2.o sha256.o spooky_serialize.o xxhash.o -L/opt/R/devel-gcc16/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-digest/00new/digest/libs
+** R
+** demo
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘digest’
+    finding HTML links ... done
+    AES                                     html  
+    digest                                  html  
+    digest2int                              html  
+    hmac                                    html  
+    makeRaw                                 html  
+    sha1                                    html  
+    vdigest                                 html  
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (digest)
+* installing *source* package ‘evaluate’ ...
+** this is package ‘evaluate’ version ‘1.0.5’
+** package ‘evaluate’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘evaluate’
+    finding HTML links ... done
+    create_traceback                        html  
+    evaluate-package                        html  
+    evaluate                                html  
+    flush_console                           html  
+    inject_funs                             html  
+    is.message                              html  
+    line_prompt                             html  
+    local_reproducible_output               html  
+    new_output_handler                      html  
+    parse_all                               html  
+    replay                                  html  
+    set_hooks                               html  
+    trim_intermediate_plots                 html  
+    try_capture_stack                       html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (evaluate)
+* installing *source* package ‘xfun’ ...
+** this is package ‘xfun’ version ‘0.60’
+** package ‘xfun’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c base64.c -o base64.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c init.c -o init.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c rand_lcg.c -o rand_lcg.o
+gcc -shared -L/opt/R/devel-gcc16/lib/R/lib -L/usr/local/lib -o xfun.so base64.o init.o rand_lcg.o -L/opt/R/devel-gcc16/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-xfun/00new/xfun/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+    finding HTML links ...  converting help for package ‘xfun’
+ done
+    Rscript                                 html  
+    Rscript_call                            html  
+    alnum_id                                html  
+    attr2                                   html  
+    base64_encode                           html  
+    base64_uri                              html  
+    base_pkgs                               html  
+    bg_process                              html  
+    broken_packages                         html  
+    browser_dom                             html  
+    browser_print                           html  
+    bump_version                            html  
+    cache_exec                              html  
+    cache_rds                               html  
+    crandalf_check                          html  
+    csv_options                             html  
+    decimal_dot                             html  
+    del_empty_dir                           html  
+    dir_create                              html  
+    dir_exists                              html  
+    divide_chunk                            html  
+    do_once                                 html  
+    download_cache                          html  
+    download_file                           html  
+    embed_file                              html  
+    env_option                              html  
+    existing_files                          html  
+    exit_call                               html  
+    fenced_block                            html  
+    file_ext                                html  
+    file_rename                             html  
+    file_string                             html  
+    find_globals                            html  
+    format_bytes                            html  
+    from_root                               html  
+    github_releases                         html  
+    grep_sub                                html  
+    gsub_file                               html  
+    html_tag                                html  
+    in_dir                                  html  
+    install_dir                             html  
+    install_github                          html  
+    is_R_CMD_check                          html  
+    is_abs_path                             html  
+    is_ascii                                html  
+    is_blank                                html  
+    is_sub_path                             html  
+    is_web_path                             html  
+    join_words                              html  
+    lazy_save                               html  
+    magic_path                              html  
+    mark_dirs                               html  
+    md5                                     html  
+    md_table                                html  
+    mime_type                               html  
+    msg_cat                                 html  
+    native_encode                           html  
+    new_app                                 html  
+    news2md                                 html  
+    normalize_path                          html  
+    numbers_to_words                        html  
+    optipng                                 html  
+    os                                      html  
+    parse_only                              html  
+    pkg_attach                              html  
+    pkg_bib                                 html  
+    post_release                            html  
+    proc_kill                               html  
+    process_file                            html  
+    proj_root                               html  
+    prose_index                             html  
+    protect_math                            html  
+    rand_unit                               html  
+    random_port                             html  
+    raw_string                              html  
+    read_all                                html  
+    read_bin                                html  
+    read_utf8                               html  
+    record                                  html  
+    record_print                            html  
+    relative_path                           html  
+    rename_seq                              html  
+    rest_api                                html  
+    retry                                   html  
+    rev_check                               html  
+    rstudio_type                            html  
+    same_path                               html  
+    serve_dir                               html  
+    session_info                            html  
+    set_envvar                              html  
+    shrink_images                           html  
+    split_lines                             html  
+    split_source                            html  
+    str_wrap                                html  
+    strict_list                             html  
+    strip_html                              html  
+    submit_cran                             html  
+    system3                                 html  
+    tabset                                  html  
+    taml_load                               html  
+    tinify                                  html  
+    tojson                                  html  
+    tree                                    html  
+    try_error                               html  
+    try_silent                              html  
+    upload_ftp                              html  
+    upload_imgur                            html  
+    url_accessible                          html  
+    url_destination                         html  
+    url_filename                            html  
+    valid_syntax                            html  
+    yaml_body                               html  
+    yaml_load                               html  
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (xfun)
+* installing *source* package ‘yaml’ ...
+** this is package ‘yaml’ version ‘2.3.12’
+** package ‘yaml’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c api.c -o api.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c dumper.c -o dumper.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c emitter.c -o emitter.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c implicit.c -o implicit.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c loader.c -o loader.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c parser.c -o parser.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c r_emit.c -o r_emit.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c r_ext.c -o r_ext.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c r_parse.c -o r_parse.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c reader.c -o reader.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c scanner.c -o scanner.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c writer.c -o writer.o
+gcc -shared -L/opt/R/devel-gcc16/lib/R/lib -L/usr/local/lib -o yaml.so api.o dumper.o emitter.o implicit.o loader.o parser.o r_emit.o r_ext.o r_parse.o reader.o scanner.o writer.o -L/opt/R/devel-gcc16/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-yaml/00new/yaml/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘yaml’
+    finding HTML links ... done
+    as.yaml                                 html  
+    read_yaml                               html  
+    verbatim_logical                        html  
+    write_yaml                              html  
+    yaml-package                            html  
+    yaml.load                               html  
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (yaml)
+* installing *source* package ‘jsonlite’ ...
+** this is package ‘jsonlite’ version ‘2.0.0’
+** package ‘jsonlite’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c base64.c -o base64.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c collapse_array.c -o collapse_array.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c collapse_object.c -o collapse_object.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c collapse_pretty.c -o collapse_pretty.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c escape_chars.c -o escape_chars.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c integer64_to_na.c -o integer64_to_na.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c is_datelist.c -o is_datelist.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c is_recordlist.c -o is_recordlist.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c is_scalarlist.c -o is_scalarlist.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c modp_numtoa.c -o modp_numtoa.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c null_to_na.c -o null_to_na.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c num_to_char.c -o num_to_char.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c parse.c -o parse.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c prettify.c -o prettify.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c push_parser.c -o push_parser.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c r-base64.c -o r-base64.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c register.c -o register.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c row_collapse.c -o row_collapse.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c transpose_list.c -o transpose_list.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c validate.c -o validate.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c yajl/yajl.c -o yajl/yajl.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c yajl/yajl_alloc.c -o yajl/yajl_alloc.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c yajl/yajl_buf.c -o yajl/yajl_buf.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c yajl/yajl_encode.c -o yajl/yajl_encode.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c yajl/yajl_gen.c -o yajl/yajl_gen.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c yajl/yajl_lex.c -o yajl/yajl_lex.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c yajl/yajl_parser.c -o yajl/yajl_parser.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c yajl/yajl_tree.c -o yajl/yajl_tree.o
+gcc-ar rcs yajl/libstatyajl.a yajl/yajl.o yajl/yajl_alloc.o yajl/yajl_buf.o yajl/yajl_encode.o yajl/yajl_gen.o yajl/yajl_lex.o yajl/yajl_parser.o yajl/yajl_tree.o
+gcc -shared -L/opt/R/devel-gcc16/lib/R/lib -L/usr/local/lib -o jsonlite.so base64.o collapse_array.o collapse_object.o collapse_pretty.o escape_chars.o integer64_to_na.o is_datelist.o is_recordlist.o is_scalarlist.o modp_numtoa.o null_to_na.o num_to_char.o parse.o prettify.o push_parser.o r-base64.o register.o row_collapse.o transpose_list.o validate.o -Lyajl -lstatyajl -L/opt/R/devel-gcc16/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-jsonlite/00new/jsonlite/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+in method for ‘asJSON’ with signature ‘"AsIs"’: no definition for class “AsIs”
+in method for ‘asJSON’ with signature ‘"ITime"’: no definition for class “ITime”
+in method for ‘asJSON’ with signature ‘"hms"’: no definition for class “hms”
+in method for ‘asJSON’ with signature ‘"json"’: no definition for class “json”
+in method for ‘asJSON’ with signature ‘"integer64"’: no definition for class “integer64”
+in method for ‘asJSON’ with signature ‘"pairlist"’: no definition for class “pairlist”
+in method for ‘asJSON’ with signature ‘"blob"’: no definition for class “blob”
+in method for ‘asJSON’ with signature ‘"scalar"’: no definition for class “scalar”
+in method for ‘asJSON’ with signature ‘"sf"’: no definition for class “sf”
+in method for ‘asJSON’ with signature ‘"sfc"’: no definition for class “sfc”
+in method for ‘asJSON’ with signature ‘"vctrs_vctr"’: no definition for class “vctrs_vctr”
+** help
+*** installing help indices
+  converting help for package ‘jsonlite’
+    finding HTML links ... done
+    base64                                  html  
+    flatten                                 html  
+    fromJSON                                html  
+    gzjson                                  html  
+    prettify                                html  
+    rbind_pages                             html  
+    read_json                               html  
+    serializeJSON                           html  
+    stream_in                               html  
+    unbox                                   html  
+    validate                                html  
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (jsonlite)
 * installing *source* package ‘tinytest’ ...
 ** this is package ‘tinytest’ version ‘1.4.3’
 ** package ‘tinytest’ successfully unpacked and MD5 sums checked
@@ -49,8 +953,8 @@ downloaded 581 KB
 ** byte-compile and prepare package for lazy loading
 ** help
 *** installing help indices
-    finding HTML links ...  converting help for package ‘tinytest’
- done
+  converting help for package ‘tinytest’
+    finding HTML links ... done
     at_home                                 html  
     build_install_test                      html  
     exit_file                               html  
@@ -70,16 +974,369 @@ downloaded 581 KB
     test_package                            html  
     tinytest                                html  
     tinytests                               html  
-    using                                   html  ** building package indices
-
+    using                                   html  
+** building package indices
 ** installing vignettes
 ** testing if installed package can be loaded from temporary location
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
 * DONE (tinytest)
+* installing *source* package ‘cachem’ ...
+** this is package ‘cachem’ version ‘1.1.0’
+** package ‘cachem’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c cache.c -o cache.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c init.c -o init.o
+gcc -shared -L/opt/R/devel-gcc16/lib/R/lib -L/usr/local/lib -o cachem.so cache.o init.o -L/opt/R/devel-gcc16/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-cachem/00new/cachem/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘cachem’
+    finding HTML links ... done
+    cache_disk                              html  
+    cache_layered                           html  
+    cache_mem                               html  
+    reexports                               html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cachem)
+* installing *source* package ‘lifecycle’ ...
+** this is package ‘lifecycle’ version ‘1.0.5’
+** package ‘lifecycle’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘lifecycle’
+    finding HTML links ... done
+    badge                                   html  
+    deprecate_soft                          html  
+    deprecated-signallers                   html  
+    deprecated                              html  
+    expect_deprecated                       html  
+    last_lifecycle_warnings                 html  
+    lifecycle-package                       html  
+    lifecycle_linter                        html  
+    signal_stage                            html  
+    verbosity                               html  
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (lifecycle)
+* installing *source* package ‘highr’ ...
+** this is package ‘highr’ version ‘0.12’
+** package ‘highr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘highr’
+    finding HTML links ... done
+    hi_andre                                html  
+    hilight                                 html  
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (highr)
+* installing *source* package ‘htmltools’ ...
+** this is package ‘htmltools’ version ‘0.5.9’
+** package ‘htmltools’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c init.c -o init.o
+gcc -I"/opt/R/devel-gcc16/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes  -c template.c -o template.o
+gcc -shared -L/opt/R/devel-gcc16/lib/R/lib -L/usr/local/lib -o htmltools.so init.o template.o -L/opt/R/devel-gcc16/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-htmltools/00new/htmltools/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+    finding HTML links ...  converting help for package ‘htmltools’
+ done
+    HTML                                    html  
+    as.tags                                 html  
+    bindFillRole                            html  
+    browsable                               html  
+    builder                                 html  
+    capturePlot                             html  
+    copyDependencyToDir                     html  
+    css                                     html  
+    defaultPngDevice                        html  
+    findDependencies                        html  
+    htmlDependencies                        html  
+    htmlDependency                          html  
+    htmlEscape                              html  
+    htmlPreserve                            html  
+    htmlTemplate                            html  
+    html_print                              html  
+    htmltools-package                       html  
+    include                                 html  
+    knitr_methods                           html  
+    makeDependencyRelative                  html  
+    parseCssColors                          html  
+    plotTag                                 html  
+    print.html                              html  
+    renderDependencies                      html  
+    renderDocument                          html  
+    renderTags                              html  
+    resolveDependencies                     html  
+    save_html                               html  
+    singleton                               html  
+    singleton_tools                         html  
+    subtractDependencies                    html  
+    suppressDependencies                    html  
+    tagAddRenderHook                        html  
+    tagAppendAttributes                     html  
+    tagAppendChild                          html  
+    tagFunction                             html  
+    tagList                                 html  
+    tagQuery                                html  
+    urlEncodePath                           html  
+    validateCssUnit                         html  
+    withTags                                html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (htmltools)
+* installing *source* package ‘tinytex’ ...
+** this is package ‘tinytex’ version ‘0.60’
+** package ‘tinytex’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘tinytex’
+    finding HTML links ... done
+    check_installed                         html  
+    copy_tinytex                            html  
+    install_tinytex                         html  
+    is_tinytex                              html  
+    latexmk                                 html  
+    parse_install                           html  
+    parse_packages                          html  
+    r_texmf                                 html  
+    tinytex-package                         html  
+    tl_pkgs                                 html  
+    tl_sizes                                html  
+    tlmgr                                   html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (tinytex)
+* installing *source* package ‘memoise’ ...
+** this is package ‘memoise’ version ‘2.0.1’
+** package ‘memoise’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘memoise’
+    finding HTML links ... done
+    cache_filesystem                        html  
+    cache_gcs                               html  
+    cache_memory                            html  
+    cache_s3                                html  
+    drop_cache                              html  
+    forget                                  html  
+    has_cache                               html  
+    is.memoised                             html  
+    memoise                                 html  
+    timeout                                 html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (memoise)
+ERROR: dependency ‘fs’ is not available for package ‘sass’
+Perhaps try a variation of:
+install.packages('fs')
+* removing ‘/cache/R_libs/sass’
+* installing *source* package ‘fontawesome’ ...
+** this is package ‘fontawesome’ version ‘0.5.3’
+** package ‘fontawesome’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘fontawesome’
+    finding HTML links ... done
+    fa                                      html  
+    fa_html_dependency                      html  
+    fa_i                                    html  
+    fa_metadata                             html  
+    fa_png                                  html  
+    print.fontawesome                       html  
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (fontawesome)
+* installing *source* package ‘jquerylib’ ...
+** this is package ‘jquerylib’ version ‘0.1.4’
+** package ‘jquerylib’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+    finding HTML links ...  converting help for package ‘jquerylib’
+ done
+    jquery_core                             html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (jquerylib)
+* installing *source* package ‘knitr’ ...
+** this is package ‘knitr’ version ‘1.51’
+** package ‘knitr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘knitr’
+    finding HTML links ... done
+    Sweave2knitr                            html  
+    all_labels                              html  
+    all_patterns                            html  
+    asis_output                             html  
+    cache_engines                           html  
+    chunk_hook                              html  
+    clean_cache                             html  
+    combine_words                           html  
+    convert_chunk_header                    html  
+    current_input                           html  
+    dep_auto                                html  
+    dep_prev                                html  
+    download_image                          html  
+    engine_output                           html  
+    fig_chunk                               html  
+    fig_path                                html  
+    hook_animation                          html  
+    hook_document                           html  
+    hook_plot                               html  
+    image_uri                               html  
+    imgur_upload                            html  
+    include_graphics                        html  
+    include_url                             html  
+    inline_expr                             html  
+    is_low_change                           html  
+    kable                                   html  
+    knit                                    html  
+    knit2html                               html  
+    knit2pandoc                             html  
+    knit2pdf                                html  
+    knit2wp                                 html  
+    knit_child                              html  
+    knit_code                               html  
+    knit_engines                            html  
+    knit_exit                               html  
+    knit_expand                             html  
+    knit_filter                             html  
+    knit_global                             html  
+    knit_hooks                              html  
+    knit_meta                               html  
+    knit_params                             html  
+    knit_params_yaml                        html  
+    knit_patterns                           html  
+    knit_print                              html  
+    knit_rd                                 html  
+    knit_theme                              html  
+    knit_watch                              html  
+    knitr-package                           html  
+    load_cache                              html  
+    opts_chunk                              html  
+    opts_hooks                              html  
+    opts_knit                               html  
+    opts_template                           html  
+    output_hooks                            html  
+    output_type                             html  
+    pandoc                                  html  
+    partition_chunk                         html  
+    pat_fun                                 html  
+    plot_crop                               html  
+    rand_seed                               html  
+    raw_block                               html  
+    raw_output                              html  
+    read_chunk                              html  
+    rnw2pdf                                 html  
+    rocco                                   html  
+    rst2pdf                                 html  
+    set_alias                               html  
+    set_header                              html  
+    set_parent                              html  
+    sew                                     html  
+    spin                                    html  
+    spin_child                              html  
+    stitch                                  html  
+    vignette_engines                        html  
+    wrap_rmd                                html  
+    write_bib                               html  
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (knitr)
+ERROR: dependency ‘sass’ is not available for package ‘bslib’
+Perhaps try a variation of:
+install.packages('sass')
+* removing ‘/cache/R_libs/bslib’
+ERROR: dependency ‘bslib’ is not available for package ‘rmarkdown’
+Perhaps try a variation of:
+install.packages('bslib')
+* removing ‘/cache/R_libs/rmarkdown’
 
 The downloaded source packages are in
-	‘/tmp/RtmpihtgJE/downloaded_packages’
+	‘/tmp/RtmpRqgV9B/downloaded_packages’
+Warning messages:
+1: In install.packages(pkgs, lib = user_lib) :
+  installation of package ‘fs’ had non-zero exit status
+2: In install.packages(pkgs, lib = user_lib) :
+  installation of package ‘sass’ had non-zero exit status
+3: In install.packages(pkgs, lib = user_lib) :
+  installation of package ‘bslib’ had non-zero exit status
+4: In install.packages(pkgs, lib = user_lib) :
+  installation of package ‘rmarkdown’ had non-zero exit status
+trying URL 'https://raw.githubusercontent.com/r-hub/repos/main/fedora-44/4.7/src/contrib/curl_7.1.0_b2_R4.7_x86_64-pc-linux-gnu-fedora-44.tar.gz'
+Error in download.file(urls, destfiles, "libcurl", mode = "wb", ...) : 
+  cannot open URL 'https://raw.githubusercontent.com/r-hub/repos/main/fedora-44/4.7/src/contrib/curl_7.1.0_b2_R4.7_x86_64-pc-linux-gnu-fedora-44.tar.gz'
+In addition: Warning message:
+In download.file(urls, destfiles, "libcurl", mode = "wb", ...) :
+  cannot open URL 'https://raw.githubusercontent.com/r-hub/repos/main/fedora-44/4.7/src/contrib/curl_7.1.0_b2_R4.7_x86_64-pc-linux-gnu-fedora-44.tar.gz': HTTP status was '404 Not Found'
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘curl’ failed
 * installing *source* package ‘cpp4r’ ...
 ** this is package ‘cpp4r’ version ‘1.1.0’
 ** using staged installation
@@ -246,7 +1503,7 @@ installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)
 * running under: Fedora Linux 44 (Container Image)
 * using session charset: UTF-8
-* current time: 2026-07-24 14:56:52 UTC
+* current time: 2026-07-26 20:29:22 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
@@ -263,7 +1520,7 @@ New submission
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [23s/19s] OK
+* checking whether package ‘cpp4rtest’ can be installed ... [21s/16s] OK
 * used C++ compiler: ‘g++ (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
@@ -467,7 +1724,7 @@ installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)
 * running under: Fedora Linux 44 (Container Image)
 * using session charset: UTF-8
-* current time: 2026-07-24 14:56:52 UTC
+* current time: 2026-07-26 20:29:22 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
@@ -484,7 +1741,7 @@ New submission
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [23s/19s] OK
+* checking whether package ‘cpp4rtest’ can be installed ... [21s/16s] OK
 * used C++ compiler: ‘g++ (GCC) 16.1.1 20260501 (Red Hat 16.1.1-1)’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
