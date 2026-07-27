@@ -1,946 +1,0 @@
-Reading package lists...
-Building dependency tree...
-Reading state information...
-pkg-config is already the newest version (1.8.1-2build1).
-gfortran is already the newest version (4:13.2.0-7ubuntu1).
-gfortran set to manually installed.
-The following additional packages will be installed:
-  bzip2 curl dirmngr dpkg dpkg-dev file gnupg gnupg-utils gpg gpg-agent
-  gpgconf gpgsm keyboxd libb-hooks-op-check-perl
-  libclass-method-modifiers-perl libclass-xsaccessor-perl libclone-perl
-  libcurl3t64-gnutls libcurl4t64 libdevel-callchecker-perl libdpkg-perl
-  libdynaloader-functions-perl libencode-locale-perl libfile-dirlist-perl
-  libfile-homedir-perl libfile-listing-perl libfile-touch-perl
-  libfile-which-perl libhtml-parser-perl libhtml-tagset-perl libhtml-tree-perl
-  libhttp-cookies-perl libhttp-date-perl libhttp-message-perl
-  libhttp-negotiate-perl libimport-into-perl libio-html-perl libio-pty-perl
-  libio-socket-ssl-perl libipc-run-perl libksba8 liblwp-mediatypes-perl
-  liblwp-protocol-https-perl libmagic-mgc libmagic1t64 libmodule-runtime-perl
-  libmoo-perl libnet-http-perl libnet-ssleay-perl libparams-classify-perl
-  libperl5.38t64 libpython3-stdlib libpython3.12-minimal libpython3.12-stdlib
-  librole-tiny-perl libsqlite3-0 libsub-quote-perl libtimedate-perl
-  libtry-tiny-perl liburi-perl libwww-perl libwww-robotrules-perl
-  lto-disabled-list media-types patchutils perl perl-base perl-modules-5.38
-  perl-openssl-defaults pinentry-curses python3 python3-minimal python3.12
-  python3.12-minimal wdiff
-Suggested packages:
-  adequate at autopkgtest bls-standalone bsd-mailx | mailx build-essential
-  check-all-the-things cvs-buildpackage debhelper diffoscope disorderfs
-  dose-extra duck elpa-devscripts faketime gnuplot how-can-i-help
-  libauthen-sasl-perl libdbd-pg-perl libfile-desktopentry-perl
-  libterm-size-perl libyaml-syck-perl mmdebstrap mutt piuparts
-  postgresql-client pristine-lfs quilt ratt reprotest svn-buildpackage w3m
-  debian-keyring equivs libgitlab-api-v4-perl libsoap-lite-perl pristine-tar
-  dbus-user-session libpam-systemd pinentry-gnome3 tor debsig-verify
-  parcimonie xloadimage gpg-wks-server scdaemon libcurl4-doc libidn-dev
-  libkrb5-dev libldap2-dev librtmp-dev libssh2-1-dev libssl-dev bzr
-  libdata-dump-perl libio-compress-brotli-perl libcrypt-ssleay-perl
-  libscalar-number-perl libxstring-perl libsub-name-perl libbusiness-isbn-perl
-  libregexp-ipv6-perl libauthen-ntlm-perl perl-doc libterm-readline-gnu-perl
-  | libterm-readline-perl-perl libtap-harness-archive-perl pinentry-doc
-  python3-doc python3-tk python3-venv python3.12-venv python3.12-doc
-  binfmt-support wdiff-doc
-Recommended packages:
-  dctrl-tools dput | dupload libdistro-info-perl libgit-wrapper-perl
-  libjson-perl liblist-compare-perl libstring-shellquote-perl licensecheck
-  lintian man-db python3-apt python3-debian python3-magic python3-requests
-  python3-unidiff python3-xdg strace build-essential fakeroot
-  libalgorithm-merge-perl gnupg-l10n gpg-wks-client libfile-fcntllock-perl
-  liblocale-gettext-perl libhtml-format-perl libnamespace-clean-perl
-  libdata-dump-perl libhtml-form-perl libhttp-daemon-perl libmailtools-perl
-The following NEW packages will be installed:
-  bzip2 devscripts dirmngr dpkg-dev file gnupg gnupg-utils gpg gpg-agent
-  gpgconf gpgsm keyboxd libb-hooks-op-check-perl
-  libclass-method-modifiers-perl libclass-xsaccessor-perl libclone-perl
-  libcurl4-openssl-dev libdevel-callchecker-perl libdpkg-perl
-  libdynaloader-functions-perl libencode-locale-perl libfile-dirlist-perl
-  libfile-homedir-perl libfile-listing-perl libfile-touch-perl
-  libfile-which-perl libhtml-parser-perl libhtml-tagset-perl libhtml-tree-perl
-  libhttp-cookies-perl libhttp-date-perl libhttp-message-perl
-  libhttp-negotiate-perl libimport-into-perl libio-html-perl libio-pty-perl
-  libio-socket-ssl-perl libipc-run-perl libksba8 liblwp-mediatypes-perl
-  liblwp-protocol-https-perl libmagic-mgc libmagic1t64 libmodule-runtime-perl
-  libmoo-perl libnet-http-perl libnet-ssleay-perl libparams-classify-perl
-  libpython3-stdlib libpython3.12-minimal libpython3.12-stdlib
-  librole-tiny-perl libsqlite3-0 libsub-quote-perl libtimedate-perl
-  libtry-tiny-perl liburi-perl libwww-perl libwww-robotrules-perl
-  lto-disabled-list media-types patchutils perl-openssl-defaults
-  pinentry-curses python3 python3-minimal python3.12 python3.12-minimal wdiff
-The following packages will be upgraded:
-  curl dpkg libcurl3t64-gnutls libcurl4t64 libperl5.38t64 perl perl-base
-  perl-modules-5.38
-8 upgraded, 69 newly installed, 0 to remove and 38 not upgraded.
-Need to get 26.2 MB of archives.
-After this operation, 53.3 MB of additional disk space will be used.
-Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 dpkg amd64 1.22.6ubuntu6.6 [1,282 kB]
-Get:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libperl5.38t64 amd64 5.38.2-3.2ubuntu0.3 [4,876 kB]
-Get:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 perl amd64 5.38.2-3.2ubuntu0.3 [231 kB]
-Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 perl-base amd64 5.38.2-3.2ubuntu0.3 [1,827 kB]
-Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 perl-modules-5.38 all 5.38.2-3.2ubuntu0.3 [3,110 kB]
-Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12-minimal amd64 3.12.3-1ubuntu0.15 [839 kB]
-Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3.12-minimal amd64 3.12.3-1ubuntu0.15 [2,334 kB]
-Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-minimal amd64 3.12.3-0ubuntu2.1 [27.4 kB]
-Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 media-types all 10.1.0 [27.5 kB]
-Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsqlite3-0 amd64 3.45.1-1ubuntu2.7 [701 kB]
-Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12-stdlib amd64 3.12.3-1ubuntu0.15 [2,071 kB]
-Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3.12 amd64 3.12.3-1ubuntu0.15 [651 kB]
-Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3-stdlib amd64 3.12.3-0ubuntu2.1 [10.1 kB]
-Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3 amd64 3.12.3-0ubuntu2.1 [23.0 kB]
-Get:15 http://archive.ubuntu.com/ubuntu noble/main amd64 libmagic-mgc amd64 1:5.45-3build1 [307 kB]
-Get:16 http://archive.ubuntu.com/ubuntu noble/main amd64 libmagic1t64 amd64 1:5.45-3build1 [87.2 kB]
-Get:17 http://archive.ubuntu.com/ubuntu noble/main amd64 file amd64 1:5.45-3build1 [22.0 kB]
-Get:18 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 bzip2 amd64 1.0.8-5.1build0.1 [34.5 kB]
-Get:19 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 curl amd64 8.5.0-2ubuntu10.11 [226 kB]
-Get:20 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl4t64 amd64 8.5.0-2ubuntu10.11 [342 kB]
-Get:21 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdpkg-perl all 1.22.6ubuntu6.6 [268 kB]
-Get:22 http://archive.ubuntu.com/ubuntu noble/main amd64 lto-disabled-list all 47 [12.4 kB]
-Get:23 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 dpkg-dev all 1.22.6ubuntu6.6 [1,074 kB]
-Get:24 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gpgconf amd64 2.4.4-2ubuntu17.4 [104 kB]
-Get:25 http://archive.ubuntu.com/ubuntu noble/main amd64 libksba8 amd64 1.6.6-1build1 [122 kB]
-Get:26 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 dirmngr amd64 2.4.4-2ubuntu17.4 [323 kB]
-Get:27 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gnupg-utils amd64 2.4.4-2ubuntu17.4 [109 kB]
-Get:28 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gpg amd64 2.4.4-2ubuntu17.4 [565 kB]
-Get:29 http://archive.ubuntu.com/ubuntu noble/main amd64 pinentry-curses amd64 1.2.1-3ubuntu5 [35.2 kB]
-Get:30 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gpg-agent amd64 2.4.4-2ubuntu17.4 [227 kB]
-Get:31 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gpgsm amd64 2.4.4-2ubuntu17.4 [232 kB]
-Get:32 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 keyboxd amd64 2.4.4-2ubuntu17.4 [78.3 kB]
-Get:33 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gnupg all 2.4.4-2ubuntu17.4 [359 kB]
-Get:34 http://archive.ubuntu.com/ubuntu noble/main amd64 libfile-dirlist-perl all 0.05-3 [7,286 B]
-Get:35 http://archive.ubuntu.com/ubuntu noble/main amd64 libfile-which-perl all 1.27-2 [12.5 kB]
-Get:36 http://archive.ubuntu.com/ubuntu noble/main amd64 libfile-homedir-perl all 1.006-2 [37.0 kB]
-Get:37 http://archive.ubuntu.com/ubuntu noble/main amd64 libfile-touch-perl all 0.12-2 [7,498 B]
-Get:38 http://archive.ubuntu.com/ubuntu noble/main amd64 libio-pty-perl amd64 1:1.20-1build2 [31.2 kB]
-Get:39 http://archive.ubuntu.com/ubuntu noble/main amd64 libipc-run-perl all 20231003.0-1 [92.1 kB]
-Get:40 http://archive.ubuntu.com/ubuntu noble/main amd64 libclass-method-modifiers-perl all 2.15-1 [16.1 kB]
-Get:41 http://archive.ubuntu.com/ubuntu noble/main amd64 libclass-xsaccessor-perl amd64 1.19-4build4 [33.1 kB]
-Get:42 http://archive.ubuntu.com/ubuntu noble/main amd64 libb-hooks-op-check-perl amd64 0.22-3build1 [9,518 B]
-Get:43 http://archive.ubuntu.com/ubuntu noble/main amd64 libdynaloader-functions-perl all 0.003-3 [12.1 kB]
-Get:44 http://archive.ubuntu.com/ubuntu noble/main amd64 libdevel-callchecker-perl amd64 0.008-2build3 [13.2 kB]
-Get:45 http://archive.ubuntu.com/ubuntu noble/main amd64 libparams-classify-perl amd64 0.015-2build5 [20.1 kB]
-Get:46 http://archive.ubuntu.com/ubuntu noble/main amd64 libmodule-runtime-perl all 0.016-2 [16.4 kB]
-Get:47 http://archive.ubuntu.com/ubuntu noble/main amd64 libimport-into-perl all 1.002005-2 [10.7 kB]
-Get:48 http://archive.ubuntu.com/ubuntu noble/main amd64 librole-tiny-perl all 2.002004-1 [16.3 kB]
-Get:49 http://archive.ubuntu.com/ubuntu noble/main amd64 libsub-quote-perl all 2.006008-1ubuntu1 [20.7 kB]
-Get:50 http://archive.ubuntu.com/ubuntu noble/main amd64 libmoo-perl all 2.005005-1 [47.4 kB]
-Get:51 http://archive.ubuntu.com/ubuntu noble/main amd64 libencode-locale-perl all 1.05-3 [11.6 kB]
-Get:52 http://archive.ubuntu.com/ubuntu noble/main amd64 libtimedate-perl all 2.3300-2 [34.0 kB]
-Get:53 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libhttp-date-perl all 6.06-1ubuntu0.24.04.1 [10.6 kB]
-Get:54 http://archive.ubuntu.com/ubuntu noble/main amd64 libfile-listing-perl all 6.16-1 [11.3 kB]
-Get:55 http://archive.ubuntu.com/ubuntu noble/main amd64 libhtml-tagset-perl all 3.20-6 [11.3 kB]
-Get:56 http://archive.ubuntu.com/ubuntu noble/main amd64 liburi-perl all 5.27-1 [88.0 kB]
-Get:57 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libhtml-parser-perl amd64 3.81-1ubuntu0.1 [86.0 kB]
-Get:58 http://archive.ubuntu.com/ubuntu noble/main amd64 libhtml-tree-perl all 5.07-3 [200 kB]
-Get:59 http://archive.ubuntu.com/ubuntu noble/main amd64 libclone-perl amd64 0.46-1build3 [10.7 kB]
-Get:60 http://archive.ubuntu.com/ubuntu noble/main amd64 libio-html-perl all 1.004-3 [15.9 kB]
-Get:61 http://archive.ubuntu.com/ubuntu noble/main amd64 liblwp-mediatypes-perl all 6.04-2 [20.1 kB]
-Get:62 http://archive.ubuntu.com/ubuntu noble/main amd64 libhttp-message-perl all 6.45-1ubuntu1 [78.2 kB]
-Get:63 http://archive.ubuntu.com/ubuntu noble/main amd64 libhttp-cookies-perl all 6.11-1 [18.2 kB]
-Get:64 http://archive.ubuntu.com/ubuntu noble/main amd64 libhttp-negotiate-perl all 6.01-2 [12.4 kB]
-Get:65 http://archive.ubuntu.com/ubuntu noble/main amd64 perl-openssl-defaults amd64 7build3 [6,626 B]
-Get:66 http://archive.ubuntu.com/ubuntu noble/main amd64 libnet-ssleay-perl amd64 1.94-1build4 [316 kB]
-Get:67 http://archive.ubuntu.com/ubuntu noble/main amd64 libio-socket-ssl-perl all 2.085-1 [195 kB]
-Get:68 http://archive.ubuntu.com/ubuntu noble/main amd64 libnet-http-perl all 6.23-1 [22.3 kB]
-Get:69 http://archive.ubuntu.com/ubuntu noble/main amd64 liblwp-protocol-https-perl all 6.13-1 [9,006 B]
-Get:70 http://archive.ubuntu.com/ubuntu noble/main amd64 libtry-tiny-perl all 0.31-2 [20.8 kB]
-Get:71 http://archive.ubuntu.com/ubuntu noble/main amd64 libwww-robotrules-perl all 6.02-1 [12.6 kB]
-Get:72 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libwww-perl all 6.76-1ubuntu0.1 [139 kB]
-Get:73 http://archive.ubuntu.com/ubuntu noble/main amd64 patchutils amd64 0.4.2-1build3 [77.0 kB]
-Get:74 http://archive.ubuntu.com/ubuntu noble/main amd64 wdiff amd64 1.2.2-6build1 [29.1 kB]
-Get:75 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 devscripts all 2.23.7ubuntu0.2 [1,048 kB]
-Get:76 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl3t64-gnutls amd64 8.5.0-2ubuntu10.11 [334 kB]
-Get:77 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl4-openssl-dev amd64 8.5.0-2ubuntu10.11 [446 kB]
-debconf: delaying package configuration, since apt-utils is not installed
-Fetched 26.2 MB in 6s (4,616 kB/s)
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 19926 files and directories currently installed.)
-Preparing to unpack .../dpkg_1.22.6ubuntu6.6_amd64.deb ...
-Unpacking dpkg (1.22.6ubuntu6.6) over (1.22.6ubuntu6.5) ...
-Setting up dpkg (1.22.6ubuntu6.6) ...
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 19926 files and directories currently installed.)
-Preparing to unpack .../libperl5.38t64_5.38.2-3.2ubuntu0.3_amd64.deb ...
-Unpacking libperl5.38t64:amd64 (5.38.2-3.2ubuntu0.3) over (5.38.2-3.2ubuntu0.2) ...
-Preparing to unpack .../perl_5.38.2-3.2ubuntu0.3_amd64.deb ...
-Unpacking perl (5.38.2-3.2ubuntu0.3) over (5.38.2-3.2ubuntu0.2) ...
-Preparing to unpack .../perl-base_5.38.2-3.2ubuntu0.3_amd64.deb ...
-Unpacking perl-base (5.38.2-3.2ubuntu0.3) over (5.38.2-3.2ubuntu0.2) ...
-Setting up perl-base (5.38.2-3.2ubuntu0.3) ...
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 19926 files and directories currently installed.)
-Preparing to unpack .../perl-modules-5.38_5.38.2-3.2ubuntu0.3_all.deb ...
-Unpacking perl-modules-5.38 (5.38.2-3.2ubuntu0.3) over (5.38.2-3.2ubuntu0.2) ...
-Selecting previously unselected package libpython3.12-minimal:amd64.
-Preparing to unpack .../libpython3.12-minimal_3.12.3-1ubuntu0.15_amd64.deb ...
-Unpacking libpython3.12-minimal:amd64 (3.12.3-1ubuntu0.15) ...
-Selecting previously unselected package python3.12-minimal.
-Preparing to unpack .../python3.12-minimal_3.12.3-1ubuntu0.15_amd64.deb ...
-Unpacking python3.12-minimal (3.12.3-1ubuntu0.15) ...
-Setting up libpython3.12-minimal:amd64 (3.12.3-1ubuntu0.15) ...
-Setting up python3.12-minimal (3.12.3-1ubuntu0.15) ...
-Selecting previously unselected package python3-minimal.
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20237 files and directories currently installed.)
-Preparing to unpack .../0-python3-minimal_3.12.3-0ubuntu2.1_amd64.deb ...
-Unpacking python3-minimal (3.12.3-0ubuntu2.1) ...
-Selecting previously unselected package media-types.
-Preparing to unpack .../1-media-types_10.1.0_all.deb ...
-Unpacking media-types (10.1.0) ...
-Selecting previously unselected package libsqlite3-0:amd64.
-Preparing to unpack .../2-libsqlite3-0_3.45.1-1ubuntu2.7_amd64.deb ...
-Unpacking libsqlite3-0:amd64 (3.45.1-1ubuntu2.7) ...
-Selecting previously unselected package libpython3.12-stdlib:amd64.
-Preparing to unpack .../3-libpython3.12-stdlib_3.12.3-1ubuntu0.15_amd64.deb ...
-Unpacking libpython3.12-stdlib:amd64 (3.12.3-1ubuntu0.15) ...
-Selecting previously unselected package python3.12.
-Preparing to unpack .../4-python3.12_3.12.3-1ubuntu0.15_amd64.deb ...
-Unpacking python3.12 (3.12.3-1ubuntu0.15) ...
-Selecting previously unselected package libpython3-stdlib:amd64.
-Preparing to unpack .../5-libpython3-stdlib_3.12.3-0ubuntu2.1_amd64.deb ...
-Unpacking libpython3-stdlib:amd64 (3.12.3-0ubuntu2.1) ...
-Setting up python3-minimal (3.12.3-0ubuntu2.1) ...
-Selecting previously unselected package python3.
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20677 files and directories currently installed.)
-Preparing to unpack .../00-python3_3.12.3-0ubuntu2.1_amd64.deb ...
-Unpacking python3 (3.12.3-0ubuntu2.1) ...
-Selecting previously unselected package libmagic-mgc.
-Preparing to unpack .../01-libmagic-mgc_1%3a5.45-3build1_amd64.deb ...
-Unpacking libmagic-mgc (1:5.45-3build1) ...
-Selecting previously unselected package libmagic1t64:amd64.
-Preparing to unpack .../02-libmagic1t64_1%3a5.45-3build1_amd64.deb ...
-Unpacking libmagic1t64:amd64 (1:5.45-3build1) ...
-Selecting previously unselected package file.
-Preparing to unpack .../03-file_1%3a5.45-3build1_amd64.deb ...
-Unpacking file (1:5.45-3build1) ...
-Selecting previously unselected package bzip2.
-Preparing to unpack .../04-bzip2_1.0.8-5.1build0.1_amd64.deb ...
-Unpacking bzip2 (1.0.8-5.1build0.1) ...
-Preparing to unpack .../05-curl_8.5.0-2ubuntu10.11_amd64.deb ...
-Unpacking curl (8.5.0-2ubuntu10.11) over (8.5.0-2ubuntu10.9) ...
-Preparing to unpack .../06-libcurl4t64_8.5.0-2ubuntu10.11_amd64.deb ...
-Unpacking libcurl4t64:amd64 (8.5.0-2ubuntu10.11) over (8.5.0-2ubuntu10.9) ...
-Selecting previously unselected package libdpkg-perl.
-Preparing to unpack .../07-libdpkg-perl_1.22.6ubuntu6.6_all.deb ...
-Unpacking libdpkg-perl (1.22.6ubuntu6.6) ...
-Selecting previously unselected package lto-disabled-list.
-Preparing to unpack .../08-lto-disabled-list_47_all.deb ...
-Unpacking lto-disabled-list (47) ...
-Selecting previously unselected package dpkg-dev.
-Preparing to unpack .../09-dpkg-dev_1.22.6ubuntu6.6_all.deb ...
-Unpacking dpkg-dev (1.22.6ubuntu6.6) ...
-Selecting previously unselected package gpgconf.
-Preparing to unpack .../10-gpgconf_2.4.4-2ubuntu17.4_amd64.deb ...
-Unpacking gpgconf (2.4.4-2ubuntu17.4) ...
-Selecting previously unselected package libksba8:amd64.
-Preparing to unpack .../11-libksba8_1.6.6-1build1_amd64.deb ...
-Unpacking libksba8:amd64 (1.6.6-1build1) ...
-Selecting previously unselected package dirmngr.
-Preparing to unpack .../12-dirmngr_2.4.4-2ubuntu17.4_amd64.deb ...
-Unpacking dirmngr (2.4.4-2ubuntu17.4) ...
-Selecting previously unselected package gnupg-utils.
-Preparing to unpack .../13-gnupg-utils_2.4.4-2ubuntu17.4_amd64.deb ...
-Unpacking gnupg-utils (2.4.4-2ubuntu17.4) ...
-Selecting previously unselected package gpg.
-Preparing to unpack .../14-gpg_2.4.4-2ubuntu17.4_amd64.deb ...
-Unpacking gpg (2.4.4-2ubuntu17.4) ...
-Selecting previously unselected package pinentry-curses.
-Preparing to unpack .../15-pinentry-curses_1.2.1-3ubuntu5_amd64.deb ...
-Unpacking pinentry-curses (1.2.1-3ubuntu5) ...
-Selecting previously unselected package gpg-agent.
-Preparing to unpack .../16-gpg-agent_2.4.4-2ubuntu17.4_amd64.deb ...
-Unpacking gpg-agent (2.4.4-2ubuntu17.4) ...
-Selecting previously unselected package gpgsm.
-Preparing to unpack .../17-gpgsm_2.4.4-2ubuntu17.4_amd64.deb ...
-Unpacking gpgsm (2.4.4-2ubuntu17.4) ...
-Selecting previously unselected package keyboxd.
-Preparing to unpack .../18-keyboxd_2.4.4-2ubuntu17.4_amd64.deb ...
-Unpacking keyboxd (2.4.4-2ubuntu17.4) ...
-Selecting previously unselected package gnupg.
-Preparing to unpack .../19-gnupg_2.4.4-2ubuntu17.4_all.deb ...
-Unpacking gnupg (2.4.4-2ubuntu17.4) ...
-Selecting previously unselected package libfile-dirlist-perl.
-Preparing to unpack .../20-libfile-dirlist-perl_0.05-3_all.deb ...
-Unpacking libfile-dirlist-perl (0.05-3) ...
-Selecting previously unselected package libfile-which-perl.
-Preparing to unpack .../21-libfile-which-perl_1.27-2_all.deb ...
-Unpacking libfile-which-perl (1.27-2) ...
-Selecting previously unselected package libfile-homedir-perl.
-Preparing to unpack .../22-libfile-homedir-perl_1.006-2_all.deb ...
-Unpacking libfile-homedir-perl (1.006-2) ...
-Selecting previously unselected package libfile-touch-perl.
-Preparing to unpack .../23-libfile-touch-perl_0.12-2_all.deb ...
-Unpacking libfile-touch-perl (0.12-2) ...
-Selecting previously unselected package libio-pty-perl.
-Preparing to unpack .../24-libio-pty-perl_1%3a1.20-1build2_amd64.deb ...
-Unpacking libio-pty-perl (1:1.20-1build2) ...
-Selecting previously unselected package libipc-run-perl.
-Preparing to unpack .../25-libipc-run-perl_20231003.0-1_all.deb ...
-Unpacking libipc-run-perl (20231003.0-1) ...
-Selecting previously unselected package libclass-method-modifiers-perl.
-Preparing to unpack .../26-libclass-method-modifiers-perl_2.15-1_all.deb ...
-Unpacking libclass-method-modifiers-perl (2.15-1) ...
-Selecting previously unselected package libclass-xsaccessor-perl.
-Preparing to unpack .../27-libclass-xsaccessor-perl_1.19-4build4_amd64.deb ...
-Unpacking libclass-xsaccessor-perl (1.19-4build4) ...
-Selecting previously unselected package libb-hooks-op-check-perl:amd64.
-Preparing to unpack .../28-libb-hooks-op-check-perl_0.22-3build1_amd64.deb ...
-Unpacking libb-hooks-op-check-perl:amd64 (0.22-3build1) ...
-Selecting previously unselected package libdynaloader-functions-perl.
-Preparing to unpack .../29-libdynaloader-functions-perl_0.003-3_all.deb ...
-Unpacking libdynaloader-functions-perl (0.003-3) ...
-Selecting previously unselected package libdevel-callchecker-perl:amd64.
-Preparing to unpack .../30-libdevel-callchecker-perl_0.008-2build3_amd64.deb ...
-Unpacking libdevel-callchecker-perl:amd64 (0.008-2build3) ...
-Selecting previously unselected package libparams-classify-perl:amd64.
-Preparing to unpack .../31-libparams-classify-perl_0.015-2build5_amd64.deb ...
-Unpacking libparams-classify-perl:amd64 (0.015-2build5) ...
-Selecting previously unselected package libmodule-runtime-perl.
-Preparing to unpack .../32-libmodule-runtime-perl_0.016-2_all.deb ...
-Unpacking libmodule-runtime-perl (0.016-2) ...
-Selecting previously unselected package libimport-into-perl.
-Preparing to unpack .../33-libimport-into-perl_1.002005-2_all.deb ...
-Unpacking libimport-into-perl (1.002005-2) ...
-Selecting previously unselected package librole-tiny-perl.
-Preparing to unpack .../34-librole-tiny-perl_2.002004-1_all.deb ...
-Unpacking librole-tiny-perl (2.002004-1) ...
-Selecting previously unselected package libsub-quote-perl.
-Preparing to unpack .../35-libsub-quote-perl_2.006008-1ubuntu1_all.deb ...
-Unpacking libsub-quote-perl (2.006008-1ubuntu1) ...
-Selecting previously unselected package libmoo-perl.
-Preparing to unpack .../36-libmoo-perl_2.005005-1_all.deb ...
-Unpacking libmoo-perl (2.005005-1) ...
-Selecting previously unselected package libencode-locale-perl.
-Preparing to unpack .../37-libencode-locale-perl_1.05-3_all.deb ...
-Unpacking libencode-locale-perl (1.05-3) ...
-Selecting previously unselected package libtimedate-perl.
-Preparing to unpack .../38-libtimedate-perl_2.3300-2_all.deb ...
-Unpacking libtimedate-perl (2.3300-2) ...
-Selecting previously unselected package libhttp-date-perl.
-Preparing to unpack .../39-libhttp-date-perl_6.06-1ubuntu0.24.04.1_all.deb ...
-Unpacking libhttp-date-perl (6.06-1ubuntu0.24.04.1) ...
-Selecting previously unselected package libfile-listing-perl.
-Preparing to unpack .../40-libfile-listing-perl_6.16-1_all.deb ...
-Unpacking libfile-listing-perl (6.16-1) ...
-Selecting previously unselected package libhtml-tagset-perl.
-Preparing to unpack .../41-libhtml-tagset-perl_3.20-6_all.deb ...
-Unpacking libhtml-tagset-perl (3.20-6) ...
-Selecting previously unselected package liburi-perl.
-Preparing to unpack .../42-liburi-perl_5.27-1_all.deb ...
-Unpacking liburi-perl (5.27-1) ...
-Selecting previously unselected package libhtml-parser-perl:amd64.
-Preparing to unpack .../43-libhtml-parser-perl_3.81-1ubuntu0.1_amd64.deb ...
-Unpacking libhtml-parser-perl:amd64 (3.81-1ubuntu0.1) ...
-Selecting previously unselected package libhtml-tree-perl.
-Preparing to unpack .../44-libhtml-tree-perl_5.07-3_all.deb ...
-Unpacking libhtml-tree-perl (5.07-3) ...
-Selecting previously unselected package libclone-perl:amd64.
-Preparing to unpack .../45-libclone-perl_0.46-1build3_amd64.deb ...
-Unpacking libclone-perl:amd64 (0.46-1build3) ...
-Selecting previously unselected package libio-html-perl.
-Preparing to unpack .../46-libio-html-perl_1.004-3_all.deb ...
-Unpacking libio-html-perl (1.004-3) ...
-Selecting previously unselected package liblwp-mediatypes-perl.
-Preparing to unpack .../47-liblwp-mediatypes-perl_6.04-2_all.deb ...
-Unpacking liblwp-mediatypes-perl (6.04-2) ...
-Selecting previously unselected package libhttp-message-perl.
-Preparing to unpack .../48-libhttp-message-perl_6.45-1ubuntu1_all.deb ...
-Unpacking libhttp-message-perl (6.45-1ubuntu1) ...
-Selecting previously unselected package libhttp-cookies-perl.
-Preparing to unpack .../49-libhttp-cookies-perl_6.11-1_all.deb ...
-Unpacking libhttp-cookies-perl (6.11-1) ...
-Selecting previously unselected package libhttp-negotiate-perl.
-Preparing to unpack .../50-libhttp-negotiate-perl_6.01-2_all.deb ...
-Unpacking libhttp-negotiate-perl (6.01-2) ...
-Selecting previously unselected package perl-openssl-defaults:amd64.
-Preparing to unpack .../51-perl-openssl-defaults_7build3_amd64.deb ...
-Unpacking perl-openssl-defaults:amd64 (7build3) ...
-Selecting previously unselected package libnet-ssleay-perl:amd64.
-Preparing to unpack .../52-libnet-ssleay-perl_1.94-1build4_amd64.deb ...
-Unpacking libnet-ssleay-perl:amd64 (1.94-1build4) ...
-Selecting previously unselected package libio-socket-ssl-perl.
-Preparing to unpack .../53-libio-socket-ssl-perl_2.085-1_all.deb ...
-Unpacking libio-socket-ssl-perl (2.085-1) ...
-Selecting previously unselected package libnet-http-perl.
-Preparing to unpack .../54-libnet-http-perl_6.23-1_all.deb ...
-Unpacking libnet-http-perl (6.23-1) ...
-Selecting previously unselected package liblwp-protocol-https-perl.
-Preparing to unpack .../55-liblwp-protocol-https-perl_6.13-1_all.deb ...
-Unpacking liblwp-protocol-https-perl (6.13-1) ...
-Selecting previously unselected package libtry-tiny-perl.
-Preparing to unpack .../56-libtry-tiny-perl_0.31-2_all.deb ...
-Unpacking libtry-tiny-perl (0.31-2) ...
-Selecting previously unselected package libwww-robotrules-perl.
-Preparing to unpack .../57-libwww-robotrules-perl_6.02-1_all.deb ...
-Unpacking libwww-robotrules-perl (6.02-1) ...
-Selecting previously unselected package libwww-perl.
-Preparing to unpack .../58-libwww-perl_6.76-1ubuntu0.1_all.deb ...
-Unpacking libwww-perl (6.76-1ubuntu0.1) ...
-Selecting previously unselected package patchutils.
-Preparing to unpack .../59-patchutils_0.4.2-1build3_amd64.deb ...
-Unpacking patchutils (0.4.2-1build3) ...
-Selecting previously unselected package wdiff.
-Preparing to unpack .../60-wdiff_1.2.2-6build1_amd64.deb ...
-Unpacking wdiff (1.2.2-6build1) ...
-Selecting previously unselected package devscripts.
-Preparing to unpack .../61-devscripts_2.23.7ubuntu0.2_all.deb ...
-Unpacking devscripts (2.23.7ubuntu0.2) ...
-Preparing to unpack .../62-libcurl3t64-gnutls_8.5.0-2ubuntu10.11_amd64.deb ...
-Unpacking libcurl3t64-gnutls:amd64 (8.5.0-2ubuntu10.11) over (8.5.0-2ubuntu10.9) ...
-Selecting previously unselected package libcurl4-openssl-dev:amd64.
-Preparing to unpack .../63-libcurl4-openssl-dev_8.5.0-2ubuntu10.11_amd64.deb ...
-Unpacking libcurl4-openssl-dev:amd64 (8.5.0-2ubuntu10.11) ...
-Setting up libksba8:amd64 (1.6.6-1build1) ...
-Setting up pinentry-curses (1.2.1-3ubuntu5) ...
-Setting up media-types (10.1.0) ...
-Setting up wdiff (1.2.2-6build1) ...
-Setting up lto-disabled-list (47) ...
-Setting up libcurl4t64:amd64 (8.5.0-2ubuntu10.11) ...
-Setting up libmagic-mgc (1:5.45-3build1) ...
-Setting up libsqlite3-0:amd64 (3.45.1-1ubuntu2.7) ...
-Setting up libmagic1t64:amd64 (1:5.45-3build1) ...
-Setting up libcurl3t64-gnutls:amd64 (8.5.0-2ubuntu10.11) ...
-Setting up perl-openssl-defaults:amd64 (7build3) ...
-Setting up file (1:5.45-3build1) ...
-Setting up bzip2 (1.0.8-5.1build0.1) ...
-Setting up libcurl4-openssl-dev:amd64 (8.5.0-2ubuntu10.11) ...
-Setting up perl-modules-5.38 (5.38.2-3.2ubuntu0.3) ...
-Setting up gpgconf (2.4.4-2ubuntu17.4) ...
-Setting up curl (8.5.0-2ubuntu10.11) ...
-Setting up libperl5.38t64:amd64 (5.38.2-3.2ubuntu0.3) ...
-Setting up gpg (2.4.4-2ubuntu17.4) ...
-Setting up gnupg-utils (2.4.4-2ubuntu17.4) ...
-Setting up gpg-agent (2.4.4-2ubuntu17.4) ...
-Setting up libpython3.12-stdlib:amd64 (3.12.3-1ubuntu0.15) ...
-Setting up python3.12 (3.12.3-1ubuntu0.15) ...
-Setting up gpgsm (2.4.4-2ubuntu17.4) ...
-Setting up dirmngr (2.4.4-2ubuntu17.4) ...
-Setting up perl (5.38.2-3.2ubuntu0.3) ...
-Setting up libio-html-perl (1.004-3) ...
-Setting up libb-hooks-op-check-perl:amd64 (0.22-3build1) ...
-Setting up keyboxd (2.4.4-2ubuntu17.4) ...
-Setting up libdpkg-perl (1.22.6ubuntu6.6) ...
-Setting up libtimedate-perl (2.3300-2) ...
-Setting up gnupg (2.4.4-2ubuntu17.4) ...
-Setting up libsub-quote-perl (2.006008-1ubuntu1) ...
-Setting up libclass-xsaccessor-perl (1.19-4build4) ...
-Setting up libfile-dirlist-perl (0.05-3) ...
-Setting up liburi-perl (5.27-1) ...
-Setting up libfile-touch-perl (0.12-2) ...
-Setting up libpython3-stdlib:amd64 (3.12.3-0ubuntu2.1) ...
-Setting up libnet-ssleay-perl:amd64 (1.94-1build4) ...
-Setting up libhttp-date-perl (6.06-1ubuntu0.24.04.1) ...
-Setting up libfile-which-perl (1.27-2) ...
-Setting up libfile-listing-perl (6.16-1) ...
-Setting up libdynaloader-functions-perl (0.003-3) ...
-Setting up libclass-method-modifiers-perl (2.15-1) ...
-Setting up libio-pty-perl (1:1.20-1build2) ...
-Setting up libclone-perl:amd64 (0.46-1build3) ...
-Setting up libhtml-tagset-perl (3.20-6) ...
-Setting up liblwp-mediatypes-perl (6.04-2) ...
-Setting up libtry-tiny-perl (0.31-2) ...
-Setting up libnet-http-perl (6.23-1) ...
-Setting up libencode-locale-perl (1.05-3) ...
-Setting up python3 (3.12.3-0ubuntu2.1) ...
-Setting up libdevel-callchecker-perl:amd64 (0.008-2build3) ...
-Setting up dpkg-dev (1.22.6ubuntu6.6) ...
-Setting up patchutils (0.4.2-1build3) ...
-Setting up libipc-run-perl (20231003.0-1) ...
-Setting up libwww-robotrules-perl (6.02-1) ...
-Setting up libhtml-parser-perl:amd64 (3.81-1ubuntu0.1) ...
-Setting up librole-tiny-perl (2.002004-1) ...
-Setting up libfile-homedir-perl (1.006-2) ...
-Setting up libio-socket-ssl-perl (2.085-1) ...
-Setting up libhttp-message-perl (6.45-1ubuntu1) ...
-Setting up libhttp-negotiate-perl (6.01-2) ...
-Setting up libhttp-cookies-perl (6.11-1) ...
-Setting up libhtml-tree-perl (5.07-3) ...
-Setting up libparams-classify-perl:amd64 (0.015-2build5) ...
-Setting up libmodule-runtime-perl (0.016-2) ...
-Setting up libimport-into-perl (1.002005-2) ...
-Setting up libmoo-perl (2.005005-1) ...
-Setting up libwww-perl (6.76-1ubuntu0.1) ...
-Setting up devscripts (2.23.7ubuntu0.2) ...
-Setting up liblwp-protocol-https-perl (6.13-1) ...
-Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
-Installing declared dependencies: tinytest, rbibutils, litedown
-also installing the dependencies ‘commonmark’, ‘xfun’
-
-trying URL 'https://cloud.r-project.org/src/contrib/commonmark_2.0.0.tar.gz'
-trying URL 'https://yihui.r-universe.dev/src/contrib/xfun_0.60.1.tar.gz?sha256=fd175f9e69de6b2efd7ebb6e4c921c13801b60bbb52fef9702022fac7ec93fbf&file=/xfun_0.60.1.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/tinytest_1.4.3.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/rbibutils_2.4.1.tar.gz'
-trying URL 'https://yihui.r-universe.dev/src/contrib/litedown_0.10.1.tar.gz?sha256=5311ad2f675fbf8652db4c445512db39a27dc65b98e1ad979bfa63d1bec22611&file=/litedown_0.10.1.tar.gz'
-* installing *source* package ‘commonmark’ ...
-** this is package ‘commonmark’ version ‘2.0.0’
-** package ‘commonmark’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions.c -o extensions.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c init.c -o init.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c wrapper.c -o wrapper.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/cmark.c -o cmark/cmark.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/node.c -o cmark/node.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/iterator.c -o cmark/iterator.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/blocks.c -o cmark/blocks.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/inlines.c -o cmark/inlines.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/scanners.c -o cmark/scanners.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/utf8.c -o cmark/utf8.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/buffer.c -o cmark/buffer.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/references.c -o cmark/references.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/render.c -o cmark/render.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/man.c -o cmark/man.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/xml.c -o cmark/xml.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/html.c -o cmark/html.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/commonmark.c -o cmark/commonmark.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/latex.c -o cmark/latex.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/houdini_href_e.c -o cmark/houdini_href_e.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/houdini_html_e.c -o cmark/houdini_html_e.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/houdini_html_u.c -o cmark/houdini_html_u.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/cmark_ctype.c -o cmark/cmark_ctype.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/arena.c -o cmark/arena.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/linked_list.c -o cmark/linked_list.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/plugin.c -o cmark/plugin.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/registry.c -o cmark/registry.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/syntax_extension.c -o cmark/syntax_extension.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/plaintext.c -o cmark/plaintext.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/footnotes.c -o cmark/footnotes.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/map.c -o cmark/map.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/autolink.c -o extensions/autolink.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/core-extensions.c -o extensions/core-extensions.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/ext_scanners.c -o extensions/ext_scanners.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/strikethrough.c -o extensions/strikethrough.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/table.c -o extensions/table.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/tagfilter.c -o extensions/tagfilter.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/tasklist.c -o extensions/tasklist.o
-gcc -std=gnu2x -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o commonmark.so extensions.o init.o wrapper.o -Lcmark -lstatcmark -L/opt/R/4.6.0/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-commonmark/00new/commonmark/libs
-** R
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (commonmark)
-* installing *source* package ‘xfun’ ...
-** this is package ‘xfun’ version ‘0.60.1’
-** using staged installation
-** libs
-using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c base64.c -o base64.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c rand_lcg.c -o rand_lcg.o
-gcc -std=gnu2x -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o xfun.so base64.o init.o rand_lcg.o -L/opt/R/4.6.0/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-xfun/00new/xfun/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (xfun)
-* installing *source* package ‘tinytest’ ...
-** this is package ‘tinytest’ version ‘1.4.3’
-** package ‘tinytest’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (tinytest)
-* installing *source* package ‘rbibutils’ ...
-** this is package ‘rbibutils’ version ‘2.4.1’
-** package ‘rbibutils’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c adsout.c -o adsout.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c any2xml.c -o any2xml.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c args.c -o args.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bib2be.c -o bib2be.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibcore.c -o bibcore.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibentrydirectout.c -o bibentrydirectout.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibentryout.c -o bibentryout.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibl.c -o bibl.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c biblatexin.c -o biblatexin.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c biblatexout.c -o biblatexout.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibprog.c -o bibprog.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibtexdirectin.c -o bibtexdirectin.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibtexin.c -o bibtexin.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibtexout.c -o bibtexout.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibtextypes.c -o bibtextypes.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibutils.c -o bibutils.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bltypes.c -o bltypes.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bu_auth.c -o bu_auth.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c charsets.c -o charsets.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_be_bed.c -o common_be_bed.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_bt_blt_btd_out.c -o common_bt_blt_btd_out.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_bt_btd.c -o common_bt_btd.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_bt_btd_blt.c -o common_bt_btd_blt.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_bt_btd_out.c -o common_bt_btd_out.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_most.c -o common_most.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c copacin.c -o copacin.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c copactypes.c -o copactypes.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c ebiin.c -o ebiin.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c endin.c -o endin.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c endout.c -o endout.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c endtypes.c -o endtypes.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c endxmlin.c -o endxmlin.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c entities.c -o entities.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c fields.c -o fields.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c gb18030.c -o gb18030.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c generic.c -o generic.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c intlist.c -o intlist.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c is_ws.c -o is_ws.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c isiin.c -o isiin.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c isiout.c -o isiout.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c isitypes.c -o isitypes.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c iso639_1.c -o iso639_1.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c iso639_2.c -o iso639_2.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c iso639_3.c -o iso639_3.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c latex.c -o latex.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c latex_parse.c -o latex_parse.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c marc_auth.c -o marc_auth.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c medin.c -o medin.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c modsin.c -o modsin.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c modsout.c -o modsout.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c modstypes.c -o modstypes.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c name.c -o name.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c nbibin.c -o nbibin.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c nbibout.c -o nbibout.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c nbibtypes.c -o nbibtypes.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c notes.c -o notes.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c pages.c -o pages.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c reftypes.c -o reftypes.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c risin.c -o risin.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c risout.c -o risout.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c ristypes.c -o ristypes.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c serialno.c -o serialno.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c slist.c -o slist.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c str.c -o str.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c str_conv.c -o str_conv.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c strsearch.c -o strsearch.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c title.c -o title.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c tomods.c -o tomods.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c type.c -o type.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c unicode.c -o unicode.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c url.c -o url.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c utf8.c -o utf8.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c vplist.c -o vplist.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c wordin.c -o wordin.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c wordout.c -o wordout.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c xml.c -o xml.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c xml2any.c -o xml2any.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c xml_encoding.c -o xml_encoding.o
-gcc -std=gnu2x -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o rbibutils.so adsout.o any2xml.o args.o bib2be.o bibcore.o bibentrydirectout.o bibentryout.o bibl.o biblatexin.o biblatexout.o bibprog.o bibtexdirectin.o bibtexin.o bibtexout.o bibtextypes.o bibutils.o bltypes.o bu_auth.o charsets.o common_be_bed.o common_bt_blt_btd_out.o common_bt_btd.o common_bt_btd_blt.o common_bt_btd_out.o common_most.o copacin.o copactypes.o ebiin.o endin.o endout.o endtypes.o endxmlin.o entities.o fields.o gb18030.o generic.o init.o intlist.o is_ws.o isiin.o isiout.o isitypes.o iso639_1.o iso639_2.o iso639_3.o latex.o latex_parse.o marc_auth.o medin.o modsin.o modsout.o modstypes.o name.o nbibin.o nbibout.o nbibtypes.o notes.o pages.o reftypes.o risin.o risout.o ristypes.o serialno.o slist.o str.o str_conv.o strsearch.o title.o tomods.o type.o unicode.o url.o utf8.o vplist.o wordin.o wordout.o xml.o xml2any.o xml_encoding.o -L/opt/R/4.6.0/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-rbibutils/00new/rbibutils/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (rbibutils)
-* installing *source* package ‘litedown’ ...
-** this is package ‘litedown’ version ‘0.10.1’
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (litedown)
-
-The downloaded source packages are in
-	‘/tmp/Rtmp6ux0fw/downloaded_packages’
-trying URL 'https://cloud.r-project.org/src/contrib/curl_7.1.0.tar.gz'
-Content type 'application/x-gzip' length 717725 bytes (700 KB)
-==================================================
-downloaded 700 KB
-
-* installing *source* package ‘curl’ ...
-** this is package ‘curl’ version ‘7.1.0’
-** package ‘curl’ successfully unpacked and MD5 sums checked
-** using staged installation
-Found pkg-config cflags and libs!
-Using PKG_CFLAGS=-I/usr/include/x86_64-linux-gnu 
-Using PKG_LIBS=-lcurl 
-** libs
-using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c callbacks.c -o callbacks.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c curl.c -o curl.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c download.c -o download.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c dryrun.c -o dryrun.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c escape.c -o escape.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c fetch.c -o fetch.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c findport.c -o findport.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c form.c -o form.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c getdate.c -o getdate.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c handle.c -o handle.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c ieproxy.c -o ieproxy.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c init.c -o init.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c interrupt.c -o interrupt.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c multi.c -o multi.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c nslookup.c -o nslookup.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c options.c -o options.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c reflist.c -o reflist.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c split.c -o split.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c ssl.c -o ssl.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c typechecking.c -o typechecking.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c urlparser.c -o urlparser.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c utils.c -o utils.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c version.c -o version.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c winidn.c -o winidn.o
-gcc -std=gnu2x -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c writer.c -o writer.o
-gcc -std=gnu2x -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o curl.so callbacks.o curl.o download.o dryrun.o escape.o fetch.o findport.o form.o getdate.o handle.o ieproxy.o init.o interrupt.o multi.o nslookup.o options.o reflist.o split.o ssl.o typechecking.o urlparser.o utils.o version.o winidn.o writer.o -lcurl -L/opt/R/4.6.0/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-curl/00new/curl/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (curl)
-
-The downloaded source packages are in
-	‘/tmp/RtmpxM1ZYP/downloaded_packages’
-* installing *source* package ‘cpp4r’ ...
-** this is package ‘cpp4r’ version ‘1.2.0’
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-*** copying figures
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (cpp4r)
-* installing *source* package ‘cpp4rtest’ ...
-** this is package ‘cpp4rtest’ version ‘0.3.0’
-** using staged installation
-** libs
-using C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
-g++ -std=gnu++20 -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
-g++ -std=gnu++20 -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
-g++ -std=gnu++20 -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/4.6.0/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (cpp4rtest)
-* using log directory ‘/check/cpp4rtest.Rcheck’
-* using R version 4.6.0 (2026-04-24)
-* using platform: x86_64-pc-linux-gnu
-* R was compiled by
-    gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
-    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
-* running under: Ubuntu 24.04.4 LTS
-* using session charset: UTF-8
-* current time: 2026-07-27 12:58:59 UTC
-* using options ‘--no-manual --as-cran’
-* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
-* this is package ‘cpp4rtest’ version ‘0.3.0’
-* package encoding: UTF-8
-* checking CRAN incoming feasibility ... [4s/6s] NOTE
-Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
-
-New submission
-* checking package namespace information ... OK
-* checking package dependencies ... OK
-* checking if this is a source package ... OK
-* checking if there is a namespace ... OK
-* checking for executable files ... OK
-* checking for hidden files and directories ... OK
-* checking for portable file names ... OK
-* checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [19s/14s] OK
-* used C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
-* checking package directory ... OK
-* checking for future file timestamps ... OK
-* checking DESCRIPTION meta-information ... OK
-* checking top-level files ... OK
-* checking for left-over files ... OK
-* checking index information ... OK
-* checking package subdirectories ... OK
-* checking code files for non-ASCII characters ... OK
-* checking R files for syntax errors ... OK
-* checking whether the package can be loaded ... [1s/0s] OK
-* checking whether the package can be loaded with stated dependencies ... [1s/0s] OK
-* checking whether the package can be unloaded cleanly ... [1s/0s] OK
-* checking whether the namespace can be loaded with stated dependencies ... [1s/0s] OK
-* checking whether the namespace can be unloaded cleanly ... [1s/0s] OK
-* checking loading without being on the library search path ... [1s/0s] OK
-* checking use of S3 registration ... OK
-* checking dependencies in R code ... OK
-* checking S3 generic/method consistency ... OK
-* checking replacement functions ... OK
-* checking foreign function calls ... OK
-* checking R code for possible problems ... [13s/4s] OK
-* checking Rd files ... [1s/1s] OK
-* checking Rd metadata ... OK
-* checking Rd line widths ... OK
-* checking Rd cross-references ... OK
-* checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... OK
-* checking Rd \usage sections ... OK
-* checking Rd contents ... OK
-* checking for unstated dependencies in examples ... OK
-* checking line endings in shell scripts ... OK
-* checking line endings in C/C++/Fortran sources/headers ... OK
-* checking line endings in Makefiles ... OK
-* checking compilation flags in Makevars ... OK
-* checking for GNU extensions in Makefiles ... OK
-* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
-* checking use of PKG_*FLAGS in Makefiles ... OK
-* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
-* checking pragmas in C/C++ headers and code ... OK
-* checking compilation flags used ... OK
-* checking compiled code ... OK
-* checking examples ... NONE
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ...
-  Running ‘tinytest.R’ [2s/1s]
- [3s/2s] OK
-* checking for non-standard things in the check directory ... OK
-* checking for detritus in the temp directory ... OK
-* DONE
-
-Status: 1 NOTE
-See
-  ‘/check/cpp4rtest.Rcheck/00check.log’
-for details.
-
-=== 00install.out ===
-* installing *source* package ‘cpp4rtest’ ...
-** this is package ‘cpp4rtest’ version ‘0.3.0’
-** using staged installation
-** libs
-using C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
-g++ -std=gnu++20 -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c cpp4r.cpp -o cpp4r.o
-g++ -std=gnu++20 -I"/opt/R/4.6.0/lib/R/include" -DNDEBUG -I vendor/  -I/usr/local/include   -fopenmp -fpic  -g -O2   -c main.cpp -o main.o
-g++ -std=gnu++20 -shared -L/opt/R/4.6.0/lib/R/lib -L/usr/local/lib -o cpp4rtest.so cpp4r.o main.o -fopenmp -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/4.6.0/lib/R/lib -lR
-installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (cpp4rtest)
-=== 00check.log ===
-* using log directory ‘/check/cpp4rtest.Rcheck’
-* using R version 4.6.0 (2026-04-24)
-* using platform: x86_64-pc-linux-gnu
-* R was compiled by
-    gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
-    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
-* running under: Ubuntu 24.04.4 LTS
-* using session charset: UTF-8
-* current time: 2026-07-27 12:58:59 UTC
-* using options ‘--no-manual --as-cran’
-* checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
-* this is package ‘cpp4rtest’ version ‘0.3.0’
-* package encoding: UTF-8
-* checking CRAN incoming feasibility ... [4s/6s] NOTE
-Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
-
-New submission
-* checking package namespace information ... OK
-* checking package dependencies ... OK
-* checking if this is a source package ... OK
-* checking if there is a namespace ... OK
-* checking for executable files ... OK
-* checking for hidden files and directories ... OK
-* checking for portable file names ... OK
-* checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [19s/14s] OK
-* used C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
-* checking package directory ... OK
-* checking for future file timestamps ... OK
-* checking DESCRIPTION meta-information ... OK
-* checking top-level files ... OK
-* checking for left-over files ... OK
-* checking index information ... OK
-* checking package subdirectories ... OK
-* checking code files for non-ASCII characters ... OK
-* checking R files for syntax errors ... OK
-* checking whether the package can be loaded ... [1s/0s] OK
-* checking whether the package can be loaded with stated dependencies ... [1s/0s] OK
-* checking whether the package can be unloaded cleanly ... [1s/0s] OK
-* checking whether the namespace can be loaded with stated dependencies ... [1s/0s] OK
-* checking whether the namespace can be unloaded cleanly ... [1s/0s] OK
-* checking loading without being on the library search path ... [1s/0s] OK
-* checking use of S3 registration ... OK
-* checking dependencies in R code ... OK
-* checking S3 generic/method consistency ... OK
-* checking replacement functions ... OK
-* checking foreign function calls ... OK
-* checking R code for possible problems ... [13s/4s] OK
-* checking Rd files ... [1s/1s] OK
-* checking Rd metadata ... OK
-* checking Rd line widths ... OK
-* checking Rd cross-references ... OK
-* checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... OK
-* checking Rd \usage sections ... OK
-* checking Rd contents ... OK
-* checking for unstated dependencies in examples ... OK
-* checking line endings in shell scripts ... OK
-* checking line endings in C/C++/Fortran sources/headers ... OK
-* checking line endings in Makefiles ... OK
-* checking compilation flags in Makevars ... OK
-* checking for GNU extensions in Makefiles ... OK
-* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
-* checking use of PKG_*FLAGS in Makefiles ... OK
-* checking use of SHLIB_OPENMP_*FLAGS in Makefiles ... OK
-* checking pragmas in C/C++ headers and code ... OK
-* checking compilation flags used ... OK
-* checking compiled code ... OK
-* checking examples ... NONE
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... [3s/2s] OK
-  Running ‘tinytest.R’ [2s/1s]
-* checking for non-standard things in the check directory ... OK
-* checking for detritus in the temp directory ... OK
-* DONE
-Status: 1 NOTE
