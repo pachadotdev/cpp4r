@@ -148,7 +148,7 @@ cp "$CPP4RTEST_TARBALL" "$CHECK_DIR/"
 cat > "$CHECK_DIR/install_required.R" <<'R_EOF'
 user_lib <- strsplit(Sys.getenv('R_LIBS_USER'), ':')[[1]][1]
 .libPaths(c(user_lib, .libPaths()))
-options(repos = c(CRAN = 'https://cloud.r-project.org'))
+options(repos = c('https://yihui.r-universe.dev', 'https://cloud.r-project.org'))
 
 deps_from_tarball <- function(tarfile, own_names) {
   td <- tempfile()
@@ -276,6 +276,18 @@ docker run --rm \
     # take effect), producing a '#warning' on every compile. Clearing it
     # restores normal -O2 optimized builds inside the container.
     unset DEB_BUILD_OPTIONS
+    # litedown (and possibly other dev-only deps) isn't on CRAN yet, so any
+    # automatic install of missing dependencies inside this container (e.g.
+    # R CMD check's own install of missing Suggests, or the ad-hoc 'curl'
+    # install below) needs a fallback repo. Writing to Rprofile.site rather
+    # than a single script's options(repos = ...) makes the setting global:
+    # it's sourced by every R/Rscript process started in this container from
+    # here on, not just the one process that calls options() itself.
+    RHOME=\$(R RHOME)
+    mkdir -p \"\$RHOME/etc\"
+    cat >> \"\$RHOME/etc/Rprofile.site\" <<'RPROFILE_EOF'
+options(repos = c('https://yihui.r-universe.dev', 'https://cloud.r-project.org'))
+RPROFILE_EOF
     mkdir -p /cache/R_libs
     # Install minimal system build deps needed by R packages (libuv for 'fs')
     if command -v apt-get >/dev/null 2>&1; then

@@ -128,7 +128,7 @@ Get:60 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 devscripts all 
 Get:61 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl3t64-gnutls amd64 8.5.0-2ubuntu10.11 [334 kB]
 Get:62 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl4-openssl-dev amd64 8.5.0-2ubuntu10.11 [446 kB]
 debconf: delaying package configuration, since apt-utils is not installed
-Fetched 18.1 MB in 3s (5386 kB/s)
+Fetched 18.1 MB in 7s (2594 kB/s)
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 25650 files and directories currently installed.)
 Preparing to unpack .../dpkg_1.22.6ubuntu6.6_amd64.deb ...
 Unpacking dpkg (1.22.6ubuntu6.6) over (1.22.6ubuntu6.5) ...
@@ -374,129 +374,59 @@ Setting up libwww-perl (6.76-1ubuntu0.1) ...
 Setting up devscripts (2.23.7ubuntu0.2) ...
 Setting up liblwp-protocol-https-perl (6.13-1) ...
 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
-Installing declared dependencies: tinytest, knitr, rmarkdown
-also installing the dependencies ‘cli’, ‘fs’, ‘R6’, ‘rappdirs’, ‘base64enc’, ‘cachem’, ‘fastmap’, ‘lifecycle’, ‘memoise’, ‘mime’, ‘rlang’, ‘sass’, ‘digest’, ‘evaluate’, ‘highr’, ‘xfun’, ‘yaml’, ‘bslib’, ‘fontawesome’, ‘htmltools’, ‘jquerylib’, ‘jsonlite’, ‘tinytex’
+Installing declared dependencies: tinytest, rbibutils, litedown
+also installing the dependencies ‘commonmark’, ‘xfun’
 
-trying URL 'https://cloud.r-project.org/src/contrib/cli_3.6.6.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/fs_2.1.0.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/R6_2.6.1.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/rappdirs_0.3.4.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/base64enc_0.1-6.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/cachem_1.1.0.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/fastmap_1.2.0.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/lifecycle_1.0.5.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/memoise_2.0.1.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/mime_0.13.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/rlang_1.3.0.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/sass_0.4.10.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/digest_0.6.39.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/evaluate_1.0.5.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/highr_0.12.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/xfun_0.60.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/yaml_2.3.12.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/bslib_0.11.0.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/fontawesome_0.5.3.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/htmltools_0.5.9.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/jquerylib_0.1.4.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/jsonlite_2.0.0.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/tinytex_0.60.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/commonmark_2.0.0.tar.gz'
+trying URL 'https://yihui.r-universe.dev/src/contrib/xfun_0.60.1.tar.gz?sha256=fd175f9e69de6b2efd7ebb6e4c921c13801b60bbb52fef9702022fac7ec93fbf&file=/xfun_0.60.1.tar.gz'
 trying URL 'https://cloud.r-project.org/src/contrib/tinytest_1.4.3.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/knitr_1.51.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/rmarkdown_2.31.tar.gz'
-* installing *source* package ‘cli’ ...
-** this is package ‘cli’ version ‘3.6.6’
-** package ‘cli’ successfully unpacked and MD5 sums checked
+trying URL 'https://cloud.r-project.org/src/contrib/rbibutils_2.4.1.tar.gz'
+trying URL 'https://yihui.r-universe.dev/src/contrib/litedown_0.10.1.tar.gz?sha256=5311ad2f675fbf8652db4c445512db39a27dc65b98e1ad979bfa63d1bec22611&file=/litedown_0.10.1.tar.gz'
+* installing *source* package ‘commonmark’ ...
+** this is package ‘commonmark’ version ‘2.0.0’
+** package ‘commonmark’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** libs
 using C compiler: ‘gcc-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c ansi.c -o ansi.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cleancall.c -o cleancall.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c diff.c -o diff.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c errors.c -o errors.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c glue.c -o glue.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c init.c -o init.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c inst.c -o inst.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c keypress-unix.c -o keypress-unix.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c keypress-win.c -o keypress-win.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c keypress.c -o keypress.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c md5.c -o md5.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c progress-altrep.c -o progress-altrep.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c progress.c -o progress.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c sha1.c -o sha1.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c sha256.c -o sha256.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c thread.c -o thread.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c tty.c -o tty.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c utf8.c -o utf8.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c utils.c -o utils.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c vt.c -o vt.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c vtparse.c -o vtparse.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c vtparse_table.c -o vtparse_table.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c win-utf8.c -o win-utf8.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c winfiles.c -o winfiles.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c xxhash.c -o xxhash.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c xxhash2.c -o xxhash2.o
-gcc-15 -std=gnu2x -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cli.so ansi.o cleancall.o diff.o errors.o glue.o init.o inst.o keypress-unix.o keypress-win.o keypress.o md5.o progress-altrep.o progress.o sha1.o sha256.o thread.o tty.o utf8.o utils.o vt.o vtparse.o vtparse_table.o win-utf8.o winfiles.o xxhash.o xxhash2.o -lpthread -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-cli/00new/cli/libs
-** R
-** exec
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-*** copying figures
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (cli)
-* installing *source* package ‘fs’ ...
-** this is package ‘fs’ version ‘2.1.0’
-** package ‘fs’ successfully unpacked and MD5 sums checked
-** using staged installation
-Package libuv was not found in the pkg-config search path.
-Perhaps you should add the directory containing `libuv.pc'
-to the PKG_CONFIG_PATH environment variable
-Package 'libuv', required by 'virtual:world', not found
-Using PKG_CFLAGS=
-Using PKG_LIBS=-luv
---------------------------- [CONFIGURE] --------------------------------
-Configuration failed because libuv was not found. Try installing:
- * deb: libuv1-dev (Debian, Ubuntu, etc)
- * rpm: libuv-devel (Fedora, EPEL)
- * brew: libuv (OSX)
-Alternatively set environment variable USE_BUNDLED_LIBUV=1 to build a static
-version of libuv that is included with this package.
--------------------------- [ERROR MESSAGE] ---------------------------
-<stdin>:1:10: fatal error: uv.h: No such file or directory
-compilation terminated.
---------------------------------------------------------------------
-ERROR: configuration failed for package ‘fs’
-* removing ‘/cache/R_libs/fs’
-* installing *source* package ‘R6’ ...
-** this is package ‘R6’ version ‘2.6.1’
-** package ‘R6’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-*** copying figures
-** building package indices
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (R6)
-* installing *source* package ‘rappdirs’ ...
-** this is package ‘rappdirs’ version ‘0.3.4’
-** package ‘rappdirs’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c win-path.c -o win-path.o
-gcc-15 -std=gnu2x -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o rappdirs.so init.o win-path.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-rappdirs/00new/rappdirs/libs
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions.c -o extensions.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c init.c -o init.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c wrapper.c -o wrapper.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/cmark.c -o cmark/cmark.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/node.c -o cmark/node.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/iterator.c -o cmark/iterator.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/blocks.c -o cmark/blocks.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/inlines.c -o cmark/inlines.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/scanners.c -o cmark/scanners.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/utf8.c -o cmark/utf8.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/buffer.c -o cmark/buffer.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/references.c -o cmark/references.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/render.c -o cmark/render.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/man.c -o cmark/man.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/xml.c -o cmark/xml.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/html.c -o cmark/html.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/commonmark.c -o cmark/commonmark.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/latex.c -o cmark/latex.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/houdini_href_e.c -o cmark/houdini_href_e.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/houdini_html_e.c -o cmark/houdini_html_e.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/houdini_html_u.c -o cmark/houdini_html_u.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/cmark_ctype.c -o cmark/cmark_ctype.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/arena.c -o cmark/arena.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/linked_list.c -o cmark/linked_list.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/plugin.c -o cmark/plugin.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/registry.c -o cmark/registry.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/syntax_extension.c -o cmark/syntax_extension.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/plaintext.c -o cmark/plaintext.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/footnotes.c -o cmark/footnotes.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/map.c -o cmark/map.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/autolink.c -o extensions/autolink.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/core-extensions.c -o extensions/core-extensions.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/ext_scanners.c -o extensions/ext_scanners.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/strikethrough.c -o extensions/strikethrough.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/table.c -o extensions/table.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/tagfilter.c -o extensions/tagfilter.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/tasklist.c -o extensions/tasklist.o
+gcc-15 -std=gnu2x -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o commonmark.so extensions.o init.o wrapper.o -Lcmark -lstatcmark -L/opt/R/devel/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-commonmark/00new/commonmark/libs
 ** R
 ** byte-compile and prepare package for lazy loading
 ** help
@@ -506,152 +436,9 @@ installing to /cache/R_libs/00LOCK-rappdirs/00new/rappdirs/libs
 ** checking absolute paths in shared objects and dynamic libraries
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
-* DONE (rappdirs)
-* installing *source* package ‘base64enc’ ...
-** this is package ‘base64enc’ version ‘0.1-6’
-** package ‘base64enc’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c base64.c -o base64.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c dummy.c -o dummy.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c uriencode.c -o uriencode.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c utf8.c -o utf8.o
-gcc-15 -std=gnu2x -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o base64enc.so base64.o dummy.o uriencode.o utf8.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-base64enc/00new/base64enc/libs
-** R
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (base64enc)
-* installing *source* package ‘fastmap’ ...
-** this is package ‘fastmap’ version ‘1.2.0’
-** package ‘fastmap’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
-using C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
-g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -Ilib/  -I/usr/local/include   -DR_NO_REMAP -fpic  -g -O2   -c fastmap.cpp -o fastmap.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Ilib/  -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
-g++-15 -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o fastmap.so fastmap.o init.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-fastmap/00new/fastmap/libs
-** R
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (fastmap)
-* installing *source* package ‘mime’ ...
-** this is package ‘mime’ version ‘0.13’
-** package ‘mime’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c rawmatch.c -o rawmatch.o
-gcc-15 -std=gnu2x -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o mime.so init.o rawmatch.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-mime/00new/mime/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (mime)
-* installing *source* package ‘rlang’ ...
-** this is package ‘rlang’ version ‘1.3.0’
-** package ‘rlang’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c capture.c -o capture.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c internal.c -o internal.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c rlang.c -o rlang.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c version.c -o version.o
-gcc-15 -std=gnu2x -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o rlang.so capture.o internal.o rlang.o version.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-rlang/00new/rlang/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-*** copying figures
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (rlang)
-* installing *source* package ‘digest’ ...
-** this is package ‘digest’ version ‘0.6.39’
-** package ‘digest’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
-using C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
-g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2   -c SpookyV2.cpp -o SpookyV2.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c aes.c -o aes.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c blake3.c -o blake3.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c blake3_dispatch.c -o blake3_dispatch.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c blake3_portable.c -o blake3_portable.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c crc32.c -o crc32.o
-g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2   -c crc32c.cpp -o crc32c.o
-g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2   -c crc32c_portable.cpp -o crc32c_portable.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c digest.c -o digest.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c digest2int.c -o digest2int.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c md5.c -o md5.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c pmurhash.c -o pmurhash.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c raes.c -o raes.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c sha1.c -o sha1.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c sha2.c -o sha2.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c sha256.c -o sha256.o
-g++-15 -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2   -c spooky_serialize.cpp -o spooky_serialize.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c xxhash.c -o xxhash.o
-g++-15 -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o digest.so SpookyV2.o aes.o blake3.o blake3_dispatch.o blake3_portable.o crc32.o crc32c.o crc32c_portable.o digest.o digest2int.o init.o md5.o pmurhash.o raes.o sha1.o sha2.o sha256.o spooky_serialize.o xxhash.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-digest/00new/digest/libs
-** R
-** demo
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (digest)
-* installing *source* package ‘evaluate’ ...
-** this is package ‘evaluate’ version ‘1.0.5’
-** package ‘evaluate’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (evaluate)
+* DONE (commonmark)
 * installing *source* package ‘xfun’ ...
-** this is package ‘xfun’ version ‘0.60’
-** package ‘xfun’ successfully unpacked and MD5 sums checked
+** this is package ‘xfun’ version ‘0.60.1’
 ** using staged installation
 ** libs
 using C compiler: ‘gcc-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
@@ -672,98 +459,6 @@ installing to /cache/R_libs/00LOCK-xfun/00new/xfun/libs
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
 * DONE (xfun)
-* installing *source* package ‘yaml’ ...
-** this is package ‘yaml’ version ‘2.3.12’
-** package ‘yaml’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c api.c -o api.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c dumper.c -o dumper.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c emitter.c -o emitter.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c implicit.c -o implicit.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c loader.c -o loader.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c parser.c -o parser.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c r_emit.c -o r_emit.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c r_ext.c -o r_ext.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c r_parse.c -o r_parse.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c reader.c -o reader.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c scanner.c -o scanner.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c writer.c -o writer.o
-gcc-15 -std=gnu2x -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o yaml.so api.o dumper.o emitter.o implicit.o loader.o parser.o r_emit.o r_ext.o r_parse.o reader.o scanner.o writer.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-yaml/00new/yaml/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (yaml)
-* installing *source* package ‘jsonlite’ ...
-** this is package ‘jsonlite’ version ‘2.0.0’
-** package ‘jsonlite’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c base64.c -o base64.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c collapse_array.c -o collapse_array.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c collapse_object.c -o collapse_object.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c collapse_pretty.c -o collapse_pretty.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c escape_chars.c -o escape_chars.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c integer64_to_na.c -o integer64_to_na.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c is_datelist.c -o is_datelist.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c is_recordlist.c -o is_recordlist.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c is_scalarlist.c -o is_scalarlist.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c modp_numtoa.c -o modp_numtoa.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c null_to_na.c -o null_to_na.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c num_to_char.c -o num_to_char.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c parse.c -o parse.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c prettify.c -o prettify.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c push_parser.c -o push_parser.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c r-base64.c -o r-base64.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c register.c -o register.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c row_collapse.c -o row_collapse.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c transpose_list.c -o transpose_list.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c validate.c -o validate.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl.c -o yajl/yajl.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_alloc.c -o yajl/yajl_alloc.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_buf.c -o yajl/yajl_buf.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_encode.c -o yajl/yajl_encode.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_gen.c -o yajl/yajl_gen.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_lex.c -o yajl/yajl_lex.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_parser.c -o yajl/yajl_parser.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_tree.c -o yajl/yajl_tree.o
-ar rcs yajl/libstatyajl.a yajl/yajl.o yajl/yajl_alloc.o yajl/yajl_buf.o yajl/yajl_encode.o yajl/yajl_gen.o yajl/yajl_lex.o yajl/yajl_parser.o yajl/yajl_tree.o
-gcc-15 -std=gnu2x -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o jsonlite.so base64.o collapse_array.o collapse_object.o collapse_pretty.o escape_chars.o integer64_to_na.o is_datelist.o is_recordlist.o is_scalarlist.o modp_numtoa.o null_to_na.o num_to_char.o parse.o prettify.o push_parser.o r-base64.o register.o row_collapse.o transpose_list.o validate.o -Lyajl -lstatyajl -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-jsonlite/00new/jsonlite/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-in method for ‘asJSON’ with signature ‘"AsIs"’: no definition for class “AsIs”
-in method for ‘asJSON’ with signature ‘"ITime"’: no definition for class “ITime”
-in method for ‘asJSON’ with signature ‘"hms"’: no definition for class “hms”
-in method for ‘asJSON’ with signature ‘"json"’: no definition for class “json”
-in method for ‘asJSON’ with signature ‘"integer64"’: no definition for class “integer64”
-in method for ‘asJSON’ with signature ‘"pairlist"’: no definition for class “pairlist”
-in method for ‘asJSON’ with signature ‘"blob"’: no definition for class “blob”
-in method for ‘asJSON’ with signature ‘"scalar"’: no definition for class “scalar”
-in method for ‘asJSON’ with signature ‘"sf"’: no definition for class “sf”
-in method for ‘asJSON’ with signature ‘"sfc"’: no definition for class “sfc”
-in method for ‘asJSON’ with signature ‘"vctrs_vctr"’: no definition for class “vctrs_vctr”
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (jsonlite)
 * installing *source* package ‘tinytest’ ...
 ** this is package ‘tinytest’ version ‘1.4.3’
 ** package ‘tinytest’ successfully unpacked and MD5 sums checked
@@ -779,45 +474,107 @@ in method for ‘asJSON’ with signature ‘"vctrs_vctr"’: no definition for 
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
 * DONE (tinytest)
-* installing *source* package ‘cachem’ ...
-** this is package ‘cachem’ version ‘1.1.0’
-** package ‘cachem’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘rbibutils’ ...
+** this is package ‘rbibutils’ version ‘2.4.1’
+** package ‘rbibutils’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** libs
 using C compiler: ‘gcc-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c cache.c -o cache.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c adsout.c -o adsout.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c any2xml.c -o any2xml.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c args.c -o args.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bib2be.c -o bib2be.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibcore.c -o bibcore.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibentrydirectout.c -o bibentrydirectout.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibentryout.c -o bibentryout.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibl.c -o bibl.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c biblatexin.c -o biblatexin.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c biblatexout.c -o biblatexout.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibprog.c -o bibprog.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibtexdirectin.c -o bibtexdirectin.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibtexin.c -o bibtexin.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibtexout.c -o bibtexout.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibtextypes.c -o bibtextypes.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibutils.c -o bibutils.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bltypes.c -o bltypes.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bu_auth.c -o bu_auth.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c charsets.c -o charsets.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_be_bed.c -o common_be_bed.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_bt_blt_btd_out.c -o common_bt_blt_btd_out.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_bt_btd.c -o common_bt_btd.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_bt_btd_blt.c -o common_bt_btd_blt.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_bt_btd_out.c -o common_bt_btd_out.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_most.c -o common_most.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c copacin.c -o copacin.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c copactypes.c -o copactypes.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c ebiin.c -o ebiin.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c endin.c -o endin.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c endout.c -o endout.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c endtypes.c -o endtypes.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c endxmlin.c -o endxmlin.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c entities.c -o entities.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c fields.c -o fields.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c gb18030.c -o gb18030.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c generic.c -o generic.o
 gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
-gcc-15 -std=gnu2x -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cachem.so cache.o init.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-cachem/00new/cachem/libs
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c intlist.c -o intlist.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c is_ws.c -o is_ws.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c isiin.c -o isiin.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c isiout.c -o isiout.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c isitypes.c -o isitypes.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c iso639_1.c -o iso639_1.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c iso639_2.c -o iso639_2.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c iso639_3.c -o iso639_3.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c latex.c -o latex.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c latex_parse.c -o latex_parse.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c marc_auth.c -o marc_auth.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c medin.c -o medin.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c modsin.c -o modsin.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c modsout.c -o modsout.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c modstypes.c -o modstypes.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c name.c -o name.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c nbibin.c -o nbibin.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c nbibout.c -o nbibout.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c nbibtypes.c -o nbibtypes.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c notes.c -o notes.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c pages.c -o pages.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c reftypes.c -o reftypes.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c risin.c -o risin.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c risout.c -o risout.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c ristypes.c -o ristypes.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c serialno.c -o serialno.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c slist.c -o slist.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c str.c -o str.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c str_conv.c -o str_conv.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c strsearch.c -o strsearch.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c title.c -o title.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c tomods.c -o tomods.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c type.c -o type.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c unicode.c -o unicode.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c url.c -o url.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c utf8.c -o utf8.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c vplist.c -o vplist.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c wordin.c -o wordin.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c wordout.c -o wordout.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c xml.c -o xml.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c xml2any.c -o xml2any.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c xml_encoding.c -o xml_encoding.o
+gcc-15 -std=gnu2x -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o rbibutils.so adsout.o any2xml.o args.o bib2be.o bibcore.o bibentrydirectout.o bibentryout.o bibl.o biblatexin.o biblatexout.o bibprog.o bibtexdirectin.o bibtexin.o bibtexout.o bibtextypes.o bibutils.o bltypes.o bu_auth.o charsets.o common_be_bed.o common_bt_blt_btd_out.o common_bt_btd.o common_bt_btd_blt.o common_bt_btd_out.o common_most.o copacin.o copactypes.o ebiin.o endin.o endout.o endtypes.o endxmlin.o entities.o fields.o gb18030.o generic.o init.o intlist.o is_ws.o isiin.o isiout.o isitypes.o iso639_1.o iso639_2.o iso639_3.o latex.o latex_parse.o marc_auth.o medin.o modsin.o modsout.o modstypes.o name.o nbibin.o nbibout.o nbibtypes.o notes.o pages.o reftypes.o risin.o risout.o ristypes.o serialno.o slist.o str.o str_conv.o strsearch.o title.o tomods.o type.o unicode.o url.o utf8.o vplist.o wordin.o wordout.o xml.o xml2any.o xml_encoding.o -L/opt/R/devel/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-rbibutils/00new/rbibutils/libs
 ** R
+** inst
 ** byte-compile and prepare package for lazy loading
 ** help
 *** installing help indices
 ** building package indices
+** installing vignettes
 ** testing if installed package can be loaded from temporary location
 ** checking absolute paths in shared objects and dynamic libraries
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
-* DONE (cachem)
-* installing *source* package ‘lifecycle’ ...
-** this is package ‘lifecycle’ version ‘1.0.5’
-** package ‘lifecycle’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-*** copying figures
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (lifecycle)
-* installing *source* package ‘highr’ ...
-** this is package ‘highr’ version ‘0.12’
-** package ‘highr’ successfully unpacked and MD5 sums checked
+* DONE (rbibutils)
+* installing *source* package ‘litedown’ ...
+** this is package ‘litedown’ version ‘0.10.1’
 ** using staged installation
 ** R
 ** inst
@@ -829,136 +586,68 @@ installing to /cache/R_libs/00LOCK-cachem/00new/cachem/libs
 ** testing if installed package can be loaded from temporary location
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
-* DONE (highr)
-* installing *source* package ‘htmltools’ ...
-** this is package ‘htmltools’ version ‘0.5.9’
-** package ‘htmltools’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
-gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c template.c -o template.o
-gcc-15 -std=gnu2x -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o htmltools.so init.o template.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-htmltools/00new/htmltools/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-*** copying figures
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (htmltools)
-* installing *source* package ‘tinytex’ ...
-** this is package ‘tinytex’ version ‘0.60’
-** package ‘tinytex’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (tinytex)
-* installing *source* package ‘memoise’ ...
-** this is package ‘memoise’ version ‘2.0.1’
-** package ‘memoise’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (memoise)
-ERROR: dependency ‘fs’ is not available for package ‘sass’
-Perhaps try a variation of:
-install.packages('fs')
-* removing ‘/cache/R_libs/sass’
-* installing *source* package ‘fontawesome’ ...
-** this is package ‘fontawesome’ version ‘0.5.3’
-** package ‘fontawesome’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-*** copying figures
-** building package indices
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (fontawesome)
-* installing *source* package ‘jquerylib’ ...
-** this is package ‘jquerylib’ version ‘0.1.4’
-** package ‘jquerylib’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (jquerylib)
-* installing *source* package ‘knitr’ ...
-** this is package ‘knitr’ version ‘1.51’
-** package ‘knitr’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (knitr)
-ERROR: dependency ‘sass’ is not available for package ‘bslib’
-Perhaps try a variation of:
-install.packages('sass')
-* removing ‘/cache/R_libs/bslib’
-ERROR: dependency ‘bslib’ is not available for package ‘rmarkdown’
-Perhaps try a variation of:
-install.packages('bslib')
-* removing ‘/cache/R_libs/rmarkdown’
+* DONE (litedown)
 
 The downloaded source packages are in
-	‘/tmp/RtmpcRhgIv/downloaded_packages’
-Warning messages:
-1: In install.packages(pkgs, lib = user_lib) :
-  installation of package ‘fs’ had non-zero exit status
-2: In install.packages(pkgs, lib = user_lib) :
-  installation of package ‘sass’ had non-zero exit status
-3: In install.packages(pkgs, lib = user_lib) :
-  installation of package ‘bslib’ had non-zero exit status
-4: In install.packages(pkgs, lib = user_lib) :
-  installation of package ‘rmarkdown’ had non-zero exit status
-trying URL 'https://raw.githubusercontent.com/r-hub/repos/main/ubuntu-24.04/4.7/src/contrib/curl_7.1.0_b2_R4.7_x86_64-pc-linux-gnu-ubuntu-24.04.tar.gz'
-Error in download.file(urls, destfiles, "libcurl", mode = "wb", ...) : 
-  cannot open URL 'https://raw.githubusercontent.com/r-hub/repos/main/ubuntu-24.04/4.7/src/contrib/curl_7.1.0_b2_R4.7_x86_64-pc-linux-gnu-ubuntu-24.04.tar.gz'
-In addition: Warning messages:
-1: In download.file(urls, destfiles, "libcurl", mode = "wb", ...) :
-  downloaded length 0 != reported length 14
-2: In download.file(urls, destfiles, "libcurl", mode = "wb", ...) :
-  cannot open URL 'https://raw.githubusercontent.com/r-hub/repos/main/ubuntu-24.04/4.7/src/contrib/curl_7.1.0_b2_R4.7_x86_64-pc-linux-gnu-ubuntu-24.04.tar.gz': HTTP status was '404 Not Found'
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘curl’ failed
+	‘/tmp/RtmpkC07pQ/downloaded_packages’
+trying URL 'https://cloud.r-project.org/src/contrib/curl_7.1.0.tar.gz'
+Content type 'application/x-gzip' length 717725 bytes (700 KB)
+==================================================
+downloaded 700 KB
+
+* installing *source* package ‘curl’ ...
+** this is package ‘curl’ version ‘7.1.0’
+** package ‘curl’ successfully unpacked and MD5 sums checked
+** using staged installation
+Found pkg-config cflags and libs!
+Using PKG_CFLAGS=-I/usr/include/x86_64-linux-gnu 
+Using PKG_LIBS=-lcurl 
+** libs
+using C compiler: ‘gcc-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c callbacks.c -o callbacks.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c curl.c -o curl.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c download.c -o download.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c dryrun.c -o dryrun.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c escape.c -o escape.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c fetch.c -o fetch.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c findport.c -o findport.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c form.c -o form.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c getdate.c -o getdate.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c handle.c -o handle.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c ieproxy.c -o ieproxy.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c init.c -o init.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c interrupt.c -o interrupt.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c multi.c -o multi.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c nslookup.c -o nslookup.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c options.c -o options.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c reflist.c -o reflist.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c split.c -o split.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c ssl.c -o ssl.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c typechecking.c -o typechecking.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c urlparser.c -o urlparser.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c utils.c -o utils.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c version.c -o version.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c winidn.c -o winidn.o
+gcc-15 -std=gnu2x -I"/opt/R/devel/lib/R/include" -DNDEBUG -I/usr/include/x86_64-linux-gnu  -DSTRICT_R_HEADERS -DR_NO_REMAP  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c writer.c -o writer.o
+gcc-15 -std=gnu2x -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o curl.so callbacks.o curl.o download.o dryrun.o escape.o fetch.o findport.o form.o getdate.o handle.o ieproxy.o init.o interrupt.o multi.o nslookup.o options.o reflist.o split.o ssl.o typechecking.o urlparser.o utils.o version.o winidn.o writer.o -lcurl -L/opt/R/devel/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-curl/00new/curl/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (curl)
+
+The downloaded source packages are in
+	‘/tmp/Rtmp9igzK5/downloaded_packages’
 * installing *source* package ‘cpp4r’ ...
-** this is package ‘cpp4r’ version ‘1.1.0’
+** this is package ‘cpp4r’ version ‘1.2.0’
 ** using staged installation
 ** R
 ** inst
@@ -967,6 +656,7 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 *** installing help indices
 *** copying figures
 ** building package indices
+** installing vignettes
 ** testing if installed package can be loaded from temporary location
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
@@ -999,21 +689,15 @@ installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
 * running under: Ubuntu 24.04.4 LTS
 * using session charset: UTF-8
-* current time: 2026-07-26 19:49:48 UTC
+* current time: 2026-07-27 12:53:55 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [5s/6s] NOTE
+* checking CRAN incoming feasibility ... [4s/6s] NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
-
-Checking URLs failed with message:
-  there is no package called ‘curl’
-
-Checking DOIs failed with message:
-  there is no package called ‘curl’
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -1022,7 +706,7 @@ Checking DOIs failed with message:
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [22s/18s] OK
+* checking whether package ‘cpp4rtest’ can be installed ... [19s/15s] OK
 * used C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
@@ -1044,7 +728,7 @@ Checking DOIs failed with message:
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... [12s/4s] OK
+* checking R code for possible problems ... [13s/3s] OK
 * checking Rd files ... [1s/1s] OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
@@ -1109,21 +793,15 @@ installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
 * running under: Ubuntu 24.04.4 LTS
 * using session charset: UTF-8
-* current time: 2026-07-26 19:49:48 UTC
+* current time: 2026-07-27 12:53:55 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [5s/6s] NOTE
+* checking CRAN incoming feasibility ... [4s/6s] NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
-
-Checking URLs failed with message:
-  there is no package called ‘curl’
-
-Checking DOIs failed with message:
-  there is no package called ‘curl’
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -1132,7 +810,7 @@ Checking DOIs failed with message:
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [22s/18s] OK
+* checking whether package ‘cpp4rtest’ can be installed ... [19s/15s] OK
 * used C++ compiler: ‘g++-15 (Ubuntu 15.2.0-14ubuntu1~24~ppa1) 15.2.0’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
@@ -1154,7 +832,7 @@ Checking DOIs failed with message:
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... [12s/4s] OK
+* checking R code for possible problems ... [13s/3s] OK
 * checking Rd files ... [1s/1s] OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK

@@ -1,693 +1,82 @@
 Updating and loading repositories:
- Fedora 42 - x86_64                     100% |   3.2 KiB/s |   3.4 KiB |  00m01s
- Fedora 42 - x86_64 - Updates           100% |   8.2 KiB/s |   3.4 KiB |  00m00s
- Fedora 42 openh264 (From Cisco) - x86_ 100% |   3.1 KiB/s | 986.0   B |  00m00s
+ Fedora 42 - x86_64                     100% |   3.1 KiB/s |   3.4 KiB |  00m01s
+ Fedora 42 - x86_64 - Updates           100% |   6.8 KiB/s |   3.4 KiB |  00m00s
+ Fedora 42 openh264 (From Cisco) - x86_ 100% |   2.4 KiB/s | 986.0   B |  00m00s
 Repositories loaded.
 Package "pkgconf-pkg-config-2.3.0-2.fc42.x86_64" is already installed.
 Package "gcc-gfortran-15.2.1-7.fc42.x86_64" is already installed.
 Package "libcurl-devel-8.11.1-8.fc42.x86_64" is already installed.
 
 Nothing to do.
-Installing declared dependencies: tinytest, knitr, rmarkdown
-also installing the dependencies ‘cli’, ‘fs’, ‘R6’, ‘rappdirs’, ‘base64enc’, ‘cachem’, ‘fastmap’, ‘lifecycle’, ‘memoise’, ‘mime’, ‘rlang’, ‘sass’, ‘digest’, ‘evaluate’, ‘highr’, ‘xfun’, ‘yaml’, ‘bslib’, ‘fontawesome’, ‘htmltools’, ‘jquerylib’, ‘jsonlite’, ‘tinytex’
+Installing declared dependencies: tinytest, rbibutils, litedown
+also installing the dependencies ‘commonmark’, ‘xfun’
 
-trying URL 'https://cloud.r-project.org/src/contrib/cli_3.6.6.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/fs_2.1.0.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/R6_2.6.1.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/rappdirs_0.3.4.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/base64enc_0.1-6.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/cachem_1.1.0.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/fastmap_1.2.0.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/lifecycle_1.0.5.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/memoise_2.0.1.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/mime_0.13.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/rlang_1.3.0.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/sass_0.4.10.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/digest_0.6.39.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/evaluate_1.0.5.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/highr_0.12.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/xfun_0.60.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/yaml_2.3.12.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/bslib_0.11.0.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/fontawesome_0.5.3.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/htmltools_0.5.9.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/jquerylib_0.1.4.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/jsonlite_2.0.0.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/tinytex_0.60.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/commonmark_2.0.0.tar.gz'
+trying URL 'https://yihui.r-universe.dev/src/contrib/xfun_0.60.1.tar.gz?sha256=fd175f9e69de6b2efd7ebb6e4c921c13801b60bbb52fef9702022fac7ec93fbf&file=/xfun_0.60.1.tar.gz'
 trying URL 'https://cloud.r-project.org/src/contrib/tinytest_1.4.3.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/knitr_1.51.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/rmarkdown_2.31.tar.gz'
-* installing *source* package ‘cli’ ...
-** this is package ‘cli’ version ‘3.6.6’
-** package ‘cli’ successfully unpacked and MD5 sums checked
+trying URL 'https://cloud.r-project.org/src/contrib/rbibutils_2.4.1.tar.gz'
+trying URL 'https://yihui.r-universe.dev/src/contrib/litedown_0.10.1.tar.gz?sha256=5311ad2f675fbf8652db4c445512db39a27dc65b98e1ad979bfa63d1bec22611&file=/litedown_0.10.1.tar.gz'
+* installing *source* package ‘commonmark’ ...
+** this is package ‘commonmark’ version ‘2.0.0’
+** package ‘commonmark’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** libs
 using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c ansi.c -o ansi.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cleancall.c -o cleancall.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c diff.c -o diff.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c errors.c -o errors.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c glue.c -o glue.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c init.c -o init.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c inst.c -o inst.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c keypress-unix.c -o keypress-unix.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c keypress-win.c -o keypress-win.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c keypress.c -o keypress.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c md5.c -o md5.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c progress-altrep.c -o progress-altrep.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c progress.c -o progress.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c sha1.c -o sha1.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c sha256.c -o sha256.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c thread.c -o thread.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c tty.c -o tty.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c utf8.c -o utf8.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c utils.c -o utils.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c vt.c -o vt.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c vtparse.c -o vtparse.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c vtparse_table.c -o vtparse_table.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c win-utf8.c -o win-utf8.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c winfiles.c -o winfiles.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c xxhash.c -o xxhash.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I../inst/include  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c xxhash2.c -o xxhash2.o
-gcc -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cli.so ansi.o cleancall.o diff.o errors.o glue.o init.o inst.o keypress-unix.o keypress-win.o keypress.o md5.o progress-altrep.o progress.o sha1.o sha256.o thread.o tty.o utf8.o utils.o vt.o vtparse.o vtparse_table.o win-utf8.o winfiles.o xxhash.o xxhash2.o -lpthread -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-cli/00new/cli/libs
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions.c -o extensions.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c init.c -o init.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c wrapper.c -o wrapper.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/cmark.c -o cmark/cmark.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/node.c -o cmark/node.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/iterator.c -o cmark/iterator.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/blocks.c -o cmark/blocks.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/inlines.c -o cmark/inlines.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/scanners.c -o cmark/scanners.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/utf8.c -o cmark/utf8.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/buffer.c -o cmark/buffer.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/references.c -o cmark/references.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/render.c -o cmark/render.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/man.c -o cmark/man.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/xml.c -o cmark/xml.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/html.c -o cmark/html.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/commonmark.c -o cmark/commonmark.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/latex.c -o cmark/latex.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/houdini_href_e.c -o cmark/houdini_href_e.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/houdini_html_e.c -o cmark/houdini_html_e.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/houdini_html_u.c -o cmark/houdini_html_u.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/cmark_ctype.c -o cmark/cmark_ctype.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/arena.c -o cmark/arena.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/linked_list.c -o cmark/linked_list.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/plugin.c -o cmark/plugin.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/registry.c -o cmark/registry.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/syntax_extension.c -o cmark/syntax_extension.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/plaintext.c -o cmark/plaintext.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/footnotes.c -o cmark/footnotes.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cmark/map.c -o cmark/map.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/autolink.c -o extensions/autolink.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/core-extensions.c -o extensions/core-extensions.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/ext_scanners.c -o extensions/ext_scanners.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/strikethrough.c -o extensions/strikethrough.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/table.c -o extensions/table.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/tagfilter.c -o extensions/tagfilter.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Icmark -I. -DCMARK_GFM_STATIC_DEFINE -DCMARK_GFM_EXTENSIONS_STATIC_DEFINE -DR_NO_REMAP -DSTRICT_R_HEADERS  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c extensions/tasklist.c -o extensions/tasklist.o
+gcc -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o commonmark.so extensions.o init.o wrapper.o -Lcmark -lstatcmark -L/opt/R/devel/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-commonmark/00new/commonmark/libs
 ** R
-** exec
-** inst
 ** byte-compile and prepare package for lazy loading
 ** help
 *** installing help indices
-  converting help for package ‘cli’
+  converting help for package ‘commonmark’
     finding HTML links ... done
-    ansi-styles                             html  
-    ansi_align                              html  
-    ansi_collapse                           html  
-    ansi_columns                            html  
-    ansi_grep                               html  
-    ansi_has_any                            html  
-    ansi_hide_cursor                        html  
-    ansi_html                               html  
-    ansi_html_style                         html  
-    ansi_nchar                              html  
-    ansi_nzchar                             html  
-    ansi_palettes                           html  
-    ansi_regex                              html  
-    ansi_simplify                           html  
-    ansi_string                             html  
-    ansi_strip                              html  
-    ansi_strsplit                           html  
-    ansi_strtrim                            html  
-    ansi_strwrap                            html  
-    ansi_substr                             html  
-    ansi_substring                          html  
-    ansi_toupper                            html  
-    ansi_trimws                             html  
-    boxx                                    html  
-    builtin_theme                           html  
-    cat_line                                html  
-    cli-config                              html  
-    cli-package                             html  
-    cli                                     html  
-    cli_abort                               html  
-    cli_alert                               html  
-    cli_blockquote                          html  
-    cli_bullets                             html  
-    cli_bullets_raw                         html  
-    cli_code                                html  
-    cli_debug_doc                           html  
-    cli_div                                 html  
-    cli_dl                                  html  
-    cli_end                                 html  
-    cli_fmt                                 html  
-    cli_format                              html  
-    cli_format_method                       html  
-    cli_h1                                  html  
-    cli_li                                  html  
-    cli_list_themes                         html  
-    cli_ol                                  html  
-    cli_output_connection                   html  
-    cli_par                                 html  
-    cli_process_start                       html  
-    cli_progress_along                      html  
-    cli_progress_bar                        html  
-    cli_progress_builtin_handlers           html  
-    cli_progress_demo                       html  
-    cli_progress_message                    html  
-    cli_progress_output                     html  
-    cli_progress_step                       html  
-    cli_progress_styles                     html  
-    cli_rule                                html  
-    cli_sitrep                              html  
-    cli_status                              html  
-    cli_status_clear                        html  
-    cli_status_update                       html  
-    cli_text                                html  
-    cli_ul                                  html  
-    cli_vec                                 html  
-    cli_verbatim                            html  
-    code_highlight                          html  
-    code_theme_list                         html  
-    combine_ansi_styles                     html  
-    console_width                           html  
-    containers                              html  
-    demo_spinners                           html  
-    diff_chr                                html  
-    diff_str                                html  
-    faq                                     html  
-    format_error                            html  
-    format_inline                           html  
-    get_spinner                             html  
-    has_keypress_support                    html  
-    hash_animal                             html  
-    hash_emoji                              html  
-    hash_md5                                html  
-    hash_sha1                               html  
-    hash_sha256                             html  
-    hash_xxhash                             html  
-    inline-markup                           html  
-    is_ansi_tty                             html  
-    is_dynamic_tty                          html  
-    is_utf8_output                          html  
-    keypress                                html  
-    links                                   html  
-    list_spinners                           html  
-    make_ansi_style                         html  
-    make_spinner                            html  
-    match_selector                          html  
-    match_selector_node                     html  
-    num_ansi_colors                         html  
-    parse_selector                          html  
-    pluralization-helpers                   html  
-    pluralization                           html  
-    pluralize                               html  
-    pretty_print_code                       html  
-    progress-c                              html  
-    progress-utils                          html  
-    progress-variables                      html  
-    rule                                    html  
-    ruler                                   html  
-    simple_theme                            html  
-    spark_bar                               html  
-    spark_line                              html  
-    start_app                               html  
-    style_hyperlink                         html  
-    symbol                                  html  
-    test_that_cli                           html  
-    themes                                  html  
-    tree                                    html  
-    unicode-width-workaround                html  
-    utf8_graphemes                          html  
-    utf8_nchar                              html  
-    utf8_substr                             html  
-    vt_output                               html  
-*** copying figures
+    commonmark                              html  
+    extensions                              html  
 ** building package indices
 ** testing if installed package can be loaded from temporary location
 ** checking absolute paths in shared objects and dynamic libraries
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
-* DONE (cli)
-* installing *source* package ‘fs’ ...
-** this is package ‘fs’ version ‘2.1.0’
-** package ‘fs’ successfully unpacked and MD5 sums checked
-** using staged installation
-Package libuv was not found in the pkg-config search path.
-Perhaps you should add the directory containing `libuv.pc'
-to the PKG_CONFIG_PATH environment variable
-Package 'libuv' not found
-Using PKG_CFLAGS=
-Using PKG_LIBS=-luv
---------------------------- [CONFIGURE] --------------------------------
-Configuration failed because libuv was not found. Try installing:
- * deb: libuv1-dev (Debian, Ubuntu, etc)
- * rpm: libuv-devel (Fedora, EPEL)
- * brew: libuv (OSX)
-Alternatively set environment variable USE_BUNDLED_LIBUV=1 to build a static
-version of libuv that is included with this package.
--------------------------- [ERROR MESSAGE] ---------------------------
-<stdin>:1:10: fatal error: uv.h: No such file or directory
-compilation terminated.
---------------------------------------------------------------------
-ERROR: configuration failed for package ‘fs’
-* removing ‘/cache/R_libs/fs’
-* installing *source* package ‘R6’ ...
-** this is package ‘R6’ version ‘2.6.1’
-** package ‘R6’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘R6’
-    finding HTML links ... done
-    R6-package                              html  
-    R6Class                                 html  
-    as.list.R6                              html  
-    is.R6                                   html  
-*** copying figures
-** building package indices
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (R6)
-* installing *source* package ‘rappdirs’ ...
-** this is package ‘rappdirs’ version ‘0.3.4’
-** package ‘rappdirs’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c win-path.c -o win-path.o
-gcc -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o rappdirs.so init.o win-path.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-rappdirs/00new/rappdirs/libs
-** R
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘rappdirs’
-    finding HTML links ... done
-    app_dir                                 html  
-    rappdirs-package                        html  
-    site_data_dir                           html  
-    user_cache_dir                          html  
-    user_data_dir                           html  
-    user_log_dir                            html  
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (rappdirs)
-* installing *source* package ‘base64enc’ ...
-** this is package ‘base64enc’ version ‘0.1-6’
-** package ‘base64enc’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c base64.c -o base64.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c dummy.c -o dummy.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c uriencode.c -o uriencode.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c utf8.c -o utf8.o
-gcc -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o base64enc.so base64.o dummy.o uriencode.o utf8.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-base64enc/00new/base64enc/libs
-** R
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘base64enc’
-    finding HTML links ... done
-    base64                                  html  
-    checkUTF8                               html  
-    dataURI                                 html  
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (base64enc)
-* installing *source* package ‘fastmap’ ...
-** this is package ‘fastmap’ version ‘1.2.0’
-** package ‘fastmap’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
-using C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
-g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -Ilib/  -I/usr/local/include   -DR_NO_REMAP -fpic  -g -O2   -c fastmap.cpp -o fastmap.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Ilib/  -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
-g++ -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o fastmap.so fastmap.o init.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-fastmap/00new/fastmap/libs
-** R
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘fastmap’
-    finding HTML links ... done
-    fastmap                                 html  
-    fastqueue                               html  
-    faststack                               html  
-    key_missing                             html  
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (fastmap)
-* installing *source* package ‘mime’ ...
-** this is package ‘mime’ version ‘0.13’
-** package ‘mime’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c rawmatch.c -o rawmatch.o
-gcc -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o mime.so init.o rawmatch.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-mime/00new/mime/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘mime’
-    finding HTML links ... done
-    guess_type                              html  
-    mimemap                                 html  
-    parse_multipart                         html  
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (mime)
-* installing *source* package ‘rlang’ ...
-** this is package ‘rlang’ version ‘1.3.0’
-** package ‘rlang’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c capture.c -o capture.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c internal.c -o internal.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c rlang.c -o rlang.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I./rlang/  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c version.c -o version.o
-gcc -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o rlang.so capture.o internal.o rlang.o version.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-rlang/00new/rlang/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘rlang’
-    finding HTML links ... done
-    UQ                                      html  
-    abort                                   html  
-    are_na                                  html  
-    arg_match                               html  
-    args_data_masking                       html  
-    args_dots_empty                         html  
-    args_dots_used                          html  
-    args_error_context                      html  
-    as_box                                  html  
-    as_closure                              html  
-    as_data_mask                            html  
-    as_environment                          html  
-    as_function                             html  
-    as_label                                html  
-    as_name                                 html  
-    as_string                               html  
-    as_utf8_character                       html  
-    bare-type-predicates                    html  
-    box                                     html  
-    bytes-class                             html  
-    call2                                   html  
-    call_args                               html  
-    call_fn                                 html  
-    call_inspect                            html  
-    call_match                              html  
-    call_modify                             html  
-    call_name                               html  
-    call_standardise                        html  
-    caller_arg                              html  
-    catch_cnd                               html  
-    check_data_frame                        html  
-    check_dots_empty                        html  
-    check_dots_empty0                       html  
-    check_dots_unnamed                      html  
-    check_dots_used                         html  
-    check_exclusive                         html  
-    check_required                          html  
-    check_type_number                       html  
-    check_type_scalar                       html  
-    child_env                               html  
-    chr_unserialise_unicode                 html  
-    cnd                                     html  
-    cnd_inherits                            html  
-    cnd_message                             html  
-    cnd_muffle                              html  
-    cnd_signal                              html  
-    cnd_type                                html  
-    defusing-advanced                       html  
-    dev-notes-dots                          html  
-    done                                    html  
-    dot-data                                html  
-    dots_n                                  html  
-    dots_splice                             html  
-    dots_values                             html  
-    duplicate                               html  
-    dyn-dots                                html  
-    embrace-operator                        html  
-    empty_env                               html  
-    englue                                  html  
-    enquo                                   html  
-    entrace                                 html  
-    env                                     html  
-    env_bind                                html  
-    env_binding_are_active                  html  
-    env_binding_lock                        html  
-    env_browse                              html  
-    env_bury                                html  
-    env_cache                               html  
-    env_clone                               html  
-    env_depth                               html  
-    env_get                                 html  
-    env_has                                 html  
-    env_inherits                            html  
-    env_is_user_facing                      html  
-    env_lock                                html  
-    env_name                                html  
-    env_names                               html  
-    env_parent                              html  
-    env_poke                                html  
-    env_print                               html  
-    env_unbind                              html  
-    env_unlock                              html  
-    eval_bare                               html  
-    eval_tidy                               html  
-    exec                                    html  
-    expr                                    html  
-    expr_interp                             html  
-    expr_label                              html  
-    expr_print                              html  
-    exprs_auto_name                         html  
-    f_rhs                                   html  
-    f_text                                  html  
-    faq-options                             html  
-    ffi_standalone_types_check              html  
-    flatten                                 html  
-    fn_body                                 html  
-    fn_env                                  html  
-    fn_fmls                                 html  
-    format_error_bullets                    html  
-    format_error_call                       html  
-    friendly_type                           html  
-    get_env                                 html  
-    global_entrace                          html  
-    global_handle                           html  
-    global_prompt_install                   html  
-    glue-operators                          html  
-    has_length                              html  
-    has_name                                html  
-    hash                                    html  
-    inherits_any                            html  
-    inject                                  html  
-    injection-operator                      html  
-    interrupt                               html  
-    invoke                                  html  
-    is_call                                 html  
-    is_callable                             html  
-    is_condition                            html  
-    is_copyable                             html  
-    is_dictionaryish                        html  
-    is_empty                                html  
-    is_environment                          html  
-    is_expression                           html  
-    is_formula                              html  
-    is_function                             html  
-    is_installed                            html  
-    is_integerish                           html  
-    is_interactive                          html  
-    is_lang                                 html  
-    is_named                                html  
-    is_namespace                            html  
-    is_pairlist                             html  
-    is_reference                            html  
-    is_symbol                               html  
-    is_true                                 html  
-    is_weakref                              html  
-    lang                                    html  
-    last_error                              html  
-    last_warnings                           html  
-    list2                                   html  
-    local_bindings                          html  
-    local_error_call                        html  
-    local_options                           html  
-    local_use_cli                           html  
-    missing                                 html  
-    missing_arg                             html  
-    names2                                  html  
-    names_inform_repair                     html  
-    new-vector                              html  
-    new_call                                html  
-    new_formula                             html  
-    new_function                            html  
-    new_node                                html  
-    new_quosure                             html  
-    new_quosures                            html  
-    new_weakref                             html  
-    ns_env                                  html  
-    ns_registry_env                         html  
-    obj_address                             html  
-    on_load                                 html  
-    op-get-attr                             html  
-    op-na-default                           html  
-    op-null-continuation                    html  
-    op-null-default                         html  
-    pairlist2                               html  
-    parse_expr                              html  
-    prim_name                               html  
-    qq_show                                 html  
-    quo_expr                                html  
-    quo_label                               html  
-    quo_squash                              html  
-    quosure-tools                           html  
-    raw_deparse_str                         html  
-    rep_along                               html  
-    return_from                             html  
-    rlang-package                           html  
-    rlang_backtrace_on_error                html  
-    rlang_error                             html  
-    rlib_trace_spec                         html  
-    scalar-type-predicates                  html  
-    scoped_env                              html  
-    scoped_interactive                      html  
-    search_envs                             html  
-    seq2                                    html  
-    set_attrs                               html  
-    set_expr                                html  
-    set_names                               html  
-    splice-operator                         html  
-    splice                                  html  
-    stack-deprecated                        html  
-    stack                                   html  
-    stop_input_type                         html  
-    string                                  html  
-    switch_type                             html  
-    sym                                     html  
-    topic-condition-customisation           html  
-    topic-condition-formatting              html  
-    topic-data-mask-ambiguity               html  
-    topic-data-mask-programming             html  
-    topic-data-mask                         html  
-    topic-defuse                            html  
-    topic-double-evaluation                 html  
-    topic-embrace-constants                 html  
-    topic-embrace-non-args                  html  
-    topic-error-call                        html  
-    topic-error-chaining                    html  
-    topic-inject-out-of-context             html  
-    topic-inject                            html  
-    topic-metaprogramming                   html  
-    topic-multiple-columns                  html  
-    topic-quosure                           html  
-    trace_back                              html  
-    try_fetch                               html  
-    type-predicates                         html  
-    type_of                                 html  
-    vec_poke_n                              html  
-    vector-coercion                         html  
-    vector-construction                     html  
-    with_env                                html  
-    with_handlers                           html  
-    wref_key                                html  
-    zap                                     html  
-    zap_srcref                              html  
-*** copying figures
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (rlang)
-* installing *source* package ‘digest’ ...
-** this is package ‘digest’ version ‘0.6.39’
-** package ‘digest’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
-using C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
-g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2   -c SpookyV2.cpp -o SpookyV2.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c aes.c -o aes.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c blake3.c -o blake3.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c blake3_dispatch.c -o blake3_dispatch.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c blake3_portable.c -o blake3_portable.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c crc32.c -o crc32.o
-g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2   -c crc32c.cpp -o crc32c.o
-g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2   -c crc32c_portable.cpp -o crc32c_portable.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c digest.c -o digest.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c digest2int.c -o digest2int.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c md5.c -o md5.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c pmurhash.c -o pmurhash.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c raes.c -o raes.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c sha1.c -o sha1.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c sha2.c -o sha2.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c sha256.c -o sha256.o
-g++ -std=gnu++20 -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2   -c spooky_serialize.cpp -o spooky_serialize.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I.  -I/usr/local/include    -fpic  -g -O2  -c xxhash.c -o xxhash.o
-g++ -std=gnu++20 -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o digest.so SpookyV2.o aes.o blake3.o blake3_dispatch.o blake3_portable.o crc32.o crc32c.o crc32c_portable.o digest.o digest2int.o init.o md5.o pmurhash.o raes.o sha1.o sha2.o sha256.o spooky_serialize.o xxhash.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-digest/00new/digest/libs
-** R
-** demo
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘digest’
-    finding HTML links ... done
-    AES                                     html  
-    digest                                  html  
-    digest2int                              html  
-    hmac                                    html  
-    makeRaw                                 html  
-    sha1                                    html  
-    vdigest                                 html  
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (digest)
-* installing *source* package ‘evaluate’ ...
-** this is package ‘evaluate’ version ‘1.0.5’
-** package ‘evaluate’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘evaluate’
-    finding HTML links ... done
-    create_traceback                        html  
-    evaluate-package                        html  
-    evaluate                                html  
-    flush_console                           html  
-    inject_funs                             html  
-    is.message                              html  
-    line_prompt                             html  
-    local_reproducible_output               html  
-    new_output_handler                      html  
-    parse_all                               html  
-    replay                                  html  
-    set_hooks                               html  
-    trim_intermediate_plots                 html  
-    try_capture_stack                       html  
-** building package indices
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (evaluate)
+* DONE (commonmark)
 * installing *source* package ‘xfun’ ...
-** this is package ‘xfun’ version ‘0.60’
-** package ‘xfun’ successfully unpacked and MD5 sums checked
+** this is package ‘xfun’ version ‘0.60.1’
 ** using staged installation
 ** libs
 using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
@@ -823,119 +212,6 @@ installing to /cache/R_libs/00LOCK-xfun/00new/xfun/libs
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
 * DONE (xfun)
-* installing *source* package ‘yaml’ ...
-** this is package ‘yaml’ version ‘2.3.12’
-** package ‘yaml’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c api.c -o api.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c dumper.c -o dumper.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c emitter.c -o emitter.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c implicit.c -o implicit.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c loader.c -o loader.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c parser.c -o parser.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c r_emit.c -o r_emit.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c r_ext.c -o r_ext.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c r_parse.c -o r_parse.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c reader.c -o reader.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c scanner.c -o scanner.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -I. -DNDEBUG  -I/usr/local/include    -fpic  -g -O2  -c writer.c -o writer.o
-gcc -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o yaml.so api.o dumper.o emitter.o implicit.o loader.o parser.o r_emit.o r_ext.o r_parse.o reader.o scanner.o writer.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-yaml/00new/yaml/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘yaml’
-    finding HTML links ... done
-    as.yaml                                 html  
-    read_yaml                               html  
-    verbatim_logical                        html  
-    write_yaml                              html  
-    yaml-package                            html  
-    yaml.load                               html  
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (yaml)
-* installing *source* package ‘jsonlite’ ...
-** this is package ‘jsonlite’ version ‘2.0.0’
-** package ‘jsonlite’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c base64.c -o base64.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c collapse_array.c -o collapse_array.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c collapse_object.c -o collapse_object.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c collapse_pretty.c -o collapse_pretty.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c escape_chars.c -o escape_chars.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c integer64_to_na.c -o integer64_to_na.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c is_datelist.c -o is_datelist.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c is_recordlist.c -o is_recordlist.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c is_scalarlist.c -o is_scalarlist.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c modp_numtoa.c -o modp_numtoa.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c null_to_na.c -o null_to_na.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c num_to_char.c -o num_to_char.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c parse.c -o parse.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c prettify.c -o prettify.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c push_parser.c -o push_parser.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c r-base64.c -o r-base64.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c register.c -o register.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c row_collapse.c -o row_collapse.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c transpose_list.c -o transpose_list.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c validate.c -o validate.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl.c -o yajl/yajl.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_alloc.c -o yajl/yajl_alloc.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_buf.c -o yajl/yajl_buf.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_encode.c -o yajl/yajl_encode.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_gen.c -o yajl/yajl_gen.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_lex.c -o yajl/yajl_lex.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_parser.c -o yajl/yajl_parser.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG -Iyajl/api  -I/usr/local/include   -fvisibility=hidden  -fpic  -g -O2  -c yajl/yajl_tree.c -o yajl/yajl_tree.o
-ar rcs yajl/libstatyajl.a yajl/yajl.o yajl/yajl_alloc.o yajl/yajl_buf.o yajl/yajl_encode.o yajl/yajl_gen.o yajl/yajl_lex.o yajl/yajl_parser.o yajl/yajl_tree.o
-gcc -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o jsonlite.so base64.o collapse_array.o collapse_object.o collapse_pretty.o escape_chars.o integer64_to_na.o is_datelist.o is_recordlist.o is_scalarlist.o modp_numtoa.o null_to_na.o num_to_char.o parse.o prettify.o push_parser.o r-base64.o register.o row_collapse.o transpose_list.o validate.o -Lyajl -lstatyajl -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-jsonlite/00new/jsonlite/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-in method for ‘asJSON’ with signature ‘"AsIs"’: no definition for class “AsIs”
-in method for ‘asJSON’ with signature ‘"ITime"’: no definition for class “ITime”
-in method for ‘asJSON’ with signature ‘"hms"’: no definition for class “hms”
-in method for ‘asJSON’ with signature ‘"json"’: no definition for class “json”
-in method for ‘asJSON’ with signature ‘"integer64"’: no definition for class “integer64”
-in method for ‘asJSON’ with signature ‘"pairlist"’: no definition for class “pairlist”
-in method for ‘asJSON’ with signature ‘"blob"’: no definition for class “blob”
-in method for ‘asJSON’ with signature ‘"scalar"’: no definition for class “scalar”
-in method for ‘asJSON’ with signature ‘"sf"’: no definition for class “sf”
-in method for ‘asJSON’ with signature ‘"sfc"’: no definition for class “sfc”
-in method for ‘asJSON’ with signature ‘"vctrs_vctr"’: no definition for class “vctrs_vctr”
-** help
-*** installing help indices
-    finding HTML links ...  converting help for package ‘jsonlite’
- done
-    base64                                  html  
-    flatten                                 html  
-    fromJSON                                html  
-    gzjson                                  html  
-    prettify                                html  
-    rbind_pages                             html  
-    read_json                               html  
-    serializeJSON                           html  
-    stream_in                               html  
-    unbox                                   html  
-    validate                                html  
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (jsonlite)
 * installing *source* package ‘tinytest’ ...
 ** this is package ‘tinytest’ version ‘1.4.3’
 ** package ‘tinytest’ successfully unpacked and MD5 sums checked
@@ -945,8 +221,8 @@ in method for ‘asJSON’ with signature ‘"vctrs_vctr"’: no definition for 
 ** byte-compile and prepare package for lazy loading
 ** help
 *** installing help indices
-  converting help for package ‘tinytest’
-    finding HTML links ... done
+    finding HTML links ...  converting help for package ‘tinytest’
+ done
     at_home                                 html  
     build_install_test                      html  
     exit_file                               html  
@@ -973,355 +249,152 @@ in method for ‘asJSON’ with signature ‘"vctrs_vctr"’: no definition for 
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
 * DONE (tinytest)
-* installing *source* package ‘cachem’ ...
-** this is package ‘cachem’ version ‘1.1.0’
-** package ‘cachem’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘rbibutils’ ...
+** this is package ‘rbibutils’ version ‘2.4.1’
+** package ‘rbibutils’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** libs
 using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c cache.c -o cache.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c adsout.c -o adsout.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c any2xml.c -o any2xml.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c args.c -o args.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bib2be.c -o bib2be.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibcore.c -o bibcore.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibentrydirectout.c -o bibentrydirectout.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibentryout.c -o bibentryout.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibl.c -o bibl.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c biblatexin.c -o biblatexin.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c biblatexout.c -o biblatexout.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibprog.c -o bibprog.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibtexdirectin.c -o bibtexdirectin.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibtexin.c -o bibtexin.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibtexout.c -o bibtexout.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibtextypes.c -o bibtextypes.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bibutils.c -o bibutils.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bltypes.c -o bltypes.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c bu_auth.c -o bu_auth.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c charsets.c -o charsets.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_be_bed.c -o common_be_bed.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_bt_blt_btd_out.c -o common_bt_blt_btd_out.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_bt_btd.c -o common_bt_btd.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_bt_btd_blt.c -o common_bt_btd_blt.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_bt_btd_out.c -o common_bt_btd_out.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c common_most.c -o common_most.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c copacin.c -o copacin.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c copactypes.c -o copactypes.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c ebiin.c -o ebiin.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c endin.c -o endin.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c endout.c -o endout.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c endtypes.c -o endtypes.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c endxmlin.c -o endxmlin.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c entities.c -o entities.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c fields.c -o fields.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c gb18030.c -o gb18030.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c generic.c -o generic.o
 gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
-gcc -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o cachem.so cache.o init.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-cachem/00new/cachem/libs
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c intlist.c -o intlist.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c is_ws.c -o is_ws.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c isiin.c -o isiin.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c isiout.c -o isiout.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c isitypes.c -o isitypes.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c iso639_1.c -o iso639_1.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c iso639_2.c -o iso639_2.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c iso639_3.c -o iso639_3.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c latex.c -o latex.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c latex_parse.c -o latex_parse.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c marc_auth.c -o marc_auth.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c medin.c -o medin.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c modsin.c -o modsin.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c modsout.c -o modsout.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c modstypes.c -o modstypes.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c name.c -o name.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c nbibin.c -o nbibin.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c nbibout.c -o nbibout.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c nbibtypes.c -o nbibtypes.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c notes.c -o notes.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c pages.c -o pages.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c reftypes.c -o reftypes.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c risin.c -o risin.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c risout.c -o risout.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c ristypes.c -o ristypes.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c serialno.c -o serialno.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c slist.c -o slist.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c str.c -o str.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c str_conv.c -o str_conv.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c strsearch.c -o strsearch.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c title.c -o title.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c tomods.c -o tomods.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c type.c -o type.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c unicode.c -o unicode.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c url.c -o url.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c utf8.c -o utf8.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c vplist.c -o vplist.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c wordin.c -o wordin.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c wordout.c -o wordout.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c xml.c -o xml.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c xml2any.c -o xml2any.o
+gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c xml_encoding.c -o xml_encoding.o
+gcc -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o rbibutils.so adsout.o any2xml.o args.o bib2be.o bibcore.o bibentrydirectout.o bibentryout.o bibl.o biblatexin.o biblatexout.o bibprog.o bibtexdirectin.o bibtexin.o bibtexout.o bibtextypes.o bibutils.o bltypes.o bu_auth.o charsets.o common_be_bed.o common_bt_blt_btd_out.o common_bt_btd.o common_bt_btd_blt.o common_bt_btd_out.o common_most.o copacin.o copactypes.o ebiin.o endin.o endout.o endtypes.o endxmlin.o entities.o fields.o gb18030.o generic.o init.o intlist.o is_ws.o isiin.o isiout.o isitypes.o iso639_1.o iso639_2.o iso639_3.o latex.o latex_parse.o marc_auth.o medin.o modsin.o modsout.o modstypes.o name.o nbibin.o nbibout.o nbibtypes.o notes.o pages.o reftypes.o risin.o risout.o ristypes.o serialno.o slist.o str.o str_conv.o strsearch.o title.o tomods.o type.o unicode.o url.o utf8.o vplist.o wordin.o wordout.o xml.o xml2any.o xml_encoding.o -L/opt/R/devel/lib/R/lib -lR
+installing to /cache/R_libs/00LOCK-rbibutils/00new/rbibutils/libs
 ** R
+** inst
 ** byte-compile and prepare package for lazy loading
 ** help
 *** installing help indices
-  converting help for package ‘cachem’
+  converting help for package ‘rbibutils’
     finding HTML links ... done
-    cache_disk                              html  
-    cache_layered                           html  
-    cache_mem                               html  
-    reexports                               html  
+    bibConvert                              html  
+    bibentryExtra                           html  
+    bibstyle_JSSextra                       html  
+    rbibutils-package                       html  
+    rbibutils_formats                       html  
+    readBib                                 html  
+    readBibentry                            html  
 ** building package indices
+** installing vignettes
 ** testing if installed package can be loaded from temporary location
 ** checking absolute paths in shared objects and dynamic libraries
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
-* DONE (cachem)
-* installing *source* package ‘lifecycle’ ...
-** this is package ‘lifecycle’ version ‘1.0.5’
-** package ‘lifecycle’ successfully unpacked and MD5 sums checked
+* DONE (rbibutils)
+* installing *source* package ‘litedown’ ...
+** this is package ‘litedown’ version ‘0.10.1’
 ** using staged installation
 ** R
 ** inst
 ** byte-compile and prepare package for lazy loading
 ** help
 *** installing help indices
-  converting help for package ‘lifecycle’
+  converting help for package ‘litedown’
     finding HTML links ... done
-    badge                                   html  
-    deprecate_soft                          html  
-    deprecated-signallers                   html  
-    deprecated                              html  
-    expect_deprecated                       html  
-    last_lifecycle_warnings                 html  
-    lifecycle-package                       html  
-    lifecycle_linter                        html  
-    signal_stage                            html  
-    verbosity                               html  
-*** copying figures
+    crack                                   html  
+    engines                                 html  
+    fuse_book                               html  
+    fuse_env                                html  
+    fuse_exit                               html  
+    fuse_site                               html  
+    get_context                             html  
+    html_format                             html  
+    litedown-package                        html  
+    mark                                    html  
+    markdown_options                        html  
+    pkg_desc                                html  
+    raw_text                                html  
+    reactor                                 html  
+    roam                                    html  
+    smartypants                             html  
+    timing_data                             html  
+    vest                                    html  
 ** building package indices
 ** installing vignettes
 ** testing if installed package can be loaded from temporary location
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
-* DONE (lifecycle)
-* installing *source* package ‘highr’ ...
-** this is package ‘highr’ version ‘0.12’
-** package ‘highr’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘highr’
-    finding HTML links ... done
-    hi_andre                                html  
-    hilight                                 html  
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (highr)
-* installing *source* package ‘htmltools’ ...
-** this is package ‘htmltools’ version ‘0.5.9’
-** package ‘htmltools’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c init.c -o init.o
-gcc -I"/opt/R/devel/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c template.c -o template.o
-gcc -shared -L/opt/R/devel/lib/R/lib -L/usr/local/lib -o htmltools.so init.o template.o -L/opt/R/devel/lib/R/lib -lR
-installing to /cache/R_libs/00LOCK-htmltools/00new/htmltools/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘htmltools’
-    finding HTML links ... done
-    HTML                                    html  
-    as.tags                                 html  
-    bindFillRole                            html  
-    browsable                               html  
-    builder                                 html  
-    capturePlot                             html  
-    copyDependencyToDir                     html  
-    css                                     html  
-    defaultPngDevice                        html  
-    findDependencies                        html  
-    htmlDependencies                        html  
-    htmlDependency                          html  
-    htmlEscape                              html  
-    htmlPreserve                            html  
-    htmlTemplate                            html  
-    html_print                              html  
-    htmltools-package                       html  
-    include                                 html  
-    knitr_methods                           html  
-    makeDependencyRelative                  html  
-    parseCssColors                          html  
-    plotTag                                 html  
-    print.html                              html  
-    renderDependencies                      html  
-    renderDocument                          html  
-    renderTags                              html  
-    resolveDependencies                     html  
-    save_html                               html  
-    singleton                               html  
-    singleton_tools                         html  
-    subtractDependencies                    html  
-    suppressDependencies                    html  
-    tagAddRenderHook                        html  
-    tagAppendAttributes                     html  
-    tagAppendChild                          html  
-    tagFunction                             html  
-    tagList                                 html  
-    tagQuery                                html  
-    urlEncodePath                           html  
-    validateCssUnit                         html  
-    withTags                                html  
-*** copying figures
-** building package indices
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (htmltools)
-* installing *source* package ‘tinytex’ ...
-** this is package ‘tinytex’ version ‘0.60’
-** package ‘tinytex’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘tinytex’
-    finding HTML links ... done
-    check_installed                         html  
-    copy_tinytex                            html  
-    install_tinytex                         html  
-    is_tinytex                              html  
-    latexmk                                 html  
-    parse_install                           html  
-    parse_packages                          html  
-    r_texmf                                 html  
-    tinytex-package                         html  
-    tl_pkgs                                 html  
-    tl_sizes                                html  
-    tlmgr                                   html  
-** building package indices
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (tinytex)
-* installing *source* package ‘memoise’ ...
-** this is package ‘memoise’ version ‘2.0.1’
-** package ‘memoise’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘memoise’
-    finding HTML links ... done
-    cache_filesystem                        html  
-    cache_gcs                               html  
-    cache_memory                            html  
-    cache_s3                                html  
-    drop_cache                              html  
-    forget                                  html  
-    has_cache                               html  
-    is.memoised                             html  
-    memoise                                 html  
-    timeout                                 html  
-** building package indices
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (memoise)
-ERROR: dependency ‘fs’ is not available for package ‘sass’
-Perhaps try a variation of:
-install.packages('fs')
-* removing ‘/cache/R_libs/sass’
-* installing *source* package ‘fontawesome’ ...
-** this is package ‘fontawesome’ version ‘0.5.3’
-** package ‘fontawesome’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘fontawesome’
-    finding HTML links ... done
-    fa                                      html  
-    fa_html_dependency                      html  
-    fa_i                                    html  
-    fa_metadata                             html  
-    fa_png                                  html  
-    print.fontawesome                       html  
-*** copying figures
-** building package indices
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (fontawesome)
-* installing *source* package ‘jquerylib’ ...
-** this is package ‘jquerylib’ version ‘0.1.4’
-** package ‘jquerylib’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘jquerylib’
-    finding HTML links ... done
-    jquery_core                             html  
-** building package indices
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (jquerylib)
-* installing *source* package ‘knitr’ ...
-** this is package ‘knitr’ version ‘1.51’
-** package ‘knitr’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package ‘knitr’
-    finding HTML links ... done
-    Sweave2knitr                            html  
-    all_labels                              html  
-    all_patterns                            html  
-    asis_output                             html  
-    cache_engines                           html  
-    chunk_hook                              html  
-    clean_cache                             html  
-    combine_words                           html  
-    convert_chunk_header                    html  
-    current_input                           html  
-    dep_auto                                html  
-    dep_prev                                html  
-    download_image                          html  
-    engine_output                           html  
-    fig_chunk                               html  
-    fig_path                                html  
-    hook_animation                          html  
-    hook_document                           html  
-    hook_plot                               html  
-    image_uri                               html  
-    imgur_upload                            html  
-    include_graphics                        html  
-    include_url                             html  
-    inline_expr                             html  
-    is_low_change                           html  
-    kable                                   html  
-    knit                                    html  
-    knit2html                               html  
-    knit2pandoc                             html  
-    knit2pdf                                html  
-    knit2wp                                 html  
-    knit_child                              html  
-    knit_code                               html  
-    knit_engines                            html  
-    knit_exit                               html  
-    knit_expand                             html  
-    knit_filter                             html  
-    knit_global                             html  
-    knit_hooks                              html  
-    knit_meta                               html  
-    knit_params                             html  
-    knit_params_yaml                        html  
-    knit_patterns                           html  
-    knit_print                              html  
-    knit_rd                                 html  
-    knit_theme                              html  
-    knit_watch                              html  
-    knitr-package                           html  
-    load_cache                              html  
-    opts_chunk                              html  
-    opts_hooks                              html  
-    opts_knit                               html  
-    opts_template                           html  
-    output_hooks                            html  
-    output_type                             html  
-    pandoc                                  html  
-    partition_chunk                         html  
-    pat_fun                                 html  
-    plot_crop                               html  
-    rand_seed                               html  
-    raw_block                               html  
-    raw_output                              html  
-    read_chunk                              html  
-    rnw2pdf                                 html  
-    rocco                                   html  
-    rst2pdf                                 html  
-    set_alias                               html  
-    set_header                              html  
-    set_parent                              html  
-    sew                                     html  
-    spin                                    html  
-    spin_child                              html  
-    stitch                                  html  
-    vignette_engines                        html  
-    wrap_rmd                                html  
-    write_bib                               html  
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (knitr)
-ERROR: dependency ‘sass’ is not available for package ‘bslib’
-Perhaps try a variation of:
-install.packages('sass')
-* removing ‘/cache/R_libs/bslib’
-ERROR: dependency ‘bslib’ is not available for package ‘rmarkdown’
-Perhaps try a variation of:
-install.packages('bslib')
-* removing ‘/cache/R_libs/rmarkdown’
+* DONE (litedown)
 
 The downloaded source packages are in
-	‘/tmp/Rtmp8L9uvo/downloaded_packages’
-Warning messages:
-1: In install.packages(pkgs, lib = user_lib) :
-  installation of package ‘fs’ had non-zero exit status
-2: In install.packages(pkgs, lib = user_lib) :
-  installation of package ‘sass’ had non-zero exit status
-3: In install.packages(pkgs, lib = user_lib) :
-  installation of package ‘bslib’ had non-zero exit status
-4: In install.packages(pkgs, lib = user_lib) :
-  installation of package ‘rmarkdown’ had non-zero exit status
-trying URL 'https://cran.rstudio.com/src/contrib/curl_7.1.0.tar.gz'
+	‘/tmp/RtmpGEJIiB/downloaded_packages’
+trying URL 'https://cloud.r-project.org/src/contrib/curl_7.1.0.tar.gz'
 Content type 'application/x-gzip' length 717725 bytes (700 KB)
 ==================================================
 downloaded 700 KB
@@ -1397,9 +470,9 @@ installing to /cache/R_libs/00LOCK-curl/00new/curl/libs
 * DONE (curl)
 
 The downloaded source packages are in
-	‘/tmp/RtmpA0wuBi/downloaded_packages’
+	‘/tmp/RtmpucMVT4/downloaded_packages’
 * installing *source* package ‘cpp4r’ ...
-** this is package ‘cpp4r’ version ‘1.1.0’
+** this is package ‘cpp4r’ version ‘1.2.0’
 ** using staged installation
 ** R
 ** inst
@@ -1415,6 +488,7 @@ The downloaded source packages are in
     vendor                                  html  
 *** copying figures
 ** building package indices
+** installing vignettes
 ** testing if installed package can be loaded from temporary location
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
@@ -1564,12 +638,18 @@ installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)
 * running under: Fedora Linux 42 (Container Image)
 * using session charset: UTF-8
-* current time: 2026-07-26 20:04:44 UTC
+* current time: 2026-07-27 14:17:54 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... NOTE
+* checking CRAN incoming feasibility ...Warning: unable to access index for repository https://bioconductor.org/packages/3.23/bioc/src/contrib:
+  cannot open URL 'https://bioconductor.org/packages/3.23/bioc/src/contrib/PACKAGES'
+Warning: unable to access index for repository https://bioconductor.org/packages/3.23/data/annotation/src/contrib:
+  cannot open URL 'https://bioconductor.org/packages/3.23/data/annotation/src/contrib/PACKAGES'
+Warning: unable to access index for repository https://bioconductor.org/packages/3.23/data/experiment/src/contrib:
+  cannot open URL 'https://bioconductor.org/packages/3.23/data/experiment/src/contrib/PACKAGES'
+ [4s/247s] NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
@@ -1581,7 +661,7 @@ New submission
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [16s/16s] OK
+* checking whether package ‘cpp4rtest’ can be installed ... [12s/12s] OK
 * used C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
@@ -1785,12 +865,12 @@ installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)
 * running under: Fedora Linux 42 (Container Image)
 * using session charset: UTF-8
-* current time: 2026-07-26 20:04:44 UTC
+* current time: 2026-07-27 14:17:54 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... NOTE
+* checking CRAN incoming feasibility ... [4s/247s] NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
@@ -1802,7 +882,7 @@ New submission
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘cpp4rtest’ can be installed ... [16s/16s] OK
+* checking whether package ‘cpp4rtest’ can be installed ... [12s/12s] OK
 * used C++ compiler: ‘g++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
