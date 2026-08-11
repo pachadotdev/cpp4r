@@ -1,22 +1,3 @@
-Updating and loading repositories:
- Fedora 42 - x86_64                     100% |   6.8 KiB/s |   3.4 KiB |  00m01s
- Fedora 42 - x86_64 - Updates           100% |  10.0 KiB/s |   3.4 KiB |  00m00s
- Fedora 42 openh264 (From Cisco) - x86_ 100% |  22.9 KiB/s | 986.0   B |  00m00s
-Repositories loaded.
-Package "pkgconf-pkg-config-2.3.0-2.fc42.x86_64" is already installed.
-Package "gcc-gfortran-15.2.1-7.fc42.x86_64" is already installed.
-Package "libcurl-devel-8.11.1-8.fc42.x86_64" is already installed.
-
-Nothing to do.
-Installing declared dependencies: tinytest, rbibutils, litedown
-also installing the dependencies ‘commonmark’, ‘xfun’
-
-trying URL 'https://cloud.r-project.org/src/contrib/commonmark_2.0.0.tar.gz'
-trying URL 'https://yihui.r-universe.dev/src/contrib/xfun_0.60.1.tar.gz?sha256=fd175f9e69de6b2efd7ebb6e4c921c13801b60bbb52fef9702022fac7ec93fbf&file=/xfun_0.60.1.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/tinytest_1.4.3.tar.gz'
-trying URL 'https://cloud.r-project.org/src/contrib/rbibutils_2.4.1.tar.gz'
-trying URL 'https://yihui.r-universe.dev/src/contrib/litedown_0.10.1.tar.gz?sha256=5311ad2f675fbf8652db4c445512db39a27dc65b98e1ad979bfa63d1bec22611&file=/litedown_0.10.1.tar.gz'
-* installing *source* package ‘commonmark’ ...
 ** this is package ‘commonmark’ version ‘2.0.0’
 ** package ‘commonmark’ successfully unpacked and MD5 sums checked
 ** using staged installation
@@ -65,8 +46,8 @@ installing to /cache/R_libs/00LOCK-commonmark/00new/commonmark/libs
 ** byte-compile and prepare package for lazy loading
 ** help
 *** installing help indices
-  converting help for package ‘commonmark’
-    finding HTML links ... done
+    finding HTML links ...  converting help for package ‘commonmark’
+ done
     commonmark                              html  
     extensions                              html  
 ** building package indices
@@ -242,8 +223,8 @@ installing to /cache/R_libs/00LOCK-xfun/00new/xfun/libs
     test_package                            html  
     tinytest                                html  
     tinytests                               html  
-    using                                   html  ** building package indices
-
+    using                                   html  
+** building package indices
 ** installing vignettes
 ** testing if installed package can be loaded from temporary location
 ** testing if installed package can be loaded from final location
@@ -393,7 +374,7 @@ installing to /cache/R_libs/00LOCK-rbibutils/00new/rbibutils/libs
 * DONE (litedown)
 
 The downloaded source packages are in
-	‘/tmp/Rtmp0JiT4K/downloaded_packages’
+	‘/tmp/Rtmp4VA2ng/downloaded_packages’
 trying URL 'https://cloud.r-project.org/src/contrib/curl_7.1.0.tar.gz'
 Content type 'application/x-gzip' length 717725 bytes (700 KB)
 ==================================================
@@ -470,7 +451,7 @@ installing to /cache/R_libs/00LOCK-curl/00new/curl/libs
 * DONE (curl)
 
 The downloaded source packages are in
-	‘/tmp/RtmpaNNtxu/downloaded_packages’
+	‘/tmp/RtmpvksnKS/downloaded_packages’
 * installing *source* package ‘cpp4r’ ...
 ** this is package ‘cpp4r’ version ‘1.2.0’
 ** using staged installation
@@ -638,18 +619,12 @@ installing to /cache/R_libs/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)
 * running under: Fedora Linux 42 (Container Image)
 * using session charset: UTF-8
-* current time: 2026-07-27 15:33:16 UTC
+* current time: 2026-08-11 14:34:18 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ...Warning: unable to access index for repository https://bioconductor.org/packages/3.23/bioc/src/contrib:
-  cannot open URL 'https://bioconductor.org/packages/3.23/bioc/src/contrib/PACKAGES'
-Warning: unable to access index for repository https://bioconductor.org/packages/3.23/data/annotation/src/contrib:
-  cannot open URL 'https://bioconductor.org/packages/3.23/data/annotation/src/contrib/PACKAGES'
-Warning: unable to access index for repository https://bioconductor.org/packages/3.23/data/experiment/src/contrib:
-  cannot open URL 'https://bioconductor.org/packages/3.23/data/experiment/src/contrib/PACKAGES'
- [4s/277s] NOTE
+* checking CRAN incoming feasibility ... NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission
@@ -866,12 +841,12 @@ installing to /check/cpp4rtest.Rcheck/00LOCK-cpp4rtest/00new/cpp4rtest/libs
     GNU Fortran (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)
 * running under: Fedora Linux 42 (Container Image)
 * using session charset: UTF-8
-* current time: 2026-07-27 15:33:16 UTC
+* current time: 2026-08-11 14:34:18 UTC
 * using options ‘--no-manual --as-cran’
 * checking for file ‘cpp4rtest/DESCRIPTION’ ... OK
 * this is package ‘cpp4rtest’ version ‘0.3.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [4s/277s] NOTE
+* checking CRAN incoming feasibility ... NOTE
 Maintainer: ‘Mauricio Vargas Sepulveda <m.vargas.sepulveda@gmail.com>’
 
 New submission

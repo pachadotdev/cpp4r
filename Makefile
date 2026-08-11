@@ -2,6 +2,7 @@ clean:
 	@Rscript -e 'tinydev::pkg_clean(".");'
 
 document:
+	@Rscript -e 'spelling::update_wordlist()'
 	@Rscript -e 'tinydev::pkg_document(".");'
 
 install:
@@ -43,18 +44,8 @@ check-cxx%-clang:
 	@chmod +x ./scripts/check.sh
 	@./scripts/check.sh ubuntu-release cxx$* clang
 
-# make check-cran-<image>, e.g. check-cran-gcc16, check-cran-rocky8:
-# full CRAN-style check via Docker using <image>'s default toolchain.
-check-cran-%:
-	@chmod +x ./scripts/check.sh
-	@./scripts/check.sh $*
-
-check-cran-extra-%:
-	@chmod +x ./scripts/check.sh
-	@./scripts/check.sh $*
-
 # CRAN-like containers (pair: CRAN name : r-hub image)
-CRAN_EXTRA_PAIRS := \
+CRAN := \
 	r-devel-linux-x86_64-debian-clang:ubuntu-clang \
 	r-devel-linux-x86_64-debian-gcc:ubuntu-gcc15 \
 	r-patched-linux-x86_64:ubuntu-next \
@@ -64,11 +55,11 @@ CRAN_EXTRA_PAIRS := \
 CRAN_EXTRA := atlas clang-asan clang-ubsan clang21 clang22 donttest \
 	gcc16 gcc-asan lto mkl nold nosuggests rchk valgrind
 
-# Loop the single-image CRAN check above over every image in CRAN_EXTRA_PAIRS
+# Loop the single-image CRAN check above over every image in CRAN
 # (the r-hub image is the part of each pair after the colon).
 check-cran:
 	@chmod +x ./scripts/check.sh
-	@for pair in $(CRAN_EXTRA_PAIRS); do \
+	@for pair in $(CRAN); do \
 		image=$${pair#*:}; \
 		./scripts/check.sh $$image || exit 1; \
 	done
@@ -79,6 +70,16 @@ check-cran-extra:
 	@for image in $(CRAN_EXTRA); do \
 		./scripts/check.sh $$image || exit 1; \
 	done
+
+# make check-cran-<image>, e.g. check-cran-gcc16, check-cran-rocky8:
+# full CRAN-style check via Docker using <image>'s default toolchain.
+check-cran-%:
+	@chmod +x ./scripts/check.sh
+	@./scripts/check.sh $*
+
+check-cran-extra-%:
+	@chmod +x ./scripts/check.sh
+	@./scripts/check.sh $*
 
 clang_format=`which clang-format-21`
 

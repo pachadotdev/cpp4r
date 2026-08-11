@@ -45,11 +45,20 @@ fi
 SUFFIX="${IMAGE}${STD:+-$STD-$COMPILER}"
 LOG_DIR="./check-docker"
 LOG="${LOG_DIR}/${SUFFIX}.log"
+# R library cache: kept per-project under ./check-docker/cache, deliberately
+# NOT shared, so installed package versions/binaries for this repo never
+# bleed into (or get clobbered by) another package's check.
 CACHE_DIR="$(pwd)/check-docker/cache/${SUFFIX}"
 CHECK_DIR=$(mktemp -d)
 
+# Image cache: shared across every repo/package that runs this script, so
+# the (large) r-hub images are only ever pulled once instead of once per
+# package. Override with R_HUB_DOCKER_CACHE if you want it somewhere else.
+IMAGE_CACHE_DIR="${R_HUB_DOCKER_CACHE:-$HOME/.cache/r-hub-docker}"
+
 mkdir -p "$LOG_DIR"
 mkdir -p "$CACHE_DIR"
+mkdir -p "$IMAGE_CACHE_DIR"
 trap 'rm -rf "$CHECK_DIR"' EXIT
 
 echo "==============================="
@@ -59,6 +68,28 @@ else
   echo "Docker check: $IMAGE (default toolchain)"
 fi
 echo "==============================="
+
+# Filesystem-safe tarball name for an image ref, e.g.
+# ghcr.io/r-hub/containers/ubuntu-release:latest -> ghcr.io_r-hub_containers_ubuntu-release_latest.tar
+image_tar_path() {
+  echo "${IMAGE_CACHE_DIR}/$(echo "$1" | tr '/:' '__').tar"
+}
+
+# 1. Already in Docker's local image store (from a previous run, on this
+#    machine): nothing to pull/load.
+# 2. Not in the local store, but a tarball for it exists in the shared
+#    cache: load it (fast, no network).
+# 3. Neither: pull from the registry (with fallbacks), then fall through to
+#    the save step below.
+if docker image inspect "$FULL_IMAGE" >/dev/null 2>&1; then
+  echo "Using locally cached image $FULL_IMAGE"
+else
+  IMAGE_TAR="$(image_tar_path "$FULL_IMAGE")"
+  if [ -f "$IMAGE_TAR" ]; then
+    echo "Loading $FULL_IMAGE from shared image cache ($IMAGE_TAR)..."
+    docker load -i "$IMAGE_TAR" >/dev/null
+  fi
+fi
 
 if ! docker image inspect "$FULL_IMAGE" >/dev/null 2>&1; then
   echo "Pulling $FULL_IMAGE..."
@@ -89,8 +120,18 @@ if ! docker image inspect "$FULL_IMAGE" >/dev/null 2>&1; then
       exit 1
     fi
   fi
-else
-  echo "Using cached image $FULL_IMAGE"
+fi
+
+# Regardless of how we got the image (already local, loaded from the shared
+# cache, or just pulled), make sure a tarball for it exists in the shared
+# cache so the next check of this or any other package can `docker load` it
+# instead of hitting the registry. Note this pins whatever ":latest"
+# resolved to right now; delete the tar file under $IMAGE_CACHE_DIR to force
+# a re-pull of a newer ":latest" later.
+IMAGE_TAR="$(image_tar_path "$FULL_IMAGE")"
+if [ ! -f "$IMAGE_TAR" ]; then
+  echo "Saving $FULL_IMAGE to shared image cache ($IMAGE_TAR)..."
+  docker save "$FULL_IMAGE" -o "$IMAGE_TAR"
 fi
 
 echo "Building package tarballs..."
@@ -317,7 +358,11 @@ ${MAKEVARS_STEP}
     R CMD check --as-cran --no-manual ${CPP4RTEST_FILE}
   " 2>&1 | grep -v 'readelf: Warning:' | tee "${CHECK_DIR}/docker.log" || DOCKER_RC="${PIPESTATUS[0]}"
 
-cp "${CHECK_DIR}/docker.log" "$LOG"
+if awk 'found { print; next } /^\*\* this is package .* version/ { found=1; print }' "${CHECK_DIR}/docker.log" > "${CHECK_DIR}/docker.trimmed.log" && [ -s "${CHECK_DIR}/docker.trimmed.log" ]; then
+  cp "${CHECK_DIR}/docker.trimmed.log" "$LOG"
+else
+  cp "${CHECK_DIR}/docker.log" "$LOG"
+fi
 
 if [ -d "${CHECK_DIR}/cpp4rtest.Rcheck" ]; then
   RCHECK_DEST="${LOG_DIR}/${SUFFIX}-cpp4rtest.Rcheck"
