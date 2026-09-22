@@ -12,7 +12,12 @@ cpp_files <- function(pkg = ".") {
     return(character())
   }
 
-  out <- list.files(src, full.names = TRUE, pattern = "[.](cc|cpp|h|hpp)$")
+  out <- list.files(
+    src,
+    full.names = TRUE,
+    recursive = TRUE,
+    pattern = "[.](cc|cpp|h|hpp)$"
+  )
   # stable, locale-independent order
   out[order(out, method = "radix")]
 }

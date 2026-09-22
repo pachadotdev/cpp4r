@@ -2,6 +2,7 @@
 // clang-format off
 
 
+#include "main.h"
 #include "cpp4r/declarations.hpp"
 #include <R_ext/Visibility.h>
 

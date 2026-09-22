@@ -1,3 +1,8 @@
+# cpp4r 1.3.0
+
+* Allows a header only codebase. The previous versions required one or more .cpp files
+  in order to register the exposed functions.
+
 # cpp4r 1.2.0
 
 * Reduced second order dependencies. I dropped all suggested packages that install a long list

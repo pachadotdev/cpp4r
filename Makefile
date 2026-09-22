@@ -11,6 +11,7 @@ install:
 check:
 	@Rscript -e 'tinydev::pkg_check(".");'
 	@Rscript -e 'tinydev::pkg_install(".");'
+	@Rscript -e 'tinydev::pkg_register("./cpp4rtest");'
 	@Rscript -e 'tinydev::pkg_check("./cpp4rtest");'
 
 site:

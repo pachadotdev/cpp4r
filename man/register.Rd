@@ -25,7 +25,9 @@ Functions decorated with \code{[[cpp4r::register]]} in files
  ending in '.cc', '.cpp', '.h' or '.hpp' will be wrapped in generated code
  and registered to be called from R. Decorating a function only makes it
  callable via '.Call()'; it does not export or document it. See the
- "Package skeleton" vignette for how to export a registered function.
+ "Package skeleton" vignette for how to export a registered function. If a
+ package contains only header files, those headers are included in the
+ generated translation unit so no additional C++ source file is required.
 }
 
 \examples{
